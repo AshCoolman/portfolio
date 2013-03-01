@@ -2,12 +2,11 @@ WaveformMODEL = Backbone.Model.extend({
 	defaults: {
 		volumeTimeline:0,
 		mediaFile:undefined,
-		mediaEl:undefined
+		mediaEl:undefined,
+		el:undefined
 	},
 	initialize: function() {
 		console.info('WaveformMODEL > initialize()');
-		
-		
 		//Ready the mediaEl by playing then instantly pausing (workaround for mobile safari) http://goo.gl/ddBRo
         this.on("change:mediaFile", function(model){
 		    var mediaEl = document.createElement('audio');
@@ -17,13 +16,15 @@ WaveformMODEL = Backbone.Model.extend({
 		     		        mediaEl.removeEventListener('canplaythrough');
 		    		        audioLoaded = true;
 		     		    },false);
-		console.log(document.getElementById('body'))
-		     		    document.getElementById('body').appendChild(mediaEl);
-		    // 		    mediaEl.src = model.get("mediaFile");
-		    // 		    mediaEl.play();
-		    // 		    //setTimeout(function(){ mediaEl.pause();  },1);
-		    //            console.info("WaveformMODEL > on() change:mediaElFile =" + mediaElFile );
-		    // 			model.set({'mediaEl':mediaEl});
+			this.get('el').appendChild(mediaEl);
+		    mediaEl.src = model.get("mediaFile");
+   		    mediaEl.play();
+   		    setTimeout(function(){ mediaEl.pause();  },0);
+            console.info("WaveformMODEL > on() change:mediaElFile =" + this.get('mediaFile') );
+   			model.set({'mediaEl':mediaEl});
         });
+	},
+	play: function() {
+	    this.get('mediaEl').play();
 	}
 });

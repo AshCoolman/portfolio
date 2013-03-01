@@ -1,0 +1,1 @@
+PortfolioApp.ApplicationController = Em.Controller.extend({});
