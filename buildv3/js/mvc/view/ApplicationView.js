@@ -1,3 +1,3 @@
 PortfolioApp.ApplicationView = Ember.View.extend({
-  templateName: 'portfolioapp'
+  templateName: 'portfolio-application'
 });

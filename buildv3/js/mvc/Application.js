@@ -11,11 +11,8 @@ App.ApplicationController = Ember.Controller.extend({
 });
 
 
-
-
-
 App.Router.map(function(){
-console.log('routing App')
+	console.log('routing App')
     this.route('index', {path:'/'});
     this.route('contributors', {path:'/con'});
 });
@@ -23,7 +20,6 @@ console.log('routing App')
 App.ApplicationRoute = Em.Route.extend({
 	model: function(){
 		console.log('ApplicationRoute.model()')
-
 	}
 });
 
@@ -37,12 +33,11 @@ App.IndexRoute = Em.Route.extend({
 	},
 	render: function() {
 		console.log('IndexRoute.render()');
-
 	},
 	renderTemplate: function() {
 		var controlller = App.SimpleBtnController.create({});
 		var btn = App.SimpleBtnView.create({controller:controlller}).appendTo('.application-container');
-			console.log('IndexRoute.renderTemplate()', btn.controller, controlller);
+		console.log('IndexRoute.renderTemplate()', btn.controller, controlller);
 
 	}
 })

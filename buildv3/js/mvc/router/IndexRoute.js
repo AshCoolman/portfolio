@@ -1,19 +1,27 @@
+
+console.log('PortfolioApp.IndexRoute.extend()');
+
 PortfolioApp.IndexRoute = Em.Route.extend({
-	connectOutlets: function(router) {
-		console.log('indexRoute connectOutlets()')
-		router.get('portfolioAppController')
+	model:function() {  console.log('PortfolioApp.IndexRoute.model()'); 	return []; },
+	activate: function() { 	console.log('PortfolioApp.IndexRoute.activate()'); 	},
+	render: function() { console.log('PortfolioApp.IndexRoute.render()'); },
+	renderTemplate: function() { 	console.log('PortfolioApp.IndexRoute.renderTemplate()');
+		/*	var controlller = App.SimpleBtnController.create({});
+			var btn = App.SimpleBtnView.create({controller:controlller}).appendTo('.application-container');
+			console.log('IndexRoute.renderTemplate()', btn.controller, controlller);
+			*/
+			
+		var waveformModel = PortfolioApp.WaveformMODEL.create({ mediaFile: 'sound/heartbeat.wav' });
 		
-		PortfolioApp.waveformMODEL = PortfolioApp.WaveformMODEL.create({ 
-			mediaFile: 'sound/heartbeat.wav' });
-			
-		PortfolioApp.startBtnCONTROLLER = PortfolioApp.StartBtnCONTROLLER.create({
-			content: PortfolioApp.waveformMODEL});
-			
-		PortfolioApp.startBtnVIEW = PortfolioApp.StartBtnVIEW.create({
+		var startBtnController = PortfolioApp.StartBtnCONTROLLER.create({ 	content: waveformModel });
+
+		PortfolioApp.StartBtnVIEW.create({
 			name:'start-btn', 
-			templateName:'start-btn-template', 
-			controller:PortfolioApp.startBtnCONTROLLER});
-			
-		PortfolioApp.startBtnVIEW.appendTo('.container');
+			controller: startBtnController
+		}).appendTo('.portfolio-app-container');
+		
+
+		
+
 	}
 })

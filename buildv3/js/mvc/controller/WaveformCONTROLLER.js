@@ -9,6 +9,7 @@
 **/
 PortfolioApp.WaveformCONTROLLER = Em.Controller.extend({
 	content:undefined,
+	
 	init: function() {
 		
 	},
