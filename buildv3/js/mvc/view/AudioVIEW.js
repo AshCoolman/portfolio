@@ -7,7 +7,6 @@ PortfolioApp.AudioView = Ember.View.extend({
 	src:undefined,
 	isSrcObservedPending:false,
 	didInsertElement: function() {
-		console.log('AudioView.didInsertElement element.');
 		var el = this.get('element');
 	    el.addEventListener('canplaythrough',function(){
 	        el.removeEventListener('canplaythrough');
@@ -21,7 +20,6 @@ PortfolioApp.AudioView = Ember.View.extend({
 		
 		var el = this.get('element');
 		if (el) {
-			console.log('AudioView.srcObserved element.src');
 			el.play()
 		   	setTimeout(function(){ el.pause();  },0);
 		 } else {

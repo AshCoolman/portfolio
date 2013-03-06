@@ -43,7 +43,20 @@
 		<script type="text/x-handlebars" data-template-name="start-btn">
 			<button {{action "doStart"}}>Start</button>
 		</script>
+		
+	<script type="text/x-handlebars" data-template-name="script-subtitle">
+		<p>Script Subtitle</p>
+		<div >
+			<span class="subtitle-text">{{ subtitleText }} <span>
+		</div>
+	</script>	
+		
+	<script type="text/x-handlebars" data-template-name="dimension1">
 
+		<p>Dimension One</p>
+	
+	
+	</script>
 
 			
 			
@@ -61,27 +74,28 @@
         
 		
 		<div class="portfolio-app-container">
-		</div> 
-		
-		<div class="application-container">
-		</div>
-		
+		</div>  
 	
 		
         <script src="js/lib/jquery-1.8.1.min.js"></script>
         <script src="js/lib/handlebars.js"></script>
         <script src="js/lib/embermandl.js"></script>
 	    <script src="js/mvc/PortfolioAPP.js"></script>
+		<script src="js/mvc/controller/ScriptSubtitleController.js"></script>
 		<script src="js/mvc/controller/StartBtnCONTROLLER.js"></script> 
 		<script src="js/mvc/controller/WaveformCONTROLLER.js"></script> 
 		<script src="js/mvc/controller/AudioController.js"></script>
+		<script src="js/mvc/controller/Dimension1Controller.js"></script>
+		<script src="js/mvc/model/ScriptModel.js"></script>
 		<script src="js/mvc/model/WaveformMODEL.js"></script> 
 		<script src="js/mvc/router/IndexRoute.js"></script> 
 		<script src="js/mvc/router/Dimension1Route.js"></script> 
+		<script src="js/mvc/view/ScriptSubtitleView.js"></script>
 		<script src="js/mvc/view/AudioVIEW.js"></script> 
 		<script src="js/mvc/view/StartBtnVIEW.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+		<!-- 
         <script>
         	if (location.protocol.indexOf('http')!=-1) {
 				var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
@@ -90,7 +104,7 @@
 				s.parentNode.insertBefore(g,s)}(document,'script'));
             }
         </script>
-        
+        -->
         
         
     </body>

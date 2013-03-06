@@ -5102,6 +5102,7 @@ Ember.bind = function(obj, to, from) {
   @return {Ember.Binding} binding instance
 */
 Ember.oneWay = function(obj, to, from) {
+	console.log('Ember.oneWay', obj, to, from);
   return new Ember.Binding(to, from).oneWay().connect(obj);
 };
 
