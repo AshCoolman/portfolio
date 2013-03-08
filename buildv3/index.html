@@ -14,28 +14,31 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css"> 
-	 
-		<script type="text/x-handlebars" data-template-name="contributors">
-			contributors
-		  {{#each person in controller}}
-		    {{person.login}}
-		  {{/each}}
-		</script>
-		
-		
-		
-		<script type="text/x-handlebars" data-template-name="application">
-			<p>application {{ name }}</p>
-				{{outlet}}
-			<br/>
-		</script>
+ 
 		
 		<script type="text/x-handlebars" data-template-name="portfolio-application">
-			<p>portfolio-application {{ name }}</p>
+			<h1>portfolio-application: {{ name }}</h1>
 				{{outlet}}
 			<br/>
 		</script>
 		
+
+		<script type="text/x-handlebars" data-template-name="dimension1">
+			<h2>Dimension One</h2>
+			<p>Dimension.wpm (model): <span class="wpm">{{ wpm }} <span></p>
+			{{ view PortfolioApp.D1BtnView }}
+			{{ view PortfolioApp.ScriptSubtitleView }}
+		</script>
+
+		<script type="text/x-handlebars" data-template-name="index">
+			<h2>Index</h2>
+			<p>
+				<button onClick="window.location.hash='/d1'">Go to d1</button>
+			</p>
+			{{ test }}
+		</script>
+
+
 		<script type="text/x-handlebars" data-template-name="simple-btn">
 			<button {{action "doStart" }}>Simple Button!</button>
 		</script>
@@ -47,19 +50,17 @@
 	<script type="text/x-handlebars" data-template-name="script-subtitle">
 		<p>Script Subtitle</p>
 		<div >
-			<span class="subtitle-text">{{ subtitleText }} <span>
+			<p>subtitleText: <span class="subtitle-text">{{ subtitleText }} <span></p>
+			<p>wpm (model): <span class="wpm">{{ wpm }} <span></p>
 		</div>
 	</script>	
-		
-	<script type="text/x-handlebars" data-template-name="dimension1">
-
-		<p>Dimension One</p>
 	
-	
+	<script type="text/x-handlebars" data-template-name="d1-btn">
+		<button onClick="window.location.hash='/'">Go to index</button>
 	</script>
+	
 
-			
-			
+
 	</head>
     <body>
         <!--[if lt IE 7]>
@@ -67,33 +68,36 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-       <div class="container">
-       
-       </div>
-       
-        
-		
-		<div class="portfolio-app-container">
-		</div>  
+       <div class="container"> </div>
+		<div class="portfolio-app-container"> </div>  
 	
+			
+	        <script src="js/lib/jquery-1.8.1.min.js"></script>
+	        <script src="js/lib/handlebars.js"></script>
+	        <script src="js/lib/embermandl.js"></script>
+		    <script src="js/mvc/PortfolioAPP.js"></script>
 		
-        <script src="js/lib/jquery-1.8.1.min.js"></script>
-        <script src="js/lib/handlebars.js"></script>
-        <script src="js/lib/embermandl.js"></script>
-	    <script src="js/mvc/PortfolioAPP.js"></script>
-		<script src="js/mvc/controller/ScriptSubtitleController.js"></script>
-		<script src="js/mvc/controller/StartBtnCONTROLLER.js"></script> 
-		<script src="js/mvc/controller/WaveformCONTROLLER.js"></script> 
-		<script src="js/mvc/controller/AudioController.js"></script>
-		<script src="js/mvc/controller/Dimension1Controller.js"></script>
-		<script src="js/mvc/model/ScriptModel.js"></script>
-		<script src="js/mvc/model/WaveformMODEL.js"></script> 
-		<script src="js/mvc/router/IndexRoute.js"></script> 
-		<script src="js/mvc/router/Dimension1Route.js"></script> 
-		<script src="js/mvc/view/ScriptSubtitleView.js"></script>
-		<script src="js/mvc/view/AudioVIEW.js"></script> 
-		<script src="js/mvc/view/StartBtnVIEW.js"></script>
-
+			<script src="js/mvc/controller/ScriptSubtitleController.js"></script>
+			<script src="js/mvc/controller/StartBtnCONTROLLER.js"></script> 
+			<script src="js/mvc/controller/WaveformCONTROLLER.js"></script> 
+			<script src="js/mvc/controller/AudioController.js"></script>
+			<script src="js/mvc/controller/Dimension1Controller.js"></script>
+			<script src="js/mvc/controller/IndexController.js"></script>
+			<script src="js/mvc/controller/ApplicationController.js"></script>
+			
+			<script src="js/mvc/model/ScriptModel.js"></script> 
+			
+			<script src="js/mvc/router/IndexRoute.js"></script> 
+			<script src="js/mvc/router/Dimension1Route.js"></script> 
+			
+			<script src="js/mvc/view/ScriptSubtitleView.js"></script>
+			<script src="js/mvc/view/AudioVIEW.js"></script> 
+			<script src="js/mvc/view/StartBtnVIEW.js"></script>
+			<script src="js/mvc/view/D1BtnView.js"></script>
+			<script src="js/mvc/view/Dimension1View.js"></script>
+			<script src="js/mvc/view/IndexView.js"></script>
+			<script src="js/mvc/view/ApplicationView.js"></script>
+		
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 		<!-- 
         <script>

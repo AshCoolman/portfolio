@@ -1,6 +1,5 @@
-PortfolioApp.ScriptSubtitleController = Em.Controller.extend({
+PortfolioApp.ScriptSubtitleController = Em.ObjectController.extend({
 	content:undefined,
-	progressBinding:'PortfolioApp.scriptModel.progress',
 	init: function() { 	
 		this._super(); 
 	}
