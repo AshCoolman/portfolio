@@ -13554,7 +13554,7 @@ var childViewsProperty = Ember.computed(function() {
   return ret;
 });
 
-Ember.warn("The VIEW_PRESERVES_CONTEXT flag has been removed and the functionality can no longer be disabled.", Ember.ENV.VIEW_PRESERVES_CONTEXT !== false);
+Ember.warn("The View_PRESERVES_CONTEXT flag has been removed and the functionality can no longer be disabled.", Ember.ENV.View_PRESERVES_CONTEXT !== false);
 
 /**
   Global hash of shared templates. This will automatically be populated
@@ -14698,7 +14698,7 @@ Ember.View = Ember.CoreView.extend(
     // remove them under the assumption that they will be re-created when
     // we re-render.
 
-    // VIEW-TODO: Unit test this path.
+    // View-TODO: Unit test this path.
     var childViews = this._childViews;
     for (var i=lengthAfter-1; i>=lengthBefore; i--) {
       if (childViews[i]) { childViews[i].destroy(); }
@@ -19219,7 +19219,7 @@ EmberHandlebars.bindClasses = function(context, classBindings, view, bindAttrId,
 */
 
 var get = Ember.get, set = Ember.set;
-var PARENT_VIEW_PATH = /^parentView\./;
+var PARENT_View_PATH = /^parentView\./;
 var EmberHandlebars = Ember.Handlebars;
 
 EmberHandlebars.ViewHelper = Ember.Object.create({
@@ -23770,7 +23770,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
     @param {Object?} model
     @param {Hash} options
   */
-  Ember.Handlebars.registerHelper('render', function(name, contextString, options) {
+  Ember.Handlebars.registerHelper('render', function(name, contextString, options) { 
     Ember.assert("You must pass a template to render", arguments.length >= 2);
     var container, router, controller, view, context;
 
@@ -23778,19 +23778,20 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
       options = contextString;
       contextString = undefined;
     }
-
+	
+	
     if (typeof contextString === 'string') {
       context = Ember.Handlebars.get(options.contexts[1], contextString, options);
     }
 
     name = name.replace(/\//g, '.');
     container = options.data.keywords.controller.container;
+
     router = container.lookup('router:main');
 
     Ember.assert("This view is already rendered", !router || !router._lookupActiveView(name));
 
     view = container.lookup('view:' + name) || container.lookup('view:default');
-
     if (controller = options.hash.controller) {
       controller = container.lookup('controller:' + controller);
     } else {

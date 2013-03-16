@@ -1,6 +1,8 @@
 PortfolioApp.IndexRoute = Em.Route.extend({
-	model:function() { return []; },
-	activate: function() { 	},
+	activate: function() { 	
+		destroys=[];
+		destroyEls=[];
+	},
 	deactivate: function() { 
 		for (var de=0; de<destroyEls.length; de++) 	destroyEls[de].destroyElement();
 		for (var d=0; d<destroys.length; d++) destroys[d].destroy();
@@ -9,8 +11,6 @@ PortfolioApp.IndexRoute = Em.Route.extend({
 	},
 	renderTemplate: function() { 
 		this.render('index');
-		destroys=[];
-		destroyEls=[];
 		/*
 		
 		audioController = destroys[destroys.length] = PortfolioApp.AudioController.create({content:[]});
@@ -20,12 +20,13 @@ PortfolioApp.IndexRoute = Em.Route.extend({
 			src: 'sound/heartbeat.wav'
 		}).appendTo('.portfolio-app-container');
                                                                                                                    
-		startBtnController = destroys[destroys.length] = PortfolioApp.StartBtnCONTROLLER.create({});
-		startButton = destroys[destroys.length] = destroyEls[destroyEls.length] = PortfolioApp.StartBtnVIEW.create({
+		startBtnController = destroys[destroys.length] = PortfolioApp.StartBtnController.create({});
+		startButton = destroys[destroys.length] = destroyEls[destroyEls.length] = PortfolioApp.StartBtnView.create({
 			name:'start-btn', 
 			controller: startBtnController
 		}).appendTo('.portfolio-app-container');
 		*/
+		
 
 	}
 })

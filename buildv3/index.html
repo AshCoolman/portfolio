@@ -17,21 +17,41 @@
  
 		
 		<script type="text/x-handlebars" data-template-name="portfolio-application">
+		{{outlet second}} <br/>
 			<h1>portfolio-application: {{ name }}</h1>
-				{{outlet}}
-			<br/>
+				{{outlet}} <br/>
+			
 		</script>
 		
 
 		<script type="text/x-handlebars" data-template-name="dimension1">
-			<h2>Dimension One</h2>
-			<p>Dimension.wpm (model): <span class="wpm">{{ wpm }} <span></p>
-			{{ view PortfolioApp.D1BtnView }}
-			{{ view PortfolioApp.ScriptSubtitleView }}
+			<h3>Dimension1</h3>
+		<div style="clear:both;">
+			{{template 'd1-btn' }}
+		</div>
+			<div style="width:100%">
+				<div style="float:left; width:40%; padding:0; margin:0; border:0;">
+					<p>
+						<strong>Dimension 1</strong><br/>
+						<i>controller</i>: {{controllerName}}<br/>
+						<i>content</i>: {{content}}<br/>
+					</p>
+					<p>
+						<i>title</i>: {{title}} <br/>
+						<i>script</i>: {{script}} <br/>
+						<i>subtitleText(computed)</i>: {{ subtitleText }} <br/>
+						<i>wpm</i>: {{ wpm }} <br/>
+						<i>boundScript:</i> {{ script }} <br/>
+					</p>
+				</div>
+				<div style="float:left; width:40%;  padding:0; margin:0; border:0;">
+					{{render "subtitle" subtitle}}
+				</div>
+			</div> 
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="index">
-			<h2>Index</h2>
+			<h3>Index</h3>
 			<p>
 				<button onClick="window.location.hash='/d1'">Go to d1</button>
 			</p>
@@ -47,11 +67,20 @@
 			<button {{action "doStart"}}>Start</button>
 		</script>
 		
-	<script type="text/x-handlebars" data-template-name="script-subtitle">
-		<p>Script Subtitle</p>
+	<script type="text/x-handlebars" data-template-name="subtitle">
+
 		<div >
-			<p>subtitleText: <span class="subtitle-text">{{ subtitleText }} <span></p>
-			<p>wpm (model): <span class="wpm">{{ wpm }} <span></p>
+			<p>
+				<strong>subtitle</strong><br/>
+				<i>controller</i>: {{controllerName}}<br/>
+				<i>content</i>:{{content}}<br/>
+			</p>
+			<p>
+				<i>title</i>: {{title}} <br/>
+				<i>script</i>: {{script}} <br/>
+				<i>subtitleText(computed)</i>: {{ subtitleText }} <br/>
+				<i>wpm</i>: {{ wpm }} <br/>
+			</p>
 		</div>
 	</script>	
 	
@@ -75,24 +104,25 @@
 	        <script src="js/lib/jquery-1.8.1.min.js"></script>
 	        <script src="js/lib/handlebars.js"></script>
 	        <script src="js/lib/embermandl.js"></script>
-		    <script src="js/mvc/PortfolioAPP.js"></script>
+		    <script src="js/mvc/PortfolioApp.js"></script>
 		
-			<script src="js/mvc/controller/ScriptSubtitleController.js"></script>
-			<script src="js/mvc/controller/StartBtnCONTROLLER.js"></script> 
-			<script src="js/mvc/controller/WaveformCONTROLLER.js"></script> 
+			<script src="js/mvc/controller/SubtitleController.js"></script>
+			<script src="js/mvc/controller/StartBtnController.js"></script> 
+			<script src="js/mvc/controller/WaveformController.js"></script> 
 			<script src="js/mvc/controller/AudioController.js"></script>
 			<script src="js/mvc/controller/Dimension1Controller.js"></script>
 			<script src="js/mvc/controller/IndexController.js"></script>
 			<script src="js/mvc/controller/ApplicationController.js"></script>
 			
 			<script src="js/mvc/model/ScriptModel.js"></script> 
+			<script src="js/mvc/model/Dimension1Model.js"></script>
 			
 			<script src="js/mvc/router/IndexRoute.js"></script> 
 			<script src="js/mvc/router/Dimension1Route.js"></script> 
 			
-			<script src="js/mvc/view/ScriptSubtitleView.js"></script>
-			<script src="js/mvc/view/AudioVIEW.js"></script> 
-			<script src="js/mvc/view/StartBtnVIEW.js"></script>
+			<script src="js/mvc/view/SubtitleView.js"></script>
+			<script src="js/mvc/view/AudioView.js"></script> 
+			<script src="js/mvc/view/StartBtnView.js"></script>
 			<script src="js/mvc/view/D1BtnView.js"></script>
 			<script src="js/mvc/view/Dimension1View.js"></script>
 			<script src="js/mvc/view/IndexView.js"></script>
