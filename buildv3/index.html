@@ -14,6 +14,7 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css"> 
+        <link rel="stylesheet" href="css/portfolio.css">
  
 		
 		<script type="text/x-handlebars" data-template-name="portfolio-application">
@@ -25,30 +26,36 @@
 		
 
 		<script type="text/x-handlebars" data-template-name="dimension1">
-			<h3>Dimension1</h3>
-		<div style="clear:both;">
-			{{template 'd1-btn' }}
-		</div>
-			<div style="width:100%">
-				<div style="float:left; width:40%; padding:0; margin:0; border:0;">
-					<p>
-						<strong>Dimension 1</strong><br/>
-						<i>controller</i>: {{controllerName}}<br/>
-						<i>content</i>: {{content}}<br/>
-					</p>
-					<p>
-						<i>title</i>: {{title}} <br/>
-						<i>script</i>: {{script}} <br/>
-						<i>subtitleText(computed)</i>: {{ subtitleText }} <br/>
-						<i>wpm</i>: {{ wpm }} <br/>
-						<i>boundScript:</i> {{ script }} <br/>
-					</p>
+			<div style="clear:both;">
+				{{render 'heartbeat' heartbeat}}
+			</div>
+			<div class="note">
+				<h3>Dimension1</h3>
+				<div style="clear:both;">
+					{{template 'd1-btn' }}
 				</div>
-				<div style="float:left; width:40%;  padding:0; margin:0; border:0;">
-					{{render "subtitle" subtitle}}
-				</div>
+				<div style="width:100%">
+					<div style="float:left; width:40%; padding:0; margin:0; border:0;">
+						<p>
+							<strong>Dimension 1</strong><br/>
+							<i>controller</i>: {{controllerName}}<br/>
+							<i>content</i>: {{content}}<br/>
+						</p>
+						<p>
+							<i>title</i>: {{title}} <br/>
+							<i>script</i>: {{script}} <br/>
+							<i>subtitleText(computed)</i>: {{ subtitleText }} <br/>
+							<i>wpm</i>: {{ wpm }} <br/>
+							<i>boundScript:</i> {{ script }} <br/>
+						</p>
+					</div>
+					<div style="float:left; width:40%;  padding:0; margin:0; border:0;">
+						{{render "subtitle" subtitle}}
+					</div>
+				</div> 
 			</div> 
 		</script>
+
 
 		<script type="text/x-handlebars" data-template-name="index">
 			<h3>Index</h3>
@@ -59,13 +66,38 @@
 		</script>
 
 
+		<script type="text/x-handlebars" data-template-name="heartbeat">
+		
+			<h4>hbs:heartbeat</h4>
+			<button {{action "doStart" }}>Start!</button>
+			{{render "heartbeat-flash" heartbeatFlash}}
+			{{render "heartbeat-sound" heartbeatSound}}
+		</script>
+		
+		
+		<style type="text/css">
+		</style>
+		
+		<script type="text/x-handlebars" classesToAdd="heartbeat-flash" data-template-name="heartbeat-flash">
+			<h5>hbs:heartbeat flash</h5>
+
+		</script>
+
+
+			<script type="text/x-handlebars" data-template-name="heartbeat-sound">
+
+			</script>
+
+		
 		<script type="text/x-handlebars" data-template-name="simple-btn">
 			<button {{action "doStart" }}>Simple Button!</button>
 		</script>
 			
+			
 		<script type="text/x-handlebars" data-template-name="start-btn">
 			<button {{action "doStart"}}>Start</button>
 		</script>
+		
 		
 	<script type="text/x-handlebars" data-template-name="subtitle">
 
@@ -83,6 +115,7 @@
 			</p>
 		</div>
 	</script>	
+	
 	
 	<script type="text/x-handlebars" data-template-name="d1-btn">
 		<button onClick="window.location.hash='/'">Go to index</button>
@@ -104,12 +137,18 @@
 	        <script src="js/lib/jquery-1.8.1.min.js"></script>
 	        <script src="js/lib/handlebars.js"></script>
 	        <script src="js/lib/embermandl.js"></script>
+	        <script src="js/lib/ragh/EventMapper.js"></script>
+	
 		    <script src="js/mvc/PortfolioApp.js"></script>
 		
+			<script src="js/mvc/controller/SmartController.js"></script>
 			<script src="js/mvc/controller/SubtitleController.js"></script>
 			<script src="js/mvc/controller/StartBtnController.js"></script> 
 			<script src="js/mvc/controller/WaveformController.js"></script> 
 			<script src="js/mvc/controller/AudioController.js"></script>
+			<script src="js/mvc/controller/HeartbeatController.js"></script>
+			<script src="js/mvc/controller/HeartbeatFlashController.js"></script>
+			<script src="js/mvc/controller/HeartbeatSoundController.js"></script>
 			<script src="js/mvc/controller/Dimension1Controller.js"></script>
 			<script src="js/mvc/controller/IndexController.js"></script>
 			<script src="js/mvc/controller/ApplicationController.js"></script>
@@ -120,10 +159,14 @@
 			<script src="js/mvc/router/IndexRoute.js"></script> 
 			<script src="js/mvc/router/Dimension1Route.js"></script> 
 			
+			<script src="js/mvc/view/SmartView.js"></script>
 			<script src="js/mvc/view/SubtitleView.js"></script>
 			<script src="js/mvc/view/AudioView.js"></script> 
 			<script src="js/mvc/view/StartBtnView.js"></script>
 			<script src="js/mvc/view/D1BtnView.js"></script>
+			<script src="js/mvc/view/HeartbeatView.js"></script>
+			<script src="js/mvc/view/HeartbeatSoundView.js"></script>
+			<script src="js/mvc/view/HeartbeatFlashView.js"></script>
 			<script src="js/mvc/view/Dimension1View.js"></script>
 			<script src="js/mvc/view/IndexView.js"></script>
 			<script src="js/mvc/view/ApplicationView.js"></script>

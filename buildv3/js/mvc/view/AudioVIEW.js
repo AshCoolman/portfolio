@@ -26,5 +26,8 @@ PortfolioApp.AudioView = Ember.View.extend({
 			isSrcObservedPending = true;
 		}
 		
-	}.observes('src')
+	}.observes('src'),
+	play: function () {
+		this.get('element').play();
+	}
 });

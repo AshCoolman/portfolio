@@ -9,4 +9,3 @@ PortfolioApp.SubtitleView = Ember.View.extend({
 		console.log('setupController')
 	}
 });
- 
