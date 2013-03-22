@@ -1,4 +1,4 @@
-PortfolioApp.AudioView = Ember.View.extend({
+PortfolioApp.AudioView = PortfolioApp.SmartView.extend({
 	tagName:'audio',
 	className: 'audio-view',
   	attributeBindings: ['src'],

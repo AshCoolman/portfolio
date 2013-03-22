@@ -14875,6 +14875,7 @@ Ember.View = Ember.CoreView.extend(
     @return {jQuery} the CoreQuery object for the DOM node
   */
   $: function(sel) {
+	//console.log('$.this', this)
     return this.currentState.$(this, sel);
   },
 

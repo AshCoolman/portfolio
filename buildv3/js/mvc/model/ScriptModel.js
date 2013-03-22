@@ -1,6 +1,6 @@
 PortfolioApp.ScriptModel = Em.Object.extend({
 	script: "My name is Ashley Coleman. I'm a digital engineer, I'm a story teller. And the thought of you experiencing my website quickens my pulse",
-	wpm: 40,
+	wpm: 180,
 	progress: 0.0,
 	subtitleText: function() {
 		console.log('computer prop subtitleText')

@@ -22,11 +22,12 @@ ragh.EventMapper = (function () {
 				this.eventsAndListeners[type] = [];
 			}
 			this.eventsAndListeners[type].push({ listener: listener, callback: callback });
+			return type;
 		},
-		removeEventListener: function (mappedEvent, listener) {
-			assert(this.eventsAndListeners[type], 'raaagh.EventMapper: this.eventsAndListeners[mappedEvent.type] is undefined');
+		removeEventListener: function (type, listener) { 
+			assert(this.eventsAndListeners[type], 'raaagh.EventMapper: this.eventsAndListeners[' + type + '] is undefined');
 			this.eventsAndListeners[type] = this.eventsAndListeners[type].filter(function (el) {
-				return (el.listener === listener);
+				return (el.listener != listener);
 			});
 		},
 		triggerEvent: function (type) {
@@ -34,7 +35,7 @@ ragh.EventMapper = (function () {
 				this.eventsAndListeners[type] = [];
 			}
 			this.eventsAndListeners[type].filter(function (el) {
-				 el.callback(type, el.listener);
+				 el.callback.call(el.listener, type, el.listener);
 				return true;
 			});
 		}
@@ -48,7 +49,7 @@ ragh.EventMapper = (function () {
 if (!this.assert) {
 	'use strict';
 	this.assert = function (condition, failMsg, succeedMsg) {
-		if (condition) {
+		if (!condition) {
 			console.info(failMsg);
 		} else if (succeedMsg) {
 			console.info(succeedMsg);

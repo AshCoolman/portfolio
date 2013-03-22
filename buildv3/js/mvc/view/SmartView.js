@@ -1,22 +1,18 @@
 PortfolioApp.SmartView = Ember.View.extend({
-	className: 'HeartbeatView',
-	templateName: 'heartbeat',
-	init: function () {
-		this._super();
-		var classes = this.get('parentView').get('classesToAdd');
-		classes += " ember-view ember-text-field";
-		this.set('classNames', Ember.makeArray(classes));	
+	className: 'PortfolioApp.SmartView',
+	mappedEvents:[],
+	smartViewObj:null,
+	init: function () {	
+		smartViewObj = this;
+		return this._super();
 	},
-	didInsertElement: function () {
-  		console.log(this.className, 'didInsertElement');
-		this.get('controller').send('view_didInsertElement', this);
-	},	
-	destroy: function () {
-		console.log('!! destroying HeartbeatView');
-		return this._super().destroy();
+	didInsertElement: function (scope) {
+		if (!scope) scope = this;
+		console.log(scope.className, 'didInsertElement', scope);
+		scope.$().addClass(scope.templateName);
+		scope.get('controller').send('view_didInsertElement', this);
 	},
-	doBeat: function() {
-		console.log('beat',this.get('childViews'));
+	willDestroyElement: function () {
+		this.get('controller').send('view_willDestroyElement', this);
 	}
 });
-

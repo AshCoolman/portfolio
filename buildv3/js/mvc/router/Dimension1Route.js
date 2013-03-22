@@ -23,7 +23,7 @@ PortfolioApp.Dimension1Route = Em.Route.extend({
 		this.render('dimension1');
 	},
 	events: {
-		InsertViewDone: function (achildview, another) {
+		SubtitleView_InsertViewDone: function (achildview, another) {
 			if ('Subtitle' == achildview.name) {
 				subtitleView = achildview;
 				subtitleController = subtitleView.get('controller');

@@ -15,72 +15,60 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css"> 
         <link rel="stylesheet" href="css/portfolio.css">
+        <link rel="stylesheet" href="css/grid.css">
  
 		
 		<script type="text/x-handlebars" data-template-name="portfolio-application">
-		{{outlet second}} <br/>
-			<h1>portfolio-application: {{ name }}</h1>
-				{{outlet}} <br/>
-			
+				{{outlet}}
 		</script>
 		
 
 		<script type="text/x-handlebars" data-template-name="dimension1">
-			<div style="clear:both;">
-				{{render 'heartbeat' heartbeat}}
-			</div>
-			<div class="note">
-				<h3>Dimension1</h3>
-				<div style="clear:both;">
+			
+			<div class="row"
+				<div class="one columns">
 					{{template 'd1-btn' }}
 				</div>
-				<div style="width:100%">
-					<div style="float:left; width:40%; padding:0; margin:0; border:0;">
-						<p>
-							<strong>Dimension 1</strong><br/>
-							<i>controller</i>: {{controllerName}}<br/>
-							<i>content</i>: {{content}}<br/>
-						</p>
-						<p>
-							<i>title</i>: {{title}} <br/>
-							<i>script</i>: {{script}} <br/>
-							<i>subtitleText(computed)</i>: {{ subtitleText }} <br/>
-							<i>wpm</i>: {{ wpm }} <br/>
-							<i>boundScript:</i> {{ script }} <br/>
-						</p>
+				
+				<div class="ten columns">
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="twelve columns">
+					{{render 'heartbeat' heartbeat}}	
+				</div>
+			</div>
+				
+			<div class="row">
+				<div class="twelve columns">
+					<div class="subtitle-container">
+						{{render 'subtitle' subtitle}}
 					</div>
-					<div style="float:left; width:40%;  padding:0; margin:0; border:0;">
-						{{render "subtitle" subtitle}}
-					</div>
-				</div> 
-			</div> 
+				</div>
+			</div>
 		</script>
 
 
 		<script type="text/x-handlebars" data-template-name="index">
-			<h3>Index</h3>
-			<p>
-				<button onClick="window.location.hash='/d1'">Go to d1</button>
-			</p>
+			<div class="nav-btn-holder">
+				<button class="nav-btn" onClick="window.location.hash='/d1'">Go to d1</button>
+			</div>
 			{{ test }}
 		</script>
 
 
 		<script type="text/x-handlebars" data-template-name="heartbeat">
-		
-			<h4>hbs:heartbeat</h4>
-			<button {{action "doStart" }}>Start!</button>
+			<div class="nav-btn-holder">
+				<button class="nav-btn" {{action "doStart" }}>Start!</button>
+			</div>
 			{{render "heartbeat-flash" heartbeatFlash}}
 			{{render "heartbeat-sound" heartbeatSound}}
 		</script>
 		
 		
-		<style type="text/css">
-		</style>
-		
-		<script type="text/x-handlebars" classesToAdd="heartbeat-flash" data-template-name="heartbeat-flash">
-			<h5>hbs:heartbeat flash</h5>
-
+		<script type="text/x-handlebars" data-template-name="heartbeat-flash">
+ 
 		</script>
 
 
@@ -92,28 +80,10 @@
 		<script type="text/x-handlebars" data-template-name="simple-btn">
 			<button {{action "doStart" }}>Simple Button!</button>
 		</script>
-			
-			
-		<script type="text/x-handlebars" data-template-name="start-btn">
-			<button {{action "doStart"}}>Start</button>
-		</script>
 		
 		
 	<script type="text/x-handlebars" data-template-name="subtitle">
-
-		<div >
-			<p>
-				<strong>subtitle</strong><br/>
-				<i>controller</i>: {{controllerName}}<br/>
-				<i>content</i>:{{content}}<br/>
-			</p>
-			<p>
-				<i>title</i>: {{title}} <br/>
-				<i>script</i>: {{script}} <br/>
-				<i>subtitleText(computed)</i>: {{ subtitleText }} <br/>
-				<i>wpm</i>: {{ wpm }} <br/>
-			</p>
-		</div>
+		{{text}}
 	</script>	
 	
 	
@@ -131,42 +101,55 @@
 
         <!-- Add your site or application content here -->
        <div class="container"> </div>
-		<div class="portfolio-app-container"> </div>  
+		<div class="portfolio-app-container">
+			
+		</div>  
 	
 			
 	        <script src="js/lib/jquery-1.8.1.min.js"></script>
 	        <script src="js/lib/handlebars.js"></script>
 	        <script src="js/lib/embermandl.js"></script>
 	        <script src="js/lib/ragh/EventMapper.js"></script>
-	
+			
+			<!-- PORTFOLIO EMBER MVC FILES -->
 		    <script src="js/mvc/PortfolioApp.js"></script>
-		
+			
+			<!-- Controller -->
 			<script src="js/mvc/controller/SmartController.js"></script>
-			<script src="js/mvc/controller/SubtitleController.js"></script>
+			<script src="js/mvc/controller/SmartController/HeartbeatFlashController.js"></script>
+			<script src="js/mvc/controller/SmartController/AudioController.js"></script>
+			<script src="js/mvc/controller/SmartController/HeartbeatController.js"></script>
+			<script src="js/mvc/controller/SmartController/SubtitleController.js"></script>
+			
+			<script src="js/mvc/controller/SmartController/AudioController/HeartbeatSoundController.js"></script>
+			
 			<script src="js/mvc/controller/StartBtnController.js"></script> 
 			<script src="js/mvc/controller/WaveformController.js"></script> 
-			<script src="js/mvc/controller/AudioController.js"></script>
-			<script src="js/mvc/controller/HeartbeatController.js"></script>
-			<script src="js/mvc/controller/HeartbeatFlashController.js"></script>
-			<script src="js/mvc/controller/HeartbeatSoundController.js"></script>
 			<script src="js/mvc/controller/Dimension1Controller.js"></script>
 			<script src="js/mvc/controller/IndexController.js"></script>
 			<script src="js/mvc/controller/ApplicationController.js"></script>
 			
+			<!-- Models -->
 			<script src="js/mvc/model/ScriptModel.js"></script> 
 			<script src="js/mvc/model/Dimension1Model.js"></script>
 			
+			<!-- Routes -->
 			<script src="js/mvc/router/IndexRoute.js"></script> 
 			<script src="js/mvc/router/Dimension1Route.js"></script> 
 			
+			<!-- Views -->
 			<script src="js/mvc/view/SmartView.js"></script>
-			<script src="js/mvc/view/SubtitleView.js"></script>
-			<script src="js/mvc/view/AudioView.js"></script> 
+			
+			<script src="js/mvc/view/SmartView/HeartbeatView.js"></script>
+			<script src="js/mvc/view/SmartView/HeartbeatFlashView.js"></script>
+			<script src="js/mvc/view/SmartView/AudioView.js"></script>
+			<script src="js/mvc/view/SmartView/SubtitleView.js"></script>
+			<script src="js/mvc/view/SmartView/SubtitleView.js"></script>
+			
+			<script src="js/mvc/view/SmartView/AudioView/HeartbeatSoundView.js"></script>
+			
 			<script src="js/mvc/view/StartBtnView.js"></script>
 			<script src="js/mvc/view/D1BtnView.js"></script>
-			<script src="js/mvc/view/HeartbeatView.js"></script>
-			<script src="js/mvc/view/HeartbeatSoundView.js"></script>
-			<script src="js/mvc/view/HeartbeatFlashView.js"></script>
 			<script src="js/mvc/view/Dimension1View.js"></script>
 			<script src="js/mvc/view/IndexView.js"></script>
 			<script src="js/mvc/view/ApplicationView.js"></script>

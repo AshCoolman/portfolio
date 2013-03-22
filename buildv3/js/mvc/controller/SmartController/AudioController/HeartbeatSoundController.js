@@ -5,7 +5,7 @@ PortfolioApp.HeartbeatSoundController = PortfolioApp.AudioController.extend({
 	content: undefined,
 	init: function () {
 		this._super();
-		PortfolioApp.eventMapper.addEventListener('heartbeat', this, this.doHeartbeat);
+		this.addAutoMappedEvent('heartbeat', this, this.doHeartbeat);
 	},
 	destroy: function () {
 		PortfolioApp.eventMapper.removeEventListener('heartbeat', this);

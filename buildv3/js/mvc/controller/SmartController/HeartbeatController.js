@@ -2,7 +2,7 @@
 /*global $, jQuery, PortfolioApp, Em, console*/
 (function () {
 	'use strict';
-	PortfolioApp.HeartbeatController = Em.Controller.extend({
+	PortfolioApp.HeartbeatController = PortfolioApp.SmartController.extend({
 		label: 'HeartbeatController',
 		timeout: null,
 		total: 0,
@@ -10,19 +10,14 @@
 		init: function () {
 			this._super();
 		},
-		destroy: function () {
-			if (this.timeout) {
-				this.timeout.clearTimeout();
-			}
-			return this._super().destroy();
-		},
-		doStart: function () {
+		doStart: function (arg1, arg2, arg3, arg4) {
+			this.myView.doStart();
 			this.myView.doBeat();
 			PortfolioApp.eventMapper.triggerEvent('d1Start');
 			this.createHeartbeat(this);
 		},
 		createHeartbeat: function (target) {
-			if (this.total < 25) {
+			if (this.total < 1) {
 				this.total++;
 				(function(){
 					target.timeout = setTimeout(function () {
@@ -34,6 +29,11 @@
 		},
 		view_didInsertElement: function (aview) {
 			this.myView = aview;
+		},
+		view_willDestroyElement: function () {
+			if (typeof this.timeout == 'number') {
+				clearTimeout(this.timeout);
+			}
 		}
 	});
 }());
