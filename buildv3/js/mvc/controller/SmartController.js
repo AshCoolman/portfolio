@@ -6,10 +6,12 @@ PortfolioApp.SmartController = Em.ObjectController.extend({
 	view_didInsertElement: function (aview) {
 		var meObj, me;
 		this.set('view', aview);
+		
 		for (me = 0; me < this.autoMappedEvents.length; me++) {
 			meObj = this.autoMappedEvents[me];
 			PortfolioApp.eventMapper.addEventListener(meObj.type, meObj.listener, meObj.callback);
 		}
+		
 	},
 	view_willDestroyElement: function () {
 		for (var me=0; me < this.autoMappedEvents.length; me++) {

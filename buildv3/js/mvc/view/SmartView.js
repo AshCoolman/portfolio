@@ -8,7 +8,6 @@ PortfolioApp.SmartView = Ember.View.extend({
 	},
 	didInsertElement: function (scope) {
 		if (!scope) scope = this;
-		console.log(scope.className, 'didInsertElement', scope);
 		scope.$().addClass(scope.templateName);
 		scope.get('controller').send('view_didInsertElement', this);
 	},

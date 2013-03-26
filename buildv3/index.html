@@ -21,25 +21,32 @@
 		<script type="text/x-handlebars" data-template-name="portfolio-application">
 				{{outlet}}
 		</script>
-		
+
+
+		<script type="text/x-handlebars" data-template-name="index">
+			<div class="nav-btn-holder">
+				{{render 'hash-btn' hashBtn hash="d1" label="Dimension 1"}}
+			</div>
+		</script>
+
 
 		<script type="text/x-handlebars" data-template-name="dimension1">
-			
+
 			<div class="row"
 				<div class="one columns">
 					{{template 'd1-btn' }}
 				</div>
-				
+
 				<div class="ten columns">
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="twelve columns">
 					{{render 'heartbeat' heartbeat}}	
 				</div>
 			</div>
-				
+
 			<div class="row">
 				<div class="twelve columns">
 					<div class="subtitle-container">
@@ -50,11 +57,12 @@
 		</script>
 
 
-		<script type="text/x-handlebars" data-template-name="index">
-			<div class="nav-btn-holder">
-				<button class="nav-btn" onClick="window.location.hash='/d1'">Go to d1</button>
+		<script type="text/x-handlebars" data-template-name="dimension2">
+			<div class="row">
+				<div class="twelve columns">
+					{{title}}
+				</div>
 			</div>
-			{{ test }}
 		</script>
 
 
@@ -84,11 +92,11 @@
 		
 	<script type="text/x-handlebars" data-template-name="subtitle">
 		{{text}}
-	</script>	
+	</script>
 	
-	
-	<script type="text/x-handlebars" data-template-name="d1-btn">
-		<button onClick="window.location.hash='/'">Go to index</button>
+
+	<script type="text/x-handlebars" data-template-name="hash-btn">
+		<button onClick="window.location.hash='/{{hash}}'">{{label}}</button>
 	</script>
 	
 
@@ -126,16 +134,19 @@
 			<script src="js/mvc/controller/StartBtnController.js"></script> 
 			<script src="js/mvc/controller/WaveformController.js"></script> 
 			<script src="js/mvc/controller/Dimension1Controller.js"></script>
+			<script src="js/mvc/controller/Dimension2Controller.js"></script>
 			<script src="js/mvc/controller/IndexController.js"></script>
 			<script src="js/mvc/controller/ApplicationController.js"></script>
 			
 			<!-- Models -->
 			<script src="js/mvc/model/ScriptModel.js"></script> 
 			<script src="js/mvc/model/Dimension1Model.js"></script>
+			<script src="js/mvc/model/Dimension2Model.js"></script>
 			
 			<!-- Routes -->
 			<script src="js/mvc/router/IndexRoute.js"></script> 
 			<script src="js/mvc/router/Dimension1Route.js"></script> 
+			<script src="js/mvc/router/Dimension2Route.js"></script>
 			
 			<!-- Views -->
 			<script src="js/mvc/view/SmartView.js"></script>
@@ -144,14 +155,14 @@
 			<script src="js/mvc/view/SmartView/HeartbeatFlashView.js"></script>
 			<script src="js/mvc/view/SmartView/AudioView.js"></script>
 			<script src="js/mvc/view/SmartView/SubtitleView.js"></script>
-			<script src="js/mvc/view/SmartView/SubtitleView.js"></script>
 			
 			<script src="js/mvc/view/SmartView/AudioView/HeartbeatSoundView.js"></script>
 			
 			<script src="js/mvc/view/StartBtnView.js"></script>
 			<script src="js/mvc/view/D1BtnView.js"></script>
-			<script src="js/mvc/view/Dimension1View.js"></script>
 			<script src="js/mvc/view/IndexView.js"></script>
+			<script src="js/mvc/view/Dimension1View.js"></script>
+			<script src="js/mvc/view/Dimension2View.js"></script>
 			<script src="js/mvc/view/ApplicationView.js"></script>
 		
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

@@ -21,7 +21,14 @@ ragh.EventMapper = (function () {
 			if (!this.eventsAndListeners.hasOwnProperty(type)) {
 				this.eventsAndListeners[type] = [];
 			}
-			this.eventsAndListeners[type].push({ listener: listener, callback: callback });
+			
+			var matched = this.eventsAndListeners[type].filter( function (el) {
+				return (el.listener == listener);
+			});
+			
+			if (matched.length == 0) {
+				this.eventsAndListeners[type].push({ listener: listener, callback: callback });
+			}
 			return type;
 		},
 		removeEventListener: function (type, listener) { 

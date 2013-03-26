@@ -5,6 +5,7 @@ PortfolioApp = Ember.Application.create({
 		PortfolioApp.Router.map(function(){
 		    this.route('index', {path:'/'});
 		    this.route('dimension1', {path:'/d1'});
+		    this.route('dimension2', {path:'/d2'});
 		});
 	},
 	eventMapper: ragh.EventMapper

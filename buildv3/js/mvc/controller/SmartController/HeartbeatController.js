@@ -7,23 +7,35 @@
 		timeout: null,
 		total: 0,
 		myView:null,
-		init: function () {
-			this._super();
-		},
-		doStart: function (arg1, arg2, arg3, arg4) {
+		speedFactors: [],
+		doStart: function () {
 			this.myView.doStart();
-			this.myView.doBeat();
 			PortfolioApp.eventMapper.triggerEvent('d1Start');
 			this.createHeartbeat(this);
 		},
 		createHeartbeat: function (target) {
+			var min = 1000,
+				max = 3000,
+				sf = 0,
+				total = 0,
+				prc = 1,
+				delay = 0;
+				
+			for (sf = 0; sf < speedFactors.length; sf++) {
+				var speedFactor = speedFactors[sf]();
+				Ember.assert('PortfolioApp.HeartbeatController.createHeartbeat() speedFactor function does not return 0 - 1:' + speedFactor, (0 <= speedFactor && 1 >= speedFactor))
+			}
+			
+			prc = total / speedFactors.length;
+			delay = min + (prc * (max - min))
+			
 			if (this.total < 1) {
 				this.total++;
 				(function(){
 					target.timeout = setTimeout(function () {
 						PortfolioApp.eventMapper.triggerEvent('heartbeat');
 						target.createHeartbeat(target);
-					}, 2500);
+					}, delay);
 				}());
 			}
 		},
@@ -37,3 +49,4 @@
 		}
 	});
 }());
+
