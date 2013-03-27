@@ -16,7 +16,11 @@
         <link rel="stylesheet" href="css/main.css"> 
         <link rel="stylesheet" href="css/portfolio.css">
         <link rel="stylesheet" href="css/grid.css">
- 
+
+		<script type="text/x-handlebars" data-template-name="hash-btn">
+			<button hash="{{urlhash}}"{{action "doNavigate" }}> {{label}} </button>
+		</script>
+	
 		
 		<script type="text/x-handlebars" data-template-name="portfolio-application">
 				{{outlet}}
@@ -25,7 +29,7 @@
 
 		<script type="text/x-handlebars" data-template-name="index">
 			<div class="nav-btn-holder">
-				{{render 'hash-btn' hashBtn hash="d1" label="Dimension 1"}}
+				{{renderWithVars 'hash-btn' hashBtn urlhash="d1" label="Fuck yes"}}
 			</div>
 		</script>
 
@@ -95,11 +99,6 @@
 	</script>
 	
 
-	<script type="text/x-handlebars" data-template-name="hash-btn">
-		<button onClick="window.location.hash='/{{hash}}'">{{label}}</button>
-	</script>
-	
-
 
 	</head>
     <body>
@@ -124,6 +123,7 @@
 			
 			<!-- Controller -->
 			<script src="js/mvc/controller/SmartController.js"></script>
+			<script src="js/mvc/controller/SmartController/HashBtnController.js"></script>
 			<script src="js/mvc/controller/SmartController/HeartbeatFlashController.js"></script>
 			<script src="js/mvc/controller/SmartController/AudioController.js"></script>
 			<script src="js/mvc/controller/SmartController/HeartbeatController.js"></script>
@@ -151,6 +151,7 @@
 			<!-- Views -->
 			<script src="js/mvc/view/SmartView.js"></script>
 			
+			<script src="js/mvc/view/SmartView/HashBtnView.js"></script>
 			<script src="js/mvc/view/SmartView/HeartbeatView.js"></script>
 			<script src="js/mvc/view/SmartView/HeartbeatFlashView.js"></script>
 			<script src="js/mvc/view/SmartView/AudioView.js"></script>
