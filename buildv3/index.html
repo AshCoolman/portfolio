@@ -17,33 +17,48 @@
         <link rel="stylesheet" href="css/portfolio.css">
         <link rel="stylesheet" href="css/grid.css">
 
-		<script type="text/x-handlebars" data-template-name="hash-btn">
-			<button hash="{{urlhash}}"{{action "doNavigate" }}> {{label}} </button>
-		</script>
-	
-		
+
+		<!-- APPLICATION -->
 		<script type="text/x-handlebars" data-template-name="portfolio-application">
 				{{outlet}}
 		</script>
+		
+		<!-- APPLICATION ELEMENTS -->
+		<script type="text/x-handlebars" data-template-name="hash-btn">
+			<button {{action "doNavigate" }}> {{label}} </button>
+		</script>
+		
+		<script type="text/x-handlebars" data-template-name="navigation">
+			<div class="row">
+				<div class="twelve columns">
+				
+					{{#if isIndex}}
+						{{renderWithVars 'hash-btn' hashBtn urlhash="/" label="Index"}}
+					{{/if}}
 
+					{{#if isDimension1}}
+						{{controlWithVars 'hash-btn' hashBtn urlhash="d1" label="Dimension 1"}}
+					{{/if}}
 
-		<script type="text/x-handlebars" data-template-name="index">
-			<div class="nav-btn-holder">
-				{{renderWithVars 'hash-btn' hashBtn urlhash="d1" label="Fuck yes"}}
+					{{#if isDimension2}}
+						{{controlWithVars 'hash-btn' hashBtn urlhash="d2" label="Dimension 2"}}
+					{{/if}}
+					
+				</div>
 			</div>
 		</script>
 
-
+		
+		<!-- ROUTE INDEX -->
+		<script type="text/x-handlebars" data-template-name="index">
+			{{renderWithVars 'navigation' navigation isDimension1="true" isDimension2="true"}}
+		</script>
+		
+		
+		
+		<!-- ROUTE DIMENSION 1 -->
 		<script type="text/x-handlebars" data-template-name="dimension1">
-
-			<div class="row"
-				<div class="one columns">
-					{{template 'd1-btn' }}
-				</div>
-
-				<div class="ten columns">
-				</div>
-			</div>
+			{{renderWithVars 'navigation' navigation isIndex="true" isDimension2="true"}}
 
 			<div class="row">
 				<div class="twelve columns">
@@ -59,44 +74,49 @@
 				</div>
 			</div>
 		</script>
+		
+			<script type="text/x-handlebars" data-template-name="heartbeat">
+				<div class="nav-btn-holder">
+					<button class="nav-btn" {{action "doStart" }}>Start!</button>
+				</div>
+				{{render "heartbeat-flash" heartbeatFlash}}
+				{{render "heartbeat-sound" heartbeatSound}}
+			</script>
 
+			<script type="text/x-handlebars" data-template-name="heartbeat-flash">
+
+			</script>
+
+				<script type="text/x-handlebars" data-template-name="heartbeat-sound">
+
+				</script>
+
+		<script type="text/x-handlebars" data-template-name="subtitle">
+			{{text}}
+		</script>
+		
+		
+		
+		<!-- ROUTE DIMENSION 2 -->
 
 		<script type="text/x-handlebars" data-template-name="dimension2">
+			{{renderWithVars 'navigation' navigation isIndex="true" isDimension1="true"}}
 			<div class="row">
 				<div class="twelve columns">
 					{{title}}
 				</div>
 			</div>
-		</script>
-
-
-		<script type="text/x-handlebars" data-template-name="heartbeat">
-			<div class="nav-btn-holder">
-				<button class="nav-btn" {{action "doStart" }}>Start!</button>
+			<div class="row">
+				<div class="twelve columns">
+					{{render 'world-2d'}}
+				</div>
 			</div>
-			{{render "heartbeat-flash" heartbeatFlash}}
-			{{render "heartbeat-sound" heartbeatSound}}
-		</script>
-		
-		
-		<script type="text/x-handlebars" data-template-name="heartbeat-flash">
- 
-		</script>
+		</script>	
 
-
-			<script type="text/x-handlebars" data-template-name="heartbeat-sound">
-
-			</script>
-
+	<script type="text/x-handlebars" data-template-name="world-2d">
 		
-		<script type="text/x-handlebars" data-template-name="simple-btn">
-			<button {{action "doStart" }}>Simple Button!</button>
-		</script>
-		
-		
-	<script type="text/x-handlebars" data-template-name="subtitle">
-		{{text}}
 	</script>
+
 	
 
 
@@ -115,6 +135,7 @@
 			
 	        <script src="js/lib/jquery-1.8.1.min.js"></script>
 	        <script src="js/lib/handlebars.js"></script>
+	        <script src="js/mvc/EmberSettings.js"></script>
 	        <script src="js/lib/embermandl.js"></script>
 	        <script src="js/lib/ragh/EventMapper.js"></script>
 			
@@ -128,6 +149,8 @@
 			<script src="js/mvc/controller/SmartController/AudioController.js"></script>
 			<script src="js/mvc/controller/SmartController/HeartbeatController.js"></script>
 			<script src="js/mvc/controller/SmartController/SubtitleController.js"></script>
+			<script src="js/mvc/controller/SmartController/NavigationController.js"></script>
+			<script src="js/mvc/controller/SmartController/World2dController.js"></script>
 			
 			<script src="js/mvc/controller/SmartController/AudioController/HeartbeatSoundController.js"></script>
 			
@@ -142,6 +165,7 @@
 			<script src="js/mvc/model/ScriptModel.js"></script> 
 			<script src="js/mvc/model/Dimension1Model.js"></script>
 			<script src="js/mvc/model/Dimension2Model.js"></script>
+			<script src="js/mvc/model/HashBtnModel.js"></script>
 			
 			<!-- Routes -->
 			<script src="js/mvc/router/IndexRoute.js"></script> 
@@ -156,6 +180,8 @@
 			<script src="js/mvc/view/SmartView/HeartbeatFlashView.js"></script>
 			<script src="js/mvc/view/SmartView/AudioView.js"></script>
 			<script src="js/mvc/view/SmartView/SubtitleView.js"></script>
+			<script src="js/mvc/view/SmartView/NavigationView.js"></script>
+			<script src="js/mvc/view/SmartView/World2dView.js"></script>
 			
 			<script src="js/mvc/view/SmartView/AudioView/HeartbeatSoundView.js"></script>
 			

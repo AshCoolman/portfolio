@@ -6258,6 +6258,7 @@ define("container",
     }
 
     function option(container, fullName, optionName) {
+
       var options = container._options.get(fullName);
 
       if (options && options[optionName] !== undefined) {
@@ -11537,6 +11538,7 @@ Ember.ObjectProxy = Ember.Object.extend(
 
   setUnknownProperty: function (key, value) {
     var content = get(this, 'content');
+	console.log('setUnknownProperty', ['key', key], ['value', value], ['this', this], ['this.content', this.content]);
     Ember.assert(fmt("Cannot delegate set('%@', %@) to the 'content' property of object proxy %@: its 'content' is undefined.", [key, value, this]), content);
     return set(content, key, value);
   }
@@ -17420,6 +17422,7 @@ define("metamorph",
     }
 
     Metamorph.prototype.html = function(html) {
+		console.log('html');
       this.checkRemoved();
       if (html === undefined) { return this.innerHTML; }
 
@@ -17429,6 +17432,7 @@ define("metamorph",
     };
 
     Metamorph.prototype.replaceWith = function(html) {
+		console.log('replaceWith');
       this.checkRemoved();
       htmlFunc.call(this, html, true);
     };
@@ -17450,7 +17454,8 @@ define("metamorph",
 
     Metamorph.prototype.checkRemoved = function() {
       if (this.isRemoved()) {
-        throw new Error("Cannot perform operations on a Metamorph that is not in the DOM.");
+
+        throw new Error("Cannot perform operations on a Metamorph that is not in the DOM. this.isRemoved() == true");
       }
     };
 
@@ -24137,6 +24142,7 @@ if (Ember.ENV.EXPERIMENTAL_CONTROL_HELPER) {
     @return {String} HTML string
   */
   Ember.Handlebars.registerHelper('control', function(path, modelPath, options) {
+	console.log('control scope', thi)
     if (arguments.length === 2) {
       options = modelPath;
       modelPath = undefined;

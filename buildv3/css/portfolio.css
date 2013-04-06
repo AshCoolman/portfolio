@@ -51,4 +51,9 @@ html, body {
   position: relative;
   margin: 0 auto;
   width: 100px;
-  display: block; }
+  display: block;
+  color: #666; }
+
+.hash-btn {
+  float: left;
+  padding: 0.25em; }
