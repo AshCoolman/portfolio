@@ -40,6 +40,7 @@
 			}
 		},
 		view_didInsertElement: function (aview) {
+			this._super(aview);
 			this.myView = aview;
 		},
 		view_willDestroyElement: function () {

@@ -2,6 +2,7 @@ PortfolioApp.HeartbeatView = PortfolioApp.SmartView.extend({
 	className:'HeartbeatView',
 	templateName:'heartbeat',
 	didInsertElement: function() {
+ 	
 		this.get('controller').send('view_didInsertElement', this);
 	},
 	doStart: function () {

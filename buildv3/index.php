@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+	require('dBug.php');
+?>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -114,10 +117,13 @@
 		</script>	
 
 	<script type="text/x-handlebars" data-template-name="world-2d">
-		
+		{{render 'ash'}}
 	</script>
 
 	
+	<script type="text/x-handlebars" data-template-name="ash">
+
+	</script>
 
 
 	</head>
@@ -131,67 +137,60 @@
 		<div class="portfolio-app-container">
 			
 		</div>  
-	
-			
 	        <script src="js/lib/jquery-1.8.1.min.js"></script>
 	        <script src="js/lib/handlebars.js"></script>
-	        <script src="js/mvc/EmberSettings.js"></script>
 	        <script src="js/lib/embermandl.js"></script>
 	        <script src="js/lib/ragh/EventMapper.js"></script>
+			<script src="js/lib/easeljs-0.6.0.min.js"></script>
+			<script src="js/lib/PxLoader.js"></script>
+			<script src="js/lib/PxLoaderImage.js"></script>
 			
-			<!-- PORTFOLIO EMBER MVC FILES -->
-		    <script src="js/mvc/PortfolioApp.js"></script>
 			
-			<!-- Controller -->
-			<script src="js/mvc/controller/SmartController.js"></script>
-			<script src="js/mvc/controller/SmartController/HashBtnController.js"></script>
-			<script src="js/mvc/controller/SmartController/HeartbeatFlashController.js"></script>
-			<script src="js/mvc/controller/SmartController/AudioController.js"></script>
-			<script src="js/mvc/controller/SmartController/HeartbeatController.js"></script>
-			<script src="js/mvc/controller/SmartController/SubtitleController.js"></script>
-			<script src="js/mvc/controller/SmartController/NavigationController.js"></script>
-			<script src="js/mvc/controller/SmartController/World2dController.js"></script>
 			
-			<script src="js/mvc/controller/SmartController/AudioController/HeartbeatSoundController.js"></script>
-			
-			<script src="js/mvc/controller/StartBtnController.js"></script> 
-			<script src="js/mvc/controller/WaveformController.js"></script> 
-			<script src="js/mvc/controller/Dimension1Controller.js"></script>
-			<script src="js/mvc/controller/Dimension2Controller.js"></script>
-			<script src="js/mvc/controller/IndexController.js"></script>
-			<script src="js/mvc/controller/ApplicationController.js"></script>
-			
-			<!-- Models -->
-			<script src="js/mvc/model/ScriptModel.js"></script> 
-			<script src="js/mvc/model/Dimension1Model.js"></script>
-			<script src="js/mvc/model/Dimension2Model.js"></script>
-			<script src="js/mvc/model/HashBtnModel.js"></script>
-			
-			<!-- Routes -->
-			<script src="js/mvc/router/IndexRoute.js"></script> 
-			<script src="js/mvc/router/Dimension1Route.js"></script> 
-			<script src="js/mvc/router/Dimension2Route.js"></script>
-			
-			<!-- Views -->
-			<script src="js/mvc/view/SmartView.js"></script>
-			
-			<script src="js/mvc/view/SmartView/HashBtnView.js"></script>
-			<script src="js/mvc/view/SmartView/HeartbeatView.js"></script>
-			<script src="js/mvc/view/SmartView/HeartbeatFlashView.js"></script>
-			<script src="js/mvc/view/SmartView/AudioView.js"></script>
-			<script src="js/mvc/view/SmartView/SubtitleView.js"></script>
-			<script src="js/mvc/view/SmartView/NavigationView.js"></script>
-			<script src="js/mvc/view/SmartView/World2dView.js"></script>
-			
-			<script src="js/mvc/view/SmartView/AudioView/HeartbeatSoundView.js"></script>
-			
-			<script src="js/mvc/view/StartBtnView.js"></script>
-			<script src="js/mvc/view/D1BtnView.js"></script>
-			<script src="js/mvc/view/IndexView.js"></script>
-			<script src="js/mvc/view/Dimension1View.js"></script>
-			<script src="js/mvc/view/Dimension2View.js"></script>
-			<script src="js/mvc/view/ApplicationView.js"></script>
+
 		
+<?php
+				try {
+					
+					$paths = array('js/mvc/');
+					foreach($paths as $path) {
+						$simpath = $path;
+						$Directory = new RecursiveDirectoryIterator(realpath($simpath));
+						$Iterator = new RecursiveIteratorIterator($Directory);
+						$Regex = new RegexIterator($Iterator, '/^.+\.js$/i', RecursiveRegexIterator::GET_MATCH);
+						$fileLevels = array();
+						foreach($Regex as $match) {
+							$el = explode($simpath, $match[0] )[1];
+							$lvl = count(explode('/', $el ));
+							if ( is_null($fileLevels[ $lvl ] ) ) {
+								$fileLevels[ $lvl ] = array();
+							}
+							$fileLevels[ $lvl ][] = "$simpath$el";
+						}		
+	
+						ksort($fileLevels);
+						foreach($fileLevels as $lvl => $filesInLevel) {
+							sort($filesInLevel);
+							foreach($filesInLevel as $file) {
+								//echo "<br/>$lvl: $file";
+								echo "<script src=\"$file\"></script>";
+							}
+						}
+					}
+				} catch (Exception $e) {
+					 echo  "PHP Exception <br/>$e<br/>";
+				}
+?>
+				
+				
+				
+				
+				
+				
+					
+					
+			
+				
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 		<!-- 
         <script>

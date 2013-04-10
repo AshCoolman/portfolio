@@ -249,3 +249,4 @@ Em.Object.reopenClass({
 		return this._super().setProperties(config);
 	}
 });
+

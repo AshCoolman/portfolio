@@ -3,10 +3,13 @@
 PortfolioApp.SmartController = Em.ObjectController.extend({
 	label: 'PortfolioApp.SmartController',
 	autoMappedEvents: [],
+	isViewInserted: false,
 	view_didInsertElement: function (aview) {
 		var meObj, me;
 		this.set('view', aview);
-		
+		this.set('isViewInserted', true);
+		 
+ 	
 		for (me = 0; me < this.autoMappedEvents.length; me++) {
 			meObj = this.autoMappedEvents[me];
 			PortfolioApp.eventMapper.addEventListener(meObj.type, meObj.listener, meObj.callback);
@@ -26,3 +29,5 @@ PortfolioApp.SmartController = Em.ObjectController.extend({
 		this.autoMappedEvents.push( {type:type, listener: listener, callback: callback} );
 	}
 });
+
+PortfolioApp.register('controller:smart-controller', PortfolioApp.SmartController, {singleton: false }); //Yeah holy shit that was not obvious
