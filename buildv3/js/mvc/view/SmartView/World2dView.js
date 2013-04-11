@@ -1,45 +1,27 @@
-
-
-
-//http://stackoverflow.com/questions/5078913/html5-canvas-performance-calculating-loops-frames-per-second
-var fps = 0, fdur=5, now, timePassed=0, samplestart = firstUpdate = lastUpdate = (new Date)*1 - 1, samplesize = 1000, sampleframes=0, samplefps=-1;
-
-// The higher this value, the less the FPS will be affected by quick changes
-// Setting this to 1 will show you the FPS of the last sampled frame only
-var fpsFilter = 50;
-
-$('body').append('<div id="fps"></div>');
-
-var fpsOut = document.getElementById('fps');
-setInterval(function(){
-	
-
-  fpsOut.innerHTML = fps.toFixed(0) + "fps<br>" +Math.round(timePassed*1000/fdur) + '<br/>' + Math.round(timePassed)+'s<br/>' + samplefps + 'sfps';
-
-	
-}, 1000);
-
-
-
-
-
 PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
 	tagName:'div',
 	className: 'World2dView',
 	templateName:'world-2d',
 	width: 800,
 	height: 600,
-	multi: 5,
+	multi: 10,
 	src: {},
 	vis: {},
+	$editorBtn: null,
+	$editor: null,
 	scale: 1,
 	didInsertElement: function(scope) {
 		
 		with (this) {
 			_super();
+			
+			//$el.append('<button label="editor" class=".editor-btn"></button>');
+			//$editorBtn = $('.editor-btn', $el);
+			
 			get('controller').send('view_didInsertElement', this);
 			$el.append('<canvas class="src-world-2d">');
 			src.$canvas = $('.src-world-2d', $el);
+			src.$canvas.css({display:'none'});
 			src.context = src.$canvas[0].getContext("2d");
 			src.stage = new createjs.Stage(src.$canvas[0]);
 
@@ -51,6 +33,12 @@ PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
 			resize();
 			redraw();
 		}
+		
+		$(window).resize(function(me) {
+		  	return function () {
+				me.resize();
+			}
+		}(this));
 		
 		requestAnimationFrame(function(me) {
 			var animloop = function (time) {
@@ -64,6 +52,7 @@ PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
 	
 	},
 	resize: function() {
+		
 		with (this) {	
 			var winWidth = $(window).width();
 			if (winWidth > 1000) {
@@ -87,23 +76,6 @@ PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
 	},
 	
 	redraw: function() {
-		
-		/*8888888 fps 8888888*/
-		with (window) {
-			var thisFrameFPS = 1000 / ((now=new Date) - lastUpdate);
-			fps += (thisFrameFPS - fps) / fpsFilter;
-			lastUpdate = now;
-			timePassed = (now - firstUpdate ) / 1000;
-			var sampledif = now - samplestart;
-			if (sampledif > samplesize) {
-				var perc = 1 - ( (sampledif - samplesize) / samplesize );
-				samplefps = Math.round( (sampleframes / samplesize ) *1000 * perc );
-				sampleframes=0;
-				samplestart = now;
-			}
-			sampleframes++;
-		}
-		/*8888888 fps 8888888*/
 		with (this) {
 			src.stage.update();
 
@@ -119,8 +91,6 @@ PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
 				context.fillRect(0, 0, width, height)
 			}
 		}
-		
-		
 	},
 	view_createdEaselDisplayObject: function (label, easelObj, childView) {
 
@@ -132,7 +102,5 @@ PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
 			this.src.stage.addChild(ash.easelObj);
 		}
 	}
-	
-	
 
 });

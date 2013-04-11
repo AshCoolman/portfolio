@@ -106,7 +106,7 @@
 			{{renderWithVars 'navigation' navigation isIndex="true" isDimension1="true"}}
 			<div class="row">
 				<div class="twelve columns">
-					{{title}}
+					{{render 'world-2d-editor'}}
 				</div>
 			</div>
 			<div class="row">
@@ -123,6 +123,10 @@
 	
 	<script type="text/x-handlebars" data-template-name="ash">
 
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name="world-2d-editor">
+		<button type="button" {{action "addSquare" }}>+Square</button>
 	</script>
 
 
