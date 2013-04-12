@@ -1,29 +1,40 @@
 PortfolioApp.World2dController = PortfolioApp.SmartController.extend({
 	ashTest: null,
-	ashPending: null,
-	view_createdEaselDisplayObject: function(label, easelObj, childView) {
-	
-		if (label === 'ash') {
-			this.ashPending = {
-				label: label,
-				object: easelObj,
-				childView: childView
-			}
-		}
+	easelEntitiesPending: [],
+	init: function () {
+		this._super();
 		
-		if (this.get('isViewInserted') ) {
-			this.get('view').view_createdEaselDisplayObject(this.ashPending.label, this.ashPending.object, this.ashPending.childView);
-			this.ashPending = null;
-		} //else wait till did insert view element
+		this.createEaselEntitiesPending = ( function(me) {
+			return  function () {
+				var e,
+					view = me.get('view');
+				
+				console.log('me view', view._debugContainerKey)
+				for (e = 0; e < me.easelEntitiesPending.length; e++) {
+					view.view_createdEaselDisplayObject( me.easelEntitiesPending[e].label, me.easelEntitiesPending[e].childView);
+				}
+				this.easelEntitiesPending = [];
+			}
+		}(this));
+		
+		this.viewCreatedEaselDisplayObject = ( function(me) {
+			return  function (label, childView) {
+					me.easelEntitiesPending.push({
+						label: label,
+						childView: childView
+					});
 
+					if (me.get('isViewInserted')) {
+						me.createEaselEntitiesPending();
+					}
+			}
+		}(this));
 	},
 	view_didInsertElement: function (childView) {
 		this._super(childView);
-		if (this.ashPending) {		
-			this.get('view').view_createdEaselDisplayObject(this.ashPending.label, this.ashPending.object, this.ashPending.childView);
-			this.ashPending = null;
-		}
-		 
-		 
+		this.createEaselEntitiesPending();
+	},
+	addSquare: function () {
+		this.view.addSquare();
 	}
 })

@@ -1,0 +1,1 @@
+PortfolioApp.PersonView = PortfolioApp.EaselEntityView.extend({});

@@ -1,1 +1,0 @@
-PortfolioApp.PersonView = PortfolioApp.SmartView.extend({});

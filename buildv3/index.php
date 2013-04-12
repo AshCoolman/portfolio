@@ -118,6 +118,7 @@
 
 	<script type="text/x-handlebars" data-template-name="world-2d">
 		{{render 'ash'}}
+		{{render 'square'}}
 	</script>
 
 	
@@ -125,6 +126,9 @@
 
 	</script>
 	
+	<script type="text/x-handlebars" data-template-name="square">
+
+	</script>
 	<script type="text/x-handlebars" data-template-name="world-2d-editor">
 		<button type="button" {{action "addSquare" }}>+Square</button>
 	</script>
