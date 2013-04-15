@@ -117,10 +117,14 @@
 		</script>	
 
 	<script type="text/x-handlebars" data-template-name="world-2d">
+		{{render 'easel-entity-container'}}
 		{{render 'ash'}}
-		{{render 'square'}}
 	</script>
+	
+	
+	<script type="text/x-handlebars" data-template-name="easel-entity-container">
 
+	</script>
 	
 	<script type="text/x-handlebars" data-template-name="ash">
 

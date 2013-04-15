@@ -13,22 +13,29 @@ PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
 	trails:0,
 	easelEntities: [],
 	didInsertElement: function(scope) {
+		this._super();
+		console.log('World2dView.didInsertElement()', this);
+		this.isVis=false;
 		
 		with (this) {
-			_super();
+			
 			get('controller').send('view_didInsertElement', this);
 			$el.append('<canvas class="src-world-2d">');
 			src.$canvas = $('.src-world-2d', $el);
 			src.$canvas.css({position:'absolute'});
 			src.context = src.$canvas[0].getContext("2d");
 			src.stage = new createjs.Stage(src.$canvas[0]);
-
-			$el.append('<canvas class="vis-world-2d">');
-			vis.$canvas = $('.vis-world-2d', $el);
-			vis.$canvas.css({display:'none'});
-			vis.context = vis.$canvas[0].getContext("2d");
-			vis.src = src;
-			src.vis = vis;
+			//src.stage.scaleX=src.stage.scaleY=multi;
+			src.stage.mouseMoveOutside = true;
+			
+			if (this.isVis) {
+				$el.append('<canvas class="vis-world-2d">');
+				vis.$canvas = $('.vis-world-2d', $el);
+				vis.$canvas.css({display:'none'});
+				vis.context = vis.$canvas[0].getContext("2d");
+				vis.src = src;
+				src.vis = vis;
+			}
 			resize();
 			redraw();
 		}
@@ -51,11 +58,34 @@ PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
 	
 	},
 	addSquare: function () {
-		with (this) {
+		var sqData = {
+			x: 200,
+			y: 10,
+			class: PortfolioApp.SquareView
+		},
+		sqc, sqv;
 			
+		this.$el.append('<div class="container-view"></div>')
+		var containerView = Em.ContainerView.create();
+		containerView.append(	);//($('.container-view', this.$el));
+		
+		if (true) {
+			sqc = PortfolioApp.SquareController.create();
+			sqv = PortfolioApp.SquareView.create();
+			sqv.set('controller', sqc)
+			console.log('World2dView.addSquare() ', this.easelEntityContainerView);
+			this.easelEntityContainerView.pushObject( sqv );
+		}
+			
+			
+			//this.easelEntities.push( sqv );
+			//this.src.stage.addChild( sqv.get('easelObj') );
+			//sqv.easelObj.x = sqData.x;
+			//sqv.easelObj.y = sqData.y;
+			//src.stage.addChild(sqv.easelObj);
 			//this.src.stage.addChild(displayObjs[] = );
 		
-		}
+		
 	},
 	resize: function() {
 		
@@ -74,46 +104,46 @@ PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
 				height = 300;
 				vis.bgcolor = "rgba(255, 200, 200, "+ (trails ? 1 / trails : 1) + ")";
 			}
-			src.$canvas.attr( { width: width / multi, height: height / multi } );
-			vis.$canvas.attr( { width: width, height: height } );
+			src.$canvas.attr( { width: width , height: height  } );
+			
+			if (this.isVis) vis.$canvas.attr( { width: width, height: height } );
 		}
 	},
 	
 	redraw: function() {
 		with (this) {
 			
-			if (src.ashView) {
-				if (src.ashView.easelObj) {
-					src.ashView.easelObj.x++;
-					if (src.ashView.easelObj.x > 100)
-						src.ashView.easelObj.x = -100;
-				}
+			if (src.ashView){
+				src.ashView.redraw();
 			}
+			
 			
 			for (var i = 0; i < this.easelEntities.length; i++) {
 				this.easelEntities[i].redraw();
 			}
-			
 			src.stage.update();
 
 			
-			with (vis) {
-				context.webkitImageSmoothingEnabled = 
-				context.mozImageSmoothingEnabled = false;
-				context.setTransform(1 * multi,0,0,1 * multi,0,0);
-				vis.context.fillStyle = vis.bgcolor;
-				vis.context.fillRect(0,0,width, height);
-				context.fillStyle = context.createPattern(src.$canvas[0], 'repeat');
-				context.fillRect(0, 0, width, height)
+			if (this.isVis) {
+				with (vis) {
+					context.webkitImageSmoothingEnabled = 
+					context.mozImageSmoothingEnabled = false;
+					context.setTransform(1 * multi,0,0,1 * multi,0,0);
+					vis.context.fillStyle = vis.bgcolor;
+					vis.context.fillRect(0,0,width, height);
+					context.fillStyle = context.createPattern(src.$canvas[0], 'repeat');
+					context.fillRect(0, 0, width, height)
+				}
 			}
 		}
 	},
-	view_createdEaselDisplayObject: function (label, childView) {
+	easelDisplayObjectCreatedByChildView: function (label, childView) {
+		console.log('easelDisplayObjectCreatedByChildView', label, childView.get('easelObj'));
 		if (label === 'ash') {
 			this.src.ashView = childView;
 			this.src.stage.addChild( childView.get('easelObj') );
 		} else {
-			console.log('view_createdEaselDisplayObject', childView._debugContainerKey, childView.get('easelObj'));
+			console.log('easelDisplayObjectCreatedByChildView', childView._debugContainerKey, childView.get('easelObj'));
 			this.easelEntities.push( childView );
 			this.src.stage.addChild( childView.get('easelObj') );
 		}

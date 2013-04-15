@@ -6,6 +6,9 @@ PortfolioApp.EaselEntityView = PortfolioApp.SmartView.extend({
 		return this._super();
 		//this.__defineGetter__"easelObj", function
 	},
+	didInsertElement: function () {
+		PortfolioApp.eventMapper
+	},
 	redraw: function () {
 		
 	}

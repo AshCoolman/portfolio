@@ -3,13 +3,18 @@ PortfolioApp.SquareView = PortfolioApp.EaselEntityView.extend({
 	templateName: 'square',
 	tag: 'div',
 	className: 'SquareView',
+	init: function () {
+		return this._super();
+	},
 	didInsertElement: function (aview) {
-		this._super(aview);
+		this._super((aview) ? aview : this);
+		
+		console.log('SquareView.didInsertElement', 'parentView:'+this.get('parentView')._debugContainerKey);
 		this.bmp = new createjs.Bitmap('img/cog.png');
 		this.bmp.image.onload = (function(aeaselObj){
 			return function(){
 				with (aeaselObj) {
-					scaleX = scaleY = 0.05;
+					scaleX = scaleY = 0.1;
 					regX = image.width/2;
 					regY = image.height/2;
 				}
@@ -33,8 +38,7 @@ PortfolioApp.SquareView = PortfolioApp.EaselEntityView.extend({
 			});
 		});
 		
-		console.log('this.easelObj', this.easelObj, this.easelObj.cacheCanvas)
-		this.get('controller').send('viewCreatedEaselDisplayObject', 'square', this);
+		this.get('controller').send('easelDisplayObjectCreatedByChildView', 'square', this);
 	},
 	redraw: function () {
 		this._super();
