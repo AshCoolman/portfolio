@@ -1,8 +1,8 @@
 /*jslint browser: true, nomen: true*/
-/*global $, jQuery, PortfolioApp, Em, console*/
+/*global $, jQuery, App, Em, console*/
 (function () {
 	'use strict';
-	PortfolioApp.HeartbeatController = PortfolioApp.SmartController.extend({
+	App.HeartbeatController = App.SmartController.extend({
 		label: 'HeartbeatController',
 		timeout: null,
 		total: 0,
@@ -10,7 +10,7 @@
 		speedFactors: [],
 		doStart: function () {
 			this.myView.doStart();
-			PortfolioApp.eventMapper.triggerEvent('d1Start');
+			App.eventMapper.triggerEvent('d1Start');
 			this.createHeartbeat(this);
 		},
 		createHeartbeat: function (target) {
@@ -23,7 +23,7 @@
 				
 			for (sf = 0; sf < speedFactors.length; sf++) {
 				var speedFactor = speedFactors[sf]();
-				Ember.assert('PortfolioApp.HeartbeatController.createHeartbeat() speedFactor function does not return 0 - 1:' + speedFactor, (0 <= speedFactor && 1 >= speedFactor))
+				Ember.assert('App.HeartbeatController.createHeartbeat() speedFactor function does not return 0 - 1:' + speedFactor, (0 <= speedFactor && 1 >= speedFactor))
 			}
 			
 			prc = total / speedFactors.length;
@@ -33,7 +33,7 @@
 				this.total++;
 				(function(){
 					target.timeout = setTimeout(function () {
-						PortfolioApp.eventMapper.triggerEvent('heartbeat');
+						App.eventMapper.triggerEvent(ragh.MEvt.create('heartbeat'));
 						target.createHeartbeat(target);
 					}, delay);
 				}());

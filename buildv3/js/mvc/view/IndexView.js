@@ -1,3 +1,3 @@
-PortfolioApp.IndexView = Ember.View.extend({
+App.IndexView = Ember.View.extend({
 	tagName:'div'
 });

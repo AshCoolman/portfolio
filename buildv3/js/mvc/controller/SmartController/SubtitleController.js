@@ -30,7 +30,7 @@
 		
 		
 
-PortfolioApp.SubtitleController = PortfolioApp.SmartController.extend({
+App.SubtitleController = App.SmartController.extend({
 	controllerName:'Script Subtitle Controller',
 	text: '',
 	read:{},

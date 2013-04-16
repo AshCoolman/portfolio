@@ -1,6 +1,6 @@
 /*jslint browser: true, nomen: true*/
-/*global $, jQuery, PortfolioApp, Em, console*/
-PortfolioApp.HeartbeatFlashController = PortfolioApp.SmartController.extend({
+/*global $, jQuery, App, Em, console*/
+App.HeartbeatFlashController = App.SmartController.extend({
 	label: 'HeartbeatFlashController', 
 	content: undefined,
 	init: function () {
@@ -8,7 +8,7 @@ PortfolioApp.HeartbeatFlashController = PortfolioApp.SmartController.extend({
 		//this.addMappedEvent('heartbeat', this, this.doHeartbeat);
 		return this._super();
 	},
-	doHeartbeat: function (type, target) {
+	doHeartbeat: function (atype, adata) {
 		this.get('view').doHeartbeat();
 	}
 })

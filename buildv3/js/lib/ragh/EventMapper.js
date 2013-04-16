@@ -4,7 +4,7 @@
 * listener hash for quicker removing
 **/
 var ragh = {};
-ragh.EventMapper = (function () {
+ragh.eventMapper = (function () {
 	'use strict';
 	return {
 		eventsAndListeners: {},
@@ -37,18 +37,35 @@ ragh.EventMapper = (function () {
 				return (el.listener != listener);
 			});
 		},
-		triggerEvent: function (type) {
-			if (!this.eventsAndListeners.hasOwnProperty(type)) {
-				this.eventsAndListeners[type] = [];
+		triggerEvent: function ( e) {
+ 			console.log('triggerEvent', e)
+			if (!this.eventsAndListeners.hasOwnProperty(e.type)) {
+				this.eventsAndListeners[e.type] = [];
 			}
-			this.eventsAndListeners[type].filter(function (el) {
-				 el.callback.call(el.listener, type, el.listener);
+			this.eventsAndListeners[e.type].filter(function (el) {
+				 el.callback.call(el.listener, e.type, e.data);
 				return true;
 			});
 		}
 	};
 }());
 
+ragh.MappedEvent = ragh.MEvt = {
+	type: null,
+	data: null,
+	create: function (atype, adata) {
+		if (!atype) 
+			throw "ragh.MappedEvent.create() expects first parameter to be a String describing event type";
+		
+		if (typeof atype  != "string") 
+			throw "ragh.MappedEvent.create() expects first parameter to be String describing event type. Currently "+ (typeof atype );
+		
+		this.type = atype;
+		this.data = adata;
+		
+		return this;
+	}
+}
 
 
 /*ignore jslint start*/

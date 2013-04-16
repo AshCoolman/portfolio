@@ -1,4 +1,4 @@
-PortfolioApp.IndexRoute = Em.Route.extend({
+App.IndexRoute = Em.Route.extend({
 	activate: function() { 	
 		destroys=[];
 		destroyEls=[];

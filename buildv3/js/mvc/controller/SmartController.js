@@ -1,10 +1,13 @@
 /*jslint browser: true, nomen: true*/
-/*global $, jQuery, PortfolioApp, Em, console*/
-PortfolioApp.SmartController = Em.ObjectController.extend({
-	label: 'PortfolioApp.SmartController',
+/*global $, jQuery, App, Em, console*/
+App.SmartController = Em.ObjectController.extend({
+	label: 'App.SmartController',
 	autoMappedEvents: [],
 	isViewInserted: false,
 	view_didInsertElement: function (aview) {
+		
+		if (!aview) throw 'SmartController.view_didInsertElement() did not recieve aview parameter';
+		
 		var meObj, me;
 		this.set('view', aview);
 		this.set('isViewInserted', true);
@@ -12,13 +15,13 @@ PortfolioApp.SmartController = Em.ObjectController.extend({
  	
 		for (me = 0; me < this.autoMappedEvents.length; me++) {
 			meObj = this.autoMappedEvents[me];
-			PortfolioApp.eventMapper.addEventListener(meObj.type, meObj.listener, meObj.callback);
+			App.eventMapper.addEventListener(meObj.type, meObj.listener, meObj.callback);
 		}
 		
 	},
 	view_willDestroyElement: function () {
 		for (var me=0; me < this.autoMappedEvents.length; me++) {
-			PortfolioApp.eventMapper.removeEventListener(this.autoMappedEvents[me].type, this.autoMappedEvents[me].listener);
+			App.eventMapper.removeEventListener(this.autoMappedEvents[me].type, this.autoMappedEvents[me].listener);
 		}
 		//this.autoMappedEvents = [];
 	},
@@ -30,4 +33,4 @@ PortfolioApp.SmartController = Em.ObjectController.extend({
 	}
 });
 
-PortfolioApp.register('controller:smart-controller', PortfolioApp.SmartController, {singleton: false }); //Yeah holy shit that was not obvious
+App.register('controller:smart-controller', App.SmartController, {singleton: false }); //Yeah holy shit that was not obvious

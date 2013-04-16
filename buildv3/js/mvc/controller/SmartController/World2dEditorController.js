@@ -1,5 +1,8 @@
-PortfolioApp.World2dEditorController = PortfolioApp.SmartController.extend({
-	addSquare: function() {
-		PortfolioApp.eventMapper.triggerEvent('world2dEditorAddSquare');
+App.World2dEditorController = App.SmartController.extend({
+	addCog: function() {
+		App.eventMapper.triggerEvent(ragh.MEvt.create('world2dEditorAddCog'));
+	},	
+	getAddedStaticPlans: function() {
+		App.eventMapper.triggerEvent(ragh.MEvt.create('world2dEditorGetAddedStaticPlans'));
 	}
 })

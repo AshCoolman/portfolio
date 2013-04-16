@@ -1,5 +1,5 @@
-PortfolioApp.SmartView = Ember.View.extend({
-	className: 'PortfolioApp.SmartView',
+App.SmartView = Ember.View.extend({
+	className: 'App.SmartView',
 	mappedEvents:[],
 	smartViewObj:null,
 	el: null,
@@ -9,6 +9,7 @@ PortfolioApp.SmartView = Ember.View.extend({
 		return this._super();
 	},
 	didInsertElement: function (scope) {
+		this._super();
 		if (!scope) scope = this;
 		this.el = this.get('element');
 		this.$el = $(this.el); 

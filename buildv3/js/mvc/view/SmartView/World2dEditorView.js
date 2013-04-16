@@ -1,4 +1,4 @@
-PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
+App.World2dView = App.SmartView.extend({
 	tagName:'div',
 	didInsertElement: function () {
 		with (this) {

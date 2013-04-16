@@ -17,12 +17,12 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css"> 
-        <link rel="stylesheet" href="css/portfolio.css">
+        <link rel="stylesheet" href="css/app.css">
         <link rel="stylesheet" href="css/grid.css">
 
 
 		<!-- APPLICATION -->
-		<script type="text/x-handlebars" data-template-name="portfolio-application">
+		<script type="text/x-handlebars" data-template-name="application">
 				{{outlet}}
 		</script>
 		
@@ -119,6 +119,7 @@
 	<script type="text/x-handlebars" data-template-name="world-2d">
 		{{render 'easel-entity-container'}}
 		{{render 'ash'}}
+		{{ renderWithVars "cog" cog x="835"}}
 	</script>
 	
 	
@@ -130,11 +131,14 @@
 
 	</script>
 	
-	<script type="text/x-handlebars" data-template-name="square">
+	<script type="text/x-handlebars" data-template-name="cog">
 
 	</script>
 	<script type="text/x-handlebars" data-template-name="world-2d-editor">
-		<button type="button" {{action "addSquare" }}>+Square</button>
+		<button type="button" {{action "addCog" }}>+Cog</button>
+		<button type="button" {{action "getAddedStaticPlans" }}>Plans</button>
+		
+		
 	</script>
 
 
@@ -146,7 +150,7 @@
 
         <!-- Add your site or application content here -->
        <div class="container"> </div>
-		<div class="portfolio-app-container">
+		<div class="app-container">
 			
 		</div>  
 	        <script src="js/lib/jquery-1.8.1.min.js"></script>

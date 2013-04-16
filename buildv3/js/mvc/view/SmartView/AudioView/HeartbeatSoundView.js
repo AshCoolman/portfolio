@@ -1,6 +1,6 @@
 /*jslint browser: true, nomen: true*/
-/*global $, jQuery, PortfolioApp, Em, Ember, console*/
-PortfolioApp.HeartbeatSoundView = PortfolioApp.AudioView.extend({
+/*global $, jQuery, App, Em, Ember, console*/
+App.HeartbeatSoundView = App.AudioView.extend({
 	name: 'Heartbeat Sound View',
 	templateName: 'heartbeat-sound',
 	src: 'sound/heartbeat.wav',

@@ -1,4 +1,4 @@
-PortfolioApp.HashBtnView = PortfolioApp.SmartView.extend({
+App.HashBtnView = App.SmartView.extend({
 	name:'HashBtn',
 	templateName:'hash-btn'/*,
 	didInsertElement: function () {

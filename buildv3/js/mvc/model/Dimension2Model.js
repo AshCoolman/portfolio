@@ -1,3 +1,3 @@
-PortfolioApp.Dimension2Model = Em.Object.extend({
+App.Dimension2Model = Em.Object.extend({
 	title:'The second dimension'
 });

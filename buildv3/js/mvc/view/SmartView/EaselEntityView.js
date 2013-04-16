@@ -1,15 +1,5 @@
-PortfolioApp.EaselEntityView = PortfolioApp.SmartView.extend({
+App.EaselEntityView = App.SmartView.extend({
 	easelObj: null,
-	tag: 'div',
-	className: 'EaselEntityView',
-	init: function () {
-		return this._super();
-		//this.__defineGetter__"easelObj", function
-	},
-	didInsertElement: function () {
-		PortfolioApp.eventMapper
-	},
-	redraw: function () {
-		
-	}
+	tag: 'span',
+	className: 'EaselEntityView'
 });

@@ -1,4 +1,4 @@
-PortfolioApp.Dimension1Route = Em.Route.extend({
+App.Dimension1Route = Em.Route.extend({
 	subtitleView:null, 
 	subtitleController:null,
 	scriptModel:null,
@@ -6,11 +6,11 @@ PortfolioApp.Dimension1Route = Em.Route.extend({
 		this._super();
 	},
 	model: function () {
-		return (PortfolioApp.dimension1Model) ? PortfolioApp.dimension1Model : PortfolioApp.Dimension1Model.create();
+		return (App.dimension1Model) ? App.dimension1Model : App.Dimension1Model.create();
 	},
 	activate: function () { 
 		//Application state
-		scriptModel = PortfolioApp.ScriptModel.create({});
+		scriptModel = App.ScriptModel.create({});
 	},
 	deactivate: function () {
 		scriptModel.destroy();

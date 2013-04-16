@@ -1,4 +1,4 @@
-PortfolioApp.HeartbeatView = PortfolioApp.SmartView.extend({
+App.HeartbeatView = App.SmartView.extend({
 	className:'HeartbeatView',
 	templateName:'heartbeat',
 	didInsertElement: function() {

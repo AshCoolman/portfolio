@@ -1,1 +1,1 @@
-PortfolioApp.PersonController = PortfolioApp.EaselEntityController.extend({});
+App.PersonController = App.EaselEntityController.extend({});

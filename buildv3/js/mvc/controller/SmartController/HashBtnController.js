@@ -1,4 +1,4 @@
-PortfolioApp.HashBtnController = PortfolioApp.SmartController.extend({
+App.HashBtnController = App.SmartController.extend({
  	className: 'HashBtnController',
 	label: undefined,
 	urlhash: undefined,
@@ -17,4 +17,4 @@ PortfolioApp.HashBtnController = PortfolioApp.SmartController.extend({
 		window.location.hash = this.urlhash;
 	}
 });
-PortfolioApp.register('controller:hash-btn', PortfolioApp.HashBtnController, {singleton: false }); //Yeah holy shit that was not obvious
+App.register('controller:hash-btn', App.HashBtnController, {singleton: false }); //Yeah holy shit that was not obvious

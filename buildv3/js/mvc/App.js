@@ -231,16 +231,16 @@ Ember.Handlebars.registerHelper('renderWithVars', function(name, contextString, 
 
 
 
-PortfolioApp = Ember.Application.create({
-	rootElement:$('.portfolio-app-container')[0],
+App = Ember.Application.create({
+	rootElement:$('.app-container')[0],
 	ready: function () {
-		PortfolioApp.Router.map(function(){
+		App.Router.map(function(){
 		    this.route('index', {path:'/'});
 		    this.route('dimension1', {path:'/d1'});
 		    this.route('dimension2', {path:'/d2'});
 		});
 	},
-	eventMapper: ragh.EventMapper
+	eventMapper: ragh.eventMapper
 });
 
 
@@ -249,4 +249,5 @@ Em.Object.reopenClass({
 		return this._super().setProperties(config);
 	}
 });
+
 

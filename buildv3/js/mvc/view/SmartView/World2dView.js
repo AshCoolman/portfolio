@@ -1,4 +1,4 @@
-PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
+App.World2dView = App.SmartView.extend({
 	tagName:'div',
 	className: 'World2dView',
 	templateName:'world-2d',
@@ -12,32 +12,29 @@ PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
 	scale: 1,
 	trails:0,
 	easelEntities: [],
+	init: function() {
+		return this._super();
+	},
 	didInsertElement: function(scope) {
-		this._super();
-		console.log('World2dView.didInsertElement()', this);
-		this.isVis=false;
-		
 		with (this) {
-			
+			_super();
+			isVis=false;
 			get('controller').send('view_didInsertElement', this);
+			
 			$el.append('<canvas class="src-world-2d">');
 			src.$canvas = $('.src-world-2d', $el);
-			src.$canvas.css({position:'absolute'});
 			src.context = src.$canvas[0].getContext("2d");
 			src.stage = new createjs.Stage(src.$canvas[0]);
 			//src.stage.scaleX=src.stage.scaleY=multi;
 			src.stage.mouseMoveOutside = true;
 			
-			if (this.isVis) {
-				$el.append('<canvas class="vis-world-2d">');
-				vis.$canvas = $('.vis-world-2d', $el);
-				vis.$canvas.css({display:'none'});
-				vis.context = vis.$canvas[0].getContext("2d");
-				vis.src = src;
-				src.vis = vis;
-			}
-			resize();
-			redraw();
+			$el.append('<canvas class="vis-world-2d">'); 
+			vis.$canvas = $('.vis-world-2d', $el);
+			vis.$canvas.css({display:'none'});
+			vis.context = vis.$canvas[0].getContext("2d");
+			vis.src = src;
+			src.vis = vis;
+		
 		}
 		
 		$(window).resize(function(me) {
@@ -48,44 +45,33 @@ PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
 		
 		requestAnimationFrame(function(me) {
 			var animloop = function (time) {
-				var src =  me.get('src'),
-					vis =  me.get('vis');
+					var src =  me.get('src'),
+						vis =  me.get('vis'); 
 					me.redraw();
 					requestAnimationFrame(animloop)
 				};
 			return animloop
-		}(this));
+		}(this));	
+		
+		this.resize();
+		this.redraw();
 	
 	},
-	addSquare: function () {
+	addCog: function () {
+		console.log('adding cog')
 		var sqData = {
 			x: 200,
 			y: 10,
-			class: PortfolioApp.SquareView
-		},
-		sqc, sqv;
-			
-		this.$el.append('<div class="container-view"></div>')
-		var containerView = Em.ContainerView.create();
-		containerView.append(	);//($('.container-view', this.$el));
+			class: App.CogView
+		};
 		
-		if (true) {
-			sqc = PortfolioApp.SquareController.create();
-			sqv = PortfolioApp.SquareView.create();
-			sqv.set('controller', sqc)
-			console.log('World2dView.addSquare() ', this.easelEntityContainerView);
-			this.easelEntityContainerView.pushObject( sqv );
-		}
-			
-			
-			//this.easelEntities.push( sqv );
-			//this.src.stage.addChild( sqv.get('easelObj') );
-			//sqv.easelObj.x = sqData.x;
-			//sqv.easelObj.y = sqData.y;
-			//src.stage.addChild(sqv.easelObj);
-			//this.src.stage.addChild(displayObjs[] = );
-		
-		
+		App.static_easelEntityContainerView.pushObject( App.CogView.create( {controller: App.CogController.create() }));
+		//this.easelEntities.push( sqv );
+		//this.src.stage.addChild( sqv.get('easelObj') );
+		//sqv.easelObj.x = sqData.x;
+		//sqv.easelObj.y = sqData.y;
+		//src.stage.addChild(sqv.easelObj);
+		//this.src.stage.addChild(displayObjs[] = );
 	},
 	resize: function() {
 		
@@ -94,19 +80,20 @@ PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
 			if (winWidth > 1000) {
 				width = 1000;
 				height = 800; 
-				vis.bgcolor = "rgba(200, 255, 200, " + (trails ? 1 / trails : 1) + ")";
+				src.bgcolor = vis.bgcolor = "rgba(200, 255, 200, " + (trails ? 1 / trails : 1) + ")";
 			} else if (winWidth > 800) {
 				width = 800;
 				height = 800;
-				vis.bgcolor = "rgba(200, 200, 255, "+ (trails ? 1 / trails : 1) + ")";
+				src.bgcolor = vis.bgcolor = "rgba(200, 200, 255, "+ (trails ? 1 / trails : 1) + ")";
 			} else {
 				width = 400;
 				height = 300;
-				vis.bgcolor = "rgba(255, 200, 200, "+ (trails ? 1 / trails : 1) + ")";
+				src.bgcolor = vis.bgcolor = "rgba(255, 200, 200, "+ (trails ? 1 / trails : 1) + ")";
 			}
 			src.$canvas.attr( { width: width , height: height  } );
 			
 			if (this.isVis) vis.$canvas.attr( { width: width, height: height } );
+			src.$canvas.css( 'background-color', src.bgcolor );
 		}
 	},
 	
@@ -120,7 +107,8 @@ PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
 			
 			for (var i = 0; i < this.easelEntities.length; i++) {
 				this.easelEntities[i].redraw();
-			}
+			}	
+			
 			src.stage.update();
 
 			
@@ -137,13 +125,13 @@ PortfolioApp.World2dView = PortfolioApp.SmartView.extend({
 			}
 		}
 	},
-	easelDisplayObjectCreatedByChildView: function (label, childView) {
-		console.log('easelDisplayObjectCreatedByChildView', label, childView.get('easelObj'));
+	addEaselEnt: function (label, childView) {
+		console.log('World2dView.addEaselEnt()', label, childView);
 		if (label === 'ash') {
 			this.src.ashView = childView;
 			this.src.stage.addChild( childView.get('easelObj') );
 		} else {
-			console.log('easelDisplayObjectCreatedByChildView', childView._debugContainerKey, childView.get('easelObj'));
+			console.log('add this shit', label, childView);
 			this.easelEntities.push( childView );
 			this.src.stage.addChild( childView.get('easelObj') );
 		}

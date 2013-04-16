@@ -1,3 +1,3 @@
-PortfolioApp.IndexController = Em.Controller.extend({
+App.IndexController = Em.Controller.extend({
 	test:'testVariable'
 })

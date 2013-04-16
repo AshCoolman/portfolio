@@ -14689,6 +14689,7 @@ Ember.View = Ember.CoreView.extend(
     @method rerender
   */
   rerender: function() {
+	console.log('rerender', this)
     return this.currentState.rerender(this);
   },
 
@@ -16147,7 +16148,7 @@ var inDOM = Ember.View.states.inDOM = Ember.create(hasElement);
 
 Ember.merge(inDOM, {
   insertElement: function(view, fn) {
-    throw "You can't insert an element into the DOM that has already been inserted";
+    throw "You can't insert an element into the DOM that has already been inserted:" + view._debugContainerKey;
   }
 });
 

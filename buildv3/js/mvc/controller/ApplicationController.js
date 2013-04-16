@@ -1,3 +1,3 @@
-PortfolioApp.ApplicationController = Em.Controller.extend({
-	name:'PortfolioApp.ApplicationController'
+App.ApplicationController = Em.Controller.extend({
+	name:'App.ApplicationController'
 });

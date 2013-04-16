@@ -1,6 +1,6 @@
 /*jslint browser: true, nomen: true*/
-/*global $, jQuery, PortfolioApp, Em, Ember, console*/
-PortfolioApp.HeartbeatFlashView = PortfolioApp.SmartView.extend({
+/*global $, jQuery, App, Em, Ember, console*/
+App.HeartbeatFlashView = App.SmartView.extend({
 	className: 'HeartbeatFlashView',
 	templateName: 'heartbeat-flash',
 	doHeartbeat: function () {

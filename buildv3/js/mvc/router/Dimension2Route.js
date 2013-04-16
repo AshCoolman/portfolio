@@ -1,9 +1,9 @@
-PortfolioApp.Dimension2Route = Em.Route.extend({ 
+App.Dimension2Route = Em.Route.extend({ 
 	init: function () {
 		this._super();
 	},
 	model: function () {
-		return (PortfolioApp.dimension2Model) ? PortfolioApp.dimension2Model : PortfolioApp.Dimension2Model.create();
+		return (App.dimension2Model) ? App.dimension2Model : App.Dimension2Model.create();
 	},
 	activate: function () { 
 		//Application state 

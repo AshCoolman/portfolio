@@ -1,4 +1,4 @@
-PortfolioApp.NavigationController = PortfolioApp.SmartController.extend({
+App.NavigationController = App.SmartController.extend({
 	className:'NavigationController',
 	isIndex:false,
 	isDimension1:false,

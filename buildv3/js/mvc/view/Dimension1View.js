@@ -1,4 +1,4 @@
-PortfolioApp.Dimension1View = Ember.View.extend({
+App.Dimension1View = Ember.View.extend({
 	tagName:'div',
 	name:'dimension1'
 });

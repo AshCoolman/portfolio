@@ -1,3 +1,3 @@
-PortfolioApp.NavigationView = PortfolioApp.SmartView.extend({
+App.NavigationView = App.SmartView.extend({
 	templateName:'navigation'
 });

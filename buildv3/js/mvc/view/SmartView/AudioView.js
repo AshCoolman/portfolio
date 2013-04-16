@@ -1,4 +1,4 @@
-PortfolioApp.AudioView = PortfolioApp.SmartView.extend({
+App.AudioView = App.SmartView.extend({
 	tagName:'audio',
 	className: 'audio-view',
   	attributeBindings: ['src'],

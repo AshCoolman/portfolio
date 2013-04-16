@@ -1,6 +1,6 @@
 /*jslint browser: true, nomen: true*/
-/*global $, jQuery, PortfolioApp, Em, Ember, console*/
-PortfolioApp.HeartbeatSoundController = PortfolioApp.AudioController.extend({
+/*global $, jQuery, App, Em, Ember, console*/
+App.HeartbeatSoundController = App.AudioController.extend({
 	label: 'HeartbeatSoundController',
 	content: undefined,
 	init: function () {
@@ -8,7 +8,7 @@ PortfolioApp.HeartbeatSoundController = PortfolioApp.AudioController.extend({
 		this.addAutoMappedEvent('heartbeat', this, this.doHeartbeat);
 	},
 	destroy: function () {
-		PortfolioApp.eventMapper.removeEventListener('heartbeat', this);
+		App.eventMapper.removeEventListener('heartbeat', this);
 		return this._super().destroy();
 	},
 	view_didInsertElement: function (aview) {

@@ -1,2 +1,1 @@
-PortfolioApp.EaselEntityController = PortfolioApp.SmartController.extend({
-})
+App.EaselEntityController = App.SmartController.extend({})

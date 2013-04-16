@@ -1,4 +1,4 @@
-PortfolioApp.SubtitleView = PortfolioApp.SmartView.extend({
+App.SubtitleView = App.SmartView.extend({
 	name:'Subtitle',
 	templateName:'subtitle',
 	subtitleText:'Lorum ipsum',       
