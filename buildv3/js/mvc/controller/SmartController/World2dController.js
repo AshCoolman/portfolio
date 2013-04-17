@@ -20,8 +20,7 @@ App.EaselEntManager = {
 	_createQ: function () {
 		this._q.forEach( function(me) {
 			return function (eo, index, array) {
-				console.log('hm', eo);
-				me._view.addEaselEnt( eo.label, eo.childView );
+				me._view.addEaselEnt( eo.label, eo.view );
 			}
 		}(this));
 		
@@ -35,21 +34,24 @@ App.EaselEntManager = {
 App.World2dController = App.SmartController.extend({
 	eeMgr: App.EaselEntManager,
 	init: function () {
-		App.eventMapper.addEventListener( 'world2dEditorAddCog', this, this.doWorld2dEditorAddCog );	
-		App.eventMapper.addEventListener( 'easelCreatedByChildView', this, this.doEaselCreatedByChildView);
+		App.eventMapper.addEventListener( 'w2dE_AddCog', this, this.doW2dE_AddCog );
+		App.eventMapper.addEventListener( 'W2dE_addPixel', this, this.doW2dE_addPixel );	
+		
+		App.eventMapper.addEventListener( 'viewAddedEasel', this, this.doViewAddedEasel);
 		return 	this._super();
 	},
-	view_didInsertElement: function ( childView ) {
-		this._super( childView );
+	view_didInsertElement: function ( view ) {
+		this._super( view );
 		this.eeMgr.addView( this.view );
 	}, 
-	doEaselCreatedByChildView: function ( atype, adata ) {
-		console.log('doEaselCreatedByChildView type', atype);
-			console.log('doEaselCreatedByChildView data	', adata);
-		this.eeMgr.queue({ label: adata.label, childView: adata.childView });
+	doViewAddedEasel: function ( atype, adata ) {
+		this.eeMgr.queue({ label: adata.label, view: adata.view });
 	},
-	doWorld2dEditorAddCog: function (atype, adata) {
+	doW2dE_AddCog: function (atype, adata) {
 		this.get('view').addCog();
+	},
+	doW2dE_addPixel: function  (atype, adata) {
+		this.get('view').addPixel();
 	}
 })
 

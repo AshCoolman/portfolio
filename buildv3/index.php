@@ -119,7 +119,18 @@
 	<script type="text/x-handlebars" data-template-name="world-2d">
 		{{render 'easel-entity-container'}}
 		{{render 'ash'}}
-		{{ renderWithVars "cog" cog x="835"}}
+		
+		
+		{{ controlWithVars "pixel" pixel x=220 y=100 width=20 height=20}} 
+		{{ controlWithVars "pixel" pixel x=240 y=100 width=20 height=20}} 
+		{{ controlWithVars "pixel" pixel x=260 y=100 width=20 height=20}} 
+		{{ controlWithVars "pixel" pixel x=270 y=120 width=20 height=20}} 
+		{{ controlWithVars "pixel" pixel x=210 y=120 width=20 height=20}} 
+		{{ controlWithVars "pixel" pixel x=270 y=140 width=20 height=20}} 
+		{{ controlWithVars "pixel" pixel x=260 y=160 width=20 height=20}} 
+		{{ controlWithVars "pixel" pixel x=240 y=170 width=20 height=20}} 
+		{{ controlWithVars "pixel" pixel x=240 y=190 width=20 height=20}} 
+		{{ controlWithVars "pixel" pixel x=240 y=220 width=20 height=20}}
 	</script>
 	
 	
@@ -136,6 +147,7 @@
 	</script>
 	<script type="text/x-handlebars" data-template-name="world-2d-editor">
 		<button type="button" {{action "addCog" }}>+Cog</button>
+		<button type="button" {{action "addPixel" }}>+Pixel</button>
 		<button type="button" {{action "getAddedStaticPlans" }}>Plans</button>
 		
 		

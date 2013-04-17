@@ -3,17 +3,16 @@ App.CogView = App.EaselEntityView.extend({
 	templateName: 'cog',
 	tag: 'div',
 	className: 'CogView',
-	gridSnap: 50,
-	didInsertElement: function (aview) {
+	gridSnap: 10,
+	didInsertElement: function () {
 		this._super();
-		console.log('CogView.didInsertElement')
 		this.bmp = new createjs.Bitmap('img/cog.png');
 		this.bmp.image.onload = (function(aeaselObj){
 			return function(){
 				with (aeaselObj) {
 					regX = image.width/2;
 					regY = image.height/2;
-					scaleX = scaleY = 0.1;
+					scaleX = scaleY = 0.06;
 				}	
 			}
 		}(this.bmp));
@@ -26,8 +25,8 @@ App.CogView = App.EaselEntityView.extend({
 		
 		dragger.addChild(this.bmp);
 		
-		dragger.x = Number(controller.x);
-		dragger.y = Number(controller.y);
+		if (controller.x) dragger.x = Number(controller.x);
+		if (controller.y) dragger.y = Number(controller.y);
 		
 		dragger.addEventListener("mousedown", 	(function(me) {
 													return function(evt) {
@@ -48,7 +47,6 @@ App.CogView = App.EaselEntityView.extend({
 		this.get('controller').send('view_easelObjectCreated', this);
 	},
 	redraw: function () {
-
 		this.easelObj.rotation++;
 	},
 	snap: function (val) {

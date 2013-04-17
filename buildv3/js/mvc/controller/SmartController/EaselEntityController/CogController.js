@@ -1,18 +1,14 @@
 App.CogController = App.EaselEntityController.extend({
 	label:'cog',
-	x: 0,
-	y: 0,
 	view_didInsertElement: function (aview) {
 		this._super(aview);
-		console.log('----');
-		App.eventMapper.addEventListener('world2dEditorGetAddedStaticPlans', this, this.doGetAddedStaticPlans);
+		App.eventMapper.addEventListener('w2dE_GetPlans', this, this.doGetPlans);
 	},
-	doGetAddedStaticPlans: function () {
-		console.log('{{ renderWithVars "'+this.label+'" x="'+this.x+'"}}')
+	
+	doGetPlans: function () {
+		console.log('{{ renderWithVars "'+this.label+'" "'+this.label.camelize()+'" x="'+this.get('view').easelObj.x+'" y="'+this.get('view').easelObj.y+'"}}')
 	},
 	view_easelObjectCreated: function (aview) {
-		var data = {label:this.label, childView:aview};
-		console.log('CogController.view_easelObjectCreated()', data);
-		App.eventMapper.triggerEvent(ragh.MEvt.create('easelCreatedByChildView', data));
+		App.eventMapper.triggerEvent(ragh.MEvt.create('viewAddedEasel', {label:this.label, view:aview}));
 	}	
 });		

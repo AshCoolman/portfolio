@@ -59,20 +59,15 @@ App.World2dView = App.SmartView.extend({
 	},
 	addCog: function () {
 		console.log('adding cog')
-		var sqData = {
-			x: 200,
-			y: 10,
-			class: App.CogView
-		};
-		
 		App.static_easelEntityContainerView.pushObject( App.CogView.create( {controller: App.CogController.create() }));
-		//this.easelEntities.push( sqv );
-		//this.src.stage.addChild( sqv.get('easelObj') );
-		//sqv.easelObj.x = sqData.x;
-		//sqv.easelObj.y = sqData.y;
-		//src.stage.addChild(sqv.easelObj);
-		//this.src.stage.addChild(displayObjs[] = );
 	},
+	addPixel: function () {
+		console.log('adding pixel')
+		var controller = App.PixelController.create();
+		var easelObjSettings = $.extend(App.PixelView.create().easelObjSettings, { x: 0, y: 0 });
+		var view = App.PixelView.create( {controller: controller, easelObjSettings: easelObjSettings} 	);
+		App.static_easelEntityContainerView.pushObject( view );
+	}, 
 	resize: function() {
 		
 		with (this) {	
@@ -118,7 +113,7 @@ App.World2dView = App.SmartView.extend({
 					context.mozImageSmoothingEnabled = false;
 					context.setTransform(1 * multi,0,0,1 * multi,0,0);
 					vis.context.fillStyle = vis.bgcolor;
-					vis.context.fillRect(0,0,width, height);
+					vis.context.fillRect( 0, 0, width, height);
 					context.fillStyle = context.createPattern(src.$canvas[0], 'repeat');
 					context.fillRect(0, 0, width, height)
 				}
@@ -126,12 +121,10 @@ App.World2dView = App.SmartView.extend({
 		}
 	},
 	addEaselEnt: function (label, childView) {
-		console.log('World2dView.addEaselEnt()', label, childView);
 		if (label === 'ash') {
 			this.src.ashView = childView;
 			this.src.stage.addChild( childView.get('easelObj') );
 		} else {
-			console.log('add this shit', label, childView);
 			this.easelEntities.push( childView );
 			this.src.stage.addChild( childView.get('easelObj') );
 		}

@@ -14689,7 +14689,6 @@ Ember.View = Ember.CoreView.extend(
     @method rerender
   */
   rerender: function() {
-	console.log('rerender', this)
     return this.currentState.rerender(this);
   },
 

@@ -240,7 +240,8 @@ App = Ember.Application.create({
 		    this.route('dimension2', {path:'/d2'});
 		});
 	},
-	eventMapper: ragh.eventMapper
+	eventMapper: ragh.eventMapper,
+	colors: ['#FF0000', '#993366', '#3399CC', '#0099FF', '#00CC33', '#00FF00']
 });
 
 
