@@ -413,13 +413,13 @@ THREE.Color.prototype = {
 
 	getStyle: function () {
 
-		return 'rgb(' + ( ( this.r * 255 ) | 0 )  + ',' + ( ( this.g * 255 ) | 0 ) + ',' + ( ( this.b * 255 ) | 0 ) + ')';
+		return '' + ( ( this.r * 255 ) | 0 )  + ',' + ( ( this.g * 255 ) | 0 ) + ',' + ( ( this.b * 255 ) | 0 ) + ')';
 
 	},
 
 	setStyle: function ( style ) {
 
-		// rgb(255,0,0)
+		// 255,0,0)
 
 		if ( /^rgb\((\d+),(\d+),(\d+)\)$/i.test( style ) ) {
 
@@ -433,7 +433,7 @@ THREE.Color.prototype = {
 
 		}
 
-		// rgb(100%,0%,0%)
+		// 100%,0%,0%)
 
 		if ( /^rgb\((\d+)\%,(\d+)\%,(\d+)\%\)$/i.test( style ) ) {
 
@@ -565,7 +565,7 @@ THREE.Color.prototype = {
 
 	clone: function () {
 
-		return new THREE.Color().setRGB( this.r, this.g, this.b );
+		return new THREE.Color().set this.r, this.g, this.b );
 
 	}
 
@@ -9874,7 +9874,7 @@ THREE.JSONLoader.prototype.createModel = function ( json, callback, texturePath 
 				for ( c = 0, cl = srcColors.length; c < cl; c += 3 ) {
 
 					color = new THREE.Color( 0xffaa00 );
-					color.setRGB( srcColors[ c ], srcColors[ c + 1 ], srcColors[ c + 2 ] );
+					color.set srcColors[ c ], srcColors[ c + 1 ], srcColors[ c + 2 ] );
 					dstColors.push( color );
 
 				}
@@ -10643,7 +10643,7 @@ THREE.SceneLoader.prototype.parse = function ( json, callbackFinished, url ) {
 		}
 
 		color = fogJSON.color;
-		fog.color.setRGB( color[0], color[1], color[2] );
+		fog.color.set color[0], color[1], color[2] );
 
 		result.fogs[ fogID ] = fog;
 
@@ -11085,7 +11085,7 @@ THREE.SceneLoader.prototype.parse = function ( json, callbackFinished, url ) {
 
 	color = data.defaults.bgcolor;
 	result.bgColor = new THREE.Color();
-	result.bgColor.setRGB( color[0], color[1], color[2] );
+	result.bgColor.set color[0], color[1], color[2] );
 
 	result.bgColorAlpha = data.defaults.bgalpha;
 
@@ -13653,9 +13653,9 @@ THREE.CanvasRenderer = function ( parameters ) {
 
 		function calculateLights() {
 
-			_ambientLight.setRGB( 0, 0, 0 );
-			_directionalLights.setRGB( 0, 0, 0 );
-			_pointLights.setRGB( 0, 0, 0 );
+			_ambientLight.set 0, 0, 0 );
+			_directionalLights.set 0, 0, 0 );
+			_pointLights.set 0, 0, 0 );
 
 			for ( var l = 0, ll = _lights.length; l < ll; l ++ ) {
 
@@ -13808,7 +13808,7 @@ THREE.CanvasRenderer = function ( parameters ) {
 				}
 
 				/* DEBUG
-				setStrokeStyle( 'rgb(255,255,0)' );
+				setStrokeStyle( '255,255,0)' );
 				_context.beginPath();
 				_context.moveTo( v1.x - 10, v1.y );
 				_context.lineTo( v1.x + 10, v1.y );
@@ -14322,7 +14322,7 @@ THREE.CanvasRenderer = function ( parameters ) {
 				var data = _imagedatas[ texture.id ];
 				var index = ( Math.floor( u0 ) + Math.floor( v0 ) * texture.image.width ) * 4;
 
-				_color.setRGB( data[ index ] / 255, data[ index + 1 ] / 255, data[ index + 2 ] / 255 );
+				_color.set data[ index ] / 255, data[ index + 1 ] / 255, data[ index + 2 ] / 255 );
 				fillPath( _color );
 
 				return;

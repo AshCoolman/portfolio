@@ -1,55 +1,42 @@
 App.CogView = App.EaselEntityView.extend({
-	easelObj: null,
 	templateName: 'cog',
-	tag: 'div',
 	className: 'CogView',
-	gridSnap: 10,
-	didInsertElement: function () {
-		this._super();
+	override_createEasel: function() {
 		this.bmp = new createjs.Bitmap('img/cog.png');
-		this.bmp.image.onload = (function(aeaselObj){
-			return function(){
-				with (aeaselObj) {
-					regX = image.width/2;
-					regY = image.height/2;
-					scaleX = scaleY = 0.06;
-				}	
+		this.bmp.image.onload = (function(me){ 
+			return function () {
+				me.bmp.isImgLoaded = true;
+				me.override_draw();
 			}
-		}(this.bmp));
-		
-		this.easelObj = dragger = new createjs.Container();
-
-		
-		
-		var controller = this.get('controller');
-		
-		dragger.addChild(this.bmp);
-		
-		if (controller.x) dragger.x = Number(controller.x);
-		if (controller.y) dragger.y = Number(controller.y);
-		
-		dragger.addEventListener("mousedown", 	(function(me) {
-													return function(evt) {
-														var offset = {x:evt.target.x-evt.stageX, y:evt.target.y-evt.stageY};
-                
-														// add a handler to the event object's onMouseMove callback
-														// this will be active until the user releases the mouse button:
-														evt.addEventListener("mousemove", function(ev) {
-															var controller = me.get('controller');
-														    controller.x = ev.target.x = me.snap(ev.stageX+offset.x);
-															controller.y = ev.target.y = me.snap(ev.stageY+offset.y);
-														});
-					
-													}
-												}(this)));
-		
-		
-		this.get('controller').send('view_easelObjectCreated', this);
+		}(this));
+		this.dragger = new createjs.Container();
+		this.dragger.addChild(this.bmp);
+		this.dragger.addEventListener("mousedown", 	(function(me) { return function(evt) {
+			var offset = {x:evt.target.x-evt.stageX, y:evt.target.y-evt.stageY};
+			evt.addEventListener("mousemove", function(ev) {
+			    ev.target.x = me.snap(ev.stageX+offset.x);
+				ev.target.y = me.snap(ev.stageY+offset.y);
+			});
+		} }(this)));
+		return this.dragger;
 	},
-	redraw: function () {
-		this.easelObj.rotation++;
+	override_draw: function (asettings) {
+		var settings = asettings ? asettings : this.easelObj;
+		Em.assert('CogView.override_draw(): function called before easelObj was created ', this.easelObj)
+		if (this.bmp.isImgLoaded) {
+			this.bmp.regX = this.bmp.image.width / 2;
+			this.bmp.regY = this.bmp.image.height / 2;
+		}
+		this.bmp.scaleX = this.bmp.scaleY = 0.06;		
+		
+		//this.dragger.regX = -this.bmp.scaleX * this.bmp.image.width / 2;
+		//this.dragger.regY = -this.bmp.scaleY * this.bmp.image.height / 2;
+			
+		if (settings.x) this.dragger.x = Number( settings.x );
+		if (settings.y) this.dragger.y = Number( settings.y );
+		return this.dragger;
 	},
-	snap: function (val) {
-		return Math.round( val / this.gridSnap) * this.gridSnap;
+	override_redraw: function () {
+		this.bmp.rotation++;
 	}
 });

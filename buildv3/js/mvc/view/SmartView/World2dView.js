@@ -101,7 +101,7 @@ App.World2dView = App.SmartView.extend({
 			
 			
 			for (var i = 0; i < this.easelEntities.length; i++) {
-				this.easelEntities[i].redraw();
+				this.easelEntities[i].override_redraw();
 			}	
 			
 			src.stage.update();

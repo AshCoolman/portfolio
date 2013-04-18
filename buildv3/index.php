@@ -121,16 +121,16 @@
 		{{render 'ash'}}
 		
 		
-		{{ controlWithVars "pixel" pixel x=220 y=100 width=20 height=20}} 
-		{{ controlWithVars "pixel" pixel x=240 y=100 width=20 height=20}} 
-		{{ controlWithVars "pixel" pixel x=260 y=100 width=20 height=20}} 
-		{{ controlWithVars "pixel" pixel x=270 y=120 width=20 height=20}} 
-		{{ controlWithVars "pixel" pixel x=210 y=120 width=20 height=20}} 
-		{{ controlWithVars "pixel" pixel x=270 y=140 width=20 height=20}} 
-		{{ controlWithVars "pixel" pixel x=260 y=160 width=20 height=20}} 
-		{{ controlWithVars "pixel" pixel x=240 y=170 width=20 height=20}} 
-		{{ controlWithVars "pixel" pixel x=240 y=190 width=20 height=20}} 
-		{{ controlWithVars "pixel" pixel x=240 y=220 width=20 height=20}}
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=220 y=100 width=20 height=20}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=240 y=100 width=20 height=20}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=260 y=100 width=20 height=20}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=270 y=120 width=20 height=20}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=210 y=120 width=20 height=20}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=270 y=140 width=20 height=20}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=260 y=160 width=20 height=20}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=240 y=170 width=20 height=20}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=240 y=190 width=20 height=20}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=240 y=220 width=20 height=20}}
 	</script>
 	
 	

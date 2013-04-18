@@ -16,7 +16,7 @@ ragh.eventMapper = (function () {
 				throw 'raaagh.EventMapper: .addEventListener(): second parameter must be listener';
 			}
 			if (!callback) {
-				console.log(type, listener);
+ 				console.log('raaagh.EventMapper:', type, listener._debugContainerKey, callback);
 				throw 'raaagh.EventMapper: .addEventListener(): third parameter must be callback '+type+', '+listener;
 			}
 			if (!this.eventsAndListeners.hasOwnProperty(type)) {

@@ -4,9 +4,11 @@ App.AshView = App.SmartView.extend({
 	templateName: 'ash',
 	tag: 'span',
 	didInsertElement: function () {
-		this.easelObj = new createjs.Bitmap('img//face-ash.png');
+		this.easelObj = this.override_draw();
 		this.get('controller').send('view_easelObjectCreated', this);
-		//this.get('controller').send('view_didInsertElement', this, this);
+	},
+	override_draw: function() {
+		return new createjs.Bitmap('img//face-ash.png');
 	},
 	redraw: function(){
 			if (this.easelObj) {
@@ -15,7 +17,5 @@ App.AshView = App.SmartView.extend({
 				}
 			}
 	}
-	
-	
 });
 

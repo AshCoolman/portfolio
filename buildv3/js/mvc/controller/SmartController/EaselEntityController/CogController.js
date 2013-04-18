@@ -2,7 +2,7 @@ App.CogController = App.EaselEntityController.extend({
 	label:'cog',
 	view_didInsertElement: function (aview) {
 		this._super(aview);
-		App.eventMapper.addEventListener('w2dE_GetPlans', this, this.doGetPlans);
+		//App.eventMapper.addEventListener('w2dE_GetPlans', this, this.doGetPlans);
 	},
 	
 	doGetPlans: function () {

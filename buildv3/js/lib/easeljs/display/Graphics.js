@@ -59,8 +59,8 @@ Command.prototype.exec = function(scope) { this.f.apply(scope, this.params); }
  * <h4>Example</h4>
  *      var g = new Graphics();
  *	    g.setStrokeStyle(1);
- *	    g.beginStroke(Graphics.getRGB(0,0,0));
- *	    g.beginFill(Graphics.getRGB(255,0,0));
+ *	    g.beginStroke(Graphics.get0,0,0));
+ *	    g.beginFill(Graphics.get255,0,0));
  *	    g.drawCircle(0,0,3);
  *
  *	    var s = new Shape(g);
@@ -130,14 +130,14 @@ var p = Graphics.prototype;
 	
 	/**
 	 * Returns a CSS compatible color string based on the specified RGB numeric color values in the format 
-	 * "rgba(255,255,255,1.0)", or if alpha is null then in the format "rgb(255,255,255)". For example,
+	 * "rgba(255,255,255,1.0)", or if alpha is null then in the format "255,255,255)". For example,
 	 *
-	 *      Graphics.getRGB(50, 100, 150, 0.5);
+	 *      Graphics.get50, 100, 150, 0.5);
 	 *
 	 * will return "rgba(50,100,150,0.5)". It also supports passing a single hex color value as the first param, and an
 	 * optional alpha value as the second param. For example,
 	 *
-	 *      Graphics.getRGB(0xFF00FF, 0.2);
+	 *      Graphics.get0xFF00FF, 0.2);
 	 *
 	 * will return "rgba(255,0,255,0.2)".
 	 * @method getRGB
@@ -147,7 +147,7 @@ var p = Graphics.prototype;
 	 * @param {Number} b The blue component for the color, between 0 and 0xFF (255).
 	 * @param {Number} alpha Optional. The alpha component for the color where 0 is fully transparent and 1 is fully opaque.
 	 * @return {String} A CSS compatible color string based on the specified RGB numeric color values in the format 
-	 * "rgba(255,255,255,1.0)", or if alpha is null then in the format "rgb(255,255,255)".
+	 * "rgba(255,255,255,1.0)", or if alpha is null then in the format "255,255,255)".
 	 **/
 	Graphics.getRGB = function(r, g, b, alpha) {
 		if (r != null && b == null) {
@@ -157,7 +157,7 @@ var p = Graphics.prototype;
 			r = r>>16&0xFF;
 		}
 		if (alpha == null) {
-			return "rgb("+r+","+g+","+b+")";
+			return ""+r+","+g+","+b+")";
 		} else {
 			return "rgba("+r+","+g+","+b+","+alpha+")";
 		}
@@ -852,8 +852,8 @@ var p = Graphics.prototype;
 	 *
 	 *      var g = new Graphics();
 	 *	    g.setStrokeStyle(1);
-	 *	    g.beginStroke(Graphics.getRGB(0,0,0));
-	 *	    g.beginFill(Graphics.getRGB(255,0,0));
+	 *	    g.beginStroke(Graphics.get0,0,0));
+	 *	    g.beginFill(Graphics.get255,0,0));
 	 *	    g.drawCircle(0,0,3);
 	 *
 	 *	    var s = new Shape(g);
