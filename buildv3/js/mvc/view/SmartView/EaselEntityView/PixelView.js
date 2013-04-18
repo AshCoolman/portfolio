@@ -1,73 +1,75 @@
 App.PixelView = App.EaselEntityView.extend({
 	label:'pixel',
-	easelObjSettings: {
-				width: 20,
-				height: 20,
-				x: 0,
-				y: 0
-			},
+	shp: null,
+	handle: null,
 	gridSnap: 10,
+	
+	easelObjSettings: {
+		width: 20,
+		height: 20,
+		x: 0,
+		y: 0
+	},
+	
 	didInsertElement: function () {
 		this._super();
-		this.draw();
+		this.createEasel();
+		this.initialDraw();			
+		this.get('controller').send('view_easelObjCreated', this);
 	},
-	draw: function() {
-		var shp, dragger, controller = this.get('controller'), controllerSettings = {};
-		if (!this.easelObj) {
-			Em.assert('App.PixelView.draw(): value of x in easelObj is not of type "number"', (typeof this.easelObjSettings.x == 'number'));
-			Em.assert('App.PixelView.draw(): value of y in easelObj is not of type "number"', (typeof this.easelObjSettings.y == 'number'));
-			Em.assert('App.PixelView.draw(): value of width in easelObj is not of type "number" '+this.easelObjSettings.width, (typeof this.easelObjSettings.width == 'number'));
-			Em.assert('App.PixelView.draw(): value of height in easelObj is not of type "number"', (typeof this.easelObjSettings.height == 'number'));
-
-			console.log('drawing new', this.easelObjSettings);
-			
+	
+	createEasel: function () {
+		this.shp = new createjs.Shape();
+		this.handle = new createjs.Container();
+		this.handle.addChild(this.shp);
+		this.handle.addEventListener("mousedown",  (function(me) { return function(evt) {
+					var o={x: evt.target.x-evt.stageX, y: evt.target.y-evt.stageY };
+					evt.addEventListener("mousemove", function(ev) {
+					   	ev.target.x = me.snap(ev.stageX + o.x);
+						ev.target.y = me.snap(ev.stageY + o.y);
+					});
+			} }(this)));
+		return this.easelObj = this.handle;
+	},
+	
+	initialDraw: function () {
+		var controller = this.get('controller'),
 			controllerSettings = {};
-			if (controller.x) controllerSettings.x = controller.x;
-			if (controller.y) controllerSettings.y = controller.y;
-			if (controller.width) controllerSettings.width = controller.width;
-			if (controller.height) controllerSettings.height = controller.height;
-			$.extend(this.easelObjSettings, controllerSettings); 
-			//If controller has values, they were probably set from 
+		if (controller.x) controllerSettings.x = controller.x;
+		if (controller.y) controllerSettings.y = controller.y;
+		if (controller.width) controllerSettings.width = controller.width;
+		if (controller.height) controllerSettings.height = controller.height;
+		this.draw( $.extend(this.easelObjSettings, controllerSettings) );
+	},
+	
+	draw: function(asettings) {
+		Em.assert('App.PixelView.draw(): method can\'t run without easelObj being created. easelObj = '+ this.easelObj, this.easelObj);
+		Em.assert('App.PixelView.draw(): method can\'t run without handle being created. handle = '+ this.handle, this.handle);
+		Em.assert('App.PixelView.draw(): method can\'t run without shp being created. shp = '+ this.shp, this.shp);
+		
+		var settings = asettings ? asettings : this.easelObj,
+			shp = this.shp,
+			handle = this.handle;
 			
-			shp = new createjs.Shape();
-			shp.name = 'shp';
-			shp.regX = - this.easelObjSettings.width / 2;
-			shp.regY = - this.easelObjSettings.height / 2;
-			shp.width = this.easelObjSettings.width;
-			shp.height = this.easelObjSettings.height;
-			
-			dragger = new createjs.Container();
-			dragger.addChild(shp);
-			dragger.x = Number(this.easelObjSettings.x);
-			dragger.y = Number(this.easelObjSettings.y);
-			dragger.addEventListener("mousedown", 
-				(function(me) {
-					return function(evt) {
-						var o={x: evt.target.x-evt.stageX, y: evt.target.y-evt.stageY };
-						evt.addEventListener("mousemove", function(ev) {
-						   	ev.target.x = me.snap(ev.stageX + o.x);
-							ev.target.y = me.snap(ev.stageY + o.y);
-						});
-
-					}
-				}(this)));
-			this.easelObj = dragger;
-		} else {
-			console.log('drawing old', this.easelObj)
-			dragger = this.easelObj;
-			shp = dragger.getChildAt(0);
-			shp.graphics.clear();
-		}	
-		//shp.regX = this.easelObj.regX;
-		//shp.regY = this.easelObj.regY;
-		console.log('drawing', shp);
+		Em.assert('App.PixelView.draw(): value of x in easelObj is not of type "number"', (typeof settings.x == 'number'));
+		Em.assert('App.PixelView.draw(): value of y in easelObj is not of type "number"', (typeof settings.y == 'number'));
+		Em.assert('App.PixelView.draw(): value of width in easelObj is not of type "number" ' + settings.width, (typeof settings.width == 'number'));
+		Em.assert('App.PixelView.draw(): value of height in easelObj is not of type "number" ' + settings.height, (typeof settings.height == 'number'));
+	
+		shp.regX = - settings.width / 2;
+		shp.regY = - settings.height / 2;
+		shp.width = settings.width;
+		shp.height = settings.height;
+		shp.graphics.clear();
 		shp.graphics.beginFill('#FFFFFF');
 		shp.graphics.drawRect( 0, 0, shp.width, shp.height);
-		//shp.graphics.beginFill("#ff0000").drawRect(0, 0, 100, 100);
 		
+		handle.x = Number(settings.x);
+		handle.y = Number(settings.y);
 		
+		this.handle = handle;
+		this.shp = shp;
 
-		this.get('controller').send('view_easelObjCreated', this);
 	},
 	redraw: function () {
 		
