@@ -5,38 +5,38 @@
 	App.HeartbeatController = App.SmartController.extend({
 		label: 'HeartbeatController',
 		timeout: null,
-		total: 0,
+		totalHeartbeats: 0,
+		MAX_HEARTBEATS: 20,
 		myView:null,
 		speedFactors: [],
-		doStart: function () {
-			this.myView.doStart();
-			App.eventMapper.triggerEvent('d1Start');
-			this.createHeartbeat(this);
-		},
-		createHeartbeat: function (target) {
+		createHeartbeat: function () {
+			
+				
 			var min = 1000,
 				max = 3000,
 				sf = 0,
-				total = 0,
 				prc = 1,
-				delay = 0;
+				delay = 1000,
+				speedFactors = this.speedFactors;
+				
+				App.eventMapper.triggerEvent(ragh.MEvt.create('heartbeat', {target: this}));
 				
 			for (sf = 0; sf < speedFactors.length; sf++) {
 				var speedFactor = speedFactors[sf]();
 				Ember.assert('App.HeartbeatController.createHeartbeat() speedFactor function does not return 0 - 1:' + speedFactor, (0 <= speedFactor && 1 >= speedFactor))
 			}
 			
-			prc = total / speedFactors.length;
+			prc = (speedFactors.length == 0) ? 1 : totalHeartbeats / speedFactors.length;
 			delay = min + (prc * (max - min))
 			
-			if (this.total < 1) {
-				this.total++;
-				(function(){
-					target.timeout = setTimeout(function () {
-						App.eventMapper.triggerEvent(ragh.MEvt.create('heartbeat'));
-						target.createHeartbeat(target);
-					}, delay);
-				}());
+			if (this.totalHeartbeats < this.MAX_HEARTBEATS) {
+				this.totalHeartbeats++;		
+				this.timeout = setTimeout(function (me) {
+						return function () {
+							me.createHeartbeat(me);
+						}
+				}(this), delay);
+				
 			}
 		},
 		view_didInsertElement: function (aview) {

@@ -14,7 +14,7 @@ App.HeartbeatSoundController = App.AudioController.extend({
 	view_didInsertElement: function (aview) {
 		this.set('view', aview);
 	},
-	doHeartbeat: function (type, target) {
-		target.get('view').doHeartbeat();
+	doHeartbeat: function (type, data) {
+		this.get('view').doHeartbeat();
 	}
 })

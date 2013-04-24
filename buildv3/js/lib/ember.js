@@ -1,1 +1,0 @@
-/Users/ashleycoleman/NonTimeMachine/git3rdparty/emberjsproject/ember.js/lib/ember.js

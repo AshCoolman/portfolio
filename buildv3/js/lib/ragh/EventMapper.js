@@ -3,7 +3,8 @@
 * TODO Use real js events, or maybe rename 'SignalMapper'
 * listener hash for quicker removing
 **/
-var ragh = {};
+var ragh = ragh ? ragh : {};
+
 ragh.eventMapper = (function () {
 	'use strict';
 	return {
@@ -39,7 +40,6 @@ ragh.eventMapper = (function () {
 			});
 		},
 		triggerEvent: function ( e) {
- 			console.log('triggerEvent', e)
 			if (!this.eventsAndListeners.hasOwnProperty(e.type)) {
 				this.eventsAndListeners[e.type] = [];
 			}

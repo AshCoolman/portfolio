@@ -23,10 +23,22 @@
 
 		<!-- APPLICATION -->
 		<script type="text/x-handlebars" data-template-name="application">
-				{{outlet}}
+			{{renderWithVars 'preloader' preloader}}
+			{{renderWithVars 'axis' axis}}
+			{{outlet}}
 		</script>
 		
 		<!-- APPLICATION ELEMENTS -->
+		<script type="text/x-handlebars" data-template-name="preloader">
+			Preloading...<br/>
+			{{{infoHtml}}}
+		</script>
+		
+	
+		<script type="text/x-handlebars" data-template-name="axis">
+		
+		</script>
+		
 		<script type="text/x-handlebars" data-template-name="hash-btn">
 			<button {{action "doNavigate" }}> {{label}} </button>
 		</script>
@@ -35,15 +47,15 @@
 			<div class="row">
 				<div class="twelve columns">
 				
-					{{#if isIndex}}
+					{{#if isShowIndex}}
 						{{renderWithVars 'hash-btn' hashBtn urlhash="/" label="Index"}}
 					{{/if}}
 
-					{{#if isDimension1}}
+					{{#if isShowDimension1}}
 						{{controlWithVars 'hash-btn' hashBtn urlhash="d1" label="Dimension 1"}}
 					{{/if}}
 
-					{{#if isDimension2}}
+					{{#if isShowDimension2}}
 						{{controlWithVars 'hash-btn' hashBtn urlhash="d2" label="Dimension 2"}}
 					{{/if}}
 					
@@ -54,15 +66,55 @@
 		
 		<!-- ROUTE INDEX -->
 		<script type="text/x-handlebars" data-template-name="index">
-			{{renderWithVars 'navigation' navigation isDimension1="true" isDimension2="true"}}
+			{{renderWithVars 'navigation' navigation isShowDimension1="true" isShowDimension2="true"}}
+
+			<div class="row">
+				<div class="twelve columns">
+					{{renderWithVars 'index-nav' indexNav}}	
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="twelve columns">
+					<div class="subtitle-container">
+						{{render 'subtitle' subtitle}}
+					</div>
+				</div>
+			</div>
 		</script>
 		
+		
+		<!-- ROUTE DIMENSION 1 NAV-->
+		<script type="text/x-handlebars" data-template-name="index-nav">
+			<div class="nav-btn-holder">
+				{{#if isShowStart}}
+				<button class="nav-btn" {{action "doStart" }}>Press here to begin</button>
+				{{/if}}
+			
+				{{#if isShowEnd}}
+				<button class="nav-btn" {{action "doEnd" }}>Add a dimension to Ashley</button>
+				{{/if}}
+			</div>
+		</script>
 		
 		
 		<!-- ROUTE DIMENSION 1 -->
 		<script type="text/x-handlebars" data-template-name="dimension1">
-			{{renderWithVars 'navigation' navigation isIndex="true" isDimension2="true"}}
+		<div class="width-fitter">
+			<div class="d1-scale-container">
+				{{render 'world-1d'}}
+			</div>
+		</div>
+		
+			{{renderWithVars 'navigation' navigation isShowIndex="true" isShowDimension2="true"}}
 
+				
+			<div class="row">
+				<div class="twelve columns">
+					{{renderWithVars 'dimension1-nav' dimension1Nav}}	
+				</div>
+			</div>
+				
 			<div class="row">
 				<div class="twelve columns">
 					{{render 'heartbeat' heartbeat}}	
@@ -78,24 +130,49 @@
 			</div>
 		</script>
 		
-			<script type="text/x-handlebars" data-template-name="heartbeat">
-				<div class="nav-btn-holder">
-					<button class="nav-btn" {{action "doStart" }}>Start!</button>
-				</div>
-				{{render "heartbeat-flash" heartbeatFlash}}
-				{{render "heartbeat-sound" heartbeatSound}}
-			</script>
+		<!-- SCALAR -->
+		<script type="text/x-handlebars" data-template-name="scalar">
+		
+		</script>
+		
+		<!-- ROUTE DIMENSION 1 NAV-->
+		<script type="text/x-handlebars" data-template-name="world-1d">
+			{{renderWithVars 'scalar'}}
+		</script>
+		
+		<!-- ROUTE DIMENSION 1 NAV-->
+		<script type="text/x-handlebars" data-template-name="dimension1-nav">
+			<div class="nav-btn-holder">
+				{{#if isShowStart}}
+				<button class="nav-btn" {{action "doStart" }}>Begin</button>
+				{{/if}}
+			
+				{{#if isShowEnd}}
+				<button class="nav-btn" {{action "doEnd" }}>Add another dimension to Ashley</button>
+				{{/if}}
+			</div>
+		</script>
+		
+		<!--  DIMENSION 1 SCALE -->
+		<script type="text/x-handlebars" data-template-name="d1-scale">
+			
+		</script>
+		
+		<script type="text/x-handlebars" data-template-name="heartbeat">
+			{{render "heartbeat-flash" heartbeatFlash}}
+			{{render "heartbeat-sound" heartbeatSound}}
+		</script>
 
-			<script type="text/x-handlebars" data-template-name="heartbeat-flash">
+		<script type="text/x-handlebars" data-template-name="heartbeat-flash">
 
-			</script>
+		</script>
 
-				<script type="text/x-handlebars" data-template-name="heartbeat-sound">
+		<script type="text/x-handlebars" data-template-name="heartbeat-sound">
 
-				</script>
+		</script>
 
 		<script type="text/x-handlebars" data-template-name="subtitle">
-			{{text}}
+			{{{text}}}
 		</script>
 		
 		
@@ -103,7 +180,7 @@
 		<!-- ROUTE DIMENSION 2 -->
 
 		<script type="text/x-handlebars" data-template-name="dimension2">
-			{{renderWithVars 'navigation' navigation isIndex="true" isDimension1="true"}}
+			{{renderWithVars 'navigation' navigation isShowIndex="true" isShowDimension1="true"}}
 			<div class="row">
 				<div class="twelve columns">
 					{{render 'world-2d-editor'}}
@@ -120,17 +197,21 @@
 		{{render 'easel-entity-container'}}
 		{{render 'ash'}}
 		
-		
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=220 y=100 width=20 height=20}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=240 y=100 width=20 height=20}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=260 y=100 width=20 height=20}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=270 y=120 width=20 height=20}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=210 y=120 width=20 height=20}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=270 y=140 width=20 height=20}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=260 y=160 width=20 height=20}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=240 y=170 width=20 height=20}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=240 y=190 width=20 height=20}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=240 y=220 width=20 height=20}}
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=235 y=45 height=30 width=30 }} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=45 width=30 height=30}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=295 y=45 width=30 height=30}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=90 width=30 height=30}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=205 y=60 width=30 height=30}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=325 y=60 width=30 height=30}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=90 width=30 height=30}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=120 width=30 height=30}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=120 width=30 height=30}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=150 width=30 height=30}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=320 y=180 width=30 height=30}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=290 y=195 width=30 height=30}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=210 width=30 height=30}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=240 width=30 height=30}} 
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=300 width=30 height=30}}
 	</script>
 	
 	
@@ -165,23 +246,21 @@
 		<div class="app-container">
 			
 		</div>  
+		
+	        <script src="js/lib/rAF.js"></script>
 	        <script src="js/lib/jquery-1.8.1.min.js"></script>
 	        <script src="js/lib/handlebars.js"></script>
-	        <script src="js/lib/embermandl.js"></script>
-	        <script src="js/lib/ragh/EventMapper.js"></script>
 			<script src="js/lib/easeljs-0.6.0.min.js"></script>
-			<script src="js/lib/PxLoader.js"></script>
-			<script src="js/lib/PxLoaderImage.js"></script>
+			<script src="js/lib/tweenjs-0.4.0.min.js"></script>
+ 			<script src="js/lib/preloadjs-0.3.0.min.js"></script>
+	        <script src="js/lib/embermandl.js"></script>
 			
-			
-			
-
-		
 <?php
 				try {
 					
-					$paths = array('js/mvc/');
+					$paths = array('js/lib/ragh/', 'js/mvc/');
 					foreach($paths as $path) {
+						
 						$simpath = $path;
 						$Directory = new RecursiveDirectoryIterator(realpath($simpath));
 						$Iterator = new RecursiveIteratorIterator($Directory);

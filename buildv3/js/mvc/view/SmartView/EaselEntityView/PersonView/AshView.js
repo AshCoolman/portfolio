@@ -10,10 +10,11 @@ App.AshView = App.SmartView.extend({
 	override_draw: function() {
 		return new createjs.Bitmap('img//face-ash.png');
 	},
-	redraw: function(){
+	override_redraw: function(dur){
+		var change = 30/1000 * dur; //per second
 			if (this.easelObj) {
 				with (this.easelObj) {
-					x = (x > 1200) ? -300 : x+10;
+					x = (x > 1200) ? -300 : x+change;
 				}
 			}
 	}

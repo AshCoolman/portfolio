@@ -18,6 +18,8 @@ App.SmartController = Em.ObjectController.extend({
 			App.eventMapper.addEventListener(meObj.type, meObj.listener, meObj.callback);
 		}
 		
+		this.send('SmartController_didInsertElement', this, this.label);
+		
 	},
 	view_willDestroyElement: function () {
 		for (var me=0; me < this.autoMappedEvents.length; me++) {

@@ -1,6 +1,22 @@
 App.ScriptModel = Em.Object.extend({
-	script: "My name is Ashley Coleman. I'm a digital engineer, I'm a story teller. And the thought of you experiencing my website quickens my pulse. Test another sentence and make it pretty long so it really pushes things to the max. Test another sentence and make it pretty long so it really pushes things to the max. Test another sentence and make it pretty long so it really pushes things to the max. Test another sentence and make it pretty long so it really pushes things to the max. Test another sentence and make it pretty long so it really pushes things to the max. Test another sentence and make it pretty long so it really pushes things to the max. Test another sentence and make it pretty long so it really pushes things to the max. Test another sentence and make it pretty long so it really pushes things to the max. Test another sentence and make it pretty long so it really pushes things to the max. Test another sentence and make it pretty long so it really pushes things to the max. Test another sentence and make it pretty long so it really pushes things to the max.",
-	wpm: 180,
+	init: function () {	
+		var initFunc = 	function(me) {
+			return function(type, data) {
+				me.scriptIndex = App.dictionary.copy['INDEX'];
+				me.scriptD1 = App.dictionary.copy['D1'];
+			}
+		}(this);
+		
+		if (App.dictionary.isLoaded) {
+			initFunc();
+		} else {
+			App.eventMapper.addEventListener('isDictionaryReady', this, initFunc);
+		}
+		return this._super();
+	},
+	scriptIndex	: '',
+	scriptD1: '',
+	wpm: 880,
 	progress: 0.0,
 	subtitleText: function() {
 		console.log('computer prop subtitleText')

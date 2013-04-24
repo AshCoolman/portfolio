@@ -35,6 +35,7 @@ App.SubtitleController = App.SmartController.extend({
 	text: '',
 	read:{},
 	lines:[],
+	isEnded: false,
 	tOut:undefined,
 	ARF: undefined,
 	ARF_last: undefined,
@@ -42,29 +43,19 @@ App.SubtitleController = App.SmartController.extend({
 	ARF_startTime: undefined,
 	ARF_diff: undefined,
 	init: function () {
-		this.addAutoMappedEvent('d1Start', this, this.doD1Start);
+
 		return this._super();
 	},
-	setup: function () {
-		this.read.lines = this.get('content').script.split('.');
+	setup: function (ascript) {
+		this.read.lines = ascript.split('.');
 		for (var l = 0; l < this.read.lines.length; l++ ) {
-			this.read.lines[l] = (this.read.lines[l]+'.').split('');
+			this.read.lines[l] = (this.read.lines[l]).split('');
 		}
 		this.read.currentLine = 0;
 		this.read.currentChar = 0;
 		this.set('text', '');
 		
 
-	},
-	doD1Start: function (type, target) { 
-		this.setup();
-		
-		if (true) {
-			this.doSetupDraw();
-			//this.doDraw();
-		} else {
-			this.readWord();
-		}
 	},
 	readChar: function (dur) {
 		var read = this.read,
@@ -75,11 +66,14 @@ App.SubtitleController = App.SmartController.extend({
 		if (read.currentLine < lines.length) {
 			if ( read.currentChar < lines[ read.currentLine].length) {
 				delay = 1 / this.get('content').get('cpms');
-					//console.log('d', delay)
 			} else {
-				delay = 2000;
+				delay = 200;
 				isNewLine = true;
 			}	
+		} else {
+			this.isEnded = true;
+			console.log('isEnded');
+			App.eventMapper.triggerEvent(ragh.MEvt.create('sub_finishedReading', {target:this}))
 		}
 		if (dur > delay) {
 			dur -= delay;
@@ -89,7 +83,7 @@ App.SubtitleController = App.SmartController.extend({
 			} else {	
 				read.currentChar = 0;
 				read.currentLine++;
-				this.set('text', '');
+				this.set('text', ''); //start fresh
 			}
 		};
 		
@@ -99,27 +93,25 @@ App.SubtitleController = App.SmartController.extend({
     	this.ARF_startTime = window.mozAnimationStartTime || Date.now();
 		this.ARF_diff = 0;
 		this.ARF_last = Date.now();
-	    this.ARF = window.requestAnimationFrame(this.doDraw.bind(this));
-		//console.log('setup', this.ARF_startTime, this.ARF_diff, this.ARF_last);
+	    this.ARF = window.requestAnimationFrame( this.doDraw.bind(this) );
+		console.log('doSetupDraw', this.ARF, this.ARF_startTime, this.ARF_diff, this.ARF_last);
 	},
 	
 	doDraw: function (atime) {
+		with (this) {
+			ARF_startTime = Date.now();
+			ARF_diff += (ARF_startTime - ARF_last);
+	        var prevDif = ARF_diff;
 		
-		this.ARF_startTime = Date.now();
-		this.ARF_diff += (this.ARF_startTime - this.ARF_last);
-        var prevDif = this.ARF_diff;
+			while (prevDif != (ARF_diff = readChar(ARF_diff))) {
+				prevDif = ARF_diff;
+			}
 		
-		while (prevDif != (this.ARF_diff = this.readChar(this.ARF_diff))) {
-			prevDif = this.ARF_diff;
+			ARF_last = ARF_startTime;
+			if (ARF) window.cancelAnimationFrame( ARF );
+		    if (!isEnded) ARF =  window.requestAnimationFrame(doDraw.bind(this));
 		}
-		
-		this.ARF_last = this.ARF_startTime;
-	    this.ARF = window.requestAnimationFrame(this.doDraw.bind(this));
-    },
+    }
+});
 
-	view_willDestroyElement: function () {
-		//window.cancelAnimationFrame(this.ARF);
-		clearTimeout(this.tOut);
-		this.setup();
-	}
-})
+App.register('controller:subtitle', App.SubtitleController, {singleton: false }); //Yeah holy shit that was not obvious

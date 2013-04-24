@@ -14,9 +14,21 @@ App.Dimension2Route = Em.Route.extend({
 		controller.set('content', model);
 	},
 	renderTemplate: function () {
-		//UI
-		this.render('dimension2');
+		if ( App.static_preloader.isLoaded ) {
+			this.render('dimension2');
+		} else {
+			App.eventMapper.addEventListener('preloaderIsLoaded', this, function(me){
+				return function() {
+					me.renderTemplate();
+				}
+			}(this));
+		}
 	},
 	events: {
+		SmartController_didInsertElement: function(acontroller, alabel) {
+			if (alabel == 'Dimension1NavController') {
+				this.dimension1NavController = acontroller
+			}	
+		}
 	}
 })

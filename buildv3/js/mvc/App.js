@@ -1,4 +1,4 @@
- Ember.Handlebars.registerHelper('controlWithVars', function(path, modelPath, options) {
+Ember.Handlebars.registerHelper('controlWithVars', function(path, modelPath, options) {
     if (arguments.length === 2) {
       options = modelPath;
       modelPath = undefined;
@@ -231,19 +231,49 @@ Ember.Handlebars.registerHelper('renderWithVars', function(name, contextString, 
 
 
 
+
 App = Ember.Application.create({
+	static_preloader: {},
+	scriptModel: null,
 	rootElement:$('.app-container')[0],
 	ready: function () {
+		
+		App.scriptModel = App.ScriptModel.create({});
+		
 		App.Router.map(function(){
 		    this.route('index', {path:'/'});
 		    this.route('dimension1', {path:'/d1'});
 		    this.route('dimension2', {path:'/d2'});
 		});
+		
+	},
+	readyAndLoaded: function () {
+		console.log('readyAndLoaded')
+
 	},
 	eventMapper: ragh.eventMapper,
 	colors: ['#FF0000', '#993366', '#3399CC', '#0099FF', '#00CC33', '#00FF00']
 });
 
+App.dictionary = Em.Object.create({
+	copy: {},
+	isReady: false,
+	init: function() {
+		App.eventMapper.addEventListener('preloaderIsLoaded', this, function(me) {
+			return function(type, data) {
+				var allLines = data.target.getResult('copy').split('=\n');
+				allLines = allLines.splice( 1, allLines.length - 1 );
+				var obj = allLines.forEach( function(el, index, ar) {
+					var lines = el.split('\n');
+					var heading = lines.splice(0, 1);
+					me.copy[heading[0]] = lines.join('\n');
+				});
+				me.isReady = true;
+				App.eventMapper.triggerEvent(ragh.MEvt.create('isDictionaryReady'));
+			}
+		}(this));
+	}
+});
 
 Em.Object.reopenClass({
 	create: function (config) {

@@ -3,8 +3,8 @@ App.PixelView = App.EaselEntityView.extend({
 	shp: null,
 	handle: null,
 	easelObjSettings: {
-		width: 20,
-		height: 20,
+		width: 30,
+		height: 30,
 		x: 0,
 		y: 0,
 		fromController: ['x', 'y', 'width', 'height']
@@ -33,7 +33,6 @@ App.PixelView = App.EaselEntityView.extend({
 			shp = this.shp,
 			handle = this.handle;
 			
-		console.log('CoggedView.override_draw()', asettings);
 		settings.x = Number(settings.x);	
 		settings.y = Number(settings.y);
 		//settings.height = Number(settings.height);	

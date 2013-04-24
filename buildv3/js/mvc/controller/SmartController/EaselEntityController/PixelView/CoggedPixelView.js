@@ -3,8 +3,8 @@ App.CoggedPixelView = App.PixelView.extend({
 	className: 'CoggedPixelView',
 	//THIS MUST BE OVERRIDDEN. SUBCLASS CAN"T SEEM TO ACCESS...
 	easelObjSettings: {
-		width: 20,
-		height: 20,
+		width: 30,
+		height: 30,
 		x: 0,
 		y: 0,
 		fromController: ['x', 'y', 'width', 'height']
@@ -24,12 +24,10 @@ App.CoggedPixelView = App.PixelView.extend({
 		return this.handle
 	},
 	addCogEasel: function (e) {
- 		console.log('addCogEasel', e)
 		this.e_cog = e.easelObj;
 		//this.e_cog.x=this.e_cog.y=0;
 		//this.shp.x=this.shp.y=0;
 		this.handle.addChildAt(this.e_cog)
-		console.log('>>> addCogEasel addCogEasel addCogEasel')
 	},
 	override_draw: function (settings) {
 		this._super(settings);
@@ -39,7 +37,27 @@ App.CoggedPixelView = App.PixelView.extend({
 
 	},
 	doOpen: function() {
-		this.shp.x += 30; //TODO Tween engine
+		
+		(function(me) {
+			var t0 = {}, 
+				t1 = {},
+				prop = ragh.one(['x', 'y']), 
+				dir = ragh.one([1, -1]) * me.shp.width * 0.8;
+			t0[ prop ] = me.shp[ prop ];	
+			t1[ prop ] = dir;
+			window.createjs.Tween.get(me.shp).to(t1, 750).wait(2000).to(t0, 750);	
+		}(this));
+
+		(function(me) {
+			var t0 = {}, 
+				t1 = {},
+				prop = 'rotation', 
+				dir = ragh.one([1, -1]) * 20 * 2 *Math.PI;
+			t0[ prop ] = me.shp[ prop ];	
+			t1[ prop ] = dir;
+			window.createjs.Tween.get(me.e_cog).to(t1, 750).wait(2000).to(t0, 750);	
+		}(this));
+		
 	}
 
 	

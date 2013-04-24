@@ -17422,7 +17422,6 @@ define("metamorph",
     }
 
     Metamorph.prototype.html = function(html) {
-		console.log('html');
       this.checkRemoved();
       if (html === undefined) { return this.innerHTML; }
 
@@ -22599,7 +22598,7 @@ define("router",
         }
       }
 
-      throw new Error("Nothing handled the event '" + name + "'.");
+      throw new Error("Nothing handled the event '" + name + "': ", router, args);
     }
 
     function setContext(handler, context) {

@@ -8,6 +8,7 @@ App.HeartbeatSoundView = App.AudioView.extend({
 		this.get('controller').set('view', this);
 	},
 	doHeartbeat: function () {
+		
 		this.play();
 	}
 });
