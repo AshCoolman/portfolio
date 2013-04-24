@@ -19,6 +19,7 @@ App.Dimension1Route = Em.Route.extend({
 		
 		this.heartbeatController.myView.doStart();
 		this.heartbeatController.createHeartbeat();
+		this.scalarController.startDrawing();
 		this.dimension1NavController.set('isShowStart', false);
 	},
 	dosub_finishedReading: function() {
@@ -59,6 +60,7 @@ App.Dimension1Route = Em.Route.extend({
 			switch (alabel ) {
 				case 'Dimension1NavController':  	this.dimension1NavController = acontroller; 	break;
 				case 'HeartbeatController':  		this.heartbeatController = acontroller; 		break;
+				case 'ScalarController':  		this.scalarController = acontroller; 		break;
 			}
 		}
 	}

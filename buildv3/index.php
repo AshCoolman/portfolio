@@ -100,8 +100,8 @@
 		
 		<!-- ROUTE DIMENSION 1 -->
 		<script type="text/x-handlebars" data-template-name="dimension1">
-		<div class="width-fitter">
-			<div class="d1-scale-container">
+		<div class="el-no-effect-winsize-outer">
+			<div class="el-no-effect-winsize-inner-container">
 				{{render 'world-1d'}}
 			</div>
 		</div>
@@ -151,11 +151,6 @@
 				<button class="nav-btn" {{action "doEnd" }}>Add another dimension to Ashley</button>
 				{{/if}}
 			</div>
-		</script>
-		
-		<!--  DIMENSION 1 SCALE -->
-		<script type="text/x-handlebars" data-template-name="d1-scale">
-			
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="heartbeat">

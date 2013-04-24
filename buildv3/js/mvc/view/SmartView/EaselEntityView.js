@@ -18,6 +18,7 @@ App.EaselEntityView = App.SmartView.extend({
 		throw 'EaselEntityView.override_update() is a stub function. Must be overridden without a this._super() call';
 	},
 	didInsertElement: function () {
+		console.log('EaselEntityView.didInsertElement', this)
 		this._super();
 		this.easelObj = this.override_createEasel();
 		this.initialDraw();			
