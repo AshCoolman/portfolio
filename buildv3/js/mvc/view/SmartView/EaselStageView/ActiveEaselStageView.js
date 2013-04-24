@@ -49,6 +49,8 @@ App.ActiveEaselStageView = App.EaselStageView.extend({
 		with (this) {
 			for (var i = 0; i < easelEntities.length; i++) {
 				easelEntities[i].override_redraw(dur);
+				easelEntities[i].x -= 0.5;
+				easelEntities[i].y -= 0.5;
 			}	
 			stage.update();
 		}

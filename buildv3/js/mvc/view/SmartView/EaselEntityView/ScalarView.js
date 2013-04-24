@@ -1,14 +1,18 @@
 App.ScalarView = App.EaselEntityView.extend({
 	tagName: 'span',
 	templateName: 'scalar',
-	easelObjSettings: {
-		width: 2400,
-		height: 1,
-		x: 0,
-		y: 0,
-		fromController: ['x', 'y', 'width', 'height']
-	},
+	easelObjSettings: null,
 	drawInstructions: null,
+	init: function() {
+		this.easelObjSettings = {
+			width: 2400,
+			height: 1,
+			x: 0,
+			y: 0,
+			fromController: ['x', 'y', 'width', 'height']
+		}
+		return this._super();
+	},
 	startDrawing: function () {
 			this.drawInstructions = {
 				axis: {
@@ -28,10 +32,6 @@ App.ScalarView = App.EaselEntityView.extend({
 					markHeights: [1, 2, 3, 4, 5, 6, 7, 8,9, 10, 11, 12, 13, 14, 15, 16] 	//[5, 7, 9, 10, 11, 12, 12.5, 13, 13.5, 14, 14.5, 15]
 				}
 			};	
-			
-			this.drawInstructions.axis.shp = this.shp;
-			this.drawInstructions.smallMarks.shp = this.shp;
-			this.drawInstructions.bigMarks.shp = this.shp;
 	},
 	override_createEasel: function() {
 		return this.shp = new createjs.Shape();

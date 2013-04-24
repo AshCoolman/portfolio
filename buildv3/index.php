@@ -189,7 +189,7 @@
 		</script>	
 
 	<script type="text/x-handlebars" data-template-name="world-2d">
-		{{render 'easel-entity-container'}}
+		{{render 'easel-entity-container'}}W
 		{{render 'ash'}}
 		
 		{{ controlWithVars "cogged-pixel" cogged-pixel x=235 y=45 height=30 width=30 }} 

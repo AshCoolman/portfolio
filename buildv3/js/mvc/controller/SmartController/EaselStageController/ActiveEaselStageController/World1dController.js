@@ -7,3 +7,4 @@ App.World1dController = App.ActiveEaselStageController.extend({
 	}
 	
 })
+App.register('controller:world1d', App.World1dController, {singleton:false})

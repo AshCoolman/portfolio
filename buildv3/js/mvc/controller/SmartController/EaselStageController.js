@@ -1,6 +1,7 @@
 App.EaselStageController = App.SmartController.extend({
 	pendingEE: [],
 	init: function () {
+		this.pendingEE=[]
 		App.eventMapper.addEventListener( 'viewAddedEasel', this, this.doViewAddedEasel);
 		return 	this._super();
 	},

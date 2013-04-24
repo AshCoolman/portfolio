@@ -27,7 +27,7 @@ App.CogView = App.EaselEntityView.extend({
 			this.cog.regX = this.cog.image.width / 2;
 			this.cog.regY = this.cog.image.height / 2;
 		}
-		this.cog.scaleX = this.cog.scaleY = 0.09;		
+		this.cog.scaleX = this.cog.scaleY = 0.08;		
 		
 		//this.dragger.regX = -this.cog.scaleX * this.cog.image.width / 2;
 		//this.dragger.regY = -this.cog.scaleY * this.cog.image.height / 2;

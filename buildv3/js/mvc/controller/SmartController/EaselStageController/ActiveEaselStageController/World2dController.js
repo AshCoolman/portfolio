@@ -12,5 +12,5 @@ App.World2dController = App.ActiveEaselStageController.extend({
 		this.get('view').addPixel();
 	}
 })
-
+App.register('controller:world2d', App.World2dController, {singleton:false})
 

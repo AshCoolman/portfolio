@@ -9,6 +9,7 @@ App.Dimension1Route = Em.Route.extend({
 		App.eventMapper.addEventListener('sub_finishedReading', this, this.dosub_finishedReading );
 	},
 	deactivate: function () {
+		this._super();
 		App.eventMapper.removeEventListener('dim1Nav_start', this);
 		App.eventMapper.removeEventListener('dim1Nav_end', this);
 		App.eventMapper.removeEventListener('sub_finishedReading', this);

@@ -10,6 +10,7 @@ App.World2dView = App.ActiveEaselStageView.extend({
 	scale: 1,
 	isVis: false,
 	didInsertElement: function(scope) {
+		console.log('World2dView.didInsertElement')
 		with (this) {
 			_super();
 			get('controller').send('view_didInsertElement', this);
