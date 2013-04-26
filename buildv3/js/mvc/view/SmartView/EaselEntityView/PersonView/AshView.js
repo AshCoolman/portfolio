@@ -5,7 +5,6 @@ App.AshView = App.SmartView.extend({
 	tag: 'span',
 	didInsertElement: function () {
 		this.easelObj = this.override_draw();
-		this.get('controller').send('view_easelObjectCreated', this);
 	},
 	override_draw: function() {
 		return new createjs.Bitmap('img//face-ash.png');

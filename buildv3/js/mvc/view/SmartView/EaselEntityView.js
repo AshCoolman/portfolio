@@ -21,7 +21,7 @@ App.EaselEntityView = App.SmartView.extend({
 		this._super();
 		this.easelObj = this.override_createEasel();
 		this.initialDraw();			
-		this.get('controller').send('view_easelObjCreated', this);
+		this.get('controller').send('view_easelObjectCreated', this);
 		this.dispatchEvent($.extend(new Event('easelObjCreated'), {view:this, easelObj:this.easelObj}));
 	},
 	initialDraw: function () {

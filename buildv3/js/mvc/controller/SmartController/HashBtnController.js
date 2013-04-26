@@ -11,7 +11,6 @@ App.HashBtnController = App.SmartController.extend({
 		//console.log('didInsertElement label:', this.label);
 	},
 	doNavigate: function() {
-		console.log('doNavigate label:', this.label, 'to', this.get('urlhash'));
 		this.set('label', this.label);
 		this.set('urlhash', this.urlhash);
 		window.location.hash = this.urlhash;

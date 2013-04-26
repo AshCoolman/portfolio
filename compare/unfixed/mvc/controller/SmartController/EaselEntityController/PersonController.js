@@ -1,0 +1,1 @@
+App.PersonController = App.EaselEntityController.extend({});

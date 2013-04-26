@@ -173,7 +173,6 @@ Ember.Handlebars.registerHelper('renderWithVars', function(name, contextString, 
     var container, router, controller, view, context;
 
     if (arguments.length === 2) {
-		console.log('arguments.length', arguments.length);
 		options = contextString;
 		contextString = undefined;
     }

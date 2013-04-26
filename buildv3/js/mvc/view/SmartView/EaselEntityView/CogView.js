@@ -1,6 +1,8 @@
 App.CogView = App.EaselEntityView.extend({
 	templateName: 'cog',
 	className: 'CogView',
+	cog: null,
+	dragger: null,
 	override_createEasel: function() {
 		this.cog = new createjs.Bitmap('img/cog.png');
 		this.cog.image.onload = (function(me){ 
@@ -38,5 +40,9 @@ App.CogView = App.EaselEntityView.extend({
 	},
 	override_redraw: function () {
 
+	},
+	willDestroyElement: function() {
+		this._super();
+		this.cog = this.dragger = null;
 	}
 });

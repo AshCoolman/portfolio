@@ -1,6 +1,9 @@
 App.CoggedPixelView = App.PixelView.extend({
 	cogView: null,
 	className: 'CoggedPixelView',
+	init: function () {
+		this._super();
+	},
 	//THIS MUST BE OVERRIDDEN. SUBCLASS CAN"T SEEM TO ACCESS...
 	easelObjSettings: {
 		width: 30,

@@ -1,4 +1,4 @@
-App.World2dView = App.SmartView.extend({
+App.World2dEditorView = App.SmartView.extend({
 	tagName:'div',
 	didInsertElement: function () {
 		with (this) {

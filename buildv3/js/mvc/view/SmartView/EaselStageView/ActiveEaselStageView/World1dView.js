@@ -4,8 +4,12 @@ App.World1dView = App.ActiveEaselStageView.extend({
 	height: 50,
 	className: 'World1dView',
 	templateName:'world-1d',
-	resize: function() {
-		
+	init: function() {
+	
+			console.log('World1dView.init(): ' + this.easelEntities.join(', '));	
+			return this._super();
+	},
+	resize: function() { 
 		this.$canvas.css({
 	    	position:'absolute',
 			top: '50%',
@@ -20,10 +24,7 @@ App.World1dView = App.ActiveEaselStageView.extend({
 		});
 	},
 	redraw: function(dur) {
+		console.log('rd 1d');
 		this._super();
-	},
-	addEaselEnt: function (label, childView) {
-		this._super(label, childView)
-
 	}
 });

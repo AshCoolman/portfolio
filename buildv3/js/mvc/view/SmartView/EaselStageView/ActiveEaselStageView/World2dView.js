@@ -5,15 +5,12 @@ App.World2dView = App.ActiveEaselStageView.extend({
 	multi: 10,
 	src: {},
 	vis: {},
-	$editorBtn: null,
-	$editor: null,
 	scale: 1,
 	isVis: false,
 	didInsertElement: function(scope) {
-		console.log('World2dView.didInsertElement')
 		with (this) {
 			_super();
-			get('controller').send('view_didInsertElement', this);
+			//get('controller').send('view_didInsertElement', this);
 			
 			src.$canvas = $canvas.addClass('src-world-2d');
 			src.context = src.$canvas[0].getContext("2d");
@@ -49,12 +46,11 @@ App.World2dView = App.ActiveEaselStageView.extend({
 			if (isVis) vis.$canvas.attr( { width: width, height: height } ).css( 'background-color', tmpbgcolor );
 		}
 	},
+	
 	redraw: function(dur) {
+		console.log('rd 2d');
 		with (this) {
 			_super(dur);
-			if (src.ashView){
-				src.ashView.override_redraw(dur);
-			}
 
 
 			if (isVis) {
@@ -70,11 +66,10 @@ App.World2dView = App.ActiveEaselStageView.extend({
 			}
 		}
 	},
-	addEaselEnt: function (label, childView) {
-		this._super(label, childView)
-		if (label === 'ash') {
-			this.src.ashView = childView;
-		}
+	willDestroyElement: function () {
+		this._super();
+		this.src = null
+		this.vis = null
 	}
 
 });

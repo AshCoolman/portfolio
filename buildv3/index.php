@@ -102,7 +102,7 @@
 		<script type="text/x-handlebars" data-template-name="dimension1">
 		<div class="el-no-effect-winsize-outer">
 			<div class="el-no-effect-winsize-inner-container">
-				{{render 'world-1d'}}
+				{{renderWithVars 'world-1d'}}
 			</div>
 		</div>
 		
@@ -183,30 +183,16 @@
 			</div>
 			<div class="row">
 				<div class="twelve columns">
-					{{render 'world-2d'}}
+					{{renderWithVars 'world-2d' World2d}}
 				</div>
 			</div>
 		</script>	
 
 	<script type="text/x-handlebars" data-template-name="world-2d">
-		{{render 'easel-entity-container'}}W
-		{{render 'ash'}}
+		{{render 'easel-entity-container'}}
+		{{render 'ash' Ash}}
 		
 		{{ controlWithVars "cogged-pixel" cogged-pixel x=235 y=45 height=30 width=30 }} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=45 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=295 y=45 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=90 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=205 y=60 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=325 y=60 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=90 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=120 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=120 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=150 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=320 y=180 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=290 y=195 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=210 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=240 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=300 width=30 height=30}}
 	</script>
 	
 	
@@ -233,6 +219,23 @@
 	</head>
     <body>
         <!--[if lt IE 7]>
+
+
+{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=45 width=30 height=30}} 
+{{ controlWithVars "cogged-pixel" cogged-pixel x=295 y=45 width=30 height=30}} 
+{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=90 width=30 height=30}} 
+{{ controlWithVars "cogged-pixel" cogged-pixel x=205 y=60 width=30 height=30}} 
+{{ controlWithVars "cogged-pixel" cogged-pixel x=325 y=60 width=30 height=30}} 
+{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=90 width=30 height=30}} 
+{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=120 width=30 height=30}} 
+{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=120 width=30 height=30}} 
+{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=150 width=30 height=30}} 
+{{ controlWithVars "cogged-pixel" cogged-pixel x=320 y=180 width=30 height=30}} 
+{{ controlWithVars "cogged-pixel" cogged-pixel x=290 y=195 width=30 height=30}} 
+{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=210 width=30 height=30}} 
+{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=240 width=30 height=30}} 
+{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=300 width=30 height=30}}
+
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 

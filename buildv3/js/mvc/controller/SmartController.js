@@ -2,6 +2,7 @@
 /*global $, jQuery, App, Em, console*/
 App.SmartController = Em.ObjectController.extend({
 	label: 'App.SmartController',
+	className: 'SmartController',
 	autoMappedEvents: [],
 	isViewInserted: false,
 	view_didInsertElement: function (aview) {
