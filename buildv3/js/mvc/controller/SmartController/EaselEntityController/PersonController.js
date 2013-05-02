@@ -1,1 +1,3 @@
-App.PersonController = App.EaselEntityController.extend({});
+App.PersonController = App.EslEntityController.extend({
+	className: 'PersonController'
+});

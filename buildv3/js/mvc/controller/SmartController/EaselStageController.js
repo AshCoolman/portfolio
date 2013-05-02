@@ -1,39 +1,37 @@
-App.EaselStageController = App.SmartController.extend({
+App.EslStageController = App.SmartController.extend({
 	pendingEE: [],
- 	className: 'EaselStageController',
+ 	className: 'EslStageController',
 	init: function () {
 		return 	this._super();
 	},
 	view_didInsertElement: function ( view ) {
-		console.log('Stage.inserted() Processing')
 		this.pendingEE = [];
-		App.eventMapper.addEventListener( 'viewAddedEasel', this, this.doViewAddedEasel);
-		App.eventMapper.addEventListener( 'viewRemovedEasel', this, this.doViewRemovedEasel);
+		App.eventMapper.addEventListener( 'viewAddedEsl', this, this.doViewAddedEsl);
+		App.eventMapper.addEventListener( 'viewRemovedEsl', this, this.doViewRemovedEsl);
 		this._super( view );
 		this.tryProcessPendingEE();
 	}, 
 	view_willDestroyElement: function() {
-		console.log('Stage willDestroy() unlistening');
 		this._super();
-		App.eventMapper.removeEventListener( 'viewAddedEasel', this);
-		App.eventMapper.removeEventListener( 'viewRemovedEasel', this);
+		App.eventMapper.removeEventListener( 'viewAddedEsl', this);
+		App.eventMapper.removeEventListener( 'viewRemovedEsl', this);
 		this.pendingEE = [];
 	},
-	doViewAddedEasel: function ( atype, adata ) {
-		console.log('Stage.adding() Processing', adata);
-		this.pendingEE.push({ label: adata.label, view: adata.view });
+	doViewAddedEsl: function ( atype, adata ) {
+		
+		this.pendingEE.push(adata);
 		this.tryProcessPendingEE();
 	},
-	doViewRemovedEasel: function (atype, data) {
+	doViewRemovedEsl: function (atype, data) {
 		this.pendingEE.filter(function(el) {
 			return ( data.view != el.view );
 		});
 	},
 	tryProcessPendingEE: function () {
 		if (this.view) {
-			if (!this.view.addEaselEnt)  throw "EaselStageController._processQ() the view ( subclass ) does not implememnt addEaselEnt()"
+			if (!this.view.addEslEnt)  throw "EslStageController._processQ() the view ( subclass ) does not implememnt addEslEnt()"
 			this.pendingEE.forEach( function(me) { return function (eo, index, array) {
-					me.view.addEaselEnt( eo.label, eo.view );
+					me.view.addEslEnt( eo.label, eo.view, eo.parentEslObj );
 			}}(this));
 			this.pendingEE = [];
 		} else {
@@ -41,4 +39,4 @@ App.EaselStageController = App.SmartController.extend({
 		}
 	}
 });
-App.register('controller:easel-stage', App.EaselStageController, {singleton: false})
+App.register('controller:esl-stage', App.EslStageController, {singleton: false})

@@ -1,7 +1,7 @@
-App.ActiveEaselStageView = App.EaselStageView.extend({
+App.ActiveEslStageView = App.EslStageView.extend({
 	tagName:'div',
-	className: 'ActiveEaselStageView',
-	templateName:'active-easel-stage-view',
+	className: 'ActiveEslStageView',
+	templateName:'active-esl-stage-view',
 	width: 800,
 	height: 600,
 	trails: 0,
@@ -33,7 +33,7 @@ App.ActiveEaselStageView = App.EaselStageView.extend({
 		
 		
 		this.set('raf', window.requestAnimationFrame(rafFunction));	
-		console.log('created', this.get('raf'))
+
 		//
 		this.resize();
 		this.redraw();
@@ -58,12 +58,16 @@ App.ActiveEaselStageView = App.EaselStageView.extend({
 		}
 	},	
 	redraw: function(dur) {
-		var easelEntities = this.easelEntities;
+		var eslEntities = this.eslEntities;
 		with (this) {
-			for (var i = 0; i < easelEntities.length; i++) {
-				easelEntities[i].override_redraw(dur);
-				easelEntities[i].x -= 0.5;
-				easelEntities[i].y -= 0.5;
+			for (var i = 0; i < eslEntities.length; i++) {
+				if (!eslEntities[i].override_redraw) {
+					console.log('entity lacks override_redraw\n\t', eslEntities[i]._debugContainerKey)
+				} else { 
+					eslEntities[i].override_redraw(dur);
+					eslEntities[i].x -= 0.5;
+					eslEntities[i].y -= 0.5;
+				}
 			}	
 			stage.update();
 		}
@@ -75,4 +79,4 @@ App.ActiveEaselStageView = App.EaselStageView.extend({
 	}
 
 });
-App.register('view:active-easel-stage', App.ActiveEaselStageView, {singleton: false})
+App.register('view:active-esl-stage', App.ActiveEslStageView, {singleton: false})

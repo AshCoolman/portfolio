@@ -1,21 +1,23 @@
-
-App.AshView = App.SmartView.extend({
-	easelObj: null,
+App.AshView = App.EslEntityView.extend({
+	eslObj: null,
+	className: 'AshView', 
 	templateName: 'ash',
 	tag: 'span',
-	didInsertElement: function () {
-		this.easelObj = this.override_draw();
-	},
-	override_draw: function() {
+	override_createEsl: function () {
 		return new createjs.Bitmap('img//face-ash.png');
 	},
-	override_redraw: function(dur){
+	override_draw: function(asettings) {
+ 		this.eslObj.scaleX = -1;
+		this.eslObj.x = 400;
+	},
+	override_redraw: function (dur) {
 		var change = 30/1000 * dur; //per second
-			if (this.easelObj) {
-				with (this.easelObj) {
-					x = (x > 1200) ? -300 : x+change;
-				}
+		if (this.eslObj) {
+			with (this.eslObj) {
+				//x = (x > 1200) ? -300 : x+change;
 			}
+		}
 	}
+	
 });
 

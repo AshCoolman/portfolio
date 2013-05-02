@@ -1,14 +1,16 @@
-App.EaselEntityController = App.SmartController.extend({
-	label: 'easel-entity',
-	view_easelObjectCreated: function () {
- 		App.eventMapper.addEventListener('w2dE_GetPlans', this, this.override_doGetPlans);
-		App.eventMapper.triggerEvent(ragh.MEvt.create('viewAddedEasel', {label: this.label, view: this.get('view')}));
+App.EslEntityController = App.SmartController.extend({
+	label: 'esl-entity',
+	className: 'EslEntityController',
+	view_eslObjectCreated: function (eslEntityController) {
+ 		App.eventMapper.addEventListener('w2dE_GetPlans', eslEntityController, eslEntityController.override_doGetPlans);
+		App.eventMapper.triggerEvent(ragh.MEvt.create('viewAddedEsl', {label: eslEntityController.label, view: eslEntityController.get('view'), parentEslObj: eslEntityController.get('view').parentEslObj}));
+
 	},
 	view_willDestroyElement: function () {
-	//	App.eventMapper.triggerEvent(ragh.MEvt.create('viewRemoveEasel', {label: this.label, view: this.get('view')}));
+	//	App.eventMapper.triggerEvent(ragh.MEvt.create('viewRemoveEsl', {label: this.label, view: this.get('view')}));
 	},
 	override_doGetPlans: function () {
-		throw 'EaselEntityController.override_doGetPlans() is an abstract stub function. Must be overridden without a this._super() call';
+		throw 'EslEntityController.override_doGetPlans() is an abstract stub function. Must be overridden without a this._super() call';
 	}
 });
-App.register('easel-entity', App.EaselEntityController, {singleton: false }); //Yeah holy shit that was not obvious
+App.register('esl-entity', App.EslEntityController, {singleton: false }); //Yeah holy shit that was not obvious

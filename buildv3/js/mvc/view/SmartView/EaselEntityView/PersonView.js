@@ -1,3 +1,3 @@
-App.PersonView = App.EaselEntityView.extend({
+App.PersonView = App.EslEntityView.extend({
 	
 });

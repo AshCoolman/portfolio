@@ -5,20 +5,21 @@ App.CoggedPixelView = App.PixelView.extend({
 		this._super();
 	},
 	//THIS MUST BE OVERRIDDEN. SUBCLASS CAN"T SEEM TO ACCESS...
-	easelObjSettings: {
+	eslObjSettings: {
 		width: 30,
 		height: 30,
 		x: 0,
 		y: 0,
 		fromController: ['x', 'y', 'width', 'height']
 	},
-	override_createEasel: function () {
+	override_createEsl: function () {
 		this.handle = this._super();
 		var cogView = App.CogView.create( { controller: App.CogController.create() });
-		App.static_easelEntityContainerView.pushObject(cogView);
+		console.log('+CoggedPixelView')
+		App.static_eslEntityContainerView.pushObject(cogView);
 		
-		cogView.addEventListener('easelObjCreated', (function(me) {
-			return function(e) {me.addCogEasel(e)};
+		cogView.addEventListener('eslObjCreated', (function(me) {
+			return function(e) {me.addCogEsl(e)};
 		}(this)), false);
 		setTimeout(
 			(function(me) {
@@ -26,8 +27,8 @@ App.CoggedPixelView = App.PixelView.extend({
 			}(this)), 2000+ Math.random() * 2000)
 		return this.handle
 	},
-	addCogEasel: function (e) {
-		this.e_cog = e.easelObj;
+	addCogEsl: function (e) {
+		this.e_cog = e.eslObj;
 		//this.e_cog.x=this.e_cog.y=0;
 		//this.shp.x=this.shp.y=0;
 		this.handle.addChildAt(this.e_cog)
@@ -40,7 +41,6 @@ App.CoggedPixelView = App.PixelView.extend({
 
 	},
 	doOpen: function() {
-		
 		(function(me) {
 			var t0 = {}, 
 				t1 = {},

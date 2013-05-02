@@ -1,5 +1,6 @@
-App.ScalarController = App.EaselEntityController.extend({
+App.ScalarController = App.EslEntityController.extend({
  	label: 'ScalarController',
+	className: 'ScalarController',
 	startDrawing: function() {
 		this.view.startDrawing();
 	}

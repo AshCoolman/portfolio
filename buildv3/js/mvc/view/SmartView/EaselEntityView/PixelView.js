@@ -1,8 +1,8 @@
-App.PixelView = App.EaselEntityView.extend({
+App.PixelView = App.EslEntityView.extend({
 	label:'pixel',
 	shp: null,
 	handle: null,
-	easelObjSettings: {
+	eslObjSettings: {
 		width: 30,
 		height: 30,
 		x: 0,
@@ -10,7 +10,7 @@ App.PixelView = App.EaselEntityView.extend({
 		fromController: ['x', 'y', 'width', 'height']
 	},
 	
-	override_createEasel: function () {
+	override_createEsl: function () {
 		this.shp = new createjs.Shape();
 		this.handle = new createjs.Container();
 		this.handle.addChild(this.shp);
@@ -25,11 +25,11 @@ App.PixelView = App.EaselEntityView.extend({
 	},
 	
 	override_draw: function(asettings) {
-		Em.assert('App.PixelView.draw(): method can\'t run without easelObj being created. easelObj = '+ this.easelObj, this.easelObj);
+		Em.assert('App.PixelView.draw(): method can\'t run without eslObj being created. eslObj = '+ this.eslObj, this.eslObj);
 		Em.assert('App.PixelView.draw(): method can\'t run without handle being created. handle = '+ this.handle, this.handle);
 		Em.assert('App.PixelView.draw(): method can\'t run without shp being created. shp = '+ this.shp, this.shp);
 		
-		var settings = asettings ? asettings : this.easelObj,
+		var settings = asettings ? asettings : this.eslObj,
 			shp = this.shp,
 			handle = this.handle;
 			
@@ -37,10 +37,10 @@ App.PixelView = App.EaselEntityView.extend({
 		settings.y = Number(settings.y);
 		//settings.height = Number(settings.height);	
 	//	settings.width = Number(settings.width);
-		Em.assert('App.PixelView.draw(): value of x in easelObj is not of type "number"', 	!isNaN(settings.x) );
-		Em.assert('App.PixelView.draw(): value of y in easelObj is not of type "number"',  !isNaN(settings.y) );
-		Em.assert('App.PixelView.draw(): value of width in easelObj is not of type "number" ' + settings.width, !isNaN(settings.width) );
-		Em.assert('App.PixelView.draw(): value of height in easelObj is not of type "number" ' + settings.height,  !isNaN(settings.height) );
+		Em.assert('App.PixelView.draw(): value of x in eslObj is not of type "number"', 	!isNaN(settings.x) );
+		Em.assert('App.PixelView.draw(): value of y in eslObj is not of type "number"',  !isNaN(settings.y) );
+		Em.assert('App.PixelView.draw(): value of width in eslObj is not of type "number" ' + settings.width, !isNaN(settings.width) );
+		Em.assert('App.PixelView.draw(): value of height in eslObj is not of type "number" ' + settings.height,  !isNaN(settings.height) );
 	
 		shp.regX = settings.width / 2;
 		shp.regY = settings.height / 2;

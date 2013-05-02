@@ -1,5 +1,6 @@
-App.PixelController = App.EaselEntityController.extend({
+App.PixelController = App.EslEntityController.extend({
 	label: 'pixel',
+	className: 'PixelController', 
 	override_doGetPlans: function () {
 		var handle = this.get('view').handle;
 		var shp = this.get('view').shp;

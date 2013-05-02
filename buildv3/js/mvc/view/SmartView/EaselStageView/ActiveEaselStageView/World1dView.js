@@ -1,4 +1,4 @@
-App.World1dView = App.ActiveEaselStageView.extend({
+App.World1dView = App.ActiveEslStageView.extend({
 	tagName:'div',
 	width: 800,
 	height: 50,
@@ -6,7 +6,7 @@ App.World1dView = App.ActiveEaselStageView.extend({
 	templateName:'world-1d',
 	init: function() {
 	
-			console.log('World1dView.init(): ' + this.easelEntities.join(', '));	
+			console.log('World1dView.init(): ' + this.eslEntities.join(', '));	
 			return this._super();
 	},
 	resize: function() { 

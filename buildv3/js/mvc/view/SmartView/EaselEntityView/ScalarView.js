@@ -1,16 +1,17 @@
-App.ScalarView = App.EaselEntityView.extend({
+App.ScalarView = App.EslEntityView.extend({
 	tagName: 'span',
 	templateName: 'scalar',
-	easelObjSettings: null,
+	eslObjSettings: null,
 	drawInstructions: null,
+	eslObjSettings: {
+		width: 2400,
+		height: 1,
+		x: 0,
+		y: 0,
+		fromController: ['x', 'y', 'width', 'height']
+	},
 	init: function() {
-		this.easelObjSettings = {
-			width: 2400,
-			height: 1,
-			x: 0,
-			y: 0,
-			fromController: ['x', 'y', 'width', 'height']
-		}
+
 		return this._super();
 	},
 	startDrawing: function () {
@@ -33,21 +34,21 @@ App.ScalarView = App.EaselEntityView.extend({
 				}
 			};	
 	},
-	override_createEasel: function() {
+	override_createEsl: function() {
 		return this.shp = new createjs.Shape();
 	},
 	override_draw: function (asettings) {
-			var settings = asettings ? asettings : this.easelObj,
+			var settings = asettings ? asettings : this.eslObj,
 				shp = this.shp;
 
 			settings.x = Number(settings.x);	
 			settings.y = Number(settings.y);
 			//settings.height = Number(settings.height);	
 		//	settings.width = Number(settings.width);
-			Em.assert('App.ScalarView.override_draw(): value of x in easelObj is not of type "number"', 	!isNaN(settings.x) );
-			Em.assert('App.ScalarView.override_draw(): value of y in easelObj is not of type "number"',  !isNaN(settings.y) );
-			Em.assert('App.ScalarView.override_draw(): value of width in easelObj is not of type "number" ' + settings.width, !isNaN(settings.width) );
-			Em.assert('App.ScalarView.override_draw(): value of height in easelObj is not of type "number" ' + settings.height,  !isNaN(settings.height) );
+			Em.assert('App.ScalarView.override_draw(): value of x in eslObj is not of type "number"', 	!isNaN(settings.x) );
+			Em.assert('App.ScalarView.override_draw(): value of y in eslObj is not of type "number"',  !isNaN(settings.y) );
+			Em.assert('App.ScalarView.override_draw(): value of width in eslObj is not of type "number" ' + settings.width, !isNaN(settings.width) );
+			Em.assert('App.ScalarView.override_draw(): value of height in eslObj is not of type "number" ' + settings.height,  !isNaN(settings.height) );
 
 			shp.regX = settings.width / 2;
 			shp.regY = settings.height / 2;
@@ -61,8 +62,8 @@ App.ScalarView = App.EaselEntityView.extend({
 			return shp
 	},
 	override_redraw: function () {
+		var shp = this.shp;
 		if (this.drawInstructions) {
-			
 			if (this.drawInstructions.axis) {
 				with (this.drawInstructions.axis) {
 					if (count * step < shp.width / 2) {

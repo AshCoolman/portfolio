@@ -1,3 +1,3 @@
-App.EaselEntityContainerView = App.SmartContainerView.extend({
-	templateName:'easel-entitiy-container'
+App.EslEntityContainerView = App.SmartContainerView.extend({
+	templateName:'esl-entity-container'
 });

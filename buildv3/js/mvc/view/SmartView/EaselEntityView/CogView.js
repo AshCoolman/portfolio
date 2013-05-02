@@ -1,9 +1,9 @@
-App.CogView = App.EaselEntityView.extend({
+App.CogView = App.EslEntityView.extend({
 	templateName: 'cog',
 	className: 'CogView',
 	cog: null,
 	dragger: null,
-	override_createEasel: function() {
+	override_createEsl: function() {
 		this.cog = new createjs.Bitmap('img/cog.png');
 		this.cog.image.onload = (function(me){ 
 			return function () {
@@ -23,8 +23,8 @@ App.CogView = App.EaselEntityView.extend({
 		return this.dragger;
 	},
 	override_draw: function (asettings) {
-		var settings = asettings ? asettings : this.easelObj;
-		Em.assert('CogView.override_draw(): function called before easelObj was created ', this.easelObj)
+		var settings = asettings ? asettings : this.eslObj;
+		Em.assert('CogView.override_draw(): function called before eslObj was created ', this.eslObj)
 		if (this.cog.isImgLoaded) {
 			this.cog.regX = this.cog.image.width / 2;
 			this.cog.regY = this.cog.image.height / 2;

@@ -1,4 +1,4 @@
-App.World1dController = App.ActiveEaselStageController.extend({
+App.World1dController = App.ActiveEslStageController.extend({
 	label: 'World1Controller',
 	lineEE: null,
 	className: 'World1Controller'

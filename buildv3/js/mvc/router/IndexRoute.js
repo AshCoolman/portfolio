@@ -9,7 +9,7 @@ App.IndexRoute = Em.Route.extend({
 	},
 	deactivate: function () {
 		App.eventMapper.removeEventListener('indNav_start', this);
-		App.eventMapper.removeEventListener('indNav_start', this);
+		App.eventMapper.removeEventListener('indNav_end', this);
 		App.eventMapper.removeEventListener('sub_finishedReading', this);
 	},
 	doIndNav_start: function (type, data) { 

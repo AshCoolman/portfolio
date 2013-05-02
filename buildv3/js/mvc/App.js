@@ -19,7 +19,7 @@ Ember.Handlebars.registerHelper('controlWithVars', function(path, modelPath, opt
     if (children.hasOwnProperty(controlID)) {
       subContainer = children[controlID];
     } else {
-      container = Em.get(controller, 'container'),
+      container = controller.get('container'),
       subContainer = container.child();
       children[controlID] = subContainer;
     }
@@ -281,3 +281,15 @@ Em.Object.reopenClass({
 });
 
 
+
+App.KnobController = 
+Em.ObjectController.extend({
+	callDynamicController: function() {
+		console.log('.callDynamicController()');
+	}
+});
+
+
+App.KnobView = Em.View.extend({
+	templateName: 'knob'
+});

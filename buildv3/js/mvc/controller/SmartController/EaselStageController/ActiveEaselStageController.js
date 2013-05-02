@@ -1,9 +1,9 @@
-App.ActiveEaselStageController = App.EaselStageController.extend({
-	className: 'ActiveEaselStageController',
+App.ActiveEslStageController = App.EslStageController.extend({
+	className: 'ActiveEslStageController',
 	
 	view_willDestroyElement: function () {
 		this._super();
 	}
 });
 
-App.register('controller:active-easel-stage', App.ActiveEaselStageController, {singleton:false})
+App.register('controller:active-esl-stage', App.ActiveEslStageController, {singleton:false})

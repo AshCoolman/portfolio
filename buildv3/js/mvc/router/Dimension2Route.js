@@ -24,11 +24,28 @@ App.Dimension2Route = Em.Route.extend({
 			}(this));
 		}
 	},
+	
 	events: {
+		
 		SmartController_didInsertElement: function(acontroller, alabel) {
-			if (alabel == 'Dimension1NavController') {
-				this.dimension1NavController = acontroller
+			switch (alabel) {
+				case 'Dimension1NavController': this.dimension1NavController = acontroller; break;
+				case 'World2dController': 
+					this.world2dController = acontroller; 
+					setTimeout( function(me) {
+						return function () {
+							//me.world2dController.addQuestionMark();
+							var eslObjSettings = $.extend(App.QuestionMarkView.create().eslObjSettings, { x: 0, y: 0 });
+							App.static_eslEntityContainerView.pushObject( App.QuestionMarkView.create( { eslObjSettings: eslObjSettings } ) );
+						}
+					}(this), 1500)
+					break;
+				default:  break;
 			}	
+			
+
+
+
 		}
 	}
 })

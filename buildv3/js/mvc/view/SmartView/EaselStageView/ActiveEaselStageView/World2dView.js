@@ -1,4 +1,4 @@
-App.World2dView = App.ActiveEaselStageView.extend({
+App.World2dView = App.ActiveEslStageView.extend({
 	tagName:'div',
 	className: 'World2dView',
 	templateName:'world-2d',
@@ -31,15 +31,21 @@ App.World2dView = App.ActiveEaselStageView.extend({
 	},
 	addCog: function () {
 		console.log('adding cog')
-		App.static_easelEntityContainerView.pushObject( App.CogView.create( {controller: App.CogController.create() }));
+		App.static_eslEntityContainerView.pushObject( App.CogView.create( {controller: App.CogController.create() }));
 	},
 	addPixel: function () {
 		console.log('adding pixel')
 		var controller = App.PixelController.create();
-		var easelObjSettings = $.extend(App.PixelView.create().easelObjSettings, { x: 0, y: 0 });
-		var view = App.PixelView.create( {controller: controller, easelObjSettings: easelObjSettings} 	);
-		App.static_easelEntityContainerView.pushObject( view );
+		var eslObjSettings = $.extend(App.PixelView.create().eslObjSettings, { x: 0, y: 0 });
+		var view = App.PixelView.create( {controller: controller, eslObjSettings: eslObjSettings} 	);
+		App.static_eslEntityContainerView.pushObject( view );
 	}, 
+	
+	addQuestionMark: function () {
+		console.log('view.addQuestionMark()')	
+
+	},
+	
 	resize: function() {
 		with (this) {	
 			_super();
@@ -48,7 +54,7 @@ App.World2dView = App.ActiveEaselStageView.extend({
 	},
 	
 	redraw: function(dur) {
-		console.log('rd 2d');
+
 		with (this) {
 			_super(dur);
 

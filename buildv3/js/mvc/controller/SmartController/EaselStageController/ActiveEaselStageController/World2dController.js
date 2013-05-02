@@ -1,4 +1,4 @@
-App.World2dController = App.ActiveEaselStageController.extend({
+App.World2dController = App.ActiveEslStageController.extend({
 	label: 'World2dController',
 	className: 'World2dController',
 	init: function () {
@@ -16,6 +16,10 @@ App.World2dController = App.ActiveEaselStageController.extend({
 		this._super();
 		App.eventMapper.removeEventListener( 'w2dE_AddCog', this );
 		App.eventMapper.removeEventListener( 'W2dE_addPixel', this );
+	},
+	addQuestionMark: function () {
+		console.log('C.addQuestionMark')
+		this.get('view').addQuestionMark();
 	}
 })
 App.register('controller:world2d', App.World2dController, {singleton:false})
