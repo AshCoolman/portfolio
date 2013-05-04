@@ -1,4 +1,5 @@
 App.Dimension2Route = Em.Route.extend({ 
+	questionMarkController: null,
 	init: function () {
 		this._super();
 	},
@@ -34,13 +35,29 @@ App.Dimension2Route = Em.Route.extend({
 					this.world2dController = acontroller; 
 					setTimeout( function(me) {
 						return function () {
+							
 							//me.world2dController.addQuestionMark();
-							var eslObjSettings = $.extend(App.QuestionMarkView.create().eslObjSettings, { x: 0, y: 0 });
-							App.static_eslEntityContainerView.pushObject( App.QuestionMarkView.create( { eslObjSettings: eslObjSettings } ) );
+							//var eslObjSettings = $.extend(App.QuestionMarkView.create().eslObjSettings, { x: 0, y: 0 });
+							//App.static_eslEntityContainerView.pushObject( App.QuestionMarkView.create( { eslObjSettings: eslObjSettings } ) );
+							
+							/*
+							Doesn't work as templates with render helpers fail to render:
+							
+							var controller = App.PixelController.create();
+							var eslObjSettings = $.extend(App.PixelView.create().eslObjSettings, { x: 0, y: 0 });
+							var view = App.PixelView.create( {controller: controller, eslObjSettings: eslObjSettings} 	);
+							App.static_eslEntityContainerView.pushObject( view );
+							*/
+							console.log('me.questionMarkController', me)
+							me.questionMarkController.get('view').eslObj.visible = true;
 						}
 					}(this), 1500)
 					break;
-				default:  break;
+				case 'question-mark-controller': 
+					this.questionMarkController = acontroller; 
+					
+					break;
+				default: /* console.log('++'+alabel);*/ break;
 			}	
 			
 

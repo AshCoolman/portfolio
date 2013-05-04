@@ -33,8 +33,10 @@ App.EslEntityView = App.SmartView.extend({
 		var controllerSettings = {},
 			controller = this.get('controller'),
 			fromController = this.eslObjSettings.fromController;
-		for (var i = 0, s = fromController[i]; i < fromController.length; s = fromController[i+1+(i++)]) {
-			if (controller[s])  {
+			
+		for (var i = 0, s = fromController[i]; i < fromController.length; i++) {
+			 s = fromController[i];
+			if (typeof controller[s] != 'undefined')  {
 				controllerSettings[s] = controller[s];
 			}
 		}	

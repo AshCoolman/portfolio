@@ -243,6 +243,7 @@ App = Ember.Application.create({
 		    this.route('index', {path:'/'});
 		    this.route('dimension1', {path:'/d1'});
 		    this.route('dimension2', {path:'/d2'});
+		    this.route('dimension3', {path:'/d3'});
 		});
 		
 	},

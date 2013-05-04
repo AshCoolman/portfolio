@@ -1,9 +1,11 @@
 App.CoggedPixelView = App.PixelView.extend({
 	cogView: null,
+	label:'cogged-pixel',
 	className: 'CoggedPixelView',
 	init: function () {
 		this._super();
 	},
+
 	//THIS MUST BE OVERRIDDEN. SUBCLASS CAN"T SEEM TO ACCESS...
 	eslObjSettings: {
 		width: 30,
@@ -15,7 +17,6 @@ App.CoggedPixelView = App.PixelView.extend({
 	override_createEsl: function () {
 		this.handle = this._super();
 		var cogView = App.CogView.create( { controller: App.CogController.create() });
-		console.log('+CoggedPixelView')
 		App.static_eslEntityContainerView.pushObject(cogView);
 		
 		cogView.addEventListener('eslObjCreated', (function(me) {
@@ -29,8 +30,8 @@ App.CoggedPixelView = App.PixelView.extend({
 	},
 	addCogEsl: function (e) {
 		this.e_cog = e.eslObj;
-		//this.e_cog.x=this.e_cog.y=0;
-		//this.shp.x=this.shp.y=0;
+		this.e_cog.x=this.e_cog.y=0;
+		this.shp.x=this.shp.y=0;
 		this.handle.addChildAt(this.e_cog)
 	},
 	override_draw: function (settings) {
@@ -41,6 +42,7 @@ App.CoggedPixelView = App.PixelView.extend({
 
 	},
 	doOpen: function() {
+
 		(function(me) {
 			var t0 = {}, 
 				t1 = {},

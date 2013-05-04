@@ -6292,8 +6292,9 @@ define("container",
         var injections = [];
         injections = injections.concat(container.typeInjections.get(type) || []);
         injections = injections.concat(container.injections[fullName] || []);
-
+		console.log(fullName + ' instantiate() inj\n', injections, '\n')
         var hash = buildInjections(container, injections);
+
         hash.container = container;
         hash._debugContainerKey = fullName;
 
@@ -23777,6 +23778,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
     @param {Hash} options
   */
   Ember.Handlebars.registerHelper('render', function(name, contextString, options) { 
+	
     Ember.assert("You must pass a template to render", arguments.length >= 2);
     var container, router, controller, view, context;
 
@@ -25044,11 +25046,8 @@ var Application = Ember.Application = Ember.Namespace.extend({
     this.deferUntilDOMReady();
     this.scheduleInitialize();
 
-    Ember.debug('-------------------------------');
-    Ember.debug('Ember.VERSION : ' + Ember.VERSION);
-    Ember.debug('Handlebars.VERSION : ' + Ember.Handlebars.VERSION);
-    Ember.debug('jQuery.VERSION : ' + Ember.$().jquery);
-    Ember.debug('-------------------------------');
+
+    Ember.debug('Ember.VERSION : ' + Ember.VERSION + 'Handlebars.VERSION : ' + Ember.Handlebars.VERSION + 'jQuery.VERSION : ' + Ember.$().jquery);
   },
 
   /**

@@ -21,78 +21,98 @@
 
 
 
-		<script type="text/x-handlebars" data-template-name="application">
-		    <h2>Application</h2>
+	<script type="text/x-handlebars" data-template-name="application">
 		    {{outlet}}
 		</script>
 
 
 		<!-- ROUTE INDEX -->
 		<script type="text/x-handlebars" data-template-name="index">
-		    <h3>Index</h3>
-			<p>
-				(<i>IndexController</i> saw these things added: <strong class="things-added-str">{{ thingsAddedStr }}</strong>)
-			</p>
-		    {{render 'thing-holder'}}
-		    <br/>
+			<div class="left">
+				
+				<span class="clear-left bold"><br/>View: simple</span>		
+				<span class="clear-left bold">Controller: auto-assigned</span>				
+				<span class="clear-left bold">= <span class="darkgreen">Renders</span> but <span class="darkred"> No DynamicController behaviour</span></span>
+				<span class="clear-left">DynamicView&#39;s controller is auto-wired to its parent (a ContainerView) as a default</span>
+				<span class="clear-left">Thus the error: <i>Uncaught Error: Nothing handled the event 'callDynamicController'</i></span>
+				<button {{action "addDynamic" }}> 								+ dynamic </button>
+				
+				<span class="clear-left bold"><br/>View: has render helper in template</span>		
+				<span class="clear-left bold">Controller: auto-assigned</span>		
+				<span class="clear-left bold">= <span class="darkgreen">Renders</span> but <span class="darkred"> No DynamicController behaviour</span></span>
+				<span class="clear-left">DynamicView&#39;s controller is auto-wired to its parent (a ContainerView) as a default</span>
+				<span class="clear-left">Thus the error: <i>Uncaught Error: Nothing handled the event 'callDynamicController'</i></span>
+				<button {{action "addDynamicWithControl" }}> 					+ dynamic & Control </button>
 
-		    {{render 'thing-holder-container' }}
+				
+				<span class="clear-left bold"><br/>View: simple</span>		
+				<span class="clear-left bold">Controller: manual-assigned</span>		
+				<span class="clear-left bold">= <span class="darkgreen">DynamicController behavior</span> (<span class="darkred">controller lacks some Ember-wiring</span>)</span>
+				<span class="clear-left"> e.g. the controllers do not have the property _debugContainerKey).</span>
+				<button {{action "addDynamicManualController" }}> 				+ dynamic (manual controller)</button>				
+				<span class="clear-left bold"><br/>View: has render helper in template</span>		
+				<span class="clear-left bold">Controller: manual-assigned</span>		
+				<span class="clear-left bold">= <span class="darkred">render fails</span> (<span class="darkred">controller lacks some Ember-wiring</span>)</span></span>
+				<span class="clear-left">In the following elements, the render failure interrupts the communcation from view to IndexController </span>
+
+				<button {{action "addDynamicWithControlManualController" }}> 	+ dynamic & Control (manual controller)</button>
+				<button {{action "addDynamicWithRenderManualController" }}> 	+ dynamic & Render (manual controller)</button>
+			</div>
+		    {{render 'static-container'}}
+		    {{render 'dynamic-container' }}
+			<div class="left things-added-str">
+				<strong>
+					Views that told <i>IndexController</i> they were added: <br/><span class="things-added-str-list"> {{{ thingsAddedStr }}} </span>
+				</strong>
+			</div>
 		</script>
 
 
-		<script type="text/x-handlebars" data-template-name="thing-holder-container">
-		    {{render 'static-thing'}}
+		<script type="text/x-handlebars" data-template-name="dynamic-container">
+		
 		</script>
 
 
-		<!-- 
-		using view helper has the same results
-				    {{view App.StaticThingView}}
-					{{view App.StaticThingWithRenderView}}
-			   		{{view App.StaticThingWithContrView}}
-			-->
-		<script type="text/x-handlebars" data-template-name="thing-holder">
-
-		    {{render 'static-thing'}}
-		    {{render 'static-thing-with-render'}}
-		    {{render 'static-thing-with-control'}}
+		<script type="text/x-handlebars" data-template-name="static-container">
+		    {{render 'static'}}
+		    {{render 'static-with-render'}}
+		    {{controlWithVars 'static-with-control'}}
 		</script>
 
 
 		<!-- ROUTE INDEX -->
-		<script type="text/x-handlebars" data-template-name="static-thing">
-		    Static thing
+		<script type="text/x-handlebars" data-template-name="static">
+		    Static
 		</script>
 
 
-		<script type="text/x-handlebars" data-template-name="static-thing-with-render">
-		    Static thing w/render:
+		<script type="text/x-handlebars" data-template-name="static-with-render">
+		    Static with render
 		    {{render knob}}
 		</script>
 
-		<script type="text/x-handlebars" data-template-name="static-thing-with-control">
-		    Static thing w/control:
+		<script type="text/x-handlebars" data-template-name="static-with-control">
+		    Static with control
 		    {{control knob}}
 		</script>
 
 
-		<script type="text/x-handlebars" data-template-name="dynamic-thing">
-		    dynamic thing
+		<script type="text/x-handlebars" data-template-name="dynamic">
+		    dynamic
 		</script>
 
-		<script type="text/x-handlebars" data-template-name="dynamic-thing-with-render">
-		    dynamic thing w/render:
+		<script type="text/x-handlebars" data-template-name="dynamic-with-render">
+		    dynamic w/render:
 		    {{render knob}}
 		</script>
 
-		<script type="text/x-handlebars" data-template-name="dynamic-thing-with-control">
-		    dynamic thing w/control:
-		    {{controlWithVars knob}}
+		<script type="text/x-handlebars" data-template-name="dynamic-with-control">
+		    dynamic w/control:
 		    {{controlWithVars knob}}
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="knob">
-		    knob
+		    &#123;&#123;knob&#125;&#125;
 		</script>
 
 		<div class="section box logit">
@@ -100,7 +120,6 @@
 		    <pre  class="logit-old"></pre>
 		</div>
 		<div class="section box container"> </div>
-
 
 
 
@@ -118,16 +137,16 @@
 		.container {
 			background-color:#eeFeee;
 		}
-		.thing-holder {
+		.static-container {
 			background-color:#99cc99;
-			clear:both;
 			margin:0.5em;
+			clear: left;
 		}
 		
-		.thing-holder-container {
+		.dynamic-container {
 			background-color:#9999cc;
-			clear:both;
 			margin:0.5em;
+			width: 135px;
 		}
 			
 		.logit {
@@ -144,20 +163,56 @@
 			margin:0;
 		}
 		.thing {
-			width: 100px;
-			background-color:red;
+			width: 120px;
 			color:white;
-			text-transform:uppercase;
+			text-transform:capitalize;
 			padding:0.25em;
-    margin:0.25em;
+    		margin:0.25em;
+			font-weight:bold;
 			font-size:10px;
 		}
-		.things-added-str {
-		color:red;
-		text-transform:uppercase;
-		padding:0.5em;
-		font-size:12px;
+		.static, .static-with-control, .static-with-render {
+			background-color: green;
+			color: white;
 		}
+		.dynamic, .dynamic-with-control, .dynamic-with-render {
+			background-color: purple;
+			color: white;
+		}
+		.things-added-str {
+			padding:0.5em;
+			font-size:12px;
+		}
+		.things-added-str-list {
+			text-transform:capitalize;
+		}
+		.red {
+			color:red;
+		}
+		.left {
+			float:left;
+		}
+		.clear-left {
+			font-size: 0.75em;
+			clear: left;
+			float: left;
+		}
+		button {
+			font-size: 0.75em;
+			float: left;
+			clear:left;
+		}
+		.darkgreen {
+				color: #33CC33;
+		}
+		.darkred {
+			color: red;
+			
+		}
+		.bold {
+			font-weight: bold;
+		}
+		
 	</style>
     <body>
         <!--[if lt IE 7]>

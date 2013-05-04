@@ -55,6 +55,10 @@
 						{{controlWithVars 'hash-btn' hashBtn urlhash="d2" label="Dimension 2"}}
 					{{/if}}
 					
+
+					{{#if isShowDimension3}}
+						{{controlWithVars 'hash-btn' hashBtn urlhash="d3" label="Dimension 3"}}
+					{{/if}}
 				</div>
 			</div>
 		</script>
@@ -62,7 +66,7 @@
 		
 		<!-- ROUTE INDEX -->
 		<script type="text/x-handlebars" data-template-name="index">
-			{{renderWithVars 'navigation' navigation isShowDimension1="true" isShowDimension2="true"}}
+			{{renderWithVars 'navigation' navigation isShowDimension1="true" isShowDimension2="true" isShowDimension3="true"}}
 
 			<div class="row">
 				<div class="twelve columns">
@@ -102,7 +106,7 @@
 			</div>
 		</div>
 		
-			{{renderWithVars 'navigation' navigation isShowIndex="true" isShowDimension2="true"}}
+			{{renderWithVars 'navigation' navigation isShowIndex="true" isShowDimension2="true" isShowDimension3="true"}}
 
 				
 			<div class="row">
@@ -171,8 +175,8 @@
 		<!-- ROUTE DIMENSION 2 -->
 
 		<script type="text/x-handlebars" data-template-name="dimension2">
-		{{controlWithVars 'esl-entity-container'}}
-			{{renderWithVars 'navigation' navigation isShowIndex="true" isShowDimension1="true"}}
+			{{controlWithVars 'esl-entity-container'}}
+			{{renderWithVars 'navigation' navigation isShowIndex="true" isShowDimension1="true" isShowDimension3="true"}}
 			<div class="row">
 				<div class="twelve columns">
 					{{render 'world-2d-editor'}}
@@ -187,7 +191,8 @@
 
 	<script type="text/x-handlebars" data-template-name="world-2d">
 		{{render 'ash' Ash}}
-		{{render 'question-mark'}}
+		{{controlWithVars 'question-mark' question-mark visible=false}}
+		
 	</script>
 	
 	
@@ -197,7 +202,7 @@
 	</script>
 	
 	<script type="text/x-handlebars" data-template-name="question-mark">
-	questionmark
+	
 		{{controlWithVars "cogged-pixel" cogged-pixel x=235 y=45 height=30 width=30 }}
 		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=45 width=30 height=30}} 
 		{{ controlWithVars "cogged-pixel" cogged-pixel x=295 y=45 width=30 height=30}} 
@@ -213,6 +218,7 @@
 		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=210 width=30 height=30}} 
 		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=240 width=30 height=30}} 
 		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=300 width=30 height=30}}
+
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="esl-entity-container">
@@ -234,11 +240,27 @@
 		
 	</script>
 
+	
+	<!-- ROUTE DIMENSION 3 -->
+	<script type="text/x-handlebars" data-template-name="dimension3">
+		{{renderWithVars 'navigation' navigation isShowIndex="true" isShowDimension1="true" isShowDimension2="true"}}
+		<div class="row">
+			<div class="twelve columns">
+				{{renderWithVars 'world-3d' World3d}}
+			</div>
+		</div>
+	</script>
+	
+	
+
+	<script type="text/x-handlebars" data-template-name="world-3d">
+	World 3d
+	</script>
+
 
 	</head>
     <body>
         <!--[if lt IE 7]>
-
 
 
 
