@@ -5,36 +5,6 @@ App.Entity3dView = App.SmartView.extend({
 		
 		
 		
-		// create the sphere's material
-		var sphereMaterial =
-		  new THREE.MeshLambertMaterial(
-		    {
-		      color: 0xCC0000
-		    });
-		
-		
-		
-		
-		// set up the sphere vars
-		var radius = 50,
-		    segments = 16,
-		    rings = 16;
-
-		// create a new mesh with
-		// sphere geometry - we will cover
-		// the sphereMaterial next!
-		var sphere = new THREE.Mesh(
-
-		  new THREE.SphereGeometry(
-		    radius,
-		    segments,
-		    rings),
-
-		  sphereMaterial);
-
-		// add the sphere to the scene
-		App.world3d.addE3d(sphere);
-		
 		this.override_3dCreate();
 	},
 	override_3dCreate: function () {
@@ -49,7 +19,69 @@ App.Entity3dView = App.SmartView.extend({
 		for (var p=0; p<map.length; p++) {
 			map[p] = map[p].split('');
 		}
-		console.log(map)
+		
+		for (var r = 0; r < map.length; r++) {
+		}
+		 
+		var sz = 20,
+    		mod=10,
+    		spc=sz,
+    		materials = [],
+			data = this.data = {},
+			w3d = App.world3d,
+			grp = this.grp = new THREE.Object3D(),
+			faceTex = w3d.textures['face'],
+			brainTex = w3d.textures['brain'] = THREE.ImageUtils.loadTexture('img/brain.png'),
+			brainMat = w3d.materials['brain'] =  new THREE.MeshBasicMaterial({map: brainTex}),
+			greenMat = new THREE.MeshLambertMaterial({map: brainTex, transparent:true}),
+			faceMat;
+		
+		console.log("THREE.ImageUtils.loadTexture('img/brain.png')", faceTex, THREE.ImageUtils.loadTexture('img/brain.png'))
+		for (var b=0; b<5; b++) {
+			materials.push( brainMat) ;//new THREE.MeshLambertMaterial({map: faceTex}) );
+		}
+		
+		 
+
+        for (var i=0; i<(mod*mod); i++) {
+	
+
+			var faceTex = THREE.ImageUtils.loadTexture('img/face-ash.png');
+			faceTex.offset.x = (i%mod)/(mod);
+			faceTex.offset.y = (i-(i%mod))/(mod*mod);
+			faceTex.repeat.x = faceTex.repeat.y = 1/mod;
+			faceMat = new THREE.MeshLambertMaterial({map: faceTex, transparent:true});
+			
+			var cubeMaterials = materials.slice();
+			cubeMaterials.splice(4, 0, faceMat);
+			var brainGeo = new THREE.CubeGeometry(sz, sz, sz,1,1,1);
+			var brainMesh = data['cubeBrain'+i] = new THREE.Mesh(brainGeo, new THREE.MeshFaceMaterial(cubeMaterials));
+			brainMesh.overdraw = true;
+        	brainMesh.position.set( 	(spc*(i%mod))-(spc*(mod-1)/2), 
+    											spc*(Math.floor(i/mod))-(spc*(mod-1)/2), 
+        										0);
+
+
+			createjs.Tween.get(brainMesh.rotation).to({x:4*Math.random()}, 3000*Math.random()).wait(1000).to({x:0}, 3000);
+	       	/*	
+
+			me.methods.tweenCubeAmbientMovement(brainMesh.position, sc*sz*2, sc*((i%mod)*10));
+			*/
+			
+			
+			grp.add( brainMesh );
+			
+        }
+		var light = new THREE.PointLight(0xFFFFFF);
+		grp.add( light );
+		var offset = 100
+		light.position.set(0, 0, offset);
+		createjs.Tween.get(grp.rotation).to({y:Math.PI}, 500).wait(100).to({y:-1*Math.PI}, 500);
+
+        grp.position.set(0,0,0);
+		 
+		App.world3d.addE3d(grp);
+	
 	},
 	override_3dUpdate: function () {
 		

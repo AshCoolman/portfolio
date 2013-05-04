@@ -31,6 +31,7 @@ App.PreloaderController = App.SmartController.extend({
 		this.queue.loadManifest([
 		    {id: "copy", src:"txt/copy.txt"},
 			{id: "face-ash", src:'img//face-ash.png'},
+			{id: "brain", src:'img//brain.png'},
 			{id: "cog", src:'img/cog.png'}
 		]);
 	},

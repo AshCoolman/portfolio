@@ -19340,7 +19340,7 @@ THREE.WebGLRenderer = function ( parameters ) {
 	};
 
 	function initMeshBuffers ( geometryGroup, object ) {
-
+ 
 		var geometry = object.geometry,
 			faces3 = geometryGroup.faces3,
 			faces4 = geometryGroup.faces4,
@@ -19542,7 +19542,7 @@ THREE.WebGLRenderer = function ( parameters ) {
 	function bufferGuessUVType( material ) {
 
 		// material must use some texture to require uvs
-
+	
 		if ( material.map ||
 		     material.lightMap ||
 		     material.bumpMap ||
@@ -20260,7 +20260,6 @@ THREE.WebGLRenderer = function ( parameters ) {
 	};
 
 	function setMeshBuffers( geometryGroup, object, hint, dispose, material ) {
-
 		if ( ! geometryGroup.__inittedArrays ) {
 
 			return;
