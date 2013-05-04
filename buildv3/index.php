@@ -254,8 +254,15 @@
 	
 
 	<script type="text/x-handlebars" data-template-name="world-3d">
-	World 3d
+		{{ controlWithVars 'entity-3d'}}
 	</script>
+	
+	
+	<script type="text/x-handlebars" data-template-name="entity-3d">
+	3d grid
+	</script>
+	
+
 
 
 	</head>
@@ -276,6 +283,7 @@
 	        <script src="js/lib/rAF.js"></script>
 	        <script src="js/lib/jquery-1.8.1.min.js"></script>
 	        <script src="js/lib/handlebars.js"></script>
+			<script src="js/lib/three.js"></script>
 			<script src="js/lib/easeljs-0.6.0.min.js"></script>
 			<script src="js/lib/tweenjs-0.4.0.min.js"></script>
  			<script src="js/lib/preloadjs-0.3.0.min.js"></script>
