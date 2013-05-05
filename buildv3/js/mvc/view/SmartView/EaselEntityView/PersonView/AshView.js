@@ -7,8 +7,8 @@ App.AshView = App.EslEntityView.extend({
 		return new createjs.Bitmap('img//face-ash.png');
 	},
 	override_draw: function(asettings) {
- 		this.eslObj.scaleX = -1;
-		this.eslObj.x = 400;
+ 		this.eslObj.scaleX = 1;
+		this.eslObj.x = 0;
 	},
 	override_redraw: function (dur) {
 		var change = 30/1000 * dur; //per second

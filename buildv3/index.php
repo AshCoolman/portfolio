@@ -284,6 +284,8 @@
 	        <script src="js/lib/jquery-1.8.1.min.js"></script>
 	        <script src="js/lib/handlebars.js"></script>
 			<script src="js/lib/three.js"></script>
+			<script src="js/lib/THREEx.WindowResize.js"></script>
+			
 			<script src="js/lib/easeljs-0.6.0.min.js"></script>
 			<script src="js/lib/tweenjs-0.4.0.min.js"></script>
  			<script src="js/lib/preloadjs-0.3.0.min.js"></script>
