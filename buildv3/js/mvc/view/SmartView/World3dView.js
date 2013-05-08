@@ -240,7 +240,7 @@ App.World3dView = App.SmartView.extend({
 	getRealIntersector: function( intersects ) {
 		for( i = 0; i < intersects.length; i++ ) {
 			intersector = intersects[ i ];
-			if ( 	intersector.object != this.cubeGroup.rollOverMesh ) {
+			if ( 	intersector.object != CubeGroup.rollOverMesh ) {
 				return intersector;
 			}
 		}
@@ -248,6 +248,8 @@ App.World3dView = App.SmartView.extend({
 	},
 	setVoxelPosition: function ( intersector ) {
 		with (this) {	
+			
+			//normalMatrix was new Matrix3()
 			normalMatrix.getNormalMatrix( intersector.object.matrixWorld );
 			tmpVec.copy( intersector.face.normal );
 			tmpVec.applyMatrix3( normalMatrix ).normalize();

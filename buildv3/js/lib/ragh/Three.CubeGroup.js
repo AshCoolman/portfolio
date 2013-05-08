@@ -2,6 +2,7 @@
 var CubeGroup = {
 	isMerge: false,
 	rollOver: null,
+	SIZE: 110,
 	map: 	[
 				[
 					[ {volume:1}, null, {volume:1}],
@@ -25,7 +26,7 @@ var CubeGroup = {
 	},
 	create: function (grp) {
 		var map = this.map,
-			sz = 110;
+			sz = this.SIZE;
 		if (!grp) {
 			grp = new THREE.Object3D();
 		}
@@ -71,12 +72,14 @@ var CubeGroup = {
 		//var tween = createjs.Tween.get(this.rollOverMesh.rotation, {  loop: true }).to( { y:2 * Math.PI}, 2000 );		
  		
 	
+		
 		grp.position.x = 400;
 		grp.position.y = -300;
+		
+		
 		var tween = createjs.Tween.get(grp.rotation, {
 	        loop: true
-	    }).to( { y: 2 * Math.PI,  z: Math.random()*2 * Math.PI }, 6000 );
-		
+	    }).to( { y: 2 * Math.PI,  z: Math.random()*2 * Math.PI }, 60000 );
 
 
 		this.plane = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000, 20, 20 ), new THREE.MeshBasicMaterial( { color: 0x555555, wireframe: false } ) );
@@ -95,20 +98,17 @@ var CubeGroup = {
 		var point = intersector.point;
 		var faceIndex = intersector.faceIndex;
 		var object = intersector.object; 
-		
 	
 		var v0 = new THREE.Vector3(),
 			v1 = new THREE.Vector3();
 		
 		v0.copy( object.position );
-		v1.copy( point)
-		//m1.copy( face.normal * 100 );
-		//m0.multiply( m1 );
+		if (!this.dir) dir = new THREE.Vector3();
+		dir.copy(intersector.face.centroid).normalize();
+		dir.multiplyScalar(this.SIZE);
+		v0.add(dir)
 		
-		//console.log('roll', object, point)
-		
-		
-		this.rollOverMesh.position.copy(-v1+this.grp.position);
+		this.rollOverMesh.position.copy(v0);
 		
 	},
 	createCube: function (x, y, z, data) {
