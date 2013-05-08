@@ -44,6 +44,7 @@ App.Entity3dView = App.SmartView.extend({
 			faceTex.repeat.x = faceTex.repeat.y = 1/mod;
 			faceMat = new THREE.MeshLambertMaterial({map: faceTex, transparent:true});
 			
+			
 			var cubeMaterials = materials.slice();
 			cubeMaterials.splice(4, 0, faceMat);
 			var brainGeo = new THREE.CubeGeometry(sz, sz, sz,1,1,1);
@@ -63,7 +64,7 @@ App.Entity3dView = App.SmartView.extend({
 		light.position.set(0, 0, offset);
 		createjs.Tween.get(grp.rotation).to({y:Math.PI}, 1500).wait(1500).to({y:0}, 1500);
         grp.position.set(sz * mod / 2, sz * -mod / 2,0);
-		App.world3d.addE3d(grp);
+		//App.world3d.addE3d(grp);
 	
 	},
 	override_3dUpdate: function () {

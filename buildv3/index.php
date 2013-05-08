@@ -280,6 +280,7 @@
 			
 		</div>  
 		
+		
 	        <script src="js/lib/rAF.js"></script>
 	        <script src="js/lib/jquery-1.8.1.min.js"></script>
 	        <script src="js/lib/handlebars.js"></script>
@@ -290,6 +291,9 @@
 			<script src="js/lib/tweenjs-0.4.0.min.js"></script>
  			<script src="js/lib/preloadjs-0.3.0.min.js"></script>
 	        <script src="js/lib/embermandl.js"></script>
+	
+			<script src="js/lib/ragh/Three.CubeGroup.js"></script>
+				
 			
 <?php
 				try {
