@@ -32,7 +32,7 @@ App.Entity3dView = App.SmartView.extend({
 			greenMat = new THREE.MeshLambertMaterial({map: brainTex, transparent:true}),
 			faceMat;
 		
-		console.log("THREE.ImageUtils.loadTexture('img/brain.png')", faceTex, THREE.ImageUtils.loadTexture('img/brain.png'))
+//		console.log("THREE.ImageUtils.loadTexture('img/brain.png')", faceTex, THREE.ImageUtils.loadTexture('img/brain.png'))
 		for (var b=0; b<5; b++) {
 			materials.push( brainMat) ;//new THREE.MeshLambertMaterial({map: faceTex}) );
 		}

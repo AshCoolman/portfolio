@@ -31,6 +31,26 @@ App.World3dView = App.SmartView.extend({
 		//var camera = this.camera =  new THREE.PerspectiveCamera( VIEW_ANGLE,  ASPECT, NEAR,  FAR);
 		
 		var camera = this.camera = new THREE.OrthographicCamera( WIDTH / - 2, WIDTH / 2, HEIGHT / 2, HEIGHT / - 2, 1, 5000 );
+		var controls = this.controls = new THREE.TrackballControls( camera );
+		controls.target.set( 0, 0, 0 )
+		
+		
+		
+		controls.rotateSpeed = 1.0;
+		controls.zoomSpeed = 1.2;
+		controls.panSpeed = 0.8;
+		controls.noZoom = false;
+		controls.noPan = false;
+		controls.staticMoving = true;
+		controls.dynamicDampingFactor = 0.3;
+		controls.keys = [ 65, 83, 68 ];
+		controls.addEventListener( 'change', function(me) {
+			return function() {
+				this.redraw;
+			}
+		}(this) );
+		
+		
 		camera.position.set(WIDTH / 2, 0, 1000);
 		
 
@@ -58,21 +78,25 @@ App.World3dView = App.SmartView.extend({
 		
 		
 		// create a point light
-		var light =
-		  new THREE.PointLight(0xFFFFFF);
+		var light = new THREE.AmbientLight(0x222222);
 
 		// set its position
 		light.position.x = 0;
 		light.position.y = 0;
-		light.position.z = -50;
+		light.position.z = 50;
 
 		// add to the scene
 		scene.add(light);
 		
+		
+		
+		var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+		directionalLight.position.set( 0, 1, 0 );
+		scene.add( directionalLight );
+		
+		
+		
 		scene.add(this.cubeGroup = CubeGroup.create());
-		console.log('list', this.tryIntersect.length, this.cubeGroup)
-		
-		
 		
 		this.recursivelyGetChildren(this.cubeGroup.children, this.tryIntersect);
 		
@@ -81,7 +105,9 @@ App.World3dView = App.SmartView.extend({
 
 
 		this.cursor3d = new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial());
+		this.cursor3d.add(new THREE.PointLight(0x00FF00));
 		this.cursor3d.overdraw = true;
+		
 		this.scene.add(this.cursor3d);
 						
 						
@@ -89,7 +115,7 @@ App.World3dView = App.SmartView.extend({
 		
 		
 		this.mouse2D = new THREE.Vector3( 0, 10000, 0.5 );
-		
+	
 		var rafFunction = function(me) {
 			var animloop = function (time) {
 		
@@ -128,6 +154,10 @@ App.World3dView = App.SmartView.extend({
 		this.voxelPosition = new THREE.		Vector3();
 		this.tmpVec = new THREE.Vector3();
 		this.normalMatrix = new THREE.Matrix3();
+		
+		
+
+		
 	},
 	
 	 recursivelyGetChildren: function(sceneChild, list) {	
@@ -136,7 +166,6 @@ App.World3dView = App.SmartView.extend({
 		
 	    var obj = sceneChild[i];
 	    list.push(obj);
-		console.log('+', obj)
 	    if (obj.children.length > 0) {
 			( function (me) {
 				me.recursivelyGetChildren(obj.children, list);
@@ -149,7 +178,6 @@ App.World3dView = App.SmartView.extend({
 		event.preventDefault();
 		var perc = ( event.clientX / window.innerWidth )
 			if (!window.evented) {
-				console.log(event)
 				window.evented = true;
 			}
 			this.mouse2D.x = ( event.layerX / this.w) * 2 - 1;
@@ -161,7 +189,6 @@ App.World3dView = App.SmartView.extend({
 			event.preventDefault();
 			
 			var intersects = raycaster.intersectObjects( cubeGroup.children, true );
-			console.log('children', scene.children)
 			if ( intersects.length > 0 ) {
 				intersector = getRealIntersector( intersects );
 				// delete cube
@@ -216,6 +243,9 @@ App.World3dView = App.SmartView.extend({
 	
 		this.w = w;
 		this.h = h;
+		
+		this.controls.handleResize()
+		
 	},
 	
 	redraw: function(dur) {
@@ -234,6 +264,7 @@ App.World3dView = App.SmartView.extend({
 			}
 			renderer.render( scene, camera);
 		}				
+		this.controls.update();
 	},
 	getRealIntersector: function( intersects ) {
 		for( i = 0; i < intersects.length; i++ ) {
@@ -267,3 +298,6 @@ App.World3dView = App.SmartView.extend({
 		window.cancelAnimationFrame(this.get('raf'));
 	}
 });
+
+
+
