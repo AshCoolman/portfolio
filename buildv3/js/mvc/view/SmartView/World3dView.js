@@ -160,7 +160,7 @@ App.World3dView = App.SmartView.extend({
 		with (this) {
 			event.preventDefault();
 			
-			var intersects = raycaster.intersectObjects( scene.children, true );
+			var intersects = raycaster.intersectObjects( cubeGroup.children, true );
 			console.log('children', scene.children)
 			if ( intersects.length > 0 ) {
 				intersector = getRealIntersector( intersects );
@@ -172,12 +172,10 @@ App.World3dView = App.SmartView.extend({
 				// create cube
 				} else {
 					intersector = getRealIntersector( intersects );
-					setVoxelPosition( intersector );
-					var voxel = new THREE.Mesh( cubeGeo, cubeMaterial );
-					voxel.position.copy( voxelPosition );
-					voxel.matrixAutoUpdate = false;
-					voxel.updateMatrix();
-					scene.add( voxel );
+					if ( intersector ) {
+						CubeGroup.tryAddHere(intersector);
+					}
+					
 				}
 			}
 		}
