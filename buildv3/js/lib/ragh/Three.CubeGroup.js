@@ -3,6 +3,7 @@ var CubeGroup = {
 	isMerge: true,
 	rollOver: null,
 	SIZE: 50,
+	materialsDict: {},
 	tryAddHere: function (intersector) {
 		var v0 = this.getFacePoint(intersector);
 		this.rollOverMesh.position.copy(v0);
@@ -37,8 +38,8 @@ var CubeGroup = {
 			maxZ = 0.
 			map = (amap ? amap : this.defaultMap);
 			
-		if (this.isMerge) {	
-			this.materials = [];
+		if (this.isMerge) {
+			this.materials=[];
 			this.geo = new THREE.Geometry();
 		}
 		
@@ -57,12 +58,14 @@ var CubeGroup = {
 			}
 		} 
 		if (this.isMerge) {
-		    this.mesh = new THREE.Mesh( this.geo, new THREE.MeshFaceMaterial(this.materials));
-			this.mesh.matrixAutoUpdate = false;
+		  
+		  this.mesh = new THREE.Mesh( this.geo, new THREE.MeshFaceMaterial(this.materials));
+			/*this.mesh.matrixAutoUpdate = false;
 			this.mesh.updateMatrix();
 			this.mesh.overdraw = false;
-			this.mesh.name = 'cubeGroup';
+			this.mesh.name = 'cubeGroup';*/
 	        grp.add(this.mesh);
+	
 		}
 		grp.position.copy( new THREE.Vector3( -maxX/2, maxY/2, 0));
 		grp.add( this.rollOverMesh = this.createRollOver() );
@@ -95,8 +98,11 @@ var CubeGroup = {
 		var mesh, 
 			sz = this.SIZE,
 			geo = new THREE.CubeGeometry( sz, sz, sz, 1, 1, 1 ),
-			color = (this.materialsLib[ data.color ] ? this.materialsLib[ data.color ] :  new THREE.MeshLambertMaterial({color: data.color}));
+			color = this.materialsDict[data.color];
 			
+		if (!this.materialsDict[data.color]) {
+			this.materialsDict[data.color] = color = new THREE.MeshLambertMaterial({color: data.color});
+		}
 		if (!this.isMerge) {	
 			mesh = new THREE.Mesh( geo, color);
 			mesh.position = new THREE.Vector3( x, y, z);
@@ -105,10 +111,14 @@ var CubeGroup = {
 			for(var i = 0 ; i < geo.vertices.length; i++) {
 				geo.vertices[i].add (new THREE.Vector3( x, y, z));
 			}
-			THREE.GeometryUtils.merge(this.geo, geo, this.materials.length);
+			if (!color) console.log('!color', data)
+			//console.log(this.geo, geo, color)
+			var mats = []
 			for (var b=0; b<6; b++) {
-				this.materials.push( this.color);
+				mats.push( color);
+				this.materials.push( color);
 			}
+			THREE.GeometryUtils.merge(this.geo, geo, mats);
 		}
 		return mesh;
 	},

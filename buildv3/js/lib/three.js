@@ -19340,6 +19340,7 @@ THREE.WebGLRenderer = function ( parameters ) {
 	};
 
 	function initMeshBuffers ( geometryGroup, object ) {
+	if (!getBufferMaterial( object, geometryGroup )) console.log('!', geometryGroup, geometry, object);
  
 		var geometry = object.geometry,
 			faces3 = geometryGroup.faces3,
@@ -19349,12 +19350,15 @@ THREE.WebGLRenderer = function ( parameters ) {
 			ntris     = faces3.length * 1 + faces4.length * 2,
 			nlines    = faces3.length * 3 + faces4.length * 4,
 
+			
 			material = getBufferMaterial( object, geometryGroup ),
 
+			
 			uvType = bufferGuessUVType( material ),
 			normalType = bufferGuessNormalType( material ),
 			vertexColorType = bufferGuessVertexColorType( material );
 
+			
 		// console.log( "uvType", uvType, "normalType", normalType, "vertexColorType", vertexColorType, object, geometryGroup, material );
 
 		geometryGroup.__vertexArray = new Float32Array( nvertices * 3 );
@@ -19528,7 +19532,7 @@ THREE.WebGLRenderer = function ( parameters ) {
 	};
 
 	function bufferGuessVertexColorType( material ) {
-
+		
 		if ( material.vertexColors ) {
 
 			return material.vertexColors;
@@ -19542,7 +19546,7 @@ THREE.WebGLRenderer = function ( parameters ) {
 	function bufferGuessUVType( material ) {
 
 		// material must use some texture to require uvs
-	
+		try {
 		if ( material.map ||
 		     material.lightMap ||
 		     material.bumpMap ||
@@ -19553,6 +19557,9 @@ THREE.WebGLRenderer = function ( parameters ) {
 			return true;
 
 		}
+	} catch (e){
+		console.log('bufferGuessUVType messed up', material)
+	}
 
 		return false;
 
@@ -20265,7 +20272,6 @@ THREE.WebGLRenderer = function ( parameters ) {
 			return;
 
 		}
-
 		var normalType = bufferGuessNormalType( material ),
 		vertexColorType = bufferGuessVertexColorType( material ),
 		uvType = bufferGuessUVType( material ),
