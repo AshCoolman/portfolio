@@ -29,15 +29,20 @@ App.World3dView = App.SmartView.extend({
 
 		// create a WebGL renderer, camera
 		// and a scene
-		var renderer = this.renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true });
-		//var camera = this.camera =  new THREE.PerspectiveCamera( VIEW_ANGLE,  ASPECT, NEAR,  FAR);
 		
+		var scene = this.scene = new THREE.Scene();
+	
+		var renderer = this.renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true });
+		renderer.setSize(WIDTH, HEIGHT);
+		this.$el.append(renderer.domElement);
+		$(renderer.domElement).addClass('world-3d-renderer')
+			
 		var camera = this.camera = new THREE.OrthographicCamera( WIDTH / - 2, WIDTH / 2, HEIGHT / 2, HEIGHT / - 2, 1, 5000 );
+		camera.position.set(WIDTH / 2, 0, 1000);
+		scene.add(camera);
+		
 		var controls = this.controls = new THREE.TrackballControls( camera );
 		controls.target.set( 0, 0, 0 )
-		
-		
-		
 		controls.rotateSpeed = 1.0;
 		controls.zoomSpeed = 1.2;
 		controls.panSpeed = 0.8;
@@ -46,78 +51,35 @@ App.World3dView = App.SmartView.extend({
 		controls.staticMoving = true;
 		controls.dynamicDampingFactor = 0.3;
 		controls.keys = [ 65, 83, 68 ];
-		controls.addEventListener( 'change', function(me) {
-			return function() {
-				this.redraw;
-			}
-		}(this) );
+		controls.addEventListener( 'change', function(me) { return function() { this.redraw; } }(this) );
+
+		var light = new THREE.AmbientLight(0x333333).position.copy(new THREE.Vector3(0, 0, 50));
 		
-		
-		camera.position.set(WIDTH / 2, 0, 1000);
-		
-
-		var scene = this.scene = new THREE.Scene();
-
-		// add the camera to the scene
-		scene.add(camera);
-
-		// the camera starts at 0,0,0
-		// so pull it back
-
-
-		
-		// start the renderer
-		renderer.setSize(WIDTH, HEIGHT);
-
-		// attach the render-supplied DOM element
-		this.$el.append(renderer.domElement);
-		$(renderer.domElement).addClass('world-3d-renderer')
-		
-		// picking
-		var projector = this.projector = new THREE.Projector();
-		
-		// create a point light
-		var light = new THREE.AmbientLight(0x333333);
-
-		// set its position
-		light.position.x = 0;
-		light.position.y = 0;
-		light.position.z = 50;
-
-		// add to the scene
-		//scene.add(light);
-		
-		var directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
-		directionalLight.position.set( 0, 0, 1 );
+		var directionalLight = new THREE.DirectionalLight( 0xffffff, 1 ).position.set( 0, 0, 1 );
 		scene.add( directionalLight );
-		this.cubeGroup=null;
-		//scene.add(this.cubeGroup = CubeGroup.createFromMap());
-		//this.recursivelyGetChildren(this.cubeGroup.children, this.tryIntersect);
-		// grid
+		
+			
 		this.cursor3d = new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial());
 		this.cursor3d.add(new THREE.PointLight(0x00FF00));
 		this.cursor3d.overdraw = true;
-		this.scene.add(this.cursor3d);
-						
-						
-		isAnimating = true;
-		
-		
+		scene.add(this.cursor3d);
+			
 		this.mouse2D = new THREE.Vector3( 0, 10000, 0.5 );
-	
+		this.pickProjector = new THREE.Projector();
+		
+		isAnimating = true;
+
 		var rafFunction = function(me) {
 			var animloop = function (time) {
 		
 						var dur = (this.lastRequestAnimationFrame) ? time - this.lastRequestAnimationFrame : 0;
 						this.lastRequestAnimationFrame = time;
 						me.redraw(dur);
-						
 						me.set('raf', window.requestAnimationFrame(animloop));	
 					
 				};
 			return animloop
 		}(this);
-	
 		
 		this.set('raf', window.requestAnimationFrame(rafFunction));
 		
@@ -126,6 +88,7 @@ App.World3dView = App.SmartView.extend({
 					me.onDocumentMouseMove(event);
 				}
 			}(this), false );
+			
 		this.el.addEventListener( 'mousedown', function (me) {
 				return function (event) {
 					me.onDocumentMouseDown(event);
@@ -140,11 +103,12 @@ App.World3dView = App.SmartView.extend({
 		this.resize();
 		
 		// draw!
+
+		
 		this.voxelPosition = new THREE.Vector3();
 		this.tmpVec = new THREE.Vector3();
 		this.normalMatrix = new THREE.Matrix3();
-		
-		
+				
 		this.$el.append('<canvas class="temp">');
 		this.tcanvas = $('canvas.temp', this.$el)[0]
 		console.log('this.tcanvas', this.tcanvas);
@@ -194,7 +158,6 @@ App.World3dView = App.SmartView.extend({
 					decColor = decColor.toString(16);
 					
 					map[x][y][0] = {color: '#'+decColor};
-					console.log(pixel, x, y, map[x][y][0])
 				}
 			}
 			console.log(map)
@@ -293,12 +256,11 @@ App.World3dView = App.SmartView.extend({
 	},
 	
 	redraw: function(dur) {
-		
-		with (this) {
-			if (cubeGroup) {
-				raycaster = projector.pickingRay( mouse2D.clone(), camera )	;
+		if (typeof this['cubeGroup'] != 'undefined') {
+			with (this) {
+				raycaster = pickProjector.pickingRay( mouse2D.clone(), camera )	;
 				var intersects = raycaster.intersectObjects( cubeGroup.children, true );
-	
+
 				if ( intersects.length > 0 ) {
 					intersector = getRealIntersector( intersects );
 					if ( intersector ) {
@@ -307,8 +269,8 @@ App.World3dView = App.SmartView.extend({
 						CubeGroup.show(intersector);
 					}
 				}
+				renderer.render( scene, camera);
 			}
-			renderer.render( scene, camera);
 		}				
 		this.controls.update();
 	},

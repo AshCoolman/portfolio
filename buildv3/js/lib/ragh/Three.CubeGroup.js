@@ -112,7 +112,7 @@ var CubeGroup = {
 				geo.vertices[i].add (new THREE.Vector3( x, y, z));
 			}
 			if (!color) console.log('!color', data)
-			//console.log(this.geo, geo, color)
+			console.log('>', color)
 			THREE.GeometryUtils.merge(this.geo, geo, this.materials.length);
 			for (var b=0; b<6; b++) {
 				this.materials.push( color);
