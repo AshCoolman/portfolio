@@ -37,7 +37,8 @@ var CubeGroup = {
 			maxZ = 0.
 			map = (amap ? amap : this.defaultMap);
 			
-		if (this.isMerge) {
+		if (this.isMerge) {	
+			this.materials = [];
 			this.geo = new THREE.Geometry();
 		}
 		
