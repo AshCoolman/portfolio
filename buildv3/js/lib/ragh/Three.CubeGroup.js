@@ -60,10 +60,10 @@ var CubeGroup = {
 		if (this.isMerge) {
 		  
 		  this.mesh = new THREE.Mesh( this.geo, new THREE.MeshFaceMaterial(this.materials));
-			/*this.mesh.matrixAutoUpdate = false;
+			this.mesh.matrixAutoUpdate = false;
 			this.mesh.updateMatrix();
 			this.mesh.overdraw = false;
-			this.mesh.name = 'cubeGroup';*/
+			this.mesh.name = 'cubeGroup';
 	        grp.add(this.mesh);
 	
 		}
@@ -113,12 +113,10 @@ var CubeGroup = {
 			}
 			if (!color) console.log('!color', data)
 			//console.log(this.geo, geo, color)
-			var mats = []
+			THREE.GeometryUtils.merge(this.geo, geo, this.materials.length);
 			for (var b=0; b<6; b++) {
-				mats.push( color);
 				this.materials.push( color);
 			}
-			THREE.GeometryUtils.merge(this.geo, geo, mats);
 		}
 		return mesh;
 	},
