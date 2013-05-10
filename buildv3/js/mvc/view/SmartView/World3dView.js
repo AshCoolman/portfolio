@@ -9,6 +9,8 @@ App.World3dView = App.SmartView.extend({
 	didInsertElement: function () {
 		this.tryIntersect = [];
 		this._super();
+		
+		
 		App.world3d = this;
 		
 		// set the scene size
@@ -70,15 +72,12 @@ App.World3dView = App.SmartView.extend({
 		// attach the render-supplied DOM element
 		this.$el.append(renderer.domElement);
 		$(renderer.domElement).addClass('world-3d-renderer')
-
 		
 		// picking
-
 		var projector = this.projector = new THREE.Projector();
 		
-		
 		// create a point light
-		var light = new THREE.AmbientLight(0x222222);
+		var light = new THREE.AmbientLight(0x333333);
 
 		// set its position
 		light.position.x = 0;
@@ -86,28 +85,18 @@ App.World3dView = App.SmartView.extend({
 		light.position.z = 50;
 
 		// add to the scene
-		scene.add(light);
+		//scene.add(light);
 		
-		
-		
-		var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-		directionalLight.position.set( 0, 1, 0 );
+		var directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
+		directionalLight.position.set( 0, 0, 1 );
 		scene.add( directionalLight );
-		
-		
-		
-		scene.add(this.cubeGroup = CubeGroup.create());
-		
-		this.recursivelyGetChildren(this.cubeGroup.children, this.tryIntersect);
-		
+		this.cubeGroup=null;
+		//scene.add(this.cubeGroup = CubeGroup.createFromMap());
+		//this.recursivelyGetChildren(this.cubeGroup.children, this.tryIntersect);
 		// grid
-
-
-
 		this.cursor3d = new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial());
 		this.cursor3d.add(new THREE.PointLight(0x00FF00));
 		this.cursor3d.overdraw = true;
-		
 		this.scene.add(this.cursor3d);
 						
 						
@@ -151,13 +140,68 @@ App.World3dView = App.SmartView.extend({
 		this.resize();
 		
 		// draw!
-		this.voxelPosition = new THREE.		Vector3();
+		this.voxelPosition = new THREE.Vector3();
 		this.tmpVec = new THREE.Vector3();
 		this.normalMatrix = new THREE.Matrix3();
 		
 		
+		this.$el.append('<canvas class="temp">');
+		this.tcanvas = $('canvas.temp', this.$el)[0]
+		console.log('this.tcanvas', this.tcanvas);
 
+		var img = App.static_preloader.queue.getResult('face-ash-pixel');
+		setTimeout( function (me) {
+			return  function() {
+					me.createFromImage(img);
+			}
+		}(this), 100);
+	},
+	
+	
+	createFromImage: function(img) {
+		if (!this.tcanvas.getContext) {
+			console.log('faail')
+			setTimeout( function (me) {
+				return  function() {
+						me.createFromImage(img);
+				}
+			}(this), 1000);
+		} else {		
+			
+			var map = [[[]]],
+				w=12,
+				h=12,
+				pixel,
+				c = this.tcanvas,
+				ctx=c.getContext("2d");
 		
+			ctx.drawImage(img,0,0);
+
+			var imgData=ctx.getImageData(0,0,w,h);
+			var id = imgData.data;
+			for (var i = 0 ; i < id.length;i+=4) {
+				pixel = i / 4;
+				if (id[i+3] == 255) {
+					var x = pixel % w;
+					var y = Math.floor(pixel / w);
+					if (!map[x]) map[x]=[];
+					if (!map[x][y]) map[x][y]=[];
+					var r = id[i+0]
+					var g = id[i+1]
+					var b = id[i+2]
+
+					var decColor = b + 256 * g + 65536 * r;
+					decColor = decColor.toString(16);
+					
+					map[x][y][0] = {color: '#'+decColor};
+					console.log(pixel, x, y, map[x][y][0])
+				}
+			}
+			console.log(map)
+			this.scene.add(this.cubeGroup = CubeGroup.createFromMap(map));
+		
+		}
+				
 	},
 	
 	 recursivelyGetChildren: function(sceneChild, list) {	
@@ -251,15 +295,17 @@ App.World3dView = App.SmartView.extend({
 	redraw: function(dur) {
 		
 		with (this) {
-			raycaster = projector.pickingRay( mouse2D.clone(), camera )	;
-			var intersects = raycaster.intersectObjects( cubeGroup.children, true );
+			if (cubeGroup) {
+				raycaster = projector.pickingRay( mouse2D.clone(), camera )	;
+				var intersects = raycaster.intersectObjects( cubeGroup.children, true );
 	
-			if ( intersects.length > 0 ) {
-				intersector = getRealIntersector( intersects );
-				if ( intersector ) {
-					setVoxelPosition( intersector );
-					this.cursor3d.position = voxelPosition;
-					CubeGroup.show(intersector);
+				if ( intersects.length > 0 ) {
+					intersector = getRealIntersector( intersects );
+					if ( intersector ) {
+						setVoxelPosition( intersector );
+						this.cursor3d.position = voxelPosition;
+						CubeGroup.show(intersector);
+					}
 				}
 			}
 			renderer.render( scene, camera);
