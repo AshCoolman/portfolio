@@ -293,7 +293,6 @@
  			<script src="js/lib/preloadjs-0.3.0.min.js"></script>
 	        <script src="js/lib/embermandl.js"></script>
 	
-			<script src="js/lib/ragh/Three.CubeGroup.js"></script>
 			<script src="js/lib/ragh/Three.TrackballControls.js"></script>
 			
 				

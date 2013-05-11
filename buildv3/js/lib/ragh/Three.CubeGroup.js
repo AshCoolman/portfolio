@@ -2,7 +2,7 @@
 var CubeGroup = {
 	isMerge: true,
 	rollOver: null,
-	SIZE: 50,
+	SIZE: 25,
 	materialsDict: {},
 	tryAddHere: function (intersector) {
 		var v0 = this.getFacePoint(intersector);
@@ -111,8 +111,6 @@ var CubeGroup = {
 			for(var i = 0 ; i < geo.vertices.length; i++) {
 				geo.vertices[i].add (new THREE.Vector3( x, y, z));
 			}
-			if (!color) console.log('!color', data)
-			console.log('>', color)
 			THREE.GeometryUtils.merge(this.geo, geo, this.materials.length);
 			for (var b=0; b<6; b++) {
 				this.materials.push( color);
@@ -138,5 +136,19 @@ var CubeGroup = {
 			}
 		}
 		console.log('EXPORT\n', JSON.stringify(amap));
+	},
+	cleanup: function() {
+		
 	}
 }
+
+
+function Test(aname) {
+	this.name = aname;
+	this.sayName = function() {
+		console.log('My name is '+this.name);
+	}
+};
+
+var atest = new Test('Ben');
+atest.sayName();
