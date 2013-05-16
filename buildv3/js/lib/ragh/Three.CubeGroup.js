@@ -30,7 +30,6 @@ var CubeGroup = {
 		if (!amap) {
 			throw 'CubeGroup.createFromMap() passed "amap" parameter is falsey';
 		}
-		
 		var sz = this.SIZE,
 			grp = this.grp = new THREE.Object3D(),
 			maxX = 0, 
@@ -138,7 +137,12 @@ var CubeGroup = {
 		console.log('EXPORT\n', JSON.stringify(amap));
 	},
 	cleanup: function() {
-		
+			this.grp = null;
+			this.materials = [];
+			this.geo = null;
+			this.mesh = null;
+			this.rollOverMesh = null;
+			this.materialsDict = {};
 	}
 }
 

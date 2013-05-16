@@ -7,6 +7,7 @@ App.World3dView = App.SmartView.extend({
 	textures: {},
 	VS: 10,
 	didInsertElement: function () {
+		
 		this.tryIntersect = [];
 		this._super();
 
@@ -20,6 +21,8 @@ App.World3dView = App.SmartView.extend({
 			ASPECT = WIDTH / HEIGHT,
 			NEAR = 0.1,
 			FAR = 10000;
+			
+			
 
 		var scene = this.scene = new THREE.Scene();
 	
@@ -51,10 +54,12 @@ App.World3dView = App.SmartView.extend({
 		directionalLight.position.set( 0, 0, 1 );
 		scene.add( directionalLight );
 	
-		var cursor3d = this.cursor3d = new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial());
-		cursor3d.add(new THREE.PointLight(0x00FF00));
-		cursor3d.overdraw = true;
-		scene.add(cursor3d);
+
+		
+		var cursor3D = this.cursor3D = new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial());
+		cursor3D.add(new THREE.PointLight(0x00FF00));
+		cursor3D.overdraw = true;
+		scene.add(cursor3D);
 			
 		var mouse2D = this.mouse2D = new THREE.Vector3( 0, 10000, 0.5 );
 		var pickProjector = this.pickProjector = new THREE.Projector();
@@ -84,7 +89,7 @@ App.World3dView = App.SmartView.extend({
 			}
 		}(this), false );
 						
-		$(window).resize(function(me) {
+		$(window).bind('resize.world3d', function(me) {
 		  	return function () {
 				me.resize();
 			}
@@ -102,6 +107,7 @@ App.World3dView = App.SmartView.extend({
 	
 	
 	createFromImage: function (img) {
+		
 		this.voxelPosition = new THREE.Vector3();
 		this.tmpVec = new THREE.Vector3();
 		this.normalMatrix = new THREE.Matrix3();
@@ -229,6 +235,7 @@ App.World3dView = App.SmartView.extend({
 	},
 	
 	redraw: function(dur) {
+		
 		if (typeof this['cubeGroup'] != 'undefined') {
 			with (this) {
 				raycaster = pickProjector.pickingRay( mouse2D.clone(), camera )	;
@@ -238,7 +245,7 @@ App.World3dView = App.SmartView.extend({
 					intersector = getRealIntersector( intersects );
 					if ( intersector ) {
 						setVoxelPosition( intersector );
-						this.cursor3d.position = voxelPosition;
+						this.cursor3D.position = voxelPosition;
 						CubeGroup.show(intersector);
 					}
 				}
@@ -275,11 +282,35 @@ App.World3dView = App.SmartView.extend({
 	},
 	willDestroyElement: function () {
 		//this.isAnimating = false;
+		CubeGroup.cleanup();
+		this.tryIntersect = [];
+		
+		console.log('0')
+		//this.$el.detach($(this.renderer.domElement))
+		console.log('1');
+		this.renderer = null;
+		this.camera = null;
+		this.controls = null;
+		this.cursor3D = null;
+		this.mouse2D = null;
+		this.pickProjector = null;
+		this.scene = null;
+		this.lastRequestAnimationFrame = null;
+		window.cancelAnimationFrame(this.get('raf'));
+		this.el.removeEventListener('mousemove');
+		this.el.removeEventListener('mousedown');
+		$(window).unbind('resize.world3d');
+		
+
+		this.voxelPosition = null;
+		this.tmpVec = null;
+		this.normalMatrix = null;
+		this.tcanvas = null;
+		this.cubeGroup = null;
+
 		this._super();
 		
-		this.el.removeEventListener( 'mousemove' );
-		this.el.removeEventListener( 'mousedown' );
-		window.cancelAnimationFrame(this.get('raf'));
+		
 	}
 });
 
