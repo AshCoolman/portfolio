@@ -2,7 +2,7 @@
 var CubeGroup = {
 	isMerge: true,
 	rollOver: null,
-	SIZE: 25,
+	SIZE: 30,
 	materialsDict: {},
 	tryAddHere: function (intersector) {
 		var v0 = this.getFacePoint(intersector);
@@ -51,7 +51,7 @@ var CubeGroup = {
 						maxX = Math.max(maxX, xs);
 						maxY = Math.max(maxY, ys);
 						maxZ = Math.max(maxZ, zs);
-						this.createCube(xs*sz, -ys*sz, zs*sz, map[xs][ys][zs]);
+						this.createCube( xs*sz, -ys*sz, zs*sz, map[xs][ys][zs] );
 					}
 				}
 			}
@@ -66,7 +66,10 @@ var CubeGroup = {
 	        grp.add(this.mesh);
 	
 		}
-		grp.position.copy( new THREE.Vector3( -maxX/2, maxY/2, 0));
+		grp.position.set(sz*(0.5), sz*(-0.5), 0);
+		grp.updateMatrix()
+		console.log('grp pos', grp.position)
+		window.grp = grp
 		grp.add( this.rollOverMesh = this.createRollOver() );
 		//grp.add( this.plane = this.createPlane() ); 
 		//var tween = createjs.Tween.get(this.rollOverMesh.rotation, {  loop: true }).to( { y:2 * Math.PI}, 2000 );		
@@ -82,14 +85,21 @@ var CubeGroup = {
 		return plane
 	},
 	createRollOver: function () {
-		var rollOverGeo =  new THREE.CubeGeometry( this.SIZE, this.SIZE, this.SIZE, 1, 1, 1 ),
-			rollOverMesh = new THREE.Mesh( rollOverGeo, new THREE.MeshLambertMaterial( { color: 0x0000ff, opacity: 0.25, transparent: true} )),
-			rollOverLight = new THREE.PointLight(0x333399);
-			
-		rollOverMesh.matrixAutoUpdate = true;
-		rollOverMesh.add( rollOverLight );
+		
+		if (!this.isMerge) {
+			var rollOverGeo =  new THREE.CubeGeometry( this.SIZE, this.SIZE, this.SIZE, 1, 1, 1 ),
+				rollOverMesh = new THREE.Mesh( rollOverGeo, new THREE.MeshLambertMaterial( { color: 0x0000ff, opacity: 0.25, transparent: true} )),
+				rollOverLight = new THREE.PointLight(0x333399);
+
+			rollOverMesh.matrixAutoUpdate = true;
+			rollOverMesh.add( rollOverLight );
+			rollOverLight.intensity = 2;
+			return rollOverMesh 
+		}
+		
+		var rollOverLight = new THREE.PointLight(0x333399);
 		rollOverLight.intensity = 2;
-		return rollOverMesh;
+		return rollOverLight;
 	},
 	
 	createCube: function (x, y, z, data) {

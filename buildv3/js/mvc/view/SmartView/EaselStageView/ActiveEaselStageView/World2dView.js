@@ -5,7 +5,7 @@ App.World2dView = App.ActiveEslStageView.extend({
 	multi: 10,
 	src: {},
 	vis: {},
-	scale: 1,
+	scale: 30,
 	isVis: false,
 	didInsertElement: function(scope) {
 		with (this) {
@@ -15,11 +15,12 @@ App.World2dView = App.ActiveEslStageView.extend({
 			src.$canvas = $canvas.addClass('src-world-2d');
 			src.context = src.$canvas[0].getContext("2d");
 			src.stage = stage;
-			//src.stage.scaleX=src.stage.scaleY=multi;
+			
+			//
 			src.stage.mouseMoveOutside = true;
-			
-			
+			src.stage.snapToPixelEnabled = true;
 			if (isVis) {
+				console.log('adding vis')
 				$el.append('<canvas class="vis-world-2d">');
 				vis.$canvas = $('.vis-world-2d', $el);
 				vis.$canvas.css({display:'none'});

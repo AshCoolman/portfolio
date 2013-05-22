@@ -9,7 +9,9 @@ App.Dimension2Route = Em.Route.extend({
 	activate: function () { 
 		//Application state 
 	},
-	deactivate: function () { 
+	deactivate: function () {
+		console.log('deactivate');
+		App.eventMapper.triggerEvent(ragh.MEvt.create('doTransition')); 
 	},
 	setupController: function (controller, model) {
 		controller.set('content', model);

@@ -31,7 +31,6 @@ App.CoggedPixelView = App.PixelView.extend({
 	addCogEsl: function (e) {
 		this.e_cog = e.eslObj;
 		this.e_cog.x=this.e_cog.y=0;
-		this.shp.x=this.shp.y=0;
 		this.handle.addChildAt(this.e_cog)
 	},
 	override_draw: function (settings) {

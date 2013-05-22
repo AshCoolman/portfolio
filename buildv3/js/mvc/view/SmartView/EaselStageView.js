@@ -21,7 +21,7 @@ App.EslStageView = App.SmartView.extend({
 			$canvas = $('.esl-stage-canvas', $el);
 			stage = new createjs.Stage( $canvas[0] );
 			
-			stage.x = stage.y = 0.5; //http://stackoverflow.com/questions/6672870/esljs-line-fuzziness
+			//stage.x = stage.y = 0.5; //http://stackoverflow.com/questions/6672870/esljs-line-fuzziness
 			
 		}	
 	},

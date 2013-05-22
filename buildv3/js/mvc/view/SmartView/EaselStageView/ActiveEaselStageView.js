@@ -2,8 +2,6 @@ App.ActiveEslStageView = App.EslStageView.extend({
 	tagName:'div',
 	className: 'ActiveEslStageView',
 	templateName:'active-esl-stage-view',
-	width: 800,
-	height: 600,
 	trails: 0,
 	tmpbgColor: null, 
 	tmpwinWidth: null,
@@ -41,17 +39,17 @@ App.ActiveEslStageView = App.EslStageView.extend({
 	resize: function() {
 		this.tmpwinWidth = $(window).width();
 		with (this) {	
-			if (tmpwinWidth > 1000) {
-				width = 1000;
-				height = 800; 
+			if (tmpwinWidth > App.SIZE.W2) {
+				width = App.SIZE.W2;
+				height = App.SIZE.H2; 
 				tmpbgColor = "rgba(200, 255, 200, " + (trails ? 1 / trails : 1) + ")";
-			} else if (tmpwinWidth > 800) {
-				width = 800;
-				height = 800;
+			} else if (tmpwinWidth > App.SIZE.W1) {
+				width = App.SIZE.W1;
+				height = App.SIZE.H1;
 				tmpbgColor = "rgba(200, 200, 255, "+ (trails ? 1 / trails : 1) + ")";
 			} else {
-				width = 400;
-				height = 300;
+				width = App.SIZE.W0;
+				height = App.SIZE.H0;
 				tmpbgColor = "rgba(255, 200, 200, "+ (trails ? 1 / trails : 1) + ")";
 			}
 			$canvas.attr( { width: width , height: height  } ).css( 'background-color', tmpbgColor );

@@ -23,7 +23,16 @@
 
 		<!-- APPLICATION -->
 		<script type="text/x-handlebars" data-template-name="application">
+			<div class="row">
+				<div class="twelve columns">
+					{{renderWithVars 'navigation' navigation }}
+				</div>
+			</div>
+			
+			{{render 'transitions-holder' transitions-holder}}
+			
 			{{renderWithVars 'preloader' preloader}}
+			
 			{{outlet}}
 		</script>
 		
@@ -35,38 +44,37 @@
 		
 		
 		
+		<!-- APPLICATION ELEMENTS -->
+		<script type="text/x-handlebars" data-template-name="transitions-holder">
+			Transition holder <button {{action "doTransition"}}> transition</button>
+		</script>
+		
+
+
+		<script type="text/x-handlebars" data-template-name="transition">
+				<div class="transition-canvas">
+				</div>
+		</script>
+
+
+
 		<script type="text/x-handlebars" data-template-name="hash-btn">
 			<button {{action "doNavigate" }}> {{label}} </button>
 		</script>
 		
+
+
 		<script type="text/x-handlebars" data-template-name="navigation">
-			<div class="row">
-				<div class="twelve columns">
-				
-					{{#if isShowIndex}}
-						{{renderWithVars 'hash-btn' hashBtn urlhash="/" label="Index"}}
-					{{/if}}
-
-					{{#if isShowDimension1}}
-						{{controlWithVars 'hash-btn' hashBtn urlhash="d1" label="Dimension 1"}}
-					{{/if}}
-
-					{{#if isShowDimension2}}
-						{{controlWithVars 'hash-btn' hashBtn urlhash="d2" label="Dimension 2"}}
-					{{/if}}
-					
-
-					{{#if isShowDimension3}}
-						{{controlWithVars 'hash-btn' hashBtn urlhash="d3" label="Dimension 3"}}
-					{{/if}}
-				</div>
-			</div>
+			{{renderWithVars 'hash-btn' hashBtn urlhash="/" label="Index" routePath="index"}}
+			{{controlWithVars 'hash-btn' hashBtn urlhash="d1" label="Dimension 1" routePath="dimension1"}}
+			{{controlWithVars 'hash-btn' hashBtn urlhash="d2" label="Dimension 2" routePath="dimension2"}}
+			{{controlWithVars 'hash-btn' hashBtn urlhash="d3" label="Dimension 3" routePath="dimension3"}}
 		</script>
 
-		
+
+
 		<!-- ROUTE INDEX -->
 		<script type="text/x-handlebars" data-template-name="index">
-			{{renderWithVars 'navigation' navigation isShowDimension1="true" isShowDimension2="true" isShowDimension3="true"}}
 
 			<div class="row">
 				<div class="twelve columns">
@@ -81,11 +89,15 @@
 					</div>
 				</div>
 			</div>
+			
 		</script>
+		
+		
 		
 		
 		<!-- ROUTE DIMENSION 1 NAV-->
 		<script type="text/x-handlebars" data-template-name="index-nav">
+		
 			<div class="nav-btn-holder">
 				{{#if isShowStart}}
 				<button class="nav-btn" {{action "doStart" }}>Press here to begin</button>
@@ -95,20 +107,20 @@
 				<button class="nav-btn" {{action "doEnd" }}>Add a dimension to Ashley</button>
 				{{/if}}
 			</div>
+			
 		</script>
+		
 		
 		
 		<!-- ROUTE DIMENSION 1 -->
 		<script type="text/x-handlebars" data-template-name="dimension1">
-		<div class="el-no-effect-winsize-outer">
-			<div class="el-no-effect-winsize-inner-container">
-				{{renderWithVars 'world-1d'}}
-			</div>
-		</div>
 		
-			{{renderWithVars 'navigation' navigation isShowIndex="true" isShowDimension2="true" isShowDimension3="true"}}
-
-				
+			<div class="el-no-effect-winsize-outer">
+				<div class="el-no-effect-winsize-inner-container">
+					{{renderWithVars 'world-1d'}}
+				</div>
+			</div>
+	
 			<div class="row">
 				<div class="twelve columns">
 					{{renderWithVars 'dimension1-nav' dimension1Nav}}	
@@ -176,12 +188,13 @@
 
 		<script type="text/x-handlebars" data-template-name="dimension2">
 			{{controlWithVars 'esl-entity-container'}}
-			{{renderWithVars 'navigation' navigation isShowIndex="true" isShowDimension1="true" isShowDimension3="true"}}
+			<!--
 			<div class="row">
 				<div class="twelve columns">
 					{{render 'world-2d-editor'}}
 				</div>
 			</div>
+			-->
 			<div class="row">
 				<div class="twelve columns">
 					{{renderWithVars 'world-2d' World2d}}
@@ -203,7 +216,7 @@
 	
 	<script type="text/x-handlebars" data-template-name="question-mark">
 	
-		{{controlWithVars "cogged-pixel" cogged-pixel x=235 y=45 height=30 width=30 }}
+		{{ controlWithVars "cogged-pixel" cogged-pixel x=235 y=45 height=30 width=30}}
 		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=45 width=30 height=30}} 
 		{{ controlWithVars "cogged-pixel" cogged-pixel x=295 y=45 width=30 height=30}} 
 		{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=90 width=30 height=30}} 
@@ -243,7 +256,6 @@
 	
 	<!-- ROUTE DIMENSION 3 -->
 	<script type="text/x-handlebars" data-template-name="dimension3">
-		{{renderWithVars 'navigation' navigation isShowIndex="true" isShowDimension1="true" isShowDimension2="true"}}
 		<div class="row">
 			<div class="twelve columns">
 				{{renderWithVars 'world-3d' World3d}}
@@ -259,7 +271,6 @@
 	
 	
 	<script type="text/x-handlebars" data-template-name="entity-3d">
-	3d grid
 	</script>
 	
 
@@ -275,9 +286,11 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-       <div class="container"> </div>
+
 		<div class="app-container">
-			
+			<div class="app">
+
+			</div>	
 		</div>  
 		
 		

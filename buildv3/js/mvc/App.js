@@ -234,7 +234,7 @@ Ember.Handlebars.registerHelper('renderWithVars', function(name, contextString, 
 App = Ember.Application.create({
 	static_preloader: {},
 	scriptModel: null,
-	rootElement:$('.app-container')[0],
+	rootElement:$('.app')[0],
 	ready: function () {
 		
 		App.scriptModel = App.ScriptModel.create({});
@@ -254,6 +254,18 @@ App = Ember.Application.create({
 	eventMapper: ragh.eventMapper,
 	colors: ['#FF0000', '#993366', '#3399CC', '#0099FF', '#00CC33', '#00FF00']
 });
+
+App.SIZE = {};
+with (App) {
+	SIZE['W2'] = 1000;
+	SIZE['H2'] = 800;
+
+	SIZE['W1'] = 800;
+	SIZE['H1'] = 600;
+
+	SIZE['W0'] = 480;
+	SIZE['H0'] = 320;
+}
 
 App.dictionary = Em.Object.create({
 	copy: {},

@@ -53,6 +53,7 @@ App.PixelView = App.EslEntityView.extend({
 		handle.x = Number(settings.x);
 		handle.y = Number(settings.y);
 		
+		
 		this.handle = handle;
 		this.shp = shp;
 

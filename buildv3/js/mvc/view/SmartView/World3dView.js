@@ -6,6 +6,7 @@ App.World3dView = App.SmartView.extend({
 	materials: {},
 	textures: {},
 	VS: 10,
+	isControls:false,
 	didInsertElement: function () {
 		
 		this.tryIntersect = [];
@@ -27,7 +28,6 @@ App.World3dView = App.SmartView.extend({
 		var scene = this.scene = new THREE.Scene();
 	
 		var renderer = this.renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true });
-		renderer.setSize(WIDTH, HEIGHT);
 		this.$el.append(renderer.domElement);
 		$(renderer.domElement).addClass('world-3d-renderer')
 			
@@ -35,17 +35,20 @@ App.World3dView = App.SmartView.extend({
 		camera.position.set(WIDTH / 2, 0, 1000);
 		scene.add(camera);	
 		
-		var controls = this.controls = new THREE.TrackballControls( camera );
-		controls.target.set( 0, 0, 0 )
-		controls.rotateSpeed = 1.0;
-		controls.zoomSpeed = 1.2;
-		controls.panSpeed = 0.8;
-		controls.noZoom = false;
-		controls.noPan = false;
-		controls.staticMoving = true;
-		controls.dynamicDampingFactor = 0.3;
-		controls.keys = [ 65, 83, 68 ];
-		controls.addEventListener( 'change', function(me) { return function() { this.redraw; } }(this) );
+		if (this.isControls) {
+			var controls = this.controls = new THREE.TrackballControls( camera );
+			controls.target.set( 0, 0, 0 )
+			controls.rotateSpeed = 1.0;
+			controls.zoomSpeed = 1.2;
+			controls.panSpeed = 0.8;
+			controls.noZoom = false;
+			controls.noPan = false;
+			controls.staticMoving = true;
+			controls.dynamicDampingFactor = 0.0;
+			controls.keys = [ 65, 83, 68 ]; //a s d
+			controls.addEventListener( 'change', function(me) { return function() { this.redraw; } }(this) );
+		}
+
 		
 		var light = new THREE.AmbientLight(0x333333).position.copy(new THREE.Vector3(0, 0, 50));
 		scene.add( light );
@@ -112,7 +115,8 @@ App.World3dView = App.SmartView.extend({
 		this.tmpVec = new THREE.Vector3();
 		this.normalMatrix = new THREE.Matrix3();
 		this.$el.append('<canvas class="temp">');
-		this.tcanvas = $('canvas.temp', this.$el)[0];
+		this.$tcanvas = $('canvas.temp', this.$el).css('display', 'none')
+		this.tcanvas = this.$tcanvas[0];
 		
 		if (!this.tcanvas.getContext) {
 			setTimeout( function (me) {
@@ -196,32 +200,33 @@ App.World3dView = App.SmartView.extend({
 	},
 	
 	resize: function() {
+
+		
 		var w, 
 			h, 
 			trails = 0,
 			tmpbgColor,
 			renderer = this.renderer,
-			camera = this.camera;
-			
-		this.tmpwinWidth = $(window).width();
-		
-		with (this) {	
-			if (tmpwinWidth > 1000) {
-				w = 1000;
-				h = 800; 
-				tmpbgColor = "rgba(200, 255, 200, " + (trails ? 1 / trails : 1) + ")";
-			} else if (tmpwinWidth > 800) {
-				w = 800;
-				h = 800;
-				tmpbgColor = "rgba(200, 200, 255, "+ (trails ? 1 / trails : 1) + ")";
-			} else {
-				w = 400;
-				h = 300;
-				tmpbgColor = "rgba(255, 200, 200, "+ (trails ? 1 / trails : 1) + ")";
-			}
-			$(renderer.domElement).attr( { width: w , height: h  } ).css( 'background-color', tmpbgColor );
+			camera = this.camera,
+			tmpwinWidth = this.tmpwinWidth = $(window).width();
+
+	
+		if (tmpwinWidth > App.SIZE.W2) {
+			w = App.SIZE.W2;
+			h = App.SIZE.H2; 
+			tmpbgColor = "rgba(200, 255, 200, " + (trails ? 1 / trails : 1) + ")";
+		} else if (tmpwinWidth > App.SIZE.W1) {
+			w = App.SIZE.W1;
+			h = App.SIZE.H1;
+			tmpbgColor = "rgba(200, 200, 255, "+ (trails ? 1 / trails : 1) + ")";
+		} else {
+			w = App.SIZE.W0;
+			h = App.SIZE.H0;
+			tmpbgColor = "rgba(255, 200, 200, "+ (trails ? 1 / trails : 1) + ")";
 		}
-		renderer.setSize( w, h )
+
+		$(renderer.domElement).attr( { width: w+'px' , height: h+'px'  } ).css( 'background-color', tmpbgColor );
+		renderer.setSize( w, h );
 		camera.left = -w/2;
 		camera.right = w/2;
 		camera.top = h/2;
@@ -231,7 +236,9 @@ App.World3dView = App.SmartView.extend({
 	
 		this.w = w;
 		this.h = h;
-		this.controls.handleResize();
+		if (this.isControls) {
+			this.controls.handleResize();
+		}
 	},
 	
 	redraw: function(dur) {
@@ -251,8 +258,10 @@ App.World3dView = App.SmartView.extend({
 				}
 				renderer.render( scene, camera);
 			}
-		}				
-		this.controls.update();
+		}			
+		if (this.isControls) {	
+			this.controls.update();
+		}
 	},
 	getRealIntersector: function( intersects ) {
 		for( i = 0; i < intersects.length; i++ ) {

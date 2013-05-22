@@ -8,7 +8,7 @@ App.AshView = App.EslEntityView.extend({
 	},
 	override_draw: function(asettings) {
  		this.eslObj.scaleX = 1;
-		this.eslObj.x = 0;
+		this.eslObj.y=-1; //HACK WHY?
 	},
 	override_redraw: function (dur) {
 		var change = 30/1000 * dur; //per second

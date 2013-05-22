@@ -3,6 +3,7 @@ App.IndexRoute = Em.Route.extend({
 	subtitleController: null,
 	activate: function () {
 		this._super();
+		console.log('Route index', this)
 		App.eventMapper.addEventListener('indNav_start', this, this.doIndNav_start);
 		App.eventMapper.addEventListener('indNav_end', this, this.doIndNav_end);
 		App.eventMapper.addEventListener('sub_finishedReading', this, this.dosub_finishedReading);

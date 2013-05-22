@@ -1,9 +1,12 @@
 App.HashBtnView = App.SmartView.extend({
 	name:'HashBtn',
-	templateName:'hash-btn'/*,
-	didInsertElement: function () {
-		console.log('HashBtnView> controller', this.get('controller	'));
-  		this.get('controller').send('SubtitleView_InsertViewDone', this);
-		return this._super();
-	}*/
+	templateName:'hash-btn',
+	doHide: function() {
+		$('button', this.$el).attr("disabled", true);
+	},
+
+	doShow: function () {
+		$('button', this.$el).attr("disabled", false);
+	}
+
 });
