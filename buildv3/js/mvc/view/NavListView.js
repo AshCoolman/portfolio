@@ -7,5 +7,9 @@ App.NavListView = Em.View.extend({
            isActive: function() {
                return this.get('item') === this.get('parentView.selected');
            }.property('item', 'parentView.selected').cacheable()
-       })
+       }),
+		didInsertElement: function () {
+			this._super();
+			Foundation.libs.topbar.init()
+		}
    });

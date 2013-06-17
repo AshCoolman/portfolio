@@ -30,8 +30,14 @@
 
       if (typeof method !== 'string') {
 
-        $('.top-bar, [data-topbar]').each(function () {
-          $.extend(true, self.settings, self.data_options($(this)));
+		$('.top-bar, [data-topbar]').each(function () {
+          /* FIX - START - FIX */
+          if($(this).data("init") !== undefined){
+              return;
+          }
+          $(this).data("init", true);
+          /* FIX - END - FIX */
+		  $.extend(true, self.settings, self.data_options($(this)));
           self.settings.$w = $(window);
           self.settings.$topbar = $(this);
           self.settings.$section = self.settings.$topbar.find('section');

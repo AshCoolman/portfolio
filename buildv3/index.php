@@ -10,22 +10,23 @@
 
   
   <link rel="stylesheet" href="stylesheets/app.css" />
-  <link rel="stylesheet" href="stylesheets/portfolio.css" />
+  <link rel="stylesheet" href="hm/portfolio.css" />
   
 
   <script src="javascripts/vendor/custom.modernizr.js"></script>
 
 
 		<!-- APPLICATION -->
-		<script type="text/x-handlebars" data-template-name="application">
-			<div class="row">
-				<div class="twelve columns">
-					{{renderWithVars 'navigation' navigation }}
-				</div>
-			</div>
+		<script type="text/x-handlebars" data-template-name="application">		
+		
+
+		 <row>
+			{{outlet "nav-list"}}
+		</row>
+			
 			{{render 'transitions-holder' transitions-holder}}
 			{{renderWithVars 'preloader-content' preloader}}
-			{{outlet "nav-list"}}
+			
 			{{outlet}}
 		</script>
 
@@ -53,20 +54,41 @@
 
 		<!-- NAV LIST -->
 		<script type="text/x-handlebars" data-template-name="nav-list">
-		    <ul class="nav nav-tabs">
-		        {{#view view.NavListItemView item="home" }}
-		            <a {{action doIndex}} >Home</a>
-		        {{/view}}
-		        {{#view view.NavListItemView item="doDimension1" }}
-		            <a {{action doDimension1}} >Dimension 1</a>
-		        {{/view}}   
-		        {{#view view.NavListItemView item="doDimension2" }}
-		            <a {{action doDimension2}} >Dimension 2</a>
-		        {{/view}}   
-		        {{#view view.NavListItemView item="doDimension3" }}
-		            <a {{action doDimension3}} >Dimension 3</a>
-		        {{/view}}   
-		    </ul>
+			<nav class="top-bar">
+				<ul class="title-area">
+					<li class="name"> <h1><a href="#">Ashley Coleman</a></h1> </li>
+			    	<li class="toggle-topbar menu-icon"><a href="#"><span>Go</span></a></li>
+				</ul>
+			
+				<section class="top-bar-section">
+			    	<ul class="left">
+						<!-- Title Area -->
+
+			
+				      	<li class="divider"></li>
+				        {{#view view.NavListItemView item="home" }}
+				            <a {{action doIndex}} >Home</a>
+				        {{/view}}
+			
+					    <li class="divider"></li>
+				        {{#view view.NavListItemView item="doDimension1" }}
+				            <a {{action doDimension1}} >Dimension 1</a>
+				        {{/view}}
+			
+						<li class="divider"></li>
+				        {{#view view.NavListItemView item="doDimension2" }}
+				            <a {{action doDimension2}} >Dimension 2</a>
+				        {{/view}}
+			
+						<li class="divider"></li>
+				        {{#view view.NavListItemView item="doDimension3" }}
+				            <a {{action doDimension3}} >Dimension 3</a>
+				        {{/view}}   
+				    </ul>
+				 	<ul class="right">
+					</ul>
+				</section>
+			</nav>
 		</script>
 
 
@@ -83,13 +105,13 @@
 		<script type="text/x-handlebars" data-template-name="index">
 
 			<div class="row">
-				<div class="twelve columns">
+				<div class="columns">
 					{{renderWithVars 'index-nav' indexNav}}	
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="twelve columns">
+				<div class="columns">
 					<div class="subtitle-container">
 						{{render 'subtitle' subtitle}}
 					</div>
@@ -312,7 +334,7 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-
+		
 		<div class="app-container">
 			<div class="app">
 
