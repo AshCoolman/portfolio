@@ -1,6 +1,6 @@
-App.PreloaderController = App.SmartController.extend({
+App.PreloaderContentController = App.SmartController.extend({
 	isLoaded: false,
-	templateName: 'preloader',
+	templateName: 'preloader-content',
 	isLoadedList: [],
 	queue: {},
 	view_didInsertElement: function(aview) {
