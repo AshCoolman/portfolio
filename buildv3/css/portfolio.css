@@ -1,16 +1,6 @@
 html, body {
   height: 100%; }
 
-.app {
-  margin: 0 auto;
-  width: 1000px;
-  display: block;
-  height: 20px;
-  background-color: yellow; }
-
-.app-container {
-  width: 100%; }
-
 .note {
   font-size: 0.33em;
   color: #999; }
@@ -50,27 +40,6 @@ html, body {
   min-width: 768px;
   margin: 0 auto;
   text-align: center; }
-
-.nav-btn-holder {
-  width: 100%;
-  position: fixed;
-  left: 0;
-  top: 50%; }
-
-.nav-btn {
-  position: relative;
-  margin: 0 auto;
-  width: 100px;
-  display: block;
-  color: #666; }
-
-.hash-btn {
-  float: left;
-  padding: 0.25em; }
-
-.src-world-2d {
-  /* position:'absolute'; */
-  border: 0; }
 
 .preloader-content {
   position: fixed;

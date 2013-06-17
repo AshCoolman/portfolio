@@ -10,7 +10,7 @@
 
   
   <link rel="stylesheet" href="stylesheets/app.css" />
-  <link rel="stylesheet" href="hm/portfolio.css" />
+  <link rel="stylesheet" href="css/portfolio.css" />
   
 
   <script src="javascripts/vendor/custom.modernizr.js"></script>
@@ -105,7 +105,7 @@
 		<script type="text/x-handlebars" data-template-name="index">
 
 			<div class="row">
-				<div class="columns">
+				<div class="small-8 large-3 small-centered  columns" >
 					{{renderWithVars 'index-nav' indexNav}}	
 				</div>
 			</div>
