@@ -50,8 +50,6 @@ App.TransitionView = App.SmartView.extend({
 		}
 
 		$('.transition-canvas', this.$el).css( { width: w+'px' , height: h+'px', 'background-color': tmpbgColor} );
-		
-		console.log('resizing', $('.transition-canvas'));
 	},
 
 })

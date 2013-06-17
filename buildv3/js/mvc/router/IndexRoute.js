@@ -33,8 +33,11 @@ App.IndexRoute = Em.Route.extend({
 		}
 	},
 	renderTemplate: function() { 
+		
+		
 		if ( App.static_preloader ? App.static_preloader.isLoaded : false ) {
 			this.render('index');
+	     	this.render("nav-list", {outlet: "nav-list"});
 		} else {
 			App.eventMapper.addEventListener('preloaderIsLoaded', this, function(me){
 				return function() {
@@ -44,6 +47,9 @@ App.IndexRoute = Em.Route.extend({
 		}
 	},
 	events: {
+		doShowDimension1: function() {
+			console.log('doShowDimension1');
+		},
 		SubtitleView_InsertViewDone: function (achildview, another) {
 			if ('Subtitle' == achildview.name) {
 				subtitleView = achildview;

@@ -28,11 +28,9 @@
 					{{renderWithVars 'navigation' navigation }}
 				</div>
 			</div>
-			
 			{{render 'transitions-holder' transitions-holder}}
-			
 			{{renderWithVars 'preloader' preloader}}
-			
+			{{outlet "nav-list"}}
 			{{outlet}}
 		</script>
 		
@@ -42,36 +40,49 @@
 			{{{infoHtml}}}
 		</script>
 		
-		
-		
 		<!-- APPLICATION ELEMENTS -->
 		<script type="text/x-handlebars" data-template-name="transitions-holder">
 			Transition holder <button {{action "doTransition"}}> transition</button>
 		</script>
 		
-
-
+		<!-- TRANSITION -->
 		<script type="text/x-handlebars" data-template-name="transition">
 				<div class="transition-canvas">
 				</div>
 		</script>
 
-
-
+		<!-- HASH BTN -->
 		<script type="text/x-handlebars" data-template-name="hash-btn">
 			<button {{action "doNavigate" }}> {{label}} </button>
 		</script>
 		
+		<!-- NAV LIST -->
+		<script type="text/x-handlebars" data-template-name="nav-list">
+		    <ul class="nav nav-tabs">
+		        {{#view view.NavListItemView item="home" }}
+		            <a {{action doIndex}} >Home</a>
+		        {{/view}}
+		        {{#view view.NavListItemView item="doDimension1" }}
+		            <a {{action doDimension1}} >Dimension 1</a>
+		        {{/view}}   
+		        {{#view view.NavListItemView item="doDimension2" }}
+		            <a {{action doDimension2}} >Dimension 2</a>
+		        {{/view}}   
+		        {{#view view.NavListItemView item="doDimension3" }}
+		            <a {{action doDimension3}} >Dimension 3</a>
+		        {{/view}}   
+		    </ul>
+		</script>
 
 
+		<!-- NAVIGATION -->
 		<script type="text/x-handlebars" data-template-name="navigation">
+
 			{{renderWithVars 'hash-btn' hashBtn urlhash="/" label="Index" routePath="index"}}
 			{{controlWithVars 'hash-btn' hashBtn urlhash="d1" label="Dimension 1" routePath="dimension1"}}
 			{{controlWithVars 'hash-btn' hashBtn urlhash="d2" label="Dimension 2" routePath="dimension2"}}
 			{{controlWithVars 'hash-btn' hashBtn urlhash="d3" label="Dimension 3" routePath="dimension3"}}
 		</script>
-
-
 
 		<!-- ROUTE INDEX -->
 		<script type="text/x-handlebars" data-template-name="index">
@@ -88,14 +99,10 @@
 						{{render 'subtitle' subtitle}}
 					</div>
 				</div>
-			</div>
-			
+			</div>			
 		</script>
-		
-		
-		
-		
-		<!-- ROUTE DIMENSION 1 NAV-->
+
+		<!-- INDEX NAV-->
 		<script type="text/x-handlebars" data-template-name="index-nav">
 		
 			<div class="nav-btn-holder">
@@ -109,9 +116,7 @@
 			</div>
 			
 		</script>
-		
-		
-		
+
 		<!-- ROUTE DIMENSION 1 -->
 		<script type="text/x-handlebars" data-template-name="dimension1">
 		
@@ -140,6 +145,7 @@
 					</div>
 				</div>
 			</div>
+			
 		</script>
 		
 		<!-- SCALAR -->
@@ -147,12 +153,12 @@
 		
 		</script>
 		
-		<!-- ROUTE DIMENSION 1 NAV-->
+		<!-- WORLD 1 D -->
 		<script type="text/x-handlebars" data-template-name="world-1d">
 			{{renderWithVars 'scalar'}}
 		</script>
 		
-		<!-- ROUTE DIMENSION 1 NAV-->
+		<!-- DIMENSION 2 NAV-->
 		<script type="text/x-handlebars" data-template-name="dimension1-nav">
 			<div class="nav-btn-holder">
 				{{#if isShowStart}}
@@ -165,106 +171,131 @@
 			</div>
 		</script>
 		
+		<!-- HEARTBEAT -->
 		<script type="text/x-handlebars" data-template-name="heartbeat">
 			{{render "heartbeat-flash" heartbeatFlash}}
 			{{render "heartbeat-sound" heartbeatSound}}
 		</script>
-
+		
+		<!-- HEARTBEAT FLASH -->
 		<script type="text/x-handlebars" data-template-name="heartbeat-flash">
 
 		</script>
-
+		
+		<!-- HEARTBEAT SOUND -->
 		<script type="text/x-handlebars" data-template-name="heartbeat-sound">
 
 		</script>
-
+		
+		<!-- SUBTITLE -->
 		<script type="text/x-handlebars" data-template-name="subtitle">
 			{{{text}}}
 		</script>
-		
-		
-		
-		<!-- ROUTE DIMENSION 2 -->
 
+		<!-- ROUTE DIMENSION 2 -->
 		<script type="text/x-handlebars" data-template-name="dimension2">
-			{{controlWithVars 'esl-entity-container'}}
-			<!--
+
 			<div class="row">
 				<div class="twelve columns">
 					{{render 'world-2d-editor'}}
 				</div>
 			</div>
-			-->
-			<div class="row">
-				<div class="twelve columns">
-					{{renderWithVars 'world-2d' World2d}}
-				</div>
+ 
+			<div class="centered-hero"> 
+				{{renderWithVars 'world-2d' World2d}} 
+				{{controlWithVars 'esl-entity-container'}}
 			</div>
+			
 		</script>	
-
-	<script type="text/x-handlebars" data-template-name="world-2d">
-		{{render 'ash' Ash}}
-		{{controlWithVars 'question-mark' question-mark visible=false}}
-		
-	</script>
-	
-	
-
-	<script type="text/x-handlebars" data-template-name="knob">
-	    knob
-	</script>
-	
-	<script type="text/x-handlebars" data-template-name="question-mark">
-	
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=235 y=45 height=30 width=30}}
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=45 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=295 y=45 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=90 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=205 y=60 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=325 y=60 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=90 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=120 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=120 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=150 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=320 y=180 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=290 y=195 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=210 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=240 width=30 height=30}} 
-		{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=300 width=30 height=30}}
-
-	</script>
-
-	<script type="text/x-handlebars" data-template-name="esl-entity-container">
-
-	</script>
-	
-	<script type="text/x-handlebars" data-template-name="ash">
-
-	</script>
-	
-	<script type="text/x-handlebars" data-template-name="cog">
-
-	</script>
-	<script type="text/x-handlebars" data-template-name="world-2d-editor">
-		<button type="button" {{action "addCog" }}>+Cog</button>
-		<button type="button" {{action "addPixel" }}>+Pixel</button>
-		<button type="button" {{action "getAddedStaticPlans" }}>Plans</button>
 		
 		
-	</script>
+		
+		<!-- WORLD 2D -->
+		
+		<script type="text/x-handlebars" data-template-name="world-2d">
+			{{render 'ash' Ash}}
+			{{controlWithVars 'question-mark' question-mark visible=false}}
+		</script>
+		
+
+		
+		<!-- KNOB -->
+		
+		<script type="text/x-handlebars" data-template-name="knob">
+		    knob
+		</script>
+
+
+
+		<!-- QUESTION MARK -->
+			
+		<script type="text/x-handlebars" data-template-name="question-mark">
+	
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=235 y=45 height=30 width=30}}
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=45 width=30 height=30}} 
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=295 y=45 width=30 height=30}} 
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=90 width=30 height=30}} 
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=205 y=60 width=30 height=30}} 
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=325 y=60 width=30 height=30}} 
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=90 width=30 height=30}} 
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=120 width=30 height=30}} 
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=120 width=30 height=30}} 
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=150 width=30 height=30}} 
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=320 y=180 width=30 height=30}} 
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=290 y=195 width=30 height=30}} 
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=210 width=30 height=30}} 
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=240 width=30 height=30}} 
+			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=300 width=30 height=30}}
+
+		</script>
+		
+
+
+
+		<!-- ESL-ENTITY-CONTAINER -->
+		<script type="text/x-handlebars" data-template-name="esl-entity-container">
+
+		</script>
+		
+
+
+
+		<!-- ASH -->
+	
+		<script type="text/x-handlebars" data-template-name="ash">
+
+		</script>
+	
+	
+
+		<!-- COG -->
+		<script type="text/x-handlebars" data-template-name="cog">
+
+		</script>
+		
+		
+		
+
+		<!-- WORLD 2D EDITOR -->
+		<script type="text/x-handlebars" data-template-name="world-2d-editor">
+			<button type="button" {{action "addCog" }}>+Cog</button>
+			<button type="button" {{action "addPixel" }}>+Pixel</button>
+			<button type="button" {{action "getAddedStaticPlans" }}>Plans</button>
+		</script>
+
 
 	
-	<!-- ROUTE DIMENSION 3 -->
-	<script type="text/x-handlebars" data-template-name="dimension3">
-		<div class="row">
-			<div class="twelve columns">
+		<!-- ROUTE DIMENSION 3 -->
+		<script type="text/x-handlebars" data-template-name="dimension3">
+			<div class="centered-hero">
 				{{renderWithVars 'world-3d' World3d}}
 			</div>
-		</div>
-	</script>
-	
-	
+		</script>
+		
 
+
+	
+		<!-- ROUTE DIMENSION 3 -->
 	<script type="text/x-handlebars" data-template-name="world-3d">
 		{{ controlWithVars 'entity-3d'}}
 	</script>

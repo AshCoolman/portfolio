@@ -17,13 +17,12 @@ App.HashBtnController = App.SmartController.extend({
 //		console.log('controller:application', Em.lookup('controller:application'))
 	},
 	
-	doRoute: function(type, data) {
-			console.log('doRoute data', type)
-			if (this.routePath == data.routePath) {
-				this.get('view').doHide();
-			} else {
-				this.get('view').doShow();
-			}
+	doRoute: function(type, data) { 
+		if (this.routePath == data.routePath) {
+			this.get('view').doHide();
+		} else {
+			this.get('view').doShow();
+		}
 	},
 	
 	doNavigate: function() {

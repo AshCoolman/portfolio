@@ -1,6 +1,5 @@
-App.NavTabsController = Em.Controller.extend({
- 	className: 'NavTabsController',
-
+App.NavListController = Em.Controller.extend({
+ 	className: 'NavListController',
 	doIndex: function() {
 		window.location.hash = '';
 	},
@@ -12,10 +11,9 @@ App.NavTabsController = Em.Controller.extend({
 	doDimension2: function() {
 		window.location.hash = 'd2';
 	},
-	
+
 	doDimension3: function() {
 		window.location.hash = 'd3';
 	}
-	
 });
-App.register('controller:nav-tabs', App.NavTabsController, {singleton: false });
+App.register('controller:nav-list', App.NavListController, {singleton: false });
