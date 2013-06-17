@@ -72,7 +72,7 @@ html, body {
   /* position:'absolute'; */
   border: 0; }
 
-.preloader {
+.preloader-content {
   position: fixed;
   height: 100%;
   width: 100%;
