@@ -1,0 +1,128 @@
+html, body {
+  height: 100%; }
+
+.app {
+  margin: 0 auto;
+  width: 1000px;
+  display: block;
+  height: 20px;
+  background-color: yellow; }
+
+.app-container {
+  width: 100%; }
+
+.note {
+  font-size: 0.33em;
+  color: #999; }
+
+.heartbeat-flash {
+  background: pink;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1; }
+
+.heartbeat-on {
+  background: red;
+  -webkit-transition: background 0.4s;
+  -moz-transition: background 0.4s;
+  -o-transition: background 0.4s;
+  transition: background 0.4s; }
+
+.heartbeat-off {
+  -webkit-transition: background 1s;
+  -moz-transition: background 1s;
+  -o-transition: background 1s;
+  transition: background 1s; }
+
+.subtitle-container {
+  position: fixed;
+  bottom: 50%;
+  left: 0;
+  width: 100%; }
+
+.subtitle {
+  color: #333333;
+  width: 100%;
+  max-width: 1000px;
+  min-width: 768px;
+  margin: 0 auto;
+  text-align: center; }
+
+.nav-btn-holder {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 50%; }
+
+.nav-btn {
+  position: relative;
+  margin: 0 auto;
+  width: 100px;
+  display: block;
+  color: #666; }
+
+.hash-btn {
+  float: left;
+  padding: 0.25em; }
+
+.src-world-2d {
+  /* position:'absolute'; */
+  border: 0; }
+
+.preloader-content {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  float: left;
+  color: #c9c9c9;
+  display: none; }
+
+.transitions-holder {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  float: left;
+  color: #c9c9c9;
+  z-index: 1000;
+  pointer-events: none;
+  display: inline; }
+
+.transition {
+  display: block;
+  margin: auto;
+  float: left;
+  z-index: 1001;
+  height: 100%;
+  width: 100%; }
+
+.transition-canvas {
+  width: 1000px;
+  height: 1000px;
+  display: block;
+  float: left; }
+
+.el-no-effect-winsize-outer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+.el-no-effect-winsize-inner {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0; }
+
+.navigation {
+  z-index: 9999;
+  position: absolute; }
+
+.relative-wrapper {
+  position: relative; }

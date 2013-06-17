@@ -10,6 +10,7 @@
 
   
   <link rel="stylesheet" href="stylesheets/app.css" />
+  <link rel="stylesheet" href="stylesheets/portfolio.css" />
   
 
   <script src="javascripts/vendor/custom.modernizr.js"></script>
