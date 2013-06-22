@@ -6,19 +6,18 @@ App.EslStageController = App.SmartController.extend({
 	},
 	view_didInsertElement: function ( view ) {
 		this.pendingEE = [];
-		App.eventMapper.addEventListener( 'viewAddedEsl', this, this.doViewAddedEsl);
+		App.eventMapper.addEventListener( 'eslViewAddedEsl', this, this.doEslViewAddedEsl);
 		App.eventMapper.addEventListener( 'viewRemovedEsl', this, this.doViewRemovedEsl);
 		this._super( view );
 		this.tryProcessPendingEE();
 	}, 
 	view_willDestroyElement: function() {
 		this._super();
-		App.eventMapper.removeEventListener( 'viewAddedEsl', this);
+		App.eventMapper.removeEventListener( 'eslViewAddedEsl', this);
 		App.eventMapper.removeEventListener( 'viewRemovedEsl', this);
 		this.pendingEE = [];
 	},
-	doViewAddedEsl: function ( atype, adata ) {
-		
+	doEslViewAddedEsl: function ( atype, adata ) {
 		this.pendingEE.push(adata);
 		this.tryProcessPendingEE();
 	},

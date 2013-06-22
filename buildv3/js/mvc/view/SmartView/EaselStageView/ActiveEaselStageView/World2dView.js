@@ -50,7 +50,7 @@ App.World2dView = App.ActiveEslStageView.extend({
 	resize: function() {
 		with (this) {	
 			_super();
-			if (isVis) vis.$canvas.attr( { width: width, height: height } ).css( 'background-color', tmpbgcolor );
+
 		}
 	},
 	
@@ -62,7 +62,7 @@ App.World2dView = App.ActiveEslStageView.extend({
 
 			if (isVis) {
 				with (vis) {
-					context.webkitImageSmoothingEnabled = 
+					context.webkitImageSmoothingEnabled = false;
 					context.mozImageSmoothingEnabled = false;
 					context.setTransform(1 * multi,0,0,1 * multi,0,0);
 					vis.context.fillStyle = vis.bgcolor;
@@ -72,11 +72,10 @@ App.World2dView = App.ActiveEslStageView.extend({
 				}
 			}
 		}
+		App.transitionView.draw( this.$canvas ); //should go in willDestroyElement callback, but does not work	
 	},
 	willDestroyElement: function () {
 		this._super();
-		this.src = null
-		this.vis = null
 	}
 
 });

@@ -22,4 +22,4 @@ App.Dimension1NavController = App.SmartController.extend({
 	}
 });
 
-App.register('controller:dimension1-nav', App.Dimension1NavController, {singleton: false }); //Yeah holy shit that was not obvious
+App.register('controller:dimension1-nav', App.Dimension1NavController, {singleton: false }); 

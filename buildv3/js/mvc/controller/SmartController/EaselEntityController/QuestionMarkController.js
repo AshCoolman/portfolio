@@ -1,7 +1,7 @@
 App.QuestionMarkController = App.EslEntityController.extend({
 	className:'QuestionMarkController',
 	label:'question-mark-controller',
-	view_eslObjectCreated: function (acontroller) {
+	view_eslEntityCreated: function (acontroller) {
 		this._super(acontroller);
 	}
 });

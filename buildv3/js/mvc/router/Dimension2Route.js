@@ -9,16 +9,14 @@ App.Dimension2Route = Em.Route.extend({
 	activate: function () { 
 		//Application state 
 	},
-	deactivate: function () {
-		console.log('deactivate');
-		App.eventMapper.triggerEvent(ragh.MEvt.create('doTransition')); 
-	},
+
 	setupController: function (controller, model) {
 		controller.set('content', model);
 	},
 	renderTemplate: function () {
 		if ( App.static_preloader.isLoaded ) {
 			this.render('dimension2');
+	     	this.render("nav-list", {outlet: "nav-list"});
 		} else {
 			App.eventMapper.addEventListener('preloaderIsLoaded', this, function(me){
 				return function() {
@@ -51,7 +49,9 @@ App.Dimension2Route = Em.Route.extend({
 							App.static_eslEntityContainerView.pushObject( view );
 							*/
 							console.log('me.questionMarkController', me)
-							me.questionMarkController.get('view').eslObj.visible = true;
+							if (me.questionMarkController) {
+								me.questionMarkController.get('view').eslObj.visible = true;
+							}
 						}
 					}(this), 1500)
 					break;

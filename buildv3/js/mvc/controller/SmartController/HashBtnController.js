@@ -35,4 +35,4 @@ App.HashBtnController = App.SmartController.extend({
 		App.eventMapper.removeEventListener('doRoute', this);
 	}
 });
-App.register('controller:hash-btn', App.HashBtnController, {singleton: false }); //Yeah holy shit that was not obvious
+App.register('controller:hash-btn', App.HashBtnController, {singleton: false }); 

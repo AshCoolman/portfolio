@@ -232,6 +232,7 @@ Ember.Handlebars.registerHelper('renderWithVars', function(name, contextString, 
 
 
 App = Ember.Application.create({
+	DEBUG: false,
 	static_preloader: {},
 	scriptModel: null,
 	rootElement:$('.app')[0],
@@ -255,16 +256,14 @@ App = Ember.Application.create({
 	colors: ['#FF0000', '#993366', '#3399CC', '#0099FF', '#00CC33', '#00FF00']
 });
 
-App.SIZE = {};
-with (App) {
-	SIZE['W2'] = 1000;
-	SIZE['H2'] = 800;
 
-	SIZE['W1'] = 800;
-	SIZE['H1'] = 600;
-
-	SIZE['W0'] = 480;
-	SIZE['H0'] = 320;
+App.BREAKPOINT = {
+	WIDTH_2: 1280,
+	HEIGHT_2: 800,
+	WIDTH_1: 768,
+	HEIGHT_1: 600,
+	WIDTH_0: 480,
+	HEIGHT_0: 360
 }
 
 App.dictionary = Em.Object.create({

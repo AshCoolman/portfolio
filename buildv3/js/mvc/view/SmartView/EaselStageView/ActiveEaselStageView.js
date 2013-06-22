@@ -18,14 +18,11 @@ App.ActiveEslStageView = App.EslStageView.extend({
 		
 		var rafFunction = function(me) {
 			var animloop = function (time) {
-		
-						var dur = (this.lastRequestAnimationFrame) ? time - this.lastRequestAnimationFrame : 0;
-						this.lastRequestAnimationFrame = time;
-						me.redraw(dur);
-						
-						me.set('raf', window.requestAnimationFrame(animloop));	
-					
-				};
+				var dur = (this.lastRequestAnimationFrame) ? time - this.lastRequestAnimationFrame : 0;
+				this.lastRequestAnimationFrame = time;
+				me.redraw(dur);
+				me.set('raf', window.requestAnimationFrame(animloop));			
+			};
 			return animloop
 		}(this);
 		
@@ -39,20 +36,23 @@ App.ActiveEslStageView = App.EslStageView.extend({
 	resize: function() {
 		this.tmpwinWidth = $(window).width();
 		with (this) {	
-			if (tmpwinWidth > App.SIZE.W2) {
-				width = App.SIZE.W2;
-				height = App.SIZE.H2; 
+			if (tmpwinWidth > App.BREAKPOINT.WIDTH_2) {
+				width = App.BREAKPOINT.WIDTH_2;
+				height = App.BREAKPOINT.HEIGHT_2; 
 				tmpbgColor = "rgba(200, 255, 200, " + (trails ? 1 / trails : 1) + ")";
-			} else if (tmpwinWidth > App.SIZE.W1) {
-				width = App.SIZE.W1;
-				height = App.SIZE.H1;
+			} else if (tmpwinWidth > App.BREAKPOINT.WIDTH_1) {
+				width = App.BREAKPOINT.WIDTH_1;
+				height = App.BREAKPOINT.HEIGHT_1;
 				tmpbgColor = "rgba(200, 200, 255, "+ (trails ? 1 / trails : 1) + ")";
 			} else {
-				width = App.SIZE.W0;
-				height = App.SIZE.H0;
+				width = App.BREAKPOINT.WIDTH_0;
+				height = App.BREAKPOINT.HEIGHT_0;
 				tmpbgColor = "rgba(255, 200, 200, "+ (trails ? 1 / trails : 1) + ")";
 			}
-			$canvas.attr( { width: width , height: height  } ).css( 'background-color', tmpbgColor );
+			$canvas.attr( { width: width , height: height  } );
+			if (App.DEBUG) {
+				$canvas.css( {'box-shadow': 'inset -1px -1px '+ tmpbgColor, width: width , height: height } );
+			}
 		}
 	},	
 	redraw: function(dur) {
@@ -62,11 +62,15 @@ App.ActiveEslStageView = App.EslStageView.extend({
 				if (!eslEntities[i].override_redraw) {
 					console.log('entity lacks override_redraw\n\t', eslEntities[i]._debugContainerKey)
 				} else { 
+					//console.log('>>', eslEntities[i].x)
 					eslEntities[i].override_redraw(dur);
+					/*
 					eslEntities[i].x -= 0.5;
 					eslEntities[i].y -= 0.5;
+					*/
 				}
 			}	
+			stage.x = -1 + $canvas.attr('width')/2;
 			stage.update();
 		}
 	},

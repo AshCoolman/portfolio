@@ -40,6 +40,7 @@ App.Dimension1Route = Em.Route.extend({
 	renderTemplate: function () {
 		if ( ( App.static_preloader ) ? ( App.static_preloader.isLoaded ) : false ) {
 			this.render('dimension1');
+	     	this.render("nav-list", {outlet: "nav-list"});
 		} else {
 			App.eventMapper.addEventListener('preloaderIsLoaded', this, function(me){
 				return function() {

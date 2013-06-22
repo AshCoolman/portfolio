@@ -9,9 +9,9 @@ App.EslEntityContainerController = App.SmartController.extend({
 	//	App.eventMapper.triggerEvent(ragh.MEvt.create('static_eslEntityContainerViewAdded'));
 	},
 	
-	view_eslObjectCreated: function (eslEntityController) {
-		console.log(' view_eslObjectCreated', eslEntityController)
-		App.eventMapper.triggerEvent(ragh.MEvt.create('viewAddedEsl', {label: eslEntityController.label, view: eslEntityController.get('view'), parentEslObj: eslEntityController.get('view').parentEslObj}));
+	view_eslEntityCreated: function (eslEntityController) {
+		console.log(' view_eslEntityCreated', eslEntityController)
+		App.eventMapper.triggerEvent(ragh.MEvt.create('eslViewAddedEsl', {label: eslEntityController.label, view: eslEntityController.get('view'), parentEslObj: eslEntityController.get('view').parentEslObj}));
 
 	},
 });

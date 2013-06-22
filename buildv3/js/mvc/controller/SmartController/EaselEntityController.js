@@ -1,9 +1,9 @@
 App.EslEntityController = App.SmartController.extend({
 	label: 'esl-entity',
 	className: 'EslEntityController',
-	view_eslObjectCreated: function (eslEntityController) {
+	view_eslEntityCreated: function (eslEntityController) {
  		App.eventMapper.addEventListener('w2dE_GetPlans', eslEntityController, eslEntityController.override_doGetPlans);
-		App.eventMapper.triggerEvent(ragh.MEvt.create('viewAddedEsl', {label: eslEntityController.label, view: eslEntityController.get('view'), parentEslObj: eslEntityController.get('view').parentEslObj}));
+		App.eventMapper.triggerEvent(ragh.MEvt.create('eslViewAddedEsl', {label: eslEntityController.label, view: eslEntityController.get('view'), parentEslObj: eslEntityController.get('view').parentEslObj}));
 
 	},
 	view_willDestroyElement: function () {
@@ -13,4 +13,4 @@ App.EslEntityController = App.SmartController.extend({
 		throw 'EslEntityController.override_doGetPlans() is an abstract stub function. Must be overridden without a this._super() call';
 	}
 });
-App.register('esl-entity', App.EslEntityController, {singleton: false }); //Yeah holy shit that was not obvious
+App.register('esl-entity', App.EslEntityController, {singleton: false }); 

@@ -114,4 +114,4 @@ App.SubtitleController = App.SmartController.extend({
     }
 });
 
-App.register('controller:subtitle', App.SubtitleController, {singleton: false }); //Yeah holy shit that was not obvious
+App.register('controller:subtitle', App.SubtitleController, {singleton: false }); 

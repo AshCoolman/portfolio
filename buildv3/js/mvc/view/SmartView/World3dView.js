@@ -9,8 +9,9 @@ App.World3dView = App.SmartView.extend({
 	isControls:false,
 	didInsertElement: function () {
 		
-		this.tryIntersect = [];
 		this._super();
+		this.tryIntersect = [];
+		this.$el.css('display', 'none');
 
 		App.world3d = this;
 		
@@ -26,7 +27,6 @@ App.World3dView = App.SmartView.extend({
 			
 
 		var scene = this.scene = new THREE.Scene();
-	
 		var renderer = this.renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true });
 		this.$el.append(renderer.domElement);
 		$(renderer.domElement).addClass('world-3d-renderer')
@@ -48,7 +48,6 @@ App.World3dView = App.SmartView.extend({
 			controls.keys = [ 65, 83, 68 ]; //a s d
 			controls.addEventListener( 'change', function(me) { return function() { this.redraw; } }(this) );
 		}
-
 		
 		var light = new THREE.AmbientLight(0x333333).position.copy(new THREE.Vector3(0, 0, 50));
 		scene.add( light );
@@ -57,10 +56,14 @@ App.World3dView = App.SmartView.extend({
 		directionalLight.position.set( 0, 0, 1 );
 		scene.add( directionalLight );
 	
-
 		
-		var cursor3D = this.cursor3D = new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial());
-		cursor3D.add(new THREE.PointLight(0x00FF00));
+		if (App.DEBUG) {
+			this.cursor3D = new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial());
+			cursor3D.add(new THREE.PointLight(0x00FF00));
+		} else {
+			this.cursor3D = new THREE.Object3D();
+		}
+		var cursor3D = this.cursor3D;
 		cursor3D.overdraw = true;
 		scene.add(cursor3D);
 			
@@ -104,6 +107,7 @@ App.World3dView = App.SmartView.extend({
 		setTimeout( function (me) {
 			return  function() {
 					me.createFromImage(img);
+					App.transitionView.clear();
 			}
 		}(this), 100);
 	},
@@ -150,6 +154,7 @@ App.World3dView = App.SmartView.extend({
 				}
 			}
 			this.scene.add(this.cubeGroup = CubeGroup.createFromMap(map));
+			this.$el.css('display', 'block');
 		}	
 	},
 	
@@ -211,27 +216,30 @@ App.World3dView = App.SmartView.extend({
 			tmpwinWidth = this.tmpwinWidth = $(window).width();
 
 	
-		if (tmpwinWidth > App.SIZE.W2) {
-			w = App.SIZE.W2;
-			h = App.SIZE.H2; 
+		if (tmpwinWidth > App.BREAKPOINT.WIDTH_2) {
+			w = App.BREAKPOINT.WIDTH_2;
+			h = App.BREAKPOINT.HEIGHT_2; 
 			tmpbgColor = "rgba(200, 255, 200, " + (trails ? 1 / trails : 1) + ")";
-		} else if (tmpwinWidth > App.SIZE.W1) {
-			w = App.SIZE.W1;
-			h = App.SIZE.H1;
+		} else if (tmpwinWidth > App.BREAKPOINT.WIDTH_1) {
+			w = App.BREAKPOINT.WIDTH_1;
+			h = App.BREAKPOINT.HEIGHT_1;
 			tmpbgColor = "rgba(200, 200, 255, "+ (trails ? 1 / trails : 1) + ")";
 		} else {
-			w = App.SIZE.W0;
-			h = App.SIZE.H0;
+			w = App.BREAKPOINT.WIDTH_0;
+			h = App.BREAKPOINT.HEIGHT_0;
 			tmpbgColor = "rgba(255, 200, 200, "+ (trails ? 1 / trails : 1) + ")";
 		}
 
-		$(renderer.domElement).attr( { width: w+'px' , height: h+'px'  } ).css( 'background-color', tmpbgColor );
+		$(renderer.domElement).attr( { width: w+'px' , height: h+'px'  } );
+		if (App.DEBUG) {
+			$canvas.css( 'box-shadow', 'inset -1px -1px '+ tmpbgColor );
+		}
 		renderer.setSize( w, h );
 		camera.left = -w/2;
 		camera.right = w/2;
 		camera.top = h/2;
 		camera.bottom = -h/2;	
-		camera.position.set(w / 2, -h/2, 1000);
+		camera.position.set(200, -h/2, 1000);
 	    camera.updateProjectionMatrix();
 	
 		this.w = w;

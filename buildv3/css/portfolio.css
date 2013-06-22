@@ -1,12 +1,13 @@
 html, body {
-  height: 100%; }
+  height: 100%;
+  background: transparent !important; }
 
 .note {
   font-size: 0.33em;
   color: #999; }
 
 .heartbeat-flash {
-  background: pink;
+  background: transparent;
   position: fixed;
   width: 100%;
   height: 100%;
@@ -27,7 +28,11 @@ html, body {
   -o-transition: background 1s;
   transition: background 1s; }
 
-.subtitle-container {
+.horizontal-centered {
+  margin: 0 auto;
+  display: block; }
+
+.vertical-centered {
   position: fixed;
   bottom: 50%;
   left: 0;
@@ -50,28 +55,11 @@ html, body {
   display: none; }
 
 .transitions-holder {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  float: left;
-  color: #c9c9c9;
-  z-index: 1000;
-  pointer-events: none;
-  display: inline; }
-
-.transition {
-  display: block;
-  margin: auto;
-  float: left;
-  z-index: 1001;
-  height: 100%;
-  width: 100%; }
+  pointer-events: none; }
 
 .transition-canvas {
-  width: 1000px;
-  height: 1000px;
-  display: block;
-  float: left; }
+  z-index: 1000;
+  display: block; }
 
 .el-no-effect-winsize-outer {
   position: absolute;
@@ -95,3 +83,26 @@ html, body {
 
 .relative-wrapper {
   position: relative; }
+
+.full-width-centered {
+  width: 100%; }
+
+.absolute-positioned {
+  position: absolute; }
+
+.esl-stage-canvas, .world-3d-renderer, .transition-canvas {
+  margin: 0 auto;
+  display: block; }
+
+.world-1d-centerer {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  position: relative; }
+
+.world-1d {
+  width: 1000px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -500px; }

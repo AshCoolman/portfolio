@@ -49,9 +49,11 @@ App.QuestionMarkView = App.EslEntityView.extend({
 		shp.width = settings.width;
 		shp.height = settings.height;
 		shp.graphics.clear();
-		shp.graphics.beginFill('#FF0000');
-		shp.graphics.drawRect( 0, 0, shp.width, shp.height);
-		
+	
+		//if (App.DEBUG) {
+			shp.graphics.beginFill('#FF0000');
+			shp.graphics.drawRect( 0, 0, shp.width, shp.height);
+		//}
 		handle.x = Number(settings.x);
 		handle.y = Number(settings.y);
 		handle.visible = settings.visible;

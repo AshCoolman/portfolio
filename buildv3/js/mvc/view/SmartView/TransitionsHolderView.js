@@ -6,8 +6,8 @@ App.TransitionsHolderView = App.SmartContainerView.extend({
 		this._super();
 	},
 	
-	doTransition: function() {
-		console.log('doTransition');
-		this.pushObject( App.TransitionView.create( { controller: App.TransitionController.create() }));
+	doTransition: function($acanvas) {
+		console.log('doTransition', $acanvas);
+		this.pushObject( App.TransitionView.create( { controller: App.TransitionController.create(), $canvasSrc: $acanvas }));
 	}
 })

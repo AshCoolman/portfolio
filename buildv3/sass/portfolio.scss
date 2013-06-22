@@ -1,7 +1,10 @@
 $fullWidth: 1000px;
 $minWidth: 768px;
 
-html,body { height:100%; }
+html,body { 
+	height:100%; 
+	background: transparent !important;
+}
  
 
 .note {
@@ -11,7 +14,7 @@ html,body { height:100%; }
 
 
 .heartbeat-flash {
-	background:pink;
+background:transparent;
 	position: fixed;
 	width: 100%;
 	height: 100%;
@@ -36,12 +39,17 @@ html,body { height:100%; }
 }
 
 
-.subtitle-container {
+.horizontal-centered {
+	margin: 0 auto;
+	display: block;
+}
+
+
+.vertical-centered {
 	position:fixed;
 	bottom: 50%;
 	left:0;
 	width: 100%;
-	
 }
 
 
@@ -64,30 +72,15 @@ html,body { height:100%; }
 }
 
 .transitions-holder {
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	float: left;
-	color: rgb(201, 201, 201);
-	z-index: 1000;
     pointer-events: none;
-	display:inline;
 }
 
 .transition {
-	display: block;
-	margin: auto;
-	float:left;
-	z-index: 1001;
-	height: 100%;
-	width: 100%;
 }
 
 .transition-canvas {
-	width: 1000px;
-	height: 1000px;
+	z-index: 1000;
 	display: block;
-	float:left;
 }
 
 
@@ -117,4 +110,36 @@ html,body { height:100%; }
 }
 
 .world-3d-renderer {
+}
+
+
+.full-width-centered {
+  width: 100%;
+}
+
+.absolute-positioned {
+	position: absolute;
+}
+
+.esl-stage-canvas, .world-3d-renderer, .transition-canvas {
+	margin: 0 auto;
+	display: block;
+}
+.world-1d-centerer {
+  width: 100%;
+	height:400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.world-1d {
+  width: 1000px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -500px;
+}
+
+.scalar {
+
 }

@@ -15,4 +15,4 @@ App.IndexNavController = App.SmartController.extend({
 	}
 });
 
-App.register('controller:index-nav', App.IndexNavController, {singleton: false }); //Yeah holy shit that was not obvious
+App.register('controller:index-nav', App.IndexNavController, {singleton: false }); 

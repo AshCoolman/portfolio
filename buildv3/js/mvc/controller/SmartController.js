@@ -36,4 +36,4 @@ App.SmartController = Em.ObjectController.extend({
 	}
 });
 
-App.register('controller:smart-controller', App.SmartController, {singleton: false }); //Yeah holy shit that was not obvious
+App.register('controller:smart-controller', App.SmartController, {singleton: false }); 

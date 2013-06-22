@@ -20,6 +20,7 @@ App.CogView = App.EslEntityView.extend({
 				ev.target.y = me.snap(ev.stageY+offset.y);
 			});
 		} }(this)));
+		console.log('override_createEsl()', this.dragger)
 		return this.dragger;
 	},
 	override_draw: function (asettings) {

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -23,11 +22,16 @@
 		 <row>
 			{{outlet "nav-list"}}
 		</row>
-			
-			{{render 'transitions-holder' transitions-holder}}
+		
+
 			{{renderWithVars 'preloader-content' preloader}}
 			
+			<div class="full-width-centered absolute-positioned">
+				{{render 'transition' transition}}
+			</div>
+			
 			{{outlet}}
+			
 		</script>
 
 		<!-- APPLICATION ELEMENTS -->
@@ -43,8 +47,10 @@
 
 		<!-- TRANSITION -->
 		<script type="text/x-handlebars" data-template-name="transition">
-				<div class="transition-canvas">
-				</div>
+		
+				<canvas class="transition-canvas">
+				</canvas>
+				
 		</script>
 
 		<!-- HASH BTN -->
@@ -63,12 +69,6 @@
 				<section class="top-bar-section">
 			    	<ul class="left">
 						<!-- Title Area -->
-
-			
-				      	<li class="divider"></li>
-				        {{#view view.NavListItemView item="home" }}
-				            <a {{action doIndex}} >Home</a>
-				        {{/view}}
 			
 					    <li class="divider"></li>
 				        {{#view view.NavListItemView item="doDimension1" }}
@@ -104,15 +104,18 @@
 		<!-- ROUTE INDEX -->
 		<script type="text/x-handlebars" data-template-name="index">
 
-			<div class="row">
-				<div class="small-8 large-3 small-centered  columns" >
-					{{renderWithVars 'index-nav' indexNav}}	
-				</div>
-			</div>
+
 
 			<div class="row">
 				<div class="columns">
-					<div class="subtitle-container">
+					<div class="vertical-centered">
+					
+						<div class="row">
+							<div class="small-2 large-2 small-centered columns">
+								{{renderWithVars 'index-nav' indexNav}}	
+							</div>
+						</div>
+						
 						{{render 'subtitle' subtitle}}
 					</div>
 				</div>
@@ -121,58 +124,59 @@
 
 		<!-- INDEX NAV-->
 		<script type="text/x-handlebars" data-template-name="index-nav">
+			{{#if isShowStart}}
+			<a class="button nav-btn" {{action "doStart" }}>Start</a>
+			{{/if}}
 
-			<div class="nav-btn-holder">
-				{{#if isShowStart}}
-				<button class="nav-btn" {{action "doStart" }}>Press here to begin</button>
-				{{/if}}
-
-				{{#if isShowEnd}}
-				<button class="nav-btn" {{action "doEnd" }}>Add a dimension to Ashley</button>
-				{{/if}}
-			</div>
-
+			{{#if isShowEnd}}
+			<a class="button nav-btn" {{action "doEnd" }}>0 + 1 =</a>
+			{{/if}}
 		</script>
 
 		<!-- ROUTE DIMENSION 1 -->
 		<script type="text/x-handlebars" data-template-name="dimension1">
 
-			<div class="el-no-effect-winsize-outer">
-				<div class="el-no-effect-winsize-inner-container">
+			<div class="full-width-centered absolute-positioned">
+				<div class="world-1d-centerer">
 					{{renderWithVars 'world-1d'}}
 				</div>
 			</div>
-
-			<div class="row">
-				<div class="twelve columns">
-					{{renderWithVars 'dimension1-nav' dimension1Nav}}	
-				</div>
+			
+			
+			<div class="full-width-centered absolute-positioned">
+				{{render 'heartbeat' heartbeat}}
 			</div>
+			
 
 			<div class="row">
-				<div class="twelve columns">
-					{{render 'heartbeat' heartbeat}}	
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="twelve columns">
-					<div class="subtitle-container">
+				<div class="columns">
+					<div class="vertical-centered">
+						<div class="row">
+							<div class="small-2 large-2 small-centered columns">
+								{{renderWithVars 'dimension1-nav' dimension1Nav}}
+							</div>
+						</div>
 						{{render 'subtitle' subtitle}}
 					</div>
 				</div>
-			</div>
-
+ 			</div>
 		</script>
 
 		<!-- SCALAR -->
 		<script type="text/x-handlebars" data-template-name="scalar">
 
 		</script>
+		
 
+		<!-- SCALAR -->
+		<script type="text/x-handlebars" data-template-name="scalar-value	">
+
+		</script>
+		
 		<!-- WORLD 1 D -->
 		<script type="text/x-handlebars" data-template-name="world-1d">
 			{{renderWithVars 'scalar'}}
+			{{renderWithVars 'scalar-value'}}
 		</script>
 
 		<!-- DIMENSION 2 NAV-->
@@ -183,7 +187,7 @@
 				{{/if}}
 
 				{{#if isShowEnd}}
-				<button class="nav-btn" {{action "doEnd" }}>Add another dimension to Ashley</button>
+				<button class="nav-btn" {{action "doEnd" }}>1 + 1 =</button>
 				{{/if}}
 			</div>
 		</script>
@@ -211,18 +215,13 @@
 
 		<!-- ROUTE DIMENSION 2 -->
 		<script type="text/x-handlebars" data-template-name="dimension2">
-
-			<div class="row">
-				<div class="twelve columns">
-					{{render 'world-2d-editor'}}
-				</div>
-			</div>
-
-			<div class="centered-hero"> 
+			<div class="full-width-centered absolute-positioned">
 				{{renderWithVars 'world-2d' World2d}} 
 				{{controlWithVars 'esl-entity-container'}}
 			</div>
-
+			{{#if App.DEBUG}}
+			{{render 'world-2d-editor'}}
+			{{/if}}
 		</script>	
 
 
@@ -230,8 +229,8 @@
 		<!-- WORLD 2D -->
 
 		<script type="text/x-handlebars" data-template-name="world-2d">
-			{{render 'ash' Ash}}
-			{{controlWithVars 'question-mark' question-mark visible=false}}
+			{{controlWithVars 'ash' ash x=-200 }}
+			{{controlWithVars 'question-mark' question-mark x=-200 visible=false}}
 		</script>
 
 
@@ -295,16 +294,20 @@
 
 		<!-- WORLD 2D EDITOR -->
 		<script type="text/x-handlebars" data-template-name="world-2d-editor">
-			<button type="button" {{action "addCog" }}>+Cog</button>
-			<button type="button" {{action "addPixel" }}>+Pixel</button>
-			<button type="button" {{action "getAddedStaticPlans" }}>Plans</button>
+			<div class="row">
+				<div class="small-offset-1 columns">
+					<a class="small button" type="button" {{action "addCog" }}>+Cog</a>
+					<a class="small button" type="button" {{action "addPixel" }}>+Pixel</a>
+					<a class="small button" type="button" {{action "getAddedStaticPlans" }}>Plans</a>
+				</div>
+			</div>
 		</script>
 
 
 
 		<!-- ROUTE DIMENSION 3 -->
 		<script type="text/x-handlebars" data-template-name="dimension3">
-			<div class="centered-hero">
+			<div class="full-width-centered absolute-positioned">
 				{{renderWithVars 'world-3d' World3d}}
 			</div>
 		</script>
