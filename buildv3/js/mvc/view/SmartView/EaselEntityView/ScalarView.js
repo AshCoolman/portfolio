@@ -5,12 +5,13 @@ App.ScalarView = App.EslEntityView.extend({
 	drawInstructions: null,
 	eslObjSettings: {
 		width: 2400,
-		height: 1,
+		height:320,
 		x: 0,
 		y: 0,
 		fromController: ['x', 'y', 'width', 'height']
 	},
 	drawInstructions: {
+		isMirrored: true,
 		axis: {
 			step: 10,
 			count:0
@@ -36,49 +37,70 @@ App.ScalarView = App.EslEntityView.extend({
 
 	},
 	override_createEsl: function() {
-		return this.shp = new createjs.Shape();
+		this.container = new createjs.Container();
+		this.shp = new createjs.Shape();
+		
+		this.container.addChild(this.shp);
+		return this.container;
 	},
 	resize: function () {
 		
 	},
 	override_draw: function (asettings) {
+		console.log('scalar.override_draw()', asettings);
 			var settings = asettings ? asettings : this.eslObj,
-				shp = this.shp;
+				shp = this.shp,
+				container = this.container;
 
 			settings.x = Number(settings.x);	
 			settings.y = Number(settings.y);
 			//settings.height = Number(settings.height);	
-		//	settings.width = Number(settings.width);
+			//settings.width = Number(settings.width);
 			Em.assert('App.ScalarView.override_draw(): value of x in eslObj is not of type "number"', 	!isNaN(settings.x) );
 			Em.assert('App.ScalarView.override_draw(): value of y in eslObj is not of type "number"',  !isNaN(settings.y) );
 			Em.assert('App.ScalarView.override_draw(): value of width in eslObj is not of type "number" ' + settings.width, !isNaN(settings.width) );
 			Em.assert('App.ScalarView.override_draw(): value of height in eslObj is not of type "number" ' + settings.height,  !isNaN(settings.height) );
 
-			shp.regX = settings.width / 2;
-			shp.regY = settings.height / 2;
+
 			shp.width = settings.width;
 			shp.height = settings.height;
 			
+			shp.regX = shp.width / 2;
+			shp.regY = -shp.height / 2;
+			
+			/*
+			shp.graphics.beginFill("#ff0000").drawRect(0, 0, 1000, 800);
+			shp.graphics.beginStroke("#666")
+				.moveTo(0, 700)
+				.lineTo(1000, 700)
+				.endStroke();
+			*/
+		 	console.log('Settings?', settings)
+		
 			shp.x = Number(settings.x);
 			shp.y = Number(settings.y);	
 			
+			 this.set('value', shp.width / 2);
 			return shp
 	},
 	override_redraw: function () {
-		var drawInstructions = this.get('drawInstructions');
-		var shp = this.shp;
+		
+		var drawInstructions = this.get('drawInstructions'),
+			shp = this.shp,
+			value = this.get('value'),
+			offset = (drawInstructions.isMirrored) ? shp.width/2 : 0;
 		if (drawInstructions) {
 			if (drawInstructions.axis) {
 				with (drawInstructions.axis) {
-					if (count * step < shp.width / 2) {
+					if (count * step < this.value) {
 							if (drawInstructions.isMirrored) {
 								shp.graphics.beginStroke("#666")
-											.moveTo(shp.width/2 - (count) * step, 0)
-											.lineTo(shp.width/2 - (count + 1) * step, 0);
+											.moveTo(offset - (count) * step, 0)
+											.lineTo(offset - (count + 1) * step, 0);
 							}
 							shp.graphics.beginStroke("#666")	
-										.moveTo(shp.width/2 + (count) * step, 0)
-										.lineTo(shp.width/2 + (count + 1) * step, 0)
+										.moveTo(offset + (count) * step, 0)
+										.lineTo(offset + (count + 1) * step, 0)
 										.endStroke();
 						count++;
 					} else {
@@ -89,16 +111,16 @@ App.ScalarView = App.EslEntityView.extend({
 			 if (drawInstructions.smallMarks) {
 				with (drawInstructions.smallMarks) {
 			
-					if (count * step < shp.width / 2) {
+					if (count * step < this.value) {
 						for (var s = 0; s < markHeights.length && count - s >= 0; s++) {
 							if (drawInstructions.isMirrored) {
 								shp.graphics.beginStroke("#666")
-									.moveTo(shp.width/2 - (count - s) * unit, markHeights[s])
-									.lineTo(shp.width/2 - (count - s) * unit, - markHeights[s]);
+									.moveTo(offset - (count - s) * unit, markHeights[s])
+									.lineTo(offset - (count - s) * unit, - markHeights[s]);
 							}
 							shp.graphics.beginStroke("#666")
-								.moveTo(shp.width/2 + (count - s) * unit, markHeights[s])
-								.lineTo(shp.width/2 + (count - s) * unit, - markHeights[s])
+								.moveTo(offset + (count - s) * unit, markHeights[s])
+								.lineTo(offset + (count - s) * unit, - markHeights[s])
 								.endStroke();
 						}
 						count++;
@@ -110,17 +132,17 @@ App.ScalarView = App.EslEntityView.extend({
 			 if (drawInstructions.bigMarks) {
 				with (drawInstructions.bigMarks) {
 
-					if (count * step < shp.width / 2) {
+					if (count * step < this.value) {
 						if ( ((count * step ) % unit ) == 0) {
 							for (var s = 0; s < markHeights.length && (count * step - s * unit ) >= 0; s++) {
 								if (drawInstructions.isMirrored) {
 									shp.graphics.beginStroke("#666")
-										.moveTo(shp.width/2 - (count * step - s * unit ),  	markHeights[s])
-										.lineTo(shp.width/2 - (count * step - s * unit ), - markHeights[s]);
+										.moveTo(offset - (count * step - s * unit ),  	markHeights[s])
+										.lineTo(offset - (count * step - s * unit ), - markHeights[s]);
 								}
 								shp.graphics.beginStroke("#666")
-									.moveTo(shp.width/2 + (count * step - s * unit ),  	markHeights[s])
-									.lineTo(shp.width/2 + (count * step - s * unit ), - markHeights[s])
+									.moveTo(offset + (count * step - s * unit ),  	markHeights[s])
+									.lineTo(offset + (count * step - s * unit ), - markHeights[s])
 									.endStroke();
 							}
 						}
@@ -131,8 +153,8 @@ App.ScalarView = App.EslEntityView.extend({
 				}
 			}
 		}
-		this.shp.x = Math.round( 0 );
-		this.shp.y = Math.round( this.shp.parent.canvas.height / 2 );
+		//this.container.x = Math.round( 0 );
+		//this.container.y = Math.round( this.container.parent.canvas.height / 2 );
 		
 	}
 });

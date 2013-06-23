@@ -31,8 +31,9 @@ App.EslEntityView = App.SmartView.extend({
 	initialDraw: function () {
 		
 		var controllerSettings = {},
+			eslObjSettings = this.get('eslObjSettings'),
 			controller = this.get('controller'),
-			fromController = this.eslObjSettings.fromController;
+			fromController = eslObjSettings.fromController;
 			
 			
 		for (var i = 0, s = fromController[i]; i < fromController.length; i++) {
@@ -43,7 +44,8 @@ App.EslEntityView = App.SmartView.extend({
 				controllerSettings[s] = controller[s];
 			}
 		}	
-		this.override_draw( $.extend({}, this.eslObjSettings, controllerSettings) );
+		console.log('this.override_draw()', eslObjSettings, controllerSettings );
+		this.override_draw( $.extend({}, eslObjSettings, controllerSettings) );
 	},
 	willDestroyElement: function () {
 

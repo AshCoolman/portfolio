@@ -169,14 +169,15 @@
 		
 
 		<!-- SCALAR -->
-		<script type="text/x-handlebars" data-template-name="scalar-value	">
+		<script type="text/x-handlebars" data-template-name="scalar-value">
 
 		</script>
 		
 		<!-- WORLD 1 D -->
 		<script type="text/x-handlebars" data-template-name="world-1d">
 			{{renderWithVars 'scalar'}}
-			{{renderWithVars 'scalar-value'}}
+			{{controlWithVars 'scalar-value' scaleLabel="1.63 m" value="163"}}
+			{{controlWithVars 'scalar-value' scaleLabel="55 WPM" value="55"}}
 		</script>
 
 		<!-- DIMENSION 2 NAV-->
