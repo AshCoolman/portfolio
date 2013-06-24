@@ -1,19 +1,16 @@
 App.ScalarValueView = App.ScalarView.extend({
 	templateName: 'scalar-value',
-	value: 64,
-	scaleLabel: '64.4 KG',
-	
 	eslObjSettings: {
 		width: 800,
 		height:50,
 		x: 0,
 		y: 0,
-		fromController: ['x', 'y', 'width', 'height']
+		fromController: ['x', 'y', 'width', 'height', 'value']
 	},
 	drawInstructions: {},
 	init: function () {
 		this._super();
-		this.set('eslObjSettings', {fromController: ['x', 'y']});
+		this.set('eslObjSettings', {fromController: ['x', 'y', 'value']});
 		this.set('drawInstructions', {
 			isMirrored: false,
 			axis: {
@@ -30,32 +27,25 @@ App.ScalarValueView = App.ScalarView.extend({
 				step: 5,
 				unit: 50,
 				count:0,
-				markHeights: [10] 	//[5, 7, 9, 10, 11, 12, 12.5, 13, 13.5, 14, 14.5, 15]
+				markHeights: [10]
 			}
 		});
-		
-		var eslObjSettings = this.get('eslObjSettings');
-		eslObjSettings.width = Number(this.get('value'));
-		eslObjSettings.height = 50;
-		eslObjSettings.x = Math.round( -50+Math.random()*100 );
-		eslObjSettings.y = Math.round( Math.random()*100 );
-		console.log('this.eslObjSettings.width:'+eslObjSettings.width);
 		return this;
 	},
 	override_createEsl: function() {
+		var eslObjSettings = this.get('eslObjSettings');
+		eslObjSettings.width = Number(this.get('value'));
+		eslObjSettings.height = 50;
 		this.container = new createjs.Container();
-		
 		this.shp = new createjs.Shape();
 		this.container.addChild( this.shp );
-		
-		this.text = new createjs.Text(this.get('scaleLabel')+this.get('value'), "12px Arial", "#666666");
+		this.text = new createjs.Text(this.get('scaleLabel'), "12px Arial", "#666666");
 		this.text.textBaseline = "alphabetic";
 		this.container.addChild( this.text );
-		
 		return this.container;
 	},
 	override_draw: function (asettings) {
-		console.log('scalar.override_draw()', asettings);
+		console.log('scalar.override_draw() VALUE', this.controller.get('value'));
 			var settings = asettings ? asettings : this.eslObj,
 				shp = this.shp,
 				container = this.container,
@@ -68,23 +58,16 @@ App.ScalarValueView = App.ScalarView.extend({
 			Em.assert('App.ScalarView.override_draw(): value of height in eslObj is not of type "number" ' + settings.height,  !isNaN(settings.height) );
 			shp.width = settings.width;
 			shp.height = settings.height;
-			
-			/*
-			text.regX = shp.regX = shp.width / 2;
-			*/
-			text.regY = shp.regY = -shp.height / 2;
-			
-			/*
-			shp.graphics.beginFill("#ff0000").drawRect(0, 0, shp.width , shp.height);
-			shp.graphics.beginStroke("#666")
-				.moveTo(0, 0)
-				.lineTo(1000, 0)
-				.endStroke();
-			*/
-		 	console.log('Settings?', settings)
 			shp.x = Number( settings.x );
-			text.x = Number( settings.x ) + shp.width;
+			text.regY = shp.regY = -shp.height / 2;
+			text.x = 10 + Number( settings.x ) + shp.width;
 			text.y = shp.y = Number(settings.y);	
 			return shp;
+	},
+	override_redraw: function () {
+		this._super();
+		this.container.x++;
 	}
+	
+			
 });
