@@ -95,13 +95,13 @@ App.ScalarView = App.EslEntityView.extend({
 					if (count * step < this.value) {
 							if (drawInstructions.isMirrored) {
 								shp.graphics.beginStroke("#666")
-											.moveTo(offset - (count) * step, 0)
-											.lineTo(offset - (count + 1) * step, 0);
+									.moveTo(offset - (count) * step, 0)
+									.lineTo(offset - (count + 1) * step, 0);
 							}
 							shp.graphics.beginStroke("#666")	
-										.moveTo(offset + (count) * step, 0)
-										.lineTo(offset + (count + 1) * step, 0)
-										.endStroke();
+								.moveTo(offset + (count) * step, 0)
+								.lineTo(offset + (count + 1) * step, 0)
+								.endStroke();
 						count++;
 					} else {
 						drawInstructions.axis = null;
