@@ -18,8 +18,9 @@ App.ActiveEslStageView = App.EslStageView.extend({
 		
 		var rafFunction = function(me) {
 			var animloop = function (time) {
-				var dur = (this.lastRequestAnimationFrame) ? time - this.lastRequestAnimationFrame : 0;
-				this.lastRequestAnimationFrame = time;
+				var dur = (me.get('lastRequestAnimationFrame')) ? time - me.get('lastRequestAnimationFrame') : 0;
+				me.set('lastRequestAnimationFrame', time);
+
 				me.redraw(dur);
 				me.set('raf', window.requestAnimationFrame(animloop));			
 			};
@@ -55,8 +56,10 @@ App.ActiveEslStageView = App.EslStageView.extend({
 			}
 		}
 	},	
-	redraw: function(dur) {
+	redraw: function( dur) {
+		console.log('redraw.dur', dur)
 		var eslEntities = this.eslEntities;
+
 		with (this) {
 			for (var i = 0; i < eslEntities.length; i++) {
 				if (!eslEntities[i].override_redraw) {

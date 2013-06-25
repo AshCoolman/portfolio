@@ -74,11 +74,11 @@ App.World3dView = App.SmartView.extend({
 
 		var rafFunction = function(me) {
 			var animloop = function (time) {
-					var dur = (this.lastRequestAnimationFrame) ? time - this.lastRequestAnimationFrame : 0;
-					this.lastRequestAnimationFrame = time;
-					me.redraw(dur);
-					me.set('raf', window.requestAnimationFrame(animloop));	
-				};
+				var dur = (this.lastRequestAnimationFrame) ? time - this.lastRequestAnimationFrame : 0;
+				this.lastRequestAnimationFrame = time;
+				me.redraw(dur);
+				me.set('raf', window.requestAnimationFrame(animloop));	
+			};
 			return animloop
 		}(this);
 		

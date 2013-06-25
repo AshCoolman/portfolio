@@ -64,9 +64,13 @@ App.ScalarValueView = App.ScalarView.extend({
 			text.y = shp.y = Number(settings.y);	
 			return shp;
 	},
-	override_redraw: function () {
+	override_redraw: function (dur) {
 		this._super();
-		this.container.x++;
+		var speed = 1000,
+			change = speed/1000 * dur; //per second
+		if (Math.random()*1000 > 900) console.log(speed, dur)
+		this.container.x = (this.container.x > 1200) ? -300 : this.container.x+change;
+		
 	}
 	
 			
