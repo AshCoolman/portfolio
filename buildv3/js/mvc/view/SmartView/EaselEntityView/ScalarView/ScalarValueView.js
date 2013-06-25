@@ -45,7 +45,7 @@ App.ScalarValueView = App.ScalarView.extend({
 		return this.container;
 	},
 	override_draw: function (asettings) {
-		console.log('scalar.override_draw() VALUE', this.controller.get('value'));
+		//console.log('scalar.override_draw() VALUE', this.controller.get('value'));
 			var settings = asettings ? asettings : this.eslObj,
 				shp = this.shp,
 				container = this.container,
@@ -58,19 +58,27 @@ App.ScalarValueView = App.ScalarView.extend({
 			Em.assert('App.ScalarView.override_draw(): value of height in eslObj is not of type "number" ' + settings.height,  !isNaN(settings.height) );
 			shp.width = settings.width;
 			shp.height = settings.height;
-			shp.x = Number( settings.x );
-			text.regY = shp.regY = -shp.height / 2;
-			text.x = 10 + Number( settings.x ) + shp.width;
-			text.y = shp.y = Number(settings.y);	
+			container.x = Number( settings.x );
+			container.y = Number( settings.y );
+			container.regY = -shp.height / 2;
+			text.x = 10 + shp.width;
+			text.y = 0;	
 			return shp;
 	},
-	override_redraw: function (dur) {
+	override_reDraw: function (dur) {
 		this._super();
-		var speed = 1000,
+		var speed = 100,
 			change = speed/1000 * dur; //per second
-		if (Math.random()*1000 > 900) console.log(speed, dur)
-		this.container.x = (this.container.x > 1200) ? -300 : this.container.x+change;
+		this.container.x = (this.container.x > 800) ? -800 : this.container.x+change;
 		
+		var startFade = 400,
+			endFade = 600,
+			diff = endFade - startFade;
+		if (this.container.x > startFade) {
+			this.container.alpha = 1 - (this.container.x - startFade) / diff;
+		} else if (this.container.x < -startFade) {
+			this.container.alpha = 1+(this.container.x + startFade) / diff;
+		}
 	}
 	
 			

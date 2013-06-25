@@ -20,8 +20,7 @@ App.ActiveEslStageView = App.EslStageView.extend({
 			var animloop = function (time) {
 				var dur = (me.get('lastRequestAnimationFrame')) ? time - me.get('lastRequestAnimationFrame') : 0;
 				me.set('lastRequestAnimationFrame', time);
-
-				me.redraw(dur);
+				me.reDraw(dur);
 				me.set('raf', window.requestAnimationFrame(animloop));			
 			};
 			return animloop
@@ -32,9 +31,9 @@ App.ActiveEslStageView = App.EslStageView.extend({
 
 		//
 		this.resize();
-		this.redraw();
+		this.reDraw();
 	},
-	resize: function() {
+	resize: function () {
 		this.tmpwinWidth = $(window).width();
 		with (this) {	
 			if (tmpwinWidth > App.BREAKPOINT.WIDTH_2) {
@@ -56,17 +55,17 @@ App.ActiveEslStageView = App.EslStageView.extend({
 			}
 		}
 	},	
-	redraw: function( dur) {
-		console.log('redraw.dur', dur)
+	reDraw: function ( dur ) {
+		//console.log('reDraw.dur', adur)
 		var eslEntities = this.eslEntities;
 
 		with (this) {
 			for (var i = 0; i < eslEntities.length; i++) {
-				if (!eslEntities[i].override_redraw) {
-					console.log('entity lacks override_redraw\n\t', eslEntities[i]._debugContainerKey)
+				if (!eslEntities[i].override_reDraw) {
+					//console.log('entity lacks override_reDraw\n\t', eslEntities[i]._debugContainerKey)
 				} else { 
 					//console.log('>>', eslEntities[i].x)
-					eslEntities[i].override_redraw(dur);
+					eslEntities[i].override_reDraw(dur);
 					/*
 					eslEntities[i].x -= 0.5;
 					eslEntities[i].y -= 0.5;

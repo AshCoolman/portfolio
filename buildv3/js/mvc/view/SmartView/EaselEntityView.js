@@ -38,13 +38,13 @@ App.EslEntityView = App.SmartView.extend({
 			
 		for (var i = 0, s = fromController[i]; i < fromController.length; i++) {
 			 s = fromController[i];
-			console.log('from controller', this.get('className'), s, controller[s]);
+			//console.log('from controller', this.get('className'), s, controller[s]);
 			
 			if (typeof controller[s] != 'undefined')  {
 				controllerSettings[s] = controller[s];
 			}
 		}	
-		console.log('this.override_draw()', eslObjSettings, controllerSettings );
+		//console.log('this.override_draw()', eslObjSettings, controllerSettings );
 		this.override_draw( $.extend({}, eslObjSettings, controllerSettings) );
 	},
 	willDestroyElement: function () {

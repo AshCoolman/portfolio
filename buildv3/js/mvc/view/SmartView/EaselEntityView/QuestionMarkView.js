@@ -62,7 +62,7 @@ App.QuestionMarkView = App.EslEntityView.extend({
 		this.shp = shp;
 
 	},
-	override_redraw: function () {
+	override_reDraw: function () {
 		
 	}
 	

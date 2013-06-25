@@ -39,7 +39,7 @@ App.CogView = App.EslEntityView.extend({
 		if (settings.y) this.dragger.y = Number( settings.y );
 		return this.dragger;
 	},
-	override_redraw: function () {
+	override_reDraw: function () {
 
 	},
 	willDestroyElement: function() {

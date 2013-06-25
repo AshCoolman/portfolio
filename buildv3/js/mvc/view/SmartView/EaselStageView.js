@@ -29,7 +29,7 @@ App.EslStageView = App.SmartView.extend({
 		if (!parentEslObj ) {
 			parentEslObj = this.stage;
 		}
-		console.log('addEslEnt\n', '\t',label,'\n', '\t',childView,'\n', '\t',parentEslObj.id+'','\n');
+		//console.log('addEslEnt\n', '\t',label,'\n', '\t',childView,'\n', '\t',parentEslObj.id+'','\n');
 		this.eslEntities.push( childView );
 		parentEslObj.addChild( childView.get('eslObj') );
 	},

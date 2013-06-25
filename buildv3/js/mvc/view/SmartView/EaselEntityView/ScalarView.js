@@ -47,7 +47,7 @@ App.ScalarView = App.EslEntityView.extend({
 		
 	},
 	override_draw: function (asettings) {
-		console.log('scalar.override_draw()', asettings);
+		//console.log('scalar.override_draw()', asettings);
 			var settings = asettings ? asettings : this.eslObj,
 				shp = this.shp,
 				container = this.container;
@@ -75,7 +75,7 @@ App.ScalarView = App.EslEntityView.extend({
 				.lineTo(1000, 700)
 				.endStroke();
 			*/
-		 	console.log('Settings?', settings)
+		 	//console.log('Settings?', settings)
 		
 			shp.x = Number(settings.x);
 			shp.y = Number(settings.y);	
@@ -83,7 +83,7 @@ App.ScalarView = App.EslEntityView.extend({
 			 this.set('value', shp.width / 2);
 			return shp
 	},
-	override_redraw: function () {
+	override_reDraw: function () {
 		
 		var drawInstructions = this.get('drawInstructions'),
 			shp = this.shp,

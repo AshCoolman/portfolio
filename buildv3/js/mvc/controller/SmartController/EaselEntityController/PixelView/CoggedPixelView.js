@@ -37,7 +37,7 @@ App.CoggedPixelView = App.PixelView.extend({
 		this._super(settings);
 		
 	},
-	override_redraw: function () {
+	override_reDraw: function () {
 
 	},
 	doOpen: function() {

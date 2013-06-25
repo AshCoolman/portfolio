@@ -33,6 +33,7 @@
 App.SubtitleController = App.SmartController.extend({
 	controllerName:'Script Subtitle Controller',
 	text: '',
+	cursorChar: '∆',
 	read:{},
 	lines:[],
 	isEnded: false,
@@ -67,7 +68,7 @@ App.SubtitleController = App.SmartController.extend({
 			if ( read.currentChar < lines[ read.currentLine].length) {
 				delay = 1 / this.get('content').get('cpms');
 			} else {
-				delay = 200;
+				delay = 1200;
 				isNewLine = true;
 			}	
 		} else {
@@ -94,7 +95,6 @@ App.SubtitleController = App.SmartController.extend({
 		this.ARF_diff = 0;
 		this.ARF_last = Date.now();
 	    this.ARF = window.requestAnimationFrame( this.doDraw.bind(this) );
-		console.log('doSetupDraw', this.ARF, this.ARF_startTime, this.ARF_diff, this.ARF_last);
 	},
 	
 	doDraw: function (atime) {
