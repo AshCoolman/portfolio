@@ -32,8 +32,14 @@ html, body {
   margin: 0 auto;
   display: block; }
 
-.vertical-centered {
+.vertical-centered-to-page {
   position: fixed;
+  bottom: 50%;
+  left: 0;
+  width: 100%; }
+
+.vertical-centered-to-parent {
+  position: absolute;
   bottom: 50%;
   left: 0;
   width: 100%; }
@@ -43,8 +49,18 @@ html, body {
   width: 100%;
   max-width: 1000px;
   min-width: 768px;
+  height: 8em;
   margin: 0 auto;
   text-align: center; }
+
+.relative-positioned {
+  position: relative; }
+
+.single {
+  text-align: center; }
+
+.standard-single-button {
+  width: 8em; }
 
 .preloader-content {
   position: fixed;
