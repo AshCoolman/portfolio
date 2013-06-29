@@ -84,7 +84,9 @@ App.SubtitleController = App.SmartController.extend({
 			} else {	
 				read.currentChar = 0;
 				read.currentLine++;
-				this.set('text', ''); //start fresh
+				if (read.currentLine < lines.length) {
+					this.set('text', this.get('text')+'<br/>'); //start fresh
+				}
 			}
 		};
 		
