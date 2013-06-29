@@ -1,16 +1,1 @@
-App.TransitionsHolderController = App.SmartController.extend({
-	init: function () {
-		
-		App.eventMapper.addEventListener('doTransition', this, function (me) {
-			return function (atype, adata) {
-				me.doTransition(adata.$canvas);
-			}
-		}(this));
-		
-		return this._super();
-	},
-	
-	doTransition: function ($acavas) {
-		this.view.doTransition($acavas);
-	}
-});
+App.TransitionsHolderController=App.SmartController.extend({init:function(){App.eventMapper.addEventListener("doTransition",this,function(a){return function(b,c){a.doTransition(c.$canvas)}}(this));return this._super()},doTransition:function(a){this.view.doTransition(a)}});

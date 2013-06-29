@@ -1,3 +1,1 @@
-App.NavigationView = App.SmartView.extend({
-	templateName:'navigation'
-});
+App.NavigationView=App.SmartView.extend({templateName:"navigation"});

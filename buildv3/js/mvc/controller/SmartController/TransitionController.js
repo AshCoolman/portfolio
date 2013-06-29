@@ -1,3 +1,1 @@
-App.TransitionController = App.SmartController.extend({
-	
-})
+App.TransitionController=App.SmartController.extend({});

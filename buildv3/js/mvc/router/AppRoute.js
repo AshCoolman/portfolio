@@ -1,4 +1,1 @@
-App.AppRoute = Em.Route.extend({
-
-})
-
+App.AppRoute=Em.Route.extend({});

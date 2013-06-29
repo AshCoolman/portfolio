@@ -103,33 +103,29 @@
 
 		<!-- ROUTE INDEX -->
 		<script type="text/x-handlebars" data-template-name="index">
-
-
-
-			<div class="row">
-				<div class="columns">
-					<div class="vertical-centered">
-					
-						<div class="row">
-							<div class="small-2 large-2 small-centered columns">
-								{{renderWithVars 'index-nav' indexNav}}	
-							</div>
-						</div>
-						
+		
+	 		<div class="relative-positioned">
+				<div class="full-width-centered">
 						{{render 'subtitle' subtitle}}
-					</div>
+				</div>		
+	 		</div>
+		
+			<div class="row">
+				<div class="small-centered columns single">
+					{{renderWithVars 'index-nav' indexNav}}	&nbsp;
 				</div>
-			</div>			
+			</div>	
+
 		</script>
 
 		<!-- INDEX NAV-->
 		<script type="text/x-handlebars" data-template-name="index-nav">
 			{{#if isShowStart}}
-			<a class="button nav-btn" {{action "doStart" }}>Start</a>
+			<a class="button nav-btn standard-single-button" {{action "doStart" }}>Start</a>
 			{{/if}}
 
 			{{#if isShowEnd}}
-			<a class="button nav-btn" {{action "doEnd" }}>0 + 1 =</a>
+			<a class="button nav-btn standard-single-button" {{action "doEnd" }}>0 + 1 =</a>
 			{{/if}}
 		</script>
 
@@ -150,13 +146,12 @@
 
 			<div class="row">
 				<div class="columns">
-					<div class="vertical-centered">
+					<div class="vertical-centered-to-page">
 						<div class="row">
 							<div class="small-2 large-2 small-centered columns">
 								{{renderWithVars 'dimension1-nav' dimension1Nav}}
 							</div>
 						</div>
-						{{render 'subtitle' subtitle}}
 					</div>
 				</div>
  			</div>
@@ -212,7 +207,7 @@
 
 		<!-- SUBTITLE -->
 		<script type="text/x-handlebars" data-template-name="subtitle">
-			{{{text}}}<img src="img/cursor.gif"/> 
+				{{{text}}}<img src="img/cursor.gif"/> 
 		</script>
 
 		<!-- ROUTE DIMENSION 2 -->

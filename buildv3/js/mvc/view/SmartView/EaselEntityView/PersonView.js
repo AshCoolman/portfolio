@@ -1,3 +1,1 @@
-App.PersonView = App.EslEntityView.extend({
-	
-});
+App.PersonView=App.EslEntityView.extend({});

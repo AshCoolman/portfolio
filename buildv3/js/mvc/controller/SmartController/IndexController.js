@@ -1,0 +1,1 @@
+App.IndexController=App.SmartController.extend({className:"IndexController",test:"testVariable",view_didInsertElement:function(){console.log("Index Controller view_didInsertElement")}});

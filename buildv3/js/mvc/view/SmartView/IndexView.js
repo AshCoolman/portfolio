@@ -1,0 +1,1 @@
+App.IndexView=App.SmartView.extend({tagName:"div",didInsertElement:function(){this._super();App.transitionView.clear();this.get("controller").send("IndexView_InsertViewDone",this)}});

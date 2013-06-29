@@ -1,3 +1,1 @@
-App.Dimension3Model = Em.Object.extend({
-	title:'The third dimension'
-});
+App.Dimension3Model=Em.Object.extend({title:"The third dimension"});

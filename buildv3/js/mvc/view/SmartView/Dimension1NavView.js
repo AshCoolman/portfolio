@@ -1,3 +1,1 @@
-App.Dimension1NavView = App.SmartView.extend({
-	templateName:'dimension1-nav'
-});
+App.Dimension1NavView=App.SmartView.extend({templateName:"dimension1-nav"});
