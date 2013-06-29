@@ -30,8 +30,8 @@ App.IndexRoute = Em.Route.extend({
 		}
 	},
 	doStopReading: function (type, data) {
-		console.log('dosub_finishedReading')
-		if (subtitleController) {
+		console.log('dosub_finishedReading');
+		if (this.subtitleController) {
 			this.indexNavController.set('isShowEnd', true);
 		}
 	},
@@ -49,18 +49,21 @@ App.IndexRoute = Em.Route.extend({
 	},
 	events: {
 		SubtitleView_InsertViewDone: function (achildview, another) {
+			console.log('i SubtitleView_InsertViewDone');
 			if ('Subtitle' == achildview.name) {
-				subtitleView = achildview;
-				subtitleController = subtitleView.get('controller');
-				subtitleController.set('content', App.scriptModel);
+				this.subtitleView = achildview;
+				this.subtitleController = this.subtitleView.get('controller');
+				this.subtitleController.set('content', App.scriptModel);
                 this.tryStart()
 			}
 		},
 		IndexNavController_didInsertElement: function (inc) {
+			console.log('i IndexNavController_didInsertElement');
 			this.indexNavController = inc;
             this.tryStart()
 		},
 		SmartController_didInsertElement: function(acontroller, alabel) {
+			console.log('i SmartController_didInsertElement');
 			if (alabel == 'IndexNavController') {
 				this.indexNavController = acontroller
                 this.tryStart()

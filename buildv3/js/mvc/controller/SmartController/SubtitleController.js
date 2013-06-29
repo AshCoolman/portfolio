@@ -48,8 +48,11 @@ App.SubtitleController = App.SmartController.extend({
 		return this._super();
 	},
 	setup: function (ascript) {
+		if (ascript[ascript.length-2] == '.') {
+			ascript = ascript.substr(0, ascript.length-2);
+		}
 		this.read.lines = ascript.split('.');
-		for (var l = 0; l < this.read.lines.length; l++ ) {
+		for (var l = 0; l < this.read.lines.length; l++ ) { 
 			this.read.lines[l] = (this.read.lines[l]).split('');
 		}
 		this.read.currentLine = 0;
@@ -84,7 +87,8 @@ App.SubtitleController = App.SmartController.extend({
 			} else {	
 				read.currentChar = 0;
 				read.currentLine++;
-				if (read.currentLine < lines.length) {
+				if ( (read.currentLine < lines.length) &&  ( lines[ read.currentLine].length > 0) ) {
+					console.log('>>', read.currentLine, lines.length);
 					this.set('text', this.get('text')+'<br/>'); //start fresh
 				}
 			}
