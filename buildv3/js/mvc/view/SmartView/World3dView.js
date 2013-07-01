@@ -107,7 +107,7 @@ App.World3dView = App.SmartView.extend({
 		setTimeout( function (me) {
 			return  function() {
 					me.createFromImage(img);
-					App.transitionView.clear();
+					App.transitionView.hide();
 			}
 		}(this), 100);
 	},

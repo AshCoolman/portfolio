@@ -1,9 +1,21 @@
 $fullWidth: 1000px;
 $minWidth: 768px;
+/*
+http://jsfiddle.net/VAXrL/190/
+*/
+canvas, img {
+    image-rendering: optimizeSpeed;             // Older versions of FF
+    image-rendering: -moz-crisp-edges;          // FF 6.0+
+    image-rendering: -webkit-optimize-contrast; // Webkit
+                                                //  (Safari now, Chrome soon)
+    image-rendering: -o-crisp-edges;            // OS X & Windows Opera (12.02+)
+    image-rendering: optimize-contrast;         // Possible future browsers.
+    -ms-interpolation-mode: nearest-neighbor;
+}
 
 html,body { 
 	height:100%; 
-	background: transparent !important;
+	background: lightblue !important;
 }
  
 
@@ -100,7 +112,9 @@ background:transparent;
 	display: block;
 }
 
-
+.world-2d canvas {
+	margin:0 auto;
+}
 .el-no-effect-winsize-outer {
     position:absolute;
     top:0px;
@@ -138,7 +152,7 @@ background:transparent;
 	position: absolute;
 }
 
-.esl-stage-canvas, .world-3d-renderer, .transition-canvas {
+.visible-world-2d, .world-3d-renderer, .transition-canvas {
 	margin: 0 auto;
 	display: block;
 }

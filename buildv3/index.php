@@ -227,7 +227,7 @@
 
 		<script type="text/x-handlebars" data-template-name="world-2d">
 			{{controlWithVars 'ash' ash x=-200 }}
-			{{controlWithVars 'question-mark' question-mark x=-200 visible=false}}
+			{{controlWithVars 'question-mark' question-mark x=0 visible=false}}
 		</script>
 
 
@@ -351,6 +351,8 @@
 
 			<script src="js/lib/easeljs-0.6.0.min.js"></script>
 			<script src="js/lib/tweenjs-0.4.0.min.js"></script>
+			<script src="js/lib/Ease.js"></script>
+			
  			<script src="js/lib/preloadjs-0.3.0.min.js"></script>
 	        <script src="js/lib/embermandl.js"></script>
 

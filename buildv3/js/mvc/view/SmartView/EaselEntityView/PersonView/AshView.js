@@ -9,7 +9,12 @@ App.AshView = App.EslEntityView.extend({
 		fromController: ['x', 'y']
 	},
 	override_createEsl: function () {
-		return new createjs.Bitmap('img//face-ash.png');
+		var shp = new createjs.Shape();
+		var img = new createjs.Bitmap('img//face-ash.png');
+		var container = new createjs.Container();
+		container.addChild(shp);
+		container.addChild(img);
+		return container;
 	},
 	override_draw: function(asettings) {
 		var settings = asettings ? asettings : this.eslObj
@@ -18,6 +23,9 @@ App.AshView = App.EslEntityView.extend({
 		this.eslObj.y=settings.y; //-1; //HACK WHY?
 		
 		
+	},
+	doMosaicEffect: function () {
+	
 	},
 	override_reDraw: function (dur) {
 		var change = 30/1000 * dur; //per second

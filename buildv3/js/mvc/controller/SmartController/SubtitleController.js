@@ -35,6 +35,7 @@ App.SubtitleController = App.SmartController.extend({
 	text: '',
 	cursorChar: '∆',
 	read:{},
+	isForceFinish:false,
 	lines:[],
 	isEnded: false,
 	tOut:undefined,
@@ -74,25 +75,27 @@ App.SubtitleController = App.SmartController.extend({
 				delay = 1200;
 				isNewLine = true;
 			}	
+			if (dur > delay) {
+				dur -= delay;
+				if (!isNewLine) {
+					this.set('text', this.get('text') + '' + lines[read.currentLine][read.currentChar]);
+					read.currentChar++;
+				} else {	
+					read.currentChar = 0;
+					read.currentLine++;
+					if ( (read.currentLine < lines.length) &&  ( lines[ read.currentLine].length > 0) ) {
+						console.log('>>', read.currentLine, lines.length);
+						this.set('text', this.get('text')+'<br/>'); //start fresh
+					}
+				}
+			};
+			
 		} else {
 			this.isEnded = true;
 			console.log('isEnded');
 			App.eventMapper.triggerEvent(ragh.MEvt.create('sub_finishedReading', {target:this}))
 		}
-		if (dur > delay) {
-			dur -= delay;
-			if (!isNewLine) {
-				this.set('text', this.get('text') + '' + lines[read.currentLine][read.currentChar]);
-				read.currentChar++;
-			} else {	
-				read.currentChar = 0;
-				read.currentLine++;
-				if ( (read.currentLine < lines.length) &&  ( lines[ read.currentLine].length > 0) ) {
-					console.log('>>', read.currentLine, lines.length);
-					this.set('text', this.get('text')+'<br/>'); //start fresh
-				}
-			}
-		};
+
 		
 		return dur;
 	},
@@ -117,7 +120,13 @@ App.SubtitleController = App.SmartController.extend({
 			if (ARF) window.cancelAnimationFrame( ARF );
 		    if (!isEnded) ARF =  window.requestAnimationFrame(doDraw.bind(this));
 		}
-    }
+    },
+	doForceFinish: function () {
+		console.log(this.isEnded);
+		while (!this.isEnded) {
+			prevDif = ARF_diff = this.readChar(99999);
+		}
+	}
 });
 
 App.register('controller:subtitle', App.SubtitleController, {singleton: false }); 

@@ -17,6 +17,7 @@ App.TransitionView = App.SmartView.extend({
 				me.doClick();
 			}
 		}(this));
+		//this.$el.css({ display: 'none' });
 		App.transitionView = this;
 		this.doResize();
 		
@@ -28,8 +29,16 @@ App.TransitionView = App.SmartView.extend({
 		var $dst = this.$dst;
 		var widthHeightObj = {width: $src.css('width'), height: $src.css('height')};
 		$dst.css(widthHeightObj).attr(widthHeightObj);
+		$dst[0].getContext('2d').clearRect( 0, 0, $dst[0].width,  $dst[0].height);
  		$dst[0].getContext('2d').drawImage($src[0], 0, 0);	
-
+	
+	},
+	show: function() {
+		//this.$el.css('opacity', 1)
+			this.$el.fadeIn(0);
+	},
+	hide: function() {
+		this.$el.fadeOut(1400);
 	},
 	clear: function () {
 		this.$dst[0].getContext('2d').clearRect( 0, 0, this.$dst[0].width,  this.$dst[0].height);

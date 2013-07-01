@@ -258,12 +258,12 @@ App = Ember.Application.create({
 
 
 App.BREAKPOINT = {
-	WIDTH_2: 1280,
-	HEIGHT_2: 800,
+	WIDTH_2: 1280 ,
+	HEIGHT_2: 768,
 	WIDTH_1: 768,
-	HEIGHT_1: 600,
-	WIDTH_0: 480,
-	HEIGHT_0: 360
+	HEIGHT_1: 576,
+	WIDTH_0: 448,
+	HEIGHT_0: 320
 }
 
 App.dictionary = Em.Object.create({

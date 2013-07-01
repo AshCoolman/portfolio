@@ -1,6 +1,17 @@
+/*
+http://jsfiddle.net/VAXrL/190/
+*/
+canvas, img {
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -o-crisp-edges;
+  image-rendering: optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor; }
+
 html, body {
   height: 100%;
-  background: transparent !important; }
+  background: lightblue !important; }
 
 .note {
   font-size: 0.33em;
@@ -77,6 +88,9 @@ html, body {
   z-index: 1000;
   display: block; }
 
+.world-2d canvas {
+  margin: 0 auto; }
+
 .el-no-effect-winsize-outer {
   position: absolute;
   top: 0px;
@@ -106,7 +120,7 @@ html, body {
 .absolute-positioned {
   position: absolute; }
 
-.esl-stage-canvas, .world-3d-renderer, .transition-canvas {
+.visible-world-2d, .world-3d-renderer, .transition-canvas {
   margin: 0 auto;
   display: block; }
 

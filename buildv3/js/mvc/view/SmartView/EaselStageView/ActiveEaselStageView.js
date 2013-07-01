@@ -25,8 +25,6 @@ App.ActiveEslStageView = App.EslStageView.extend({
 			};
 			return animloop
 		}(this);
-		
-		
 		this.set('raf', window.requestAnimationFrame(rafFunction));	
 
 		//

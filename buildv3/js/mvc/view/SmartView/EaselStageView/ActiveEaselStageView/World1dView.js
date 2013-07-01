@@ -4,7 +4,6 @@ App.World1dView = App.ActiveEslStageView.extend({
 	templateName:'world-1d',
 	didInsertElement: function () {
 		this._super();
-		App.transitionView.clear();
 	},
 	redraw: function(dur) {
 		this._super();

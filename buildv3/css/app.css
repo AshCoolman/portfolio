@@ -44,15 +44,13 @@ Backtrace:
 /Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:203:in `block in update_stylesheets'
 /Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:201:in `each'
 /Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:201:in `update_stylesheets'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:235:in `watch'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/plugin.rb:107:in `method_missing'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/exec.rb:452:in `watch_or_update'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/exec.rb:315:in `process_result'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/exec.rb:41:in `parse'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/exec.rb:21:in `parse!'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/bin/sass:9:in `<top (required)>'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/bin/sass:23:in `load'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/bin/sass:23:in `<main>'
+/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:283:in `block in watch'
+/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/vendor/listen/lib/listen/multi_listener.rb:108:in `call'
+/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/vendor/listen/lib/listen/multi_listener.rb:108:in `on_change'
+/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/vendor/listen/lib/listen/multi_listener.rb:117:in `block in initialize_adapter'
+/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/vendor/listen/lib/listen/adapters/polling.rb:56:in `call'
+/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/vendor/listen/lib/listen/adapters/polling.rb:56:in `poll'
+/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/vendor/listen/lib/listen/adapters/polling.rb:32:in `block in start'
 */
 body:before {
   white-space: pre;
