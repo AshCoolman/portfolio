@@ -163,17 +163,25 @@
 		</script>
 		
 
-		<!-- SCALAR -->
+		<!-- SCALAR-VALUE -->
 		<script type="text/x-handlebars" data-template-name="scalar-value">
 
 		</script>
 		
+		<!-- CLICK-AND-DRAG-SCALAR -->
+		<script type="text/x-handlebars" data-template-name="click-and-drag-scalar">
+
+		</script>
+		<!--
+		{{controlWithVars 'scalar-value' 			scaleLabel="163 CM" 	value=163	x=-400 	y=0}}
+		{{controlWithVars 'scalar-value' 			scaleLabel="55 WPM" 	value=55 		x=-50 	y=50}}
+		{{controlWithVars 'scalar-value' 			scaleLabel="63 KG" 		value=63 		x=500 	y=100}}
+		-->
+		
 		<!-- WORLD 1 D -->
 		<script type="text/x-handlebars" data-template-name="world-1d">
-			{{renderWithVars 'scalar'}}
-			{{controlWithVars 'scalar-value' scaleLabel="163 CM" value="163" x=-400 y=0}}
-			{{controlWithVars 'scalar-value' scaleLabel="55 WPM" value="55" x=-50 y=50}}
-			{{controlWithVars 'scalar-value' scaleLabel="63 KG" value="63" x=500 y=100}}
+			{{renderWithVars 'scalar' x=50 y=50}}
+			{{controlWithVars 'click-and-drag-scalar'  		scaleLabel=""	value=200	x=-0 	y=50}}
 		</script>
 
 		<!-- DIMENSION 2 NAV-->

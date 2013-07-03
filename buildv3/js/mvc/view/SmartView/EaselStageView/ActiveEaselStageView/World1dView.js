@@ -2,15 +2,25 @@ App.World1dView = App.ActiveEslStageView.extend({
 	tagName:'div',
 	className: 'World1dView',
 	templateName:'world-1d',
+	clickAndDragScale: undefined,
 	didInsertElement: function () {
 		this._super();
+		this.$el.mousedown(function (me) {
+			return function () {
+				
+			}
+		}(this));
+		this.$el.mouseup(function (me) {
+			return function () {
+				
+			}
+		}(this));
+		
 	},
 	redraw: function(dur) {
 		this._super();
 	},
 	resize: function () {
-
-
 		var width = 2400;
 		this.$canvas.attr( { width: width } ).css( {width: width} );
 		this.$el.css( { width: width, 'margin-left': -width/2} );

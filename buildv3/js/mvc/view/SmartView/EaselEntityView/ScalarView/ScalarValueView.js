@@ -58,6 +58,7 @@ App.ScalarValueView = App.ScalarView.extend({
 			Em.assert('App.ScalarView.override_draw(): value of height in eslObj is not of type "number" ' + settings.height,  !isNaN(settings.height) );
 			shp.width = settings.width;
 			shp.height = settings.height;
+			shp.x=0.5;
 			container.x = Number( settings.x );
 			container.y = Number( settings.y );
 			container.regY = -shp.height / 2;
