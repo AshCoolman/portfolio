@@ -4,11 +4,11 @@ App.IndexNavController = App.SmartController.extend({
 	label: 'IndexNavController',
 	view_didInsertElement: function (aview) {
 		this._super(aview);
+		console.log('view IndexNavController_didInsertElement');
 		this.send('IndexNavController_didInsertElement', this);
 	},
 	doStart: function () {
 		App.eventMapper.triggerEvent(ragh.MEvt.create('indNav_start', {target:this}));
-		
 	},
 	doEnd: function () {
 		App.eventMapper.triggerEvent(ragh.MEvt.create('indNav_end', {target:this}));

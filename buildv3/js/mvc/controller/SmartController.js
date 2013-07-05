@@ -5,6 +5,9 @@ App.SmartController = Em.ObjectController.extend({
 	className: 'SmartController',
 	autoMappedEvents: [],
 	isViewInserted: false,
+	view_didSetController: function () {
+		//this.send('SmartController_didSetController', this, this.label);
+	},
 	view_didInsertElement: function (aview) {
 		
 		if (!aview) throw 'SmartController.view_didInsertElement() did not recieve aview parameter';

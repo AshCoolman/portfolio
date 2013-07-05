@@ -62,7 +62,8 @@ html, body {
   min-width: 768px;
   height: 8em;
   margin: 0 auto;
-  text-align: center; }
+  text-align: center;
+  line-height: 150%; }
 
 .relative-positioned {
   position: relative; }

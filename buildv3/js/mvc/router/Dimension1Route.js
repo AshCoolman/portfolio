@@ -15,8 +15,8 @@ App.Dimension1Route = Em.Route.extend({
 		App.eventMapper.removeEventListener('sub_finishedReading', this);
 	},
 	doDim1Nav_start: function (type, data) { 
-		subtitleController.setup( subtitleController.get('content').scriptD1 );
-		subtitleController.doSetupDraw();
+		this.subtitleController.setup( this.subtitleController.get('content').scriptD1 );
+		this.subtitleController.doSetupDraw();
 		
 		this.heartbeatController.myView.doStart();
 		this.heartbeatController.createHeartbeat();
@@ -30,7 +30,12 @@ App.Dimension1Route = Em.Route.extend({
 	doDim1Nav_end: function () {			
 		window.location.hash = 'd2';
 	},
-	
+	doStart: function (type, data) {
+		this.subtitleController.set('content', App.scriptModel); 
+        this.subtitleController.setup(this.subtitleController.get("content").scriptD1);
+        this.subtitleController.doSetupDraw();
+        this.dimension1NavController.set("isShowStart", false)
+    },
 	model: function () {
 		return (App.dimension1Model) ? App.dimension1Model : App.Dimension1Model.create();
 	},
@@ -50,20 +55,22 @@ App.Dimension1Route = Em.Route.extend({
 		}
 	},
 	events: {
-		SubtitleView_InsertViewDone: function (achildview, another) {
-			if ('Subtitle' == achildview.name) {
-				subtitleView = achildview;
-				subtitleController = subtitleView.get('controller');
-				subtitleController.set('content', App.scriptModel);
-				
-			}
-		},
+		SubtitleView_InsertViewDone: function (achildview, another) {},
 		SmartController_didInsertElement: function(acontroller, alabel) {
-			switch (alabel ) {
+			console.log('SmartController_didInsertElement label', alabel);
+			switch (alabel) {
+				case 'SubtitleController': 			this.subtitleController = acontroller; this.subtitleView = acontroller.get('view'); break;  
 				case 'Dimension1NavController':  	this.dimension1NavController = acontroller; 	break;
 				case 'HeartbeatController':  		this.heartbeatController = acontroller; 		break;
-				case 'ScalarController':  		this.scalarController = acontroller; 		break;
+				case 'ScalarController':  			this.scalarController = acontroller; 			break;
 			}
-		}
-	}
+			this.tryStart();
+		},
+		SubtitleController_didInsertElement: function (acontroller, alabel) { }
+	},
+	tryStart: function () {
+        if (this.subtitleController && this.dimension1NavController && this.scalarController) {
+            this.doStart()
+        }
+    }
 })

@@ -132,6 +132,12 @@
 		<!-- ROUTE DIMENSION 1 -->
 		<script type="text/x-handlebars" data-template-name="dimension1">
 
+	 		<div class="relative-positioned">
+				<div class="full-width-centered">
+						{{render 'subtitle' subtitle}}
+				</div>		
+	 		</div>
+
 			<div class="full-width-centered absolute-positioned">
 				<div class="world-1d-centerer">
 					{{renderWithVars 'world-1d'}}
@@ -144,17 +150,13 @@
 			</div>
 			
 
+
 			<div class="row">
-				<div class="columns">
-					<div class="vertical-centered-to-page">
-						<div class="row">
-							<div class="small-2 large-2 small-centered columns">
-								{{renderWithVars 'dimension1-nav' dimension1Nav}}
-							</div>
-						</div>
-					</div>
+				<div class="small-centered columns single">
+					{{renderWithVars 'dimension1-nav' dimension1Nav}}
 				</div>
- 			</div>
+			</div>
+			
 		</script>
 
 		<!-- SCALAR -->
@@ -220,6 +222,12 @@
 
 		<!-- ROUTE DIMENSION 2 -->
 		<script type="text/x-handlebars" data-template-name="dimension2">
+			<div class="absolute-positioned">
+				<div class="full-width-centered">
+						{{render 'subtitle' subtitle}}
+				</div>		
+	 		</div>
+	
 			<div class="full-width-centered absolute-positioned">
 				{{renderWithVars 'world-2d' World2d}} 
 				{{controlWithVars 'esl-entity-container'}}

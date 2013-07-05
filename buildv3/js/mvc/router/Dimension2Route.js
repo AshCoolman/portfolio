@@ -2,6 +2,13 @@ App.Dimension2Route = Em.Route.extend({
 	questionMarkController: null,
 	init: function () {
 		this._super();
+		App.eventMapper.addEventListener('scriptD2ShowQuestion', this, function (me) {
+			return function () {
+				if (me.questionMarkController) {
+					me.questionMarkController.get('view').eslObj.visible = true;
+				}
+			}
+		}(this));
 	},
 	model: function () {
 		return (App.dimension2Model) ? App.dimension2Model : App.Dimension2Model.create();
@@ -26,45 +33,35 @@ App.Dimension2Route = Em.Route.extend({
 		}
 	},
 	
+	doStart: function (type, data) {
+		this.subtitleController.set('content', App.scriptModel); 
+        this.subtitleController.setup(this.subtitleController.get("content").scriptD2);
+        this.subtitleController.doSetupDraw();
+    },
 	events: {
 		
 		SmartController_didInsertElement: function(acontroller, alabel) {
+			console.log('Dimension2 route', alabel)
 			switch (alabel) {
-				case 'Dimension1NavController': this.dimension1NavController = acontroller; break;
 				case 'World2dController': 
-					this.world2dController = acontroller; 
-					setTimeout( function(me) {
-						return function () {
-							
-							//me.world2dController.addQuestionMark();
-							//var eslObjSettings = $.extend(App.QuestionMarkView.create().eslObjSettings, { x: 0, y: 0 });
-							//App.static_eslEntityContainerView.pushObject( App.QuestionMarkView.create( { eslObjSettings: eslObjSettings } ) );
-							
-							/*
-							Doesn't work as templates with render helpers fail to render:
-							
-							var controller = App.PixelController.create();
-							var eslObjSettings = $.extend(App.PixelView.create().eslObjSettings, { x: 0, y: 0 });
-							var view = App.PixelView.create( {controller: controller, eslObjSettings: eslObjSettings} 	);
-							App.static_eslEntityContainerView.pushObject( view );
-							*/
-							console.log('me.questionMarkController', me)
-							if (me.questionMarkController) {
-								me.questionMarkController.get('view').eslObj.visible = true;
-							}
-						}
-					}(this), 1500)
+					this.world2dController = acontroller;
 					break;
-				case 'question-mark-controller': 
+				case 'QuestionMarkController': 
 					this.questionMarkController = acontroller; 
-					
+					break;
+				case 'SubtitleController': 
+					this.subtitleController = acontroller; 
 					break;
 				default: /* console.log('++'+alabel);*/ break;
 			}	
-			
-
-
-
+			this.tryStart();
+		},
+		SubtitleController_didInsertElement: function () {
 		}
-	}
+	},
+	tryStart: function () {
+        if (this.questionMarkController && this.world2dController && this.subtitleController) {
+            this.doStart()
+        }
+    }
 })

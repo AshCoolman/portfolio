@@ -4,9 +4,13 @@ App.SmartView = Ember.View.extend({
 	smartViewObj:null,
 	el: null,
 	$el: null,
+	controllerAdded: function() {
+		this.get('controller').send('view_didSetController', this);
+	}.observes('controller'),
 	init: function () {	
 		smartViewObj = this;
-		return this._super();
+		this._super();
+		return this
 	},
 	didInsertElement: function (scope) {
 		this._super();

@@ -22,32 +22,30 @@ Click to add another dimension
 
 =
 D2
-The web is the sophisticated layer of technology I generally use to construct my experiences.
-I am able to look at a problem through my *computer science spectacles and come up with a solution.
-
-=
-D2 STAR
-*this is not true, i do not require spectacles
+I develop web technology.
+It's a fun job, due to web being everywhere, hyper-connective, and an evolving kaleidoscope of functionality.
+@event scriptD2ShowQuestion
+I am able to look at a problem, and see how to create a solution from this technology.
 
 =
 D2 NEXT
-Click to add another dimension
+2 + 1 = ?
 
 =
 D2 ALT1
 Explain it another way.
-Imagine you are sitting at a meeting where someone has just finished explaining a business opportunity...
-Then, they change track from delivering information to asking for it.
-They turn and look at one guy/gal and start a sentence:
+Imagine a meeting where there is a discussion about a business opportunity.
+When one person turns to some other person and says something like:
 
 =
 D2 ALT OPTIONS
-"As the resident techy in the room..."
+"As the resident techy in the room, is this possible?..."
 "Is this something wordpress can do? or is this something more?..."
+"Something something web presence something"
 
 =
 D2 ALT2
-I'm that some other guy.
+I'm that some other person.
 
 =
 D2 BRAIN

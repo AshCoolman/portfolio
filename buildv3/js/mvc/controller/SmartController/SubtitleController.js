@@ -32,6 +32,7 @@
 
 App.SubtitleController = App.SmartController.extend({
 	controllerName:'Script Subtitle Controller',
+	label:'SubtitleController',
 	text: '',
 	cursorChar: '∆',
 	read:{},
@@ -62,6 +63,10 @@ App.SubtitleController = App.SmartController.extend({
 		
 
 	},
+	view_didInsertElement: function (aview) {
+		this._super(aview);
+		this.send('SubtitleController_didInsertElement', this);
+	},
 	readChar: function (dur) {
 		var read = this.read,
 			lines = this.read.lines,
@@ -81,8 +86,15 @@ App.SubtitleController = App.SmartController.extend({
 					this.set('text', this.get('text') + '' + lines[read.currentLine][read.currentChar]);
 					read.currentChar++;
 				} else {	
+					
 					read.currentChar = 0;
 					read.currentLine++;
+					if (lines[ read.currentLine] && lines[ read.currentLine][1] == '@') {	
+						var eventStr = lines[ read.currentLine].join('').split(' ')[1];
+						App.eventMapper.triggerEvent(ragh.MEvt.create(eventStr));
+						read.currentLine++;	
+						console.log('event'+eventStr+'<');
+					}	
 					if ( (read.currentLine < lines.length) &&  ( lines[ read.currentLine].length > 0) ) {
 						console.log('>>', read.currentLine, lines.length);
 						this.set('text', this.get('text')+'<br/>'); //start fresh

@@ -131,7 +131,7 @@ App.ClickAndDragScalarView = App.ScalarView.extend({
 						.beginStroke(COLOR)
 						.moveTo(0, 0)
 						.lineTo(var2d, 0)
-						.endStroke();
+						.endStroke();	1
 							
 					markHeight = smallMarks.markHeights[smallMarks.markHeights.length-1];
 					for (var s = 1; s * smallMarks.unit < valAbs; s++) {
