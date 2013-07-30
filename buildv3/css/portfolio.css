@@ -115,8 +115,13 @@ html, body {
 .relative-wrapper {
   position: relative; }
 
+.subtitle-text {
+  background-color: white;
+  display: block; }
+
 .full-width-centered {
-  width: 100%; }
+  width: 100%;
+  margin: 0 auto; }
 
 .absolute-positioned {
   position: absolute; }

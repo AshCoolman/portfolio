@@ -48,13 +48,10 @@ D2 ALT2
 I'm that some other person.
 
 =
+D3
+During my problem solving process, I can make associations that are not typical, but are very useful. This allows me to laterally discover solutions that just might be elegant.
+i.e. The big idea
+
+=
 D2 BRAIN
 Dissect the brain
-
-=
-D3 PART1
-During my problem solving process, I can make associations that are not typical, but are very useful. This allows me to laterally discover solutions that just might be elegant.
-
-=
-D3 PART2
-i.e. The big idea

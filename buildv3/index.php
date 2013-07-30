@@ -186,7 +186,7 @@
 			{{controlWithVars 'click-and-drag-scalar'  		scaleLabel=""	value=200	x=-0 	y=50}}
 		</script>
 
-		<!-- DIMENSION 2 NAV-->
+		<!-- DIMENSION 1 NAV-->
 		<script type="text/x-handlebars" data-template-name="dimension1-nav">
 			<div class="nav-btn-holder">
 				{{#if isShowStart}}
@@ -222,23 +222,33 @@
 
 		<!-- ROUTE DIMENSION 2 -->
 		<script type="text/x-handlebars" data-template-name="dimension2">
-			<div class="absolute-positioned">
-				<div class="full-width-centered">
-						{{render 'subtitle' subtitle}}
-				</div>		
-	 		</div>
-	
-			<div class="full-width-centered absolute-positioned">
-				{{renderWithVars 'world-2d' World2d}} 
-				{{controlWithVars 'esl-entity-container'}}
-			</div>
+			<div class="relative-positioned">
+				<div class="absolute-positioned"> 
+					{{renderWithVars 'world-2d' World2d}} 
+					{{controlWithVars 'esl-entity-container'}}
+				</div>
+				<div class="full-width-centered absolute-positioned">
+					{{render 'subtitle' subtitle}}
+					<div class="small-centered columns single">
+						{{renderWithVars 'dimension2-nav' dimension2Nav}}
+					</div>	
+				</div>
+			</div>	
 			{{#if App.DEBUG}}
 			{{render 'world-2d-editor'}}
 			{{/if}}
 		</script>	
 
 
-
+		<!-- DIMENSION 2 NAV-->
+		<script type="text/x-handlebars" data-template-name="dimension2-nav">
+			<div class="nav-btn-holder">
+				{{#if isShowEnd}}
+				<button class="nav-btn" {{action "doEnd" }}>2 + 1 =</button>
+				{{/if}}
+			</div>
+		</script>
+		
 		<!-- WORLD 2D -->
 
 		<script type="text/x-handlebars" data-template-name="world-2d">
@@ -320,9 +330,15 @@
 
 		<!-- ROUTE DIMENSION 3 -->
 		<script type="text/x-handlebars" data-template-name="dimension3">
-			<div class="full-width-centered absolute-positioned">
+		
+		<div class="relative-positioned">
+			<div class="absolute-positioned"> 
 				{{renderWithVars 'world-3d' World3d}}
 			</div>
+			<div class="full-width-centered absolute-positioned">
+				{{render 'subtitle' subtitle}}
+			</div>
+		</div>
 		</script>
 
 

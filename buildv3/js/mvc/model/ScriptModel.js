@@ -5,6 +5,8 @@ App.ScriptModel = Em.Object.extend({
 				me.scriptIndex = App.dictionary.copy['INDEX'];
 				me.scriptD1 = App.dictionary.copy['D1'];
 				me.scriptD2 = App.dictionary.copy['D2'];
+				me.scriptD3 = App.dictionary.copy['D3'];
+				console.log('scriptD3', me.scriptD3);
 			}
 		}(this);
 		

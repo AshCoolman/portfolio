@@ -278,6 +278,7 @@ App.dictionary = Em.Object.create({
 					var lines = el.split('\n');
 					var heading = lines.splice(0, 1);
 					me.copy[heading[0]] = lines.join('\n');
+					console.log('dictionary read', heading[0])
 				});
 				me.isReady = true;
 				App.eventMapper.triggerEvent(ragh.MEvt.create('isDictionaryReady'));

@@ -30,14 +30,23 @@ App.Dimension3Route = Em.Route.extend({
 		
 		SmartController_didInsertElement: function(acontroller, alabel) {
 			switch (alabel) {
-				case 'World3dController': this.world2dController = acontroller;  break;
-				
+				case 'World3dController': this.world3dController = acontroller;  break;
+				case 'SubtitleController': this.subtitleController = acontroller; break;
 				default: /* console.log('++'+alabel);*/ break;
-			}	
-			
-
-
-
-		}
-	}
+			}
+					console.log('try start ', alabel, this.world3dController, this.subtitleController)
+			this.tryStart();	
+		},
+		SubtitleController_didInsertElement: function (acontroller, alabel) { }
+	},
+	tryStart: function () {
+        if (this.world3dController && this.subtitleController) {
+            this.doStart()
+        }
+    },
+	doStart: function (type, data) {
+		this.subtitleController.set('content', App.scriptModel); 
+        this.subtitleController.setup(this.subtitleController.get("content").scriptD3);
+        this.subtitleController.doSetupDraw();
+    },
 })

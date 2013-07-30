@@ -2,6 +2,8 @@ App.Dimension2Route = Em.Route.extend({
 	questionMarkController: null,
 	init: function () {
 		this._super();
+		
+		App.eventMapper.addEventListener('sub_finishedReading', this, this.doStopReading);
 		App.eventMapper.addEventListener('scriptD2ShowQuestion', this, function (me) {
 			return function () {
 				if (me.questionMarkController) {
@@ -38,6 +40,10 @@ App.Dimension2Route = Em.Route.extend({
         this.subtitleController.setup(this.subtitleController.get("content").scriptD2);
         this.subtitleController.doSetupDraw();
     },
+	doStopReading: function (type, data) {
+		console.log('doStopReading', this.dimension2NavController);
+		this.dimension2NavController.set('isShowEnd', true);
+	},
 	events: {
 		
 		SmartController_didInsertElement: function(acontroller, alabel) {
@@ -52,6 +58,8 @@ App.Dimension2Route = Em.Route.extend({
 				case 'SubtitleController': 
 					this.subtitleController = acontroller; 
 					break;
+				case 'Dimension2NavController':
+					this.dimension2NavController = acontroller;
 				default: /* console.log('++'+alabel);*/ break;
 			}	
 			this.tryStart();
