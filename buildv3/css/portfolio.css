@@ -65,6 +65,11 @@ html, body {
   text-align: center;
   line-height: 150%; }
 
+p.subtitle-text {
+  display: inline;
+  padding: 5px 0px;
+  background: white; }
+
 .relative-positioned {
   position: relative; }
 

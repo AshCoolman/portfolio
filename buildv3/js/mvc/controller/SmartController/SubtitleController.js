@@ -53,12 +53,14 @@ App.SubtitleController = App.SmartController.extend({
 		if (ascript[ascript.length-2] == '.') {
 			ascript = ascript.substr(0, ascript.length-2);
 		}
-		this.read.lines = ascript.split('.');
-		for (var l = 0; l < this.read.lines.length; l++ ) { 
-			this.read.lines[l] = (this.read.lines[l]).split('');
+		this.read.srcLines = ascript.split('.');
+		for (var l = 0; l < this.read.srcLines.length; l++ ) { 
+			this.read.srcLines[l] = (this.read.srcLines[l]).split('');
 		}
 		this.read.currentLine = 0;
 		this.read.currentChar = 0;
+		this.read.printedLines = [''];
+		this.read.currentPrintedLine = 0;
 		this.set('text', '');
 		
 
@@ -69,12 +71,13 @@ App.SubtitleController = App.SmartController.extend({
 	},
 	readChar: function (dur) {
 		var read = this.read,
-			lines = this.read.lines,
+			srcLines = this.read.srcLines,
+			printedLines = this.read.printedLines,
 			isNewLine = false,
 			delay;
 		
-		if (read.currentLine < lines.length) {
-			if ( read.currentChar < lines[ read.currentLine].length) {
+		if (read.currentLine < srcLines.length) {
+			if ( read.currentChar < srcLines[ read.currentLine].length) {
 				delay = 1 / this.get('content').get('cpms');
 			} else {
 				delay = 1200;
@@ -83,23 +86,29 @@ App.SubtitleController = App.SmartController.extend({
 			if (dur > delay) {
 				dur -= delay;
 				if (!isNewLine) {
-					this.set('text', this.get('text') + '' + lines[read.currentLine][read.currentChar]);
+					printedLines[read.currentPrintedLine] += srcLines[read.currentLine][read.currentChar];
+					this.set('text', '<p class="subtitle-text">'+printedLines.join('<br/>')+'</p>');
 					read.currentChar++;
 				} else {	
 					
 					read.currentChar = 0;
 					read.currentLine++;
-					if (lines[ read.currentLine] && lines[ read.currentLine][1] == '@') {	
-						var eventStr = lines[ read.currentLine].join('').split(' ')[1];
+					read.currentPrintedLine++;
+					if (srcLines[ read.currentLine] && srcLines[ read.currentLine][1] == '@') {	
+						var eventStr = srcLines[ read.currentLine].join('').split(' ')[1];
 						App.eventMapper.triggerEvent(ragh.MEvt.create(eventStr));
 						read.currentLine++;	
 						console.log('event'+eventStr+'<');
 					}	
-					if ( (read.currentLine < lines.length) &&  ( lines[ read.currentLine].length > 0) ) {
-						console.log('>>', read.currentLine, lines.length);
-						this.set('text', this.get('text')+'<br/>'); //start fresh
+					
+					printedLines[read.currentPrintedLine]='';
+					if ( (read.currentLine < srcLines.length) &&  ( srcLines[ read.currentLine].length > 0) ) {
+						console.log('>>', read.currentLine, srcLines.length, printedLines.length);
+						printedLines[read.currentPrintedLine] += srcLines[read.currentLine][read.currentChar];
+						this.set('text', '<p class="subtitle-text">'+printedLines.join('<br/>')+'</p>');
 					}
 				}
+				
 			};
 			
 		} else {
