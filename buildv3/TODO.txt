@@ -6,3 +6,6 @@ Why did I want an event?
 Subtitle ending events:
 	Should the Route detect end of subtitle and tell a nav (alt being Nav detects all subtitle end events)? Yes, because it is controlling this phenomenon
 	And many things could cause the Nav to show/hide
+
+LOW PRIORITY
+-Split script newlines on '/n/r' etc instead of '.'
