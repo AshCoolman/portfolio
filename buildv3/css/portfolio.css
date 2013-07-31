@@ -65,6 +65,17 @@ html, body {
   text-align: center;
   line-height: 150%; }
 
+.subtitle-text-holder {
+  position: relative; }
+
+.remove-button-holder {
+  position: absolute;
+  right: 10%;
+  top: -24px; }
+
+.remove-button-holder i:hover {
+  color: #FFFFFF; }
+
 p.subtitle-text {
   display: inline;
   padding: 5px 0px;

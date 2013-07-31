@@ -3,11 +3,15 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 
 <head>
+
+	
 	<meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <title>Ashley Coleman</title>
 
-  
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+	
   <link rel="stylesheet" href="stylesheets/app.css" />
   <link rel="stylesheet" href="css/portfolio.css" />
   
@@ -217,9 +221,29 @@
 
 		<!-- SUBTITLE -->
 		<script type="text/x-handlebars" data-template-name="subtitle">
-				{{{text}}}<img src="img/cursor.gif"/> 
-		</script>
+			<div class="subtitle-text-holder">
+			
+				<p class="subtitle-text">
+					{{{text}}}
+					
+						{{#if isRemoveButton}}
+						<div class="remove-button-holder">
+							<i class="icon-remove-sign remove-button"{{action 'doRemoveClicked'}}></i>
+						</div>
+						{{/if}}
 
+				</p>	
+				
+				
+					
+			</div>
+			
+			{{#unless isRemoved}}
+			<img src="img/cursor.gif"/>
+			{{/unless}}
+		</script>
+		
+		
 		<!-- ROUTE DIMENSION 2 -->
 		<script type="text/x-handlebars" data-template-name="dimension2">
 			<div class="relative-positioned">
@@ -336,7 +360,9 @@
 				{{renderWithVars 'world-3d' World3d}}
 			</div>
 			<div class="full-width-centered absolute-positioned">
-				{{render 'subtitle' subtitle}}
+				{{#if isSubtitle}}
+				{{controlWithVars 'subtitle' subtitle hasRemoveButton=true}}
+				{{/if}}
 			</div>
 		</div>
 		</script>

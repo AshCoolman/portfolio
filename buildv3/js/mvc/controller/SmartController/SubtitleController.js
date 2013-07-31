@@ -39,6 +39,9 @@ App.SubtitleController = App.SmartController.extend({
 	isForceFinish:false,
 	lines:[],
 	isEnded: false,
+	isRemoved:false,
+	hasRemoveButton:false,
+	isRemoveButton:false,
 	tOut:undefined,
 	ARF: undefined,
 	ARF_last: undefined,
@@ -87,7 +90,7 @@ App.SubtitleController = App.SmartController.extend({
 				dur -= delay;
 				if (!isNewLine) {
 					printedLines[read.currentPrintedLine] += srcLines[read.currentLine][read.currentChar];
-					this.set('text', '<p class="subtitle-text">'+printedLines.join('<br/>')+'</p>');
+					this.set('text', printedLines.join('<br/>'));
 					read.currentChar++;
 				} else {	
 					
@@ -105,7 +108,7 @@ App.SubtitleController = App.SmartController.extend({
 					if ( (read.currentLine < srcLines.length) &&  ( srcLines[ read.currentLine].length > 0) ) {
 						console.log('>>', read.currentLine, srcLines.length, printedLines.length);
 						printedLines[read.currentPrintedLine] += srcLines[read.currentLine][read.currentChar];
-						this.set('text', '<p class="subtitle-text">'+printedLines.join('<br/>')+'</p>');
+						this.set('text', printedLines.join('<br/>'));
 					}
 				}
 				
@@ -113,12 +116,22 @@ App.SubtitleController = App.SmartController.extend({
 			
 		} else {
 			this.isEnded = true;
-			console.log('isEnded');
+			if (this.get('hasRemoveButton')) {
+				this.set('isRemoveButton', true);
+			}
 			App.eventMapper.triggerEvent(ragh.MEvt.create('sub_finishedReading', {target:this}))
 		}
 
 		
 		return dur;
+	},
+	doRemoveClicked: function () {
+		console.log('doRemoveClicked');
+		window.cancelAnimationFrame( this.ARF );
+		this.isEnded = true;
+		this.set('isRemoved', true);
+		this.set('text', ''); //todo low technically should not need to render this, but if you look at template, I can't conditionally stop rendering {{text}} without incurring a js error
+		this.send('doRemoveSubtitle');
 	},
 	doSetupDraw: function () {
     	this.ARF_startTime = window.mozAnimationStartTime || Date.now();
@@ -128,6 +141,7 @@ App.SubtitleController = App.SmartController.extend({
 	},
 	
 	doDraw: function (atime) {
+
 		with (this) {
 			ARF_startTime = Date.now();
 			ARF_diff += (ARF_startTime - ARF_last);
