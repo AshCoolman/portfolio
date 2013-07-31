@@ -54,20 +54,10 @@ App.ActiveEslStageView = App.EslStageView.extend({
 		}
 	},	
 	reDraw: function ( dur ) {
-		//console.log('reDraw.dur', adur)
-		var eslEntities = this.eslEntities;
-
 		with (this) {
 			for (var i = 0; i < eslEntities.length; i++) {
-				if (!eslEntities[i].override_reDraw) {
-					//console.log('entity lacks override_reDraw\n\t', eslEntities[i]._debugContainerKey)
-				} else { 
-					//console.log('>>', eslEntities[i].x)
+				if (eslEntities[i].override_reDraw) {
 					eslEntities[i].override_reDraw(dur);
-					/*
-					eslEntities[i].x -= 0.5;
-					eslEntities[i].y -= 0.5;
-					*/
 				}
 			}	
 			stage.x = -1 + $canvas.attr('width')/2;

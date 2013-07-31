@@ -1,12 +1,13 @@
-2nd parameter of controlWithVars
-Slow down?
-Transitions
-Outline text
-Better looking (add dimension)
-Why did I want an event?
-Subtitle ending events:
-	Should the Route detect end of subtitle and tell a nav (alt being Nav detects all subtitle end events)? Yes, because it is controlling this phenomenon
-	And many things could cause the Nav to show/hide
+HIGH PRIORITY
+180	Slow down?
+60	Transitions
+240	Better looking (add dimension)
+90	Event driven script
+		Subtitle ending events:
+			Should the Route detect end of subtitle and tell a nav (alt being Nav detects all subtitle end events)? Yes, because it is controlling this phenomenon
+			And many things could cause the Nav to show/hide
+
 
 LOW PRIORITY
--Split script newlines on '/n/r' etc instead of '.'
+45	Split script newlines on '/n/r' etc instead of '.'
+Change ControlWithVars to not have second attribute as a "model", instead check that model="adf" would work.
