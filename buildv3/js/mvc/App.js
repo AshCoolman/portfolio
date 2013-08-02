@@ -232,7 +232,7 @@ Ember.Handlebars.registerHelper('renderWithVars', function(name, contextString, 
 
 
 App = Ember.Application.create({
-	DEBUG: false,
+	DEBUG: true,
 	static_preloader: {},
 	scriptModel: null,
 	rootElement:$('.app')[0],
@@ -306,3 +306,32 @@ Em.ObjectController.extend({
 App.KnobView = Em.View.extend({
 	templateName: 'knob'
 });
+
+
+if (App.DEBUG) {
+	var stats = new Stats();
+	stats.setMode(1); // 0: fps, 1: ms
+
+	// Align top-left
+	stats.domElement.style.position = 'absolute';
+	stats.domElement.style.left = '0px';
+	stats.domElement.style.top = '0px';
+
+	document.body.appendChild( stats.domElement );
+
+	setInterval( function () {
+
+	    stats.begin();
+
+	    // your code goes here
+
+	    stats.end();
+
+	}, 1000 / 60 );
+	
+	
+	
+
+	
+	
+}

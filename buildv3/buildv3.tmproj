@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>js/mvc/view/SmartView/EaselEntityView/ScalarView.js</string>
+	<string>index.php</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -56,9 +56,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>13</integer>
+				<integer>59</integer>
 				<key>line</key>
-				<integer>0</integer>
+				<integer>20</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -128,30 +128,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>15</integer>
+				<integer>63</integer>
 				<key>line</key>
-				<integer>362</integer>
+				<integer>403</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>349</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>10</integer>
-				<key>line</key>
-				<integer>362</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>20</integer>
-				<key>line</key>
-				<integer>362</integer>
-			</dict>
+			<integer>388</integer>
 		</dict>
 		<key>index.php.old</key>
 		<dict>
@@ -255,6 +239,20 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>js/lib/easeljs-0.6.0.min.js</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>22</integer>
+				<key>line</key>
+				<integer>93</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>64</integer>
+		</dict>
 		<key>js/lib/ragh/Three.CubeGroup.js</key>
 		<dict>
 			<key>caret</key>
@@ -290,30 +288,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>5</integer>
+				<integer>12</integer>
 				<key>line</key>
-				<integer>269</integer>
+				<integer>234</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>250</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>1</integer>
-				<key>line</key>
-				<integer>269</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>5</integer>
-				<key>line</key>
-				<integer>269</integer>
-			</dict>
+			<integer>206</integer>
 		</dict>
 		<key>js/mvc/controller/ApplicationController.js</key>
 		<dict>
@@ -536,14 +518,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>line</key>
-				<integer>0</integer>
+				<integer>24</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>28</integer>
+			<integer>18</integer>
 		</dict>
 		<key>js/mvc/controller/SmartController/EaselEntityController/QuestionMarkController.js</key>
 		<dict>
@@ -661,6 +643,20 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>js/mvc/controller/SmartController/Entity3dController.js</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>js/mvc/controller/SmartController/HashBtnController.js</key>
 		<dict>
 			<key>caret</key>
@@ -738,30 +734,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>18</integer>
+				<integer>4</integer>
 				<key>line</key>
-				<integer>133</integer>
+				<integer>56</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>110</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>13</integer>
-				<key>line</key>
-				<integer>133</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>29</integer>
-				<key>line</key>
-				<integer>133</integer>
-			</dict>
+			<integer>36</integer>
 		</dict>
 		<key>js/mvc/controller/SmartController/TransitionController.js</key>
 		<dict>
@@ -856,9 +836,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>39</integer>
+				<integer>44</integer>
 				<key>line</key>
-				<integer>8</integer>
+				<integer>7</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -914,29 +894,29 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>1</integer>
+				<integer>12</integer>
 				<key>line</key>
-				<integer>36</integer>
+				<integer>70</integer>
 			</dict>
 			<key>columnSelection</key>
 			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>34</integer>
+			<integer>36</integer>
 			<key>selectFrom</key>
 			<dict>
 				<key>column</key>
-				<integer>6</integer>
+				<integer>42</integer>
 				<key>line</key>
-				<integer>41</integer>
+				<integer>70</integer>
 			</dict>
 			<key>selectTo</key>
 			<dict>
 				<key>column</key>
-				<integer>1</integer>
+				<integer>12</integer>
 				<key>line</key>
-				<integer>36</integer>
+				<integer>70</integer>
 			</dict>
 		</dict>
 		<key>js/mvc/router/Dimension3Route.js</key>
@@ -944,14 +924,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>73</integer>
+				<integer>61</integer>
 				<key>line</key>
-				<integer>39</integer>
+				<integer>49</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>6</integer>
+			<integer>13</integer>
 		</dict>
 		<key>js/mvc/router/IndexRoute.js</key>
 		<dict>
@@ -1174,9 +1154,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>53</integer>
+				<integer>2</integer>
 				<key>line</key>
-				<integer>12</integer>
+				<integer>30</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -1195,7 +1175,7 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>9</integer>
+			<integer>26</integer>
 		</dict>
 		<key>js/mvc/view/SmartView/EaselEntityView/QuestionMarkView.js</key>
 		<dict>
@@ -1274,9 +1254,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>16</integer>
+				<integer>3</integer>
 				<key>line</key>
-				<integer>24</integer>
+				<integer>23</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -1288,14 +1268,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>15</integer>
+				<integer>4</integer>
 				<key>line</key>
-				<integer>56</integer>
+				<integer>63</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>35</integer>
+			<integer>36</integer>
 		</dict>
 		<key>js/mvc/view/SmartView/EaselStageView/ActiveEaselStageView/World1dView.js</key>
 		<dict>
@@ -1316,44 +1296,28 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>43</integer>
+				<integer>39</integer>
 				<key>line</key>
-				<integer>71</integer>
+				<integer>48</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>56</integer>
+			<integer>20</integer>
 		</dict>
 		<key>js/mvc/view/SmartView/Entity3dVIew.js</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>35</integer>
+				<integer>2</integer>
 				<key>line</key>
-				<integer>63</integer>
+				<integer>66</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>39</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>84</integer>
-				<key>line</key>
-				<integer>64</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>35</integer>
-				<key>line</key>
-				<integer>63</integer>
-			</dict>
 		</dict>
 		<key>js/mvc/view/SmartView/HashBtnView.js</key>
 		<dict>
@@ -1548,30 +1512,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>63</integer>
+				<integer>7</integer>
 				<key>line</key>
-				<integer>69</integer>
+				<integer>134</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>50</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>60</integer>
-				<key>line</key>
-				<integer>69</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>63</integer>
-				<key>line</key>
-				<integer>69</integer>
-			</dict>
+			<integer>123</integer>
 		</dict>
 		<key>sass/_settings.scss</key>
 		<dict>
@@ -1606,7 +1554,7 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>30</integer>
+				<integer>29</integer>
 				<key>line</key>
 				<integer>93</integer>
 			</dict>
@@ -1620,14 +1568,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>16</integer>
+				<integer>14</integer>
 				<key>line</key>
-				<integer>53</integer>
+				<integer>44</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>20</integer>
+			<integer>24</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
@@ -1661,6 +1609,7 @@
 		<string>js/mvc/controller/SmartController/EaselEntityController/ScalarController.js</string>
 		<string>index.php.old</string>
 		<string>index.php</string>
+		<string>js/mvc/controller/SmartController/Entity3dController.js</string>
 		<string>js/mvc/view/SmartView/Dimension1NavView.js</string>
 		<string>js/mvc/view/SmartView/Dimension2NavView.js</string>
 		<string>js/mvc/controller/SmartController/Dimension1NavController.js</string>
@@ -1699,6 +1648,7 @@
 		<string>js/mvc/controller/SmartController/EaselEntityController.js</string>
 		<string>js/mvc/view/ApplicationView.js</string>
 		<string>js/mvc/view/SmartView/EaselStageView/ActiveEaselStageView.js</string>
+		<string>js/lib/easeljs-0.6.0.min.js</string>
 		<string>js/mvc/view/SmartView/EaselEntityView/ScalarView/ScalarValueView.js</string>
 		<string>js/mvc/view/SmartView/SubtitleView.js</string>
 		<string>js/mvc/controller/SmartController/SubtitleController.js</string>

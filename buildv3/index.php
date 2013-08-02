@@ -198,7 +198,7 @@
 				{{/if}}
 
 				{{#if isShowEnd}}
-				<button class="nav-btn" {{action "doEnd" }}>1 + 1 =</button>
+				<button class="nav-btn" {{action "doGotoDimension2" }}>1 + 1 =</button>
 				{{/if}}
 			</div>
 		</script>
@@ -372,9 +372,9 @@
 
 		<!-- ROUTE DIMENSION 3 -->
 	<script type="text/x-handlebars" data-template-name="world-3d">
-		{{ controlWithVars 'entity-3d'}}
 	</script>
-
+	
+		<!-- {{ controlWithVars 'entity-3d'}} -->
 
 	<script type="text/x-handlebars" data-template-name="entity-3d">
 	</script>
@@ -399,7 +399,10 @@
 			</div>	
 		</div>  
 
-
+		
+	        <script src="js/lib/stats.min.js"></script>
+	        <script src="js/lib/threex.rendererstats.js"></script>
+		
 	        <script src="js/lib/json2.js"></script>
 	        <script src="js/lib/rAF.js"></script>
 	        <script src="js/lib/jquery-1.8.1.min.js"></script>
@@ -415,6 +418,8 @@
 	        <script src="js/lib/embermandl.js"></script>
 
 			<script src="js/lib/ragh/Three.TrackballControls.js"></script>
+			
+			
 
 
 

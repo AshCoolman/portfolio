@@ -11,3 +11,11 @@ HIGH PRIORITY
 LOW PRIORITY
 45	Split script newlines on '/n/r' etc instead of '.'
 Change ControlWithVars to not have second attribute as a "model", instead check that model="adf" would work.
+
+
+PERFORMANCE
+setup wireless 
+	http://esbueno.noahstokes.com/post/42930947028/test-your-local-web-sites-on-your-ipad-or-iphone-using
+	http://jona.than.biz/blog/how-to-enable-zeroconf-for-apache/
+	Squidman
+	http://serverfault.com/questions/118652/how-to-use-bonjour

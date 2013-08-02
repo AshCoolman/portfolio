@@ -30,6 +30,14 @@ App.World3dView = App.SmartView.extend({
 		var renderer = this.renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true });
 		this.$el.append(renderer.domElement);
 		$(renderer.domElement).addClass('world-3d-renderer')
+		if (App.DEBUG) {
+			var rendererStats = this.rendererStats  = new THREEx.RendererStats()
+			rendererStats.domElement.style.position = 'absolute'
+			rendererStats.domElement.style.left = '0px'
+			rendererStats.domElement.style.bottom   = '0px'
+			document.body.appendChild( rendererStats.domElement );
+					
+		}
 			
 		var camera = this.camera = new THREE.OrthographicCamera( WIDTH / - 2, WIDTH / 2, HEIGHT / 2, HEIGHT / - 2, 1, 5000 );
 		camera.position.set(WIDTH / 2, 0, 1000);
@@ -56,13 +64,17 @@ App.World3dView = App.SmartView.extend({
 		directionalLight.position.set( 0, 0, 1 );
 		scene.add( directionalLight );
 	
-		
+		/*
 		if (App.DEBUG) {
 			this.cursor3D = new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial());
-			cursor3D.add(new THREE.PointLight(0x00FF00));
+			console.log(this.cursor3d);
+			this.cursor3D.add(new THREE.PointLight(0x00FF00));
 		} else {
+		*/
 			this.cursor3D = new THREE.Object3D();
+			/*
 		}
+		*/
 		var cursor3D = this.cursor3D;
 		cursor3D.overdraw = true;
 		scene.add(cursor3D);
@@ -231,9 +243,11 @@ App.World3dView = App.SmartView.extend({
 		}
 
 		$(renderer.domElement).attr( { width: w+'px' , height: h+'px'  } );
+		/*
 		if (App.DEBUG) {
 			$canvas.css( 'box-shadow', 'inset -1px -1px '+ tmpbgColor );
 		}
+		*/
 		renderer.setSize( w, h );
 		camera.left = -w/2;
 		camera.right = w/2;
@@ -253,6 +267,7 @@ App.World3dView = App.SmartView.extend({
 		
 		if (typeof this['cubeGroup'] != 'undefined') {
 			with (this) {
+				
 				raycaster = pickProjector.pickingRay( mouse2D.clone(), camera )	;
 				var intersects = raycaster.intersectObjects( cubeGroup.children, true );
 
@@ -264,11 +279,15 @@ App.World3dView = App.SmartView.extend({
 						CubeGroup.show(intersector);
 					}
 				}
+				
 				renderer.render( scene, camera);
 			}
 		}			
 		if (this.isControls) {	
 			this.controls.update();
+		}
+		if (App.DEBUG) {
+			this.rendererStats.update(this.renderer);
 		}
 	},
 	getRealIntersector: function( intersects ) {

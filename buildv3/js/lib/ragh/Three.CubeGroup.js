@@ -1,6 +1,6 @@
 
 var CubeGroup = {
-	isMerge: true,
+	isMerge: false,
 	rollOver: null,
 	SIZE: 30,
 	materialsDict: {},
@@ -103,16 +103,19 @@ var CubeGroup = {
 	},
 	
 	createCube: function (x, y, z, data) {
-
+		console.log('created cube geo')
 		var mesh, 
 			sz = this.SIZE,
 			geo = new THREE.CubeGeometry( sz, sz, sz, 1, 1, 1 ),
+			//geo = new THREE.SphereGeometry( sz, 1, 1 ),
 			color = this.materialsDict[data.color];
 			
 		if (!this.materialsDict[data.color]) {
 			this.materialsDict[data.color] = color = new THREE.MeshLambertMaterial({color: data.color});
 		}
 		if (!this.isMerge) {	
+			
+			THREE.GeometryUtils.merge(geo, new THREE.Geometry());
 			mesh = new THREE.Mesh( geo, color);
 			mesh.position = new THREE.Vector3( x, y, z);
 			this.grp.add( mesh );
@@ -140,7 +143,6 @@ var CubeGroup = {
 				z = Math.round( cube.position.z / this.SIZE);
 				if (!amap[x]) amap[x]=[];
 				if (!amap[x][y]) amap[x][y]=[];
-				console.log(cube.position, x, y, z, '>', amap)	
 				amap[x][y][z] = {name: c};
 			}
 		}
@@ -156,13 +158,3 @@ var CubeGroup = {
 	}
 }
 
-
-function Test(aname) {
-	this.name = aname;
-	this.sayName = function() {
-		console.log('My name is '+this.name);
-	}
-};
-
-var atest = new Test('Ben');
-atest.sayName();

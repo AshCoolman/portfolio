@@ -5,7 +5,6 @@ App.Dimension1Route = Em.Route.extend({
 	activate: function () {
 		this._super();
 		App.eventMapper.addEventListener('dim1Nav_start', this, this.doDim1Nav_start );
-		App.eventMapper.addEventListener('dim1Nav_end', this, this.doDim1Nav_end );
 		App.eventMapper.addEventListener('sub_finishedReading', this, this.dosub_finishedReading );
 	},
 	deactivate: function () {
@@ -24,11 +23,7 @@ App.Dimension1Route = Em.Route.extend({
 		this.dimension1NavController.set('isShowStart', false);
 	},
 	dosub_finishedReading: function() {
-		console.log('show end')
 		this.dimension1NavController.set('isShowEnd', true);
-	},
-	doDim1Nav_end: function () {			
-		window.location.hash = 'd2';
 	},
 	doStart: function (type, data) {
 		this.subtitleController.set('content', App.scriptModel); 
@@ -67,6 +62,9 @@ App.Dimension1Route = Em.Route.extend({
 			this.tryStart();
 		},
 		SubtitleController_didInsertElement: function (acontroller, alabel) { }
+	},	
+	doGotoDimension2: function () {			
+		window.location.hash = 'd2';
 	},
 	tryStart: function () {
         if (this.subtitleController && this.dimension1NavController && this.scalarController) {
