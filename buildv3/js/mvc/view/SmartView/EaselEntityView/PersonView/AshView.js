@@ -28,12 +28,14 @@ App.AshView = App.EslEntityView.extend({
 	
 	},
 	override_reDraw: function (dur) {
+		
 		var change = 30/1000 * dur; //per second
 		if (this.eslObj) {
 			with (this.eslObj) {
 				//x = (x > 1200) ? -300 : x+change;
 			}
 		}
+		
 	}
 	
 });

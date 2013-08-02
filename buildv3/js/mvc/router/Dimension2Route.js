@@ -47,7 +47,7 @@ App.Dimension2Route = Em.Route.extend({
 	events: {
 		
 		SmartController_didInsertElement: function(acontroller, alabel) {
-			console.log('Dimension2 route', alabel)
+//			console.log('Dimension2 route', alabel)
 			switch (alabel) {
 				case 'World2dController': 
 					this.world2dController = acontroller;

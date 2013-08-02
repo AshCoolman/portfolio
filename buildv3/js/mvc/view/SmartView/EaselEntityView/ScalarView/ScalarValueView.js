@@ -67,7 +67,20 @@ App.ScalarValueView = App.ScalarView.extend({
 			return shp;
 	},
 	override_reDraw: function (dur) {
-
+		/*
+		this._super();
+		var speed = 100,
+			change = speed/1000 * dur; //per second
+		this.container.x = (this.container.x > 800) ? -800 : this.container.x+change;
+		
+		var startFade = 400,
+			endFade = 600,
+			diff = endFade - startFade;
+		if (this.container.x > startFade) {
+			this.container.alpha = 1 - (this.container.x - startFade) / diff;
+		} else if (this.container.x < -startFade) {
+			this.container.alpha = 1+(this.container.x + startFade) / diff;
+		}*/
 	}
 	
 			

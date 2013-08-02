@@ -19,6 +19,7 @@ App.EslStageView = App.SmartView.extend({
 			_super();
 			canvas = $el.append('<canvas class="esl-stage-canvas">');
 			$canvas = $('.esl-stage-canvas', $el);
+			
 			stage = new createjs.Stage( $canvas[0] );
 			
 			stage.x = 0.5

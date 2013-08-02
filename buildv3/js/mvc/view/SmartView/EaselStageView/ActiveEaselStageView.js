@@ -15,21 +15,23 @@ App.ActiveEslStageView = App.EslStageView.extend({
 			}
 		}(this));
 		isAnimating = true;
-		
 		var rafFunction = function(me) {
 			var animloop = function (time) {
 				var dur = (me.get('lastRequestAnimationFrame')) ? time - me.get('lastRequestAnimationFrame') : 0;
 				me.set('lastRequestAnimationFrame', time);
-				me.reDraw(dur);
-				me.set('raf', window.requestAnimationFrame(animloop));			
+				me.reDraw(dur); // stage.update() does not work... todo high
+				me.set('raf', window.requestAnimationFrame(animloop));		
 			};
+			me.stage.update();
 			return animloop
 		}(this);
+		
 		this.set('raf', window.requestAnimationFrame(rafFunction));	
 
 		//
 		this.resize();
 		this.reDraw();
+		
 	},
 	resize: function () {
 		this.tmpwinWidth = $(window).width();
@@ -55,14 +57,14 @@ App.ActiveEslStageView = App.EslStageView.extend({
 	},	
 	reDraw: function ( dur ) {
 		with (this) {
-			for (var i = 0; i < eslEntities.length; i++) {
+			for (var i = 0; i <  eslEntities.length; i++) {
 				if (eslEntities[i].override_reDraw) {
 					eslEntities[i].override_reDraw(dur);
 				}
-			}	
-			stage.x = -1 + $canvas.attr('width')/2;
+			}
+			stage.x = -1 + $canvas.attr('width')/2;	
 			stage.update();
-		}
+		}		
 	},
 	willDestroyElement: function () {
 		//this.isAnimating = false;

@@ -46,6 +46,9 @@ App.Dimension3Route = Em.Route.extend({
     },
 	doStart: function (type, data) {
 		this.subtitleController.set('content', App.scriptModel); 
+		console.log(this.subtitleController.get("content").scriptD1)
+		console.log(this.subtitleController.get("content").scriptD2)
+		console.log(this.subtitleController.get("content").scriptD3)
         this.subtitleController.setup(this.subtitleController.get("content").scriptD3);
         this.subtitleController.doSetupDraw();
     },

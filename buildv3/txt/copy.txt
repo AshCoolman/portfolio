@@ -4,14 +4,18 @@ This website is about me, Ashley Coleman.
 I'm looking for a job.
 You probably don't have any real picture about who I am.
 I created this website to help build that picture.
+
 =
 INDEX BUTTON
+Lala
+
 =
 D1
 One thing about me, is I like stories.
 And I especially like to craft experiences for others.
 For instance, the thought of you experiencing my website right now gets my blood pumping.
 That is one important aspect to me.
+
 =
 D1 MUTLI
 Oh look, you are not alone!
@@ -29,7 +33,7 @@ I am able to look at a problem, and see how to create a solution from this techn
 
 =
 D2 NEXT
-2 + 1 = ?
+2 + 1 = ?.
 
 =
 D2 ALT1

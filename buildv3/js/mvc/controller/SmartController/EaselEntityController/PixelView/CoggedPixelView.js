@@ -22,10 +22,12 @@ App.CoggedPixelView = App.PixelView.extend({
 		cogView.addEventListener('eslObjCreated', (function(me) {
 			return function(e) {me.addCogEsl(e)};
 		}(this)), false);
+		
 		setTimeout(
 			(function(me) {
 				return function() {me.doOpen();}
 			}(this)), 2000+ Math.random() * 2000)
+			
 		return this.handle
 	},
 	addCogEsl: function (e) {

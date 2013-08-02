@@ -53,10 +53,14 @@ App.SubtitleController = App.SmartController.extend({
 		return this._super();
 	},
 	setup: function (ascript) {
+		
+		//console.log('Erm', ascript);
+		/*
 		if (ascript[ascript.length-2] == '.') {
 			ascript = ascript.substr(0, ascript.length-2);
 		}
-		this.read.srcLines = ascript.split('.');
+		*/
+		this.read.srcLines = ascript.split('\n\r');
 		for (var l = 0; l < this.read.srcLines.length; l++ ) { 
 			this.read.srcLines[l] = (this.read.srcLines[l]).split('');
 		}
