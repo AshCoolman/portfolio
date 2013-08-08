@@ -129,11 +129,12 @@
 			{{/if}}
 
 			{{#if isShowEnd}}
-			<a class="button nav-btn standard-single-button" {{action "doEnd" }}>0 + 1 =</a>
+			<a class="button nav-btn standard-single-button" {{action "doGotoDimension1" }}>0 + 1 =</a>
 			{{/if}}
 		</script>
 
 		<!-- ROUTE DIMENSION 1 -->
+		<!--{{renderWithVars 'world-1d'}}-->
 		<script type="text/x-handlebars" data-template-name="dimension1">
 
 	 		<div class="relative-positioned">
@@ -144,7 +145,7 @@
 
 			<div class="full-width-centered absolute-positioned">
 				<div class="world-1d-centerer">
-					{{renderWithVars 'world-1d'}}
+					{{render 'interactive-grid'}}
 				</div>
 			</div>
 			
@@ -162,8 +163,15 @@
 			</div>
 			
 		</script>
+		
+		
+		
+		<script type="text/x-handlebars" data-template-name="interactive-grid" >
+			{{labelText}}
 
-		<!-- SCALAR -->
+			<div id="svg-raphaeljs"></div>
+		</script>
+		
 		<script type="text/x-handlebars" data-template-name="scalar">
 
 		</script>
@@ -268,7 +276,7 @@
 		<script type="text/x-handlebars" data-template-name="dimension2-nav">
 			<div class="nav-btn-holder">
 				{{#if isShowEnd}}
-				<button class="nav-btn" {{action "doEnd" }}>2 + 1 =</button>
+				<button class="nav-btn" {{action "doGotoDimension3" }}>2 + 1 =</button>
 				{{/if}}
 			</div>
 		</script>
@@ -404,6 +412,7 @@
 	        <script src="js/lib/threex.rendererstats.js"></script>
 		
 	        <script src="js/lib/json2.js"></script>
+	        <script src="js/lib/raphael-min.js"></script>
 	        <script src="js/lib/rAF.js"></script>
 	        <script src="js/lib/jquery-1.8.1.min.js"></script>
 	        <script src="js/lib/handlebars.js"></script>

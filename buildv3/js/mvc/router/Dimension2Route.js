@@ -65,6 +65,9 @@ App.Dimension2Route = Em.Route.extend({
 			this.tryStart();
 		},
 		SubtitleController_didInsertElement: function () {
+		},
+		doGotoDimension3: function () {
+			window.location.hash = 'd3';
 		}
 	},
 	tryStart: function () {

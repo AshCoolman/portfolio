@@ -16,9 +16,6 @@ App.Dimension1NavController = App.SmartController.extend({
 	},
 	doStart: function () {
 		App.eventMapper.triggerEvent(ragh.MEvt.create('dim1Nav_start'));
-	},
-	doEnd: function () {
-		App.eventMapper.triggerEvent(ragh.MEvt.create('dim1Nav_end'));
 	}
 });
 
