@@ -1,6 +1,6 @@
 App.Dimension1Route = Em.Route.extend({
-	subtitleView:null, 
 	subtitleController:null,
+	subtitleController2:null,
 	dimension1NavController: null,
 	activate: function () {
 		this._super();
@@ -15,13 +15,7 @@ App.Dimension1Route = Em.Route.extend({
 		App.eventMapper.removeEventListener('sub_finishedReading', this);
 	},
 	doDim1Nav_start: function (type, data) { 
-		this.subtitleController.setup( this.subtitleController.get('content').scriptD1 );
-		this.subtitleController.doSetupDraw();
-		
-		this.heartbeatController.myView.doStart();
-		this.heartbeatController.createHeartbeat();
-		this.scalarController.startDrawing();
-		this.dimension1NavController.set('isShowStart', false);
+
 	},
 	dosub_finishedReading: function() {
 		this.dimension1NavController.set('isShowEnd', true);
@@ -30,10 +24,19 @@ App.Dimension1Route = Em.Route.extend({
 		window.location.hash = 'd2';
 	},
 	doStart: function (type, data) {
+
+
+		
+		console.log('STARTED DIMENSION 1', this.subtitleController.get('thescript'), this.subtitleController2.get('thescript'))			
 		this.subtitleController.set('content', App.scriptModel); 
-        this.subtitleController.setup(this.subtitleController.get("content").scriptD1);
+        this.subtitleController.setup();//this.subtitleController.get("content").scriptD1);
         this.subtitleController.doSetupDraw();
-        this.dimension1NavController.set("isShowStart", false)
+		/*
+		this.heartbeatController.myView.doStart();
+		this.heartbeatController.createHeartbeat();
+		this.scalarController.startDrawing();
+		this.dimension1NavController.set('isShowStart', false);
+		*/
     },
 	model: function () {
 		return (App.dimension1Model) ? App.dimension1Model : App.Dimension1Model.create();
@@ -58,10 +61,17 @@ App.Dimension1Route = Em.Route.extend({
 		SmartController_didInsertElement: function(acontroller, alabel) {
 			console.log('SmartController_didInsertElement label', alabel);
 			switch (alabel) {
-				case 'SubtitleController': 			this.subtitleController = acontroller; this.subtitleView = acontroller.get('view'); break;  
+				case 'SubtitleController': 			if (acontroller.get('orderRead') == '1') {
+														this.subtitleController = acontroller;
+														console.log('***1 subtitleController set')
+													} else if (acontroller.get('orderRead') == '2') {
+														this.subtitleController2 = acontroller;
+														console.log('***2 subtitleController set')
+													}
+													break;  
 				case 'Dimension1NavController':  	this.dimension1NavController = acontroller; 	break;
 				case 'HeartbeatController':  		this.heartbeatController = acontroller; 		break;
-				case 'ScalarController':  			this.scalarController = acontroller; 			break;
+				case 'ScalarController':  			this.scalarController = acontroller;			break;
 			}
 			this.tryStart();
 		},
@@ -70,10 +80,17 @@ App.Dimension1Route = Em.Route.extend({
 		},
 		doGotoDimension2: function () { 
 			window.location.hash = 'd2';
+		},
+		doSecondSubtitle: function () { 
+			this.subtitleController.set('isCursor', false);
+			this.subtitleController2.set('content', App.scriptModel); 
+	        this.subtitleController2.setup();//this.subtitleController.get("content").scriptD1);
+	        this.subtitleController2.doSetupDraw();
 		}
 	},
 	tryStart: function () {
-        if (this.subtitleController && this.dimension1NavController /*&& this.scalarController*/) {
+        if (!this.isStarted && this.subtitleController && this.subtitleController2 /*&& this.scalarController*/) {
+			this.isStarted = true;
             this.doStart()
         }
     }

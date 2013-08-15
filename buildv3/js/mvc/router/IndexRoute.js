@@ -18,10 +18,10 @@ App.IndexRoute = Em.Route.extend({
 		App.eventMapper.removeEventListener('sub_finishedReading', this);
 	},
     doStart: function (type, data) {
-		this.subtitleController.set('content', App.scriptModel); 
-        this.subtitleController.setup(this.subtitleController.get("content").scriptIndex);
-        this.subtitleController.doSetupDraw();
-        this.indexNavController.set("isShowStart", false)
+		console.log('start draw')
+		this.subtitleController1.set('content', App.scriptModel); 
+        this.subtitleController1.setup();
+        this.subtitleController1.doSetupDraw();
     },
 	doEnd: function (type, data) {
 		if (this.indexNavController) {
@@ -30,7 +30,7 @@ App.IndexRoute = Em.Route.extend({
 		}
 	},
 	doStopReading: function (type, data) { 
-		if (this.subtitleController) {
+		if (this.subtitleController1) {
 			this.indexNavController.set('isShowEnd', true);
 		}
 	},
@@ -48,8 +48,8 @@ App.IndexRoute = Em.Route.extend({
 	},
 	events: {
 		SubtitleController_didInsertElement: function (acontroller, alabel) { 
-			this.subtitleController = acontroller; 
-			this.subtitleView = acontroller.get('view');
+			if (acontroller.get('readOrder') == '1') { this.subtitleController1 = acontroller; }
+			if (acontroller.get('readOrder') == '2') { this.subtitleController2 = acontroller; }
 			this.tryStart();
 		},
 		IndexNavController_didInsertElement: function (acontroller, alabel) {
@@ -57,11 +57,17 @@ App.IndexRoute = Em.Route.extend({
 			this.tryStart();
 		},
 		SmartController_didInsertElement: function (acontroller, alabel) {
+		},
+		doSecondSubtitle: function () {
+			this.subtitleController1.set('isCursor', false);
+			this.subtitleController2.set('content', App.scriptModel); 
+	        this.subtitleController2.setup();
+	        this.subtitleController2.doSetupDraw();
 		}
 		
 	},
 	tryStart: function () {
-        if (this.subtitleController && this.indexNavController) {
+        if (this.subtitleController1 && this.subtitleController2) {
             this.doStart()
         }
     },

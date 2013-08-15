@@ -1,6 +1,9 @@
 /*
 http://jsfiddle.net/VAXrL/190/
 */
+button {
+  pointer-events: auto; }
+
 canvas, img {
   image-rendering: optimizeSpeed;
   image-rendering: -moz-crisp-edges;
@@ -68,6 +71,31 @@ html, body {
 .subtitle-text-holder {
   position: relative; }
 
+.subtitle-text-holder a {
+  color: #333333;
+  margin: 0 auto;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  pointer-events: none; }
+
+.subtitle-text-holder p {
+  color: #333333;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center; }
+
+.subtitle-text-holder span {
+  display: inline;
+  padding: 5px 5px;
+  background: white; }
+
+.subtitle-text-holder a p span {
+  color: lightblue;
+  text-decoration: none;
+  pointer-events: auto;
+  background: white; }
+
 .remove-button-holder {
   position: absolute;
   right: 10%;
@@ -75,11 +103,6 @@ html, body {
 
 .remove-button-holder i:hover {
   color: #FFFFFF; }
-
-p.subtitle-text {
-  display: inline;
-  padding: 5px 0px;
-  background: white; }
 
 .relative-positioned {
   position: relative; }
@@ -142,6 +165,9 @@ p.subtitle-text {
 .absolute-positioned {
   position: absolute; }
 
+.pointer-events-none {
+  pointer-events: none; }
+
 .visible-world-2d, .world-3d-renderer, .transition-canvas {
   margin: 0 auto;
   display: block; }
@@ -158,3 +184,20 @@ p.subtitle-text {
   left: 50%;
   top: 0;
   margin-left: -500px; }
+
+.dimension1-nav {
+  pointer-events: none; }
+
+.interactive-grid {
+  position: relative;
+  width: 100%; }
+
+.plot-text-jscss, .position-text-jscss, #svg-raphaeljs {
+  position: absolute; }
+
+#svg-raphaeljs {
+  top: -1.875em;
+  width: 100%; }
+
+.plot-text-jscss {
+  top: 200px; }

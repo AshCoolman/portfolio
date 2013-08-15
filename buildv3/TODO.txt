@@ -1,4 +1,5 @@
 HIGH PRIORITY
+split out read data structure--
 180	Slow down?
 60	Transitions
 240	Better looking (add dimension)

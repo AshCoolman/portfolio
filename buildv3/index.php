@@ -110,15 +110,26 @@
 		
 	 		<div class="relative-positioned">
 				<div class="full-width-centered">
-						{{render 'subtitle' subtitle}}
+					<div class="subtitle-text-holder">
+						{{{controlWithVars 'subtitle' readOrder='1' thescript=<?php
+echo "
+\"This website is about me, Ashley Coleman.
+To you I'm probably just the name \\\"Ashley Coleman\\\"...
+...a featureless and blank concept.
+I created this website to change that.
+@actionOnRead=doSecondSubtitle\"";?>}}}
+					</div>
 				</div>		
-	 		</div>
-		
-			<div class="row">
-				<div class="small-centered columns single">
-					{{renderWithVars 'index-nav' indexNav}}	&nbsp;
+				
+				<div class="full-width-centered">
+					<div class="subtitle-text-holder">
+						<a {{action "doGotoDimension1"}}>
+							{{{controlWithVars 'subtitle' readOrder='2' thescript="Add the x"}}}
+						</a>
+					</div>
 				</div>
-			</div>	
+		 	</div>
+
 
 		</script>
 
@@ -136,40 +147,39 @@
 		<!-- ROUTE DIMENSION 1 -->
 		<!--{{renderWithVars 'world-1d'}}-->
 		<script type="text/x-handlebars" data-template-name="dimension1">
-
-	 		<div class="relative-positioned">
-				<div class="full-width-centered">
-						{{render 'subtitle' subtitle}}
-				</div>		
-	 		</div>
-
+		
+		
 			<div class="full-width-centered absolute-positioned">
-				<div class="world-1d-centerer">
-					{{render 'interactive-grid'}}
-				</div>
-			</div>
-			
-			
-			<div class="full-width-centered absolute-positioned">
+				{{render 'interactive-grid'}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
-			
-
-
-			<div class="row">
-				<div class="small-centered columns single">
-					{{renderWithVars 'dimension1-nav' dimension1Nav}}
+		
+	 		<div class="relative-positioned  pointer-events-none">
+				<div class="full-width-centered">
+					<div class="subtitle-text-holder">
+						{{controlWithVars 'subtitle' orderRead="1" thescript="1234 asdjfalksjdf lkasj dflkajlfkadl;skjf.\n4567\n@actionOnRead=doSecondSubtitle"}}
+					<div>
 				</div>
-			</div>
+				<div class="full-width-centered">
+					<div class="subtitle-text-holder">
+						<a {{action "doGotoDimension2"}}>
+							{{controlWithVars 'subtitle' orderRead="2" thescript="abcde."}} 
+						</a>
+					</div>
+				</div>
+				
+	 		</div>
+
 			
 		</script>
-		
-		
-		
-		<script type="text/x-handlebars" data-template-name="interactive-grid" >
-			{{labelText}}
 
+<!--
+
+-->
+		<script type="text/x-handlebars" data-template-name="interactive-grid" >
 			<div id="svg-raphaeljs"></div>
+				<div class="plot-text-jscss"> {{plotText}} </div>
+				<div class="position-text-jscss"> {{positionText}} </div>
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="scalar">
@@ -229,26 +239,20 @@
 
 		<!-- SUBTITLE -->
 		<script type="text/x-handlebars" data-template-name="subtitle">
-			<div class="subtitle-text-holder">
-			
-				<p class="subtitle-text">
+		 
 					{{{text}}}
+					{{#unless isRemoved}}
 					
-						{{#if isRemoveButton}}
-						<div class="remove-button-holder">
-							<i class="icon-remove-sign remove-button"{{action 'doRemoveClicked'}}></i>
-						</div>
-						{{/if}}
+					{{/unless}}
+					
+					{{#if isRemoveButton}}
+					<div class="remove-button-holder">
+						<i class="icon-remove-sign remove-button"{{action 'doRemoveClicked'}}></i>
+					</div>
+					{{/if}}
 
-				</p>	
-				
-				
-					
-			</div>
 			
-			{{#unless isRemoved}}
-			<img src="img/cursor.gif"/>
-			{{/unless}}
+
 		</script>
 		
 		

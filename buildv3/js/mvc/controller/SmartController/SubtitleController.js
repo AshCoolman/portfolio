@@ -34,136 +34,203 @@ App.SubtitleController = App.SmartController.extend({
 	controllerName:'Script Subtitle Controller',
 	label:'SubtitleController',
 	text: '',
-	cursorChar: '∆',
-	read:{},
+	cursorChar: '&#0178;', //light block 176, 177, 178, 219 dark block 
+	
+		currentLine:0,
+		currentChar:0,
+		currentPrintedLine:0,
+	
+	srcLines:[],
+	tagStart:'<p><span>',
+	tagMid: '</span></p><p><span>',
+	tagEnd: '</span></p>',
+	tagCursor:'<img src="img/cursor.gif"/>',
+	printedLines:'printedLines',
 	isForceFinish:false,
+	isCursor: true,
+	isCursorObserver: function () {
+		if (this.get('isCursor')) {
+			this.set('tagCursor', '<img src="img/cursor.gif"/>');
+		} else {
+				this.set('tagCursor', '');
+		}
+		var printedLines = this.get('printedLines');
+		if (printedLines) {
+			this.set('text', this.tagStart + printedLines.join(this.tagMid)+this.tagCursor+this.tagEnd);
+		}
+	}.observes('isCursor'),
 	lines:[],
 	isEnded: false,
 	isRemoved:false,
 	hasRemoveButton:false,
+	thescript:'nothing',
 	isRemoveButton:false,
 	tOut:undefined,
-	ARF: undefined,
-	ARF_last: undefined,
-	ARF_drawStart: undefined,
-	ARF_startTime: undefined,
-	ARF_diff: undefined,
-	init: function () {
-
-		return this._super();
-	},
+	aniReqFrmObj: {},
+	raf:null,
+	lastRequestAnimationFrame:0,
+	durSinceReadChar:0,
 	setup: function (ascript) {
-		
-		//console.log('Erm', ascript);
-		/*
-		if (ascript[ascript.length-2] == '.') {
-			ascript = ascript.substr(0, ascript.length-2);
-		}
-		*/
-		this.read.srcLines = ascript.split('\n\r');
-		for (var l = 0; l < this.read.srcLines.length; l++ ) { 
-			this.read.srcLines[l] = (this.read.srcLines[l]).split('');
-		}
-		this.read.currentLine = 0;
-		this.read.currentChar = 0;
-		this.read.printedLines = [''];
-		this.read.currentPrintedLine = 0;
-		this.set('text', '');
-		
 
+		if (this.get('thescript')) 
+			ascript = this.get('thescript');
+		
+		ascript = ascript.replace(/(\r\n|\n|\r)/gm,'\n');
+			ascript = ascript.split("\r\n").join('\n')
+		ascript = window.unescape(ascript);
+		
+		var printedLines = [''],
+			srcLines = ascript.split('\n'),
+			currentLine = 0,
+			currentChar = 0,
+			currentPrintedLine = 0;
+			
+		for (var l = 0; l < srcLines.length; l++ ) { 
+			srcLines[l] = srcLines[l].split('');
+		}
+		
+		this.set('text', '');
+		this.set('currentLine', currentLine);
+		this.set('currentChar', currentChar);
+		this.set('currentPrintedLine', currentPrintedLine);
+		this.set('printedLines', printedLines);
+		this.set('srcLines', srcLines);
+		
 	},
 	view_didInsertElement: function (aview) {
 		this._super(aview);
 		this.send('SubtitleController_didInsertElement', this);
 	},
-	readChar: function (dur) {
-		var read = this.read,
-			srcLines = this.read.srcLines,
-			printedLines = this.read.printedLines,
+	readChar: function (dur, me) {
+		
+		//console.log('readChar?', me.get('thescript'));
+
+		
+		var srcLines = me.get('srcLines'),
+			printedLines = me.get('printedLines'),
+			currentLine = me.get('currentLine'),
+			currentChar = me.get('currentChar'),
+			currentPrintedLine = me.get('currentPrintedLine'),
 			isNewLine = false,
 			delay;
-		
-		if (read.currentLine < srcLines.length) {
-			if ( read.currentChar < srcLines[ read.currentLine].length) {
-				delay = 1 / this.get('content').get('cpms');
+			
+			
+		if (currentLine < srcLines.length) {
+			if ( currentChar < srcLines[ currentLine].length) {
+				delay = 1 / me.get('content').get('cpms');
+				//console.log('dur='+dur, 'delay='+delay, dur > delay);
 			} else {
 				delay = 1200;
 				isNewLine = true;
+				//console.log('NEWLINE')
 			}	
-			if (dur > delay) {
+			if (dur > delay) {	
 				dur -= delay;
 				if (!isNewLine) {
-					printedLines[read.currentPrintedLine] += srcLines[read.currentLine][read.currentChar];
-					this.set('text', printedLines.join('<br/>'));
-					read.currentChar++;
-				} else {	
-					
-					read.currentChar = 0;
-					read.currentLine++;
-					read.currentPrintedLine++;
-					if (srcLines[ read.currentLine] && srcLines[ read.currentLine][1] == '@') {	
-						var eventStr = srcLines[ read.currentLine].join('').split(' ')[1];
-						App.eventMapper.triggerEvent(ragh.MEvt.create(eventStr));
-						read.currentLine++;	
-						console.log('event'+eventStr+'<');
+					printedLines[currentPrintedLine] += srcLines[currentLine][currentChar];
+					me.set('text', this.tagStart+printedLines.join(this.tagMid)+this.tagCursor+this.tagEnd);
+					currentChar++;
+				} else {
+					currentChar = 0;
+					currentLine++;
+					currentPrintedLine++;
+					if (srcLines[currentLine] && srcLines[currentLine][0] && srcLines[currentLine][0] == '@') {	
+						var line = srcLines[currentLine].join('');
+						if(line.indexOf('@action=') == 0) { 
+							console.log('SawAction');
+							var action = line.split(' ')[0].split('=')[1];
+							currentLine++;
+						} else if(line.indexOf('@actionOnRead=') == 0) { ;
+							var action = line.split(' ')[0].split('=')[1];
+							console.log('SawActionOnRead', action);
+							me.send(action);
+							currentLine++;
+						} else {
+							
+							console.log('Saw @ ', line);
+							var eventStr = line.split(' ')[1];
+							App.eventMapper.triggerEvent(ragh.MEvt.create(eventStr));
+							currentLine++;	
+							console.log('event'+eventStr+'<');
+						}
+
+					} else {
+						
+						console.log('Saw nothing', srcLines[currentLine]);
 					}	
-					
-					printedLines[read.currentPrintedLine]='';
-					if ( (read.currentLine < srcLines.length) &&  ( srcLines[ read.currentLine].length > 0) ) {
-						console.log('>>', read.currentLine, srcLines.length, printedLines.length);
-						printedLines[read.currentPrintedLine] += srcLines[read.currentLine][read.currentChar];
-						this.set('text', printedLines.join('<br/>'));
+					printedLines[currentPrintedLine]='';
+					if ( (currentLine < srcLines.length) &&  ( srcLines[ currentLine].length > 0) ) {
+						printedLines[currentPrintedLine] += srcLines[currentLine][currentChar];
+						me.set('text', me.tagStart + printedLines.join(me.tagMid)+me.tagCursor+me.tagEnd);
+						currentChar++;
 					}
-				}
+				} 
 				
 			};
-			
 		} else {
-			this.isEnded = true;
-			if (this.get('hasRemoveButton')) {
-				this.set('isRemoveButton', true);
+			me.set('isEnded', true);
+			//window.alert('CANCELLED')
+			window.cancelAnimationFrame(me.get('raf'));
+			if (me.get('hasRemoveButton')) {
+				me.set('isRemoveButton', true);
 			}
 			App.eventMapper.triggerEvent(ragh.MEvt.create('sub_finishedReading', {target:this}))
 		}
-
 		
+		me.set('srcLines', srcLines);
+		me.set('printedLines', printedLines);
+		me.set('currentLine', currentLine);
+		me.set('currentChar', currentChar);
+		me.set('currentPrintedLine', currentPrintedLine);
 		return dur;
 	},
 	doRemoveClicked: function () {
 		console.log('doRemoveClicked');
-		window.cancelAnimationFrame( this.ARF );
-		this.isEnded = true;
+		window.cancelAnimationFrame(this.get('raf'));
+		this.set('isEnded', true);
 		this.set('isRemoved', true);
 		this.set('text', ''); //todo low technically should not need to render this, but if you look at template, I can't conditionally stop rendering {{text}} without incurring a js error
 		this.send('doRemoveSubtitle');
 	},
 	doSetupDraw: function () {
-    	this.ARF_startTime = window.mozAnimationStartTime || Date.now();
-		this.ARF_diff = 0;
-		this.ARF_last = Date.now();
-	    this.ARF = window.requestAnimationFrame( this.doDraw.bind(this) );
+		console.log('doSetupDraw...'); 
+		var rafFunction = function(me) {
+			var animloop = function (time) {
+				var last = me.get('lastRequestAnimationFrame'),
+					dur = me.get('durSinceReadChar');
+					
+					//console.log('>>', dur , last, dur+last)
+					dur += (last ? time - last : 0);
+					
+					
+						
+				me.set('lastRequestAnimationFrame', time);
+				dur = me.reDraw(dur, me); // stage.update() does not work... todo high
+				me.set('durSinceReadChar', dur);
+				if (!me.get('isEnded')) {
+					me.set('raf', window.requestAnimationFrame(animloop));
+				}
+			};
+			return animloop
+		}(this);
+		
+		this.set('raf', window.requestAnimationFrame(rafFunction));
 	},
 	
-	doDraw: function (atime) {
-
-		with (this) {
-			ARF_startTime = Date.now();
-			ARF_diff += (ARF_startTime - ARF_last);
-	        var prevDif = ARF_diff;
-		
-			while (prevDif != (ARF_diff = readChar(ARF_diff))) {
-				prevDif = ARF_diff;
-			}
-		
-			ARF_last = ARF_startTime;
-			if (ARF) window.cancelAnimationFrame( ARF );
-		    if (!isEnded) ARF =  window.requestAnimationFrame(doDraw.bind(this));
-		}
+	reDraw: function (adur, scope) {
+		//console.log('doDraw', adur);
+		var prevDur = adur;
+		while (prevDur != (adur = scope.readChar(adur, scope))) {
+			//console.log('doDraw.readChar', adur, prevDur);
+			prevDur = adur;
+		}	
+		return adur;
     },
 	doForceFinish: function () {
-		console.log(this.isEnded);
-		while (!this.isEnded) {
-			prevDif = ARF_diff = this.readChar(99999);
+		console.log(this.get('isEnded'));
+		while (!this.get('isEnded')) {
+			this.readChar(99999);
+			window.cancelAnimationFrame(this.get('raf'));
 		}
 	}
 });
