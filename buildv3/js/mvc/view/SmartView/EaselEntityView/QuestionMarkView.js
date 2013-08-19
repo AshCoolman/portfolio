@@ -11,7 +11,22 @@ App.QuestionMarkView = App.EslEntityView.extend({
 		y: 0,
 		fromController: ['x', 'y', 'width', 'height', 'visible']
 	},
-	
+	doShowPixelInChildren: function () {
+		console.log(this.handle.children)
+		this.handle.visible = true;
+		var child,
+			c;
+			
+		for (c=0; c < this.handle.children.length; c++) {
+			child = this.handle.children[c];
+			child.visible = false;
+			setTimeout( function (me, achild) {
+				return function () {
+					achild.visible = true;
+				}
+			}(this, child), Math.random(4000))
+		}
+	},
 	override_createEsl: function () {
 		this.shp = new createjs.Shape();
 		this.handle = new createjs.Container();
@@ -57,7 +72,7 @@ App.QuestionMarkView = App.EslEntityView.extend({
 		handle.x = Number(settings.x);
 		handle.y = Number(settings.y);
 		handle.visible = settings.visible;
-		console.log('settings visible', settings.visible)
+		//console.log('settings visible', settings.visible)
 		this.handle = handle;
 		this.shp = shp;
 

@@ -321,9 +321,7 @@ App.World3dView = App.SmartView.extend({
 		CubeGroup.cleanup();
 		this.tryIntersect = [];
 		
-		console.log('0')
 		//this.$el.detach($(this.renderer.domElement))
-		console.log('1');
 		this.renderer = null;
 		this.camera = null;
 		this.controls = null;

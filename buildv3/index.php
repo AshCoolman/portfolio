@@ -75,18 +75,23 @@
 						<!-- Title Area -->
 			
 					    <li class="divider"></li>
-				        {{#view view.NavListItemView item="doDimension1" }}
-				            <a {{action doDimension1}} >Dimension 1</a>
+				        {{#view view.NavListItemView item="Index" }}
+				            <a {{action doDimension0}} >_</a>
+				        {{/view}}
+				
+						<li class="divider"></li>
+						{{#view view.NavListItemView item="doDimension1" }}
+				            <a {{action doDimension1}} >X</a>
 				        {{/view}}
 			
 						<li class="divider"></li>
 				        {{#view view.NavListItemView item="doDimension2" }}
-				            <a {{action doDimension2}} >Dimension 2</a>
+				            <a {{action doDimension2}} >Y</a>
 				        {{/view}}
 			
 						<li class="divider"></li>
 				        {{#view view.NavListItemView item="doDimension3" }}
-				            <a {{action doDimension3}} >Dimension 3</a>
+				            <a {{action doDimension3}} >Z</a>
 				        {{/view}}   
 				    </ul>
 				 	<ul class="right">
@@ -113,9 +118,9 @@
 					<div class="subtitle-text-holder">
 						{{{controlWithVars 'subtitle' readOrder='1' thescript=<?php
 echo "
-\"This website is about me, Ashley Coleman.
-To you I'm probably just the name \\\"Ashley Coleman\\\"...
-...a featureless and blank concept.
+\"To you \\\"Ashley Coleman\\\" is probably just a name ...
+...featureless
+...blank
 I created this website to change that.
 @actionOnRead=doSecondSubtitle\"";?>}}}
 					</div>
@@ -150,36 +155,41 @@ I created this website to change that.
 		
 		
 			<div class="full-width-centered absolute-positioned">
-				{{render 'interactive-grid'}}
+				{{renderWithVars 'interactive-grid' pixW=50}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
 		
 	 		<div class="relative-positioned  pointer-events-none">
 				<div class="full-width-centered">
 					<div class="subtitle-text-holder">
-						{{controlWithVars 'subtitle' orderRead="1" thescript="1234 asdjfalksjdf lkasj dflkajlfkadl;skjf.\n4567\n@actionOnRead=doSecondSubtitle"}}
+						{{{controlWithVars 'subtitle' orderRead='1' thescript=<?php
+echo "
+\"I have web technology skills.
+So I can happily rattle of a dry list of acronyms and names...
+JS, PHP, AS3, OOP, MCV, MVP, CSS3, AJAX, LINT, node, Ember, Handlebars etc...
+@actionOnRead=doSecondSubtitle\"";?>}}}
 					<div>
 				</div>
 				<div class="full-width-centered">
 					<div class="subtitle-text-holder">
 						<a {{action "doGotoDimension2"}}>
-							{{controlWithVars 'subtitle' orderRead="2" thescript="abcde."}} 
+							{{controlWithVars 'subtitle' orderRead="2" thescript="Add the y"}} 
 						</a>
 					</div>
 				</div>
-				
 	 		</div>
 
 			
 		</script>
 
 <!--
+	<div class="plot-text-jscss"> {{plotText}} </div>
+	<div class="position-text-jscss"> {{positionText}} </div>
 
 -->
 		<script type="text/x-handlebars" data-template-name="interactive-grid" >
+
 			<div id="svg-raphaeljs"></div>
-				<div class="plot-text-jscss"> {{plotText}} </div>
-				<div class="position-text-jscss"> {{positionText}} </div>
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="scalar">
@@ -263,12 +273,29 @@ I created this website to change that.
 					{{renderWithVars 'world-2d' World2d}} 
 					{{controlWithVars 'esl-entity-container'}}
 				</div>
-				<div class="full-width-centered absolute-positioned">
-					{{render 'subtitle' subtitle}}
-					<div class="small-centered columns single">
-						{{renderWithVars 'dimension2-nav' dimension2Nav}}
-					</div>	
-				</div>
+
+
+		 		<div class="relative-positioned  pointer-events-none">
+					<div class="full-width-centered">
+						<div class="subtitle-text-holder">
+							{{{controlWithVars 'subtitle' orderRead='1' thescript=<?php
+echo "
+\"It gets me excited to know you are engaging with my website right now.
+
+There is certain group of communication problems that can be solved using web technologies.
+I love to use my technical skills to craft experience that solve those problems.
+@actionOnRead=doSecondSubtitle\"";?>}}}
+						<div>
+					</div>
+					<div class="full-width-centered">
+						<div class="subtitle-text-holder">
+							<a {{action "doGotoDimension3"}}>
+								{{controlWithVars 'subtitle' orderRead="2" thescript="Add the z"}} 
+							</a>
+						</div>
+					</div>
+		 		</div>
+					
 			</div>	
 			{{#if App.DEBUG}}
 			{{render 'world-2d-editor'}}
@@ -371,11 +398,18 @@ I created this website to change that.
 			<div class="absolute-positioned"> 
 				{{renderWithVars 'world-3d' World3d}}
 			</div>
-			<div class="full-width-centered absolute-positioned">
-				{{#if isSubtitle}}
-				{{controlWithVars 'subtitle' subtitle hasRemoveButton=true}}
-				{{/if}}
-			</div>
+					 		<div class="relative-positioned  pointer-events-none">
+								<div class="full-width-centered">
+									<div class="subtitle-text-holder">
+										{{{controlWithVars 'subtitle' orderRead='1' hasRemoveButton=true thescript=<?php
+			echo "
+\"3. CREATIVE 
+If I come upon a problem, I enjoy exploring laterally. 
+By looking at normally distant associations I can find an elegant solution.
+i.e. The big idea.\"";?>}}}
+									<div>
+								</div>
+					 		</div>
 		</div>
 		</script>
 

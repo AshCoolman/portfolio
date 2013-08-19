@@ -68,7 +68,6 @@ var CubeGroup = {
 		}
 		grp.position.set(sz*(0.5), sz*(-0.5), 0);
 		grp.updateMatrix()
-		console.log('grp pos', grp.position)
 		window.grp = grp
 		grp.add( this.rollOverMesh = this.createRollOver() );
 		//grp.add( this.plane = this.createPlane() ); 
@@ -103,7 +102,6 @@ var CubeGroup = {
 	},
 	
 	createCube: function (x, y, z, data) {
-		console.log('created cube geo')
 		var mesh, 
 			sz = this.SIZE,
 			geo = new THREE.CubeGeometry( sz, sz, sz, 1, 1, 1 ),

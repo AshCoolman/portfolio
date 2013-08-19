@@ -1,6 +1,7 @@
 App.Dimension3Route = Em.Route.extend({ 
 	init: function () {
 		this._super();
+		this.isStarted = false;
 	},
 	model: function () {
 		return (App.dimension3Model) ? App.dimension3Model : App.Dimension3Model.create();
@@ -9,6 +10,9 @@ App.Dimension3Route = Em.Route.extend({
 		//Application state 
 	},
 	deactivate: function () { 
+		this.subtitleController.deactivate();
+		this.world3dController = null;
+		this.subtitleController = null;
 	},
 	setupController: function (controller, model) {
 		controller.set('content', model);
@@ -34,7 +38,7 @@ App.Dimension3Route = Em.Route.extend({
 				case 'SubtitleController': this.subtitleController = acontroller; break;
 				default: /* console.log('++'+alabel);*/ break;
 			}
-					console.log('try start ', alabel, this.world3dController, this.subtitleController)
+		
 			this.tryStart();	
 		},
 		SubtitleController_didInsertElement: function (acontroller, alabel) { }

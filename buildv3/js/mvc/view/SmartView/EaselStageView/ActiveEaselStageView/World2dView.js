@@ -109,12 +109,13 @@ App.World2dView = App.ActiveEslStageView.extend({
 						}
 						//App.transitionView.draw( pix.$canvas ); //should go in willDestroyElement callback, but does not work
 					} else if ( this.get('isMosaic')) {	
-						console.log('multiIndex', multiIndex)
+						//console.log('multiIndex', multiIndex)
 						src.$canvas.css({display:'block'});
 						min.$canvas.css({display:'none'});
 						pix.$canvas.css({display:'none'});
 						//App.transitionView.draw( src.$canvas ); //should go in willDestroyElement callback, but does not work
 						this.set('isMosaic', false);
+						this.get('controller').send('doMosaicFinished');
 					}
 				}
 			}

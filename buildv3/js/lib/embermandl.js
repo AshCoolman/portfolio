@@ -17431,7 +17431,6 @@ define("metamorph",
     };
 
     Metamorph.prototype.replaceWith = function(html) {
-		console.log('replaceWith');
       this.checkRemoved();
       htmlFunc.call(this, html, true);
     };

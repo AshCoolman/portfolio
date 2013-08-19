@@ -4,6 +4,7 @@ App.IndexRoute = Em.Route.extend({
 	smartControllers: [],
 	init: function () {
 		this._super();
+		this.isStarted = false;
 		this.smartControllers = this.get('smartControllers');
 		return this;
 	},
@@ -16,6 +17,11 @@ App.IndexRoute = Em.Route.extend({
 	deactivate: function () {
 		App.eventMapper.removeEventListener('indNav_end', this);
 		App.eventMapper.removeEventListener('sub_finishedReading', this);
+		this.subtitleController1.deactivate();
+		this.subtitleController2.deactivate();
+		this.subtitleController1 = null;
+		this.subtitleController2 = null;
+		this.isStarted = null;
 	},
     doStart: function (type, data) {
 		console.log('start draw')
@@ -31,7 +37,7 @@ App.IndexRoute = Em.Route.extend({
 	},
 	doStopReading: function (type, data) { 
 		if (this.subtitleController1) {
-			this.indexNavController.set('isShowEnd', true);
+			//this.indexNavController.set('isShowEnd', true);
 		}
 	},
 	renderTemplate: function() { 
@@ -57,6 +63,9 @@ App.IndexRoute = Em.Route.extend({
 			this.tryStart();
 		},
 		SmartController_didInsertElement: function (acontroller, alabel) {
+		},
+		doGotoDimension1: function () {	
+			window.location.hash = 'd1';
 		},
 		doSecondSubtitle: function () {
 			this.subtitleController1.set('isCursor', false);

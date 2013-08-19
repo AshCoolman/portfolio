@@ -2,7 +2,7 @@ App.Dimension2Route = Em.Route.extend({
 	questionMarkController: null,
 	init: function () {
 		this._super();
-		
+		this.isStarted = false;
 		App.eventMapper.addEventListener('sub_finishedReading', this, this.doStopReading);
 		App.eventMapper.addEventListener('scriptD2ShowQuestion', this, function (me) {
 			return function () {
@@ -18,7 +18,17 @@ App.Dimension2Route = Em.Route.extend({
 	activate: function () { 
 		//Application state 
 	},
-
+	
+	deactivate: function () {
+		this._super();
+		this.subtitleController1.deactivate();
+		this.subtitleController2.deactivate();
+		this.subtitleController1 = null;
+		this.subtitleController2 = null;
+		this.questionMarkController = null;
+		this.world2dController = null;
+		this.isStart = null;
+	},
 	setupController: function (controller, model) {
 		controller.set('content', model);
 	},
@@ -36,18 +46,17 @@ App.Dimension2Route = Em.Route.extend({
 	},
 	
 	doStart: function (type, data) {
-		this.subtitleController.set('content', App.scriptModel); 
-        this.subtitleController.setup(this.subtitleController.get("content").scriptD2);
-        this.subtitleController.doSetupDraw();
+		this.subtitleController1.set('content', App.scriptModel); 
+        this.subtitleController1.setup();
+        this.subtitleController1.doSetupDraw();
     },
 	doStopReading: function (type, data) {
-		console.log('doStopReading', this.dimension2NavController);
-		this.dimension2NavController.set('isShowEnd', true);
+		//console.log('doStopReading', this.dimension2NavController);
+		//this.dimension2NavController.set('isShowEnd', true);
 	},
 	events: {
 		
 		SmartController_didInsertElement: function(acontroller, alabel) {
-//			console.log('Dimension2 route', alabel)
 			switch (alabel) {
 				case 'World2dController': 
 					this.world2dController = acontroller;
@@ -56,7 +65,10 @@ App.Dimension2Route = Em.Route.extend({
 					this.questionMarkController = acontroller; 
 					break;
 				case 'SubtitleController': 
-					this.subtitleController = acontroller; 
+					switch (acontroller.get('orderRead')) {
+						case '1': this.subtitleController1 = acontroller; break;
+						case '2': this.subtitleController2 = acontroller; break;
+					}
 					break;
 				case 'Dimension2NavController':
 					this.dimension2NavController = acontroller;
@@ -68,11 +80,26 @@ App.Dimension2Route = Em.Route.extend({
 		},
 		doGotoDimension3: function () {
 			window.location.hash = 'd3';
+		},
+		doSecondSubtitle: function () {
+			this.subtitleController1.set('isCursor', false);
+
+			this.subtitleController2.set('content', App.scriptModel); 
+	        this.subtitleController2.setup(this.subtitleController2.get("content").scriptD2);
+	        this.subtitleController2.doSetupDraw();
+		},
+		doMosaicFinished: function () {
+			console.log('Route doMosaicFinished')
+			this.questionMarkController.setVisible()
 		}
 	},
 	tryStart: function () {
-        if (this.questionMarkController && this.world2dController && this.subtitleController) {
-            this.doStart()
-        }
+        if (!this.isStart && this.questionMarkController && this.world2dController && this.subtitleController1 && this.subtitleController2) {
+			this.isStart = true;
+            this.doStart();
+			console.log('trySUCCESS')
+        } else {
+			console.log('tryFAILED', (!this.isStart) , (this.questionMarkController? true :false) , (this.world2dController?true:false) , (this.subtitleController1?true:false) , (this.subtitleController2?true:false))
+		}
     }
 })

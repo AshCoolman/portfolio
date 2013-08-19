@@ -1,20 +1,21 @@
 HIGH PRIORITY
-split out read data structure--
-180	Slow down?
+120	Design/Style plotted Text so it makes sense
+60	Design Style text to wrap with resize
+120	Grid interactive mosaic for XY
 60	Transitions
-240	Better looking (add dimension)
-90	Event driven script
-		Subtitle ending events:
-			Should the Route detect end of subtitle and tell a nav (alt being Nav detects all subtitle end events)? Yes, because it is controlling this phenomenon
-			And many things could cause the Nav to show/hide
-
+30	Add Questionmark
+10	SubtitleController forceFinish on view_willRemove...
+60  Subtitle delete chars & type
+60	Subtitle delete all & type
 
 LOW PRIORITY
-45	Split script newlines on '/n/r' etc instead of '.'
 Change ControlWithVars to not have second attribute as a "model", instead check that model="adf" would work.
-
+subtitles monofont + nbsp
 
 PERFORMANCE
+
+
+CROSS PLATFORM 	3 days
 setup wireless 
 	http://esbueno.noahstokes.com/post/42930947028/test-your-local-web-sites-on-your-ipad-or-iphone-using
 	http://jona.than.biz/blog/how-to-enable-zeroconf-for-apache/

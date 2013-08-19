@@ -12,7 +12,6 @@ App.ApplicationController = Em.Controller.extend({
 				case 'dimension2>dimension3': App.transitionView.show();	break;
 				default: 	App.transitionView.hide();	break;
 			} 
-			console.log('PATH '+this.get('previousPath')+'>'+this.get('currentPath'));
 		}
 		this.set('previousPath', this.get('currentPath'));
   }.observes('currentPath')

@@ -35,17 +35,15 @@ App.SubtitleController = App.SmartController.extend({
 	label:'SubtitleController',
 	text: '',
 	cursorChar: '&#0178;', //light block 176, 177, 178, 219 dark block 
-	
-		currentLine:0,
-		currentChar:0,
-		currentPrintedLine:0,
-	
+	currentLine:0,
+	currentChar:0,
+	currentPrintedLine:0,
 	srcLines:[],
+	printedLines:[''],
 	tagStart:'<p><span>',
 	tagMid: '</span></p><p><span>',
 	tagEnd: '</span></p>',
 	tagCursor:'<img src="img/cursor.gif"/>',
-	printedLines:'printedLines',
 	isForceFinish:false,
 	isCursor: true,
 	isCursorObserver: function () {
@@ -63,10 +61,8 @@ App.SubtitleController = App.SmartController.extend({
 	isEnded: false,
 	isRemoved:false,
 	hasRemoveButton:false,
-	thescript:'nothing',
+	thescript:'',
 	isRemoveButton:false,
-	tOut:undefined,
-	aniReqFrmObj: {},
 	raf:null,
 	lastRequestAnimationFrame:0,
 	durSinceReadChar:0,
@@ -76,7 +72,7 @@ App.SubtitleController = App.SmartController.extend({
 			ascript = this.get('thescript');
 		
 		ascript = ascript.replace(/(\r\n|\n|\r)/gm,'\n');
-			ascript = ascript.split("\r\n").join('\n')
+		ascript = ascript.split("\r\n").join('\n')
 		ascript = window.unescape(ascript);
 		
 		var printedLines = [''],
@@ -97,16 +93,27 @@ App.SubtitleController = App.SmartController.extend({
 		this.set('srcLines', srcLines);
 		
 	},
+	deactivate: function () {
+		console.log('SubtitleController.deactivate()...')
+		this.doForceFinish();
+		console.log('...done')
+		this.set('text', '');
+		this.set('currentLine', 0);
+		this.set('currentChar', 0);
+		this.set('currentPrintedLine', 0);
+		this.set('printedLines', ['']);
+		this.set('srcLines', []);
+		
+	},
 	view_didInsertElement: function (aview) {
 		this._super(aview);
 		this.send('SubtitleController_didInsertElement', this);
 	},
-	readChar: function (dur, me) {
-		
-		//console.log('readChar?', me.get('thescript'));
-
-		
-		var srcLines = me.get('srcLines'),
+	readChar: function (dur, me, isEvents) {
+		//console.log('readChar?', typeof(isEvents),  (typeof(isEvents) == 'undefined'));
+		var me = me || this,
+			isEvents = (typeof(isEvents) != 'undefined') ? isEvents : true,
+			srcLines = me.get('srcLines'),
 			printedLines = me.get('printedLines'),
 			currentLine = me.get('currentLine'),
 			currentChar = me.get('currentChar'),
@@ -134,30 +141,25 @@ App.SubtitleController = App.SmartController.extend({
 					currentChar = 0;
 					currentLine++;
 					currentPrintedLine++;
-					if (srcLines[currentLine] && srcLines[currentLine][0] && srcLines[currentLine][0] == '@') {	
+					if (isEvents && srcLines[currentLine] && srcLines[currentLine][0] && srcLines[currentLine][0] == '@') {	
 						var line = srcLines[currentLine].join('');
 						if(line.indexOf('@action=') == 0) { 
-							console.log('SawAction');
+							//console.log('SawAction');
 							var action = line.split(' ')[0].split('=')[1];
 							currentLine++;
 						} else if(line.indexOf('@actionOnRead=') == 0) { ;
 							var action = line.split(' ')[0].split('=')[1];
-							console.log('SawActionOnRead', action);
 							me.send(action);
 							currentLine++;
 						} else {
 							
-							console.log('Saw @ ', line);
+							//console.log('Saw @ ', line);
 							var eventStr = line.split(' ')[1];
 							App.eventMapper.triggerEvent(ragh.MEvt.create(eventStr));
-							currentLine++;	
-							console.log('event'+eventStr+'<');
+							currentLine++;	 
 						}
 
-					} else {
-						
-						console.log('Saw nothing', srcLines[currentLine]);
-					}	
+					} 
 					printedLines[currentPrintedLine]='';
 					if ( (currentLine < srcLines.length) &&  ( srcLines[ currentLine].length > 0) ) {
 						printedLines[currentPrintedLine] += srcLines[currentLine][currentChar];
@@ -193,17 +195,13 @@ App.SubtitleController = App.SmartController.extend({
 		this.send('doRemoveSubtitle');
 	},
 	doSetupDraw: function () {
-		console.log('doSetupDraw...'); 
 		var rafFunction = function(me) {
 			var animloop = function (time) {
 				var last = me.get('lastRequestAnimationFrame'),
 					dur = me.get('durSinceReadChar');
 					
 					//console.log('>>', dur , last, dur+last)
-					dur += (last ? time - last : 0);
-					
-					
-						
+					dur += (last ? time - last : 0);		
 				me.set('lastRequestAnimationFrame', time);
 				dur = me.reDraw(dur, me); // stage.update() does not work... todo high
 				me.set('durSinceReadChar', dur);
@@ -218,7 +216,6 @@ App.SubtitleController = App.SmartController.extend({
 	},
 	
 	reDraw: function (adur, scope) {
-		//console.log('doDraw', adur);
 		var prevDur = adur;
 		while (prevDur != (adur = scope.readChar(adur, scope))) {
 			//console.log('doDraw.readChar', adur, prevDur);
@@ -227,11 +224,11 @@ App.SubtitleController = App.SmartController.extend({
 		return adur;
     },
 	doForceFinish: function () {
-		console.log(this.get('isEnded'));
+		
+		window.cancelAnimationFrame(this.get('raf'));
 		while (!this.get('isEnded')) {
-			this.readChar(99999);
-			window.cancelAnimationFrame(this.get('raf'));
-		}
+			this.readChar(99999, this, false);
+		}	
 	}
 });
 

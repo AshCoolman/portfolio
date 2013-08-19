@@ -4,6 +4,10 @@ App.NavListController = Em.Controller.extend({
 		window.location.hash = '';
 	},
 
+	doDimension0: function() {
+		window.location.hash = '';
+	},
+
 	doDimension1: function() {
 		window.location.hash = 'd1';
 	},
