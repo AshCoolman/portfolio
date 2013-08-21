@@ -42,7 +42,7 @@ App.World2dView = App.ActiveEslStageView.extend({
 		var multiData = this.get('multiData');
 		this.set('multiTween', createjs.Tween
 								.get(multiData, {})
-								.to( { index:multiData.values.length}, 5000, createjs.Ease.getPowIn(4.2) )
+								.to( { index:multiData.values.length}, 3000, createjs.Ease.getPowIn(4.2) )
 								.addEventListener("change", function (e) {
 									var multiData = e.target.target;
 									if (Math.round( multiData.index) != multiData.roundIndex) {

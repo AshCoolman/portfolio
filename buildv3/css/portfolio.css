@@ -14,7 +14,7 @@ canvas, img {
 
 html, body {
   height: 100%;
-  background: lightblue !important; }
+  background: #333 !important; }
 
 .note {
   font-size: 0.33em;
@@ -60,30 +60,15 @@ html, body {
 
 .subtitle {
   color: #333333;
-  width: 100%;
-  max-width: 1000px;
-  min-width: 768px;
   height: 8em;
-  margin: 0 auto;
-  text-align: center;
-  line-height: 150%; }
-
-.subtitle-text-holder {
-  position: relative; }
+  line-height: 100%; }
 
 .subtitle-text-holder a {
-  color: #333333;
-  margin: 0 auto;
-  text-align: center;
   text-decoration: none;
-  display: block;
   pointer-events: none; }
 
 .subtitle-text-holder p {
-  color: #333333;
-  width: 100%;
-  margin: 0 auto;
-  text-align: center; }
+  margin: 0; }
 
 .subtitle-text-holder span {
   display: inline;
@@ -91,15 +76,20 @@ html, body {
   background: white; }
 
 .subtitle-text-holder a p span {
-  color: lightblue;
+  color: darkorange;
   text-decoration: none;
-  pointer-events: auto;
-  background: white; }
+  pointer-events: auto; }
+
+.subtitle-text {
+  background-color: white;
+  display: block; }
 
 .remove-button-holder {
   position: absolute;
-  right: 10%;
-  top: -24px; }
+  left: -10px;
+  top: -24px;
+  background: white;
+  pointer-events: auto; }
 
 .remove-button-holder i:hover {
   color: #FFFFFF; }
@@ -154,10 +144,6 @@ html, body {
 .relative-wrapper {
   position: relative; }
 
-.subtitle-text {
-  background-color: white;
-  display: block; }
-
 .full-width-centered {
   width: 100%;
   margin: 0 auto; }
@@ -171,6 +157,11 @@ html, body {
 .visible-world-2d, .world-3d-renderer, .transition-canvas {
   margin: 0 auto;
   display: block; }
+
+.world-3d-renderer {
+  background-image: url("../img/face-ash.png");
+  background-position: center top;
+  background-repeat: no-repeat; }
 
 .world-1d-centerer {
   width: 100%;
@@ -192,12 +183,27 @@ html, body {
   position: relative;
   width: 100%; }
 
-.plot-text-jscss, .position-text-jscss, #svg-raphaeljs {
-  position: absolute; }
-
 #svg-raphaeljs {
+  position: absolute;
   top: -1.875em;
   width: 100%; }
 
+.plot-heading-jscss, .plot-text-jscss, .position-text-jscss {
+  position: absolute;
+  line-height: 0;
+  font-size: 18px;
+  top: 14px;
+  color: #99CC99; }
+
+.plot-heading-jscss {
+  font-size: 100px;
+  left: 14px; }
+
 .plot-text-jscss {
-  top: 200px; }
+  top: 88px;
+  left: 14px; }
+
+.position-text-jscss {
+  right: 14px;
+  color: #666666;
+  font-size: 100px; }

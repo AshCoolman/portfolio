@@ -39,6 +39,7 @@ App.SubtitleController = App.SmartController.extend({
 	currentChar:0,
 	currentPrintedLine:0,
 	srcLines:[],
+	editList:[],
 	printedLines:[''],
 	tagStart:'<p><span>',
 	tagMid: '</span></p><p><span>',
@@ -46,6 +47,7 @@ App.SubtitleController = App.SmartController.extend({
 	tagCursor:'<img src="img/cursor.gif"/>',
 	isForceFinish:false,
 	isCursor: true,
+	isLooping:false,
 	isCursorObserver: function () {
 		if (this.get('isCursor')) {
 			this.set('tagCursor', '<img src="img/cursor.gif"/>');
@@ -79,8 +81,41 @@ App.SubtitleController = App.SmartController.extend({
 			srcLines = ascript.split('\n'),
 			currentLine = 0,
 			currentChar = 0,
-			currentPrintedLine = 0;
-			
+			currentPrintedLine = 0,
+			editList = [];
+		
+		
+		for (var l = 0; l < srcLines.length; l++ ) { 
+			var editIndex;
+			if (editIndex = srcLines[l].indexOf('@edits=') != -1) {
+				var splitOnEditArr = srcLines[l].split('@edits='),
+					lastHalfArr = splitOnEditArr[1].split(' '),
+					editVals = lastHalfArr.reverse().pop();
+				lastHalfArr.reverse();
+				srcLines[l] = splitOnEditArr[0].concat(lastHalfArr);
+				editVals = editVals.split(',');
+				for (var v in editVals) {
+					v = v.split('');
+				}
+				editList.push( {
+					linePosition:l,
+					charPosition:splitOnEditArr[0].length,
+					currentVal: 0,
+					currentChar: 0,
+					currentDirection: 1,
+					editVals: editVals,
+					printed:'',
+					editPause:false,
+					loops:true
+				});
+				l--; //check for more
+			}
+		}
+		this.set('editList', editList);
+		
+		console.log('EDITLIST\n', editList, '\nsrcLines\n', srcLines);
+		
+		
 		for (var l = 0; l < srcLines.length; l++ ) { 
 			srcLines[l] = srcLines[l].split('');
 		}
@@ -114,6 +149,7 @@ App.SubtitleController = App.SmartController.extend({
 		var me = me || this,
 			isEvents = (typeof(isEvents) != 'undefined') ? isEvents : true,
 			srcLines = me.get('srcLines'),
+			editList = 	me.get('editList'),
 			printedLines = me.get('printedLines'),
 			currentLine = me.get('currentLine'),
 			currentChar = me.get('currentChar'),
@@ -122,18 +158,57 @@ App.SubtitleController = App.SmartController.extend({
 			delay;
 			
 			
+		var currentEdit;
+		for (var e = 0; e < editList.length; e++) {
+			if (editList[e].linePosition == currentLine && editList[e].charPosition == currentChar) {
+				currentEdit = editList[e];
+			}
+		}
+			
 		if (currentLine < srcLines.length) {
-			if ( currentChar < srcLines[ currentLine].length) {
+			if (currentEdit) {
+				if (currentEdit.editPause) {
+					delay = me.get('content').get('editDelay');
+				} else {
+					delay = 1 / me.get('content').get('cpms');
+				}
+			} else if ( currentChar < srcLines[ currentLine].length) {
 				delay = 1 / me.get('content').get('cpms');
-				//console.log('dur='+dur, 'delay='+delay, dur > delay);
 			} else {
-				delay = 1200;
+				delay = me.get('content').get('newLineDelay');
 				isNewLine = true;
-				//console.log('NEWLINE')
 			}	
 			if (dur > delay) {	
 				dur -= delay;
-				if (!isNewLine) {
+
+				if (currentEdit) {
+					with (currentEdit) {
+						editPause = false;
+						if ( currentDirection == 1 ) {
+							printed += editVals[currentVal][currentChar];
+							currentChar++;
+							if ( (currentChar + 1) > editVals[currentVal].length ) { 
+								currentDirection = -1; 
+								editPause = true;
+							}	
+						} else {
+							printed = printed.substring(0, printed.length - 1);
+							if (printed.length == 0) {
+								currentDirection = 1;
+								currentChar = 0;
+								currentVal++;
+								editPause = true;
+								if (currentVal >= editVals.length) { 
+									currentVal = 0;
+									me.set('isLooping', true);
+								}
+								
+							}
+						}
+					}
+					me.set('editList', editList)
+					me.set('text', this.tagStart+printedLines.join(this.tagMid)+currentEdit.printed+this.tagCursor+this.tagEnd);
+				} else if (!isNewLine) {
 					printedLines[currentPrintedLine] += srcLines[currentLine][currentChar];
 					me.set('text', this.tagStart+printedLines.join(this.tagMid)+this.tagCursor+this.tagEnd);
 					currentChar++;
@@ -144,7 +219,6 @@ App.SubtitleController = App.SmartController.extend({
 					if (isEvents && srcLines[currentLine] && srcLines[currentLine][0] && srcLines[currentLine][0] == '@') {	
 						var line = srcLines[currentLine].join('');
 						if(line.indexOf('@action=') == 0) { 
-							//console.log('SawAction');
 							var action = line.split(' ')[0].split('=')[1];
 							currentLine++;
 						} else if(line.indexOf('@actionOnRead=') == 0) { ;
@@ -167,11 +241,9 @@ App.SubtitleController = App.SmartController.extend({
 						currentChar++;
 					}
 				} 
-				
 			};
 		} else {
 			me.set('isEnded', true);
-			//window.alert('CANCELLED')
 			window.cancelAnimationFrame(me.get('raf'));
 			if (me.get('hasRemoveButton')) {
 				me.set('isRemoveButton', true);
@@ -205,7 +277,7 @@ App.SubtitleController = App.SmartController.extend({
 				me.set('lastRequestAnimationFrame', time);
 				dur = me.reDraw(dur, me); // stage.update() does not work... todo high
 				me.set('durSinceReadChar', dur);
-				if (!me.get('isEnded')) {
+				if (!me.get('isEnded') || me.get('isLooping')) {
 					me.set('raf', window.requestAnimationFrame(animloop));
 				}
 			};
@@ -226,7 +298,7 @@ App.SubtitleController = App.SmartController.extend({
 	doForceFinish: function () {
 		
 		window.cancelAnimationFrame(this.get('raf'));
-		while (!this.get('isEnded')) {
+		while (!this.get('isEnded')  && !this.get('isLooping') ) {
 			this.readChar(99999, this, false);
 		}	
 	}

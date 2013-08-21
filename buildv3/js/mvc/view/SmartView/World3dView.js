@@ -11,7 +11,7 @@ App.World3dView = App.SmartView.extend({
 		
 		this._super();
 		this.tryIntersect = [];
-		this.$el.css('display', 'none');
+		//this.$el.css('display', 'none');
 
 		App.world3d = this;
 		
@@ -25,7 +25,7 @@ App.World3dView = App.SmartView.extend({
 			FAR = 10000;
 			
 			
-
+		
 		var scene = this.scene = new THREE.Scene();
 		var renderer = this.renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true });
 		this.$el.append(renderer.domElement);
@@ -166,7 +166,8 @@ App.World3dView = App.SmartView.extend({
 				}
 			}
 			this.scene.add(this.cubeGroup = CubeGroup.createFromMap(map));
-			this.$el.css('display', 'block');
+			this.cubeGroup.position.x=65;
+			$('.world-3d-renderer', this.$el).css('background-image', 'none');
 		}	
 	},
 	

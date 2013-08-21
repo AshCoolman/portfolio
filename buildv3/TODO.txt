@@ -1,16 +1,27 @@
 HIGH PRIORITY
 120	Design/Style plotted Text so it makes sense
 60	Design Style text to wrap with resize
-120	Grid interactive mosaic for XY
-60	Transitions
 30	Add Questionmark
-10	SubtitleController forceFinish on view_willRemove...
+60	Transitions
 60  Subtitle delete chars & type
-60	Subtitle delete all & type
+
+
+Remove bg
+Make flow
+performance
+content
+
+MEDIUM
+Mosaic SVG
+Ruler X Appear
+Ruler Y Appear
+Ruler Z Appear
 
 LOW PRIORITY
+10	SubtitleController forceFinish on view_willRemove...
 Change ControlWithVars to not have second attribute as a "model", instead check that model="adf" would work.
 subtitles monofont + nbsp
+60	Subtitle delete all & type
 
 PERFORMANCE
 

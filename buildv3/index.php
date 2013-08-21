@@ -113,8 +113,8 @@
 		<!-- ROUTE INDEX -->
 		<script type="text/x-handlebars" data-template-name="index">
 		
-	 		<div class="relative-positioned">
-				<div class="full-width-centered">
+	 		<div class="row  pointer-events-none">
+				<div class="columns small-12">
 					<div class="subtitle-text-holder">
 						{{{controlWithVars 'subtitle' readOrder='1' thescript=<?php
 echo "
@@ -122,20 +122,23 @@ echo "
 ...featureless
 ...blank
 I created this website to change that.
-@actionOnRead=doSecondSubtitle\"";?>}}}
+@actionOnRead=doSecondSubtitle\"";
+?>}}}
 					</div>
 				</div>		
+			</div>	
 				
-				<div class="full-width-centered">
+	 		<div class="row  pointer-events-none">
+				<div class="columns small-12">
 					<div class="subtitle-text-holder">
 						<a {{action "doGotoDimension1"}}>
-							{{{controlWithVars 'subtitle' readOrder='2' thescript="Add the x"}}}
+							{{{controlWithVars 'subtitle' readOrder='2' thescript=<?php
+
+	echo "\"Add dimension @edits=X,Who,Knowledge\"";	?>}}}
 						</a>
 					</div>
 				</div>
 		 	</div>
-
-
 		</script>
 
 		<!-- INDEX NAV-->
@@ -155,22 +158,22 @@ I created this website to change that.
 		
 		
 			<div class="full-width-centered absolute-positioned">
-				{{renderWithVars 'interactive-grid' pixW=50}}
+				{{renderWithVars 'interactive-grid' pixW=20 isPlotX=true}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
 		
-	 		<div class="relative-positioned  pointer-events-none">
-				<div class="full-width-centered">
+	 		<div class="row  pointer-events-none">
+				<div class="columns small-12">
 					<div class="subtitle-text-holder">
 						{{{controlWithVars 'subtitle' orderRead='1' thescript=<?php
-echo "
+							echo "
 \"I have web technology skills.
 So I can happily rattle of a dry list of acronyms and names...
 JS, PHP, AS3, OOP, MCV, MVP, CSS3, AJAX, LINT, node, Ember, Handlebars etc...
 @actionOnRead=doSecondSubtitle\"";?>}}}
-					<div>
+					</div>
 				</div>
-				<div class="full-width-centered">
+				<div class="columns small-12">
 					<div class="subtitle-text-holder">
 						<a {{action "doGotoDimension2"}}>
 							{{controlWithVars 'subtitle' orderRead="2" thescript="Add the y"}} 
@@ -190,6 +193,11 @@ JS, PHP, AS3, OOP, MCV, MVP, CSS3, AJAX, LINT, node, Ember, Handlebars etc...
 		<script type="text/x-handlebars" data-template-name="interactive-grid" >
 
 			<div id="svg-raphaeljs"></div>
+			{{#if isPlotX}}
+			<div class="plot-heading-jscss">{{plotHeading}}</div>
+			<div class="plot-text-jscss"> {{plotText}} </div>
+			<div class="position-text-jscss"> {{positionText}} </div>
+			{{/if}}
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="scalar">
@@ -257,7 +265,7 @@ JS, PHP, AS3, OOP, MCV, MVP, CSS3, AJAX, LINT, node, Ember, Handlebars etc...
 					
 					{{#if isRemoveButton}}
 					<div class="remove-button-holder">
-						<i class="icon-remove-sign remove-button"{{action 'doRemoveClicked'}}></i>
+						<span><i class="icon-remove-sign remove-button"{{action 'doRemoveClicked'}}>close</i></span>
 					</div>
 					{{/if}}
 
@@ -268,35 +276,44 @@ JS, PHP, AS3, OOP, MCV, MVP, CSS3, AJAX, LINT, node, Ember, Handlebars etc...
 		
 		<!-- ROUTE DIMENSION 2 -->
 		<script type="text/x-handlebars" data-template-name="dimension2">
+		
+			<div class="full-width-centered absolute-positioned">
+				{{renderWithVars 'interactive-grid' pixW=20 pixH=20 isPlotX=false}}
+				{{render 'heartbeat' heartbeat}}
+			</div>
+		
+		
 			<div class="relative-positioned">
 				<div class="absolute-positioned"> 
 					{{renderWithVars 'world-2d' World2d}} 
 					{{controlWithVars 'esl-entity-container'}}
 				</div>
+			</div>
 
 
-		 		<div class="relative-positioned  pointer-events-none">
-					<div class="full-width-centered">
-						<div class="subtitle-text-holder">
-							{{{controlWithVars 'subtitle' orderRead='1' thescript=<?php
+	 		<div class="row  pointer-events-none">
+				<div class="columns">
+					<div class="subtitle-text-holder">
+						{{{controlWithVars 'subtitle' orderRead='1' thescript=<?php
 echo "
 \"It gets me excited to know you are engaging with my website right now.
 
 There is certain group of communication problems that can be solved using web technologies.
 I love to use my technical skills to craft experience that solve those problems.
 @actionOnRead=doSecondSubtitle\"";?>}}}
-						<div>
+					<div>
+				</div>
+			</div>
+	 		<div class="row  pointer-events-none">
+				<div class="columns">
+					<div class="subtitle-text-holder">
+						<a {{action "doGotoDimension3"}}>
+							{{controlWithVars 'subtitle' orderRead="2" thescript="Add the @edits=z,depth,exploration"}} 
+						</a>
 					</div>
-					<div class="full-width-centered">
-						<div class="subtitle-text-holder">
-							<a {{action "doGotoDimension3"}}>
-								{{controlWithVars 'subtitle' orderRead="2" thescript="Add the z"}} 
-							</a>
-						</div>
-					</div>
-		 		</div>
-					
-			</div>	
+				</div>
+		 	</div>
+			
 			{{#if App.DEBUG}}
 			{{render 'world-2d-editor'}}
 			{{/if}}
@@ -315,7 +332,7 @@ I love to use my technical skills to craft experience that solve those problems.
 		<!-- WORLD 2D -->
 
 		<script type="text/x-handlebars" data-template-name="world-2d">
-			{{controlWithVars 'ash' ash x=-200 }}
+			{{controlWithVars 'ash' ash x=-180 }}
 			{{controlWithVars 'question-mark' question-mark x=0 visible=false}}
 		</script>
 
@@ -393,24 +410,24 @@ I love to use my technical skills to craft experience that solve those problems.
 
 		<!-- ROUTE DIMENSION 3 -->
 		<script type="text/x-handlebars" data-template-name="dimension3">
-		
-		<div class="relative-positioned">
-			<div class="absolute-positioned"> 
-				{{renderWithVars 'world-3d' World3d}}
+			<div class="relative-positioned">
+				<div class="absolute-positioned"> 
+					{{renderWithVars 'world-3d' World3d}}
+				</div
 			</div>
-					 		<div class="relative-positioned  pointer-events-none">
-								<div class="full-width-centered">
-									<div class="subtitle-text-holder">
-										{{{controlWithVars 'subtitle' orderRead='1' hasRemoveButton=true thescript=<?php
+		
+			<div class="row  pointer-events-none">
+				<div class="columns">
+					<div class="subtitle-text-holder">
+						{{{controlWithVars 'subtitle' orderRead='1' hasRemoveButton=true thescript=<?php
 			echo "
-\"3. CREATIVE 
+\"CREATIVE 
 If I come upon a problem, I enjoy exploring laterally. 
 By looking at normally distant associations I can find an elegant solution.
 i.e. The big idea.\"";?>}}}
-									<div>
-								</div>
-					 		</div>
-		</div>
+					<div>
+				</div>
+	 		</div>
 		</script>
 
 
