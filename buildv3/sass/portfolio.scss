@@ -19,7 +19,7 @@ canvas, img {
 
 html,body { 
 	height:100%; 
-	background: #333 !important;
+	background: #666666 !important;
 }
  
 
@@ -28,7 +28,10 @@ html,body {
 	color:#999;
 }
 
-
+.obligatory-list {
+	font-family: Monospace;
+	white-space:pre-wrap;
+}
 .heartbeat-flash {
 	background:transparent;
 	position: fixed;
@@ -77,56 +80,52 @@ html,body {
 
 .subtitle {
 	color:#333333;
-	height:8em;
+	//height:8em;
 	line-height:100%;
+	display:inline;
 }
 
 .subtitle-text-holder {
+	margin-bottom:1.5em;
 }
 
 .subtitle-text-holder a {
 	text-decoration:none;
-	pointer-events:none;
 }
 
 .subtitle-text-holder p {
 	margin: 0;
+	display:block;
 }
  
 .subtitle-text-holder span {
-	display: inline;
 	padding: 5px 5px;
-	background: white;
+	background-color: #FFFFFF;;
 }	
  
 .subtitle-text-holder a p span {
 	color: darkorange;
-	text-decoration:none;
 	pointer-events:auto;
 }
 
 
 .subtitle-text {
-	background-color:white;
-	display:block;
 }
 
 
+ 
+a {
+pointer-events:auto;
+color:darkorange;
+}
 
-
-
-.remove-button-holder {
-	position:absolute;
-	left:-10px;
-	top:-24px;
+a:hover {
+color:red;
+}
+a:visited {
+color:darkred;
 	
-	background: white;
-	pointer-events:auto;
 }
-.remove-button-holder i:hover {
-	color:#FFFFFF;
-}
-
 .relative-positioned {
 	position:relative;
 }
@@ -230,38 +229,40 @@ background-repeat: no-repeat;
 .interactive-grid {
 	position: relative;
 	width:100%;
+	top:-1.875em;
 }
+
 
 #svg-raphaeljs {
 	position: absolute;
-	top:-1.875em;
 	width:100%;
 }
 
-
-.plot-heading-jscss, .plot-text-jscss, .position-text-jscss {
-	position: absolute;
-	line-height:0;
+.graph-plot, .graph-position {
+	pointer-events:none;
+	position:absolute;
 	font-size:18px;
-	top: 14px;
+	color:#99CC99;
+	width:100%;
+	display:block;
+	line-height: 100%;
+	padding: 0 2em;
+}
+
+.graph-plot h1, .graph-position h1 {
+	font-size:200px;
+	margin: 0;
+	padding: 0;
+	line-height: 100%;
+}
+.graph-plot h1 {
 	color:#99CC99;
 }
-
-.plot-heading-jscss {
-	font-size:100px;
-	left:14px;
-}
-
-.plot-text-jscss {
-	top: 88px;
-	left:14px;
-} 
-
-.position-text-jscss {
-	right:14px;
+.graph-position h1 {
 	color:#666666;
-	font-size:100px;
+	text-align:right;
 }
+
 
 
 .scalar {

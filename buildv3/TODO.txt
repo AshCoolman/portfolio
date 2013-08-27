@@ -6,6 +6,7 @@ HIGH PRIORITY
 60  Subtitle delete chars & type
 
 
+
 Remove bg
 Make flow
 performance
@@ -23,6 +24,12 @@ Change ControlWithVars to not have second attribute as a "model", instead check 
 subtitles monofont + nbsp
 60	Subtitle delete all & type
 
+
+Clean up
+		this.subtitleController1.set('isCursor', false);
+		this.subtitleController2.set('content', App.scriptModel); 
+		this.subtitleController2.setup();
+		this.subtitleController2.doSetupDraw();
 PERFORMANCE
 
 

@@ -35,9 +35,11 @@ ragh.eventMapper = (function () {
 		},
 		removeEventListener: function (type, listener) { 
 			assert(this.eventsAndListeners[type], 'raaagh.EventMapper: this.eventsAndListeners[' + type + '] is undefined');
-			this.eventsAndListeners[type] = this.eventsAndListeners[type].filter(function (el) {
-				return (el.listener != listener);
-			});
+			if (this.eventsAndListeners[type]) {
+				this.eventsAndListeners[type] = this.eventsAndListeners[type].filter(function (el) {
+					return (el.listener != listener);
+				});
+			}
 		},
 		triggerEvent: function ( e) {
 			if (!this.eventsAndListeners.hasOwnProperty(e.type)) {

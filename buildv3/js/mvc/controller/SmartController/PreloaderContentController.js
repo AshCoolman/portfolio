@@ -31,6 +31,7 @@ App.PreloaderContentController = App.SmartController.extend({
 		    {id: "test", src:"img/test.png"},  
 		  	{id: "copy", src:"txt/copy.txt"+(App.DEBUG ? '?'+Math.random() : '')},
 			{id: "face-ash-pixel", src:'img//face-ash-pixel.png'},
+			{id: "qm-pixel", src:'img//qm-pixel.png'},
 			{id: "face-ash", src:'img//face-ash.png'},
 			{id: "brain", src:'img//brain.png'},
 			{id: "cog", src:'img/cog.png'}

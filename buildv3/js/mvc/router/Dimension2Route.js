@@ -81,6 +81,9 @@ App.Dimension2Route = Em.Route.extend({
 		doGotoDimension3: function () {
 			window.location.hash = 'd3';
 		},
+		doShowQuestion: function () {
+			this.questionMarkController.setVisible();
+		},
 		doSecondSubtitle: function () {
 			this.subtitleController1.set('isCursor', false);
 
@@ -89,17 +92,13 @@ App.Dimension2Route = Em.Route.extend({
 	        this.subtitleController2.doSetupDraw();
 		},
 		doMosaicFinished: function () {
-			console.log('Route doMosaicFinished')
-			this.questionMarkController.setVisible()
+			//console.log('Route doMosaicFinished')
 		}
 	},
 	tryStart: function () {
         if (!this.isStart && this.questionMarkController && this.world2dController && this.subtitleController1 && this.subtitleController2) {
 			this.isStart = true;
             this.doStart();
-			console.log('trySUCCESS')
-        } else {
-			console.log('tryFAILED', (!this.isStart) , (this.questionMarkController? true :false) , (this.world2dController?true:false) , (this.subtitleController1?true:false) , (this.subtitleController2?true:false))
 		}
     }
 })

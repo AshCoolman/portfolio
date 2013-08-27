@@ -36,8 +36,8 @@ App.World2dView = App.ActiveEslStageView.extend({
 			}
 			
 			src.$canvas.css({display:'none'});
-			min.$canvas.css({display:'none'});
-			pix.$canvas.css({display:'block'}); 
+			min.$canvas.css({display:'block'});
+			pix.$canvas.css({display:'none'}); 
 		}
 		var multiData = this.get('multiData');
 		this.set('multiTween', createjs.Tween
@@ -90,10 +90,14 @@ App.World2dView = App.ActiveEslStageView.extend({
 							widtht = src.$canvas.attr('width'),
 							height = src.$canvas.attr('height');
 					
-						with (min) {
+						/*
+						with (min) {	
+							context.webkitImageSmoothingEnabled = context.mozImageSmoothingEnabled = context.imageSmoothingEnabled = false;
 							$canvas.attr({width: width/multi, height: height/multi});
 							context.setTransform(invMulti,0,0,invMulti,0,0);
 							context.drawImage(src.canvas, 0,0);
+							$canvas.css({width: width, height: height});
+							
 							//context.fillRect(0, 0, width/2, height/2) 
 						}
 						with (pix) {
@@ -106,7 +110,8 @@ App.World2dView = App.ActiveEslStageView.extend({
 							context.drawImage(min.canvas, 0,0);
 						
 							//min.context.clearRect(0, 0, width, height);
-						}
+						}*/
+						
 						//App.transitionView.draw( pix.$canvas ); //should go in willDestroyElement callback, but does not work
 					} else if ( this.get('isMosaic')) {	
 						//console.log('multiIndex', multiIndex)
@@ -123,11 +128,6 @@ App.World2dView = App.ActiveEslStageView.extend({
 		
 	},
 	willDestroyElement: function () {
-		if (this.get('isMosaic')) {
-			App.transitionView.draw( this.pix.$canvas ); //should go in willDestroyElement callback, but does not work
-		} else {
-			App.transitionView.draw( this.src.$canvas ); //should go in willDestroyElement callback, but does not work
-		}
 		createjs.Tween.removeTweens( this.get('multiTween') );
 		this._super();
 	}

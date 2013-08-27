@@ -3,19 +3,47 @@ App.InteractiveGridView = App.SmartView.extend({
 	templateName: 'interactive-grid',
 	tagName:'div',
 	grid: [[]],
+	isDrawGrid:false,
 	plots:[
-		{x:3, text: 'YEARS OF STUDY'},
-		{x:4, text: 'JS TECHNIQUES USED IN THIS WEBSITE\n* web workers\n * closures\n * request animation frame\n * ajax'},
-		{x:8, text: 'PROFICIENT PROGRAMMING LANGUAGES'},
-		{x:9, text: 'YEARS AS A DEVELOPER'},
-		{x:10, text: 'JS API\'S USED IN THIS WEBSITE\n * Threejs (inc WebGL)\n *  JQuery\n *  Emberjs (inc. Handlebars & Underscorejs)\n *  Createjs (inc. Preloadjs,  Easeljs,  Tweenjs)\n * Raphaeljs'}
+		{x:3, text: '\
+		<p>\
+			YEARS OF STUDY\
+		</p>'},
+		{x:4, text: '\
+		<p>\
+			JS TECHNIQUES USED IN THIS WEBSITE\
+		</p>\
+		<ul>\
+			<li>Web workers</li>\
+			<li>Closures</li>\
+			<li>Request animation frame</li>\
+			<li>AJAX</li>\
+		</ul>'},
+		{x:8, text: '\
+		<p>\
+			PROFICIENT PROGRAMMING LANGUAGES\
+		</p>'},
+		{x:9, text: '\
+		<p>\
+			YEARS AS A DEVELOPER\
+		</p>'},
+		{x:10, text: '\
+		<p>\
+			JS API&#39;S USED IN THIS WEBSITE\
+		</p>\
+		<ul>\
+			<li>Threejs (inc WebGL)</li>\
+			<li>JQuery</li>\
+			<li>Emberjs (inc. Handlebars & Underscorejs)</li>\
+			<li>Createjs (inc. Preloadjs,  Easeljs,  Tweenjs)</li>\
+			<li>Raphaeljs</li>\
+		</ul>'}
 	],
 	pixW:0,
 	pixH:0,
 	shownPlotIndex: null,
 	didInsertElement: function () {
 		this._super();
-		console.log("this.get('controller').get('pixW')", this.get('controller').get('pixH'))
 		var raphaeljs,
 			w = 1200,
 			h = 1024,
@@ -50,7 +78,7 @@ App.InteractiveGridView = App.SmartView.extend({
 			};
 		
  		this.set( 'plots', this.get('plots').sort(plotCompFfunction));
-		 console.log(this.get('plots'));
+		//console.log(this.get('plots'));
 		
 		this.set('raphaeljs', raphaeljs = new Raphael('svg-raphaeljs', '100%', '100%'));
 		$('svg', this.$el).attr({
@@ -71,29 +99,30 @@ App.InteractiveGridView = App.SmartView.extend({
 			return false;
 		};
 		
-		
-		for (x = 0; x < w / pixW; x++) {
-			var attrIndex = (x) % 2;
+		if (this.get('isDrawGrid')) {			
+			for (x = 0; x < w / pixW; x++) {
+				var attrIndex = (x) % 2;
 			
-			if (!grid[0]) {
-				grid[0] = [];
+				if (!grid[0]) {
+					grid[0] = [];
+				}
+				if (attrIndex == 1) {
+					grid[0][y] = raphaeljs.path('M'+(x*pixW)+' 0L'+(x*pixW)+' '+h);
+					grid[0][y].attr(attrs[attrIndex]);
+				}		
 			}
-			if (attrIndex == 1) {
-				grid[0][y] = raphaeljs.path('M'+(x*pixW)+' 0L'+(x*pixW)+' '+h);
-				grid[0][y].attr(attrs[attrIndex]);
-			}		
-		}
 		
-		for (y = 0; y < h / pixH; y++) {
-			var attrIndex = (y) % 2;
+			for (y = 0; y < h / pixH; y++) {
+				var attrIndex = (y) % 2;
 			
-			if (!grid[1]) {
-				grid[1] = [];
-			}
-			if (attrIndex == 1) {
-				grid[1][y] = raphaeljs.path('M0 '+(y*pixH)+'L'+w+' '+y*pixH);
-				grid[1][y].attr(attrs[attrIndex]);
-			}
+				if (!grid[1]) {
+					grid[1] = [];
+				}
+				if (attrIndex == 1) {
+					grid[1][y] = raphaeljs.path('M0 '+(y*pixH)+'L'+w+' '+y*pixH);
+					grid[1][y].attr(attrs[attrIndex]);
+				}
+			}	
 		}
 		
 		
@@ -108,7 +137,8 @@ App.InteractiveGridView = App.SmartView.extend({
 			//console.log('created plot', plots[p])
 		}
 		
-		var coordX = raphaeljs.rect(0,0,2,h).attr({fill:'#CCCCCC', 'stroke-width':0});
+		var coordX = raphaeljs.rect(0,0,6,h).attr({fill:'#666666', 'stroke-width':0});
+		/*
 		var coordLabel = raphaeljs.text(coordX.width, h/2, '').attr({fill:'#669966', 'stroke-width':0, 'text-anchor': 'start', 'font-size':12});
 		
 		var positionHeadingOverlap = raphaeljs.text(w-10, 50, '').attr({fill:'#666666', 'stroke-width':0, 'text-anchor': 'end', 'font-size':100});
@@ -119,8 +149,8 @@ App.InteractiveGridView = App.SmartView.extend({
 		var plotInfoOverlap = raphaeljs.text(10, 150, '').attr({fill:'#99CC99', 'stroke-width':0, 'text-anchor': 'start', 'font-size':16});
 		var plotInfoNonOverlap = raphaeljs.text(10, 150, '').attr({fill:'#99CC99', 'stroke-width':0, 'text-anchor': 'start', 'font-size':16});
 	
-		
-		var mouseZone = raphaeljs.rect(0,0,w,h).attr({'stroke-width':0});
+		*/
+		var mouseZone = raphaeljs.rect(0,0,w,h).attr({'stroke-width':0, 'fill':'#001133', opacity:0.0});
 		$(mouseZone.node).css('z-index', 9999);
 		var svgPoint = $('svg', this.$el)[0].createSVGPoint();
 		var pointToSVGSpaceFunc = function (e){
@@ -195,6 +225,7 @@ App.InteractiveGridView = App.SmartView.extend({
 					} else {	
 						me.set('shownPlotIndex', null);
 						me.get('controller').set('plotText', '');
+						me.get('controller').set('plotHeading', '');
 					}
 					me.get('controller').set('positionText', positionText);
 				

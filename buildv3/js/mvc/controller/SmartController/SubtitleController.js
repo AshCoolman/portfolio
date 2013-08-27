@@ -41,6 +41,8 @@ App.SubtitleController = App.SmartController.extend({
 	srcLines:[],
 	editList:[],
 	printedLines:[''],
+	isFreezeOnHover: true,
+	isHover:false,
 	tagStart:'<p><span>',
 	tagMid: '</span></p><p><span>',
 	tagEnd: '</span></p>',
@@ -113,9 +115,8 @@ App.SubtitleController = App.SmartController.extend({
 		}
 		this.set('editList', editList);
 		
-		console.log('EDITLIST\n', editList, '\nsrcLines\n', srcLines);
-		
-		
+//		console.log('EDITLIST\n', editList, '\nsrcLines\n', srcLines);
+
 		for (var l = 0; l < srcLines.length; l++ ) { 
 			srcLines[l] = srcLines[l].split('');
 		}
@@ -129,9 +130,9 @@ App.SubtitleController = App.SmartController.extend({
 		
 	},
 	deactivate: function () {
-		console.log('SubtitleController.deactivate()...')
+//		console.log('SubtitleController.deactivate()...')
 		this.doForceFinish();
-		console.log('...done')
+//		console.log('...done')
 		this.set('text', '');
 		this.set('currentLine', 0);
 		this.set('currentChar', 0);
@@ -207,7 +208,7 @@ App.SubtitleController = App.SmartController.extend({
 						}
 					}
 					me.set('editList', editList)
-					me.set('text', this.tagStart+printedLines.join(this.tagMid)+currentEdit.printed+this.tagCursor+this.tagEnd);
+					me.set('text', this.tagStart+printedLines.join(this.tagMid)+'<i>'+currentEdit.printed+'</i>'+this.tagCursor+this.tagEnd);
 				} else if (!isNewLine) {
 					printedLines[currentPrintedLine] += srcLines[currentLine][currentChar];
 					me.set('text', this.tagStart+printedLines.join(this.tagMid)+this.tagCursor+this.tagEnd);
@@ -259,12 +260,12 @@ App.SubtitleController = App.SmartController.extend({
 		return dur;
 	},
 	doRemoveClicked: function () {
-		console.log('doRemoveClicked');
+		//console.log('doRemoveClicked');
 		window.cancelAnimationFrame(this.get('raf'));
 		this.set('isEnded', true);
 		this.set('isRemoved', true);
 		this.set('text', ''); //todo low technically should not need to render this, but if you look at template, I can't conditionally stop rendering {{text}} without incurring a js error
-		this.send('doRemoveSubtitle');
+		//this.send('doRemoveSubtitle');
 	},
 	doSetupDraw: function () {
 		var rafFunction = function(me) {
@@ -275,7 +276,7 @@ App.SubtitleController = App.SmartController.extend({
 					//console.log('>>', dur , last, dur+last)
 					dur += (last ? time - last : 0);		
 				me.set('lastRequestAnimationFrame', time);
-				dur = me.reDraw(dur, me); // stage.update() does not work... todo high
+				if (!me.get('isHover')) { dur = me.reDraw(dur, me); }// stage.update() does not work... todo high 
 				me.set('durSinceReadChar', dur);
 				if (!me.get('isEnded') || me.get('isLooping')) {
 					me.set('raf', window.requestAnimationFrame(animloop));
@@ -285,6 +286,11 @@ App.SubtitleController = App.SmartController.extend({
 		}(this);
 		
 		this.set('raf', window.requestAnimationFrame(rafFunction));
+	},
+	
+	getActionEvent: function () {
+		//console.log('getActionEvent', this.get('actionEvent'))
+		this.send(this.get('actionEvent'))
 	},
 	
 	reDraw: function (adur, scope) {

@@ -5,7 +5,6 @@ App.QuestionMarkController = App.EslEntityController.extend({
 		this._super(acontroller);
 	},
 	setVisible: function (val) {
-		console.log('setVisible', this.get('view'));
 		this.get('view').doShowPixelInChildren();
 	}
 });

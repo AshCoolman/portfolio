@@ -1,9 +1,17 @@
+if (typeof Object.create !== 'function') {
+    Object.create = function (o) {
+        function F() {}
+        F.prototype = o;
+        return new F();
+    };
+}
 
 var CubeGroup = {
 	isMerge: false,
 	rollOver: null,
 	SIZE: 30,
 	materialsDict: {},
+	group:null,
 	tryAddHere: function (intersector) {
 		var v0 = this.getFacePoint(intersector);
 		this.rollOverMesh.position.copy(v0);
@@ -77,6 +85,7 @@ var CubeGroup = {
 		
 		//grp.add( this.plane );
 		return grp;
+
 	},
 	createPlane: function () {
 		var plane = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000, 20, 20 ), new THREE.MeshBasicMaterial( { color: 0x555555, wireframe: true } ) );

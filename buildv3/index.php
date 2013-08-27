@@ -30,14 +30,41 @@
 
 			{{renderWithVars 'preloader-content' preloader}}
 			
-			<div class="full-width-centered absolute-positioned">
-				{{render 'transition' transition}}
-			</div>
+
 			
 			{{outlet}}
 			
 		</script>
 
+
+		<!-- LAYOUT -->
+		<script type="text/x-handlebars" data-template-name="lo-subtitle-row">
+			<div class="row pointer-events-none">
+				<div class="columns large-12 small-12 subtitle-text-holder">
+ 					{{yield}}
+				</div>
+			</div>
+		</script>
+		
+		<!-- LAYOUT -->
+		<script type="text/x-handlebars" data-template-name="lo-subtitle-obligatory">
+			<div class="row pointer-events-none">
+				<div class="columns subtitle-text-holder obligatory-list">
+ 					{{yield}}
+				</div>
+			</div>
+		</script>
+		
+		<!-- LAYOUT -->
+		<script type="text/x-handlebars" data-template-name="lo-subtitle-row-link">
+			<div class="row pointer-events-none">
+				<div class="columns subtitle-text-holder large-9 small-9 large-offset-3 small-offset-1">
+					<br/>
+ 					{{yield}}
+				</div>
+			</div>
+		</script>
+		
 		<!-- APPLICATION ELEMENTS -->
 		<script type="text/x-handlebars" data-template-name="preloader-content">
 			Preloading...<br/>
@@ -75,9 +102,6 @@
 						<!-- Title Area -->
 			
 					    <li class="divider"></li>
-				        {{#view view.NavListItemView item="Index" }}
-				            <a {{action doDimension0}} >_</a>
-				        {{/view}}
 				
 						<li class="divider"></li>
 						{{#view view.NavListItemView item="doDimension1" }}
@@ -111,78 +135,58 @@
 		</script>
 
 		<!-- ROUTE INDEX -->
-		<script type="text/x-handlebars" data-template-name="index">
-		
-	 		<div class="row  pointer-events-none">
-				<div class="columns small-12">
-					<div class="subtitle-text-holder">
-						{{{controlWithVars 'subtitle' readOrder='1' thescript=<?php
-echo "
-\"To you \\\"Ashley Coleman\\\" is probably just a name ...
-...featureless
-...blank
-I created this website to change that.
+		<script type="text/x-handlebars" data-template-name="index">		
+<?php
+$indexCopyA = "\"My name is Ashley Coleman.
+I'm probably just another name to you.
+But I wanted a way to convey the different dimensions that make-up who I am.
+So I made this website.
 @actionOnRead=doSecondSubtitle\"";
-?>}}}
-					</div>
-				</div>		
-			</div>	
-				
-	 		<div class="row  pointer-events-none">
-				<div class="columns small-12">
-					<div class="subtitle-text-holder">
-						<a {{action "doGotoDimension1"}}>
-							{{{controlWithVars 'subtitle' readOrder='2' thescript=<?php
-
-	echo "\"Add dimension @edits=X,Who,Knowledge\"";	?>}}}
-						</a>
-					</div>
-				</div>
-		 	</div>
+?>
+			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php echo $indexCopyA; ?>}}}
+			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="Add dimension @edits=X...,One...,Who...,What..." isLink=true actionEvent="doGotoDimension1" }}}
 		</script>
 
-		<!-- INDEX NAV-->
-		<script type="text/x-handlebars" data-template-name="index-nav">
-			{{#if isShowStart}}
-			<a class="button nav-btn standard-single-button" {{action "doStart" }}>Start</a>
-			{{/if}}
-
-			{{#if isShowEnd}}
-			<a class="button nav-btn standard-single-button" {{action "doGotoDimension1" }}>0 + 1 =</a>
-			{{/if}}
-		</script>
 
 		<!-- ROUTE DIMENSION 1 -->
 		<!--{{renderWithVars 'world-1d'}}-->
 		<script type="text/x-handlebars" data-template-name="dimension1">
 		
-		
 			<div class="full-width-centered absolute-positioned">
 				{{renderWithVars 'interactive-grid' pixW=20 isPlotX=true}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
-		
-	 		<div class="row  pointer-events-none">
-				<div class="columns small-12">
-					<div class="subtitle-text-holder">
-						{{{controlWithVars 'subtitle' orderRead='1' thescript=<?php
-							echo "
-\"I have web technology skills.
-So I can happily rattle of a dry list of acronyms and names...
-JS, PHP, AS3, OOP, MCV, MVP, CSS3, AJAX, LINT, node, Ember, Handlebars etc...
-@actionOnRead=doSecondSubtitle\"";?>}}}
-					</div>
-				</div>
-				<div class="columns small-12">
-					<div class="subtitle-text-holder">
-						<a {{action "doGotoDimension2"}}>
-							{{controlWithVars 'subtitle' orderRead="2" thescript="Add the y"}} 
-						</a>
-					</div>
-				</div>
-	 		</div>
+<?php
+ $d1copyA = "\"" . 
+htmlspecialchars("I have web development skills
+@actionOnRead=doSubtitle2") . "\"";
 
-			
+ $d1copyB =  "\"" . 
+htmlspecialchars("<OBLIGATORY SKILL LIST>
+    Javascript: JQuery, AJAX, nodejs, Ember, Handlebars, threejs (WebGL), Google Closure Library, Raphaeljs, Createjs, underscorejs etc
+    Flash: AS3, AS2, Flex, Flash Video etc
+    HTML: HTML5, CSS3, SVG, HTML5 Audio & Video, etc
+    Serverside: PHP, MySQL, Postgres, templating, etc
+    Programming Paradigms/Patterns: OOP, MCV, MVP etc
+    Tools: LINT, SVN, Git etc
+    General knowledge: 3d Math, Physics, Geo-location, CMS, API creation, Code documentation, Eclipse
+</OBLIGATORY SKILL LIST>
+@actionOnRead=doSubtitle3") . "\"";
+
+ $d1copyC =  "\"" . 
+htmlspecialchars("Web development skills are my craft.
+I watch the bleeding edge of technology, and integrate new techniques.
+I value speed, elegance, and clarity.
+
+But above all:
+'Real artists ship'
+-Steve Jobs") . "\"";
+
+?>
+			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php echo $d1copyA; ?>}}}
+			{{{controlWithVars 'subtitle' orderRead='2' layoutName="lo-subtitle-obligatory" hasRemoveButton=true thescript=<?php echo $d1copyB;?>}}}
+			{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php echo  $d1copyC;?>}}}
+			{{{controlWithVars 'subtitle' orderRead='4' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Add dimension @edits=Y...,Why?...,Motivation..."}} 
 		</script>
 
 <!--
@@ -192,12 +196,20 @@ JS, PHP, AS3, OOP, MCV, MVP, CSS3, AJAX, LINT, node, Ember, Handlebars etc...
 -->
 		<script type="text/x-handlebars" data-template-name="interactive-grid" >
 
-			<div id="svg-raphaeljs"></div>
-			{{#if isPlotX}}
-			<div class="plot-heading-jscss">{{plotHeading}}</div>
-			<div class="plot-text-jscss"> {{plotText}} </div>
-			<div class="position-text-jscss"> {{positionText}} </div>
-			{{/if}}
+				<div id="svg-raphaeljs"></div>
+				{{#if isPlotX}}	
+					
+						<div class="graph-position">
+							<h1>{{{positionText}}}</h1>
+						</div>
+
+						<div class="graph-plot">
+							<h1> {{{plotHeading}}} </h1>
+							<span> {{{plotText}}} </span>
+						</div>
+
+				{{/if}}
+			</div>
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="scalar">
@@ -226,18 +238,7 @@ JS, PHP, AS3, OOP, MCV, MVP, CSS3, AJAX, LINT, node, Ember, Handlebars etc...
 			{{controlWithVars 'click-and-drag-scalar'  		scaleLabel=""	value=200	x=-0 	y=50}}
 		</script>
 
-		<!-- DIMENSION 1 NAV-->
-		<script type="text/x-handlebars" data-template-name="dimension1-nav">
-			<div class="nav-btn-holder">
-				{{#if isShowStart}}
-				<button class="nav-btn" {{action "doStart" }}>Begin</button>
-				{{/if}}
 
-				{{#if isShowEnd}}
-				<button class="nav-btn" {{action "doGotoDimension2" }}>1 + 1 =</button>
-				{{/if}}
-			</div>
-		</script>
 
 		<!-- HEARTBEAT -->
 		<script type="text/x-handlebars" data-template-name="heartbeat">
@@ -257,20 +258,16 @@ JS, PHP, AS3, OOP, MCV, MVP, CSS3, AJAX, LINT, node, Ember, Handlebars etc...
 
 		<!-- SUBTITLE -->
 		<script type="text/x-handlebars" data-template-name="subtitle">
-		 
+			{{#unless isRemoved}}
+				{{#if isLink}}<a {{action getActionEvent}}>{{/if}}
 					{{{text}}}
-					{{#unless isRemoved}}
-					
-					{{/unless}}
-					
-					{{#if isRemoveButton}}
-					<div class="remove-button-holder">
-						<span><i class="icon-remove-sign remove-button"{{action 'doRemoveClicked'}}>close</i></span>
-					</div>
-					{{/if}}
-
-			
-
+				{{#if isLink}}</a>{{/if}}
+				{{#if isRemoveButton}}
+				<div class="remove-button-holder">
+					<span><a><i class="icon-remove-sign remove-button"{{action 'doRemoveClicked'}}></i></a></span>
+				</div>
+				{{/if}}
+			{{/unless}}
 		</script>
 		
 		
@@ -291,44 +288,26 @@ JS, PHP, AS3, OOP, MCV, MVP, CSS3, AJAX, LINT, node, Ember, Handlebars etc...
 			</div>
 
 
-	 		<div class="row  pointer-events-none">
-				<div class="columns">
-					<div class="subtitle-text-holder">
-						{{{controlWithVars 'subtitle' orderRead='1' thescript=<?php
-echo "
-\"It gets me excited to know you are engaging with my website right now.
 
-There is certain group of communication problems that can be solved using web technologies.
-I love to use my technical skills to craft experience that solve those problems.
+			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php
+echo "\"DESIRE TO COMMUNICATE
+I like induce change in the audience, be it emotion, thought, excitement, knowledge...
+Simply put, I am a story teller.
+
+If the question is how to best communicate to an audience, 
+@actionOnRead=doShowQuestion
+then I have the technical skills can be used to craft an answering experience.
 @actionOnRead=doSecondSubtitle\"";?>}}}
-					<div>
-				</div>
-			</div>
-	 		<div class="row  pointer-events-none">
-				<div class="columns">
-					<div class="subtitle-text-holder">
-						<a {{action "doGotoDimension3"}}>
-							{{controlWithVars 'subtitle' orderRead="2" thescript="Add the @edits=z,depth,exploration"}} 
-						</a>
-					</div>
-				</div>
-		 	</div>
+
+			{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="Add dimension @edits=Z...,Depth...,Exploration..." isLink=true actionEvent="doGotoDimension3" }} 
+
 			
 			{{#if App.DEBUG}}
-			{{render 'world-2d-editor'}}
+				{{render 'world-2d-editor'}}
 			{{/if}}
 		</script>	
 
 
-		<!-- DIMENSION 2 NAV-->
-		<script type="text/x-handlebars" data-template-name="dimension2-nav">
-			<div class="nav-btn-holder">
-				{{#if isShowEnd}}
-				<button class="nav-btn" {{action "doGotoDimension3" }}>2 + 1 =</button>
-				{{/if}}
-			</div>
-		</script>
-		
 		<!-- WORLD 2D -->
 
 		<script type="text/x-handlebars" data-template-name="world-2d">
@@ -416,18 +395,19 @@ I love to use my technical skills to craft experience that solve those problems.
 				</div
 			</div>
 		
-			<div class="row  pointer-events-none">
-				<div class="columns">
-					<div class="subtitle-text-holder">
-						{{{controlWithVars 'subtitle' orderRead='1' hasRemoveButton=true thescript=<?php
+			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php
 			echo "
-\"CREATIVE 
-If I come upon a problem, I enjoy exploring laterally. 
-By looking at normally distant associations I can find an elegant solution.
-i.e. The big idea.\"";?>}}}
-					<div>
-				</div>
-	 		</div>
+\"DEPTH: Creativity
+
+I am committed to creative thinking.
+It means discarding your 'first thoughts', and what seems 'obvious'.
+
+And knowing that somewhere there exists a simple and elegant solution...
+
+i.e. The big idea.
+
+\"";?>}}}
+
 		</script>
 
 
@@ -435,6 +415,7 @@ i.e. The big idea.\"";?>}}}
 
 		<!-- ROUTE DIMENSION 3 -->
 	<script type="text/x-handlebars" data-template-name="world-3d">
+	
 	</script>
 	
 		<!-- {{ controlWithVars 'entity-3d'}} -->

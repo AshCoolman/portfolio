@@ -6,12 +6,6 @@ App.Dimension1Route = Em.Route.extend({
 		this._super();
 		this.isStarted = false;
 	},
-	activate: function () {
-		this._super();
-		App.eventMapper.addEventListener('dim1Nav_start', this, this.doDim1Nav_start );
-		App.eventMapper.addEventListener('dim1Nav_end', this, this.doDim1Nav_end );
-		App.eventMapper.addEventListener('sub_finishedReading', this, this.dosub_finishedReading );
-	},
 	deactivate: function () {
 		this._super();
 		App.eventMapper.removeEventListener('dim1Nav_start', this);
@@ -24,28 +18,21 @@ App.Dimension1Route = Em.Route.extend({
 		this.isStarted = null;
 		this.heartbeatController = null;
 		this.scalarController = null;
-		
 	},
-	doDim1Nav_start: function (type, data) { 
-
-	},
-	dosub_finishedReading: function() {
-	//	this.dimension1NavController.set('isShowEnd', true);
-	},
-	doDim1Nav_end: function () {			
-		window.location.hash = 'd2';
-	},
-	doStart: function (type, data) {
-		//console.log('STARTED DIMENSION 1', this.subtitleController1.get('thescript'), this.subtitleController2.get('thescript'))			
+	doStart: function (type, data) { 
+				
 		this.subtitleController1.set('content', App.scriptModel); 
-        this.subtitleController1.setup();//this.subtitleController1.get("content").scriptD1);
+		this.subtitleController2.set('content', App.scriptModel); 
+		this.subtitleController3.set('content', App.scriptModel); 
+		this.subtitleController4.set('content', App.scriptModel); 
+		
+        this.subtitleController1.setup();
+        this.subtitleController2.setup();
+        this.subtitleController3.setup();
+        this.subtitleController4.setup();
+
         this.subtitleController1.doSetupDraw();
-		/*
-		this.heartbeatController.myView.doStart();
-		this.heartbeatController.createHeartbeat();
-		this.scalarController.startDrawing();
-		this.dimension1NavController.set('isShowStart', false);
-		*/
+
     },
 	model: function () {
 		return (App.dimension1Model) ? App.dimension1Model : App.Dimension1Model.create();
@@ -69,16 +56,14 @@ App.Dimension1Route = Em.Route.extend({
 		SubtitleView_InsertViewDone: function (achildview, another) {},
 		SmartController_didInsertElement: function(acontroller, alabel) {;
 			switch (alabel) {
-				case 'SubtitleController': 			
-													//console.log('SubtitleController> label', acontroller.get('orderRead'))
-													if (acontroller.get('orderRead') == '1') {
-														this.subtitleController1 = acontroller;
-														//console.log('***1 subtitleController1 set', acontroller.get('orderRead'))
-													} else if (acontroller.get('orderRead') == '2') {
-														this.subtitleController2 = acontroller;
-														//console.log('***2 subtitleController1 set', acontroller.get('orderRead'))
-													}
-													break;  
+				case 'SubtitleController': 
+					switch (acontroller.get('orderRead')) {
+						case '1': this.subtitleController1 = acontroller; break;
+						case '2': this.subtitleController2 = acontroller; break;
+						case '3': this.subtitleController3 = acontroller; break;
+						case '4': this.subtitleController4 = acontroller; break;
+					}
+					break;  
 				case 'Dimension1NavController':  	this.dimension1NavController = acontroller; 	break;
 				case 'HeartbeatController':  		this.heartbeatController = acontroller; 		break;
 				case 'ScalarController':  			this.scalarController = acontroller;			break;
@@ -91,15 +76,21 @@ App.Dimension1Route = Em.Route.extend({
 		doGotoDimension2: function () { 
 			window.location.hash = 'd2';
 		},
-		doSecondSubtitle: function () { 
-			this.subtitleController1.set('isCursor', false);
-			this.subtitleController2.set('content', App.scriptModel); 
-	        this.subtitleController2.setup();//this.subtitleController1.get("content").scriptD1);
+		doSubtitle2: function () { 
+			this.subtitleController1.set('isCursor', false); 
 	        this.subtitleController2.doSetupDraw();
+		},
+		doSubtitle3: function () { 
+			this.subtitleController2.set('isCursor', false);
+	        this.subtitleController3.doSetupDraw();
+		},
+		doSubtitle4: function () { 
+			this.subtitleController3.set('isCursor', false);
+	        this.subtitleController4.doSetupDraw();
 		}
 	},
 	tryStart: function () {
-        if (!this.isStarted && this.subtitleController1 && this.subtitleController2 /*&& this.scalarController*/) {
+        if (!this.isStarted && this.subtitleController1 && this.subtitleController2  && this.subtitleController3 && this.subtitleController4) {
 			this.isStarted = true;
             this.doStart()
 		}

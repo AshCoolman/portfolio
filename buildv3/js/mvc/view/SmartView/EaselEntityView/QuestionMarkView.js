@@ -12,7 +12,7 @@ App.QuestionMarkView = App.EslEntityView.extend({
 		fromController: ['x', 'y', 'width', 'height', 'visible']
 	},
 	doShowPixelInChildren: function () {
-		console.log(this.handle.children)
+//		console.log(this.handle.children)
 		this.handle.visible = true;
 		var child,
 			c;

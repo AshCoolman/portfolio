@@ -1,6 +1,6 @@
 App.InteractiveGridController = App.SmartController.extend({
 	plotText:'',
-	plotHeading:'Plot heading',
+	plotHeading:'',
 	positionText:'',
 	isPlotX: false
 });

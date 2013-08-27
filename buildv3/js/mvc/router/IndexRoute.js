@@ -24,7 +24,6 @@ App.IndexRoute = Em.Route.extend({
 		this.isStarted = null;
 	},
     doStart: function (type, data) {
-		console.log('start draw')
 		this.subtitleController1.set('content', App.scriptModel); 
         this.subtitleController1.setup();
         this.subtitleController1.doSetupDraw();
