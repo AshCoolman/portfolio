@@ -39,7 +39,7 @@ var CubeGroup = {
 			throw 'CubeGroup.createFromMap() passed "amap" parameter is falsey';
 		}
 		var sz = this.SIZE,
-			grp = this.grp = new THREE.Object3D(),
+			group = this.group = new THREE.Object3D(),
 			maxX = 0, 
 			maxY = 0, 
 			maxZ = 0.
@@ -71,20 +71,20 @@ var CubeGroup = {
 			this.mesh.updateMatrix();
 			this.mesh.overdraw = false;
 			this.mesh.name = 'cubeGroup';
-	        grp.add(this.mesh);
+	        group.add(this.mesh);
 	
 		}
-		grp.position.set(sz*(0.5), sz*(-0.5), 0);
-		grp.updateMatrix()
-		window.grp = grp
-		grp.add( this.rollOverMesh = this.createRollOver() );
-		//grp.add( this.plane = this.createPlane() ); 
+		group.position.set(sz*(0.5), sz*(-0.5), 0);
+		group.updateMatrix()
+		window.group = group
+		group.add( this.rollOverMesh = this.createRollOver() );
+		//group.add( this.plane = this.createPlane() ); 
 		//var tween = createjs.Tween.get(this.rollOverMesh.rotation, {  loop: true }).to( { y:2 * Math.PI}, 2000 );		
 
-		//var tween = createjs.Tween.get(grp.rotation, { loop: true }).to( { y: 2 * Math.PI,  z: Math.random()*2 * Math.PI }, 60000 );
+		//var tween = createjs.Tween.get(group.rotation, { loop: true }).to( { y: 2 * Math.PI,  z: Math.random()*2 * Math.PI }, 60000 );
 		
-		//grp.add( this.plane );
-		return grp;
+		//group.add( this.plane );
+		return group;
 
 	},
 	createPlane: function () {
@@ -125,7 +125,7 @@ var CubeGroup = {
 			THREE.GeometryUtils.merge(geo, new THREE.Geometry());
 			mesh = new THREE.Mesh( geo, color);
 			mesh.position = new THREE.Vector3( x, y, z);
-			this.grp.add( mesh );
+			this.group.add( mesh );
 		} else {
 			for(var i = 0 ; i < geo.vertices.length; i++) {
 				geo.vertices[i].add (new THREE.Vector3( x, y, z));
@@ -141,9 +141,9 @@ var CubeGroup = {
 	getMap: function () {
 		var amap = [[[]]],
 			cube,
-			grp = this.grp,
+			group = this.group,
 			x, y, z;
-		for (var c = 0; c < grp.children.length; c++, cube = grp.children[c-1] ) {
+		for (var c = 0; c < group.children.length; c++, cube = group.children[c-1] ) {
 			if (cube && cube != this.rollOverMesh) {	
 				x = Math.round( cube.position.x / this.SIZE);
 				y = Math.round( cube.position.y / this.SIZE);
@@ -156,7 +156,7 @@ var CubeGroup = {
 		console.log('EXPORT\n', JSON.stringify(amap));
 	},
 	cleanup: function() {
-			this.grp = null;
+			this.group = null;
 			this.materials = [];
 			this.geo = null;
 			this.mesh = null;
