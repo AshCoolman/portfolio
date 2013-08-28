@@ -153,7 +153,7 @@ var CubeGroup = {
 				amap[x][y][z] = {name: c};
 			}
 		}
-		console.log('EXPORT\n', JSON.stringify(amap));
+		//console.log('EXPORT\n', JSON.stringify(amap));
 	},
 	cleanup: function() {
 			this.group = null;

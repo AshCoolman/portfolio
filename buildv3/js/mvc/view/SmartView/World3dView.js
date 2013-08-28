@@ -7,6 +7,7 @@ App.World3dView = App.SmartView.extend({
 	textures: {},
 	VS: 10,
 	isControls:false,
+	intersectable: [],
 	didInsertElement: function () {
 		
 		this._super();
@@ -29,7 +30,9 @@ App.World3dView = App.SmartView.extend({
 		var scene = this.scene = new THREE.Scene();
 		var renderer = this.renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true });
 		this.$el.append(renderer.domElement);
-		$(renderer.domElement).addClass('world-3d-renderer')
+		$(renderer.domElement).addClass('world-3d-renderer');
+		$('.world-3d-renderer', this.$el).css('background-image', 'none');
+		
 		if (App.DEBUG) {
 			var rendererStats = this.rendererStats  = new THREEx.RendererStats()
 			rendererStats.domElement.style.position = 'absolute'
@@ -103,7 +106,7 @@ App.World3dView = App.SmartView.extend({
 			
 		this.el.addEventListener( 'mousedown', function (me) {
 			return function (event) {
-				me.onDocumentMouseDown(event);
+				//me.onDocumentMouseDown(event);
 			}
 		}(this), false );
 						
@@ -115,26 +118,28 @@ App.World3dView = App.SmartView.extend({
 		
 		this.resize();
 
+		
 		var faceImg = App.static_preloader.queue.getResult('face-ash-pixel');
 		setTimeout( function (me) {
 			return  function() {
 				me.faceVoxelGroup = me.createFromImage(faceImg);
 				me.faceGroup = me.faceVoxelGroup.group;
 				me.faceGroup.position.x=65;
-				$('.world-3d-renderer', me.$el).css('background-image', 'none');
+				me.intersectable.push(me.faceGroup);
 			}
 		}(this), 100);
-	
-		/*
+		
+		
 		var qmImg = App.static_preloader.queue.getResult('qm-pixel');
 		setTimeout( function (me) {
 			return  function() {
 				me.questionVoxelGroup = me.createFromImage(qmImg);
 				me.questionGroup = me.questionVoxelGroup.group;
 				me.questionGroup.position.x=450;
+				me.intersectable.push(me.questionGroup);
 			}
 		}(this), 2000);
-		*/
+		
 		
 		this.voxelPosition = new THREE.Vector3();
 		this.normalMatrix = new THREE.Matrix3();
@@ -214,9 +219,12 @@ App.World3dView = App.SmartView.extend({
 	},
 	
 	onDocumentMouseDown: function ( event ) {
-		with (this) {
+		with (this) { 
 			event.preventDefault();
-			var intersects = raycaster.intersectObjects( faceGroup.children, true );
+			var intersects = raycaster.intersectObjects( questionGroup.children, true );
+
+		
+			console.log('intersects', intersects);
 			if ( intersects.length > 0 ) {
 				intersector = getRealIntersector( intersects );
 				// delete cube
@@ -226,9 +234,11 @@ App.World3dView = App.SmartView.extend({
 					}
 				// create cube
 				} else {
-					intersector = getRealIntersector( intersects );
+					intersector = getRealIntersector(intersects);
 					if ( intersector ) {
-						this.faceGroup.tryAddHere(intersector);
+						//this.faceVoxelGroup.tryAddHere(intersector);
+						this.questionVoxelGroup.tryAddHere(intersector);
+ 						//console.log('this.faceGroup', this.faceGroup);
 					}	
 				}
 			}
@@ -282,26 +292,23 @@ App.World3dView = App.SmartView.extend({
 		}
 	},
 	
-	redraw: function(dur) {
-		
-		if (typeof this['faceGroup'] != 'undefined') {
-			with (this) {
-				
-				raycaster = pickProjector.pickingRay( mouse2D.clone(), camera )	;
-				var intersects = raycaster.intersectObjects( faceGroup.children, true );
-
-				if ( intersects.length > 0 ) {
-					intersector = getRealIntersector( intersects );
-					if ( intersector ) {
-						setVoxelPosition( intersector );
-						this.cursor3D.position = voxelPosition;
-						this.faceVoxelGroup.show(intersector);
+	redraw: function (dur) {
+		var rayIntersectsObjects;
+		raycaster = this.pickProjector.pickingRay( this.mouse2D.clone(), this.camera );
+		with (this) {
+			for (var i = 0; i < intersectable.length; i++) {
+				rayIntersectsObjects = raycaster.intersectObjects( intersectable[i].children, true )
+				if ( rayIntersectsObjects.length > 0 ) {
+					if ( intersector = getRealIntersector( rayIntersectsObjects ) ) {
+						cursor3D.position = setVoxelPosition( intersector );
+						questionVoxelGroup.show(intersector);
 					}
 				}
-				
-				renderer.render( scene, camera);
 			}
-		}			
+		}
+		
+		this.renderer.render( this.scene, this.camera);
+				
 		if (this.isControls) {	
 			this.controls.update();
 		}
@@ -309,19 +316,19 @@ App.World3dView = App.SmartView.extend({
 			this.rendererStats.update(this.renderer);
 		}
 	},
-	getRealIntersector: function( intersects ) {
-		for( i = 0; i < intersects.length; i++ ) {
-			intersector = intersects[ i ];
-			console.log('faceGroup', this.faceGroup);
-			if ( 	intersector.object != this.faceGroup.rollOverMesh ) {
-				return intersector;
+	getRealIntersector: function( arayIntersectsObjects ) {
+		for( i = 0; i < arayIntersectsObjects.length; i++ ) {
+			rayIntObj = arayIntersectsObjects[ i ];
+			if ( this.questionVoxelGroup && this.questionVoxelGroup.rollOverMesh && rayIntObj.object != this.questionVoxelGroup.rollOverMesh ) {
+				return rayIntObj;
+			} else if ( this.faceVoxelGroup && this.faceVoxelGroup.rollOverMesh && rayIntObj.object != this.faceVoxelGroup.rollOverMesh  ) {
+				return rayIntObj;
 			}
 		}
 		return null;
 	},
 	setVoxelPosition: function ( intersector ) {
 		with (this) {	
-			
 			//normalMatrix was new Matrix3()
 			normalMatrix.getNormalMatrix( intersector.object.matrixWorld );
 			tmpVec.copy( intersector.face.normal );
@@ -339,6 +346,7 @@ App.World3dView = App.SmartView.extend({
 	willDestroyElement: function () {
 		//this.isAnimating = false;
 		this.faceVoxelGroup.cleanup();
+		this.questionVoxelGroup.cleanup();
 		this.tryIntersect = [];
 		
 		//this.$el.detach($(this.renderer.domElement))
@@ -361,7 +369,7 @@ App.World3dView = App.SmartView.extend({
 		this.normalMatrix = null;
 		this.tcanvas = null;
 		this.faceVoxelGroup = null;
-		this.questionGroup = null;
+		this.questionVoxelGroup = null;
 
 		this._super();
 		
