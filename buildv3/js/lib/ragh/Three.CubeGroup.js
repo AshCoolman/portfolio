@@ -19,8 +19,8 @@ var CubeGroup = {
 		this.getMap();
 	},
 
-	show: function (intersector) {
-		var v0 = this.getFacePoint(intersector);
+	show: function (aintersectorObject) {
+		var v0 = this.getFacePoint(aintersectorObject);
 		this.rollOverMesh.position.copy(v0);
 	},
 	

@@ -264,7 +264,7 @@ But above all:
 				{{#if isLink}}</a>{{/if}}
 				{{#if isRemoveButton}}
 				<div class="remove-button-holder">
-					<span><a><i class="icon-remove-sign remove-button"{{action 'doRemoveClicked'}}></i></a></span>
+					<span><a><i class="icon-remove-sign remove-button"{{action 'doRemoveClicked'}}>close</i></a></span>
 				</div>
 				{{/if}}
 			{{/unless}}
