@@ -1,5 +1,5 @@
-if (typeof Object.createByPrototype !== 'function') {
-    Object.createByPrototype = function (o, initArg) {
+if (typeof Object.createFromPrototype !== 'function') {
+    Object.createFromPrototype = function (o, initArg) {
         function F() {}
         F.prototype = new o();
 		var newObj = new F();
@@ -19,8 +19,10 @@ var CubeGroup = function () {
 }
 
 CubeGroup.prototype = {
-	init: function (amap) {
-		this.group = this.createFromMap(amap);
+	init: function (aplan) {
+		this.group = this.createFromMap(aplan.imgMap);
+		this.group.position.x = aplan['x'] || 0;
+		this.label = aplan.label;
 	},
 
 	tryAddHere: function (intersector) {

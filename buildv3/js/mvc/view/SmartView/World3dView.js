@@ -6,6 +6,9 @@ App.World3dView = App.SmartView.extend({
 	materials: {},
 	textures: {},
 	VS: 10,
+	FACE_ASH: 'face-ash',
+	QUESTION_MARK: 'question-mark',
+	isQuestionMarkRotate: false,
 	instanceVarNameArr: [			
 		'renderer',
 		'camera',
@@ -43,7 +46,7 @@ App.World3dView = App.SmartView.extend({
 		this.set('normalMatrix',  null);
 		this.set('tmpVec',  null);
 		this.set('ignoreList',  []);
-		this.set('pixelObjectList',  []);
+		this.set('pixelObjectList',  {});
 		
 		var instanceVarNameArr = this.get('instanceVarNameArr'),
 			instanceVarObj = this.get('instanceVarObj');
@@ -54,16 +57,28 @@ App.World3dView = App.SmartView.extend({
 		return this;
 	},
 	
-	observingDoQuestionMarkRotate: function (val) {
-		if (val && !this.controls && this.instanceVarObj.camera) {
-			this.controls = this.createControls(this.instanceVarObj.camera);
-		} else if (!val && this.controls) {
-			this.controls = null;
+	
+	observingDoQuestionMarkRotate: function () {
+		var val = this.get('controller.isQuestionMarkRotating'),
+			instanceVarObj = this.get('instanceVarObj'),
+			pixelObjectList = instanceVarObj.pixelObjectList,
+			camera = instanceVarObj.camera;
+			
+		if (val && !this.isQuestionMarkRotate && camera && pixelObjectList[this.QUESTION_MARK] && this.el) {
+			console.log('OBSERVED', val, this.el);
+			this.isQuestionMarkRotate = Object.createFromPrototype(
+					ragh.THREE.Dragger, 
+					{	camera:camera, 
+						dragged: pixelObjectList[this.QUESTION_MARK].group, 
+						el: this.el});
+			
+		} else if (!val && this.isQuestionMarkRotate) {
+			this.isQuestionMarkRotate.destroy();
+			this.isQuestionMarkRotate = false;
 		}
-		console.log(val, 'observingDoQuestionMarkRotate', this.controls);
 		
 	}.observes('controller.isQuestionMarkRotating'),
-	
+
 	didInsertElement: function () {
 		this._super();
 		var instanceVarObj = this.get('instanceVarObj')
@@ -115,23 +130,21 @@ App.World3dView = App.SmartView.extend({
 		// Pixel Group
 		setTimeout( function (me, ainstanceVarObj) {
 			return  function () {
-				var plans = [ { img: App.PRELOADER.queue.getResult('face-ash-pixel'), x: 50 }, { img: App.PRELOADER.queue.getResult('question-pixel'), x: 450 }];
+				var plans = [ 
+					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('face-ash-pixel')), x: 50, label: me.FACE_ASH }, 
+					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('question-pixel')), x: 450, label: me.QUESTION_MARK }];
 				
 				for (var p = 0; p < plans.length; p++) {
-					
-					
-					var imgMap = me.createFromImage(plans[p]['img']);
-					var pixelatedObj = Object.createByPrototype(CubeGroup, imgMap),
+					var pixelatedObj = Object.createFromPrototype(CubeGroup, plans[p]),
 						pixelatedObjGroup = pixelatedObj.group;
 					
- 					console.log('pixelatedObj', pixelatedObj);
+ 					console.log('pixelatedObj', plans[p].label,  pixelatedObj);
 					ainstanceVarObj.ignoreList.push(pixelatedObj.rollOverMesh);
-					pixelatedObjGroup.position.x = plans[p]['x'] || 0;
 					ainstanceVarObj.scene.add(pixelatedObjGroup);
-					ainstanceVarObj.pixelObjectList.push(pixelatedObj);
+					ainstanceVarObj.pixelObjectList[plans[p].label] = pixelatedObj;
 				}
+					console.log('pushed voxel groups', ainstanceVarObj);
 				me.tryStart(ainstanceVarObj);
-				console.log('pushed voxel groups', me.pixelObjectList.length);
 			}
 		}(this, instanceVarObj), 0);
 		this.resize();
@@ -150,6 +163,7 @@ App.World3dView = App.SmartView.extend({
 		return rendererStats;
 	},
 	
+	
 	createControls: function (acamera) {
 
 		var controls = new THREE.TrackballControls( acamera );
@@ -166,10 +180,10 @@ App.World3dView = App.SmartView.extend({
 		return controls;
 	},
 	
-	tryStart: function (apixelObjectList) {
-		console.log('tryStart', apixelObjectList);
+	tryStart: function (ainstanceVarObj) {
+		console.log('tryStart', ainstanceVarObj.pixelObjectList[this.FACE_ASH], ainstanceVarObj.pixelObjectList[this.QUESTION_MARK], ainstanceVarObj.pixelObjectList);
 		
-		if (apixelObjectList.pixelObjectList.length == 2) {
+		if (ainstanceVarObj.pixelObjectList[this.FACE_ASH] && ainstanceVarObj.pixelObjectList[this.QUESTION_MARK]) {
 			var rafFunction = function (me) {
 				var animloop = function (time) {
 					var dur = (this.lastRequestAnimationFrame) ? time - this.lastRequestAnimationFrame : 0;
@@ -181,6 +195,7 @@ App.World3dView = App.SmartView.extend({
 			}(this);
 
 			this.set('raf', window.requestAnimationFrame(rafFunction));
+			
 			this.el.addEventListener( 'mousemove', function(me) {
 				return function (event) {
 					me.onDocumentMouseMove(event);
@@ -338,20 +353,26 @@ App.World3dView = App.SmartView.extend({
 	
 	redraw: function (dur) {
 		var instanceVarObj = this.get('instanceVarObj');
+		
+		if (this.isQuestionMarkRotate) {
+			this.isQuestionMarkRotate.animate();
+		}
+		
 		with (instanceVarObj) {
 			var rayTouches,
 				touched,
 				pixelGroup;
 
 			ray = pickProjector.pickingRay( mouse2D.clone(), camera );
-			for (var i = 0; i < pixelObjectList.length; i++) {
+			for (var i in pixelObjectList) {
+				
 				pixelGroup = pixelObjectList[i]; 
 				rayTouches = ray.intersectObjects( pixelGroup.group.children, true )
 				if ( touched = this.testIsIgnored( rayTouches ) ) {
 					if ( i == 0) { cursor3D.position = this.setVoxelPosition(instanceVarObj, touched ); }
 					pixelGroup.show(touched);
 				}
-
+				
 
 			}
 			renderer.render( scene, camera );

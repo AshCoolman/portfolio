@@ -399,11 +399,12 @@ then I have the technical skills can be used to craft an answering experience.
 			echo "
 \"DEPTH: Creativity
 
+@actionOnRead=doRotateQuestionMark
 I am committed to creative thinking.
 It means discarding your 'first thoughts', and what seems 'obvious'.
 
 And knowing that somewhere there exists a simple and elegant solution...
-@actionOnRead=doRotateQuestionMark
+
 i.e. The big idea.
 
 \"";?>}}}
