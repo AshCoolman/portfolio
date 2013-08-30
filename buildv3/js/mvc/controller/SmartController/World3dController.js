@@ -5,6 +5,10 @@ App.World3dController = App.SmartController.extend({
 	doQuestionMarkRotate: function () {
 		console.log('controller knows it is rotate time')
 		this.set('isQuestionMarkRotating', true);
+	},
+	view_doQuestionMarkRotateDone: function () {
+		this.set('isQuestionMarkRotating', false);
+		this.send('doQuestionMarkRotateDone');		
 	}
 	
 })

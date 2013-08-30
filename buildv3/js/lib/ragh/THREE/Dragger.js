@@ -37,10 +37,8 @@ ragh.THREE.Dragger.prototype = {
 				me.windowHalfX = window.innerWidth / 2;
 				me.windowHalfY = window.innerHeight / 2;
 
-				me.camera.aspect = window.innerWidth / window.innerHeight;
 				me.camera.updateProjectionMatrix();
 
-				renderer.setSize( window.innerWidth, window.innerHeight );
 			}
 		}(this);
 
@@ -49,7 +47,6 @@ ragh.THREE.Dragger.prototype = {
 		this.onDocumentMouseDown = function( me ) {
 			return function (event) {
 				event.preventDefault();
-				console.log('mousedown', me.el)
 				me.el.addEventListener( 'mousemove', me.onDocumentMouseMove, false );
 				me.el.addEventListener( 'mouseup', me.onDocumentMouseUp, false );
 				me.el.addEventListener( 'mouseout', me.onDocumentMouseOut, false );
@@ -62,7 +59,7 @@ ragh.THREE.Dragger.prototype = {
 
 		this.onDocumentMouseMove = function( me ) {
 			return function( event ) {
-
+				
 				me.mouseX = event.clientX - me.windowHalfX;
 
 				me.targetRotation = me.targetRotationOnMouseDown + ( me.mouseX - me.mouseXOnMouseDown ) * 0.02;

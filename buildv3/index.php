@@ -398,14 +398,17 @@ then I have the technical skills can be used to craft an answering experience.
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php
 			echo "
 \"DEPTH: Creativity
-
 @actionOnRead=doRotateQuestionMark
 I am committed to creative thinking.
 It means discarding your 'first thoughts', and what seems 'obvious'.
 
 And knowing that somewhere there exists a simple and elegant solution...
+\"";?>}}}
 
-i.e. The big idea.
+
+			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php
+			echo "
+\"i.e. The big idea.
 
 \"";?>}}}
 

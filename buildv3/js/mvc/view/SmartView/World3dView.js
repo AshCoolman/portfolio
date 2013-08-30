@@ -354,8 +354,26 @@ App.World3dView = App.SmartView.extend({
 	redraw: function (dur) {
 		var instanceVarObj = this.get('instanceVarObj');
 		
-		if (this.isQuestionMarkRotate) {
-			this.isQuestionMarkRotate.animate();
+		if (this.isQuestionMarkRotate && this.isQuestionMarkRotate.dragged && this.isQuestionMarkRotate.dragged.rotation) {
+			var a180 = 1 * Math.PI,
+				a360 = 2 * Math.PI,
+				tolerance = 0.01,
+				targetRot = 2 * Math.PI * 0.75,
+				targetDif = this.isQuestionMarkRotate.dragged.rotation.y - targetRot;
+
+	        while (targetDif < -a180) targetDif += a360;
+	        while (targetDif > a180) targetDif -= a360;
+			targetDif = Math.round(1000*targetDif)/1000;
+			
+			
+			
+			if (Math.min(tolerance, targetDif) == tolerance) {
+				this.isQuestionMarkRotate.animate();
+			} else {
+				this.isQuestionMarkRotate.dragged.rotation.y = targetRot;
+				this.get('controller').send('view_doQuestionMarkRotateDone');
+			}
+			
 		}
 		
 		with (instanceVarObj) {
@@ -464,5 +482,3 @@ App.World3dView = App.SmartView.extend({
 		console.log('pixelObjectList ******', this.get('pixelObjectList'))
 	}
 });
-
-App.register('view: world-3d', App.World3dView, {singleton: false});

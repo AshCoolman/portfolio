@@ -10,12 +10,14 @@ App.Dimension3Route = Em.Route.extend({
 		//Application state 
 	},
 	deactivate: function () { 
-		this.subtitleController.deactivate();
+		this.subtitle1Controller.deactivate();
 		this.world3dController = null;
-		this.subtitleController = null;
+		this.subtitle1Controller = null;
 	},
 	setupController: function (controller, model) {
 		controller.set('content', model);
+		
+
 	},
 	renderTemplate: function () {
 		if ( App.PRELOADER.isLoaded ) {
@@ -35,7 +37,12 @@ App.Dimension3Route = Em.Route.extend({
 		SmartController_didInsertElement: function(acontroller, alabel) {
 			switch (alabel) {
 				case 'World3dController': this.world3dController = acontroller;  break;
-				case 'SubtitleController': this.subtitleController = acontroller; break;
+				case 'SubtitleController': 
+					switch (acontroller.get('orderRead')) {
+						case '1': this.subtitle1Controller = acontroller; break;
+						case '2': this.subtitle2Controller = acontroller; break;
+					}
+					break;
 				default: /* console.log('++'+alabel);*/ break;
 			}
 		
@@ -46,16 +53,24 @@ App.Dimension3Route = Em.Route.extend({
 		doRotateQuestionMark: function () {
 			console.log('ROTATE TIME');
 			this.world3dController.doQuestionMarkRotate();
+		},
+		
+		doQuestionMarkRotateDone: function () {
+			this.subtitle1Controller.doRemoveClicked();
+	        this.subtitle2Controller.doSetupDraw();
 		}
 	},
 	tryStart: function () {
-        if (this.world3dController && this.subtitleController) {
+        if (this.world3dController && this.subtitle1Controller && this.subtitle2Controller) {
             this.doStart()
         }
     },
 	doStart: function (type, data) {
-		this.subtitleController.set('content', App.scriptModel); 
-        this.subtitleController.setup(this.subtitleController.get("content").scriptD3);
-        this.subtitleController.doSetupDraw();
+		this.subtitle1Controller.set('content', App.scriptModel); 
+		this.subtitle2Controller.set('content', App.scriptModel); 
+        this.subtitle1Controller.setup();
+        this.subtitle2Controller.setup();
+
+        this.subtitle1Controller.doSetupDraw();
     }
 })
