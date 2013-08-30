@@ -233,7 +233,7 @@ Ember.Handlebars.registerHelper('renderWithVars', function(name, contextString, 
 
 App = Ember.Application.create({
 	DEBUG: false,
-	static_preloader: {},
+	PRELOADER: {},
 	scriptModel: null,
 	rootElement:$('.app')[0],
 	ready: function () {

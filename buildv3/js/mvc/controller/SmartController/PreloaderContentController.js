@@ -4,7 +4,7 @@ App.PreloaderContentController = App.SmartController.extend({
 	isLoadedList: [],
 	queue: {},
 	view_didInsertElement: function(aview) {
-		App.static_preloader = this;
+		App.PRELOADER = this;
 		this._super(aview);
 		this.queue = new createjs.LoadQueue();
 		this.queue.installPlugin(createjs.Sound);
@@ -31,7 +31,7 @@ App.PreloaderContentController = App.SmartController.extend({
 		    {id: "test", src:"img/test.png"},  
 		  	{id: "copy", src:"txt/copy.txt"+(App.DEBUG ? '?'+Math.random() : '')},
 			{id: "face-ash-pixel", src:'img//face-ash-pixel.png'},
-			{id: "qm-pixel", src:'img//qm-pixel.png'},
+			{id: "question-pixel", src:'img//question-pixel.png'},
 			{id: "face-ash", src:'img//face-ash.png'},
 			{id: "brain", src:'img//brain.png'},
 			{id: "cog", src:'img/cog.png'}

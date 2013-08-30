@@ -6,13 +6,68 @@ App.World3dView = App.SmartView.extend({
 	materials: {},
 	textures: {},
 	VS: 10,
-	isControls:false,
-	scene:undefined,
-	renderer:undefined,
-	ignoreList: [],
-	pixelGroupList: [],
+	instanceVarNameArr: [			
+		'renderer',
+		'camera',
+		'isControls',
+		'controls',
+		'cursor3D',
+		'mouse2D',
+		'pickProjector',
+		'ray',
+		'rayCaster',
+		'scene',
+		'lastRequestAnimationFrame',
+		'voxelPosition',
+		'tmpVec',
+		'normalMatrix',
+		'tcanvas',
+		'ignoreList',
+		'pixelObjectList'
+	],  		
+	instanceVarObj: {},
+	init: function () {
+		this._super();
+		
+		console.log('init');
+		this.set('isControls', false);
+		this.set('scene', null);
+		this.set('renderer', null);
+		this.set('rendererStats', null);
+		this.set('camera', null);
+		this.set('controls', null);
+		this.set('cursor3D',  null);
+		this.set('mouse2D', null);
+		this.set('pickProjector', null);
+		this.set('voxelPosition',  null);
+		this.set('normalMatrix',  null);
+		this.set('tmpVec',  null);
+		this.set('ignoreList',  []);
+		this.set('pixelObjectList',  []);
+		
+		var instanceVarNameArr = this.get('instanceVarNameArr'),
+			instanceVarObj = this.get('instanceVarObj');
+		for (var n = 0; n < instanceVarNameArr.length; n++) {
+			instanceVarObj[instanceVarNameArr[n]] = this.get(instanceVarNameArr[n]);
+		}
+		this.set('instanceVarObj', instanceVarObj);
+		return this;
+	},
+	
+	observingDoQuestionMarkRotate: function (val) {
+		if (val && !this.controls && this.instanceVarObj.camera) {
+			this.controls = this.createControls(this.instanceVarObj.camera);
+		} else if (!val && this.controls) {
+			this.controls = null;
+		}
+		console.log(val, 'observingDoQuestionMarkRotate', this.controls);
+		
+	}.observes('controller.isQuestionMarkRotating'),
+	
 	didInsertElement: function () {
-		var WIDTH = 400,
+		this._super();
+		var instanceVarObj = this.get('instanceVarObj')
+			WIDTH = 400,
 			HEIGHT = 300,
 			VIEW_ANGLE = 45,
 			ASPECT = WIDTH / HEIGHT,
@@ -20,21 +75,20 @@ App.World3dView = App.SmartView.extend({
 			FAR = 10000;
 			
 		App.world3d = this;
-		with (this) {
-			_super(); 
+		
+		with (instanceVarObj) {
+			this._super(); 
 			scene = new THREE.Scene();
 			renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true });
-			$el.append(renderer.domElement);
+			this.$el.append(renderer.domElement);
 			$(renderer.domElement).addClass('world-3d-renderer');
-			rendererStats = tryCreateRenderStats();
+			//rendererStats = tryCreateRenderStats();
 
 			// +Camera	
 			camera = new THREE.OrthographicCamera( WIDTH / - 2, WIDTH / 2, HEIGHT / 2, HEIGHT / - 2, 1, 5000 );
 			camera.position.set(WIDTH / 2, 0, 1000);
 			scene.add(camera);
 
-			// +Controls
-			controls = tryCreateControls();
 
 			// +Lighting
 			scene.add( new THREE.AmbientLight(0x333333).position.copy(new THREE.Vector3(0, 0, 50)) );
@@ -50,33 +104,36 @@ App.World3dView = App.SmartView.extend({
 
 			mouse2D = new THREE.Vector3( 0, 10000, 0.5 );
 			pickProjector = new THREE.Projector();
+			
+			// Some temp variables 
+			voxelPosition = new THREE.Vector3();
+			normalMatrix = new THREE.Matrix3();
+			tmpVec = new THREE.Vector3();
+			
  		}
-
-		// Pixel Groups
-		var faceImg = App.static_preloader.queue.getResult('face-ash-pixel');
-		var qmImg = App.static_preloader.queue.getResult('qm-pixel');
-		setTimeout( function (me) {
-			return  function () {
-				me.faceVoxelGroup = me.createFromImage(faceImg);
-				me.faceGroup = me.faceVoxelGroup.group;
-				me.faceGroup.position.x = 50;
-				me.ignoreList.push(me.faceVoxelGroup.rollOverMesh);
-				me.pixelGroupList.push(me.faceVoxelGroup);
-				
-				me.questionVoxelGroup = me.createFromImage(qmImg); 
-				me.questionGroup = me.questionVoxelGroup.group;
-				me.questionGroup.position.x = 450;
-				me.ignoreList.push(me.questionVoxelGroup.rollOverMesh);
-				me.pixelGroupList.push(me.questionVoxelGroup);
-				me.tryStart();
-			}
-		}(this), 100);
-
-		// Some temp variables 
-		this.voxelPosition = new THREE.Vector3();
-		this.normalMatrix = new THREE.Matrix3();
-		this.tmpVec = new THREE.Vector3();
 		
+		// Pixel Group
+		setTimeout( function (me, ainstanceVarObj) {
+			return  function () {
+				var plans = [ { img: App.PRELOADER.queue.getResult('face-ash-pixel'), x: 50 }, { img: App.PRELOADER.queue.getResult('question-pixel'), x: 450 }];
+				
+				for (var p = 0; p < plans.length; p++) {
+					
+					
+					var imgMap = me.createFromImage(plans[p]['img']);
+					var pixelatedObj = Object.createByPrototype(CubeGroup, imgMap),
+						pixelatedObjGroup = pixelatedObj.group;
+					
+ 					console.log('pixelatedObj', pixelatedObj);
+					ainstanceVarObj.ignoreList.push(pixelatedObj.rollOverMesh);
+					pixelatedObjGroup.position.x = plans[p]['x'] || 0;
+					ainstanceVarObj.scene.add(pixelatedObjGroup);
+					ainstanceVarObj.pixelObjectList.push(pixelatedObj);
+				}
+				me.tryStart(ainstanceVarObj);
+				console.log('pushed voxel groups', me.pixelObjectList.length);
+			}
+		}(this, instanceVarObj), 0);
 		this.resize();
 		
 	},
@@ -85,20 +142,17 @@ App.World3dView = App.SmartView.extend({
 		if (!App.DEBUG) {
 			return null;
 		}
-		var rendererStats  = new THREEx.RendererStats();
+		var rendererStats = new THREEx.RendererStats();
 		rendererStats.domElement.style.position = 'absolute';
 		rendererStats.domElement.style.left = '0px';
-		rendererStats.domElement.style.bottom   = '0px';
+		rendererStats.domElement.style.bottom = '0px';
 		document.body.appendChild( rendererStats.domElement );
 		return rendererStats;
 	},
 	
-	tryCreateControls: function () {
-		
-		if (this.isControls) {
-			return null
-		}
-		var controls = new THREE.TrackballControls( camera );
+	createControls: function (acamera) {
+
+		var controls = new THREE.TrackballControls( acamera );
 		controls.target.set( 0, 0, 0 )
 		controls.rotateSpeed = 1.0;
 		controls.zoomSpeed = 1.2;
@@ -108,13 +162,15 @@ App.World3dView = App.SmartView.extend({
 		controls.staticMoving = true;
 		controls.dynamicDampingFactor = 0.0;
 		controls.keys = [ 65, 83, 68 ]; //a s d
-		controls.addEventListener( 'change', function(me) { return function() { this.redraw; } }(this) );	
+		controls.addEventListener( 'change.world3d', function(me) { return function() { this.redraw; } }(this) );	
 		return controls;
 	},
 	
-	tryStart: function () {
-		if (this.questionVoxelGroup && this.faceVoxelGroup) {
-			var rafFunction = function(me) {
+	tryStart: function (apixelObjectList) {
+		console.log('tryStart', apixelObjectList);
+		
+		if (apixelObjectList.pixelObjectList.length == 2) {
+			var rafFunction = function (me) {
 				var animloop = function (time) {
 					var dur = (this.lastRequestAnimationFrame) ? time - this.lastRequestAnimationFrame : 0;
 					this.lastRequestAnimationFrame = time;
@@ -150,7 +206,8 @@ App.World3dView = App.SmartView.extend({
 		}
 	},
 	createFromImage: function (img, groupName, pixelWidth, pixelHeight) {
-		var group = new THREE.Object3D();
+		var group = new THREE.Object3D(),
+			instanceVarObj = this.get('instanceVarObj');
 		this.$el.append('<canvas class="temp">');
 		this.$tcanvas = $('canvas.temp', this.$el).css('display', 'none')
 		this.tcanvas = this.$tcanvas[0];
@@ -171,7 +228,7 @@ App.World3dView = App.SmartView.extend({
 				ctx=c.getContext("2d"),
 				imgData,
 				id;
-		
+			console.log(img)
 			ctx.drawImage( img, 0, 0 );
 			imgData = ctx.getImageData( 0, 0, w, h );
 			id = imgData.data;
@@ -188,21 +245,20 @@ App.World3dView = App.SmartView.extend({
 			}
 			this.$tcanvas = this.tcanvas = null;
 			$('canvas', this.$el).remove('.temp');
-			var voxelGroup = Object.create(CubeGroup);
-			this.scene.add(group = voxelGroup.createFromMap(map));
-			console.log('voxelGroup', voxelGroup)
-			return voxelGroup;
+			return map;
 		}	
 	},
 	
 	onDocumentMouseMove: function ( event ) {
 		event.preventDefault();
+		
+		var instanceVarObj = this.get('instanceVarObj');
 		var perc = ( event.clientX / window.innerWidth )
 			if (!window.evented) {
 				window.evented = true;
 			}
-		this.mouse2D.x = ( event.layerX / this.w) * 2 - 1;
-		this.mouse2D.y = - ( event.layerY / this.h ) * 2 + 1;
+		instanceVarObj.mouse2D.x = ( event.layerX / this.w) * 2 - 1;
+		instanceVarObj.mouse2D.y = - ( event.layerY / this.h ) * 2 + 1;
 	},
 	
 	onDocumentMouseDown: function ( event ) {
@@ -257,45 +313,46 @@ App.World3dView = App.SmartView.extend({
 			h = App.BREAKPOINT.HEIGHT_0;
 			tmpbgColor = "rgba(255, 200, 200, "+ (trails ? 1 / trails : 1) + ")";
 		}
-
-		$(renderer.domElement).attr( { width: w+'px' , height: h+'px'  } );
-		/*
-		if (App.DEBUG) {
-			$canvas.css( 'box-shadow', 'inset -1px -1px '+ tmpbgColor );
+		
+		var instanceVarObj = this.get('instanceVarObj');
+		
+		with (instanceVarObj) {
+			$(renderer.domElement).attr( { width: w+'px' , height: h+'px'  } );
+			renderer.setSize( w, h );
+			camera.left = -w/2;
+			camera.right = w/2;
+			camera.top = h/2;
+			camera.bottom = -h/2;	
+			camera.position.set(200, -h/2, 1000);
+		    camera.updateProjectionMatrix();
+			if (isControls) {
+				controls.handleResize();
+			}
 		}
-		*/
-		renderer.setSize( w, h );
-		camera.left = -w/2;
-		camera.right = w/2;
-		camera.top = h/2;
-		camera.bottom = -h/2;	
-		camera.position.set(200, -h/2, 1000);
-	    camera.updateProjectionMatrix();
+
 	
 		this.w = w;
 		this.h = h;
-		if (this.isControls) {
-			this.controls.handleResize();
-		}
+
 	},
 	
 	redraw: function (dur) {
-		with (this) {
+		var instanceVarObj = this.get('instanceVarObj');
+		with (instanceVarObj) {
 			var rayTouches,
 				touched,
 				pixelGroup;
 
 			ray = pickProjector.pickingRay( mouse2D.clone(), camera );
-			for (var i = 0; i < pixelGroupList.length; i++) {
-				pixelGroup = pixelGroupList[i];
-				if (typeof pixelGroup.group == 'null') {
-
-				}
+			for (var i = 0; i < pixelObjectList.length; i++) {
+				pixelGroup = pixelObjectList[i]; 
 				rayTouches = ray.intersectObjects( pixelGroup.group.children, true )
-				if ( touched = testIsIgnored( rayTouches ) ) {
-					if ( i == 0) { cursor3D.position = setVoxelPosition( touched ); }
+				if ( touched = this.testIsIgnored( rayTouches ) ) {
+					if ( i == 0) { cursor3D.position = this.setVoxelPosition(instanceVarObj, touched ); }
 					pixelGroup.show(touched);
 				}
+
+
 			}
 			renderer.render( scene, camera );
 			if (isControls) { controls.update(); }
@@ -314,8 +371,8 @@ App.World3dView = App.SmartView.extend({
 		}
 		return null;
 	},
-	setVoxelPosition: function ( aintersector ) {
-		with (this) {	
+	setVoxelPosition: function ( ime, aintersector ) {
+		with (ime) {	
 			normalMatrix.getNormalMatrix( aintersector.object.matrixWorld );
 			tmpVec.copy( aintersector.face.normal );
 			tmpVec.applyMatrix3( normalMatrix ).normalize();
@@ -330,49 +387,61 @@ App.World3dView = App.SmartView.extend({
 		this.scene.add(obj3d);
 	},
 	willDestroyElement: function () {
-		//this.isAnimating = false;
+		console.log('willDestroyElement 1', this.get('instanceVarObj'));
+		var instanceVarObj = this.get('instanceVarObj');
 		App.world3d = null;
-		with (this) {
+		console.log('willDestroyElement 2');
+
+		
+		with (instanceVarObj) {
+			console.log('scene', scene);
 			
-			_super();
-			if (isControls) {
-				controls.removeEventListener( 'change');
+			
+			for (var pg = 0; pg < pixelObjectList.length; pg++) {
+				pixelObjectList[pg].cleanUp();
+				scene.remove(pixelObjectList[pg].group);
 			}
-			faceVoxelGroup.cleanup();
-			questionVoxelGroup.cleanup(); 
-			window.cancelAnimationFrame(get('raf'));
-			el.removeEventListener('mousemove');
-			el.removeEventListener('mousedown');
-			$(window).unbind('resize.world3d');
+			
+			for (var sc = 0; sc < scene.__objects.length; sc++) {
+				var obj = scene.__objects.length;
+			    scene.remove(obj);                                                                                     
+			    if (obj.geometry) {                                                                                    
+			      obj.geometry.dispose();                                                                              
+			    }                                                                                                      
+			    if (obj.material) {                                                                                    
+			      if (obj.material instanceof THREE.MeshFaceMaterial) {                 
+			        $.each(obj.material.materials, function(idx, obj) {                 
+			          obj.dispose();                                                                                   
+			        });                                                                                                
+			      } else {                                                                                             
+			        obj.material.dispose();                                                                            
+			      }                                                                                                    
+			    }                                                                                                      
+			    if (obj.dispose) {                                                                                     
+			      obj.dispose();                                                                                       
+			    }
+			}
+ 
+			
+			if (controls) {
+				controls.removeEventListener( 'change.world3d');
+			}
 			renderer.domElement.remove();
-			console.log('pixelGroupList ******', pixelGroupList.length)
+		}	
+		for (var i = 0; i < instanceVarObj.length; i++) {
+			this.set(instanceVarObj[i], null);
 		}
 		
-		var cleanUpVars = [			
-			'ignoreList',
-			'pixelGroupList',
-			'renderer',
-			'camera',
-			'controls',
-			'cursor3D',
-			'mouse2D',
-			'pickProjector',
-			'scene',
-			'lastRequestAnimationFrame',
-			'voxelPosition',
-			'tmpVec',
-			'normalMatrix',
-			'tcanvas',
-			'faceVoxelGroup',
-			'questionVoxelGroup'
-		];
 		
-		for (var v = 0; v < cleanUpVars.length; v++) {
-			this.set(cleanUpVars[v], null)
-		}
+		this.set('instanceVarObj', null);
 		
+		window.cancelAnimationFrame(this.get('raf'));
+		this.set('raf', null)
+		this.el.removeEventListener('mousemove');
+		this.el.removeEventListener('mousedown');
+		$(window).unbind('resize.world3d');
+		console.log('pixelObjectList ******', this.get('pixelObjectList'))
 	}
 });
 
-
-
+App.register('view: world-3d', App.World3dView, {singleton: false});

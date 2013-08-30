@@ -33,7 +33,7 @@ App.Dimension2Route = Em.Route.extend({
 		controller.set('content', model);
 	},
 	renderTemplate: function () {
-		if ( App.static_preloader.isLoaded ) {
+		if ( App.PRELOADER.isLoaded ) {
 			this.render('dimension2');
 	     	this.render("nav-list", {outlet: "nav-list"});
 		} else {

@@ -18,9 +18,9 @@ App.ScriptModel = Em.Object.extend({
 	},
 	scriptIndex	: '',
 	scriptD1: '',
-	wpm: 999||280,
-	editDelay: 120 || 1200,
-	newLineDelay: 80||800,
+	wpm: false&&999||280,
+	editDelay: false&&120 || 1200,
+	newLineDelay: false&&80||800,
 	progress: 0.0,
 	subtitleText: function() {
 		console.log('computer prop subtitleText')

@@ -40,7 +40,7 @@ App.IndexRoute = Em.Route.extend({
 		}
 	},
 	renderTemplate: function() { 
-		if ( App.static_preloader ? App.static_preloader.isLoaded : false ) {
+		if ( App.PRELOADER ? App.PRELOADER.isLoaded : false ) {
 			this.render('index');
 	     	this.render("nav-list", {outlet: "nav-list"});
 		} else {

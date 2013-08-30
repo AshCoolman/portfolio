@@ -1,35 +1,50 @@
-if (typeof Object.create !== 'function') {
-    Object.create = function (o) {
+if (typeof Object.createByPrototype !== 'function') {
+    Object.createByPrototype = function (o, initArg) {
         function F() {}
-        F.prototype = o;
-        return new F();
+        F.prototype = new o();
+		var newObj = new F();
+		if (newObj.init) {
+			newObj.init(initArg);
+		}
+        return newObj;
     };
 }
 
-var CubeGroup = {
-	isMerge: false,
-	rollOver: null,
-	SIZE: 30,
-	materialsDict: {},
-	group:null,
-	tryAddHere: function (intersector) {
-		var v0 = this.getFacePoint(intersector);
-		this.rollOverMesh.position.copy(v0);
-		this.createCube(v0.x, v0.y, v0.z, {});
-		this.getMap();
+var CubeGroup = function () {
+	this.isMerge = false;
+	this.rollOver = null;
+	this.SIZE = 30;
+	this.materialsDict = {};
+	this.group = null;
+}
+
+CubeGroup.prototype = {
+	init: function (amap) {
+		this.group = this.createFromMap(amap);
 	},
 
-	show: function (aintersectorObject) {
-		var v0 = this.getFacePoint(aintersectorObject);
+	tryAddHere: function (intersector) {
+		/***
+		var v0 = this.getFacePoint(intersector, this.SIZE);
 		this.rollOverMesh.position.copy(v0);
+		this.createCube(this.SIZE, v0.x, v0.y, v0.z, {}, this.materialsDict, this.group, this.geo, this.materials, this.isMerge );
+		this.getMap();
+		*/
+	},
+
+	show: function (intersector) {
+		
+		var v0 = this.getFacePoint(intersector, this.SIZE);
+		this.rollOverMesh.position.copy(v0);
+		
 	},
 	
-	getFacePoint: function ( intersector ) {
+	getFacePoint: function ( intersector, size) {
 		var v0 = new THREE.Vector3(),
 			v1 = new THREE.Vector3();
 		v0.copy( intersector.object.position );
 		v1.copy(intersector.face.centroid).normalize();
-		v1.multiplyScalar(this.SIZE);
+		v1.multiplyScalar(size);
 		v0.add(v1);
 		return v0;
 	},
@@ -39,15 +54,19 @@ var CubeGroup = {
 			throw 'CubeGroup.createFromMap() passed "amap" parameter is falsey';
 		}
 		var sz = this.SIZE,
-			group = this.group = new THREE.Object3D(),
 			maxX = 0, 
 			maxY = 0, 
-			maxZ = 0.
-			map = (amap ? amap : this.defaultMap);
+			maxZ = 0,
+			group = new THREE.Object3D(),
+			map = (amap ? amap : this.defaultMap),
+			materials,
+			geo,
+			mesh,
+			rollOverMesh;
 			
 		if (this.isMerge) {
-			this.materials=[];
-			this.geo = new THREE.Geometry();
+			materials=[];
+			geo = new THREE.Geometry();
 		}
 		
 		for (var xs = 0; xs < map.length; xs++) {
@@ -59,80 +78,72 @@ var CubeGroup = {
 						maxX = Math.max(maxX, xs);
 						maxY = Math.max(maxY, ys);
 						maxZ = Math.max(maxZ, zs);
-						this.createCube( xs*sz, -ys*sz, zs*sz, map[xs][ys][zs] );
+						this.createCube( this.SIZE, xs*sz, -ys*sz, zs*sz, map[xs][ys][zs], this.materialsDict, group, geo, materials, this.isMerge);
 					}
 				}
 			}
-		} 
-		if (this.isMerge) {
-		  
-		  this.mesh = new THREE.Mesh( this.geo, new THREE.MeshFaceMaterial(this.materials));
-			this.mesh.matrixAutoUpdate = false;
-			this.mesh.updateMatrix();
-			this.mesh.overdraw = false;
-			this.mesh.name = 'cubeGroup';
-	        group.add(this.mesh);
-	
 		}
+		
+		if (this.isMerge) {
+			mesh = new THREE.Mesh( this.geo, new THREE.MeshFaceMaterial(this.materials));
+			mesh.matrixAutoUpdate = false;
+			mesh.updateMatrix();
+			mesh.overdraw = false;
+			mesh.name = 'cubeGroup';
+	        group.add(mesh);
+		}
+		
 		group.position.set(sz*(0.5), sz*(-0.5), 0);
-		group.updateMatrix()
-		window.group = group
+		group.updateMatrix();
 		group.add( this.rollOverMesh = this.createRollOver() );
-		//group.add( this.plane = this.createPlane() ); 
-		//var tween = createjs.Tween.get(this.rollOverMesh.rotation, {  loop: true }).to( { y:2 * Math.PI}, 2000 );		
-
-		//var tween = createjs.Tween.get(group.rotation, { loop: true }).to( { y: 2 * Math.PI,  z: Math.random()*2 * Math.PI }, 60000 );
-		
-		//group.add( this.plane );
+		this.group = group;
+		/*
+		this.map = map;
+		this.geo = geo;
+		this.mesh = mesh;
+		this.rollOverMesh = rollOverMesh;
+		*/
 		return group;
+	},
 
-	},
-	createPlane: function () {
-		var plane = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000, 20, 20 ), new THREE.MeshBasicMaterial( { color: 0x555555, wireframe: true } ) );
-		plane.rotation.z = Math.PI / 2;
-		return plane
-	},
+
 	createRollOver: function () {
-		
 		if (!this.isMerge) {
 			var rollOverGeo =  new THREE.CubeGeometry( this.SIZE, this.SIZE, this.SIZE, 1, 1, 1 ),
 				rollOverMesh = new THREE.Mesh( rollOverGeo, new THREE.MeshLambertMaterial( { color: 0x0000ff, opacity: 0.25, transparent: true} )),
 				rollOverLight = new THREE.PointLight(0x333399);
-
 			rollOverMesh.matrixAutoUpdate = true;
 			rollOverMesh.add( rollOverLight );
 			rollOverLight.intensity = 2;
 			return rollOverMesh 
 		}
-		
 		var rollOverLight = new THREE.PointLight(0x333399);
 		rollOverLight.intensity = 2;
 		return rollOverLight;
 	},
 	
-	createCube: function (x, y, z, data) {
-		var mesh, 
-			sz = this.SIZE,
-			geo = new THREE.CubeGeometry( sz, sz, sz, 1, 1, 1 ),
-			//geo = new THREE.SphereGeometry( sz, 1, 1 ),
-			color = this.materialsDict[data.color];
+	createCube: function (aSIZE, x, y, z, data, amaterialsDict, agroup, ageo, amaterials, asisMerge) {
+		var sz = aSIZE,
+			color = amaterialsDict[data.color],
+			mesh, 
+			geo = new THREE.CubeGeometry( sz, sz, sz, 1, 1, 1 );
+			
 			
 		if (!this.materialsDict[data.color]) {
 			this.materialsDict[data.color] = color = new THREE.MeshLambertMaterial({color: data.color});
 		}
-		if (!this.isMerge) {	
-			
+		if (!asisMerge) {	
 			THREE.GeometryUtils.merge(geo, new THREE.Geometry());
 			mesh = new THREE.Mesh( geo, color);
 			mesh.position = new THREE.Vector3( x, y, z);
-			this.group.add( mesh );
+			agroup.add( mesh );
 		} else {
 			for(var i = 0 ; i < geo.vertices.length; i++) {
 				geo.vertices[i].add (new THREE.Vector3( x, y, z));
 			}
-			THREE.GeometryUtils.merge(this.geo, geo, this.materials.length);
+			THREE.GeometryUtils.merge(ageo, geo, amaterials.length);
 			for (var b=0; b<6; b++) {
-				this.materials.push( color);
+				amaterials.push( color);
 			}
 		}
 		return mesh;
@@ -155,13 +166,20 @@ var CubeGroup = {
 		}
 		//console.log('EXPORT\n', JSON.stringify(amap));
 	},
-	cleanup: function() {
-			this.group = null;
-			this.materials = [];
+	cleanUp: function() {
+		
+			this.materials = null;
 			this.geo = null;
 			this.mesh = null;
 			this.rollOverMesh = null;
-			this.materialsDict = {};
+			this.group = null;
+				
+			this.materials = null;
+			this.geo = null;
+			this.mesh = null;
+			this.rollOverMesh = null;
+			this.group = null;
+			this.materialsDict = null;
 	}
 }
 

@@ -18,7 +18,7 @@ App.Dimension3Route = Em.Route.extend({
 		controller.set('content', model);
 	},
 	renderTemplate: function () {
-		if ( App.static_preloader.isLoaded ) {
+		if ( App.PRELOADER.isLoaded ) {
 			this.render('dimension3');
 	     	this.render("nav-list", {outlet: "nav-list"});
 		} else {
@@ -41,7 +41,12 @@ App.Dimension3Route = Em.Route.extend({
 		
 			this.tryStart();	
 		},
-		SubtitleController_didInsertElement: function (acontroller, alabel) { }
+		SubtitleController_didInsertElement: function (acontroller, alabel) { },
+		
+		doRotateQuestionMark: function () {
+			console.log('ROTATE TIME');
+			this.world3dController.doQuestionMarkRotate();
+		}
 	},
 	tryStart: function () {
         if (this.world3dController && this.subtitleController) {
@@ -52,5 +57,5 @@ App.Dimension3Route = Em.Route.extend({
 		this.subtitleController.set('content', App.scriptModel); 
         this.subtitleController.setup(this.subtitleController.get("content").scriptD3);
         this.subtitleController.doSetupDraw();
-    },
+    }
 })

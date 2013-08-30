@@ -115,7 +115,7 @@ App.World3dView = App.SmartView.extend({
 		
 		this.resize();
 
-		var faceImg = App.static_preloader.queue.getResult('face-ash-pixel');
+		var faceImg = App.PRELOADER.queue.getResult('face-ash-pixel');
 		setTimeout( function (me) {
 			return  function() {
 				me.faceVoxelGroup = me.createFromImage(faceImg);
@@ -126,7 +126,7 @@ App.World3dView = App.SmartView.extend({
 		}(this), 100);
 	
 		/*
-		var qmImg = App.static_preloader.queue.getResult('qm-pixel');
+		var qmImg = App.PRELOADER.queue.getResult('question-pixel');
 		setTimeout( function (me) {
 			return  function() {
 				me.questionVoxelGroup = me.createFromImage(qmImg);

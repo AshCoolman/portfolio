@@ -403,7 +403,7 @@ I am committed to creative thinking.
 It means discarding your 'first thoughts', and what seems 'obvious'.
 
 And knowing that somewhere there exists a simple and elegant solution...
-
+@actionOnRead=doRotateQuestionMark
 i.e. The big idea.
 
 \"";?>}}}
