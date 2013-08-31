@@ -225,25 +225,32 @@ App.SubtitleController = App.SmartController.extend({
 					currentLine++;
 					currentPrintedLine++;
 					while (isEvents && srcLines[currentLine] && srcLines[currentLine][0] && srcLines[currentLine][0] == '@') {	
-						
 						var line = srcLines[currentLine].join('');
-						
 						if (line.indexOf('@=') == 0) {
-							
 							currentLine++;
-							var code = line.split(' ')[0].split('=')[1];
-							if (code.charAt(0) != '/') {
+							
+							var code = $('<div />').html( line.split(' ')[0].split('=')[1] ).text();
+							if (code.charAt(1) != '/') {
+								console.log(code.charAt(1), code);
+								
+								var closedVersion = code.split('');
+								closedVersion.splice(1, 0, '/');
+								closedVersion = closedVersion.join('');
+								
 								this.tagPositions.push({
-									lineOpened: currentLine, 
+									lineOpened: currentPrintedLine+1, 
 									wordOpened: 0, 
 									lineClosed: null,
 									wordClosed: null, 
 									code: code, 
+									expectedClosed: closedVersion,
 									isClosed: false
 								});
 								console.log('Opened '+code);
-								this.pendingClosingTags.push('/'+code);
+
+								this.pendingClosingTags.push( closedVersion );
 							} else {
+									console.log(code.charAt(1));
 								var mostRecentOpenTag;
 								
 								this.tagPositions.reverse();
@@ -254,17 +261,15 @@ App.SubtitleController = App.SmartController.extend({
 									}
 								}
 								this.tagPositions.reverse();
-								Em.assert('SubtitleController: Closing tag '+code+' supplied without opening tag', mostRecentOpenTag);
+								Em.assert( 'SubtitleController: Closing tag ' + code + ' supplied without opening tag', mostRecentOpenTag );
 								
-								console.log(code+'<- closed prev opened ->/'+mostRecentOpenTag.code);
-								Em.assert('SubtitleController: Tag mismatched in subtitle text. Got '+code+' expected /'+mostRecentOpenTag.code, code === '/'+mostRecentOpenTag.code);
+								console.log(code+'<- closed prev opened ->'+mostRecentOpenTag.code, mostRecentOpenTag.expectedClosed);
+								Em.assert('SubtitleController: Tag mismatched in subtitle text. Got '+code+' expected closed version of '+mostRecentOpenTag.code+':'+mostRecentOpenTag.expectedClosed, code === mostRecentOpenTag.expectedClosed);
 								
 								mostRecentOpenTag.isClosed = true;
-								mostRecentOpenTag.lineClosed = currentLine;
+								mostRecentOpenTag.lineClosed = currentPrintedLine;
 								mostRecentOpenTag.wordClosed = 0;
-								this.pendingClosingTags.reverse();
 								this.pendingClosingTags.pop();
-								this.pendingClosingTags.reverse();
 							}
 
 						} else if(line.indexOf('@action=') == 0) { 
@@ -285,8 +290,8 @@ App.SubtitleController = App.SmartController.extend({
 					printedLines[currentPrintedLine]='';
 					if ( (currentLine < srcLines.length) &&  ( srcLines[ currentLine].length > 0) ) {
 						
-						
-						var taggedLines = me.createTaggedLines(me.printedLines);
+						printedLines[currentPrintedLine] += srcLines[currentLine][currentChar];
+						var taggedLines = me.createTaggedLines(printedLines);
 						me.set('text', me.tagStart + taggedLines.join(me.tagMid)+me.tagCursor+me.tagEnd);
 						currentChar++;
 					}
@@ -318,11 +323,12 @@ App.SubtitleController = App.SmartController.extend({
 			var tag = this.tagPositions[t];
 			taggedLines[tag.lineOpened-1] = tag.code+taggedLines[tag.lineOpened-1];
 			if (tag.isClosed) {
-				taggedLines[tag.lineClosed] = taggedLines[tag.lineClosed]+'/'+tag.code;
+				taggedLines[tag.lineClosed-1] = taggedLines[tag.lineClosed-1]+tag.expectedClosed;
 			}
 		}
-		taggedLines[last] = taggedLines[last] + '';//this.pendingClosingTags.join('');
 		this.tagPositions.reverse();
+		taggedLines[last] = taggedLines[last] + ' ' + this.pendingClosingTags.join('');
+		
 		
 		return taggedLines;
 	},

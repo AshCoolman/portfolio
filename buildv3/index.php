@@ -168,6 +168,16 @@ htmlspecialchars("I have web development skills
 
  $d1copyB =  "\"" . 
 htmlspecialchars("<OBLIGATORY SKILL LIST>
+@=<ul>
+@=<li>
+(item)
+@=</li>
+    Javascript: JQuery, AJAX, nodejs, Ember, Handlebars, threejs (WebGL), Google Closure Library, Raphaeljs, Createjs, underscorejs etc
+@=</ul>
+    Flash: AS3, AS2, Flex, Flash Video etc
+    HTML: HTML5, CSS3, SVG, HTML5 Audio & Video, etc
+    Serverside: PHP, MySQL, Postgres, templating, etc
+    Programming Paradigms/Patterns: OOP, MCV, MVP etc
     Tools: LINT, SVN, Git etc
     General knowledge: 3d Math, Physics, Geo-location, CMS, API creation, Code documentation, Eclipse
 </OBLIGATORY SKILL LIST>
