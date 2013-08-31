@@ -56,8 +56,8 @@ App.InteractiveGridView = App.SmartView.extend({
 			grid = this.get('grid'),
 			plots = this.get('plots'),
 			attrs = [
-				{fill:'#CCCCCC', 'stroke-width': 5, 'stroke':'#666666', opacity: 0.5},
-				{fill:'#EEEEEE', 'stroke-width': 5, 'stroke':'#666666', opacity: 0.5}
+				{fill:'#CCCCCC', 'stroke-width': 5, 'stroke':'#595959', opacity: 0.5},
+				{fill:'#EEEEEE', 'stroke-width': 5, 'stroke':'#595959', opacity: 0.5}
 			],
 			attrsOver = [
 				{fill:'#444444', 'stroke-width': 1, 'stroke':'#999999', opacity: 1},
@@ -137,7 +137,7 @@ App.InteractiveGridView = App.SmartView.extend({
 			//console.log('created plot', plots[p])
 		}
 		
-		var coordX = raphaeljs.rect(0,0,6,h).attr({fill:'#666666', 'stroke-width':0});
+		var coordX = raphaeljs.rect(0,0,6,h).attr({fill:'#595959', 'stroke-width':0});
 		/*
 		var coordLabel = raphaeljs.text(coordX.width, h/2, '').attr({fill:'#669966', 'stroke-width':0, 'text-anchor': 'start', 'font-size':12});
 		

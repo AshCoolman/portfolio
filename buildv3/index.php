@@ -137,10 +137,15 @@
 		<!-- ROUTE INDEX -->
 		<script type="text/x-handlebars" data-template-name="index">		
 <?php
-$indexCopyA = "\"My name is Ashley Coleman.
-I'm probably just another name to you.
-But I wanted a way to convey the different dimensions that make-up who I am.
-So I made this website.
+$indexCopyA = "\"\\\"Ashley Coleman.\\\"
+My name does not tell you anything about me.
+If you want to get to know me it is the start.
+
+An origin.
+
+Now new points can be made.
+There are different dimensions to me.
+I made this website to show them.
 @actionOnRead=doSecondSubtitle\"";
 ?>
 			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php echo $indexCopyA; ?>}}}
@@ -163,7 +168,11 @@ htmlspecialchars("I have web development skills
 
  $d1copyB =  "\"" . 
 htmlspecialchars("<OBLIGATORY SKILL LIST>
+@=ul
+@=li
     Javascript: JQuery, AJAX, nodejs, Ember, Handlebars, threejs (WebGL), Google Closure Library, Raphaeljs, Createjs, underscorejs etc
+@=/li
+@=/ul
     Flash: AS3, AS2, Flex, Flash Video etc
     HTML: HTML5, CSS3, SVG, HTML5 Audio & Video, etc
     Serverside: PHP, MySQL, Postgres, templating, etc
@@ -257,18 +266,9 @@ But above all:
 		</script>
 
 		<!-- SUBTITLE -->
-		<script type="text/x-handlebars" data-template-name="subtitle">
-			{{#unless isRemoved}}
-				{{#if isLink}}<a {{action getActionEvent}}>{{/if}}
-					{{{text}}}
-				{{#if isLink}}</a>{{/if}}
-				{{#if isRemoveButton}}
-				<div class="remove-button-holder">
-					<span><a><i class="icon-remove-sign remove-button"{{action 'doRemoveClicked'}}>close</i></a></span>
-				</div>
-				{{/if}}
-			{{/unless}}
-		</script>
+		<script type="text/x-handlebars" data-template-name="subtitle">{{#unless isRemoved}}{{#if isLink}}<a {{action getActionEvent}}>{{/if}}{{{text}}}{{#if isLink}}</a>{{/if}}
+{{#if isRemoveButton}}<div class="remove-button-holder"><span><a><i class="icon-remove-sign remove-button"{{action 'doRemoveClicked'}}> close</i></a></span>
+</div>{{/if}}{{/unless}}</script>
 		
 		
 		<!-- ROUTE DIMENSION 2 -->

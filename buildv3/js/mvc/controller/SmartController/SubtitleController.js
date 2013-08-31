@@ -50,6 +50,7 @@ App.SubtitleController = App.SmartController.extend({
 	isForceFinish:false,
 	isCursor: true,
 	isLooping:false,
+	tagPositions:[],
 	isCursorObserver: function () {
 		if (this.get('isCursor')) {
 			this.set('tagCursor', '<img src="img/cursor.gif"/>');
@@ -217,9 +218,44 @@ App.SubtitleController = App.SmartController.extend({
 					currentChar = 0;
 					currentLine++;
 					currentPrintedLine++;
-					if (isEvents && srcLines[currentLine] && srcLines[currentLine][0] && srcLines[currentLine][0] == '@') {	
+					while (isEvents && srcLines[currentLine] && srcLines[currentLine][0] && srcLines[currentLine][0] == '@') {	
 						var line = srcLines[currentLine].join('');
-						if(line.indexOf('@action=') == 0) { 
+						
+						if(line.indexOf('@=') == 0) {
+							
+							currentLine++;
+							var code = line.split(' ')[0].split('=')[1];
+							if (code.charAt(0) != '/') {
+								this.tagPositions.push({
+									lineOpened: currentLine, 
+									wordOpened: 0, 
+									lineClosed: null,
+									wordClosed: null, 
+									code: code, 
+									isClosed: false
+								});
+								console.log('Opened '+code);
+							} else {
+								var mostRecentOpenTag;
+								
+								this.tagPositions.reverse();
+								for (var t = 0; t < this.tagPositions.length; t++ ) {
+									if (!this.tagPositions[t].isClosed) {
+										mostRecentOpenTag = this.tagPositions[t];
+									}
+								}
+								this.tagPositions.reverse();
+								Em.assert('SubtitleController: Closing tag '+code+' supplied without opening tag', mostRecentOpenTag);
+
+								Em.assert('SubtitleController: Tag mismatched in subtitle text. Got '+code+' expected /'+mostRecentOpenTag.code, code === '/'+mostRecentOpenTag.code);
+								console.log(code+'<- closed prev opened ->'+mostRecentOpenTag.code);
+								mostRecentOpenTag.isClosed = true;
+								mostRecentOpenTag.lineClosed = currentLine;
+								mostRecentOpenTag.wordClosed = 0;
+								
+							}
+
+						} else if(line.indexOf('@action=') == 0) { 
 							var action = line.split(' ')[0].split('=')[1];
 							currentLine++;
 						} else if(line.indexOf('@actionOnRead=') == 0) { ;
@@ -228,12 +264,11 @@ App.SubtitleController = App.SmartController.extend({
 							currentLine++;
 						} else {
 							
-							//console.log('Saw @ ', line);
+							console.log('Saw @ ', line);
 							var eventStr = line.split(' ')[1];
 							App.eventMapper.triggerEvent(ragh.MEvt.create(eventStr));
 							currentLine++;	 
 						}
-
 					} 
 					printedLines[currentPrintedLine]='';
 					if ( (currentLine < srcLines.length) &&  ( srcLines[ currentLine].length > 0) ) {

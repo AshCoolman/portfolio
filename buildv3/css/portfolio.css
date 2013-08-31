@@ -160,7 +160,7 @@ a:visited {
   display: block; }
 
 .world-3d-renderer {
-  background-image: url("../img/2d-to-3d.png");
+  background-image: url("../img/face-ash.png");
   background-position: center top;
   background-repeat: no-repeat; }
 
@@ -209,5 +209,5 @@ a:visited {
   color: #99CC99; }
 
 .graph-position h1 {
-  color: #666666;
+  color: #595959;
   text-align: right; }
