@@ -51,6 +51,7 @@ App.SubtitleController = App.SmartController.extend({
 	isCursor: true,
 	isLooping:false,
 	tagPositions:[],
+	pendingClosingTags:[],
 	isCursorObserver: function () {
 		if (this.get('isCursor')) {
 			this.set('tagCursor', '<img src="img/cursor.gif"/>');
@@ -59,7 +60,10 @@ App.SubtitleController = App.SmartController.extend({
 		}
 		var printedLines = this.get('printedLines');
 		if (printedLines) {
-			this.set('text', this.tagStart + printedLines.join(this.tagMid)+this.tagCursor+this.tagEnd);
+			
+			var taggedLines = this.createTaggedLines(this.printedLines);
+			this.set('text', this.tagStart + taggedLines.join(this.tagMid)+this.tagCursor+this.tagEnd);
+			
 		}
 	}.observes('isCursor'),
 	lines:[],
@@ -116,11 +120,10 @@ App.SubtitleController = App.SmartController.extend({
 		}
 		this.set('editList', editList);
 		
-//		console.log('EDITLIST\n', editList, '\nsrcLines\n', srcLines);
-
+ 
 		for (var l = 0; l < srcLines.length; l++ ) { 
-			srcLines[l] = srcLines[l].split('');
-		}
+			srcLines[l] = srcLines[l].split('');			
+		} 
 		
 		this.set('text', '');
 		this.set('currentLine', currentLine);
@@ -209,19 +212,23 @@ App.SubtitleController = App.SmartController.extend({
 						}
 					}
 					me.set('editList', editList)
-					me.set('text', this.tagStart+printedLines.join(this.tagMid)+'<i>'+currentEdit.printed+'</i>'+this.tagCursor+this.tagEnd);
+
+					var taggedLines = me.createTaggedLines(me.printedLines);
+					me.set('text', me.tagStart+taggedLines.join(me.tagMid)+'<i>'+currentEdit.printed+'</i>'+me.tagCursor+me.tagEnd);
 				} else if (!isNewLine) {
 					printedLines[currentPrintedLine] += srcLines[currentLine][currentChar];
-					me.set('text', this.tagStart+printedLines.join(this.tagMid)+this.tagCursor+this.tagEnd);
+					var taggedLines = this.createTaggedLines(this.printedLines);
+					me.set('text', this.tagStart+taggedLines.join(this.tagMid)+this.tagCursor+this.tagEnd);
 					currentChar++;
 				} else {
 					currentChar = 0;
 					currentLine++;
 					currentPrintedLine++;
 					while (isEvents && srcLines[currentLine] && srcLines[currentLine][0] && srcLines[currentLine][0] == '@') {	
+						
 						var line = srcLines[currentLine].join('');
 						
-						if(line.indexOf('@=') == 0) {
+						if (line.indexOf('@=') == 0) {
 							
 							currentLine++;
 							var code = line.split(' ')[0].split('=')[1];
@@ -235,6 +242,7 @@ App.SubtitleController = App.SmartController.extend({
 									isClosed: false
 								});
 								console.log('Opened '+code);
+								this.pendingClosingTags.push('/'+code);
 							} else {
 								var mostRecentOpenTag;
 								
@@ -242,17 +250,21 @@ App.SubtitleController = App.SmartController.extend({
 								for (var t = 0; t < this.tagPositions.length; t++ ) {
 									if (!this.tagPositions[t].isClosed) {
 										mostRecentOpenTag = this.tagPositions[t];
+										t = this.tagPositions.length;
 									}
 								}
 								this.tagPositions.reverse();
 								Em.assert('SubtitleController: Closing tag '+code+' supplied without opening tag', mostRecentOpenTag);
-
+								
+								console.log(code+'<- closed prev opened ->/'+mostRecentOpenTag.code);
 								Em.assert('SubtitleController: Tag mismatched in subtitle text. Got '+code+' expected /'+mostRecentOpenTag.code, code === '/'+mostRecentOpenTag.code);
-								console.log(code+'<- closed prev opened ->'+mostRecentOpenTag.code);
+								
 								mostRecentOpenTag.isClosed = true;
 								mostRecentOpenTag.lineClosed = currentLine;
 								mostRecentOpenTag.wordClosed = 0;
-								
+								this.pendingClosingTags.reverse();
+								this.pendingClosingTags.pop();
+								this.pendingClosingTags.reverse();
 							}
 
 						} else if(line.indexOf('@action=') == 0) { 
@@ -272,8 +284,10 @@ App.SubtitleController = App.SmartController.extend({
 					} 
 					printedLines[currentPrintedLine]='';
 					if ( (currentLine < srcLines.length) &&  ( srcLines[ currentLine].length > 0) ) {
-						printedLines[currentPrintedLine] += srcLines[currentLine][currentChar];
-						me.set('text', me.tagStart + printedLines.join(me.tagMid)+me.tagCursor+me.tagEnd);
+						
+						
+						var taggedLines = me.createTaggedLines(me.printedLines);
+						me.set('text', me.tagStart + taggedLines.join(me.tagMid)+me.tagCursor+me.tagEnd);
 						currentChar++;
 					}
 				} 
@@ -294,6 +308,26 @@ App.SubtitleController = App.SmartController.extend({
 		me.set('currentPrintedLine', currentPrintedLine);
 		return dur;
 	},
+	
+	createTaggedLines: function (aprintedLines) {
+		var taggedLines = aprintedLines.slice(0),
+			last = taggedLines.length -1;
+		
+		this.tagPositions.reverse();
+		for (var t = 0; t < this.tagPositions.length; t++ ) {
+			var tag = this.tagPositions[t];
+			taggedLines[tag.lineOpened-1] = tag.code+taggedLines[tag.lineOpened-1];
+			if (tag.isClosed) {
+				taggedLines[tag.lineClosed] = taggedLines[tag.lineClosed]+'/'+tag.code;
+			}
+		}
+		taggedLines[last] = taggedLines[last] + '';//this.pendingClosingTags.join('');
+		this.tagPositions.reverse();
+		
+		return taggedLines;
+	},
+
+	
 	doRemoveClicked: function () {
 		//console.log('doRemoveClicked');
 		window.cancelAnimationFrame(this.get('raf'));
