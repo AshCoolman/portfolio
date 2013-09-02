@@ -29,7 +29,7 @@ Clean up
 		this.subtitleController1.set('isCursor', false);
 		this.subtitleController2.set('content', App.scriptModel); 
 		this.subtitleController2.setup();
-		this.subtitleController2.doSetupDraw();
+		this.subtitleController2.startReading();
 PERFORMANCE
 
 

@@ -30,7 +30,6 @@ html,body {
 
 .obligatory-list {
 	font-family: Monospace;
-	white-space:pre-wrap;
 }
 .heartbeat-flash {
 	background:transparent;
@@ -94,15 +93,41 @@ html,body {
 }
 
 .subtitle-text-holder p {
-	margin: 0;
-	display:block;
+	margin: 0px;
+	padding: 0px;
 }
  
 .subtitle-text-holder span {
-	padding: 5px 5px;
-	background-color: #FFFFFF;;
+	margin: 0px;
+	padding: 0px;
+	background-color: #FFFFFF;
+	line-height:1em;
+	border-top: solid 3px white;
+	border-bottom: solid 4px white;
 }	
  
+.subtitle-text-holder span li {
+	margin: 0px;
+	padding: 0px;
+	background-color: #FFFFFF;
+	line-height:1em;
+	border-top: solid 3px white;
+	border-bottom: solid 4px white;
+}
+
+.subtitle-text-holder .indent {
+	border-left-width: 3em;
+	border-left-color: white;
+	border-left-style: solid;
+	line-height:100%;
+}
+.quote {
+	font-style:italic;
+	border-left-width: 3em;
+	border-left-color: white;
+	border-left-style: solid;
+	line-height:100%;
+}
 .subtitle-text-holder a p span {
 	color: darkorange;
 	pointer-events:auto;
@@ -146,7 +171,7 @@ color:darkred;
 }
 
 .transitions-holder {
-    pointer-events: none;
+    pointer-events: auto;
 }
 
 .transition {

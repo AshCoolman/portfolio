@@ -31,7 +31,7 @@ App.Dimension1Route = Em.Route.extend({
         this.subtitleController3.setup();
         this.subtitleController4.setup();
 
-        this.subtitleController1.doSetupDraw();
+        this.subtitleController1.startReading();
 
     },
 	model: function () {
@@ -78,15 +78,15 @@ App.Dimension1Route = Em.Route.extend({
 		},
 		doSubtitle2: function () { 
 			this.subtitleController1.set('isCursor', false); 
-	        this.subtitleController2.doSetupDraw();
+	        this.subtitleController2.startReading();
 		},
 		doSubtitle3: function () { 
 			this.subtitleController2.set('isCursor', false);
-	        this.subtitleController3.doSetupDraw();
+	        this.subtitleController3.startReading();
 		},
 		doSubtitle4: function () { 
 			this.subtitleController3.set('isCursor', false);
-	        this.subtitleController4.doSetupDraw();
+	        this.subtitleController4.startReading();
 		}
 	},
 	tryStart: function () {

@@ -50,6 +50,7 @@ App.SubtitleController = App.SmartController.extend({
 	isForceFinish:false,
 	isCursor: true,
 	isLooping:false,
+	isInstant: false,
 	tagPositions:[],
 	pendingClosingTags:[],
 	isCursorObserver: function () {
@@ -60,9 +61,7 @@ App.SubtitleController = App.SmartController.extend({
 		}
 		var printedLines = this.get('printedLines');
 		if (printedLines) {
-			
-			var taggedLines = this.createTaggedLines(this.printedLines);
-			this.set('text', this.tagStart + taggedLines.join(this.tagMid)+this.tagCursor+this.tagEnd);
+			this.set('text', this.createTaggedLines(this.get('printedLines')));
 			
 		}
 	}.observes('isCursor'),
@@ -118,6 +117,7 @@ App.SubtitleController = App.SmartController.extend({
 				l--; //check for more
 			}
 		}
+		this.set('tagPositions', []);
 		this.set('editList', editList);
 		
  
@@ -131,6 +131,8 @@ App.SubtitleController = App.SmartController.extend({
 		this.set('currentPrintedLine', currentPrintedLine);
 		this.set('printedLines', printedLines);
 		this.set('srcLines', srcLines);
+		
+
 		
 	},
 	deactivate: function () {
@@ -214,11 +216,12 @@ App.SubtitleController = App.SmartController.extend({
 					me.set('editList', editList)
 
 					var taggedLines = me.createTaggedLines(me.printedLines);
-					me.set('text', me.tagStart+taggedLines.join(me.tagMid)+'<i>'+currentEdit.printed+'</i>'+me.tagCursor+me.tagEnd);
+					
+					me.set('text', this.createTaggedLines(this.get('printedLines'), currentEdit.printed));
 				} else if (!isNewLine) {
 					printedLines[currentPrintedLine] += srcLines[currentLine][currentChar];
-					var taggedLines = this.createTaggedLines(this.printedLines);
-					me.set('text', this.tagStart+taggedLines.join(this.tagMid)+this.tagCursor+this.tagEnd);
+					
+					me.set('text', this.createTaggedLines(this.get('printedLines')));
 					currentChar++;
 				} else {
 					currentChar = 0;
@@ -227,51 +230,8 @@ App.SubtitleController = App.SmartController.extend({
 					while (isEvents && srcLines[currentLine] && srcLines[currentLine][0] && srcLines[currentLine][0] == '@') {	
 						var line = srcLines[currentLine].join('');
 						if (line.indexOf('@=') == 0) {
+							this.doTagRead(line, currentPrintedLine);
 							currentLine++;
-							
-							var code = $('<div />').html( line.split(' ')[0].split('=')[1] ).text();
-							if (code.charAt(1) != '/') {
-								console.log(code.charAt(1), code);
-								
-								var closedVersion = code.split('');
-								closedVersion.splice(1, 0, '/');
-								closedVersion = closedVersion.join('');
-								
-								this.tagPositions.push({
-									lineOpened: currentPrintedLine+1, 
-									wordOpened: 0, 
-									lineClosed: null,
-									wordClosed: null, 
-									code: code, 
-									expectedClosed: closedVersion,
-									isClosed: false
-								});
-								console.log('Opened '+code);
-
-								this.pendingClosingTags.push( closedVersion );
-							} else {
-									console.log(code.charAt(1));
-								var mostRecentOpenTag;
-								
-								this.tagPositions.reverse();
-								for (var t = 0; t < this.tagPositions.length; t++ ) {
-									if (!this.tagPositions[t].isClosed) {
-										mostRecentOpenTag = this.tagPositions[t];
-										t = this.tagPositions.length;
-									}
-								}
-								this.tagPositions.reverse();
-								Em.assert( 'SubtitleController: Closing tag ' + code + ' supplied without opening tag', mostRecentOpenTag );
-								
-								console.log(code+'<- closed prev opened ->'+mostRecentOpenTag.code, mostRecentOpenTag.expectedClosed);
-								Em.assert('SubtitleController: Tag mismatched in subtitle text. Got '+code+' expected closed version of '+mostRecentOpenTag.code+':'+mostRecentOpenTag.expectedClosed, code === mostRecentOpenTag.expectedClosed);
-								
-								mostRecentOpenTag.isClosed = true;
-								mostRecentOpenTag.lineClosed = currentPrintedLine;
-								mostRecentOpenTag.wordClosed = 0;
-								this.pendingClosingTags.pop();
-							}
-
 						} else if(line.indexOf('@action=') == 0) { 
 							var action = line.split(' ')[0].split('=')[1];
 							currentLine++;
@@ -291,8 +251,8 @@ App.SubtitleController = App.SmartController.extend({
 					if ( (currentLine < srcLines.length) &&  ( srcLines[ currentLine].length > 0) ) {
 						
 						printedLines[currentPrintedLine] += srcLines[currentLine][currentChar];
-						var taggedLines = me.createTaggedLines(printedLines);
-						me.set('text', me.tagStart + taggedLines.join(me.tagMid)+me.tagCursor+me.tagEnd);
+
+						me.set('text', me.createTaggedLines(printedLines));
 						currentChar++;
 					}
 				} 
@@ -314,23 +274,98 @@ App.SubtitleController = App.SmartController.extend({
 		return dur;
 	},
 	
-	createTaggedLines: function (aprintedLines) {
-		var taggedLines = aprintedLines.slice(0),
-			last = taggedLines.length -1;
-		
-		this.tagPositions.reverse();
-		for (var t = 0; t < this.tagPositions.length; t++ ) {
-			var tag = this.tagPositions[t];
-			taggedLines[tag.lineOpened-1] = tag.code+taggedLines[tag.lineOpened-1];
-			if (tag.isClosed) {
-				taggedLines[tag.lineClosed-1] = taggedLines[tag.lineClosed-1]+tag.expectedClosed;
+	getTagCodeFromLine: function (line) {
+		var code = unescape(line).split('=');		
+		code.splice(0, 1);
+		return $('<div />').html( code.join('=') ).text();
+	},
+	
+	getClosedVersionOfTag: function (code) {
+		var closedVersion = (code.split(' ')[0]+'>').split('');
+		closedVersion.splice(1, 0, '/');
+		return closedVersion.join('').replace('>>', '>');
+	},
+			
+	getMostRecentOpenTag: function (tagPositions) {
+		tagPositions.reverse();
+		for (var t = 0; t < tagPositions.length; t++ ) {
+			if (!tagPositions[t].isClosed) {
+				tagPositions.reverse();
+				return tagPositions.length - t -1;
 			}
 		}
-		this.tagPositions.reverse();
-		taggedLines[last] = taggedLines[last] + ' ' + this.pendingClosingTags.join('');
+		tagPositions.reverse();
+		return -1;
+	},
+	
+	doTagRead: function (line, currentPrintedLine) {
 		
+		var pendingClosingTags = this.get('pendingClosingTags'),
+			tagPositions = this.get('tagPositions'),
+			code =  this.getTagCodeFromLine(line);
+
+		if (code.charAt(1) != '/') {
+			var tpEnd = tagPositions.length;
+			tagPositions.push({
+				lineOpened: currentPrintedLine, 
+				code: code, 
+				expectedClosed: this.getClosedVersionOfTag(code),
+				isClosed: false
+			});
+			pendingClosingTags.push( tagPositions[tpEnd].expectedClosed );
+			console.log('Opened found ' + currentPrintedLine + ':' + code +  ' INFERRED AND PUSHED: ('+tagPositions[tpEnd].expectedClosed+')');
+		} else {
+			var mostRecent =  this.getMostRecentOpenTag(tagPositions);
+			tagPositions[ mostRecent ].isClosed = true;
+			tagPositions[ mostRecent ].lineClosed = currentPrintedLine-1;
+			pendingClosingTags.pop();
+			
+			//Em.assert( 'SubtitleController: Closing tag ' + code + ' supplied without opening tag', mostRecentOpenTag );	
+			//Em.assert('SubtitleController: Tag mismatched in subtitle text. Got '+code+' expected closed version of '+mostRecentOpenTag.code+':'+mostRecentOpenTag.expectedClosed, code === mostRecentOpenTag.expectedClosed);
+			console.log('closing found ' + currentPrintedLine + ':' + code +', prev opened '+tagPositions[ mostRecent ].code+', expected '+tagPositions[ mostRecent ].expectedClosed);
+		}
+		this.set('pendingClosingTags', pendingClosingTags);
+		this.set('tagPositions', tagPositions);	
+	},
+	
+	createTaggedLines: function (aprintedLines, currentEditPrinted) {
+
+		var tagPositions = this.get('tagPositions'),
+			currentEditPrinted = currentEditPrinted || '',
+			pendingClosingTags = this.get('pendingClosingTags'),
+			taggedLines = aprintedLines.slice(0),
+			last = taggedLines.length - 1;
+			
+		for (var l = 0; l < taggedLines.length; l++) {
+			if (l == taggedLines.length-1) {
+				taggedLines[l] = this.tagStart + taggedLines[l] +'<i>'+currentEditPrinted+'</i>'+ this.tagCursor + this.tagEnd;
+			} else {
+				taggedLines[l] = this.tagStart + taggedLines[l] + this.tagEnd;
+			}
+		}
+		tagPositions.reverse();
+		for ( var t = 0; t < tagPositions.length; t++ ) {
+			var tag = tagPositions[ t ],
+				openedPos = Math.min(tag.lineOpened, last);
+			//console.log('looking at tag '+tag.lineOpened+' to '+tag.lineClosed)
+			if (tag.lineOpened <= last) {
+				taggedLines[ openedPos ] = tag.code + taggedLines[ openedPos ]
+			} else {
+				taggedLines[ openedPos ] = taggedLines[ openedPos ] + tag.code;
+			}
+			
+			if ( tag.isClosed ) {
+				var closedPos = Math.min(tag.lineClosed, last);
+				//console.log('isClosed ' + closedPos + ' of ' + taggedLines.length + ' - closed tag added\n', taggedLines[closedPos]+' + '+tag.expectedClosed+'\n' );
+				taggedLines[closedPos] = taggedLines[closedPos] + tag.expectedClosed;
+			}
+		}
+		tagPositions.reverse();
 		
-		return taggedLines;
+		taggedLines[last] = taggedLines[last] + pendingClosingTags.join('');
+		this.set('tagPositions', tagPositions);
+		this.set('pendingClosingTags', pendingClosingTags);
+		return taggedLines.join('');
 	},
 
 	
@@ -342,25 +377,33 @@ App.SubtitleController = App.SmartController.extend({
 		this.set('text', ''); //todo low technically should not need to render this, but if you look at template, I can't conditionally stop rendering {{text}} without incurring a js error
 		//this.send('doRemoveSubtitle');
 	},
-	doSetupDraw: function () {
-		var rafFunction = function(me) {
-			var animloop = function (time) {
-				var last = me.get('lastRequestAnimationFrame'),
-					dur = me.get('durSinceReadChar');
-					
-					//console.log('>>', dur , last, dur+last)
-					dur += (last ? time - last : 0);		
-				me.set('lastRequestAnimationFrame', time);
-				if (!me.get('isHover')) { dur = me.reDraw(dur, me); }// stage.update() does not work... todo high 
-				me.set('durSinceReadChar', dur);
-				if (!me.get('isEnded') || me.get('isLooping')) {
-					me.set('raf', window.requestAnimationFrame(animloop));
-				}
-			};
-			return animloop
-		}(this);
+	
+
+	startReading: function () {
 		
-		this.set('raf', window.requestAnimationFrame(rafFunction));
+		if (this.get('isInstant')) {
+			this.doForceFinish();
+		} else {
+			var rafFunction = function(me) {
+				var animloop = function (time) {
+					var last = me.get('lastRequestAnimationFrame'),
+						dur = me.get('durSinceReadChar');
+
+						//console.log('>>', dur , last, dur+last)
+						dur += (last ? time - last : 0);		
+					me.set('lastRequestAnimationFrame', time);
+					if (!me.get('isHover')) { dur = me.reDraw(dur, me); }// stage.update() does not work... todo high 
+					me.set('durSinceReadChar', dur);
+					if (!me.get('isEnded') || me.get('isLooping')) {
+						me.set('raf', window.requestAnimationFrame(animloop));
+					}
+				};
+				return animloop
+			}(this);
+
+			this.set('raf', window.requestAnimationFrame(rafFunction));
+		}
+
 	},
 	
 	getActionEvent: function () {
@@ -380,7 +423,7 @@ App.SubtitleController = App.SmartController.extend({
 		
 		window.cancelAnimationFrame(this.get('raf'));
 		while (!this.get('isEnded')  && !this.get('isLooping') ) {
-			this.readChar(99999, this, false);
+			this.readChar(99999, this, true);
 		}	
 	}
 });

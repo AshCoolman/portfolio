@@ -26,7 +26,7 @@ App.IndexRoute = Em.Route.extend({
     doStart: function (type, data) {
 		this.subtitleController1.set('content', App.scriptModel); 
         this.subtitleController1.setup();
-        this.subtitleController1.doSetupDraw();
+        this.subtitleController1.startReading();
     },
 	doEnd: function (type, data) {
 		if (this.indexNavController) {
@@ -70,7 +70,7 @@ App.IndexRoute = Em.Route.extend({
 			this.subtitleController1.set('isCursor', false);
 			this.subtitleController2.set('content', App.scriptModel); 
 	        this.subtitleController2.setup();
-	        this.subtitleController2.doSetupDraw();
+	        this.subtitleController2.startReading();
 		}
 		
 	},

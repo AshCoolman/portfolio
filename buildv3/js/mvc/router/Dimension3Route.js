@@ -57,7 +57,7 @@ App.Dimension3Route = Em.Route.extend({
 		
 		doQuestionMarkRotateDone: function () {
 			this.subtitle1Controller.doRemoveClicked();
-	        this.subtitle2Controller.doSetupDraw();
+	        this.subtitle2Controller.startReading();
 		}
 	},
 	tryStart: function () {
@@ -71,6 +71,6 @@ App.Dimension3Route = Em.Route.extend({
         this.subtitle1Controller.setup();
         this.subtitle2Controller.setup();
 
-        this.subtitle1Controller.doSetupDraw();
+        this.subtitle1Controller.startReading();
     }
 })

@@ -48,7 +48,7 @@ App.Dimension2Route = Em.Route.extend({
 	doStart: function (type, data) {
 		this.subtitleController1.set('content', App.scriptModel); 
         this.subtitleController1.setup();
-        this.subtitleController1.doSetupDraw();
+        this.subtitleController1.startReading();
     },
 	doStopReading: function (type, data) {
 		//console.log('doStopReading', this.dimension2NavController);
@@ -89,7 +89,7 @@ App.Dimension2Route = Em.Route.extend({
 
 			this.subtitleController2.set('content', App.scriptModel); 
 	        this.subtitleController2.setup(this.subtitleController2.get("content").scriptD2);
-	        this.subtitleController2.doSetupDraw();
+	        this.subtitleController2.startReading();
 		},
 		doMosaicFinished: function () {
 			//console.log('Route doMosaicFinished')
