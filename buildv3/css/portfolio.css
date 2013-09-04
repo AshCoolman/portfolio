@@ -150,7 +150,8 @@ a:visited {
   display: block; }
 
 .world-2d canvas {
-  margin: 0 auto; }
+  margin: 0 auto;
+  display: block; }
 
 .el-no-effect-winsize-outer {
   position: absolute;
@@ -182,6 +183,16 @@ a:visited {
 .absolute-positioned {
   position: absolute; }
 
+.absolute-positioned-content {
+  position: absolute;
+  top: 45px; }
+
+.absolute-positioned-content-background {
+  position: absolute;
+  top: 45px;
+  overflow: hidden;
+  height: 100%; }
+
 .pointer-events-none {
   pointer-events: none; }
 
@@ -211,8 +222,9 @@ a:visited {
   pointer-events: none; }
 
 .interactive-grid {
-  position: relative;
+  position: absolute;
   width: 100%;
+  min-height: 100%;
   top: -1.875em; }
 
 #svg-raphaeljs {

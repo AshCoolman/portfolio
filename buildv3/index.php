@@ -67,7 +67,7 @@ Y: The Storyteller
 @=</h3>
 I like induce change in the audience, be it emotion, thought, excitement, knowledge...
 Simply put, I am a story teller.
-
+ 
 If the question is how to best communicate to an audience, 
 @actionOnRead=doShowQuestion
 then I have the technical skills can be used to craft an answering experience.
@@ -219,7 +219,7 @@ And knowing that somewhere there exists a simple and elegant solution...
 		<!--{{renderWithVars 'world-1d'}}-->
 		<script type="text/x-handlebars" data-template-name="dimension1">
 		
-			<div class="full-width-centered absolute-positioned">
+			<div class="full-width-centered absolute-positioned" style="overflow:hidden; height: 100%; top:3em">
 				{{renderWithVars 'interactive-grid' pixW=20 isPlotX=true}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
@@ -316,23 +316,20 @@ And knowing that somewhere there exists a simple and elegant solution...
 		<!-- ROUTE DIMENSION 2 -->
 		<script type="text/x-handlebars" data-template-name="dimension2">
 		
-			<div class="full-width-centered absolute-positioned">
+				<div class="full-width-centered absolute-positioned" style="overflow:hidden; height: 100%; top:3em">
 				{{renderWithVars 'interactive-grid' pixW=20 pixH=20 isPlotX=false}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
-		
-		
+
 			<div class="relative-positioned">
 				<div class="absolute-positioned"> 
-					{{renderWithVars 'world-2d' World2d}} 
+					{{controlWithVars 'world-2d'}} 
 					{{controlWithVars 'esl-entity-container'}}
 				</div>
 			</div>
 
-
-
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyA?>"}}}
-			{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="Add dimension @edits=Z...,Depth...,Exploration..." isLink=true actionEvent="doGotoDimension3" }} 
+			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="Add dimension @edits=Z...,Depth...,Exploration..." isLink=true actionEvent="doGotoDimension3" }}}
 
 			
 			{{#if App.DEBUG}}
@@ -422,8 +419,12 @@ And knowing that somewhere there exists a simple and elegant solution...
 
 		<!-- ROUTE DIMENSION 3 -->
 		<script type="text/x-handlebars" data-template-name="dimension3">
-
-			{{controlWithVars 'world-3d' layoutName='lo-fixed-size-centered'}}
+			<div class="relative-positioned">
+				<div class="absolute-positioned"> 
+					{{controlWithVars 'world-3d'}} 
+					{{controlWithVars 'esl-entity-container'}}
+				</div>
+			</div>
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyA; ?>"}}}
 			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php
 			echo "

@@ -189,7 +189,8 @@ color:darkred;
 }
 
 .world-2d canvas {
-	margin:0 auto;
+	margin: 0 auto;
+	display: block;
 }
 .el-no-effect-winsize-outer {
     position:absolute;
@@ -226,6 +227,19 @@ color:darkred;
 .absolute-positioned {
 	position: absolute;
 }
+
+.absolute-positioned-content {
+	position: absolute;
+	top:45px;
+}
+
+.absolute-positioned-content-background {
+	position: absolute;
+	top:45px;
+	overflow:hidden; 
+	height: 100%;
+}
+
 .pointer-events-none {
 	pointer-events: none;
 }
@@ -258,8 +272,9 @@ background-repeat: no-repeat;
 	pointer-events: none;
 }
 .interactive-grid {
-	position: relative;
+	position: absolute;
 	width:100%;
+	min-height: 100%;
 	top:-1.875em;
 }
 
