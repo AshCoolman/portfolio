@@ -23,13 +23,11 @@ App.Dimension1Route = Em.Route.extend({
 				
 		this.subtitleController1.set('content', App.scriptModel); 
 		this.subtitleController2.set('content', App.scriptModel); 
-		this.subtitleController3.set('content', App.scriptModel); 
-		this.subtitleController4.set('content', App.scriptModel); 
+		this.subtitleController3.set('content', App.scriptModel);  
 		
         this.subtitleController1.setup();
         this.subtitleController2.setup();
-        this.subtitleController3.setup();
-        this.subtitleController4.setup();
+        this.subtitleController3.setup(); 
 
         this.subtitleController1.startReading();
 
@@ -61,7 +59,6 @@ App.Dimension1Route = Em.Route.extend({
 						case '1': this.subtitleController1 = acontroller; break;
 						case '2': this.subtitleController2 = acontroller; break;
 						case '3': this.subtitleController3 = acontroller; break;
-						case '4': this.subtitleController4 = acontroller; break;
 					}
 					break;  
 				case 'Dimension1NavController':  	this.dimension1NavController = acontroller; 	break;
@@ -83,14 +80,10 @@ App.Dimension1Route = Em.Route.extend({
 		doSubtitle3: function () { 
 			this.subtitleController2.set('isCursor', false);
 	        this.subtitleController3.startReading();
-		},
-		doSubtitle4: function () { 
-			this.subtitleController3.set('isCursor', false);
-	        this.subtitleController4.startReading();
 		}
 	},
 	tryStart: function () {
-        if (!this.isStarted && this.subtitleController1 && this.subtitleController2  && this.subtitleController3 && this.subtitleController4) {
+        if (!this.isStarted && this.subtitleController1 && this.subtitleController2  && this.subtitleController3) {
 			this.isStarted = true;
             this.doStart()
 		}

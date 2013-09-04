@@ -138,16 +138,12 @@
 		<script type="text/x-handlebars" data-template-name="index">		
 <?php
 $indexCopyA = "\"" . 
-htmlspecialchars("
-@=<h3>
-The Origin
-@=</h3>
-Ashley Coleman
-To learn about me, I guess its best to start with my name.
-But my name does not really help explain who i am.
-However, as an origin it is useful.
-Now I can use it to illustrate my different dimensions 
-@actionOnRead=doSecondSubtitle") . "\"";
+htmlspecialchars("@=<h3>
+Ashley Coleman: The Origin
+@=</h3>") ."
+To teach you about myself, I start with my name.
+My name is an origin, from which I can illustrate the different dimensions that make me up.
+@actionOnRead=doSecondSubtitle" . "\"";
 ?>
 			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php echo $indexCopyA; ?>}}}
 			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="Add dimension @edits=X...,One...,Who...,How..." isLink=true actionEvent="doGotoDimension1" }}}
@@ -163,11 +159,19 @@ Now I can use it to illustrate my different dimensions
 				{{render 'heartbeat' heartbeat}}
 			</div>
 <?php
- $d1copyC = "\"" . 
-htmlspecialchars("
-@=<h3>
-X: The Software Engineer
-@=</h3>") . "\"";
+
+ $d1copyA =  "\"" . 
+htmlspecialchars("@=<h3>
+X: Software Engineer
+@=</h3>
+Web development is my craft.
+I value speed, elegance, and clarity.
+ 
+@=<div class=\"quote\">
+'Real artists ship'
+@=</div>
+-Steve Jobs") . "
+@actionOnRead=doSubtitle2\"";
 
  $d1copyB =  "\"" . 
 htmlspecialchars("<OBLIGATORY SKILL LIST>
@@ -182,28 +186,15 @@ htmlspecialchars("<OBLIGATORY SKILL LIST>
 " . 
 htmlspecialchars("
 @=</div>
-</OBLIGATORY SKILL LIST>
-@actionOnRead=doSubtitle4") . "\"";
+</OBLIGATORY SKILL LIST>") . "
+@actionOnRead=doSubtitle3\"";
 
- $d1copyA =  "\"" . 
-htmlspecialchars("
-@=<h3>
-The Software Engineer
-@=</h3>
-Web development skills are my craft.
-I watch the bleeding edge of technology, and integrate new techniques.
-I value speed, elegance, and clarity. But above all things I remember:
-@=<div class=\"quote\">
-'Real artists ship'
-@=</div>
--Steve Jobs") . "
-@actionOnRead=doSubtitle2\"";
+
 
 ?>
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php echo $d1copyA; ?>}}}
 			{{{controlWithVars 'subtitle' orderRead='2' isInstant=true layoutName="lo-subtitle-obligatory" hasRemoveButton=true thescript=<?php echo $d1copyB;?>}}}
-			{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php echo  $d1copyC;?>}}}
-			{{{controlWithVars 'subtitle' orderRead='4' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Add dimension @edits=Y...,Why?...,Motivation..."}} 
+			{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Add dimension @edits=Y...,Why?...,Motivation..."}} 
 		</script>
 
 <!--
@@ -306,22 +297,21 @@ I value speed, elegance, and clarity. But above all things I remember:
 				</div>
 			</div>
 
-
-
-			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php
-echo "\"" . 
-htmlspecialchars("
-@=<h3>
+<?php 
+$d2copyA =  
+htmlspecialchars("@=<h3>
 Y: The Storyteller
 @=</h3>
 I like induce change in the audience, be it emotion, thought, excitement, knowledge...
 Simply put, I am a story teller.
-
+ 
 If the question is how to best communicate to an audience, 
 @actionOnRead=doShowQuestion
 then I have the technical skills can be used to craft an answering experience.
-@actionOnRead=doSecondSubtitle") . "\"";?>}}}
+@actionOnRead=doSecondSubtitle");
+?>
 
+			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyA?>"}}}
 			{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="Add dimension @edits=Z...,Depth...,Exploration..." isLink=true actionEvent="doGotoDimension3" }} 
 
 			
@@ -418,25 +408,21 @@ then I have the technical skills can be used to craft an answering experience.
 				</div
 			</div>
 		
-			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php
-echo "\"" . 
-htmlspecialchars("
-@=<h3>
+<?php
+$d3copyA = htmlspecialchars("@=<h3>
 Z: The Creative
 @=</h3>") . "
 I am committed to creative thinking.
 It means discarding your <i>first thoughts</i>, and what seems <i>obvious</i>.
-
+ 
 And knowing that somewhere there exists a simple and elegant solution...
 @actionOnRead=doRotateQuestionMark
-" . "\"";?>}}}
+"; 
 
-
-			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php
-			echo "
-\"i.e. The big idea.
-
-\"";?>}}}
+$d3copyB = "i.e. The big idea.";
+?>
+			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyA; ?>"}}}
+			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyB; ?>"}}}
 
 		</script>
 

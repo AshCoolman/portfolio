@@ -1,28 +1,49 @@
 HIGH PRIORITY
-120	Design/Style plotted Text so it makes sense
-60	Design Style text to wrap with resize
-30	Add Questionmark
-60	Transitions
-60  Subtitle delete chars & type
+Natural UX
+	* scrolling expected
+	* Cursor expected
+	
+bug testing 
+	subtitle event cancel/cleanup
 
+Some sort of grid signal
+Flow
 
+Programatically calc 2d-3d transition image layout (mapping)
+Cross platform
+Persistence
+	* Stop typing
 
-Remove bg
-Make flow
-performance
-content
 
 MEDIUM
+performance
 Mosaic SVG
 Ruler X Appear
 Ruler Y Appear
 Ruler Z Appear
+Typography
 
 LOW PRIORITY
 10	SubtitleController forceFinish on view_willRemove...
+
+PURE CURIOSITY
 Change ControlWithVars to not have second attribute as a "model", instead check that model="adf" would work.
-subtitles monofont + nbsp
-60	Subtitle delete all & type
+
+Copy: "The idea that dictates what to do next"
+
+
+. Rewards for exploration should be a treated as a bonus, rather than a required interaction. Any information shared should also be accessible to those who don’t have the time or ability to use the interface
+
+
+
+
+
+
+
+
+
+
+
 
 
 Clean up
