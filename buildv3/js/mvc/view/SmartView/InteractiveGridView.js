@@ -151,7 +151,7 @@ App.InteractiveGridView = App.SmartView.extend({
 	
 		*/
 		var mouseZone = raphaeljs.rect(0,0,w,h).attr({'stroke-width':0, 'fill':'#001133', opacity:0.0});
-		$(mouseZone.node).css('z-index', 9999);
+		$(mouseZone.node).addClass('grid-zone');
 		var svgPoint = $('svg', this.$el)[0].createSVGPoint();
 		var pointToSVGSpaceFunc = function (e){
 			var offset = $(e.target).parent().offset();

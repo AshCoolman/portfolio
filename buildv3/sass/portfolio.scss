@@ -1,11 +1,33 @@
 $fullWidth: 1000px;
 $minWidth: 768px;
+$zIndexButton: 1000;
+$zIndexText: 900;
+$zIndexNone: 100;
+$zIndexFallbackButton: 200;
+$subtitleBackGroundColor: #FFFFFF;
+
 /*
 http://jsfiddle.net/VAXrL/190/
 */
 
+
+$default-legacy-ie: 7 8 9 10 11 !default;
+
+@mixin legacy-ie($versions: $default-legacy-ie) {
+    $sel: ();
+    @each $v in $versions {
+        $sel: append($sel, unquote('.ie#{$v} &'), comma);
+    }
+
+    #{$sel} {
+        @content;
+    }
+}
+	
+
+
 button {
-	pointer-events: auto;
+	z-index: $zIndexButton;
 }
 canvas, img {
     image-rendering: optimizeSpeed;             // Older versions of FF
@@ -28,9 +50,7 @@ html,body {
 	color:#999;
 }
 
-.obligatory-list {
-	font-family: Monospace;
-}
+
 .heartbeat-flash {
 	background:transparent;
 	position: fixed;
@@ -76,9 +96,16 @@ html,body {
 	width: 100%;
 }
 
+.obligatory-list {
+	font-family: Monospace;
+	cursor:text;
+	pointer-events:auto !important;
+	color:#333333;
+}
+
 
 .subtitle {
-	color:#333333;
+	color:#666666;
 	//height:8em;
 	line-height:100%;
 	display:inline;
@@ -86,57 +113,68 @@ html,body {
 
 .subtitle-text-holder {
 	margin-bottom:1.5em;
+	pointer-events:none;
+	zoom: 1;
+	filter: alpha(opacity=95);
+	opacity: 0.95;
 }
 
 .subtitle-text-holder a {
 	text-decoration:none;
+	pointer-events:auto;
+	background-color: $subtitleBackGroundColor;
 }
 
 .subtitle-text-holder p {
 	margin: 0px;
 	padding: 0px;
+	z-index: $zIndexNone;
+	pointer-events:none;
+	line-height:1.6em;
+	@include legacy-ie {
+		background-color: $subtitleBackGroundColor; /* More background colour for browsers that don't support css pointer-events */
+    }
 }
- 
+
 .subtitle-text-holder span {
 	margin: 0px;
 	padding: 0px;
-	background-color: #FFFFFF;
-	line-height:1em;
-	border-top: solid 3px white;
-	border-bottom: solid 4px white;
+	display:inline-block;
+	background-color: $subtitleBackGroundColor;
+	line-height:1.6em;
 	border-left-width: 0.5em;
-	border-left-color: white;
+	border-left-color: $subtitleBackGroundColor;
 	border-left-style: solid;
 	border-right-width: 0.5em;
-	border-right-color: white;
+	border-right-color: $subtitleBackGroundColor;
 	border-right-style: solid;
+	z-index: $zIndexText;
 }	
  
 .subtitle-text-holder span li {
 	margin: 0px;
 	padding: 0px;
-	background-color: #FFFFFF;
+	background-color: $subtitleBackGroundColor;
 	line-height:1em;
-	border-top: solid 3px white;
-	border-bottom: solid 4px white;
+	border-top: solid 3px $subtitleBackGroundColor;
+	border-bottom: solid 4px $subtitleBackGroundColor;
 }
 
 .subtitle-text-holder .indent {
 	border-left-width: 3em;
-	border-left-color: white;
+	border-left-color: $subtitleBackGroundColor;
 	border-left-style: solid;
 	line-height:100%;
 }
 .quote {
 	font-style:italic;
 	border-left-width: 3em;
-	border-left-color: white;
+	border-left-color: $subtitleBackGroundColor;
 	border-left-style: solid;
 	line-height:100%;
 }
 .subtitle-text-holder a p span {
 	color: darkorange;
-	pointer-events:auto;
 }
 
 
@@ -146,7 +184,7 @@ html,body {
 
  
 a {
-pointer-events:auto;
+z-index:$zIndexButton;
 color:darkorange;
 }
 
@@ -177,7 +215,7 @@ color:darkred;
 }
 
 .transitions-holder {
-    pointer-events: auto;
+
 }
 
 .transition {
@@ -241,9 +279,14 @@ color:darkred;
 }
 
 .pointer-events-none {
-	pointer-events: none;
+	/*pointer-events: none;*/
+	z-index:$zIndexNone;
+	
 }
 
+.grid-zone {
+	z-index:$zIndexFallbackButton;
+}
 .visible-world-2d, .world-3d-renderer, .transition-canvas {
 	margin: 0 auto;
 	display: block;
@@ -269,7 +312,7 @@ background-repeat: no-repeat;
 }
 
 .dimension1-nav {
-	pointer-events: none;
+	/*pointer-events: none;*/
 }
 .interactive-grid {
 	position: absolute;
@@ -285,7 +328,6 @@ background-repeat: no-repeat;
 }
 
 .graph-plot, .graph-position {
-	pointer-events:none;
 	position:absolute;
 	font-size:18px;
 	color:#99CC99;

@@ -1,6 +1,5 @@
 HIGH PRIORITY
 Natural UX
-	* scrolling expected
 	* Cursor expected
 	
 bug testing 

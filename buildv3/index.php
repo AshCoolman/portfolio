@@ -316,7 +316,7 @@ And knowing that somewhere there exists a simple and elegant solution...
 		<!-- ROUTE DIMENSION 2 -->
 		<script type="text/x-handlebars" data-template-name="dimension2">
 		
-				<div class="full-width-centered absolute-positioned" style="overflow:hidden; height: 100%; top:3em">
+				<div class="full-width-centered absolute-positioned-background">
 				{{renderWithVars 'interactive-grid' pixW=20 pixH=20 isPlotX=false}}
 				{{render 'heartbeat' heartbeat}}
 			</div>

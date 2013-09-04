@@ -2,7 +2,7 @@
 http://jsfiddle.net/VAXrL/190/
 */
 button {
-  pointer-events: auto; }
+  z-index: 1000; }
 
 canvas, img {
   image-rendering: optimizeSpeed;
@@ -19,9 +19,6 @@ html, body {
 .note {
   font-size: 0.33em;
   color: #999; }
-
-.obligatory-list {
-  font-family: Monospace; }
 
 .heartbeat-flash {
   background: transparent;
@@ -61,39 +58,57 @@ html, body {
   left: 0;
   width: 100%; }
 
+.obligatory-list {
+  font-family: Monospace;
+  cursor: text;
+  pointer-events: auto !important;
+  color: #333333; }
+
 .subtitle {
-  color: #333333;
+  color: #666666;
   line-height: 100%;
   display: inline; }
 
 .subtitle-text-holder {
-  margin-bottom: 1.5em; }
+  margin-bottom: 1.5em;
+  pointer-events: none;
+  zoom: 1;
+  filter: alpha(opacity=95);
+  opacity: 0.95; }
 
 .subtitle-text-holder a {
-  text-decoration: none; }
+  text-decoration: none;
+  pointer-events: auto;
+  background-color: white; }
 
 .subtitle-text-holder p {
   margin: 0px;
-  padding: 0px; }
+  padding: 0px;
+  z-index: 100;
+  pointer-events: none;
+  line-height: 1.6em; }
+  .ie7 .subtitle-text-holder p, .ie8 .subtitle-text-holder p, .ie9 .subtitle-text-holder p, .ie10 .subtitle-text-holder p, .ie11 .subtitle-text-holder p {
+    background-color: white;
+    /* More background colour for browsers that don't support css pointer-events */ }
 
 .subtitle-text-holder span {
   margin: 0px;
   padding: 0px;
-  background-color: #FFFFFF;
-  line-height: 1em;
-  border-top: solid 3px white;
-  border-bottom: solid 4px white;
+  display: inline-block;
+  background-color: white;
+  line-height: 1.6em;
   border-left-width: 0.5em;
   border-left-color: white;
   border-left-style: solid;
   border-right-width: 0.5em;
   border-right-color: white;
-  border-right-style: solid; }
+  border-right-style: solid;
+  z-index: 900; }
 
 .subtitle-text-holder span li {
   margin: 0px;
   padding: 0px;
-  background-color: #FFFFFF;
+  background-color: white;
   line-height: 1em;
   border-top: solid 3px white;
   border-bottom: solid 4px white; }
@@ -112,11 +127,10 @@ html, body {
   line-height: 100%; }
 
 .subtitle-text-holder a p span {
-  color: darkorange;
-  pointer-events: auto; }
+  color: darkorange; }
 
 a {
-  pointer-events: auto;
+  z-index: 1000;
   color: darkorange; }
 
 a:hover {
@@ -141,9 +155,6 @@ a:visited {
   float: left;
   color: #c9c9c9;
   display: none; }
-
-.transitions-holder {
-  pointer-events: auto; }
 
 .transition-canvas {
   z-index: 1000;
@@ -194,7 +205,11 @@ a:visited {
   height: 100%; }
 
 .pointer-events-none {
-  pointer-events: none; }
+  /*pointer-events: none;*/
+  z-index: 100; }
+
+.grid-zone {
+  z-index: 200; }
 
 .visible-world-2d, .world-3d-renderer, .transition-canvas {
   margin: 0 auto;
@@ -219,7 +234,7 @@ a:visited {
   margin-left: -500px; }
 
 .dimension1-nav {
-  pointer-events: none; }
+  /*pointer-events: none;*/ }
 
 .interactive-grid {
   position: absolute;
@@ -232,7 +247,6 @@ a:visited {
   width: 100%; }
 
 .graph-plot, .graph-position {
-  pointer-events: none;
   position: absolute;
   font-size: 18px;
   color: #99CC99;
