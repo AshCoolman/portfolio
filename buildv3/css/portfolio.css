@@ -81,13 +81,13 @@ html, body {
   pointer-events: auto;
   background-color: white; }
 
-.subtitle-text-holder p {
+.subtitle-text-holder .heading, .subtitle-text-holder p, .subtitle-text-holder li, .subtitle-text-holder ul {
   margin: 0px;
   padding: 0px;
   z-index: 100;
   pointer-events: none;
   line-height: 1.6em; }
-  .ie7 .subtitle-text-holder p, .ie8 .subtitle-text-holder p, .ie9 .subtitle-text-holder p, .ie10 .subtitle-text-holder p, .ie11 .subtitle-text-holder p {
+  .ie7 .subtitle-text-holder .heading, .ie8 .subtitle-text-holder .heading, .ie9 .subtitle-text-holder .heading, .ie10 .subtitle-text-holder .heading, .ie11 .subtitle-text-holder .heading, .ie7 .subtitle-text-holder p, .ie8 .subtitle-text-holder p, .ie9 .subtitle-text-holder p, .ie10 .subtitle-text-holder p, .ie11 .subtitle-text-holder p, .ie7 .subtitle-text-holder li, .ie8 .subtitle-text-holder li, .ie9 .subtitle-text-holder li, .ie10 .subtitle-text-holder li, .ie11 .subtitle-text-holder li, .ie7 .subtitle-text-holder ul, .ie8 .subtitle-text-holder ul, .ie9 .subtitle-text-holder ul, .ie10 .subtitle-text-holder ul, .ie11 .subtitle-text-holder ul {
     background-color: white;
     /* More background colour for browsers that don't support css pointer-events */ }
 
@@ -105,13 +105,15 @@ html, body {
   border-right-style: solid;
   z-index: 900; }
 
-.subtitle-text-holder span li {
-  margin: 0px;
-  padding: 0px;
-  background-color: white;
-  line-height: 1em;
-  border-top: solid 3px white;
-  border-bottom: solid 4px white; }
+.subtitle-text-holder span.heading {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-top: 1em; }
+
+.subtitle-text-holder li {
+  border-left-width: 3em;
+  border-left-color: white;
+  border-left-style: solid; }
 
 .subtitle-text-holder .indent {
   border-left-width: 3em;

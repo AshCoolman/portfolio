@@ -125,7 +125,7 @@ html,body {
 	background-color: $subtitleBackGroundColor;
 }
 
-.subtitle-text-holder p {
+.subtitle-text-holder .heading, .subtitle-text-holder p, .subtitle-text-holder li, .subtitle-text-holder ul {
 	margin: 0px;
 	padding: 0px;
 	z-index: $zIndexNone;
@@ -135,6 +135,7 @@ html,body {
 		background-color: $subtitleBackGroundColor; /* More background colour for browsers that don't support css pointer-events */
     }
 }
+
 
 .subtitle-text-holder span {
 	margin: 0px;
@@ -150,14 +151,16 @@ html,body {
 	border-right-style: solid;
 	z-index: $zIndexText;
 }	
- 
-.subtitle-text-holder span li {
-	margin: 0px;
-	padding: 0px;
-	background-color: $subtitleBackGroundColor;
-	line-height:1em;
-	border-top: solid 3px $subtitleBackGroundColor;
-	border-bottom: solid 4px $subtitleBackGroundColor;
+ .subtitle-text-holder span.heading {
+	font-size: 1.3em;
+	font-weight:bold;
+	margin-top: 1em;
+}
+
+.subtitle-text-holder li {
+border-left-width: 3em;
+border-left-color: $subtitleBackGroundColor;
+border-left-style: solid;
 }
 
 .subtitle-text-holder .indent {

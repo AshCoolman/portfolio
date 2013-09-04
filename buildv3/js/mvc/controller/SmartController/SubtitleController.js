@@ -54,6 +54,7 @@ App.SubtitleController = App.SmartController.extend({
 	isInstant: false,
 	tagPositions:[],
 	pendingClosingTags:[],
+	actionTimeouts:[],
 	isCursorObserver: function () {
 		if (this.get('isCursor')) {
 			this.set('tagCursor', '<img src="img/cursor.gif"/>');
@@ -124,7 +125,10 @@ App.SubtitleController = App.SmartController.extend({
 		
  
 		for (var l = 0; l < srcLines.length; l++ ) { 
-			srcLines[l] = srcLines[l].split('');			
+			srcLines[l] = srcLines[l].split('');
+			if (srcLines[l].length == 0) {
+				srcLines[l][0] = '&nbsp;';
+			}	
 		} 
 		
 		this.set('text', '');
@@ -139,6 +143,12 @@ App.SubtitleController = App.SmartController.extend({
 	},
 	deactivate: function () {
 		console.log('SubtitleController.deactivate()...')
+		var actionTOObjs = this.get('actionTimeouts');
+		for (var to in actionTOObjs) {
+			window.clearTimeout(to.id);
+		}
+		this.set('actionTimeouts', []);
+		
 		this.set('isLooping', false);
 		this.set('isEnded', true);
 		this.doForceFinish();
@@ -197,7 +207,7 @@ App.SubtitleController = App.SmartController.extend({
 				if (atChar == 0 && atLine == 0) {	
 					isNewLine = true;
 				} else if ( atChar >= srcLines[ atLine].length && !currentEdit) {
-					console.log('Char means new line', atChar, atLine, srcLines[atLine], 'edit:', currentEdit)
+//					console.log('Char means new line', atChar, atLine, srcLines[atLine], 'edit:', currentEdit)
 					isNewLine = true;
 					atChar = 0;
 					atLine++;
@@ -238,24 +248,36 @@ App.SubtitleController = App.SmartController.extend({
 					atChar++;
 					
 				} else if (isNewLine) {
-					console.log('NEWLINE', atLine, atChar, srcLines);
+//					console.log('NEWLINE', atLine, atChar, srcLines);
 					while (isEvents && srcLines[atLine] && srcLines[atLine][0] && srcLines[atLine][0] == '@') {
 						var line = srcLines[atLine].join('');
 						if (line.indexOf('@=') == 0) {
 							this.doTagRead(line, atPrintedLine); 
-						} else if(line.indexOf('@actionOnRead=') == 0) { ;
-							var action = line.split(' ')[0].split('=')[1];
-							me.send(action); 
+						} else if(line.indexOf('@actionOnRead=') == 0) {
+							var words =  line.split(' ');
+							var action = words[0].split('=')[1];
+							var delay = (words[1] && !isNaN(parseFloat(words[1])) && isFinite(words[1])) ? parseFloat(words[1]) : 0;
+							console.log('@action='+action, delay);
+							var actionFunc = function (my, myAction) {
+								return function () {
+									my.send(myAction)
+								}
+							}(this, action);
+							var to = setTimeout( actionFunc, delay);
+
+							this.get('actionTimeouts').push( {
+								func: actionFunc,
+								to: to
+							});
 						} else {
 							App.eventMapper.triggerEvent(ragh.MEvt.create(line.split(' ')[1])); 
 						}
 						atLine++;
-						console.log('skipped to '+atLine+' of '+srcLines.length);
+//						console.log('skipped to '+atLine+' of '+srcLines.length);
 					}
 					
 					
 					if ( atLine < srcLines.length && srcLines[atLine].length > 0 ) {
-						console.log('New Printed Line:', srcLines[atLine], atLine );
 						printedLines[atPrintedLine]='';
 						printedLines[atPrintedLine] += srcLines[atLine][atChar];
 						me.set('text', me.createTaggedLines(printedLines, null, 'newline'));
@@ -266,7 +288,7 @@ App.SubtitleController = App.SmartController.extend({
 				} 
 			};	
 		} else {
-			console.log('Ended')
+//			console.log('Ended')
 			me.set('isEnded', true);
 			window.cancelAnimationFrame(me.get('raf'));
 			if (me.get('hasRemoveButton')) {
@@ -312,7 +334,7 @@ App.SubtitleController = App.SmartController.extend({
 	},
 	
 	doTagRead: function (line, atPrintedLine) {
-		console.log('doTagRead')
+//		console.log('doTagRead')
 		var pendingClosingTags = this.get('pendingClosingTags'),
 			tagPositions = this.get('tagPositions'),
 			code =  this.getTagCodeFromLine(line);
@@ -326,9 +348,9 @@ App.SubtitleController = App.SmartController.extend({
 				isClosed: false
 			});
 			pendingClosingTags.push( tagPositions[tpEnd].expectedClosed );
-			console.log('Opened found ' + atPrintedLine + ':' + code +  ' INFERRED AND PUSHED: ('+tagPositions[tpEnd].expectedClosed+')');
+//			console.log('Opened found ' + atPrintedLine + ':' + code +  ' INFERRED AND PUSHED: ('+tagPositions[tpEnd].expectedClosed+')');
 		} else {
-			console.log('found closed:'+code)
+//			console.log('found closed:'+code)
 			var mostRecent =  this.getMostRecentOpenTag(tagPositions);
 			tagPositions[ mostRecent ].isClosed = true;
 			tagPositions[ mostRecent ].lineClosed = atPrintedLine-1;
@@ -336,7 +358,7 @@ App.SubtitleController = App.SmartController.extend({
 			
 			//Em.assert( 'SubtitleController: Closing tag ' + code + ' supplied without opening tag', mostRecentOpenTag );	
 			//Em.assert('SubtitleController: Tag mismatched in subtitle text. Got '+code+' expected closed version of '+mostRecentOpenTag.code+':'+mostRecentOpenTag.expectedClosed, code === mostRecentOpenTag.expectedClosed);
-			console.log('closing found ' + atPrintedLine + ':' + code +', prev opened '+tagPositions[ mostRecent ].code+', expected '+tagPositions[ mostRecent ].expectedClosed);
+//			console.log('closing found ' + atPrintedLine + ':' + code +', prev opened '+tagPositions[ mostRecent ].code+', expected '+tagPositions[ mostRecent ].expectedClosed);
 		}
 		this.set('pendingClosingTags', pendingClosingTags);
 		this.set('tagPositions', tagPositions);	
@@ -395,7 +417,7 @@ App.SubtitleController = App.SmartController.extend({
 	
 
 	startReading: function () {
-		console.log('start reading', this.get('orderRead'))
+//		console.log('start reading', this.get('orderRead'))
 		if (this.get('isInstant')) {
 			this.doForceFinish();
 		} else {
@@ -437,11 +459,18 @@ App.SubtitleController = App.SmartController.extend({
     },
 	doForceFinish: function () {
 		console.log('doForceFinish');
+		var actionTOObjs = this.get('actionTimeouts');
+		for (var to in actionTOObjs) {
+			to.func();
+			window.clearTimeout(to.id);
+		}
+		this.set('actionTimeouts', []);
+		
 		this.set('editList', []);
 		window.cancelAnimationFrame(this.get('raf'));
 		while (!this.get('isEnded') ) {
 			this.readChar(99999, this, true);
-		}	
+		}
 	}
 });
 

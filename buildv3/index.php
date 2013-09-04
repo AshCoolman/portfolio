@@ -27,35 +27,26 @@ My name is an origin, from which I can illustrate the different dimensions that 
 ?>
 
 <?php
+$quot = htmlspecialchars("\"");
 
  $d1copyA =  "\"" . 
 htmlspecialchars("@=<h3>
 X: Software Engineer
 @=</h3>
-Web development is my craft.
+Web dev is my craft.
 I value speed, elegance, and clarity.
-
-@=<div class=\"quote\">
-'Real artists ship'
-@=</div>
--Steve Jobs") . "
-@actionOnRead=doSubtitle2\"";
-
- $d1copyB =  "\"" . 
-htmlspecialchars("<OBLIGATORY SKILL LIST>
-@=<div class=\"indent\">") ."
- <strong>Javascript</strong>: JQuery, AJAX, nodejs, Ember, Handlebars, threejs (WebGL), Google Closure Library, Raphaeljs, Createjs, underscorejs <i>etc</i>
- <strong>Flash</strong>: AS3, AS2, Flex, Flash Video <i>etc</i>
- <strong>HTML</strong>: HTML5, CSS3, SVG, HTML5 Audio & Video, <i>etc</i>
- <strong>Serverside</strong>: PHP, MySQL, Postgres, templating, <i>etc</i>
- <strong>Programming Paradigms/Patterns</strong>: OOP, MCV, MVP <i>etc</i>
- <strong>Tools</strong>: LINT, SVN, Git <i>etc</i>
- <strong>General knowledge</strong>: 3d Math, Physics, Geo-location, CMS, API creation, Code documentation, Eclipse
+")."
+And as one <a href=" . $quot . "http://goo.gl/O5dnGf" . $quot . ">clever cookie</a> once said:
 " . 
 htmlspecialchars("
-@=</div>
-</OBLIGATORY SKILL LIST>") . "
-@actionOnRead=doSubtitle3\"";
+@=<div class=\"quote\">
+'Real artists ship'
+@=</div>") . "
+@actionOnRead=doSubtitle2 2000
+@actionOnRead=doShowSkillList 5000
+\"";
+
+ $d1copyB =  "";
 ?>
 
 
@@ -71,7 +62,7 @@ Simply put, I am a story teller.
 If the question is how to best communicate to an audience, 
 @actionOnRead=doShowQuestion
 then I have the technical skills can be used to craft an answering experience.
-@actionOnRead=doSecondSubtitle");
+");
 ?>
 
 <?php
@@ -225,8 +216,87 @@ And knowing that somewhere there exists a simple and elegant solution...
 			</div>
 
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php echo $d1copyA; ?>}}}
-			{{{controlWithVars 'subtitle' orderRead='2' isInstant=true layoutName="lo-subtitle-obligatory" hasRemoveButton=true thescript=<?php echo $d1copyB;?>}}}
-			{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Add dimension @edits=Y...,Why?...,Motivation..."}} 
+			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Add dimension @edits=Y...,Why?...,Motivation..."}} 
+			
+			{{#if controller.isShowSkillList}}
+			{{/if}}
+			<div class="row">
+				<div class="columns subtitle-text-holder obligatory-list">
+					<p>
+						<span class="heading">
+							<?php echo htmlspecialchars("<OBLIGATORY SKILL LIST>"); ?>
+						</span>
+					</p>
+					
+					<div class="indent">
+						<p><span class="heading">Javascript</span></p>
+					
+						<p><span>JQuery </span></p>
+						<p><span>AJAX </span></p>
+						<p><span>nodejs </span></p>
+						<p><span>Ember </span></p>
+						<p><span>Handlebars </span></p>
+						<p><span>threejs (WebGL) </span></p>
+						<p><span>Google Closure Library </span></p>
+						<p><span>Raphaeljs </span></p>
+						<p><span>Createjs </span></p>
+						<p><span>underscorejs </span></p>
+						
+						
+						<p><span class="heading">Flash</span></p>
+
+						<p><span>AS3 </span></p>
+						<p><span>AS2 </span></p>
+						<p><span>Flex </span></p>
+						<p><span>Flash Video </span></p>
+
+						
+						<p><span class="heading">HTML</span></p>
+
+						<p><span>HTML5</span></p>
+						<p><span>CSS3 </span></p>
+						<p><span>SVG </span></p>
+					
+					
+						<p><span class="heading">Serverside</span></p>
+
+						<p><span>PHP</span></p>
+						<p><span>MySQL </span></p>
+						<p><span>Postgres </span></p>
+						<p><span>Templating libraries </span></p>
+					
+					
+						<p><span class="heading">Coding Paradigms/Patterns</span></p>
+
+						<p><span>OOP</span></p>
+						<p><span>MVC </span></p>
+						<p><span>MVP </span></p>
+	
+
+				
+						<p><span class="heading">Tools</span></p>
+
+						<p><span>JSList</span></p>
+						<p><span>Git, SVN, Mecurial</span></p>
+						<p><span>JIRA</span></p>
+						
+
+						<p><span class="heading">General Knowledge</span></p>
+
+						<p><span>3d Math</span></p>
+						<p><span>2d / 3d Physics</span></p>
+						<p><span>Geolocation</span></p>
+						<p><span>API creation</span></p>
+						<p><span>Code documentation</span></p>
+						<p><span>Photoshop, Premiere, AfterEffects</span></p>
+						<p><span> </span></p>
+				</div>				 
+				<p>
+					<span class="heading">
+						<?php echo htmlspecialchars("</OBLIGATORY SKILL LIST>"); ?>
+					</span>
+				</p>
+			</div>
 		</script>
 
 <!--

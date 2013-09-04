@@ -2,6 +2,7 @@ App.Dimension1Route = Em.Route.extend({
 	subtitleController1:null,
 	subtitleController2:null,
 	dimension1NavController: null,
+	isShowSkillList: false,
 	init: function () {
 		this._super();
 		this.isStarted = false;
@@ -22,12 +23,10 @@ App.Dimension1Route = Em.Route.extend({
 	doStart: function (type, data) { 
 				
 		this.subtitleController1.set('content', App.scriptModel); 
-		this.subtitleController2.set('content', App.scriptModel); 
-		this.subtitleController3.set('content', App.scriptModel);  
+		this.subtitleController2.set('content', App.scriptModel);  
 		
         this.subtitleController1.setup();
         this.subtitleController2.setup();
-        this.subtitleController3.setup(); 
 
         this.subtitleController1.startReading();
 
@@ -58,7 +57,6 @@ App.Dimension1Route = Em.Route.extend({
 					switch (acontroller.get('orderRead')) {
 						case '1': this.subtitleController1 = acontroller; break;
 						case '2': this.subtitleController2 = acontroller; break;
-						case '3': this.subtitleController3 = acontroller; break;
 					}
 					break;  
 				case 'Dimension1NavController':  	this.dimension1NavController = acontroller; 	break;
@@ -77,13 +75,13 @@ App.Dimension1Route = Em.Route.extend({
 			this.subtitleController1.set('isCursor', false); 
 	        this.subtitleController2.startReading();
 		},
-		doSubtitle3: function () { 
-			this.subtitleController2.set('isCursor', false);
-	        this.subtitleController3.startReading();
+		doShowSkillList: function () { 
+			console.log('route isShowSkillList')
+			this.get('controller').set('isShowSkillList', true);
 		}
 	},
 	tryStart: function () {
-        if (!this.isStarted && this.subtitleController1 && this.subtitleController2  && this.subtitleController3) {
+        if (!this.isStarted && this.subtitleController1 && this.subtitleController2 ) {
 			this.isStarted = true;
             this.doStart()
 		}
