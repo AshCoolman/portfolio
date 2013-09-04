@@ -14,28 +14,103 @@
 	
   <link rel="stylesheet" href="stylesheets/app.css" />
   <link rel="stylesheet" href="css/portfolio.css" />
-  
+
+
+ <?php
+$indexCopyA = "\"" . 
+htmlspecialchars("@=<h3>
+Ashley Coleman: The Origin
+@=</h3>") ."
+To teach you about myself, I start with my name.
+My name is an origin, from which I can illustrate the different dimensions that make me up.
+@actionOnRead=doSecondSubtitle" . "\"";
+?>
+
+<?php
+
+ $d1copyA =  "\"" . 
+htmlspecialchars("@=<h3>
+X: Software Engineer
+@=</h3>
+Web development is my craft.
+I value speed, elegance, and clarity.
+
+@=<div class=\"quote\">
+'Real artists ship'
+@=</div>
+-Steve Jobs") . "
+@actionOnRead=doSubtitle2\"";
+
+ $d1copyB =  "\"" . 
+htmlspecialchars("<OBLIGATORY SKILL LIST>
+@=<div class=\"indent\">") ."
+ <strong>Javascript</strong>: JQuery, AJAX, nodejs, Ember, Handlebars, threejs (WebGL), Google Closure Library, Raphaeljs, Createjs, underscorejs <i>etc</i>
+ <strong>Flash</strong>: AS3, AS2, Flex, Flash Video <i>etc</i>
+ <strong>HTML</strong>: HTML5, CSS3, SVG, HTML5 Audio & Video, <i>etc</i>
+ <strong>Serverside</strong>: PHP, MySQL, Postgres, templating, <i>etc</i>
+ <strong>Programming Paradigms/Patterns</strong>: OOP, MCV, MVP <i>etc</i>
+ <strong>Tools</strong>: LINT, SVN, Git <i>etc</i>
+ <strong>General knowledge</strong>: 3d Math, Physics, Geo-location, CMS, API creation, Code documentation, Eclipse
+" . 
+htmlspecialchars("
+@=</div>
+</OBLIGATORY SKILL LIST>") . "
+@actionOnRead=doSubtitle3\"";
+?>
+
+
+
+<?php 
+$d2copyA =  
+htmlspecialchars("@=<h3>
+Y: The Storyteller
+@=</h3>
+I like induce change in the audience, be it emotion, thought, excitement, knowledge...
+Simply put, I am a story teller.
+
+If the question is how to best communicate to an audience, 
+@actionOnRead=doShowQuestion
+then I have the technical skills can be used to craft an answering experience.
+@actionOnRead=doSecondSubtitle");
+?>
+
+<?php
+$d3copyA = htmlspecialchars("@=<h3>
+Z: The Creative
+@=</h3>") . "
+I am committed to creative thinking.
+It means discarding your <i>first thoughts</i>, and what seems <i>obvious</i>.
+
+And knowing that somewhere there exists a simple and elegant solution...
+@actionOnRead=doRotateQuestionMark
+"; 
+
+
+?>
+
+
 
   <script src="javascripts/vendor/custom.modernizr.js"></script>
 
 
 		<!-- APPLICATION -->
 		<script type="text/x-handlebars" data-template-name="application">		
-		
-
-		 <row>
-			{{outlet "nav-list"}}
-		</row>
-		
-
+			 <row>
+				{{outlet "nav-list"}}
+			</row>
 			{{renderWithVars 'preloader-content' preloader}}
-			
-
-			
 			{{outlet}}
-			
 		</script>
 
+
+		<!-- LAYOUT -->
+		<script type="text/x-handlebars" data-template-name="lo-fixed-size-centered">
+			<div class="relative-positioned">
+				<div class="absolute-positioned">
+ 					{{yield}}
+				</div
+			</div>
+		</script>
 
 		<!-- LAYOUT -->
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-row">
@@ -77,11 +152,9 @@
 		</script>
 
 		<!-- TRANSITION -->
-		<script type="text/x-handlebars" data-template-name="transition">
-		
-				<canvas class="transition-canvas">
-				</canvas>
-				
+		<script type="text/x-handlebars" data-template-name="transition">		
+			<canvas class="transition-canvas">
+			</canvas>
 		</script>
 
 		<!-- HASH BTN -->
@@ -136,15 +209,7 @@
 
 		<!-- ROUTE INDEX -->
 		<script type="text/x-handlebars" data-template-name="index">		
-<?php
-$indexCopyA = "\"" . 
-htmlspecialchars("@=<h3>
-Ashley Coleman: The Origin
-@=</h3>") ."
-To teach you about myself, I start with my name.
-My name is an origin, from which I can illustrate the different dimensions that make me up.
-@actionOnRead=doSecondSubtitle" . "\"";
-?>
+
 			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php echo $indexCopyA; ?>}}}
 			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="Add dimension @edits=X...,One...,Who...,How..." isLink=true actionEvent="doGotoDimension1" }}}
 		</script>
@@ -158,40 +223,7 @@ My name is an origin, from which I can illustrate the different dimensions that 
 				{{renderWithVars 'interactive-grid' pixW=20 isPlotX=true}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
-<?php
 
- $d1copyA =  "\"" . 
-htmlspecialchars("@=<h3>
-X: Software Engineer
-@=</h3>
-Web development is my craft.
-I value speed, elegance, and clarity.
- 
-@=<div class=\"quote\">
-'Real artists ship'
-@=</div>
--Steve Jobs") . "
-@actionOnRead=doSubtitle2\"";
-
- $d1copyB =  "\"" . 
-htmlspecialchars("<OBLIGATORY SKILL LIST>
-@=<div class=\"indent\">") ."
- <strong>Javascript</strong>: JQuery, AJAX, nodejs, Ember, Handlebars, threejs (WebGL), Google Closure Library, Raphaeljs, Createjs, underscorejs <i>etc</i>
- <strong>Flash</strong>: AS3, AS2, Flex, Flash Video <i>etc</i>
- <strong>HTML</strong>: HTML5, CSS3, SVG, HTML5 Audio & Video, <i>etc</i>
- <strong>Serverside</strong>: PHP, MySQL, Postgres, templating, <i>etc</i>
- <strong>Programming Paradigms/Patterns</strong>: OOP, MCV, MVP <i>etc</i>
- <strong>Tools</strong>: LINT, SVN, Git <i>etc</i>
- <strong>General knowledge</strong>: 3d Math, Physics, Geo-location, CMS, API creation, Code documentation, Eclipse
-" . 
-htmlspecialchars("
-@=</div>
-</OBLIGATORY SKILL LIST>") . "
-@actionOnRead=doSubtitle3\"";
-
-
-
-?>
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php echo $d1copyA; ?>}}}
 			{{{controlWithVars 'subtitle' orderRead='2' isInstant=true layoutName="lo-subtitle-obligatory" hasRemoveButton=true thescript=<?php echo $d1copyB;?>}}}
 			{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Add dimension @edits=Y...,Why?...,Motivation..."}} 
@@ -297,19 +329,7 @@ htmlspecialchars("
 				</div>
 			</div>
 
-<?php 
-$d2copyA =  
-htmlspecialchars("@=<h3>
-Y: The Storyteller
-@=</h3>
-I like induce change in the audience, be it emotion, thought, excitement, knowledge...
-Simply put, I am a story teller.
- 
-If the question is how to best communicate to an audience, 
-@actionOnRead=doShowQuestion
-then I have the technical skills can be used to craft an answering experience.
-@actionOnRead=doSecondSubtitle");
-?>
+
 
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyA?>"}}}
 			{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="Add dimension @edits=Z...,Depth...,Exploration..." isLink=true actionEvent="doGotoDimension3" }} 
@@ -402,27 +422,14 @@ then I have the technical skills can be used to craft an answering experience.
 
 		<!-- ROUTE DIMENSION 3 -->
 		<script type="text/x-handlebars" data-template-name="dimension3">
-			<div class="relative-positioned">
-				<div class="absolute-positioned"> 
-					{{renderWithVars 'world-3d' World3d}}
-				</div
-			</div>
-		
-<?php
-$d3copyA = htmlspecialchars("@=<h3>
-Z: The Creative
-@=</h3>") . "
-I am committed to creative thinking.
-It means discarding your <i>first thoughts</i>, and what seems <i>obvious</i>.
- 
-And knowing that somewhere there exists a simple and elegant solution...
-@actionOnRead=doRotateQuestionMark
-"; 
 
-$d3copyB = "i.e. The big idea.";
-?>
+			{{controlWithVars 'world-3d' layoutName='lo-fixed-size-centered'}}
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyA; ?>"}}}
-			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyB; ?>"}}}
+			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php
+			echo "
+\"i.e. The big idea.
+
+\"";?>}}}
 
 		</script>
 

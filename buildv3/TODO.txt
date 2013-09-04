@@ -16,6 +16,7 @@ Persistence
 
 
 MEDIUM
+zindex text so don't use pointer events
 performance
 Mosaic SVG
 Ruler X Appear
