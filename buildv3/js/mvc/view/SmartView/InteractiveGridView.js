@@ -46,7 +46,7 @@ App.InteractiveGridView = App.SmartView.extend({
 		this._super();
 		var raphaeljs,
 			w = 1200,
-			h = 1024,
+			h = 2000,
 			pixW = 	this.get('controller').get('pixW') || h,
 			pixH= this.get('controller').get('pixH') || w ,
 			unitX = 10,
@@ -152,21 +152,29 @@ App.InteractiveGridView = App.SmartView.extend({
 		*/
 		var mouseZone = raphaeljs.rect(0,0,w,h).attr({'stroke-width':0, 'fill':'#001133', opacity:0.0});
 		$(mouseZone.node).addClass('grid-zone');
+		this.set('$mouseZone', $(mouseZone.node))
 		var svgPoint = $('svg', this.$el)[0].createSVGPoint();
-		var pointToSVGSpaceFunc = function (e){
-			var offset = $(e.target).parent().offset();
+		var pointToSVGSpaceFunc = function (e, me){
+			var $mouseZone = me.get('$mouseZone');
+			var offset = $mouseZone.parent().offset();
 			svgPoint.x = e.pageX - offset.left;
 			svgPoint.y = e.pageY - offset.top;
-			if (!$(e.target).parent()[0].getScreenCTM) return svgPoint;
-		  return svgPoint.matrixTransform($(e.target).parent()[0].getScreenCTM().inverse());
+			if (!$mouseZone.parent()[0].getScreenCTM) return svgPoint;
+		  return svgPoint.matrixTransform($mouseZone.parent()[0].getScreenCTM().inverse());
 		}
-		$( this.$el, mouseZone).mousemove(function (me, acoordX, aattrsOver, aattrs, aplotColors) {
+		$( this.$el, mouseZone).mousedown( function (me) {
+			return function (e) {
+				console.log('click', e, e.target)
+			}
+		}(this))
+		$( document).mousemove(function (me, acoordX, aattrsOver, aattrs, aplotColors) {
 			return function (e) {
 				
 				/*var offset = $(e.target).parent().offset(),
 					mousePt = {x:(e.pageX - offset.left), y:(e.pageY - offset.top)},
 				*/
-				var mousePt = pointToSVGSpaceFunc(e),
+				
+				var mousePt = pointToSVGSpaceFunc(e, me),
 					x = mousePt.x,
 					y = mousePt.y,
 					gX = Math.floor(x / pixW),
@@ -288,15 +296,30 @@ App.InteractiveGridView = App.SmartView.extend({
 		
 		this.doResize();
 		
+		
+		$(window).bind('resize.InteractiveGridView', function (me) {
+			return function () {
+				me.doResize();
+			}
+		}(this));
+		
 	},
+	
+	willDestroyElement: function ( ) { 
+		
+	},
+
+	
+	
 	doResize: function (e) {
 		/* Resize campus element */ 
-		
+		console.log('resized', this.$el.parent())
 		var campusW = 1200; 
-		var campusH = 1024; 
+		var campusH = 2000; 
 		var curCampusW = this.get('$svgRaphaeljs').width(); 
 		var newCampusH = heightInRatio(campusH,campusW,curCampusW); 
 		this.get('$svgRaphaeljs').height(newCampusH); 
+		//this.$el.parent().css('height', ((document.height !== undefined) ? document.height - 100: document.body.offsetHeight - 100) + 'px');
 		function heightInRatio(oH,oW,nW){ return (oH / oW * nW); } 
 	}
 	

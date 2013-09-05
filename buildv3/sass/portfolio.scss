@@ -5,7 +5,7 @@ $zIndexText: 900;
 $zIndexNone: 100;
 $zIndexFallbackButton: 200;
 $subtitleBackGroundColor: #FFFFFF;
-
+$navBarHeight: 45px;
 /*
 http://jsfiddle.net/VAXrL/190/
 */
@@ -24,7 +24,9 @@ $default-legacy-ie: 7 8 9 10 11 !default;
     }
 }
 	
-
+.top-bar {
+	z-index: $zIndexButton;
+} 
 
 button {
 	z-index: $zIndexButton;
@@ -152,7 +154,6 @@ html,body {
 	z-index: $zIndexText;
 }	
  .subtitle-text-holder span.heading {
-	font-size: 1.3em;
 	font-weight:bold;
 	margin-top: 1em;
 }
@@ -314,8 +315,9 @@ background-repeat: no-repeat;
   margin-left: -500px;
 }
 
-.dimension1-nav {
-	/*pointer-events: none;*/
+.dimension1 {
+	overflow:hidden; 
+	height:100%;
 }
 .interactive-grid {
 	position: absolute;
@@ -327,11 +329,13 @@ background-repeat: no-repeat;
 
 #svg-raphaeljs {
 	position: absolute;
+	z-index:0;
 	width:100%;
 }
 
 .graph-plot, .graph-position {
 	position:absolute;
+	top:$navBarHeight;
 	font-size:18px;
 	color:#99CC99;
 	width:100%;

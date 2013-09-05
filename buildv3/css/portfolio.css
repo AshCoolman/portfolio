@@ -1,6 +1,9 @@
 /*
 http://jsfiddle.net/VAXrL/190/
 */
+.top-bar {
+  z-index: 1000; }
+
 button {
   z-index: 1000; }
 
@@ -106,7 +109,6 @@ html, body {
   z-index: 900; }
 
 .subtitle-text-holder span.heading {
-  font-size: 1.3em;
   font-weight: bold;
   margin-top: 1em; }
 
@@ -235,8 +237,9 @@ a:visited {
   top: 0;
   margin-left: -500px; }
 
-.dimension1-nav {
-  /*pointer-events: none;*/ }
+.dimension1 {
+  overflow: hidden;
+  height: 100%; }
 
 .interactive-grid {
   position: absolute;
@@ -246,10 +249,12 @@ a:visited {
 
 #svg-raphaeljs {
   position: absolute;
+  z-index: 0;
   width: 100%; }
 
 .graph-plot, .graph-position {
   position: absolute;
+  top: 45px;
   font-size: 18px;
   color: #99CC99;
   width: 100%;

@@ -260,6 +260,7 @@ App.SubtitleController = App.SmartController.extend({
 							console.log('@action='+action, delay);
 							var actionFunc = function (my, myAction) {
 								return function () {
+									console.log('sending', myAction);
 									my.send(myAction)
 								}
 							}(this, action);
@@ -460,8 +461,9 @@ App.SubtitleController = App.SmartController.extend({
 	doForceFinish: function () {
 		console.log('doForceFinish');
 		var actionTOObjs = this.get('actionTimeouts');
-		for (var to in actionTOObjs) {
-			to.func();
+		for (var to = 0; to < actionTOObjs.length; to++) {
+			//console.log(actionTOObjs[to].func);
+			actionTOObjs[to].func();
 			window.clearTimeout(to.id);
 		}
 		this.set('actionTimeouts', []);

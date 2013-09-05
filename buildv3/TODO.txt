@@ -22,6 +22,8 @@ Ruler X Appear
 Ruler Y Appear
 Ruler Z Appear
 Typography
+Auto find unclosed tags and add to tag list
+
 
 LOW PRIORITY
 10	SubtitleController forceFinish on view_willRemove...

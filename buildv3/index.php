@@ -29,24 +29,86 @@ My name is an origin, from which I can illustrate the different dimensions that 
 <?php
 $quot = htmlspecialchars("\"");
 
- $d1copyA =  "\"" . 
-htmlspecialchars("@=<h3>
-X: Software Engineer
-@=</h3>
+ $d1copyA = 
+'<b class="indent">X: Software Engineer</b>
 Web dev is my craft.
 I value speed, elegance, and clarity.
-")."
-And as one <a href=" . $quot . "http://goo.gl/O5dnGf" . $quot . ">clever cookie</a> once said:
-" . 
-htmlspecialchars("
-@=<div class=\"quote\">
-'Real artists ship'
-@=</div>") . "
-@actionOnRead=doSubtitle2 2000
-@actionOnRead=doShowSkillList 5000
-\"";
 
- $d1copyB =  "";
+And as one <a href="http://goo.gl/O5dnGf">clever cookie</a> once said:
+
+<b class="quote">Real artists ship</b>
+@actionOnRead=doSubtitle2 2000
+@actionOnRead=doSubtitle3 5000';
+
+$obligatoryList = '<span class="heading">' . htmlspecialchars("<OBLIGATORY SKILL LIST>") . '</span>
+@=<div class="indent">
+							<span class="heading">Javascript</span>
+					
+							JQuery 
+							AJAX 
+							nodejs 
+							Ember 
+							Handlebars 
+							threejs (WebGL) 
+							Google Closure Library 
+							Raphaeljs 
+							Createjs 
+							underscorejs 
+						
+						
+							<span class="heading">Flash</span>
+
+							AS3 
+							AS2 
+							Flex 
+							Flash Video 
+
+						
+							<span class="heading">HTML</span>
+
+							HTML5
+							CSS3 
+							SVG 
+					
+					
+							<span class="heading">Serverside</span>
+
+							PHP
+							MySQL 
+							Postgres 
+							Templating libraries 
+					
+					
+							<span class="heading">Coding Paradigms/Patterns</span>
+
+							OOP
+							MVC 
+							MVP 
+	
+
+				
+							<span class="heading">Tools</span>
+
+							JSList
+							Git, SVN, Mecurial
+							JIRA
+						
+
+							<span class="heading">General Knowledge</span>
+
+							3d Math
+							2d / 3d Physics
+							Geolocation
+							API creation
+							Code documentation
+							Photoshop, Premiere, AfterEffects
+						 
+@=</div>				 
+				
+				<span class="heading">' . htmlspecialchars("</OBLIGATORY SKILL LIST>") . '</span>';
+$obligatoryList = addcslashes($obligatoryList, '"');		
+$d1copyA = addcslashes($d1copyA, '"');
+				
 ?>
 
 
@@ -89,6 +151,9 @@ And knowing that somewhere there exists a simple and elegant solution...
 			 <row>
 				{{outlet "nav-list"}}
 			</row>
+			
+
+			
 			{{renderWithVars 'preloader-content' preloader}}
 			{{outlet}}
 		</script>
@@ -203,6 +268,7 @@ And knowing that somewhere there exists a simple and elegant solution...
 
 			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php echo $indexCopyA; ?>}}}
 			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="Add dimension @edits=X...,One...,Who...,How..." isLink=true actionEvent="doGotoDimension1" }}}
+
 		</script>
 
 
@@ -210,93 +276,18 @@ And knowing that somewhere there exists a simple and elegant solution...
 		<!--{{renderWithVars 'world-1d'}}-->
 		<script type="text/x-handlebars" data-template-name="dimension1">
 		
-			<div class="full-width-centered absolute-positioned" style="overflow:hidden; height: 100%; top:3em">
-				{{renderWithVars 'interactive-grid' pixW=20 isPlotX=true}}
-				{{render 'heartbeat' heartbeat}}
-			</div>
+		<div class="full-width-centered" style="position: fixed; top:0; height:100%; overflow:hidden; ">
+			{{renderWithVars 'interactive-grid' pixW=20 isPlotX=true}}
+			{{render 'heartbeat' heartbeat}}
+		</div>
 
-			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php echo $d1copyA; ?>}}}
+			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
 			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Add dimension @edits=Y...,Why?...,Motivation..."}} 
-			
+			{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' hasRemoveButton=true isInstant=true thescript="<?php echo $obligatoryList; ?>"}} 
+
 			{{#if controller.isShowSkillList}}
+
 			{{/if}}
-			<div class="row">
-				<div class="columns subtitle-text-holder obligatory-list">
-					<p>
-						<span class="heading">
-							<?php echo htmlspecialchars("<OBLIGATORY SKILL LIST>"); ?>
-						</span>
-					</p>
-					
-					<div class="indent">
-						<p><span class="heading">Javascript</span></p>
-					
-						<p><span>JQuery </span></p>
-						<p><span>AJAX </span></p>
-						<p><span>nodejs </span></p>
-						<p><span>Ember </span></p>
-						<p><span>Handlebars </span></p>
-						<p><span>threejs (WebGL) </span></p>
-						<p><span>Google Closure Library </span></p>
-						<p><span>Raphaeljs </span></p>
-						<p><span>Createjs </span></p>
-						<p><span>underscorejs </span></p>
-						
-						
-						<p><span class="heading">Flash</span></p>
-
-						<p><span>AS3 </span></p>
-						<p><span>AS2 </span></p>
-						<p><span>Flex </span></p>
-						<p><span>Flash Video </span></p>
-
-						
-						<p><span class="heading">HTML</span></p>
-
-						<p><span>HTML5</span></p>
-						<p><span>CSS3 </span></p>
-						<p><span>SVG </span></p>
-					
-					
-						<p><span class="heading">Serverside</span></p>
-
-						<p><span>PHP</span></p>
-						<p><span>MySQL </span></p>
-						<p><span>Postgres </span></p>
-						<p><span>Templating libraries </span></p>
-					
-					
-						<p><span class="heading">Coding Paradigms/Patterns</span></p>
-
-						<p><span>OOP</span></p>
-						<p><span>MVC </span></p>
-						<p><span>MVP </span></p>
-	
-
-				
-						<p><span class="heading">Tools</span></p>
-
-						<p><span>JSList</span></p>
-						<p><span>Git, SVN, Mecurial</span></p>
-						<p><span>JIRA</span></p>
-						
-
-						<p><span class="heading">General Knowledge</span></p>
-
-						<p><span>3d Math</span></p>
-						<p><span>2d / 3d Physics</span></p>
-						<p><span>Geolocation</span></p>
-						<p><span>API creation</span></p>
-						<p><span>Code documentation</span></p>
-						<p><span>Photoshop, Premiere, AfterEffects</span></p>
-						<p><span> </span></p>
-				</div>				 
-				<p>
-					<span class="heading">
-						<?php echo htmlspecialchars("</OBLIGATORY SKILL LIST>"); ?>
-					</span>
-				</p>
-			</div>
 		</script>
 
 <!--
