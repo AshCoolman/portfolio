@@ -17,32 +17,33 @@
 
 
  <?php
-$indexCopyA = "\"" . 
-htmlspecialchars("@=<h3>
+$indexCopyA = "@=<h3>
 Ashley Coleman: The Origin
-@=</h3>") ."
+@=</h3>
 To teach you about myself, I start with my name.
 My name is an origin, from which I can illustrate the different dimensions that make me up.
-@actionOnRead=doSecondSubtitle" . "\"";
+@actionOnRead=doSecondSubtitle";
 ?>
 
 <?php
 $quot = htmlspecialchars("\"");
 
- $d1copyA = 
-'<b>X: Software Engineer</b>
+ $d1copyA = '@=<h3>
+X: Software Engineer
+@=</h3>
 
 Web dev is my craft.
 I value speed, elegance, and clarity.
 
 And as one <a href="http://goo.gl/O5dnGf">clever cookie</a> once said:
 
-<i class="quote">Real artists ship</i>';
+<i class="quote">Real artists ship</i>
+@actionOnRead=doSubtitle2 2000
+@actionOnRead=doSubtitle3 5000';
 
 $obligatoryList = '<span class="heading">' . htmlspecialchars("<OBLIGATORY SKILL LIST>") . '</span>
 @=<div class="indent">
 							<span class="heading">Javascript</span>
-					
 							JQuery 
 							AJAX 
 							nodejs 
@@ -53,58 +54,46 @@ $obligatoryList = '<span class="heading">' . htmlspecialchars("<OBLIGATORY SKILL
 							Raphaeljs 
 							Createjs 
 							underscorejs 
-						
-						
+
 							<span class="heading">Flash</span>
-
-							AS3 
+							AS3
 							AS2 
-							Flex 
-							Flash Video 
+							Flex
+							Flash Video
 
-						
 							<span class="heading">HTML</span>
-
 							HTML5
-							CSS3 
-							SVG 
-					
-					
-							<span class="heading">Serverside</span>
+							CSS3
+							SVG
 
+							<span class="heading">Serverside</span>
 							PHP
 							MySQL 
 							Postgres 
 							Templating libraries 
-					
-					
-							<span class="heading">Coding Paradigms/Patterns</span>
 
+							<span class="heading">Coding Paradigms/Patterns</span>
 							OOP
 							MVC 
 							MVP 
-	
 
-				
 							<span class="heading">Tools</span>
-
 							JSList
 							Git, SVN, Mecurial
 							JIRA
-						
 
 							<span class="heading">General Knowledge</span>
-
 							3d Math
 							2d / 3d Physics
 							Geolocation
 							API creation
 							Code documentation
 							Photoshop, Premiere, AfterEffects
-						 
-@=</div>				 
-				
-				<span class="heading">' . htmlspecialchars("</OBLIGATORY SKILL LIST>") . '</span>';
+
+@=</div>
+
+<span class="heading">' . htmlspecialchars("</OBLIGATORY SKILL LIST>") . '</span>';
+
 $obligatoryList = addcslashes($obligatoryList, '"');		
 $d1copyA = addcslashes($d1copyA, '"');
 				
@@ -265,7 +254,7 @@ And knowing that somewhere there exists a simple and elegant solution...
 		<!-- ROUTE INDEX -->
 		<script type="text/x-handlebars" data-template-name="index">		
 
-			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php echo $indexCopyA; ?>}}}
+			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $indexCopyA; ?>"}}}
 			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="Add dimension @edits=X...,One...,Who...,How..." isLink=true actionEvent="doGotoDimension1" }}}
 
 		</script>

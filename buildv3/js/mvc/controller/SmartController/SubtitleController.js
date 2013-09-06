@@ -392,7 +392,7 @@ App.SubtitleController = App.SmartController.extend({
 		}
 		
 	
-		/*
+		
 		tagPositions.reverse();
 		for ( var t = 0; t < tagPositions.length; t++ ) {
 			var tag = tagPositions[ t ],
@@ -411,12 +411,12 @@ App.SubtitleController = App.SmartController.extend({
 			}
 		}
 		tagPositions.reverse();
-		*/
-		//taggedLines[last] = taggedLines[last] + pendingClosingTags.join(' ... ');
-		if (pendingClosingTags.length) console.log('taggedLines['+last+'] added '+pendingClosingTags.length+'pending', taggedLines[last]);
+		
+		taggedLines[last] = taggedLines[last] + pendingClosingTags.join(' ... ');
+		//if (pendingClosingTags.length) console.log('taggedLines['+last+'] added '+pendingClosingTags.length+'pending', taggedLines[last]);
 		this.set('tagPositions', tagPositions);
 		this.set('pendingClosingTags', pendingClosingTags);
-		console.log(taggedLines.join('\n'));
+		//console.log(taggedLines.join('\n'));
 		return taggedLines.join('');
 	},
 
