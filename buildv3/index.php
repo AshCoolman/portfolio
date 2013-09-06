@@ -30,15 +30,14 @@ My name is an origin, from which I can illustrate the different dimensions that 
 $quot = htmlspecialchars("\"");
 
  $d1copyA = 
-'<b class="indent">X: Software Engineer</b>
+'<b>X: Software Engineer</b>
+
 Web dev is my craft.
 I value speed, elegance, and clarity.
 
 And as one <a href="http://goo.gl/O5dnGf">clever cookie</a> once said:
 
-<b class="quote">Real artists ship</b>
-@actionOnRead=doSubtitle2 2000
-@actionOnRead=doSubtitle3 5000';
+<i class="quote">Real artists ship</i>';
 
 $obligatoryList = '<span class="heading">' . htmlspecialchars("<OBLIGATORY SKILL LIST>") . '</span>
 @=<div class="indent">
@@ -281,9 +280,10 @@ And knowing that somewhere there exists a simple and elegant solution...
 			{{render 'heartbeat' heartbeat}}
 		</div>
 
+
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
 			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Add dimension @edits=Y...,Why?...,Motivation..."}} 
-			{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' hasRemoveButton=true isInstant=true thescript="<?php echo $obligatoryList; ?>"}} 
+			{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}} 
 
 			{{#if controller.isShowSkillList}}
 

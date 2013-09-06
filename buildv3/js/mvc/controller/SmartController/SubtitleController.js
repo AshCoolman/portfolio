@@ -85,6 +85,7 @@ App.SubtitleController = App.SmartController.extend({
 		ascript = ascript.replace(/(\r\n|\n|\r)/gm,'\n');
 		ascript = ascript.split("\r\n").join('\n')
 		ascript = window.unescape(ascript);
+		//ascript=ascript.replace('\\"','"')
 		
 		var printedLines = [''],
 			srcLines = ascript.split('\n'),
@@ -252,18 +253,22 @@ App.SubtitleController = App.SmartController.extend({
 					while (isEvents && srcLines[atLine] && srcLines[atLine][0] && srcLines[atLine][0] == '@') {
 						var line = srcLines[atLine].join('');
 						if (line.indexOf('@=') == 0) {
+							console.log('found tag', line)
 							this.doTagRead(line, atPrintedLine); 
 						} else if(line.indexOf('@actionOnRead=') == 0) {
 							var words =  line.split(' ');
 							var action = words[0].split('=')[1];
 							var delay = (words[1] && !isNaN(parseFloat(words[1])) && isFinite(words[1])) ? parseFloat(words[1]) : 0;
 							console.log('@action='+action, delay);
-							var actionFunc = function (my, myAction) {
+							var actionFunc = function (my, myAction, pos) {
 								return function () {
-									console.log('sending', myAction);
+									var actionTOObjs = my.get('actionTimeouts');
+									window.clearTimeout(actionTOObjs[pos].to);
+									actionTOObjs[pos].to = null;
 									my.send(myAction)
+									
 								}
-							}(this, action);
+							}(this, action, this.get('actionTimeouts').length);
 							var to = setTimeout( actionFunc, delay);
 
 							this.get('actionTimeouts').push( {
@@ -311,13 +316,16 @@ App.SubtitleController = App.SmartController.extend({
 	},
 	
 	getTagCodeFromLine: function (line) {
-		var code = unescape(line).split('=');		
+		var code = unescape(line).split('@=');	
 		code.splice(0, 1);
-		return $('<div />').html( code.join('=') ).text();
+		return code[0]
 	},
 	
 	getClosedVersionOfTag: function (code) {
+		//console.log('getClosedVersionOfTag code'+code)
 		var closedVersion = (code.split(' ')[0]+'>').split('');
+		closedVersion=closedVersion.replace('\t','');
+		
 		closedVersion.splice(1, 0, '/');
 		return closedVersion.join('').replace('>>', '>');
 	},
@@ -339,7 +347,7 @@ App.SubtitleController = App.SmartController.extend({
 		var pendingClosingTags = this.get('pendingClosingTags'),
 			tagPositions = this.get('tagPositions'),
 			code =  this.getTagCodeFromLine(line);
-
+		//console.log('code from line', code)
 		if (code.charAt(1) != '/') {
 			var tpEnd = tagPositions.length;
 			tagPositions.push({
@@ -349,7 +357,7 @@ App.SubtitleController = App.SmartController.extend({
 				isClosed: false
 			});
 			pendingClosingTags.push( tagPositions[tpEnd].expectedClosed );
-//			console.log('Opened found ' + atPrintedLine + ':' + code +  ' INFERRED AND PUSHED: ('+tagPositions[tpEnd].expectedClosed+')');
+			//console.log('Opened found at ' + atPrintedLine + ':' + code +  ' INFERRED AND PUSHED: ('+tagPositions[tpEnd].expectedClosed+')');
 		} else {
 //			console.log('found closed:'+code)
 			var mostRecent =  this.getMostRecentOpenTag(tagPositions);
@@ -366,6 +374,7 @@ App.SubtitleController = App.SmartController.extend({
 	},
 	
 	createTaggedLines: function (aprintedLines, currentEditPrinted, context) {
+		
 			if (aprintedLines+'' == 'NaN')
 				console.log(aprintedLines, context);
 		var tagPositions = this.get('tagPositions'),
@@ -373,7 +382,7 @@ App.SubtitleController = App.SmartController.extend({
 			pendingClosingTags = this.get('pendingClosingTags'),
 			taggedLines = aprintedLines.slice(0),
 			last = taggedLines.length - 1;
-			
+		
 		for (var l = 0; l < taggedLines.length; l++) {
 			if (l == taggedLines.length-1) {
 				taggedLines[l] = this.tagStart + taggedLines[l] +'<i>'+currentEditPrinted+'</i>'+ this.tagCursor + this.tagEnd;
@@ -381,6 +390,9 @@ App.SubtitleController = App.SmartController.extend({
 				taggedLines[l] = this.tagStart + taggedLines[l] + this.tagEnd;
 			}
 		}
+		
+	
+		/*
 		tagPositions.reverse();
 		for ( var t = 0; t < tagPositions.length; t++ ) {
 			var tag = tagPositions[ t ],
@@ -399,10 +411,12 @@ App.SubtitleController = App.SmartController.extend({
 			}
 		}
 		tagPositions.reverse();
-		
-		taggedLines[last] = taggedLines[last] + pendingClosingTags.join('');
+		*/
+		//taggedLines[last] = taggedLines[last] + pendingClosingTags.join(' ... ');
+		if (pendingClosingTags.length) console.log('taggedLines['+last+'] added '+pendingClosingTags.length+'pending', taggedLines[last]);
 		this.set('tagPositions', tagPositions);
 		this.set('pendingClosingTags', pendingClosingTags);
+		console.log(taggedLines.join('\n'));
 		return taggedLines.join('');
 	},
 
@@ -460,13 +474,7 @@ App.SubtitleController = App.SmartController.extend({
     },
 	doForceFinish: function () {
 		console.log('doForceFinish');
-		var actionTOObjs = this.get('actionTimeouts');
-		for (var to = 0; to < actionTOObjs.length; to++) {
-			//console.log(actionTOObjs[to].func);
-			actionTOObjs[to].func();
-			window.clearTimeout(to.id);
-		}
-		this.set('actionTimeouts', []);
+
 		
 		this.set('editList', []);
 		window.cancelAnimationFrame(this.get('raf'));
