@@ -152,6 +152,8 @@ html,body {
 	border-right-color: $subtitleBackGroundColor;
 	border-right-style: solid;
 	z-index: $zIndexText;
+	pointer-events:auto;
+	cursor: pointer;
 }	
  .subtitle-text-holder span.heading {
 	font-weight:bold;

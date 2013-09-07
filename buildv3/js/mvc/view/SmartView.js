@@ -12,6 +12,7 @@ App.SmartView = Ember.View.extend({
 		this._super();
 		return this
 	},
+
 	didInsertElement: function (scope) {
 		this._super();
 		if (!scope) scope = this;

@@ -17,12 +17,14 @@
 
 
  <?php
-$indexCopyA = "@=<h3>
+$indexCopyA = '@=<h3>
 Ashley Coleman: The Origin
 @=</h3>
 To teach you about myself, I start with my name.
 My name is an origin, from which I can illustrate the different dimensions that make me up.
-@actionOnRead=doSecondSubtitle";
+@actionOnRead=doSecondSubtitle';
+$indexCopyA = addcslashes($indexCopyA, '"');
+
 ?>
 
 <?php
@@ -40,6 +42,7 @@ And as one <a href="http://goo.gl/O5dnGf">clever cookie</a> once said:
 <i class="quote">Real artists ship</i>
 @actionOnRead=doSubtitle2 2000
 @actionOnRead=doSubtitle3 5000';
+$d1copyA = addcslashes($d1copyA, '"');
 
 $obligatoryList = '<span class="heading">' . htmlspecialchars("<OBLIGATORY SKILL LIST>") . '</span>
 @=<div class="indent">
@@ -94,16 +97,15 @@ $obligatoryList = '<span class="heading">' . htmlspecialchars("<OBLIGATORY SKILL
 
 <span class="heading">' . htmlspecialchars("</OBLIGATORY SKILL LIST>") . '</span>';
 
-$obligatoryList = addcslashes($obligatoryList, '"');		
-$d1copyA = addcslashes($d1copyA, '"');
+$obligatoryList = addcslashes($obligatoryList, '"');
+
 				
 ?>
 
 
 
 <?php 
-$d2copyA =  
-htmlspecialchars("@=<h3>
+$d2copyA =  '@=<h3>
 Y: The Storyteller
 @=</h3>
 I like induce change in the audience, be it emotion, thought, excitement, knowledge...
@@ -111,20 +113,18 @@ Simply put, I am a story teller.
  
 If the question is how to best communicate to an audience, 
 @actionOnRead=doShowQuestion
-then I have the technical skills can be used to craft an answering experience.
-");
+then I have the technical skills can be used to craft an answering experience.';
 ?>
 
 <?php
-$d3copyA = htmlspecialchars("@=<h3>
+$d3copyA = '@=<h3>
 Z: The Creative
-@=</h3>") . "
+@=</h3>
 I am committed to creative thinking.
 It means discarding your <i>first thoughts</i>, and what seems <i>obvious</i>.
 
 And knowing that somewhere there exists a simple and elegant solution...
-@actionOnRead=doRotateQuestionMark
-"; 
+@actionOnRead=doRotateQuestionMark'; 
 
 
 ?>
@@ -352,12 +352,12 @@ And knowing that somewhere there exists a simple and elegant solution...
 				{{#if isLink}}
 					<a {{action getActionEvent}}>
 				{{/if}}
-				{{{text}}}
+				<div class="text"></div>
 				{{#if isLink}}
 					</a>
 				{{/if}}
 				{{#if isRemoveButton}}
-					<div class="remove-button-holder"><span><a><i class="icon-remove-sign remove-button"{{action 'doRemoveClicked'}}> close</i></a></span></div>
+					<div class="remove-button-holder"><span><a><i class="icon-remove-sign remove-button"{{action 'doRemoveClicked'}}></i> close</a></span></div>
 				{{/if}}
 			{{/unless}}
 		</script>
@@ -366,7 +366,7 @@ And knowing that somewhere there exists a simple and elegant solution...
 		<!-- ROUTE DIMENSION 2 -->
 		<script type="text/x-handlebars" data-template-name="dimension2">
 		
-				<div class="full-width-centered absolute-positioned-background">
+			<div class="full-width-centered absolute-positioned-background">
 				{{renderWithVars 'interactive-grid' pixW=20 pixH=20 isPlotX=false}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
@@ -476,11 +476,7 @@ And knowing that somewhere there exists a simple and elegant solution...
 				</div>
 			</div>
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyA; ?>"}}}
-			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript=<?php
-			echo "
-\"i.e. The big idea.
-
-\"";?>}}}
+			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="i.e. The big idea."}}}
 
 		</script>
 

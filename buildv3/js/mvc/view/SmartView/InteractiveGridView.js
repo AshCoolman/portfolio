@@ -167,7 +167,8 @@ App.InteractiveGridView = App.SmartView.extend({
 				console.log('click', e, e.target)
 			}
 		}(this))
-		$( document).mousemove(function (me, acoordX, aattrsOver, aattrs, aplotColors) {
+		$(document).bind('mousemove.InteractiveGridView',
+		function (me, acoordX, aattrsOver, aattrs, aplotColors) {
 			return function (e) {
 				
 				/*var offset = $(e.target).parent().offset(),
@@ -299,18 +300,18 @@ App.InteractiveGridView = App.SmartView.extend({
 		
 		$(window).bind('resize.InteractiveGridView', function (me) {
 			return function () {
-				me.doResize();
+			//	me.doResize();
 			}
 		}(this));
 		
 	},
 	
 	willDestroyElement: function ( ) { 
-		
+		this._super();
+		$(document).unbind('mousemove.InteractiveGridView');
+		$(window).unbind('resize.InteractiveGridView');
 	},
 
-	
-	
 	doResize: function (e) {
 		/* Resize campus element */ 
 		console.log('resized', this.$el.parent())

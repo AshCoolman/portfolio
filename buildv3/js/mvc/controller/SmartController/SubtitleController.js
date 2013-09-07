@@ -64,7 +64,7 @@ App.SubtitleController = App.SmartController.extend({
 		var printedLines = this.get('printedLines');
 		if (printedLines) {
 			
-			this.set('text', this.createTaggedLines(this.get('printedLines'), null, 'isCursorObserved'));
+			this.setText(this.createTaggedLines(this.get('printedLines'), null, 'isCursorObserved'));
 			
 		}
 	}.observes('isCursor'),
@@ -132,7 +132,7 @@ App.SubtitleController = App.SmartController.extend({
 			}	
 		} 
 		
-		this.set('text', '');
+		this.setText('');
 		this.set('atLine', atLine);
 		this.set('atChar', atChar);
 		this.set('atPrintedLine', atPrintedLine);
@@ -142,30 +142,32 @@ App.SubtitleController = App.SmartController.extend({
 
 		
 	},
-	deactivate: function () {
+	view_didInsertElement: function (aview) {
+		this._super(aview);
+		this.send('SubtitleController_didInsertElement', this);
+		this.set('content', App.scriptModel); 
+        this.setup();
+
+	},
+	view_willDestroyElement: function () {
 		console.log('SubtitleController.deactivate()...')
 		var actionTOObjs = this.get('actionTimeouts');
 		for (var to in actionTOObjs) {
 			window.clearTimeout(to.id);
 		}
 		this.set('actionTimeouts', []);
-		
+
 		this.set('isLooping', false);
 		this.set('isEnded', true);
 		this.doForceFinish();
-//		console.log('...done')
-		this.set('text', '');
+		this.setText('');
 		this.set('atLine', 0);
 		this.set('atChar', 0);
 		this.set('atPrintedLine', 0);
 		this.set('printedLines', ['']);
 		this.set('srcLines', []);
-		
 	},
-	view_didInsertElement: function (aview) {
-		this._super(aview);
-		this.send('SubtitleController_didInsertElement', this);
-	},
+	
 	readChar: function (dur, me, isEvents) {
 		if (Math.random() * 5000 < 1) console.log('******')
 		//console.log('readChar?', typeof(isEvents),  (typeof(isEvents) == 'undefined'));
@@ -241,11 +243,11 @@ App.SubtitleController = App.SmartController.extend({
 					}
 					
 					me.set('editList', editList);
-					me.set('text', this.createTaggedLines(this.get('printedLines'), currentEdit.printed, 'edit'));
+					me.setText(this.createTaggedLines(this.get('printedLines'), currentEdit.printed, 'edit'));
 					
 				} else if (!isNewLine) {
 					printedLines[atPrintedLine] += srcLines[atLine][atChar];
-					me.set('text', this.createTaggedLines(printedLines, null, 'char'));
+					me.setText(this.createTaggedLines(printedLines, null, 'char'));
 					atChar++;
 					
 				} else if (isNewLine) {
@@ -286,7 +288,7 @@ App.SubtitleController = App.SmartController.extend({
 					if ( atLine < srcLines.length && srcLines[atLine].length > 0 ) {
 						printedLines[atPrintedLine]='';
 						printedLines[atPrintedLine] += srcLines[atLine][atChar];
-						me.set('text', me.createTaggedLines(printedLines, null, 'newline'));
+						me.setText(me.createTaggedLines(printedLines, null, 'newline'));
 						atChar++;
 					}
 					
@@ -426,11 +428,13 @@ App.SubtitleController = App.SmartController.extend({
 		window.cancelAnimationFrame(this.get('raf'));
 		this.set('isEnded', true);
 		this.set('isRemoved', true);
-		this.set('text', ''); //todo low technically should not need to render this, but if you look at template, I can't conditionally stop rendering {{text}} without incurring a js error
+		this.setText(''); //todo low technically should not need to render this, but if you look at template, I can't conditionally stop rendering {{text}} without incurring a js error
 		//this.send('doRemoveSubtitle');
 	},
 	
-
+	setText: function (str) {
+		$('.text', 	$(this.get('view').get('element')) )[0].innerHTML = str;
+	},
 	startReading: function () {
 //		console.log('start reading', this.get('orderRead'))
 		if (this.get('isInstant')) {

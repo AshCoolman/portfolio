@@ -106,7 +106,9 @@ html, body {
   border-right-width: 0.5em;
   border-right-color: white;
   border-right-style: solid;
-  z-index: 900; }
+  z-index: 900;
+  pointer-events: auto;
+  cursor: pointer; }
 
 .subtitle-text-holder span.heading {
   font-weight: bold;

@@ -9,16 +9,11 @@ App.Dimension3Route = Em.Route.extend({
 	activate: function () { 
 		//Application state 
 	},
-	deactivate: function () { 
-		this.subtitle1Controller.deactivate();
+	deactivate: function () {  
 		this.world3dController = null;
 		this.subtitle1Controller = null;
 	},
-	setupController: function (controller, model) {
-		controller.set('content', model);
-		
 
-	},
 	renderTemplate: function () {
 		if ( App.PRELOADER.isLoaded ) {
 			this.render('dimension3');
@@ -61,16 +56,14 @@ App.Dimension3Route = Em.Route.extend({
 		}
 	},
 	tryStart: function () {
-        if (this.world3dController && this.subtitle1Controller && this.subtitle2Controller) {
+
+
+        if (/*this.world3dController && */this.subtitle1Controller && this.subtitle2Controller) {
             this.doStart()
         }
+
     },
 	doStart: function (type, data) {
-		this.subtitle1Controller.set('content', App.scriptModel); 
-		this.subtitle2Controller.set('content', App.scriptModel); 
-        this.subtitle1Controller.setup();
-        this.subtitle2Controller.setup();
-
         this.subtitle1Controller.startReading();
     }
 })

@@ -11,9 +11,6 @@ App.Dimension1Route = Em.Route.extend({
 		App.eventMapper.removeEventListener('dim1Nav_start', this);
 		App.eventMapper.removeEventListener('dim1Nav_end', this);
 		App.eventMapper.removeEventListener('sub_finishedReading', this);
-		this.subtitleController1.deactivate();
-		this.subtitleController2.deactivate();
-		this.subtitleController3.deactivate();
 		this.subtitleController1 = null;
 		this.subtitleController2 = null;
 		this.subtitleController3 = null;

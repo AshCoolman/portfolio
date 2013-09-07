@@ -425,7 +425,7 @@ App.World3dView = App.SmartView.extend({
 	addE3d: function (obj3d) {
 		this.scene.add(obj3d);
 	},
-	willDestroyElement: function () {
+	willDestroyElement_: function () {
 		console.log('willDestroyElement 1', this.get('instanceVarObj'));
 		var instanceVarObj = this.get('instanceVarObj');
 		App.world3d = null;
@@ -440,7 +440,7 @@ App.World3dView = App.SmartView.extend({
 				pixelObjectList[pg].cleanUp();
 				scene.remove(pixelObjectList[pg].group);
 			}
-			
+				/*
 			for (var sc = 0; sc < scene.__objects.length; sc++) {
 				var obj = scene.__objects.length;
 			    scene.remove(obj);                                                                                     
@@ -460,12 +460,12 @@ App.World3dView = App.SmartView.extend({
 			      obj.dispose();                                                                                       
 			    }
 			}
- 
 			
 			if (controls) {
 				controls.removeEventListener( 'change.world3d');
 			}
 			renderer.domElement.remove();
+ 			*/
 		}	
 		for (var i = 0; i < instanceVarObj.length; i++) {
 			this.set(instanceVarObj[i], null);
