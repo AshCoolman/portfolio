@@ -5,19 +5,18 @@ App.TransitionView = App.SmartView.extend({
 	$dst: undefined,
 	didInsertElement: function() {
 		this._super();
-		this.$dst = $('canvas.transition-canvas', this.$el);
+		this.$dst = $('canvas.transition-canvas', this.get('$el'));
 		$(window).bind('resize.TransitionView', function (me) {
 			return function () {
 				me.doResize();
 			}
 		}(this));
 			
-		this.$el.bind('click.TransitionView', function (me) {
+		this.get('$el').bind('click.TransitionView', function (me) {
 			return function () {
 				me.doClick();
 			}
-		}(this));
-		//this.$el.css({ display: 'none' });
+		}(this)); 
 		App.transitionView = this;
 		this.doResize();
 		
@@ -33,12 +32,11 @@ App.TransitionView = App.SmartView.extend({
  		$dst[0].getContext('2d').drawImage($src[0], 0, 0);	
 	
 	},
-	show: function() {
-		//this.$el.css('opacity', 1)
-			this.$el.fadeIn(0);
+	show: function() { 
+		this.get('$el').fadeIn(0);
 	},
 	hide: function() {
-		this.$el.fadeOut(1400);
+		this.get('$el').fadeOut(1400);
 	},
 	clear: function () {
 		this.$dst[0].getContext('2d').clearRect( 0, 0, this.$dst[0].width,  this.$dst[0].height);
@@ -72,7 +70,7 @@ App.TransitionView = App.SmartView.extend({
 				tmpbgColor = "rgba(0, 200, 200, 0.2)";
 			}
 
-		$('.transition-canvas', this.$el).css( { width: w+'px' , height: h+'px'} );
+		$('.transition-canvas', this.get('$el')).css( { width: w+'px' , height: h+'px'} );
 		
 	},
 	redraw: function () {

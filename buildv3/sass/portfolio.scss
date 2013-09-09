@@ -130,12 +130,15 @@ html,body {
 .subtitle-text-holder .heading, .subtitle-text-holder p, .subtitle-text-holder li, .subtitle-text-holder ul {
 	margin: 0px;
 	padding: 0px;
-	z-index: $zIndexNone;
 	pointer-events:none;
 	line-height:1.6em;
 	@include legacy-ie {
 		background-color: $subtitleBackGroundColor; /* More background colour for browsers that don't support css pointer-events */
     }
+}
+
+.subtitle-text-holder h3 {
+	margin-bottom:0;
 }
 
 
@@ -151,7 +154,6 @@ html,body {
 	border-right-width: 0.5em;
 	border-right-color: $subtitleBackGroundColor;
 	border-right-style: solid;
-	z-index: $zIndexText;
 	pointer-events:auto;
 	cursor: pointer;
 }	
@@ -190,7 +192,6 @@ border-left-style: solid;
 
  
 a {
-z-index:$zIndexButton;
 color:darkorange;
 }
 
@@ -228,7 +229,6 @@ color:darkred;
 }
 
 .transition-canvas {
-	z-index: 1000;
 	display: block;
 }
 
@@ -253,7 +253,6 @@ color:darkred;
 	left:0;
 }
 .navigation {
-	z-index:9999;
 	position: absolute;
 } 
 
@@ -266,6 +265,10 @@ color:darkred;
 .full-width-centered {
   	width: 100%;
 	margin: 0 auto;
+	position: fixed;
+	top:0;
+	height:100%;
+	overflow:hidden;
 }
 
 .absolute-positioned {
@@ -286,12 +289,10 @@ color:darkred;
 
 .pointer-events-none {
 	/*pointer-events: none;*/
-	z-index:$zIndexNone;
 	
 }
 
 .grid-zone {
-	z-index:$zIndexFallbackButton;
 }
 .visible-world-2d, .world-3d-renderer, .transition-canvas {
 	margin: 0 auto;
@@ -331,7 +332,6 @@ background-repeat: no-repeat;
 
 #svg-raphaeljs {
 	position: absolute;
-	z-index:0;
 	width:100%;
 }
 

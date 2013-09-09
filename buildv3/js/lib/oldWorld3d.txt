@@ -11,7 +11,6 @@ App.World3dView = App.SmartView.extend({
 		
 		this._super();
 		this.tryIntersect = [];
-		//this.$el.css('display', 'none');
 
 		App.world3d = this;
 		
@@ -28,7 +27,7 @@ App.World3dView = App.SmartView.extend({
 		
 		var scene = this.scene = new THREE.Scene();
 		var renderer = this.renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true });
-		this.$el.append(renderer.domElement);
+		this.get('$el').append(renderer.domElement);
 		$(renderer.domElement).addClass('world-3d-renderer')
 		if (App.DEBUG) {
 			var rendererStats = this.rendererStats  = new THREEx.RendererStats()
@@ -121,7 +120,7 @@ App.World3dView = App.SmartView.extend({
 				me.faceVoxelGroup = me.createFromImage(faceImg);
 				me.faceGroup = me.faceVoxelGroup.group;
 				me.faceGroup.position.x=65;
-				$('.world-3d-renderer', me.$el).css('background-image', 'none');
+				$('.world-3d-renderer', me.get('$el')).css('background-image', 'none');
 			}
 		}(this), 100);
 	
@@ -145,8 +144,8 @@ App.World3dView = App.SmartView.extend({
 	
 	createFromImage: function (img, groupName, pixelWidth, pixelHeight) {
 		var group = new THREE.Object3D();
-		this.$el.append('<canvas class="temp">');
-		this.$tcanvas = $('canvas.temp', this.$el).css('display', 'none')
+		this.get('$el').append('<canvas class="temp">');
+		this.$tcanvas = $('canvas.temp', this.get('$el')).css('display', 'none')
 		this.tcanvas = this.$tcanvas[0];
 		
 		if (!this.tcanvas.getContext) {
@@ -181,7 +180,7 @@ App.World3dView = App.SmartView.extend({
 				}
 			}
 			this.$tcanvas = this.tcanvas = null;
-			$('canvas', this.$el).remove('.temp');
+			$('canvas', this.get('$el')).remove('.temp');
 			var voxelGroup = (CubeGroup);
 			this.scene.add(group = voxelGroup.createFromMap(map));
 			return voxelGroup;
@@ -340,7 +339,6 @@ App.World3dView = App.SmartView.extend({
 		this.faceVoxelGroup.cleanup();
 		this.tryIntersect = [];
 		
-		//this.$el.detach($(this.renderer.domElement))
 		this.renderer = null;
 		this.camera = null;
 		this.controls = null;

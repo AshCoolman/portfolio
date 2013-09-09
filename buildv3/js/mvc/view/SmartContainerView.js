@@ -13,8 +13,8 @@ App.SmartContainerView = Ember.ContainerView.extend({
 	didInsertElement: function (scope) {
 		if (!scope) scope = this;
 		this._super(scope);
-		this.el = this.get('element');
-		this.$el = $(this.el); 
+		this.set('el', this.get('element'));
+		this.set('$el', $(this.el)); 
 		scope.$().addClass(scope.templateName);
 		scope.get('controller').send('view_didInsertElement', this);
 	},

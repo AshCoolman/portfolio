@@ -2,11 +2,13 @@
 /*global $, jQuery, App, Em, Ember, console*/
 App.ApplicationView = Ember.View.extend({
   templateName: 'application',
+	el: null, 
+	$el: null,
 	didInsertElement: function () {
 		this._super();
 		
-		this.el = this.get('element');
-		this.$el = $(this.el);
+		this.set('el', this.get('element'));
+		this.set('$el', $(this.el));
 		
 		
 		

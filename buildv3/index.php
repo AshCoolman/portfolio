@@ -33,7 +33,6 @@ $quot = htmlspecialchars("\"");
  $d1copyA = '@=<h3>
 X: Software Engineer
 @=</h3>
-
 Web dev is my craft.
 I value speed, elegance, and clarity.
 
@@ -110,10 +109,11 @@ Y: The Storyteller
 @=</h3>
 I like induce change in the audience, be it emotion, thought, excitement, knowledge...
 Simply put, I am a story teller.
- 
+
 If the question is how to best communicate to an audience, 
 @actionOnRead=doShowQuestion
-then I have the technical skills can be used to craft an answering experience.';
+then I have the technical skills can be used to craft an answering experience.
+@actionOnRead=doSubtitle2';
 ?>
 
 <?php
@@ -123,7 +123,9 @@ Z: The Creative
 I am committed to creative thinking.
 It means discarding your <i>first thoughts</i>, and what seems <i>obvious</i>.
 
-And knowing that somewhere there exists a simple and elegant solution...
+And knowing that somewhere there is a solution...
+@actionOnRead=doRotateQuestionMarkHint
+...that is simple and elegant...
 @actionOnRead=doRotateQuestionMark'; 
 
 
@@ -139,9 +141,7 @@ And knowing that somewhere there exists a simple and elegant solution...
 			 <row>
 				{{outlet "nav-list"}}
 			</row>
-			
 
-			
 			{{renderWithVars 'preloader-content' preloader}}
 			{{outlet}}
 		</script>
@@ -219,8 +219,6 @@ And knowing that somewhere there exists a simple and elegant solution...
 						<!-- Title Area -->
 			
 					    <li class="divider"></li>
-				
-						<li class="divider"></li>
 						{{#view view.NavListItemView item="doDimension1" }}
 				            <a {{action doDimension1}} >X</a>
 				        {{/view}}
@@ -264,7 +262,7 @@ And knowing that somewhere there exists a simple and elegant solution...
 		<!--{{renderWithVars 'world-1d'}}-->
 		<script type="text/x-handlebars" data-template-name="dimension1">
 		
-		<div class="full-width-centered" style="position: fixed; top:0; height:100%; overflow:hidden; ">
+		<div class="full-width-centered" >
 			{{renderWithVars 'interactive-grid' pixW=20 isPlotX=true}}
 			{{render 'heartbeat' heartbeat}}
 		</div>
@@ -357,7 +355,7 @@ And knowing that somewhere there exists a simple and elegant solution...
 					</a>
 				{{/if}}
 				{{#if isRemoveButton}}
-					<div class="remove-button-holder"><span><a><i class="icon-remove-sign remove-button"{{action 'doRemoveClicked'}}></i> close</a></span></div>
+					<div class="remove-button-holder"><span><a {{action 'doRemoveClicked'}}><i class="icon-remove-sign remove-button"></i> close</a></span></div>
 				{{/if}}
 			{{/unless}}
 		</script>
@@ -366,7 +364,7 @@ And knowing that somewhere there exists a simple and elegant solution...
 		<!-- ROUTE DIMENSION 2 -->
 		<script type="text/x-handlebars" data-template-name="dimension2">
 		
-			<div class="full-width-centered absolute-positioned-background">
+			<div class="full-width-centered">
 				{{renderWithVars 'interactive-grid' pixW=20 pixH=20 isPlotX=false}}
 				{{render 'heartbeat' heartbeat}}
 			</div>

@@ -57,8 +57,18 @@ App.World3dView = App.SmartView.extend({
 		return this;
 	},
 	
+	observingIsQuestionMarkRotateHint: function () {
+		if (this.get('controller.isQuestionMarkRotatingHint')) {
+			var instanceVarObj = this.get('instanceVarObj'),
+			pixelObjectList = instanceVarObj.pixelObjectList,
+			camera = instanceVarObj.camera,
+			tweened = pixelObjectList[this.QUESTION_MARK].group.rotation;
+			createjs.Tween.get(tweened).to({y:Math.PI* 0.125}, 600);
+			
+		}
+	}.observes('controller.isQuestionMarkRotatingHint'),
 	
-	observingDoQuestionMarkRotate: function () {
+	observingIsQuestionMarkRotate: function () {
 		var val = this.get('controller.isQuestionMarkRotating'),
 			instanceVarObj = this.get('instanceVarObj'),
 			pixelObjectList = instanceVarObj.pixelObjectList,
@@ -78,7 +88,7 @@ App.World3dView = App.SmartView.extend({
 		}
 		
 	}.observes('controller.isQuestionMarkRotating'),
-
+	
 	didInsertElement: function () {
 		this._super();
 		var instanceVarObj = this.get('instanceVarObj')
@@ -95,7 +105,7 @@ App.World3dView = App.SmartView.extend({
 			this._super(); 
 			scene = new THREE.Scene();
 			renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true });
-			this.$el.append(renderer.domElement);
+			this.get('$el').append(renderer.domElement);
 			$(renderer.domElement).addClass('world-3d-renderer');
 			//rendererStats = tryCreateRenderStats();
 
@@ -196,17 +206,13 @@ App.World3dView = App.SmartView.extend({
 
 			this.set('raf', window.requestAnimationFrame(rafFunction));
 			
-			this.el.addEventListener( 'mousemove', function(me) {
+
+			this.get('$el').mousemove( function(me) {
 				return function (event) {
 					me.onDocumentMouseMove(event);
 				}
 			}(this), false );
 
-			this.el.addEventListener( 'mousedown', function (me) {
-				return function (event) {
-					//me.onDocumentMouseDown(event);
-				}
-			}(this), false );
 
 			$(window).bind('resize.world3d', function(me) {
 			  	return function () {
@@ -216,15 +222,15 @@ App.World3dView = App.SmartView.extend({
 
 			this.resize();
 			
-			$('.world-3d-renderer', this.$el).css('background-image', 'none');
+			$('.world-3d-renderer', this.get('$el')).css('background-image', 'none');
 			
 		}
 	},
 	createFromImage: function (img, groupName, pixelWidth, pixelHeight) {
 		var group = new THREE.Object3D(),
 			instanceVarObj = this.get('instanceVarObj');
-		this.$el.append('<canvas class="temp">');
-		this.$tcanvas = $('canvas.temp', this.$el).css('display', 'none')
+		this.get('$el').append('<canvas class="temp">');
+		this.$tcanvas = $('canvas.temp', this.get('$el')).css('display', 'none')
 		this.tcanvas = this.$tcanvas[0];
 		
 		if (!this.tcanvas.getContext) {
@@ -259,7 +265,7 @@ App.World3dView = App.SmartView.extend({
 				}
 			}
 			this.$tcanvas = this.tcanvas = null;
-			$('canvas', this.$el).remove('.temp');
+			$('canvas', this.get('$el')).remove('.temp');
 			return map;
 		}	
 	},
@@ -425,22 +431,23 @@ App.World3dView = App.SmartView.extend({
 	addE3d: function (obj3d) {
 		this.scene.add(obj3d);
 	},
-	willDestroyElement_: function () {
+	willDestroyElement: function () {
 		console.log('willDestroyElement 1', this.get('instanceVarObj'));
 		var instanceVarObj = this.get('instanceVarObj');
 		App.world3d = null;
 		console.log('willDestroyElement 2');
 
 		
+		
+			/*
+			*/
 		with (instanceVarObj) {
 			console.log('scene', scene);
-			
 			
 			for (var pg = 0; pg < pixelObjectList.length; pg++) {
 				pixelObjectList[pg].cleanUp();
 				scene.remove(pixelObjectList[pg].group);
 			}
-				/*
 			for (var sc = 0; sc < scene.__objects.length; sc++) {
 				var obj = scene.__objects.length;
 			    scene.remove(obj);                                                                                     
@@ -461,24 +468,18 @@ App.World3dView = App.SmartView.extend({
 			    }
 			}
 			
-			if (controls) {
-				controls.removeEventListener( 'change.world3d');
-			}
-			renderer.domElement.remove();
- 			*/
+
 		}	
 		for (var i = 0; i < instanceVarObj.length; i++) {
 			this.set(instanceVarObj[i], null);
 		}
 		
-		
 		this.set('instanceVarObj', null);
 		
+		
 		window.cancelAnimationFrame(this.get('raf'));
-		this.set('raf', null)
-		this.el.removeEventListener('mousemove');
-		this.el.removeEventListener('mousedown');
-		$(window).unbind('resize.world3d');
-		console.log('pixelObjectList ******', this.get('pixelObjectList'))
+		this.set('raf', null);
+		this.get('$el').unbind('mousemove');
+		$(window).unbind('resize.world3d'); 
 	}
 });

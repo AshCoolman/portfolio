@@ -5,39 +5,44 @@ App.InteractiveGridView = App.SmartView.extend({
 	grid: [[]],
 	isDrawGrid:false,
 	plots:[
-		{x:3, text: '\
-		<p>\
-			YEARS OF STUDY\
-		</p>'},
-		{x:4, text: '\
-		<p>\
-			JS TECHNIQUES USED IN THIS WEBSITE\
-		</p>\
-		<ul>\
-			<li>Web workers</li>\
-			<li>Closures</li>\
-			<li>Request animation frame</li>\
-			<li>AJAX</li>\
-		</ul>'},
-		{x:8, text: '\
-		<p>\
-			PROFICIENT PROGRAMMING LANGUAGES\
-		</p>'},
-		{x:9, text: '\
-		<p>\
-			YEARS AS A DEVELOPER\
-		</p>'},
-		{x:10, text: '\
-		<p>\
-			JS API&#39;S USED IN THIS WEBSITE\
-		</p>\
-		<ul>\
-			<li>Threejs (inc WebGL)</li>\
-			<li>JQuery</li>\
-			<li>Emberjs (inc. Handlebars & Underscorejs)</li>\
-			<li>Createjs (inc. Preloadjs,  Easeljs,  Tweenjs)</li>\
-			<li>Raphaeljs</li>\
-		</ul>'}
+		{
+			text: 'years of study',
+			items: 4
+		},
+		{	
+			text: 'major JavaScript features utilised', 
+			itemList: [
+				'web workers', 
+				'closures',
+				'request animation frame'
+				'Ajax'
+			]
+		},
+		{
+			text: 'proficient programming languages',
+			itemList: [
+				'Javascript',
+				'Actionscript 3.0',
+				'HTML',
+				'CSS',
+				'PHP',
+				'SQL'
+			]
+		},
+		{
+			text: 'years as a developer',
+			items: 9
+		},
+		{ 
+			text: 'JS API&#39;s used in this website'
+			itemList: [
+				'Threejs (inc WebGL)',
+				'JQuery',
+				'Emberjs (inc. Handlebars & Underscorejs)',
+				'Createjs (inc. Preloadjs,  Easeljs,  Tweenjs)',
+				'Raphaeljs'
+			]
+		}
 	],
 	pixW:0,
 	pixH:0,
@@ -66,9 +71,9 @@ App.InteractiveGridView = App.SmartView.extend({
 			plotColors= ['#669966', '#99CC99'],
 			animOver = Raphael.animation({}),
 			label,
-			$positionTextDiv = $('.position-text', this.$el).css({position: 'absolute'}),
-			$plotTextDiv = $('.plot-text', this.$el).css({position: 'absolute'}),
-			$svgRaphaeljs = this.set('$svgRaphaeljs', $('#svg-raphaeljs', this.$el)),
+			$positionTextDiv = $('.position-text', this.get('$el')).css({position: 'absolute'}),
+			$plotTextDiv = $('.plot-text', this.get('$el')).css({position: 'absolute'}),
+			$svgRaphaeljs = this.set('$svgRaphaeljs', $('#svg-raphaeljs', this.get('$el'))),
 			plotCompFfunction = function (a,b) {
 			  if (a.x < b.x)
 			     return -1;
@@ -81,7 +86,7 @@ App.InteractiveGridView = App.SmartView.extend({
 		//console.log(this.get('plots'));
 		
 		this.set('raphaeljs', raphaeljs = new Raphael('svg-raphaeljs', '100%', '100%'));
-		$('svg', this.$el).attr({
+		$('svg', this.get('$el')).attr({
 			'text-antialiasing': true,
 			width:'100%',
 			xmlns: 'http://www.w3.org/2000/svg',
@@ -153,7 +158,7 @@ App.InteractiveGridView = App.SmartView.extend({
 		var mouseZone = raphaeljs.rect(0,0,w,h).attr({'stroke-width':0, 'fill':'#001133', opacity:0.0});
 		$(mouseZone.node).addClass('grid-zone');
 		this.set('$mouseZone', $(mouseZone.node))
-		var svgPoint = $('svg', this.$el)[0].createSVGPoint();
+		var svgPoint = $('svg', this.get('$el'))[0].createSVGPoint();
 		var pointToSVGSpaceFunc = function (e, me){
 			var $mouseZone = me.get('$mouseZone');
 			var offset = $mouseZone.parent().offset();
@@ -162,7 +167,7 @@ App.InteractiveGridView = App.SmartView.extend({
 			if (!$mouseZone.parent()[0].getScreenCTM) return svgPoint;
 		  return svgPoint.matrixTransform($mouseZone.parent()[0].getScreenCTM().inverse());
 		}
-		$( this.$el, mouseZone).mousedown( function (me) {
+		$( this.get('$el'), mouseZone).mousedown( function (me) {
 			return function (e) {
 				console.log('click', e, e.target)
 			}
@@ -314,13 +319,11 @@ App.InteractiveGridView = App.SmartView.extend({
 
 	doResize: function (e) {
 		/* Resize campus element */ 
-		console.log('resized', this.$el.parent())
 		var campusW = 1200; 
 		var campusH = 2000; 
 		var curCampusW = this.get('$svgRaphaeljs').width(); 
 		var newCampusH = heightInRatio(campusH,campusW,curCampusW); 
-		this.get('$svgRaphaeljs').height(newCampusH); 
-		//this.$el.parent().css('height', ((document.height !== undefined) ? document.height - 100: document.body.offsetHeight - 100) + 'px');
+		this.get('$svgRaphaeljs').height(newCampusH);  
 		function heightInRatio(oH,oW,nW){ return (oH / oW * nW); } 
 	}
 	

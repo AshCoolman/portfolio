@@ -55,6 +55,8 @@ App.SubtitleController = App.SmartController.extend({
 	tagPositions:[],
 	pendingClosingTags:[],
 	actionTimeouts:[],
+	lastPrinted:null,
+	lastEdit:null,
 	isCursorObserver: function () {
 		if (this.get('isCursor')) {
 			this.set('tagCursor', '<img src="img/cursor.gif"/>');
@@ -64,7 +66,8 @@ App.SubtitleController = App.SmartController.extend({
 		var printedLines = this.get('printedLines');
 		if (printedLines) {
 			
-			this.setText(this.createTaggedLines(this.get('printedLines'), null, 'isCursorObserved'));
+			this.setText( this.get('printedLines'), null);
+			this.printText();
 			
 		}
 	}.observes('isCursor'),
@@ -132,7 +135,7 @@ App.SubtitleController = App.SmartController.extend({
 			}	
 		} 
 		
-		this.setText('');
+		this.setText(['']);
 		this.set('atLine', atLine);
 		this.set('atChar', atChar);
 		this.set('atPrintedLine', atPrintedLine);
@@ -160,7 +163,7 @@ App.SubtitleController = App.SmartController.extend({
 		this.set('isLooping', false);
 		this.set('isEnded', true);
 		this.doForceFinish();
-		this.setText('');
+		this.setText(['']);
 		this.set('atLine', 0);
 		this.set('atChar', 0);
 		this.set('atPrintedLine', 0);
@@ -184,7 +187,8 @@ App.SubtitleController = App.SmartController.extend({
 			delayEditLine = me.get('content').get('editDelay'),
 			isNewLine = false,
 			delay = delayChar,
-			currentEdit;
+			currentEdit,
+			isLastCharBeforeDisplay = false;
 		
 
 		for (var e = 0; e < editList.length; e++) {
@@ -204,9 +208,10 @@ App.SubtitleController = App.SmartController.extend({
 				delay = delayLine;
 
 			}
-			if (dur > delay) {	
+			
+			if (dur > delay) {
 				dur -= delay;
-
+				
 				if (atChar == 0 && atLine == 0) {	
 					isNewLine = true;
 				} else if ( atChar >= srcLines[ atLine].length && !currentEdit) {
@@ -243,11 +248,11 @@ App.SubtitleController = App.SmartController.extend({
 					}
 					
 					me.set('editList', editList);
-					me.setText(this.createTaggedLines(this.get('printedLines'), currentEdit.printed, 'edit'));
+					me.setText(this.get('printedLines'), currentEdit.printed);
 					
 				} else if (!isNewLine) {
 					printedLines[atPrintedLine] += srcLines[atLine][atChar];
-					me.setText(this.createTaggedLines(printedLines, null, 'char'));
+					me.setText(printedLines, null, 'char');
 					atChar++;
 					
 				} else if (isNewLine) {
@@ -265,6 +270,7 @@ App.SubtitleController = App.SmartController.extend({
 							var actionFunc = function (my, myAction, pos) {
 								return function () {
 									var actionTOObjs = my.get('actionTimeouts');
+									console.log(pos, actionTOObjs[pos]+'');
 									window.clearTimeout(actionTOObjs[pos].to);
 									actionTOObjs[pos].to = null;
 									my.send(myAction)
@@ -288,12 +294,14 @@ App.SubtitleController = App.SmartController.extend({
 					if ( atLine < srcLines.length && srcLines[atLine].length > 0 ) {
 						printedLines[atPrintedLine]='';
 						printedLines[atPrintedLine] += srcLines[atLine][atChar];
-						me.setText(me.createTaggedLines(printedLines, null, 'newline'));
+						me.setText(printedLines, null, 'newline');
 						atChar++;
 					}
 					
 					
 				} 
+			} else {
+				//this.printText();
 			};	
 		} else {
 //			console.log('Ended')
@@ -414,7 +422,7 @@ App.SubtitleController = App.SmartController.extend({
 		}
 		tagPositions.reverse();
 		
-		taggedLines[last] = taggedLines[last] + pendingClosingTags.join(' ... ');
+		taggedLines[last] = taggedLines[last] + pendingClosingTags.join('');
 		//if (pendingClosingTags.length) console.log('taggedLines['+last+'] added '+pendingClosingTags.length+'pending', taggedLines[last]);
 		this.set('tagPositions', tagPositions);
 		this.set('pendingClosingTags', pendingClosingTags);
@@ -432,9 +440,17 @@ App.SubtitleController = App.SmartController.extend({
 		//this.send('doRemoveSubtitle');
 	},
 	
-	setText: function (str) {
-		$('.text', 	$(this.get('view').get('element')) )[0].innerHTML = str;
+	setText: function (aprinted, aedit) {
+		this.set('lastPrinted', aprinted);
+		this.set('lastEdit', aedit);
+		
 	},
+	
+	printText: function () {			
+		if ($('.text', 	$(this.get('view').get('element')) )[0])
+			$('.text', 	$(this.get('view').get('element')) )[0].innerHTML = this.createTaggedLines(this.get('lastPrinted'), this.get('lastEdit'));
+	},
+	
 	startReading: function () {
 //		console.log('start reading', this.get('orderRead'))
 		if (this.get('isInstant')) {
@@ -468,12 +484,20 @@ App.SubtitleController = App.SmartController.extend({
 		this.send(this.get('actionEvent'))
 	},
 	
+	doClicked: function () {
+		if (this.get('actionEvent')) {
+			this.send(this.get('actionEvent'));
+		}
+		this.doForceFinish();
+	},
+	
 	reDraw: function (adur, scope) {
 		var prevDur = adur;
 		while (prevDur != (adur = scope.readChar(adur, scope))) {
 			//console.log('doDraw.readChar', adur, prevDur);
 			prevDur = adur;
-		}	
+		}
+		this.printText();
 		return adur;
     },
 	doForceFinish: function () {
@@ -485,6 +509,7 @@ App.SubtitleController = App.SmartController.extend({
 		while (!this.get('isEnded') ) {
 			this.readChar(99999, this, true);
 		}
+			this.printText();
 	}
 });
 

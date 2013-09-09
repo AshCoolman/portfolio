@@ -45,10 +45,18 @@ App.Dimension3Route = Em.Route.extend({
 		},
 		SubtitleController_didInsertElement: function (acontroller, alabel) { },
 		
+		doRotateQuestionMarkHint: function () {
+			console.log('ROTATE TIME HINT');
+			this.world3dController.doRotateQuestionMarkHint();
+		},
+		
+
+		
 		doRotateQuestionMark: function () {
 			console.log('ROTATE TIME');
 			this.world3dController.doQuestionMarkRotate();
 		},
+		
 		
 		doQuestionMarkRotateDone: function () {
 			this.subtitle1Controller.doRemoveClicked();

@@ -87,12 +87,14 @@ html, body {
 .subtitle-text-holder .heading, .subtitle-text-holder p, .subtitle-text-holder li, .subtitle-text-holder ul {
   margin: 0px;
   padding: 0px;
-  z-index: 100;
   pointer-events: none;
   line-height: 1.6em; }
   .ie7 .subtitle-text-holder .heading, .ie8 .subtitle-text-holder .heading, .ie9 .subtitle-text-holder .heading, .ie10 .subtitle-text-holder .heading, .ie11 .subtitle-text-holder .heading, .ie7 .subtitle-text-holder p, .ie8 .subtitle-text-holder p, .ie9 .subtitle-text-holder p, .ie10 .subtitle-text-holder p, .ie11 .subtitle-text-holder p, .ie7 .subtitle-text-holder li, .ie8 .subtitle-text-holder li, .ie9 .subtitle-text-holder li, .ie10 .subtitle-text-holder li, .ie11 .subtitle-text-holder li, .ie7 .subtitle-text-holder ul, .ie8 .subtitle-text-holder ul, .ie9 .subtitle-text-holder ul, .ie10 .subtitle-text-holder ul, .ie11 .subtitle-text-holder ul {
     background-color: white;
     /* More background colour for browsers that don't support css pointer-events */ }
+
+.subtitle-text-holder h3 {
+  margin-bottom: 0; }
 
 .subtitle-text-holder span {
   margin: 0px;
@@ -106,7 +108,6 @@ html, body {
   border-right-width: 0.5em;
   border-right-color: white;
   border-right-style: solid;
-  z-index: 900;
   pointer-events: auto;
   cursor: pointer; }
 
@@ -136,7 +137,6 @@ html, body {
   color: darkorange; }
 
 a {
-  z-index: 1000;
   color: darkorange; }
 
 a:hover {
@@ -163,7 +163,6 @@ a:visited {
   display: none; }
 
 .transition-canvas {
-  z-index: 1000;
   display: block; }
 
 .world-2d canvas {
@@ -187,7 +186,6 @@ a:visited {
   left: 0; }
 
 .navigation {
-  z-index: 9999;
   position: absolute; }
 
 .relative-wrapper {
@@ -195,7 +193,11 @@ a:visited {
 
 .full-width-centered {
   width: 100%;
-  margin: 0 auto; }
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  overflow: hidden; }
 
 .absolute-positioned {
   position: absolute; }
@@ -211,11 +213,7 @@ a:visited {
   height: 100%; }
 
 .pointer-events-none {
-  /*pointer-events: none;*/
-  z-index: 100; }
-
-.grid-zone {
-  z-index: 200; }
+  /*pointer-events: none;*/ }
 
 .visible-world-2d, .world-3d-renderer, .transition-canvas {
   margin: 0 auto;
@@ -251,7 +249,6 @@ a:visited {
 
 #svg-raphaeljs {
   position: absolute;
-  z-index: 0;
   width: 100%; }
 
 .graph-plot, .graph-position {
