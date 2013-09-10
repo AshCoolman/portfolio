@@ -1,48 +1,170 @@
+App.IGVC = {
+	LEGEND: [ 
+		{
+			colour: '#99CC99',
+			fill: '#669966',
+			class: 'graph-plot-tech-portfolio',
+			label: 'About this website specifically'
+		},
+		{
+			colour: '#CC9999',
+			fill: '#996666',
+			class: 'graph-plot-tech-general',
+			label: 'About my general tech. knowledge'
+		},
+		{
+			colour: '#9999CC',
+			fill: '#666699',
+			class: 'graph-plot-general',
+			label: 'About me generally'
+		}
+	],
+	TECH_PORTFOLIO: 0,
+	TECH_GENERAL: 1,
+	GENERAL: 2
+};
+
 App.InteractiveGridView = App.SmartView.extend({
+	PLOT_HEAD_0:'<h3 class="graph-plot-heading">',
+	PLOT_HEAD_1:'</h3>',
+	PLOT_ITEMS_0:'<ul><li>',
+	PLOT_ITEMS_X:'</li><li>',
+	PLOT_ITEMS_1:'</li></ul>',
 	name:'InteractiveGridView',
 	templateName: 'interactive-grid',
 	tagName:'div',
 	grid: [[]],
+	testColor:'#99CC99',
+	LEGEND: [ 
+		{
+			colour: '#99CC99',
+			fill: '#669966',
+			class: 'graph-plot-tech-portfolio',
+			label: 'About this website specifically'
+		},
+		{
+			colour: '#CC9999',
+			fill: '#996666',
+			class: 'graph-plot-tech-general',
+			label: 'About my general tech. knowledge'
+		},
+		{
+			colour: '#9999CC',
+			fill: '#666699',
+			class: 'graph-plot-general',
+			label: 'About me generally'
+		}
+	],
 	isDrawGrid:false,
 	plots:[
 		{
-			text: 'years of study',
-			items: 4
+			x: 32,
+			text: 'years breathing',
+			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO],
+		},
+		{
+			x: 9,
+			text: 'years as a developer',
+			type: App.IGVC.LEGEND[App.IGVC.GENERAL]
 		},
 		{	
-			text: 'major JavaScript features utilised', 
-			itemList: [
-				'web workers', 
-				'closures',
-				'request animation frame'
-				'Ajax'
-			]
+			x: 4,
+			text: 'years of study',
+			type: App.IGVC.LEGEND[App.IGVC.GENERAL]
 		},
+
+		
 		{
-			text: 'proficient programming languages',
-			itemList: [
+			text: 'applications I know well',
+			xList: [
+				'Adobe Photoshop',
+				'Adobe After Effects',
+				'Adobe Premiere',
+				'Adobe Media Encoder',
+				'Adobe Fireworks',
+				'Adobe Flex',
+				'Adobe Flash',
+				'Audacity (Sound)',
+				'Aperture (RAW photo manip)',
+				'SourceTree (SVN)'
+			],
+			type: App.IGVC.LEGEND[App.IGVC.TECH_GENERAL]
+		},
+		
+		
+		{
+			text: 'frontend technologies I know',
+			xList: [
 				'Javascript',
 				'Actionscript 3.0',
-				'HTML',
+				'Actionscript 2.0',
+				'HTML inc HTML5',
+				'CSS inc CSS3',
 				'CSS',
+				'SVG',
+				'Sass',
+				'Less'
+			],
+			type: App.IGVC.LEGEND[App.IGVC.TECH_GENERAL]
+		},
+		
+		{			
+			text: 'backend technologies I know',
+			xList: [
+				'node.js',
 				'PHP',
-				'SQL'
-			]
+				'mySQL',
+				'PostGRES',
+				'M/W/X AMP'
+			],
+			type: App.IGVC.LEGEND[App.IGVC.TECH_GENERAL]
 		},
-		{
-			text: 'years as a developer',
-			items: 9
-		},
-		{ 
-			text: 'JS API&#39;s used in this website'
-			itemList: [
-				'Threejs (inc WebGL)',
+ 
+
+		{ 	
+			text: 'JS libraries I used in this site',
+			xList: [
 				'JQuery',
-				'Emberjs (inc. Handlebars & Underscorejs)',
-				'Createjs (inc. Preloadjs,  Easeljs,  Tweenjs)',
+				'Emberjs',
+				'Handlebars (inc. custom helpers)',
+				'Underscorejs',
+				'Createjs: <ul><li>Preloadjs</li><li>Easeljs</li><li>Tweenjs</li></ul>',
 				'Raphaeljs'
-			]
-		}
+			],
+			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO]
+		},
+
+		{
+			x: 50,
+			text: 'Ember Views written for this site',
+			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO]
+		},
+
+		{ 
+			text: 'Frameworks I used in this site',
+			xList: [
+				'Emberjs',
+				'Foundation 4'
+			],
+			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO]
+		},
+
+		{ 
+			text: 'GIT commits I made for this site',
+			x: 44,
+			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO]
+		},
+
+		{	
+			text: 'javascript features I used in the website', 
+			xList: [
+				'closures',
+				'request animation frame',
+				'prototype inheritance'
+			],
+			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO]
+		},
+
 	],
 	pixW:0,
 	pixH:0,
@@ -54,15 +176,15 @@ App.InteractiveGridView = App.SmartView.extend({
 			h = 2000,
 			pixW = 	this.get('controller').get('pixW') || h,
 			pixH= this.get('controller').get('pixH') || w ,
-			unitX = 10,
-			unitY = 10,
+			unitX = 20,
+			unitY = 20,
 			x,
 			y,
 			grid = this.get('grid'),
 			plots = this.get('plots'),
 			attrs = [
-				{fill:'#CCCCCC', 'stroke-width': 5, 'stroke':'#595959', opacity: 0.5},
-				{fill:'#EEEEEE', 'stroke-width': 5, 'stroke':'#595959', opacity: 0.5}
+				{fill:'#CCCCCC', 'stroke-width': 2, 'stroke':'#595959', opacity: 0.5},
+				{fill:'#EEEEEE', 'stroke-width': 2, 'stroke':'#595959', opacity: 0.5}
 			],
 			attrsOver = [
 				{fill:'#444444', 'stroke-width': 1, 'stroke':'#999999', opacity: 1},
@@ -81,6 +203,7 @@ App.InteractiveGridView = App.SmartView.extend({
 			    return 1;
 			  return 0;
 			};
+		this.set('$legend', $('.graph-legend', this.get('$el')));
 		
  		this.set( 'plots', this.get('plots').sort(plotCompFfunction));
 		//console.log(this.get('plots'));
@@ -133,28 +256,18 @@ App.InteractiveGridView = App.SmartView.extend({
 		
 		
 		for (var p = 0; p < plots.length; p++) {
+			if (plots[p].xList) { plots[p].x = plots[p].xList.length; }
 			plots[p].plotShape = raphaeljs.rect( 
 				0, 
 				(plots[p].y * unitY || 0), 
 				plots[p].x * unitX,
 				(plots[p].y * unitY) || h
-			).attr({fill:plots[p].fill || plotColors[0], 'stroke-width':0, opacity:0});
+			).attr({fill:plots[p].type.fill || plotColors[0], 'stroke-width':0, opacity:0});
 			//console.log('created plot', plots[p])
 		}
 		
-		var coordX = raphaeljs.rect(0,0,6,h).attr({fill:'#595959', 'stroke-width':0});
-		/*
-		var coordLabel = raphaeljs.text(coordX.width, h/2, '').attr({fill:'#669966', 'stroke-width':0, 'text-anchor': 'start', 'font-size':12});
-		
-		var positionHeadingOverlap = raphaeljs.text(w-10, 50, '').attr({fill:'#666666', 'stroke-width':0, 'text-anchor': 'end', 'font-size':100});
-		var positionHeadingNonOverlap = raphaeljs.text(w-10, 50, '').attr({fill:'#666666', 'stroke-width':0, 'text-anchor': 'end', 'font-size':100});
-		
-		var plotHeadingOverlap = raphaeljs.text(10, 50, '').attr({fill:'#99CC99', 'stroke-width':0, 'text-anchor': 'start', 'font-size':100});
-		var plotHeadingNonOverlap = raphaeljs.text(10, 50, '').attr({fill:'#99CC99', 'stroke-width':0, 'text-anchor': 'start', 'font-size':100});
-		var plotInfoOverlap = raphaeljs.text(10, 150, '').attr({fill:'#99CC99', 'stroke-width':0, 'text-anchor': 'start', 'font-size':16});
-		var plotInfoNonOverlap = raphaeljs.text(10, 150, '').attr({fill:'#99CC99', 'stroke-width':0, 'text-anchor': 'start', 'font-size':16});
-	
-		*/
+		var coordX = raphaeljs.rect(0,0,3,h).attr({fill:'#595959', 'stroke-width':0});
+
 		var mouseZone = raphaeljs.rect(0,0,w,h).attr({'stroke-width':0, 'fill':'#001133', opacity:0.0});
 		$(mouseZone.node).addClass('grid-zone');
 		this.set('$mouseZone', $(mouseZone.node))
@@ -172,13 +285,20 @@ App.InteractiveGridView = App.SmartView.extend({
 				console.log('click', e, e.target)
 			}
 		}(this))
-		$(document).bind('mousemove.InteractiveGridView',
-		function (me, acoordX, aattrsOver, aattrs, aplotColors) {
+		
+		var mouseMoveFunc = function (me, acoordX, aattrsOver, aattrs, aplotColors) {
 			return function (e) {
 				
 				/*var offset = $(e.target).parent().offset(),
 					mousePt = {x:(e.pageX - offset.left), y:(e.pageY - offset.top)},
 				*/
+				console.log('mm')
+				//createjs.Tween.get((me.get('$legend')[0]).to({opacity:".5"},500).to({opacity:".1"},500)).to({opacity:"1"},500);
+				createjs.Tween
+					.get(me.get('$legend')[0])
+					.to({opacity:".5"},500)
+					.to({opacity:".1"},500)
+					.to({opacity:"1"},500);
 				
 				var mousePt = pointToSVGSpaceFunc(e, me),
 					x = mousePt.x,
@@ -201,7 +321,7 @@ App.InteractiveGridView = App.SmartView.extend({
 						valY = Math.round(y/unitY),
 						positionText = valX,
 						plotText = '',
-						plotHeading = 'Anything',
+						plotNumber = 'Anything',
 						deltaX,
 						smallestDeltaX,
 						nearestIndex,
@@ -214,13 +334,12 @@ App.InteractiveGridView = App.SmartView.extend({
 					
 					for (var p = 0; p < plots.length; p++) {
 						deltaX = Math.abs(plots[p].x - valX);
-
 						testNearEnough = (!plots[p].x || testNearFunc(plots[p].x, valX, 10/unitX)) && (!plots[p].y || testNearFunc(plots[p].y, gY, 10/unitY));
 						testNearest = !smallestDeltaX || smallestDeltaX > deltaX;
 						if ( testNearEnough && testNearest) {
 								nearestIndex = p;
 								smallestDeltaX = deltaX;
-								plotHeading = plots[p].x;
+								plotNumber = plots[p].x;
 						}
 					}
 					if (shownPlotIndex != nearestIndex) {
@@ -228,86 +347,39 @@ App.InteractiveGridView = App.SmartView.extend({
 							plots[shownPlotIndex].plotShape.animate({opacity:0}, 120);
 						}
 					}
-				
 					if (typeof(nearestIndex)!='undefined') {
-						plotText = plots[nearestIndex].text;
-						plots[nearestIndex].plotShape.attr({opacity:1});
+						var newPlot = plots[nearestIndex],
+							plotBody = (newPlot.xList) ? me.PLOT_ITEMS_0 + newPlot.xList.join(me.PLOT_ITEMS_X) + me.PLOT_ITEMS_1 : '',
+							plotHeading = me.PLOT_HEAD_0 + newPlot.text + me.PLOT_HEAD_1,
+							class_0 = '<span class="' + newPlot.type.class + '">',
+							class_1 = '</span>';
+							
+						newPlot.plotShape.attr({opacity:1});
 						me.set('shownPlotIndex', nearestIndex);
-						me.get('controller').set('plotText', plotText);
-						me.get('controller').set('plotHeading', plotHeading);
-						clipX = plots[nearestIndex].x * unitX;
+						me.get('controller').set('plotText', class_0 + plotHeading + plotBody + class_1);
+						me.get('controller').set('plotNumber', class_0 + newPlot.x + class_1);
+						clipX = newPlot.x * unitX;
 					} else {	
 						me.set('shownPlotIndex', null);
 						me.get('controller').set('plotText', '');
-						me.get('controller').set('plotHeading', '');
+						me.get('controller').set('plotNumber', '');
 					}
 					me.get('controller').set('positionText', positionText);
 				
 					//Set plot		
 					acoordX.stop();
 					acoordX.attr({x:x-acoordX.attr('width') });
-					//coordLabel.attr({x:(typeof(nearestIndex)!='undefined') ? 10 + clipX : acoordX.attr('x') + 5 + acoordX.attr('width') , y: y + 40, text: plotText || positionText});
-				
-					/*
-					positionHeadingOverlap.attr({
-						'text': positionText,
-						'clip-rect': [ 0,   0,  clipX, h].join(',')
-					});
-					positionHeadingNonOverlap.attr({
-						'text': positionText, 
-						'clip-rect': [clipX, 0, w - clipX, h].join(',')
-					});
-				
-				
-		 		
-					plotHeadingOverlap.attr({
-						'color': aplotColors[0],
-						'text': plotHeading,
-						'clip-rect': [ 0,   0,  clipX, h].join(',')
-					});
-					plotHeadingNonOverlap.attr({
-						'color': aplotColors[1],
-						'text': plotHeading, 
-						'clip-rect': [clipX, 0, w - clipX, h].join(',')
-					});
-				
-
-				
-				
-					plotInfoOverlap.attr({
-						'color': aplotColors[0],
-						'text': plotText || '',
-						'clip-rect': [ 0,   0,  clipX, h].join(',')
-					});
-					plotInfoOverlap.attr({
-						'y': 100 + plotInfoOverlap.getBBox().height/2
-					});
-				
-				
-					plotInfoNonOverlap.attr({
-						'color': aplotColors[1],
-						'text': plotText || '', 
-						'clip-rect': [clipX, 0, w - clipX, h].join(',')
-					});
-					plotInfoNonOverlap.attr({
-						'y': 100 + plotInfoOverlap.getBBox().height/2
-					});
-					*/
 				
 					me.set('positionText', positionText);
 				}
 
 			}
-		}(this, coordX, attrsOver, attrs, plotColors));
+		};
 		
+		$(document).bind('mousemove.InteractiveGridView', mouseMoveFunc(this, coordX, attrsOver, attrs, plotColors));
+		mouseMoveFunc(this, coordX, attrsOver, attrs, plotColors);
 		this.doResize();
 		
-		
-		$(window).bind('resize.InteractiveGridView', function (me) {
-			return function () {
-			//	me.doResize();
-			}
-		}(this));
 		
 	},
 	

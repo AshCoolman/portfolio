@@ -82,7 +82,10 @@ html, body {
 .subtitle-text-holder a {
   text-decoration: none;
   pointer-events: auto;
-  background-color: white; }
+  margin-top: 0.5em; }
+
+.remove-button-holder {
+  margin: 0.5em 7em; }
 
 .subtitle-text-holder .heading, .subtitle-text-holder p, .subtitle-text-holder li, .subtitle-text-holder ul {
   margin: 0px;
@@ -245,31 +248,81 @@ a:visited {
   position: absolute;
   width: 100%;
   min-height: 100%;
-  top: -1.875em; }
+  top: -45px; }
 
 #svg-raphaeljs {
   position: absolute;
   width: 100%; }
 
+.graph-plot-tech-general {
+  color: #CC9999; }
+
+.graph-plot-tech-general .graph-legend-fill {
+  background-color: #996666; }
+
+.graph-plot-tech-portfolio {
+  color: #99CC99; }
+
+.graph-plot-tech-portfolio .graph-legend-fill {
+  background-color: #669966; }
+
+.graph-plot-general {
+  color: #9999CC; }
+
+.graph-plot-general .graph-legend-fill {
+  background-color: #666699; }
+
 .graph-plot, .graph-position {
   position: absolute;
   top: 45px;
   font-size: 18px;
-  color: #99CC99;
   width: 100%;
-  display: block;
   line-height: 100%;
-  padding: 0 2em; }
+  padding: 0em;
+  top: 90px;
+  text-transform: capitalize; }
+
+.plot-text, .plot-heading {
+  float: left; }
+
+.plot-text ul {
+  margin-left: 1em; }
 
 .graph-plot h1, .graph-position h1 {
-  font-size: 200px;
+  font-size: 10em;
   margin: 0;
   padding: 0;
-  line-height: 100%; }
+  line-height: 80%;
+  padding-right: 15px; }
 
-.graph-plot h1 {
-  color: #99CC99; }
+.graph-plot h1, .graph-plot h3 {
+  color: inherit;
+  text-transform: uppercase; }
 
 .graph-position h1 {
   color: #595959;
   text-align: right; }
+
+.graph-legend h3 {
+  color: #595959;
+  margin: 0;
+  text-align: right;
+  width: 100%;
+  text-transform: uppercase; }
+
+.graph-legend {
+  position: absolute;
+  bottom: -3em;
+  right: 0em;
+  padding: 0 1em;
+  margin: 0.5em;
+  border: solid 0.5em #595959; }
+
+.graph-legend li {
+  list-style: none; }
+
+.graph-legend-fill {
+  width: 2em;
+  height: 1em;
+  margin-right: 0.5em;
+  float: left; }

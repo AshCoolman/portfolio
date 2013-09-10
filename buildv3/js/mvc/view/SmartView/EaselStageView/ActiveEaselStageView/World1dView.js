@@ -5,12 +5,12 @@ App.World1dView = App.ActiveEslStageView.extend({
 	clickAndDragScale: undefined,
 	didInsertElement: function () {
 		this._super();
-		this.$el.mousedown(function (me) {
+		this.get('$el').mousedown(function (me) {
 			return function () {
 				
 			}
 		}(this));
-		this.$el.mouseup(function (me) {
+		this.get('$el').mouseup(function (me) {
 			return function () {
 				
 			}
@@ -23,7 +23,7 @@ App.World1dView = App.ActiveEslStageView.extend({
 	resize: function () {
 		var width = 2400;
 		this.$canvas.attr( { width: width } ).css( {width: width} );
-		this.$el.css( { width: width, 'margin-left': -width/2} );
+		this.get('$el').css( { width: width, 'margin-left': -width/2} );
 
 		this.tmpwinHeight = $(window).height();
 		with (this) {	

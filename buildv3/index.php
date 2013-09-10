@@ -159,7 +159,7 @@ And knowing that somewhere there is a solution...
 		<!-- LAYOUT -->
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-row">
 			<div class="row pointer-events-none">
-				<div class="columns large-12 small-12 subtitle-text-holder">
+				<div class="columns subtitle-text-holder large-9 large-offset-3 small-9 small-offset-1">
  					{{yield}}
 				</div>
 			</div>
@@ -283,8 +283,9 @@ And knowing that somewhere there is a solution...
 
 -->
 		<script type="text/x-handlebars" data-template-name="interactive-grid" >
-
+		
 				<div id="svg-raphaeljs"></div>
+				
 				{{#if isPlotX}}	
 					
 						<div class="graph-position">
@@ -292,12 +293,21 @@ And knowing that somewhere there is a solution...
 						</div>
 
 						<div class="graph-plot">
-							<h1> {{{plotHeading}}} </h1>
-							<span> {{{plotText}}} </span>
+							<h1 class="plot-heading"> {{{plotNumber}}} </h1>
+							<span class="plot-text"> {{{plotText}}} </span>
+						</div>
+						
+						<div class="graph-legend">
+							<h3>Legend</h3>
+							<ul>
+							{{#each view.LEGEND}}
+						  		<li {{bindAttr class="class"}}><div class="graph-legend-fill"></div>{{{label}}}</li>
+						  	{{/each}}
+							</ul>
 						</div>
 
 				{{/if}}
-			</div>
+		
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="scalar">
@@ -355,7 +365,7 @@ And knowing that somewhere there is a solution...
 					</a>
 				{{/if}}
 				{{#if isRemoveButton}}
-					<div class="remove-button-holder"><span><a {{action 'doRemoveClicked'}}><i class="icon-remove-sign remove-button"></i> close</a></span></div>
+					<div class="remove-button-holder"><a {{action 'doRemoveClicked'}}><i class="icon-remove-sign remove-button"></i> close</a></div>
 				{{/if}}
 			{{/unless}}
 		</script>
