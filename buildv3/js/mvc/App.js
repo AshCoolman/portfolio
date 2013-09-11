@@ -229,7 +229,7 @@ Ember.Handlebars.registerHelper('renderWithVars', function(name, contextString, 
 
 
 
-
+createjs.CSSPlugin.install();
 
 App = Ember.Application.create({
 	DEBUG: false,

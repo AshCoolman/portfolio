@@ -1,21 +1,21 @@
 App.IGVC = {
-	LEGEND: [ 
+	LEGEND: [
 		{
 			colour: '#99CC99',
 			fill: '#669966',
-			class: 'graph-plot-tech-portfolio',
+			className: 'graph-plot-tech-portfolio',
 			label: 'About this website specifically'
 		},
 		{
 			colour: '#CC9999',
 			fill: '#996666',
-			class: 'graph-plot-tech-general',
+			className: 'graph-plot-tech-general',
 			label: 'About my general tech. knowledge'
 		},
 		{
 			colour: '#9999CC',
 			fill: '#666699',
-			class: 'graph-plot-general',
+			className: 'graph-plot-general',
 			label: 'About me generally'
 		}
 	],
@@ -25,55 +25,53 @@ App.IGVC = {
 };
 
 App.InteractiveGridView = App.SmartView.extend({
-	PLOT_HEAD_0:'<h3 class="graph-plot-heading">',
-	PLOT_HEAD_1:'</h3>',
-	PLOT_ITEMS_0:'<ul><li>',
-	PLOT_ITEMS_X:'</li><li>',
-	PLOT_ITEMS_1:'</li></ul>',
-	name:'InteractiveGridView',
+	PLOT_HEAD_0: '<h3 class="graph-plot-heading">',
+	PLOT_HEAD_1: '</h3>',
+	PLOT_ITEMS_0: '<ul><li>',
+	PLOT_ITEMS_X: '</li><li>',
+	PLOT_ITEMS_1: '</li></ul>',
+	name: 'InteractiveGridView',
 	templateName: 'interactive-grid',
-	tagName:'div',
+	tagName: 'div',
 	grid: [[]],
-	testColor:'#99CC99',
-	LEGEND: [ 
+	testColor: '#99CC99',
+	LEGEND: [
 		{
 			colour: '#99CC99',
 			fill: '#669966',
-			class: 'graph-plot-tech-portfolio',
+			className: 'graph-plot-tech-portfolio',
 			label: 'About this website specifically'
 		},
 		{
 			colour: '#CC9999',
 			fill: '#996666',
-			class: 'graph-plot-tech-general',
+			className: 'graph-plot-tech-general',
 			label: 'About my general tech. knowledge'
 		},
 		{
 			colour: '#9999CC',
 			fill: '#666699',
-			class: 'graph-plot-general',
+			className: 'graph-plot-general',
 			label: 'About me generally'
 		}
 	],
-	isDrawGrid:false,
-	plots:[
+	isDrawGrid: false,
+	plots: [
 		{
 			x: 32,
 			text: 'years breathing',
-			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO],
+			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO]
 		},
 		{
 			x: 9,
 			text: 'years as a developer',
 			type: App.IGVC.LEGEND[App.IGVC.GENERAL]
 		},
-		{	
+		{
 			x: 4,
 			text: 'years of study',
 			type: App.IGVC.LEGEND[App.IGVC.GENERAL]
 		},
-
-		
 		{
 			text: 'applications I know well',
 			xList: [
@@ -90,8 +88,6 @@ App.InteractiveGridView = App.SmartView.extend({
 			],
 			type: App.IGVC.LEGEND[App.IGVC.TECH_GENERAL]
 		},
-		
-		
 		{
 			text: 'frontend technologies I know',
 			xList: [
@@ -107,8 +103,7 @@ App.InteractiveGridView = App.SmartView.extend({
 			],
 			type: App.IGVC.LEGEND[App.IGVC.TECH_GENERAL]
 		},
-		
-		{			
+		{
 			text: 'backend technologies I know',
 			xList: [
 				'node.js',
@@ -119,9 +114,7 @@ App.InteractiveGridView = App.SmartView.extend({
 			],
 			type: App.IGVC.LEGEND[App.IGVC.TECH_GENERAL]
 		},
- 
-
-		{ 	
+		{
 			text: 'JS libraries I used in this site',
 			xList: [
 				'JQuery',
@@ -139,8 +132,7 @@ App.InteractiveGridView = App.SmartView.extend({
 			text: 'Ember Views written for this site',
 			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO]
 		},
-
-		{ 
+		{
 			text: 'Frameworks I used in this site',
 			xList: [
 				'Emberjs',
@@ -148,26 +140,23 @@ App.InteractiveGridView = App.SmartView.extend({
 			],
 			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO]
 		},
-
-		{ 
+		{
 			text: 'GIT commits I made for this site',
 			x: 44,
 			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO]
 		},
-
-		{	
-			text: 'javascript features I used in the website', 
+		{
+			text: 'javascript features I used in the website',
 			xList: [
 				'closures',
 				'request animation frame',
 				'prototype inheritance'
 			],
 			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO]
-		},
-
+		}
 	],
-	pixW:0,
-	pixH:0,
+	pixW: 0,
+	pixH: 0,
 	shownPlotIndex: null,
 	didInsertElement: function () {
 		this._super();
@@ -183,12 +172,12 @@ App.InteractiveGridView = App.SmartView.extend({
 			grid = this.get('grid'),
 			plots = this.get('plots'),
 			attrs = [
-				{fill:'#CCCCCC', 'stroke-width': 2, 'stroke':'#595959', opacity: 0.5},
-				{fill:'#EEEEEE', 'stroke-width': 2, 'stroke':'#595959', opacity: 0.5}
+				{fill: '#CCCCCC', 'stroke-width': 2, 'stroke': '#595959', opacity: 0.5},
+				{fill: '#EEEEEE', 'stroke-width': 2, 'stroke': '#595959', opacity: 0.5}
 			],
 			attrsOver = [
-				{fill:'#444444', 'stroke-width': 1, 'stroke':'#999999', opacity: 1},
-				{fill:'#666666', 'stroke-width': 1, 'stroke':'#999999', opacity: 1}
+				{fill: '#444444', 'stroke-width': 1, 'stroke': '#999999', opacity: 1},
+				{fill: '#666666', 'stroke-width': 1, 'stroke': '#999999', opacity: 1}
 			],
 			plotColors= ['#669966', '#99CC99'],
 			animOver = Raphael.animation({}),
@@ -211,8 +200,8 @@ App.InteractiveGridView = App.SmartView.extend({
 		this.set('raphaeljs', raphaeljs = new Raphael('svg-raphaeljs', '100%', '100%'));
 		$('svg', this.get('$el')).attr({
 			'text-antialiasing': true,
-			width:'100%',
-			xmlns: 'http://www.w3.org/2000/svg',
+			width: '100%',
+			xmlns: 'http: //www.w3.org/2000/svg',
 			version: '1.1'
 		});
 		raphaeljs.setViewBox(0, 0, w, h, false);
@@ -262,13 +251,13 @@ App.InteractiveGridView = App.SmartView.extend({
 				(plots[p].y * unitY || 0), 
 				plots[p].x * unitX,
 				(plots[p].y * unitY) || h
-			).attr({fill:plots[p].type.fill || plotColors[0], 'stroke-width':0, opacity:0});
+			).attr({fill: plots[p].type.fill || plotColors[0], 'stroke-width': 0, opacity: 0});
 			//console.log('created plot', plots[p])
 		}
 		
-		var coordX = raphaeljs.rect(0,0,3,h).attr({fill:'#595959', 'stroke-width':0});
+		var coordX = raphaeljs.rect(0,0,3,h).attr({fill: '#595959', 'stroke-width': 0});
 
-		var mouseZone = raphaeljs.rect(0,0,w,h).attr({'stroke-width':0, 'fill':'#001133', opacity:0.0});
+		var mouseZone = raphaeljs.rect(0,0,w,h).attr({'stroke-width': 0, 'fill': '#001133', opacity: 0.0});
 		$(mouseZone.node).addClass('grid-zone');
 		this.set('$mouseZone', $(mouseZone.node))
 		var svgPoint = $('svg', this.get('$el'))[0].createSVGPoint();
@@ -290,12 +279,12 @@ App.InteractiveGridView = App.SmartView.extend({
 			return function (e) {
 				
 			
-				me.get('$el').css({opacity:1});
-				createjs.Tween.get(me.get('$el')[0], {override:true}).wait(500).to({opacity:0.25}, 3000);
+				me.get('$el').css({opacity: 1});
+				createjs.Tween.get(me.get('$el')[0], {override: true}).wait(500).to({opacity: 0.25}, 3000);
 				
 				/*
-				me.get('$legend').css({opacity:1});
-				createjs.Tween.get(me.get('$legend')[0], 		{override:true}).wait(1500).to({opacity:0.5}, 3000);
+				me.get('$legend').css({opacity: 1});
+				createjs.Tween.get(me.get('$legend')[0], 		{override: true}).wait(1500).to({opacity: 0.5}, 3000);
 				*/
 				 
 				var mousePt = pointToSVGSpaceFunc(e, me),
@@ -342,17 +331,17 @@ App.InteractiveGridView = App.SmartView.extend({
 					}
 					if (shownPlotIndex != nearestIndex) {
 						if (typeof(shownPlotIndex)!='undefined' && shownPlotIndex != null) {
-							plots[shownPlotIndex].plotShape.animate({opacity:0}, 120);
+							plots[shownPlotIndex].plotShape.animate({opacity: 0}, 120);
 						}
 					}
 					if (typeof(nearestIndex)!='undefined') {
 						var newPlot = plots[nearestIndex],
 							plotBody = (newPlot.xList) ? me.PLOT_ITEMS_0 + newPlot.xList.join(me.PLOT_ITEMS_X) + me.PLOT_ITEMS_1 : '',
 							plotHeading = me.PLOT_HEAD_0 + newPlot.text + me.PLOT_HEAD_1,
-							class_0 = '<span class="' + newPlot.type.class + '">',
+							class_0 = '<span class="' + newPlot.type.className + '">',
 							class_1 = '</span>';
 							
-						newPlot.plotShape.attr({opacity:1});
+						newPlot.plotShape.attr({opacity: 1});
 						me.set('shownPlotIndex', nearestIndex);
 						me.get('controller').set('plotText', class_0 + plotHeading + plotBody + class_1);
 						me.get('controller').set('plotNumber', class_0 + newPlot.x + class_1);
@@ -366,7 +355,7 @@ App.InteractiveGridView = App.SmartView.extend({
 				
 					//Set plot		
 					acoordX.stop();
-					acoordX.attr({x:x-acoordX.attr('width') });
+					acoordX.attr({x: x-acoordX.attr('width') });
 				
 					me.set('positionText', positionText);
 				}

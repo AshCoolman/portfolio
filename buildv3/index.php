@@ -521,40 +521,35 @@ And knowing that somewhere there is a solution...
 			</div>	
 		</div>  
 
-		
+<?php
+/*	
 	        <script src="js/lib/stats.min.js"></script>
 	        <script src="js/lib/threex.rendererstats.js"></script>
-		
 	        <script src="js/lib/json2.js"></script>
-	        <script src="js/lib/raphael-min.js"></script>
 	        <script src="js/lib/rAF.js"></script>
 	        <script src="js/lib/jquery-1.8.1.min.js"></script>
 	        <script src="js/lib/handlebars.js"></script>
 			<script src="js/lib/three.js"></script>
 			<script src="js/lib/THREEx.WindowResize.js"></script>
-
 			<script src="js/lib/easeljs-0.6.0.min.js"></script>
 			<script src="js/lib/tweenjs-0.4.0.min.js"></script>
 			<script src="js/lib/movieclip-0.6.0.min.js"></script>
 			<script src="js/lib/CSSPlugin.js"></script>
-			
-			
 			<script src="js/lib/Ease.js"></script>
-			<script > console.log(createjs); createjs.CSSPlugin.install(); </script>
-			
  			<script src="js/lib/preloadjs-0.3.0.min.js"></script>
-	        <script src="js/lib/embermandl.js"></script>
-
+	        
 			<script src="js/lib/ragh/Three.TrackballControls.js"></script>
-			
-			
-
+*/
+?>
+<script src="js/lib/raphael-min.js"></script>
+<script src="js/lib.min.js"></script>
+<script src="js/lib/embermandl.js"></script>
 
 
 <?php
 				try {
 
-					$paths = array('js/lib/ragh/', 'js/mvc/');
+					$paths = array(/*'js/lib/ragh/', 'js/mvc/'*/);
 					foreach($paths as $path) {
 
 						$simpath = $path;
@@ -585,11 +580,6 @@ And knowing that somewhere there is a solution...
 				}
 ?>
 
- 
-
-
-
-
 
   <script>
   document.write('<script src=' +
@@ -597,36 +587,30 @@ And knowing that somewhere there is a solution...
   '.js><\/script>')
   </script>
   
-  <script src="javascripts/foundation/foundation.js"></script>
-	
-	<script src="javascripts/foundation/foundation.alerts.js"></script>
-	
-	<script src="javascripts/foundation/foundation.clearing.js"></script>
-	
-	<script src="javascripts/foundation/foundation.cookie.js"></script>
-	
-	<script src="javascripts/foundation/foundation.dropdown.js"></script>
-	
-	<script src="javascripts/foundation/foundation.forms.js"></script>
-	
-	<script src="javascripts/foundation/foundation.interchange.js"></script>
-	
-	<script src="javascripts/foundation/foundation.joyride.js"></script>
-	
-	<script src="javascripts/foundation/foundation.magellan.js"></script>
-	
-	<script src="javascripts/foundation/foundation.orbit.js"></script>
-	
-	<script src="javascripts/foundation/foundation.placeholder.js"></script>
-	
-	<script src="javascripts/foundation/foundation.reveal.js"></script>
-	
-	<script src="javascripts/foundation/foundation.section.js"></script>
-	
-	<script src="javascripts/foundation/foundation.tooltips.js"></script>
-	
-	<script src="javascripts/foundation/foundation.topbar.js"></script>
-	
+	<script src="js/custom.min.js"></script>
+	<script src="js/foundation.min.js"></script>
+<?php
+/*
+echo
+<<<
+<script src="javascripts/foundation/foundation.js"></script>
+<script src="javascripts/foundation/foundation.alerts.js"></script>
+<script src="javascripts/foundation/foundation.clearing.js"></script>
+<script src="javascripts/foundation/foundation.cookie.js"></script>
+<script src="javascripts/foundation/foundation.dropdown.js"></script>
+<script src="javascripts/foundation/foundation.forms.js"></script>
+<script src="javascripts/foundation/foundation.interchange.js"></script>
+<script src="javascripts/foundation/foundation.joyride.js"></script>
+<script src="javascripts/foundation/foundation.magellan.js"></script>
+<script src="javascripts/foundation/foundation.orbit.js"></script>
+<script src="javascripts/foundation/foundation.placeholder.js"></script>
+<script src="javascripts/foundation/foundation.reveal.js"></script>
+<script src="javascripts/foundation/foundation.section.js"></script>
+<script src="javascripts/foundation/foundation.tooltips.js"></script>
+<script src="javascripts/foundation/foundation.topbar.js"></script>
+>>>
+*/
+?>	
   
   <script>
     $(document).foundation();
