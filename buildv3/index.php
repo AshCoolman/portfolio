@@ -301,7 +301,7 @@ And knowing that somewhere there is a solution...
 							<h3>Legend</h3>
 							<ul>
 							{{#each view.LEGEND}}
-						  		<li {{bindAttr class="class"}}><div class="graph-legend-fill"></div>{{{label}}}</li>
+						  		<li><span {{bindAttr class="class"}}><div class="graph-legend-fill"></div></span>{{{label}}}</li>
 						  	{{/each}}
 							</ul>
 						</div>
@@ -535,7 +535,12 @@ And knowing that somewhere there is a solution...
 
 			<script src="js/lib/easeljs-0.6.0.min.js"></script>
 			<script src="js/lib/tweenjs-0.4.0.min.js"></script>
+			<script src="js/lib/movieclip-0.6.0.min.js"></script>
+			<script src="js/lib/CSSPlugin.js"></script>
+			
+			
 			<script src="js/lib/Ease.js"></script>
+			<script > console.log(createjs); createjs.CSSPlugin.install(); </script>
 			
  			<script src="js/lib/preloadjs-0.3.0.min.js"></script>
 	        <script src="js/lib/embermandl.js"></script>

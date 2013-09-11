@@ -115,7 +115,7 @@ App.InteractiveGridView = App.SmartView.extend({
 				'PHP',
 				'mySQL',
 				'PostGRES',
-				'M/W/X AMP'
+				'MAMP, WIMP, XAMPP <i>etc</i>'
 			],
 			type: App.IGVC.LEGEND[App.IGVC.TECH_GENERAL]
 		},
@@ -203,8 +203,8 @@ App.InteractiveGridView = App.SmartView.extend({
 			    return 1;
 			  return 0;
 			};
-		this.set('$legend', $('.graph-legend', this.get('$el')));
-		
+		this.set('$legend', 		$('.graph-legend', 		this.get('$el')));
+		this.set('$graphPosition', 	$('.graph-position',	this.get('$el')));
  		this.set( 'plots', this.get('plots').sort(plotCompFfunction));
 		//console.log(this.get('plots'));
 		
@@ -285,21 +285,19 @@ App.InteractiveGridView = App.SmartView.extend({
 				console.log('click', e, e.target)
 			}
 		}(this))
-		
+
 		var mouseMoveFunc = function (me, acoordX, aattrsOver, aattrs, aplotColors) {
 			return function (e) {
 				
-				/*var offset = $(e.target).parent().offset(),
-					mousePt = {x:(e.pageX - offset.left), y:(e.pageY - offset.top)},
-				*/
-				console.log('mm')
-				//createjs.Tween.get((me.get('$legend')[0]).to({opacity:".5"},500).to({opacity:".1"},500)).to({opacity:"1"},500);
-				createjs.Tween
-					.get(me.get('$legend')[0])
-					.to({opacity:".5"},500)
-					.to({opacity:".1"},500)
-					.to({opacity:"1"},500);
+			
+				me.get('$el').css({opacity:1});
+				createjs.Tween.get(me.get('$el')[0], {override:true}).wait(500).to({opacity:0.25}, 3000);
 				
+				/*
+				me.get('$legend').css({opacity:1});
+				createjs.Tween.get(me.get('$legend')[0], 		{override:true}).wait(1500).to({opacity:0.5}, 3000);
+				*/
+				 
 				var mousePt = pointToSVGSpaceFunc(e, me),
 					x = mousePt.x,
 					y = mousePt.y,
