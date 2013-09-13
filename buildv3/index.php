@@ -12,8 +12,7 @@
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 	
-  <link rel="stylesheet" href="stylesheets/app.css" />
-  <link rel="stylesheet" href="css/portfolio.css" />
+  <link rel="stylesheet" href="css/all.min.css" />
 
 
  <?php
@@ -541,7 +540,9 @@ And knowing that somewhere there is a solution...
 			<script src="js/lib/ragh/Three.TrackballControls.js"></script>
 */
 ?>
-<script src="js/lib/raphael-min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="js/lib.min.js"></script>
 <script src="js/lib/embermandl.js"></script>
 

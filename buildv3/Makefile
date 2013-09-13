@@ -1,8 +1,9 @@
 # Patterns matching CSS files that should be minified. Files with a -min.css
 # suffix will be ignored.
 CSS_FILES = $(filter-out %-min.css,$(wildcard \
-	css/*.css \
-	css/**/*.css \
+	css/html5bp.css \
+	css/portfolio.css \
+	css/foundation4.css \
 ))
 
 # Patterns matching JS files that should be minified. Files with a -min.js
@@ -18,9 +19,7 @@ JS_FILES = $(filter-out %-min.js,$(wildcard \
 	js/lib/threex.rendererstats.js \
 	js/lib/json2.js \
 	js/lib/rAF.js \
-	js/lib/jquery-1.8.1.min.js \
 	js/lib/handlebars.js \
-	js/lib/three.js \
 	js/lib/THREEx.WindowResize.js \
 	js/lib/easeljs-0.6.0.min.js \
 	js/lib/tweenjs-0.4.0.min.js \
@@ -105,7 +104,7 @@ js/foundation.min.js:$(JS_MINIFIED)
 	@echo
 endif
 
-css/all.min.js:$(CSS_MINIFIED)
+css/all.min.css:$(CSS_MINIFIED)
 	@echo '==> concating css $<'
 	cat $^ >$@
 	@echo

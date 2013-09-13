@@ -3,7 +3,7 @@ Syntax error: File to import not found or unreadable: foundation.
               Load paths:
                 /Users/ashleycoleman
                 /Users/ashleycoleman/Dropbox/_PROJECTS/portfolio/buildv3/sass
-        on line 8 of /Users/ashleycoleman/Dropbox/_PROJECTS/portfolio/buildv3/sass/app.scss
+        on line 8 of /Users/ashleycoleman/Dropbox/_PROJECTS/portfolio/buildv3/sass/foundation4.scss
 
 3: 
 4: // Comment out this import if you don't want to use normalize
@@ -18,7 +18,7 @@ Syntax error: File to import not found or unreadable: foundation.
 13: // @import "foundation/components/global"; // *always required
 
 Backtrace:
-/Users/ashleycoleman/Dropbox/_PROJECTS/portfolio/buildv3/sass/app.scss:8
+/Users/ashleycoleman/Dropbox/_PROJECTS/portfolio/buildv3/sass/foundation4.scss:8
 /Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/import_node.rb:67:in `rescue in import'
 /Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/import_node.rb:45:in `import'
 /Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/import_node.rb:28:in `imported_file'
@@ -55,4 +55,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: File to import not found or unreadable: foundation.\A               Load paths:\A                 /Users/ashleycoleman\A                 /Users/ashleycoleman/Dropbox/_PROJECTS/portfolio/buildv3/sass\A         on line 8 of /Users/ashleycoleman/Dropbox/_PROJECTS/portfolio/buildv3/sass/app.scss\A \A 3: \A 4: // Comment out this import if you don't want to use normalize\A 5: @import \"normalize\";\A 6: \A 7: // Comment out this import if you are customizing you imports below\A 8: @import \"foundation\";\A 9: \A 10: // Import specific parts of Foundation by commenting the import \"foundation\"\A 11: // and uncommenting what you want below. You must uncomment the following if customizing\A 12: \A 13: // @import \"foundation/components/global\"; // *always required"; }
+  content: "Syntax error: File to import not found or unreadable: foundation.\A               Load paths:\A                 /Users/ashleycoleman\A                 /Users/ashleycoleman/Dropbox/_PROJECTS/portfolio/buildv3/sass\A         on line 8 of /Users/ashleycoleman/Dropbox/_PROJECTS/portfolio/buildv3/sass/foundation4.scss\A \A 3: \A 4: // Comment out this import if you don't want to use normalize\A 5: @import \"normalize\";\A 6: \A 7: // Comment out this import if you are customizing you imports below\A 8: @import \"foundation\";\A 9: \A 10: // Import specific parts of Foundation by commenting the import \"foundation\"\A 11: // and uncommenting what you want below. You must uncomment the following if customizing\A 12: \A 13: // @import \"foundation/components/global\"; // *always required"; }

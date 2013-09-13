@@ -1,0 +1,1 @@
+var THREEx=THREEx||{};THREEx.WindowResize=function(b,a){var c=function(){b.setSize(window.innerWidth,window.innerHeight);a.aspect=window.innerWidth/window.innerHeight;a.updateProjectionMatrix()};window.addEventListener("resize",c,false);return{stop:function(){window.removeEventListener("resize",c)}}};

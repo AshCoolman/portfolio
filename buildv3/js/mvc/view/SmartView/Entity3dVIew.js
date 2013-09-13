@@ -27,7 +27,7 @@ App.Entity3dView = App.SmartView.extend({
 			w3d = App.world3d,
 			grp = this.grp = new THREE.Object3D(),
 			faceTex = w3d.textures['face'],
-			brainTex = w3d.textures['brain'] = THREE.ImageUtils.loadTexture('img/brain.png'),
+			brainTex = w3d.textures['brain'] = THREE.ImageUtils.loadTexture('img/brain.jpg'),
 			brainMat = w3d.materials['brain'] =  new THREE.MeshBasicMaterial({map: brainTex}),
 			greenMat = new THREE.MeshLambertMaterial({map: brainTex, transparent:true}),
 			faceMat;

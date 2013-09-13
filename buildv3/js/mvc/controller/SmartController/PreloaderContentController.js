@@ -28,7 +28,6 @@ App.PreloaderContentController = App.SmartController.extend({
 		}(this)) );
 		//queue.loadFile({id:"sound", src:"http://path/to/sound.mp3"});
 		this.queue.loadManifest([
-		    {id: "test", src:"img/test.png"},  
 		  	{id: "copy", src:"txt/copy.txt"+(App.DEBUG ? '?'+Math.random() : '')},
 			{id: "face-ash-pixel", src:'img//face-ash-pixel.png'},
 			{id: "question-pixel", src:'img//question-pixel.png'},
