@@ -10,11 +10,14 @@ App.SubtitleView = App.SmartView.extend({
 			function (me) {
 			    return function () {
 			    	me.get('controller').set('isHover', true);
+					if (!me.get('controller').get('isEnded') && !me.get('controller').get('isEdit'))
+						me.get('controller').set('isHoverUnfinished', true);
 			    }
 			}(this),
 			function (me) {
 				return function () {
 			    	me.get('controller').set('isHover', false);
+			    	me.get('controller').set('isHoverUnfinished', false);
 			    }
 			}(this)
 		);
@@ -24,6 +27,10 @@ App.SubtitleView = App.SmartView.extend({
 			}
 		}(this) );
 		return this._super();
+	},
+	doRemove: function () {
+		console.log('removing')
+		this.get('$el').css('display', 'none');
 	}
 });
 

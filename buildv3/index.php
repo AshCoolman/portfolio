@@ -1,21 +1,38 @@
 <!DOCTYPE html>
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-
+<?php
+$IS_DEPLOY = false;
+?>
 <head>
-
-	
 	<meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
-  <title>Ashley Coleman</title>
-
+	<meta name="viewport" content="width=device-width" />
+	<title>Ashley Coleman</title>
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	
-  <link rel="stylesheet" href="css/all.min.css" />
+	<link rel="stylesheet" href="///cdnjs.cloudflare.com/ajax/libs/foundation/4.3.1/css/foundation.min.css" />
+	<? if ($IS_DEPLOY) {?>
+	<link rel="stylesheet" href="css/all.min.css" />
+	<?php } else { ?>
+	<link rel="stylesheet" href="css/foundation4.css" />
+	<link rel="stylesheet" href="css/html5bp.css" />
+	<link rel="stylesheet" href="css/portfolio.css" />
+	<?php } ?>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="//cdn.jsdelivr.net/modernizr/2.6.2/modernizr.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.min.js"></script>
+	<script src="http://code.createjs.com/easeljs-0.6.0.min.js"></script>
+	<script src="http://code.createjs.com/tweenjs-0.4.0.min.js"></script>
+	<script src="http://code.createjs.com/movieclip-0.6.0.min.js"></script>
+	<script src="http://code.createjs.com/preloadjs-0.3.0.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="js/lib.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.0.0-rc.1/ember.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/foundation/4.3.1/js/foundation.min.js"></script>
 
-
- <?php
+<?php
 $indexCopyA = '@=<h3>
 Ashley Coleman: The Origin
 @=</h3>
@@ -44,63 +61,59 @@ $d1copyA = addcslashes($d1copyA, '"');
 
 $obligatoryList = '<span class="heading">' . htmlspecialchars("<OBLIGATORY SKILL LIST>") . '</span>
 @=<div class="indent">
-							<span class="heading">Javascript</span>
-							JQuery 
-							AJAX 
-							nodejs 
-							Ember 
-							Handlebars 
-							threejs (WebGL) 
-							Google Closure Library 
-							Raphaeljs 
-							Createjs 
-							underscorejs 
+	<span class="heading">Javascript</span>
+	JQuery 
+	AJAX 
+	nodejs 
+	Ember 
+	Handlebars 
+	threejs (WebGL) 
+	Google Closure Library 
+	Raphaeljs 
+	Createjs 
+	underscorejs 
 
-							<span class="heading">Flash</span>
-							AS3
-							AS2 
-							Flex
-							Flash Video
+	<span class="heading">Flash</span>
+	AS3
+	AS2 
+	Flex
+	Flash Video
 
-							<span class="heading">HTML</span>
-							HTML5
-							CSS3
-							SVG
+	<span class="heading">HTML</span>
+	HTML5
+	CSS3
+	SVG
 
-							<span class="heading">Serverside</span>
-							PHP
-							MySQL 
-							Postgres 
-							Templating libraries 
+	<span class="heading">Serverside</span>
+	PHP
+	MySQL 
+	Postgres 
+	Templating libraries 
 
-							<span class="heading">Coding Paradigms/Patterns</span>
-							OOP
-							MVC 
-							MVP 
+	<span class="heading">Coding Paradigms/Patterns</span>
+	OOP
+	MVC 
+	MVP 
 
-							<span class="heading">Tools</span>
-							JSList
-							Git, SVN, Mecurial
-							JIRA
+	<span class="heading">Tools</span>
+	JSList
+	Git, SVN, Mecurial
+	JIRA
 
-							<span class="heading">General Knowledge</span>
-							3d Math
-							2d / 3d Physics
-							Geolocation
-							API creation
-							Code documentation
-							Photoshop, Premiere, AfterEffects
+	<span class="heading">General Knowledge</span>
+	3d Math
+	2d / 3d Physics
+	Geolocation
+	API creation
+	Code documentation
+	Photoshop, Premiere, AfterEffects
 
 @=</div>
 
 <span class="heading">' . htmlspecialchars("</OBLIGATORY SKILL LIST>") . '</span>';
 
-$obligatoryList = addcslashes($obligatoryList, '"');
-
-				
+$obligatoryList = addcslashes($obligatoryList, '"');			
 ?>
-
-
 
 <?php 
 $d2copyA =  '@=<h3>
@@ -126,16 +139,8 @@ And knowing that somewhere there is a solution...
 @actionOnRead=doRotateQuestionMarkHint
 ...that is simple and elegant...
 @actionOnRead=doRotateQuestionMark'; 
-
-
 ?>
 
-
-
-  <script src="javascripts/vendor/custom.modernizr.js"></script>
-
-
-		<!-- APPLICATION -->
 		<script type="text/x-handlebars" data-template-name="application">		
 			 <row>
 				{{outlet "nav-list"}}
@@ -145,8 +150,6 @@ And knowing that somewhere there is a solution...
 			{{outlet}}
 		</script>
 
-
-		<!-- LAYOUT -->
 		<script type="text/x-handlebars" data-template-name="lo-fixed-size-centered">
 			<div class="relative-positioned">
 				<div class="absolute-positioned">
@@ -155,7 +158,6 @@ And knowing that somewhere there is a solution...
 			</div>
 		</script>
 
-		<!-- LAYOUT -->
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-row">
 			<div class="row pointer-events-none">
 				<div class="columns subtitle-text-holder large-9 large-offset-3 small-9 small-offset-1">
@@ -163,8 +165,7 @@ And knowing that somewhere there is a solution...
 				</div>
 			</div>
 		</script>
-		
-		<!-- LAYOUT -->
+
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-obligatory">
 			<div class="row">
 				<div class="columns subtitle-text-holder obligatory-list">
@@ -172,40 +173,34 @@ And knowing that somewhere there is a solution...
 				</div>
 			</div>
 		</script>
-		
-		<!-- LAYOUT -->
+
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-row-link">
 			<div class="row pointer-events-none">
-				<div class="columns subtitle-text-holder large-9 small-9 large-offset-3 small-offset-1">
+				<div class="columns subtitle-text-holder large-6 small-6 large-offset-6 small-offset-3">
 					<br/>
  					{{yield}}
 				</div>
 			</div>
 		</script>
-		
-		<!-- APPLICATION ELEMENTS -->
+
 		<script type="text/x-handlebars" data-template-name="preloader-content">
 			Preloading...<br/>
 			{{{infoHtml}}}
 		</script>
 
-		<!-- APPLICATION ELEMENTS -->
 		<script type="text/x-handlebars" data-template-name="transitions-holder">
 			Transition holder <button {{action "doTransition"}}> transition</button>
 		</script>
 
-		<!-- TRANSITION -->
 		<script type="text/x-handlebars" data-template-name="transition">		
 			<canvas class="transition-canvas">
 			</canvas>
 		</script>
 
-		<!-- HASH BTN -->
 		<script type="text/x-handlebars" data-template-name="hash-btn">
 			<button {{action "doNavigate" }}> {{label}} </button>
 		</script>
 
-		<!-- NAV LIST -->
 		<script type="text/x-handlebars" data-template-name="nav-list">
 			<nav class="top-bar">
 				<ul class="title-area">
@@ -231,6 +226,10 @@ And knowing that somewhere there is a solution...
 				        {{#view view.NavListItemView item="doDimension3" }}
 				            <a {{action doDimension3}} >Z</a>
 				        {{/view}}   
+		
+						
+						<li class="divider"></li>
+						<span class="top-bar-hint"> </span>
 				    </ul>
 				 	<ul class="right">
 					</ul>
@@ -238,8 +237,6 @@ And knowing that somewhere there is a solution...
 			</nav>
 		</script>
 
-
-		<!-- NAVIGATION -->
 		<script type="text/x-handlebars" data-template-name="navigation">
 
 			{{renderWithVars 'hash-btn' hashBtn urlhash="/" label="Index" routePath="index"}}
@@ -248,114 +245,85 @@ And knowing that somewhere there is a solution...
 			{{controlWithVars 'hash-btn' hashBtn urlhash="d3" label="Dimension 3" routePath="dimension3"}}
 		</script>
 
-		<!-- ROUTE INDEX -->
 		<script type="text/x-handlebars" data-template-name="index">		
 
 			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $indexCopyA; ?>"}}}
-			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="Add dimension @edits=X...,One...,Who...,How..." isLink=true actionEvent="doGotoDimension1" }}}
+			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="Go to dimension @edits=X...,One...,Who...,How..." isLink=true actionEvent="doGotoDimension1" }}}
 
 		</script>
 
-
-		<!-- ROUTE DIMENSION 1 -->
-		<!--{{renderWithVars 'world-1d'}}-->
 		<script type="text/x-handlebars" data-template-name="dimension1">
-		
-		<div class="full-width-centered" >
-			{{renderWithVars 'interactive-grid' pixW=20 isPlotX=true}}
-			{{render 'heartbeat' heartbeat}}
-		</div>
-
-
+			<div class="full-width-centered" >
+				{{renderWithVars 'interactive-grid' pixW=20 isPlotX=true}}
+				{{render 'heartbeat' heartbeat}}
+			</div>
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
-			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Add dimension @edits=Y...,Why?...,Motivation..."}} 
+			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Go to dimension @edits=Y...,Why?...,Motivation..."}} 
 			{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}} 
-
-			{{#if controller.isShowSkillList}}
-
-			{{/if}}
 		</script>
 
-<!--
-	<div class="plot-text-jscss"> {{plotText}} </div>
-	<div class="position-text-jscss"> {{positionText}} </div>
-
--->
 		<script type="text/x-handlebars" data-template-name="interactive-grid" >
-		
 				<div id="svg-raphaeljs"></div>
-				
 				{{#if isPlotX}}	
-					
-						<div class="graph-position">
-							<h1>{{{positionText}}}</h1>
+					<div class="graph-info" {{bindAttr class="plotClass"}}>
+						<div class="graph-layer">
+							<h1 class="graph-position">{{{positionText}}}</h1>
 						</div>
-
-						<div class="graph-plot">
-							<h1 class="plot-heading"> {{{plotNumber}}} </h1>
-							<span class="plot-text"> {{{plotText}}} </span>
-						</div>
-						
-						<div class="graph-legend">
-							<h3>Legend</h3>
-							<ul>
-							{{#each view.LEGEND}}
-						  		<li><span {{bindAttr class="class"}}><div class="graph-legend-fill"></div></span>{{{label}}}</li>
-						  	{{/each}}
+						<div class="graph-layer">
+							<h1 class="graph-plot">{{{plotHeading}}}</h1>						
+							<ul class="graph-plot">
+								{{#each plotText}}
+								<li>{{{this}}}</li>
+								{{/each}}
 							</ul>
 						</div>
-
+					</div>
+					<div class="graph-legend" >
+						<h5>About...</h5>
+						<ul>
+							{{#each view.LEGEND}}
+							<li><span {{bindAttr class="cssClass"}}><div class="graph-legend-fill"></div></span>{{{label}}}</li>
+							{{/each}}
+						<ul>
+					</div>
 				{{/if}}
-		
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="scalar">
 
 		</script>
 		
-
-		<!-- SCALAR-VALUE -->
 		<script type="text/x-handlebars" data-template-name="scalar-value">
 
 		</script>
 		
-		<!-- CLICK-AND-DRAG-SCALAR -->
 		<script type="text/x-handlebars" data-template-name="click-and-drag-scalar">
 
 		</script>
-		<!--
-		{{controlWithVars 'scalar-value' 			scaleLabel="163 CM" 	value=163	x=-400 	y=0}}
-		{{controlWithVars 'scalar-value' 			scaleLabel="55 WPM" 	value=55 		x=-50 	y=50}}
-		{{controlWithVars 'scalar-value' 			scaleLabel="63 KG" 		value=63 		x=500 	y=100}}
-		-->
-		
-		<!-- WORLD 1 D -->
+
 		<script type="text/x-handlebars" data-template-name="world-1d">
 			{{renderWithVars 'scalar' x=50 y=50}}
 			{{controlWithVars 'click-and-drag-scalar'  		scaleLabel=""	value=200	x=-0 	y=50}}
 		</script>
 
-
-
-		<!-- HEARTBEAT -->
 		<script type="text/x-handlebars" data-template-name="heartbeat">
 			{{render "heartbeat-flash" heartbeatFlash}}
 			{{render "heartbeat-sound" heartbeatSound}}
 		</script>
 
-		<!-- HEARTBEAT FLASH -->
 		<script type="text/x-handlebars" data-template-name="heartbeat-flash">
 
 		</script>
 
-		<!-- HEARTBEAT SOUND -->
 		<script type="text/x-handlebars" data-template-name="heartbeat-sound">
 
 		</script>
 
-		<!-- SUBTITLE -->
 		<script type="text/x-handlebars" data-template-name="subtitle">
 			{{#unless isRemoved}}
+				{{#if isRemoveButton}}
+					<div class="remove-button-holder"><a {{action 'doRemoveClicked'}}><i class="icon-remove remove-button"></i></a></div>
+				{{/if}}
 				{{#if isLink}}
 					<a {{action getActionEvent}}>
 				{{/if}}
@@ -363,14 +331,13 @@ And knowing that somewhere there is a solution...
 				{{#if isLink}}
 					</a>
 				{{/if}}
-				{{#if isRemoveButton}}
-					<div class="remove-button-holder"><a {{action 'doRemoveClicked'}}><i class="icon-remove-sign remove-button"></i> close</a></div>
+
+				{{#if controller.isHoverUnfinished}}
+					<div class="click-hint-holder"><i class="icon-exclamation remove-button"> Click to show all</i></div>
 				{{/if}}
 			{{/unless}}
 		</script>
 		
-		
-		<!-- ROUTE DIMENSION 2 -->
 		<script type="text/x-handlebars" data-template-name="dimension2">
 		
 			<div class="full-width-centered">
@@ -386,36 +353,23 @@ And knowing that somewhere there is a solution...
 			</div>
 
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyA?>"}}}
-			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="Add dimension @edits=Z...,Depth...,Exploration..." isLink=true actionEvent="doGotoDimension3" }}}
-
+			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true actionEvent="doGotoDimension3" }}}
 			
 			{{#if App.DEBUG}}
 				{{render 'world-2d-editor'}}
 			{{/if}}
 		</script>	
 
-
-		<!-- WORLD 2D -->
-
 		<script type="text/x-handlebars" data-template-name="world-2d">
 			{{controlWithVars 'ash' ash x=-180 }}
 			{{controlWithVars 'question-mark' question-mark x=0 visible=false}}
 		</script>
 
-
-
-		<!-- KNOB -->
-
 		<script type="text/x-handlebars" data-template-name="knob">
 		    knob
 		</script>
 
-
-
-		<!-- QUESTION MARK -->
-
 		<script type="text/x-handlebars" data-template-name="question-mark">
-
 			{{ controlWithVars "cogged-pixel" cogged-pixel x=235 y=45 height=30 width=30}}
 			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=45 width=30 height=30}} 
 			{{ controlWithVars "cogged-pixel" cogged-pixel x=295 y=45 width=30 height=30}} 
@@ -431,37 +385,20 @@ And knowing that somewhere there is a solution...
 			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=210 width=30 height=30}} 
 			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=240 width=30 height=30}} 
 			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=300 width=30 height=30}}
-
 		</script>
 
-
-
-
-		<!-- ESL-ENTITY-CONTAINER -->
 		<script type="text/x-handlebars" data-template-name="esl-entity-container">
 
 		</script>
-
-
-
-
-		<!-- ASH -->
 
 		<script type="text/x-handlebars" data-template-name="ash">
 
 		</script>
 
-
-
-		<!-- COG -->
 		<script type="text/x-handlebars" data-template-name="cog">
 
 		</script>
 
-
-
-
-		<!-- WORLD 2D EDITOR -->
 		<script type="text/x-handlebars" data-template-name="world-2d-editor">
 			<div class="row">
 				<div class="small-offset-1 columns">
@@ -472,9 +409,6 @@ And knowing that somewhere there is a solution...
 			</div>
 		</script>
 
-
-
-		<!-- ROUTE DIMENSION 3 -->
 		<script type="text/x-handlebars" data-template-name="dimension3">
 			<div class="relative-positioned">
 				<div class="absolute-positioned"> 
@@ -487,110 +421,76 @@ And knowing that somewhere there is a solution...
 
 		</script>
 
-
-
-
-		<!-- ROUTE DIMENSION 3 -->
 	<script type="text/x-handlebars" data-template-name="world-3d">
 	
 	</script>
-	
-		<!-- {{ controlWithVars 'entity-3d'}} -->
 
 	<script type="text/x-handlebars" data-template-name="entity-3d">
 	</script>
-
-
-
-
 	</head>
     <body>
         <!--[if lt IE 7]>
-
-
-
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-
-        <!-- Add your site or application content here -->
-		
 		<div class="app-container">
-			<div class="app">
-
-			</div>	
+			<div class="app"></div>	
 		</div>  
 
 <?php
-/*	
-	        <script src="js/lib/stats.min.js"></script>
-	        <script src="js/lib/threex.rendererstats.js"></script>
-	        <script src="js/lib/json2.js"></script>
-	        <script src="js/lib/rAF.js"></script>
-	        <script src="js/lib/jquery-1.8.1.min.js"></script>
-	        <script src="js/lib/handlebars.js"></script>
-			<script src="js/lib/three.js"></script>
-			<script src="js/lib/THREEx.WindowResize.js"></script>
-			<script src="js/lib/easeljs-0.6.0.min.js"></script>
-			<script src="js/lib/tweenjs-0.4.0.min.js"></script>
-			<script src="js/lib/movieclip-0.6.0.min.js"></script>
-			<script src="js/lib/CSSPlugin.js"></script>
-			<script src="js/lib/Ease.js"></script>
- 			<script src="js/lib/preloadjs-0.3.0.min.js"></script>
-	        
-			<script src="js/lib/ragh/Three.TrackballControls.js"></script>
-*/
+
+if (!$IS_DEPLOY) { 
+	try {
+		$paths = array('js/lib/ragh/', 'js/mvc/');
+		foreach($paths as $path) {
+
+			$simpath = $path;
+			$Directory = new RecursiveDirectoryIterator(realpath($simpath));
+			$Iterator = new RecursiveIteratorIterator($Directory);
+			$Regex = new RegexIterator($Iterator, '/^.+\.js$/i', RecursiveRegexIterator::GET_MATCH);
+			$fileLevels = array();
+			foreach($Regex as $match) {
+				$el = explode($simpath, $match[0] )[1];
+				$lvl = count(explode('/', $el ));
+				if ( is_null($fileLevels[ $lvl ] ) ) {
+					$fileLevels[ $lvl ] = array();
+				}
+				$fileLevels[ $lvl ][] = "$simpath$el";
+			}		
+
+			ksort($fileLevels);
+			foreach($fileLevels as $lvl => $filesInLevel) {
+				sort($filesInLevel);
+				foreach($filesInLevel as $file) {
+					//echo "<br/>$lvl: $file";
+					echo "<script src=\"$file\"></script>";
+				}
+			}
+		}
+	} catch (Exception $e) {
+		 echo  "PHP Exception <br/>$e<br/>";
+	}
+}
 ?>
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="js/lib.min.js"></script>
-<script src="js/lib/embermandl.js"></script>
+
+<?php if ($IS_DEPLOY) { ?><script src="js/custom.min.js"></script> <?php } ?>
+	<script>
+		$(document).foundation();
+	</script>
+
+</body>
+</html>
 
 
 <?php
-				try {
-
-					$paths = array(/*'js/lib/ragh/', 'js/mvc/'*/);
-					foreach($paths as $path) {
-
-						$simpath = $path;
-						$Directory = new RecursiveDirectoryIterator(realpath($simpath));
-						$Iterator = new RecursiveIteratorIterator($Directory);
-						$Regex = new RegexIterator($Iterator, '/^.+\.js$/i', RecursiveRegexIterator::GET_MATCH);
-						$fileLevels = array();
-						foreach($Regex as $match) {
-							$el = explode($simpath, $match[0] )[1];
-							$lvl = count(explode('/', $el ));
-							if ( is_null($fileLevels[ $lvl ] ) ) {
-								$fileLevels[ $lvl ] = array();
-							}
-							$fileLevels[ $lvl ][] = "$simpath$el";
-						}		
-
-						ksort($fileLevels);
-						foreach($fileLevels as $lvl => $filesInLevel) {
-							sort($filesInLevel);
-							foreach($filesInLevel as $file) {
-								//echo "<br/>$lvl: $file";
-								echo "<script src=\"$file\"></script>";
-							}
-						}
-					}
-				} catch (Exception $e) {
-					 echo  "PHP Exception <br/>$e<br/>";
-				}
-?>
-
-
+/*
   <script>
   document.write('<script src=' +
   ('__proto__' in {} ? 'javascripts/vendor/zepto' : 'javascripts/vendor/jquery') +
   '.js><\/script>')
   </script>
-  
-	<script src="js/custom.min.js"></script>
-	<script src="js/foundation.min.js"></script>
-<?php
+*/
+
+
 /*
 echo
 <<<
@@ -609,12 +509,21 @@ echo
 <script src="javascripts/foundation/foundation.section.js"></script>
 <script src="javascripts/foundation/foundation.tooltips.js"></script>
 <script src="javascripts/foundation/foundation.topbar.js"></script>
->>>
+<script src="js/lib/stats.min.js"></script>
+<script src="js/lib/threex.rendererstats.js"></script>
+<script src="js/lib/json2.js"></script>
+<script src="js/lib/rAF.js"></script>
+<script src="js/lib/jquery-1.8.1.min.js"></script>
+<script src="js/lib/handlebars.js"></script>
+<script src="js/lib/three.js"></script>
+<script src="js/lib/THREEx.WindowResize.js"></script>
+<script src="js/lib/easeljs-0.6.0.min.js"></script>
+<script src="js/lib/tweenjs-0.4.0.min.js"></script>
+<script src="js/lib/movieclip-0.6.0.min.js"></script>
+<script src="js/lib/CSSPlugin.js"></script>
+<script src="js/lib/Ease.js"></script>
+<script src="js/lib/preloadjs-0.3.0.min.js"></script>
+<script src="js/lib/ragh/Three.TrackballControls.js"></script>
 */
-?>	
-  
-  <script>
-    $(document).foundation();
-  </script>
-</body>
-</html>
+
+?>

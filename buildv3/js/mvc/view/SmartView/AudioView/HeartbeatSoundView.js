@@ -9,7 +9,7 @@ App.HeartbeatSoundView = App.AudioView.extend({
 	},
 	doHeartbeat: function () {
 		
-		this.play();
+		this.play();k
 	}
 });
 	

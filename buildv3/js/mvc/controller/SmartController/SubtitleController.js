@@ -44,6 +44,7 @@ App.SubtitleController = App.SmartController.extend({
 	isFreezeOnHover: true,
 	counter:0,
 	isHover:false,
+	isEdit: false,
 	tagStart:'<p><span>',
 	tagMid: '</span></p><p><span>',
 	tagEnd: '</span></p>',
@@ -57,6 +58,7 @@ App.SubtitleController = App.SmartController.extend({
 	actionTimeouts:[],
 	lastPrinted:null,
 	lastEdit:null,
+	isHoverUnfinished: false,
 	isCursorObserver: function () {
 		if (this.get('isCursor')) {
 			this.set('tagCursor', '<img src="img/cursor.gif"/>');
@@ -90,6 +92,9 @@ App.SubtitleController = App.SmartController.extend({
 		ascript = window.unescape(ascript);
 		//ascript=ascript.replace('\\"','"')
 		
+		if (ascript.indexOf('@edits=') != -1)
+			this.set('isEdit', true);
+		
 		var printedLines = [''],
 			srcLines = ascript.split('\n'),
 			atLine = 0,
@@ -101,6 +106,7 @@ App.SubtitleController = App.SmartController.extend({
 		for (var l = 0; l < srcLines.length; l++ ) { 
 			var editIndex;
 			if (editIndex = srcLines[l].indexOf('@edits=') != -1) {
+
 				var splitOnEditArr = srcLines[l].split('@edits='),
 					lastHalfArr = splitOnEditArr[1].split(' '),
 					editVals = lastHalfArr.reverse().pop();
@@ -432,10 +438,11 @@ App.SubtitleController = App.SmartController.extend({
 
 	
 	doRemoveClicked: function () {
-		//console.log('doRemoveClicked');
+		console.log('this.get(view)', this.get('view'));
 		window.cancelAnimationFrame(this.get('raf'));
 		this.set('isEnded', true);
 		this.set('isRemoved', true);
+		this.get('view').doRemove();
 		this.setText(''); //todo low technically should not need to render this, but if you look at template, I can't conditionally stop rendering {{text}} without incurring a js error
 		//this.send('doRemoveSubtitle');
 	},

@@ -2,14 +2,14 @@
 # suffix will be ignored.
 CSS_FILES = $(filter-out %-min.css,$(wildcard \
 	css/html5bp.css \
-	css/portfolio.css \
 	css/foundation4.css \
+	css/portfolio.css \
 ))
 
 # Patterns matching JS files that should be minified. Files with a -min.js
 # suffix will be ignored.
 
-# JS_GROUP = "lib"
+JS_GROUP = "lib"
 # JS_GROUP = "custom"
 # JS_GROUP = "foundation"
 
@@ -19,14 +19,9 @@ JS_FILES = $(filter-out %-min.js,$(wildcard \
 	js/lib/threex.rendererstats.js \
 	js/lib/json2.js \
 	js/lib/rAF.js \
-	js/lib/handlebars.js \
 	js/lib/THREEx.WindowResize.js \
-	js/lib/easeljs-0.6.0.min.js \
-	js/lib/tweenjs-0.4.0.min.js \
-	js/lib/movieclip-0.6.0.min.js \
-	js/lib/CSSPlugin.js \
 	js/lib/Ease.js \
-	js/lib/preloadjs-0.3.0.min.js \
+	js/lib/CSSPlugin.js \
 ))
 endif
 
@@ -55,6 +50,7 @@ endif
 
 ifeq ($(JS_GROUP),"foundation")
 JS_FILES = $(filter-out %-min.js,$(wildcard \
+	javascripts/vendor/zepto.js \
 	javascripts/foundation/foundation.js \
 	javascripts/foundation/foundation.alerts.js \
 	javascripts/foundation/foundation.clearing.js \

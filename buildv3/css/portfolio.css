@@ -78,56 +78,57 @@ html, body {
   zoom: 1;
   filter: alpha(opacity=95);
   opacity: 0.95; }
-
-.subtitle-text-holder a {
-  text-decoration: none;
-  pointer-events: auto;
-  margin-top: 0.5em; }
+  .subtitle-text-holder a {
+    text-decoration: none;
+    pointer-events: auto;
+    margin-top: 0.5em; }
+  .subtitle-text-holder .heading, .subtitle-text-holder p, .subtitle-text-holder li, .subtitle-text-holder ul {
+    margin: 0px;
+    padding: 0px;
+    pointer-events: none;
+    line-height: 1.6em; }
+    .ie7 .subtitle-text-holder .heading, .ie8 .subtitle-text-holder .heading, .ie9 .subtitle-text-holder .heading, .ie10 .subtitle-text-holder .heading, .ie11 .subtitle-text-holder .heading, .ie7 .subtitle-text-holder p, .ie8 .subtitle-text-holder p, .ie9 .subtitle-text-holder p, .ie10 .subtitle-text-holder p, .ie11 .subtitle-text-holder p, .ie7 .subtitle-text-holder li, .ie8 .subtitle-text-holder li, .ie9 .subtitle-text-holder li, .ie10 .subtitle-text-holder li, .ie11 .subtitle-text-holder li, .ie7 .subtitle-text-holder ul, .ie8 .subtitle-text-holder ul, .ie9 .subtitle-text-holder ul, .ie10 .subtitle-text-holder ul, .ie11 .subtitle-text-holder ul {
+      background-color: white;
+      /* More background colour for browsers that don't support css pointer-events */ }
+  .subtitle-text-holder h3 {
+    margin-bottom: 0;
+    color: inherit; }
+  .subtitle-text-holder span {
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+    background-color: white;
+    line-height: 1.6em;
+    border-left-width: 0.5em;
+    border-left-color: white;
+    border-left-style: solid;
+    border-right-width: 0.5em;
+    border-right-color: white;
+    border-right-style: solid;
+    pointer-events: auto;
+    cursor: pointer; }
+  .subtitle-text-holder span.heading {
+    font-weight: bold;
+    margin-top: 1em; }
+  .subtitle-text-holder li {
+    border-left-width: 3em;
+    border-left-color: white;
+    border-left-style: solid; }
+  .subtitle-text-holder .indent {
+    border-left-width: 3em;
+    border-left-color: white;
+    border-left-style: solid;
+    line-height: 100%; }
+  .subtitle-text-holder a p span {
+    color: darkorange; }
 
 .remove-button-holder {
+  position: absolute;
+  top: -1em; }
+
+.click-hint-holder {
+  color: white;
   margin: 0.5em 7em; }
-
-.subtitle-text-holder .heading, .subtitle-text-holder p, .subtitle-text-holder li, .subtitle-text-holder ul {
-  margin: 0px;
-  padding: 0px;
-  pointer-events: none;
-  line-height: 1.6em; }
-  .ie7 .subtitle-text-holder .heading, .ie8 .subtitle-text-holder .heading, .ie9 .subtitle-text-holder .heading, .ie10 .subtitle-text-holder .heading, .ie11 .subtitle-text-holder .heading, .ie7 .subtitle-text-holder p, .ie8 .subtitle-text-holder p, .ie9 .subtitle-text-holder p, .ie10 .subtitle-text-holder p, .ie11 .subtitle-text-holder p, .ie7 .subtitle-text-holder li, .ie8 .subtitle-text-holder li, .ie9 .subtitle-text-holder li, .ie10 .subtitle-text-holder li, .ie11 .subtitle-text-holder li, .ie7 .subtitle-text-holder ul, .ie8 .subtitle-text-holder ul, .ie9 .subtitle-text-holder ul, .ie10 .subtitle-text-holder ul, .ie11 .subtitle-text-holder ul {
-    background-color: white;
-    /* More background colour for browsers that don't support css pointer-events */ }
-
-.subtitle-text-holder h3 {
-  margin-bottom: 0; }
-
-.subtitle-text-holder span {
-  margin: 0px;
-  padding: 0px;
-  display: inline-block;
-  background-color: white;
-  line-height: 1.6em;
-  border-left-width: 0.5em;
-  border-left-color: white;
-  border-left-style: solid;
-  border-right-width: 0.5em;
-  border-right-color: white;
-  border-right-style: solid;
-  pointer-events: auto;
-  cursor: pointer; }
-
-.subtitle-text-holder span.heading {
-  font-weight: bold;
-  margin-top: 1em; }
-
-.subtitle-text-holder li {
-  border-left-width: 3em;
-  border-left-color: white;
-  border-left-style: solid; }
-
-.subtitle-text-holder .indent {
-  border-left-width: 3em;
-  border-left-color: white;
-  border-left-style: solid;
-  line-height: 100%; }
 
 .quote {
   font-style: italic;
@@ -136,17 +137,12 @@ html, body {
   border-left-style: solid;
   line-height: 100%; }
 
-.subtitle-text-holder a p span {
-  color: darkorange; }
-
 a {
   color: darkorange; }
-
-a:hover {
-  color: red; }
-
-a:visited {
-  color: darkred; }
+  a:hover {
+    color: red; }
+  a:visited {
+    color: darkred; }
 
 .relative-positioned {
   position: relative; }
@@ -255,75 +251,70 @@ a:visited {
   width: 100%; }
 
 .graph-plot-tech-general {
-  color: #CC9999; }
-
-.graph-plot-tech-general .graph-legend-fill {
-  background-color: #996666; }
+  color: #bb8888; }
+  .graph-plot-tech-general .graph-legend-fill {
+    background-color: #996666; }
 
 .graph-plot-tech-portfolio {
-  color: #99CC99; }
-
-.graph-plot-tech-portfolio .graph-legend-fill {
-  background-color: #669966; }
+  color: #88bb88; }
+  .graph-plot-tech-portfolio .graph-legend-fill {
+    background-color: #669966; }
 
 .graph-plot-general {
-  color: #9999CC; }
+  color: #8888bb; }
+  .graph-plot-general .graph-legend-fill {
+    background-color: #666699; }
 
-.graph-plot-general .graph-legend-fill {
-  background-color: #666699; }
-
-.graph-plot, .graph-position {
+.graph-info {
   position: absolute;
-  top: 45px;
+  top: 90px;
   font-size: 18px;
   width: 100%;
+  padding-left: 1em 0;
+  padding: 0 0.5em;
   line-height: 100%;
-  padding: 0em;
-  top: 80px;
   text-transform: capitalize; }
-
-.plot-text, .plot-heading {
-  float: left; }
-
-.plot-text ul {
-  margin-left: 1em; }
-
-.graph-plot h1, .graph-position h1 {
-  font-size: 10em;
-  margin: 0;
-  padding: 0;
-  line-height: 80%;
-  padding-right: 15px; }
-
-.graph-plot h1, .graph-plot h3 {
-  color: inherit;
-  text-transform: uppercase; }
-
-.graph-position h1 {
-  color: #595959;
-  text-align: right; }
-
-.graph-legend h3 {
-  color: inherit;
-  margin: 0;
-  text-align: right;
-  width: 100%;
-  text-transform: uppercase; }
+  .graph-info .graph-layer {
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    padding: 0 1em; }
+  .graph-info .graph-position {
+    color: #595959; }
+  .graph-info div, .graph-info span {
+    float: left; }
+  .graph-info li {
+    margin-left: 1.5em; }
+  .graph-info h1 {
+    color: inherit; }
 
 .graph-legend {
   position: absolute;
-  bottom: -3em;
-  right: 0em;
+  bottom: -50px;
+  right: 0;
   padding: 0 1em;
-  margin: 0.5em;
-  border: solid 0.5em #595959;
-  color: #595959; }
+  color: #515151; }
+  .graph-legend h3, .graph-legend h4, .graph-legend h5 {
+    color: inherit;
+    margin: 0;
+    width: 100%;
+    text-transform: uppercase;
+    color: #595959; }
+  .graph-legend li {
+    list-style: none; }
+    .graph-legend li .graph-legend-fill {
+      width: 2em;
+      height: 1em;
+      margin-right: 0.5em;
+      float: left;
+      clear: both; }
 
-.graph-legend li {
-  list-style: none; }
-
-.graph-legend-fill {
-  width: 2em;
-  height: 1em;
-  margin-right: 0.5em;
-  float: left; }
+/*
+.graph-plot {
+	h3 {
+		color:inherit;
+		text-transform:uppercase;
+	}
+}
+*/

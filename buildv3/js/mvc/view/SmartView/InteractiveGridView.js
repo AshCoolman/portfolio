@@ -3,20 +3,20 @@ App.IGVC = {
 		{
 			colour: '#99CC99',
 			fill: '#669966',
-			className: 'graph-plot-tech-portfolio',
-			label: 'About this website specifically'
+			cssClass: 'graph-plot-tech-portfolio',
+			label: '...tech used in this site'
 		},
 		{
 			colour: '#CC9999',
 			fill: '#996666',
-			className: 'graph-plot-tech-general',
-			label: 'About my general tech. knowledge'
+			cssClass: 'graph-plot-tech-general',
+			label: '...my tech knowledge'
 		},
 		{
 			colour: '#9999CC',
 			fill: '#666699',
-			className: 'graph-plot-general',
-			label: 'About me generally'
+			cssClass: 'graph-plot-general',
+			label: '...me personally'
 		}
 	],
 	TECH_PORTFOLIO: 0,
@@ -25,11 +25,6 @@ App.IGVC = {
 };
 
 App.InteractiveGridView = App.SmartView.extend({
-	PLOT_HEAD_0: '<h3 class="graph-plot-heading">',
-	PLOT_HEAD_1: '</h3>',
-	PLOT_ITEMS_0: '<ul><li>',
-	PLOT_ITEMS_X: '</li><li>',
-	PLOT_ITEMS_1: '</li></ul>',
 	name: 'InteractiveGridView',
 	templateName: 'interactive-grid',
 	tagName: 'div',
@@ -39,20 +34,20 @@ App.InteractiveGridView = App.SmartView.extend({
 		{
 			colour: '#99CC99',
 			fill: '#669966',
-			className: 'graph-plot-tech-portfolio',
-			label: 'About this website specifically'
+			cssClass: 'graph-plot-tech-portfolio',
+			label: 'this site'
 		},
 		{
 			colour: '#CC9999',
 			fill: '#996666',
-			className: 'graph-plot-tech-general',
-			label: 'About my general tech. knowledge'
+			cssClass: 'graph-plot-tech-general',
+			label: 'my tech knowledge'
 		},
 		{
 			colour: '#9999CC',
 			fill: '#666699',
-			className: 'graph-plot-general',
-			label: 'About me generally'
+			cssClass: 'graph-plot-general',
+			label: 'me generally'
 		}
 	],
 	isDrawGrid: false,
@@ -160,6 +155,9 @@ App.InteractiveGridView = App.SmartView.extend({
 	shownPlotIndex: null,
 	didInsertElement: function () {
 		this._super();
+		
+		$('.graph-plot', this.get('$el')).css({opacity: 1});
+		
 		var raphaeljs,
 			w = 1200,
 			h = 2000,
@@ -242,20 +240,18 @@ App.InteractiveGridView = App.SmartView.extend({
 			}	
 		}
 		
+		var thePlotX = raphaeljs.rect( 
+			0, 
+			0, 
+			300,
+			h
+		).attr({fill: '#666666', 'stroke-width': 0, opacity: 0});
 		
 		
 		for (var p = 0; p < plots.length; p++) {
 			if (plots[p].xList) { plots[p].x = plots[p].xList.length; }
-			plots[p].plotShape = raphaeljs.rect( 
-				0, 
-				(plots[p].y * unitY || 0), 
-				plots[p].x * unitX,
-				(plots[p].y * unitY) || h
-			).attr({fill: plots[p].type.fill || plotColors[0], 'stroke-width': 0, opacity: 0});
-			//console.log('created plot', plots[p])
 		}
 		
-		var coordX = raphaeljs.rect(0,0,3,h).attr({fill: '#595959', 'stroke-width': 0});
 
 		var mouseZone = raphaeljs.rect(0,0,w,h).attr({'stroke-width': 0, 'fill': '#001133', opacity: 0.0});
 		$(mouseZone.node).addClass('grid-zone');
@@ -269,24 +265,18 @@ App.InteractiveGridView = App.SmartView.extend({
 			if (!$mouseZone.parent()[0].getScreenCTM) return svgPoint;
 		  return svgPoint.matrixTransform($mouseZone.parent()[0].getScreenCTM().inverse());
 		}
+		
+		
+		var coordX = raphaeljs.rect(0,0,3,h).attr({fill: '#595959', 'stroke-width': 0});
 		$( this.get('$el'), mouseZone).mousedown( function (me) {
 			return function (e) {
 				console.log('click', e, e.target)
 			}
 		}(this))
 
-		var mouseMoveFunc = function (me, acoordX, aattrsOver, aattrs, aplotColors) {
+		var mouseMoveFunc = function (me, acoordX, athePlotX, aattrsOver, aattrs, aplotColors) {
 			return function (e) {
 				
-			
-				me.get('$el').css({opacity: 1});
-				createjs.Tween.get(me.get('$el')[0], {override: true}).wait(500).to({opacity: 0.25}, 3000);
-				
-				/*
-				me.get('$legend').css({opacity: 1});
-				createjs.Tween.get(me.get('$legend')[0], 		{override: true}).wait(1500).to({opacity: 0.5}, 3000);
-				*/
-				 
 				var mousePt = pointToSVGSpaceFunc(e, me),
 					x = mousePt.x,
 					y = mousePt.y,
@@ -307,7 +297,8 @@ App.InteractiveGridView = App.SmartView.extend({
 					var valX = Math.round(x/unitX),
 						valY = Math.round(y/unitY),
 						positionText = valX,
-						plotText = '',
+						plotText = [],
+						plotHeading = '',
 						plotNumber = 'Anything',
 						deltaX,
 						smallestDeltaX,
@@ -329,45 +320,46 @@ App.InteractiveGridView = App.SmartView.extend({
 								plotNumber = plots[p].x;
 						}
 					}
-					if (shownPlotIndex != nearestIndex) {
-						if (typeof(shownPlotIndex)!='undefined' && shownPlotIndex != null) {
-							plots[shownPlotIndex].plotShape.animate({opacity: 0}, 120);
-						}
-					}
 					if (typeof(nearestIndex)!='undefined') {
-						var newPlot = plots[nearestIndex],
-							plotBody = (newPlot.xList) ? me.PLOT_ITEMS_0 + newPlot.xList.join(me.PLOT_ITEMS_X) + me.PLOT_ITEMS_1 : '',
-							plotHeading = me.PLOT_HEAD_0 + newPlot.text + me.PLOT_HEAD_1,
-							class_0 = '<span class="' + newPlot.type.className + '">',
-							class_1 = '</span>';
-							
-						newPlot.plotShape.attr({opacity: 1});
+						var newPlot = plots[nearestIndex];
 						me.set('shownPlotIndex', nearestIndex);
-						me.get('controller').set('plotText', class_0 + plotHeading + plotBody + class_1);
-						me.get('controller').set('plotNumber', class_0 + newPlot.x + class_1);
+						me.get('controller').set('plotHeading', newPlot.x + ' ' +newPlot.text);
+						me.get('controller').set('plotText',  newPlot.xList);
+						me.get('controller').set('plotNumber', newPlot.x);
+						me.get('controller').set('plotClass', 'something '+newPlot.type.cssClass);
 						clipX = newPlot.x * unitX;
-					} else {	
-						me.set('shownPlotIndex', null);
-						me.get('controller').set('plotText', '');
-						me.get('controller').set('plotNumber', '');
+	
+						if (athePlotX['animateWidthTarget'] != clipX) {
+							athePlotX.stop();
+							athePlotX.animate({   
+						        fill: newPlot.type.fill,
+								width: clipX,
+								opacity:1
+						    }, 300);
+							$('.graph-plot', me.get('$el')).css({opacity: 1});
+							athePlotX['animateWidthTarget'] = clipX;
+							acoordX.attr({ fill: '#999999' });
+						}
+					} else {
+						if (athePlotX['animateWidthTarget'] != -1) {
+							acoordX.attr({ fill: '#595959' });
+							athePlotX['animateWidthTarget'] = -1;
+							$('.graph-plot', me.get('$el')).css({opacity: 0});
+							//createjs.Tween.get($('.graph-plot', me.get('$el'))[0], {override: true}).to({opacity: 0}, 500);
+							
+						}						
 					}
 					me.get('controller').set('positionText', positionText);
-				
 					//Set plot		
-					acoordX.stop();
 					acoordX.attr({x: x-acoordX.attr('width') });
-				
 					me.set('positionText', positionText);
 				}
-
 			}
 		};
 		
-		$(document).bind('mousemove.InteractiveGridView', mouseMoveFunc(this, coordX, attrsOver, attrs, plotColors));
-		mouseMoveFunc(this, coordX, attrsOver, attrs, plotColors);
+		$(document).bind('mousemove.InteractiveGridView', mouseMoveFunc(this, coordX, thePlotX, attrsOver, attrs, plotColors));
+		mouseMoveFunc(this, coordX, attrsOver, thePlotX, attrsOver, attrs, plotColors);
 		this.doResize();
-		
-		
 	},
 	
 	willDestroyElement: function ( ) { 

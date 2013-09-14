@@ -5,11 +5,20 @@ $zIndexText: 900;
 $zIndexNone: 100;
 $zIndexFallbackButton: 200;
 $subtitleBackGroundColor: #FFFFFF;
+$darkGrey: #595959;
 $navBarHeight: 45px;
+$col_TechGen: #BB8888;
+$col_TechPort: #88BB88;
+$col_Gen: #8888BB;
+
+$colDrk_TechGen: #996666;
+$colDrk_TechPort: #669966;
+$colDrk_Gen: #666699;
+
+$col_backGround: #666666;
 /*
 http://jsfiddle.net/VAXrL/190/
 */
-
 
 $default-legacy-ie: 7 8 9 10 11 !default;
 
@@ -43,7 +52,7 @@ canvas, img {
 
 html,body { 
 	height:100%; 
-	background: #666666 !important;
+	background: $col_backGround !important;
 }
  
 
@@ -119,63 +128,69 @@ html,body {
 	zoom: 1;
 	filter: alpha(opacity=95);
 	opacity: 0.95;
+	a {
+		text-decoration:none;
+		pointer-events:auto;
+		margin-top:0.5em;
+		
+	}
+	.heading, p, li, ul {
+		margin: 0px;
+		padding: 0px;
+		pointer-events:none;
+		line-height:1.6em;
+		@include legacy-ie {
+			background-color: $subtitleBackGroundColor; /* More background colour for browsers that don't support css pointer-events */
+	    }
+	}
+	h3 {
+		margin-bottom:0;
+		color:inherit;
+	}
+	span {
+		margin: 0px;
+		padding: 0px;
+		display:inline-block;
+		background-color: $subtitleBackGroundColor;
+		line-height:1.6em;
+		border-left-width: 0.5em;
+		border-left-color: $subtitleBackGroundColor;
+		border-left-style: solid;
+		border-right-width: 0.5em;
+		border-right-color: $subtitleBackGroundColor;
+		border-right-style: solid;
+		pointer-events:auto;
+		cursor: pointer;
+	}
+	span.heading {
+		font-weight:bold;
+		margin-top: 1em;
+	}
+	li {
+		border-left-width: 3em;
+		border-left-color: $subtitleBackGroundColor;
+		border-left-style: solid;
+	}
+	.indent {
+		border-left-width: 3em;
+		border-left-color: $subtitleBackGroundColor;
+		border-left-style: solid;
+		line-height:100%;
+	}
+	a p span {
+		color: darkorange;
+	}
 }
 
-.subtitle-text-holder a {
-	text-decoration:none;
-	pointer-events:auto;
-	margin-top:0.5em;
-}
 
 .remove-button-holder {
+	position: absolute;
+	top: -1em;
+}
+
+.click-hint-holder {
+	color:white;
 	margin:0.5em 7em;
-}
-.subtitle-text-holder .heading, .subtitle-text-holder p, .subtitle-text-holder li, .subtitle-text-holder ul {
-	margin: 0px;
-	padding: 0px;
-	pointer-events:none;
-	line-height:1.6em;
-	@include legacy-ie {
-		background-color: $subtitleBackGroundColor; /* More background colour for browsers that don't support css pointer-events */
-    }
-}
-
-.subtitle-text-holder h3 {
-	margin-bottom:0;
-}
-
-
-.subtitle-text-holder span {
-	margin: 0px;
-	padding: 0px;
-	display:inline-block;
-	background-color: $subtitleBackGroundColor;
-	line-height:1.6em;
-	border-left-width: 0.5em;
-	border-left-color: $subtitleBackGroundColor;
-	border-left-style: solid;
-	border-right-width: 0.5em;
-	border-right-color: $subtitleBackGroundColor;
-	border-right-style: solid;
-	pointer-events:auto;
-	cursor: pointer;
-}	
- .subtitle-text-holder span.heading {
-	font-weight:bold;
-	margin-top: 1em;
-}
-
-.subtitle-text-holder li {
-border-left-width: 3em;
-border-left-color: $subtitleBackGroundColor;
-border-left-style: solid;
-}
-
-.subtitle-text-holder .indent {
-	border-left-width: 3em;
-	border-left-color: $subtitleBackGroundColor;
-	border-left-style: solid;
-	line-height:100%;
 }
 .quote {
 	font-style:italic;
@@ -183,9 +198,6 @@ border-left-style: solid;
 	border-left-color: $subtitleBackGroundColor;
 	border-left-style: solid;
 	line-height:100%;
-}
-.subtitle-text-holder a p span {
-	color: darkorange;
 }
 
 
@@ -195,16 +207,17 @@ border-left-style: solid;
 
  
 a {
-color:darkorange;
+	color:darkorange;
+	&:hover {
+		color:red;
+	}
+	&:visited {
+		color:darkred;	
+	}
 }
 
-a:hover {
-color:red;
-}
-a:visited {
-color:darkred;
-	
-}
+
+
 .relative-positioned {
 	position:relative;
 }
@@ -339,88 +352,96 @@ background-repeat: no-repeat;
 }
 
 .graph-plot-tech-general {
-color:#CC9999;
+	color:$col_TechGen;
+	.graph-legend-fill {
+		background-color:$colDrk_TechGen;
+	}
 }
-.graph-plot-tech-general .graph-legend-fill {
-	background-color:#996666;
-}
-
 .graph-plot-tech-portfolio {
-	color:#99CC99;
-}
-.graph-plot-tech-portfolio .graph-legend-fill {
-	background-color:#669966;
+	color:$col_TechPort;
+ 	.graph-legend-fill {
+		background-color:$colDrk_TechPort;
+	}
 }
 
 .graph-plot-general {
-	color:#9999CC;
-}
-.graph-plot-general .graph-legend-fill {
-	background-color:#666699;
+	color:$col_Gen;
+	.graph-legend-fill {
+		background-color:$colDrk_Gen;
+	}
 }
 
-.graph-plot, .graph-position {
+.graph-info {
 	position:absolute;
-	top:$navBarHeight;
+	top:$navBarHeight*2;
 	font-size:18px;
 	width:100%;
+	padding-left:1em 0;
+	padding:0 0.5em;
 	line-height: 100%;
-	padding: 0em;
-	top:80px;
 	text-transform: capitalize;
+	.graph-layer {
+		width:100%;
+		position:absolute;
+		left:0px;
+		top:0px;
+		padding: 0 1em;
+	}
+	.graph-position {
+		color:$darkGrey;
+	}
+	div, span {
+		float:left;
+	}
+	li {
+		margin-left:1.5em;
+	}
+	h1 {
+		color:inherit;
+	}
+	h1.graph-position {
+	}
+
 }
 
-.plot-text, .plot-heading {
-	float:left;
-}
- 
- 
-.plot-text ul {
-	margin-left: 1em;
-}
-
-.graph-plot h1, .graph-position h1 {
-	font-size:10em;
-	margin: 0;
-	padding: 0;
-	line-height: 80%;
-	padding-right:15px;
-}
-.graph-plot h1, .graph-plot h3 {
-	color:inherit;
-	text-transform:uppercase;
-}
-.graph-position h1 {
-	color:#595959;
-	text-align:right;
-}
-
-.graph-legend h3 {
-color:inherit;
-margin:0;
-text-align:right;
-width:100%;
-text-transform: uppercase;
-}
 .graph-legend {
 	position:absolute;
-	bottom: -3em;
-	right: 0em;
+	bottom:-50px;
+	right:0;
 	padding:0 1em;
-	margin:0.5em;
-	border: solid 0.5em #595959;
-	color:#595959;
+	color:darken($darkGrey, 3%);
+	 h3, h4, h5 {
+		color:inherit;
+		margin:0;
+		width:100%;
+		text-transform: uppercase;
+		color:$darkGrey;
+	}
+	li {
+		list-style: none;
+		.graph-legend-fill { 
+			width:2em;
+			height:1em;
+			margin-right:0.5em;
+			float:left;
+			clear:both;
+		}
+	}
 }
 
-.graph-legend li {
-	list-style: none;
+/*
+.graph-plot {
+	h3 {
+		color:inherit;
+		text-transform:uppercase;
+	}
 }
-.graph-legend-fill { 
-	width:2em;
-	height:1em;
-	margin-right:0.5em;
-	float:left;
-}
+*/
+
+
+
+
+
 
 
 .scalar {
