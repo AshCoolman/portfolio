@@ -1,9 +1,7 @@
+
 <!DOCTYPE html>
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<?php
-$IS_DEPLOY = true;
-?>
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
@@ -11,14 +9,8 @@ $IS_DEPLOY = true;
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" href="///cdnjs.cloudflare.com/ajax/libs/foundation/4.3.1/css/foundation.min.css" />
-	<? if ($IS_DEPLOY) {?>
-	<link rel="stylesheet" href="css/all.min.css" />
-	<?php } else { ?>
-	<link rel="stylesheet" href="css/foundation4.css" />
-	<link rel="stylesheet" href="css/html5bp.css" />
-	<link rel="stylesheet" href="css/portfolio.css" />
-	<?php } ?>
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<link rel="stylesheet" href="css/all.min.css" />
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="//cdn.jsdelivr.net/modernizr/2.6.2/modernizr.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.min.js"></script>
@@ -32,114 +24,9 @@ $IS_DEPLOY = true;
 	<script src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.0.0-rc.1/ember.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/foundation/4.3.1/js/foundation.min.js"></script>
 
-<?php
-$indexCopyA = '@=<h3>
-Ashley Coleman: The Origin
-@=</h3>
-To teach you about myself, I start with my name.
-My name is an origin, from which I can illustrate the different dimensions that make me up.
-@actionOnRead=doSecondSubtitle';
-$indexCopyA = addcslashes($indexCopyA, '"');
 
-?>
 
-<?php
-$quot = htmlspecialchars("\"");
 
- $d1copyA = '@=<h3>
-X: Software Engineer
-@=</h3>
-Web dev is my craft.
-I value speed, elegance, and clarity.
-
-And as one <a href="http://goo.gl/O5dnGf">clever cookie</a> once said:
-
-<i class="quote">Real artists ship</i>
-@actionOnRead=doSubtitle2 2000
-@actionOnRead=doSubtitle3 5000';
-$d1copyA = addcslashes($d1copyA, '"');
-
-$obligatoryList = '<span class="heading">' . htmlspecialchars("<OBLIGATORY SKILL LIST>") . '</span>
-@=<div class="indent">
-	<span class="heading">Javascript</span>
-	JQuery 
-	AJAX 
-	nodejs 
-	Ember 
-	Handlebars 
-	threejs (WebGL) 
-	Google Closure Library 
-	Raphaeljs 
-	Createjs 
-	underscorejs 
-
-	<span class="heading">Flash</span>
-	AS3
-	AS2 
-	Flex
-	Flash Video
-
-	<span class="heading">HTML</span>
-	HTML5
-	CSS3
-	SVG
-
-	<span class="heading">Serverside</span>
-	PHP
-	MySQL 
-	Postgres 
-	Templating libraries 
-
-	<span class="heading">Coding Paradigms/Patterns</span>
-	OOP
-	MVC 
-	MVP 
-
-	<span class="heading">Tools</span>
-	JSList
-	Git, SVN, Mecurial
-	JIRA
-
-	<span class="heading">General Knowledge</span>
-	3d Math
-	2d / 3d Physics
-	Geolocation
-	API creation
-	Code documentation
-	Photoshop, Premiere, AfterEffects
-
-@=</div>
-
-<span class="heading">' . htmlspecialchars("</OBLIGATORY SKILL LIST>") . '</span>';
-
-$obligatoryList = addcslashes($obligatoryList, '"');			
-?>
-
-<?php 
-$d2copyA =  '@=<h3>
-Y: The Storyteller
-@=</h3>
-I like induce change in the audience, be it emotion, thought, excitement, knowledge...
-Simply put, I am a story teller.
-
-If the question is how to best communicate to an audience, 
-@actionOnRead=doShowQuestion
-then I have the technical skills can be used to craft an answering experience.
-@actionOnRead=doSubtitle2';
-?>
-
-<?php
-$d3copyA = '@=<h3>
-Z: The Creative
-@=</h3>
-I am committed to creative thinking.
-It means discarding your <i>first thoughts</i>, and what seems <i>obvious</i>.
-
-And knowing that somewhere there is a solution...
-@actionOnRead=doRotateQuestionMarkHint
-...that is simple and elegant...
-@actionOnRead=doRotateQuestionMark'; 
-?>
 
 		<script type="text/x-handlebars" data-template-name="application">		
 			 <row>
@@ -247,7 +134,12 @@ And knowing that somewhere there is a solution...
 
 		<script type="text/x-handlebars" data-template-name="index">		
 
-			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $indexCopyA; ?>"}}}
+			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="@=<h3>
+Ashley Coleman: The Origin
+@=</h3>
+To teach you about myself, I start with my name.
+My name is an origin, from which I can illustrate the different dimensions that make me up.
+@actionOnRead=doSecondSubtitle"}}}
 			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="Go to dimension @edits=X...,One...,Who...,How..." isLink=true actionEvent="doGotoDimension1" }}}
 
 		</script>
@@ -257,9 +149,70 @@ And knowing that somewhere there is a solution...
 				{{renderWithVars 'interactive-grid' pixW=20 isPlotX=true}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
-			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
+			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="@=<h3>
+X: Software Engineer
+@=</h3>
+Web dev is my craft.
+I value speed, elegance, and clarity.
+
+And as one <a href=\"http://goo.gl/O5dnGf\">clever cookie</a> once said:
+
+<i class=\"quote\">Real artists ship</i>
+@actionOnRead=doSubtitle2 2000
+@actionOnRead=doSubtitle3 5000"}}}
 			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Go to dimension @edits=Y...,Why?...,Motivation..."}} 
-			{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}} 
+			{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' isInstant=true hasRemoveButton=true thescript="<span class=\"heading\">&lt;OBLIGATORY SKILL LIST&gt;</span>
+@=<div class=\"indent\">
+	<span class=\"heading\">Javascript</span>
+	JQuery 
+	AJAX 
+	nodejs 
+	Ember 
+	Handlebars 
+	threejs (WebGL) 
+	Google Closure Library 
+	Raphaeljs 
+	Createjs 
+	underscorejs 
+
+	<span class=\"heading\">Flash</span>
+	AS3
+	AS2 
+	Flex
+	Flash Video
+
+	<span class=\"heading\">HTML</span>
+	HTML5
+	CSS3
+	SVG
+
+	<span class=\"heading\">Serverside</span>
+	PHP
+	MySQL 
+	Postgres 
+	Templating libraries 
+
+	<span class=\"heading\">Coding Paradigms/Patterns</span>
+	OOP
+	MVC 
+	MVP 
+
+	<span class=\"heading\">Tools</span>
+	JSList
+	Git, SVN, Mecurial
+	JIRA
+
+	<span class=\"heading\">General Knowledge</span>
+	3d Math
+	2d / 3d Physics
+	Geolocation
+	API creation
+	Code documentation
+	Photoshop, Premiere, AfterEffects
+
+@=</div>
+
+<span class=\"heading\">&lt;/OBLIGATORY SKILL LIST&gt;</span>"}} 
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="interactive-grid" >
@@ -352,7 +305,16 @@ And knowing that somewhere there is a solution...
 				</div>
 			</div>
 
-			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyA?>"}}}
+			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="@=<h3>
+Y: The Storyteller
+@=</h3>
+I like induce change in the audience, be it emotion, thought, excitement, knowledge...
+Simply put, I am a story teller.
+
+If the question is how to best communicate to an audience, 
+@actionOnRead=doShowQuestion
+then I have the technical skills can be used to craft an answering experience.
+@actionOnRead=doSubtitle2"}}}
 			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true actionEvent="doGotoDimension3" }}}
 			
 			{{#if App.DEBUG}}
@@ -416,7 +378,16 @@ And knowing that somewhere there is a solution...
 					{{controlWithVars 'esl-entity-container'}}
 				</div>
 			</div>
-			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyA; ?>"}}}
+			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="@=<h3>
+Z: The Creative
+@=</h3>
+I am committed to creative thinking.
+It means discarding your <i>first thoughts</i>, and what seems <i>obvious</i>.
+
+And knowing that somewhere there is a solution...
+@actionOnRead=doRotateQuestionMarkHint
+...that is simple and elegant...
+@actionOnRead=doRotateQuestionMark"}}}
 			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="i.e. The big idea."}}}
 
 		</script>
@@ -436,44 +407,8 @@ And knowing that somewhere there is a solution...
 			<div class="app"></div>	
 		</div>  
 
-<?php
 
-if (!$IS_DEPLOY) { 
-	try {
-		$paths = array('js/lib/ragh/', 'js/mvc/');
-		foreach($paths as $path) {
-
-			$simpath = $path;
-			$Directory = new RecursiveDirectoryIterator(realpath($simpath));
-			$Iterator = new RecursiveIteratorIterator($Directory);
-			$Regex = new RegexIterator($Iterator, '/^.+\.js$/i', RecursiveRegexIterator::GET_MATCH);
-			$fileLevels = array();
-			foreach($Regex as $match) {
-				$el = explode($simpath, $match[0] )[1];
-				$lvl = count(explode('/', $el ));
-				if ( is_null($fileLevels[ $lvl ] ) ) {
-					$fileLevels[ $lvl ] = array();
-				}
-				$fileLevels[ $lvl ][] = "$simpath$el";
-			}		
-
-			ksort($fileLevels);
-			foreach($fileLevels as $lvl => $filesInLevel) {
-				sort($filesInLevel);
-				foreach($filesInLevel as $file) {
-					//echo "<br/>$lvl: $file";
-					echo "<script src=\"$file\"></script>";
-				}
-			}
-		}
-	} catch (Exception $e) {
-		 echo  "PHP Exception <br/>$e<br/>";
-	}
-}
-?>
-
-<?php if ($IS_DEPLOY) { ?><script src="js/custom.min.js"></script> <?php } ?>
-	<script>
+<script src="js/custom.min.js"></script> 	<script>
 		$(document).foundation();
 	</script>
 
@@ -481,49 +416,3 @@ if (!$IS_DEPLOY) {
 </html>
 
 
-<?php
-/*
-  <script>
-  document.write('<script src=' +
-  ('__proto__' in {} ? 'javascripts/vendor/zepto' : 'javascripts/vendor/jquery') +
-  '.js><\/script>')
-  </script>
-*/
-
-
-/*
-echo
-<<<
-<script src="javascripts/foundation/foundation.js"></script>
-<script src="javascripts/foundation/foundation.alerts.js"></script>
-<script src="javascripts/foundation/foundation.clearing.js"></script>
-<script src="javascripts/foundation/foundation.cookie.js"></script>
-<script src="javascripts/foundation/foundation.dropdown.js"></script>
-<script src="javascripts/foundation/foundation.forms.js"></script>
-<script src="javascripts/foundation/foundation.interchange.js"></script>
-<script src="javascripts/foundation/foundation.joyride.js"></script>
-<script src="javascripts/foundation/foundation.magellan.js"></script>
-<script src="javascripts/foundation/foundation.orbit.js"></script>
-<script src="javascripts/foundation/foundation.placeholder.js"></script>
-<script src="javascripts/foundation/foundation.reveal.js"></script>
-<script src="javascripts/foundation/foundation.section.js"></script>
-<script src="javascripts/foundation/foundation.tooltips.js"></script>
-<script src="javascripts/foundation/foundation.topbar.js"></script>
-<script src="js/lib/stats.min.js"></script>
-<script src="js/lib/threex.rendererstats.js"></script>
-<script src="js/lib/json2.js"></script>
-<script src="js/lib/rAF.js"></script>
-<script src="js/lib/jquery-1.8.1.min.js"></script>
-<script src="js/lib/handlebars.js"></script>
-<script src="js/lib/three.js"></script>
-<script src="js/lib/THREEx.WindowResize.js"></script>
-<script src="js/lib/easeljs-0.6.0.min.js"></script>
-<script src="js/lib/tweenjs-0.4.0.min.js"></script>
-<script src="js/lib/movieclip-0.6.0.min.js"></script>
-<script src="js/lib/CSSPlugin.js"></script>
-<script src="js/lib/Ease.js"></script>
-<script src="js/lib/preloadjs-0.3.0.min.js"></script>
-<script src="js/lib/ragh/Three.TrackballControls.js"></script>
-*/
-
-?>

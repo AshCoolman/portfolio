@@ -1,17 +1,17 @@
 # Patterns matching CSS files that should be minified. Files with a -min.css
 # suffix will be ignored.
 CSS_FILES = $(filter-out %-min.css,$(wildcard \
-	css/html5bp.css \
 	css/foundation4.css \
+	css/html5bp.css \
 	css/portfolio.css \
 ))
 
 # Patterns matching JS files that should be minified. Files with a -min.js
 # suffix will be ignored.
 
-JS_GROUP = "lib"
+# JS_GROUP = "lib"
 # JS_GROUP = "custom"
-# JS_GROUP = "foundation"
+#s JS_GROUP = "foundation"
 
 ifeq ($(JS_GROUP),"lib")
 JS_FILES = $(filter-out %-min.js,$(wildcard \
