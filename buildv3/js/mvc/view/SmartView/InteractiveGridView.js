@@ -156,7 +156,7 @@ App.InteractiveGridView = App.SmartView.extend({
 	didInsertElement: function () {
 		this._super();
 		
-		$('.graph-plot', this.get('$el')).css({opacity: 1});
+		$('.graph-plot', this.get('$el')).css({opacity: 0});
 		
 		var raphaeljs,
 			w = 1200,
@@ -323,13 +323,19 @@ App.InteractiveGridView = App.SmartView.extend({
 					if (typeof(nearestIndex)!='undefined') {
 						var newPlot = plots[nearestIndex];
 						me.set('shownPlotIndex', nearestIndex);
-						me.get('controller').set('plotHeading', newPlot.x + ' ' +newPlot.text);
-						me.get('controller').set('plotText',  newPlot.xList);
+						//me.get('controller').set('plotHeading', newPlot.x + ' ' +newPlot.text);
+						
+						//me.get('controller').set('plotText',  newPlot.xList);
 						me.get('controller').set('plotNumber', newPlot.x);
 						me.get('controller').set('plotClass', 'something '+newPlot.type.cssClass);
 						clipX = newPlot.x * unitX;
 	
 						if (athePlotX['animateWidthTarget'] != clipX) {
+							console.log('triggered interactiveGridText')
+							App.eventMapper.triggerEvent( ragh.MEvt.create('interactiveGridText', {
+								heading: newPlot.x + ' ' +newPlot.text, 
+								items: newPlot.xList
+							}));
 							athePlotX.stop();
 							athePlotX.animate({   
 						        fill: newPlot.type.fill,

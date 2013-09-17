@@ -246,6 +246,15 @@ a {
   min-height: 100%;
   top: -45px; }
 
+.interactive-graph-output {
+  background-color: #333333;
+  font-family: monospace;
+  font-size: 1.2em;
+  color: #CCCCCC; }
+  .interactive-graph-output h3 {
+    color: inherit;
+    font-family: inherit; }
+
 #svg-raphaeljs {
   position: absolute;
   width: 100%; }

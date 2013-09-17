@@ -345,6 +345,16 @@ background-repeat: no-repeat;
 	top:-45px;
 }
 
+.interactive-graph-output {
+	background-color: #333333;
+	font-family:monospace;
+	font-size:1.2em;
+	color:#CCCCCC;
+	h3 {
+		color: inherit;
+		font-family:inherit;
+	}
+}
 
 #svg-raphaeljs {
 	position: absolute;

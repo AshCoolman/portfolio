@@ -2,7 +2,7 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <?php
-$IS_DEPLOY = true;
+$IS_DEPLOY = false;
 ?>
 <head>
 	<meta charset="utf-8" />
@@ -10,14 +10,9 @@ $IS_DEPLOY = true;
 	<title>Ashley Coleman</title>
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<? if ($IS_DEPLOY) {?>	
 	<link rel="stylesheet" href="///cdnjs.cloudflare.com/ajax/libs/foundation/4.3.1/css/foundation.min.css" />
-	<? if ($IS_DEPLOY) {?>
 	<link rel="stylesheet" href="css/all.min.css" />
-	<?php } else { ?>
-	<link rel="stylesheet" href="css/foundation4.css" />
-	<link rel="stylesheet" href="css/html5bp.css" />
-	<link rel="stylesheet" href="css/portfolio.css" />
-	<?php } ?>
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="//cdn.jsdelivr.net/modernizr/2.6.2/modernizr.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js"></script>
@@ -31,6 +26,28 @@ $IS_DEPLOY = true;
 	<script src="js/lib.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.0.0-rc.1/ember.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/foundation/4.3.1/js/foundation.min.js"></script>
+<?php } else { ?>
+	<link rel="stylesheet" href="css/foundation4.css" />
+	<link rel="stylesheet" href="css/html5bp.css" />
+	<link rel="stylesheet" href="css/portfolio.css" />
+
+
+	<script src="js/lib/jquery-1.8.1.min.js"></script>
+	<script src="javascripts/vendor/modernizr.min.js"></script>
+	<script src="javascripts/vendor/zepto.js"></script>
+	<script src="js/lib/handlebars.js"></script>
+	<script src="js/lib/easeljs-0.6.0.min.js"></script>
+	<script src="js/lib/tweenjs-0.4.0.min.js"></script>
+	<script src="js/lib/movieclip-0.6.0.min.js"></script>
+	<script src="js/lib/preloadjs-0.3.0.min.js"></script>
+	<script src="js/lib/three.js"></script>
+	<script src="js/lib/raphael.js"></script>
+	<script src="js/lib.min.js"></script>
+	<script src="js/lib/embermandl.js"></script>
+	<script src="js/foundation.min.js"></script>
+
+<?php } ?>
+
 
 <?php
 $indexCopyA = '@=<h3>
@@ -52,7 +69,7 @@ X: Software Engineer
 Web dev is my craft.
 I value speed, elegance, and clarity.
 
-And as one <a href="http://goo.gl/O5dnGf">clever cookie</a> once said:
+And as one <a href="http://goo.gl/O5dnGf" target="_blank">clever cookie</a> once said:
 
 <i class="quote">Real artists ship</i>
 @actionOnRead=doSubtitle2 2000
@@ -160,7 +177,7 @@ And knowing that somewhere there is a solution...
 
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-row">
 			<div class="row pointer-events-none">
-				<div class="columns subtitle-text-holder large-9 large-offset-3 small-9 small-offset-1">
+				<div class="columns subtitle-text-holder large-12 small-12">
  					{{yield}}
 				</div>
 			</div>
@@ -257,9 +274,19 @@ And knowing that somewhere there is a solution...
 				{{renderWithVars 'interactive-grid' pixW=20 isPlotX=true}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
-			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
-			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Go to dimension @edits=Y...,Why?...,Motivation..."}} 
-			{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}} 
+			<div class="row">
+				<div class="columns large-6 small-6 interactive-graph-output">
+					<h3>{{{this.interactiveGridData.heading}}}</h3>
+					{{#each this.interactiveGridData.items}}
+					<li>{{{this}}}</li>
+					{{/each}}
+				</div>
+				<div class="columns large-6 small-6">
+					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
+					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Go to dimension @edits=Y...,Why?...,Motivation..."}} 
+					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}} 
+				</div>
+			</div>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="interactive-grid" >
