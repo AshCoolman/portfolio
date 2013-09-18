@@ -328,7 +328,6 @@ App.InteractiveGridView = App.SmartView.extend({
 						clipX = newPlot.x * unitX;
 	
 						if (athePlotX['animateWidthTarget'] != clipX) {
-							console.log('triggered interactiveGridText')
 							App.eventMapper.triggerEvent( ragh.MEvt.create('interactiveGridText', {
 								heading: newPlot.text, 
 								number: newPlot.x,

@@ -9,7 +9,7 @@ CSS_FILES = $(filter-out %-min.css,$(wildcard \
 # Patterns matching JS files that should be minified. Files with a -min.js
 # suffix will be ignored.
 
-# JS_GROUP = "lib"
+#s JS_GROUP = "lib"
 # JS_GROUP = "custom"
 #s JS_GROUP = "foundation"
 

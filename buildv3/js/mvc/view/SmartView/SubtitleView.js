@@ -12,18 +12,20 @@ App.SubtitleView = App.SmartView.extend({
 			    	me.get('controller').set('isHover', true);
 					if (!me.get('controller').get('isEnded') && !me.get('controller').get('isEdit'))
 						me.get('controller').set('isHoverUnfinished', true);
+					me.get('controller').send('doHover');
 			    }
 			}(this),
 			function (me) {
 				return function () {
 			    	me.get('controller').set('isHover', false);
 			    	me.get('controller').set('isHoverUnfinished', false);
+					me.get('controller').send('doHover');
 			    }
 			}(this)
 		);
 		$('.text', this.get('$el')).on( 'click', 'span', function (me) {
 			return function () {
-				me.get('controller').send('doClicked')
+				me.get('controller').send('doClicked');
 			}
 		}(this) );
 		return this._super();

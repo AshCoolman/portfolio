@@ -19,7 +19,7 @@ $colDrk_Gen: #666699;
 $col_offwhite: #CCCCCC;
 $col_bg: #666666;
 $col_bg_lit: lighten($col_bg, 25%);
-$gridHeight: 4px;
+$rulerSize: 5px;
 /*
 http://jsfiddle.net/VAXrL/190/
 */
@@ -65,26 +65,29 @@ canvas, img {
 }
 
 html,body { 
-	background-color: #fff;	
+	background-color: $col_bg;
 	height: 100%;
 }
 
 .app-container {
-	background-color: $col_bg;
 	height:100%;
 	min-height:100%;
+}
+
+.application {
+	height:100%;
 }
 
 .bg-layer {
 	height:100%;
 	width:100%;
-	position:absolute;
+	position:fixed;
 	margin:0;
 	padding:0;
 }
 
 .y-ruler {
-	background-size: 30px $gridHeight;
+	background-size: 30px $rulerSize;
 	background-position: center bottom;
 	background-image: linear-gradient(90deg, 
 						$col_bg_lit 0px, 
@@ -121,7 +124,7 @@ html,body {
 }
 
 .x-ruler {
-	background-size: $gridHeight 30px;
+	background-size: $rulerSize 30px;
 	background-position: right bottom;
 	background-image: linear-gradient( 
 						$col_bg_lit 0px, 

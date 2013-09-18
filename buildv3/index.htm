@@ -140,7 +140,7 @@ Ashley Coleman: The Origin
 To teach you about myself, I start with my name.
 My name is an origin, from which I can illustrate the different dimensions that make me up.
 @actionOnRead=doSecondSubtitle"}}}
-			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="Go to dimension @edits=X...,One...,Who...,How..." isLink=true actionEvent="doGotoDimension1" }}}
+			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="Go to dimension @edits=X...,One...,Who...,How..." isLink=true linkEvent="doGotoDimension1" }}}
 
 		</script>
 
@@ -160,7 +160,7 @@ And as one <a href=\"http://goo.gl/O5dnGf\">clever cookie</a> once said:
 <i class=\"quote\"><i class=\"icon-quote-left\"></i>Real artists ship<i class=\"icon-quote-right\"></i></i>
 @actionOnRead=doSubtitle2 2000
 @actionOnRead=doSubtitle3 5000"}}}
-			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Go to dimension @edits=Y...,Why?...,Motivation..."}} 
+			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2" hasRemoveButton=true thescript="Go to dimension @edits=Y...,Why?...,Motivation..."}} 
 			{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' isInstant=true hasRemoveButton=true thescript="<span class=\"heading\">&lt;OBLIGATORY SKILL LIST&gt;</span>
 @=<div class=\"indent\">
 	<span class=\"heading\">Javascript</span>
@@ -278,7 +278,7 @@ And as one <a href=\"http://goo.gl/O5dnGf\">clever cookie</a> once said:
 					<div class="remove-button-holder"><a {{action 'doRemoveClicked'}}><i class="icon-remove remove-button"></i></a></div>
 				{{/if}}
 				{{#if isLink}}
-					<a {{action getActionEvent}}>
+					<a {{action getLinkEvent}}>
 				{{/if}}
 				<div class="text"></div>
 				{{#if isLink}}
@@ -315,7 +315,7 @@ If the question is how to best communicate to an audience,
 @actionOnRead=doShowQuestion
 then I have the technical skills can be used to craft an answering experience.
 @actionOnRead=doSubtitle2"}}}
-			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true actionEvent="doGotoDimension3" }}}
+			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true linkEvent="doGotoDimension3" }}}
 			
 			{{#if App.DEBUG}}
 				{{render 'world-2d-editor'}}

@@ -33,7 +33,7 @@ $IS_DEPLOY = false;
 
 
 	<script src="js/lib/jquery-1.8.1.min.js"></script>
-	<script src="javascripts/vendor/modernizr.min.js"></script>
+	<script src="javascripts/vendor/custom.modernizr.js"></script>
 	<script src="javascripts/vendor/zepto.js"></script>
 	<script src="js/lib/handlebars.js"></script>
 	<script src="js/lib/easeljs-0.6.0.min.js"></script>
@@ -158,7 +158,9 @@ And knowing that somewhere there is a solution...
 @actionOnRead=doRotateQuestionMark'; 
 ?>
 
-		<script type="text/x-handlebars" data-template-name="application">		
+		<script type="text/x-handlebars" data-template-name="application">
+		<div class="bg-layer x-ruler"></div>
+		<div class="bg-layer y-ruler"></div>		
 			 <row>
 				{{outlet "nav-list"}}
 			</row>
@@ -271,7 +273,7 @@ And knowing that somewhere there is a solution...
 		<script type="text/x-handlebars" data-template-name="index">		
 
 			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $indexCopyA; ?>"}}}
-			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=X...,One...,Who...,How..." isLink=true actionEvent="doGotoDimension1" }}}
+			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=X...,One...,Who...,How..." isLink=true linkEvent="doGotoDimension1" hoverEvent="doSetRulerX"}}}
 
 		</script>
 
@@ -296,7 +298,7 @@ And knowing that somewhere there is a solution...
 				</div>
 				<div class="columns large-6  small-6">
 					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
-					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Y...,Why?...,Motivation..."}} 
+					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Y...,Why?...,Motivation..."}} 
 					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}} 
 				</div>
 			</div>
@@ -351,7 +353,7 @@ And knowing that somewhere there is a solution...
 					<div class="remove-button-holder"><a {{action 'doRemoveClicked'}}><i class="icon-remove remove-button"></i></a></div>
 				{{/if}}
 				{{#if isLink}}
-					<a {{action getActionEvent}}>
+					<a {{action getLinkEvent}}>
 				{{/if}}
 				<div class="text"></div>
 				{{#if isLink}}
@@ -379,7 +381,7 @@ And knowing that somewhere there is a solution...
 			</div>
 
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyA?>"}}}
-			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true actionEvent="doGotoDimension3" }}}
+			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true linkEvent="doGotoDimension3" }}}
 			
 			{{#if App.DEBUG}}
 				{{render 'world-2d-editor'}}
@@ -460,12 +462,9 @@ And knowing that somewhere there is a solution...
         <![endif]-->
 		 
 			
+
 		<div class="app-container">
-			
-			<div class="bg-layer x-ruler"></div>
-			<div class="bg-layer y-ruler"></div>
 			<div class="app">
-				
 			</div>	
 		</div>  
 		

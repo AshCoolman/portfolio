@@ -266,7 +266,6 @@ App.SubtitleController = App.SmartController.extend({
 					while (isEvents && srcLines[atLine] && srcLines[atLine][0] && srcLines[atLine][0] == '@') {
 						var line = srcLines[atLine].join('');
 						if (line.indexOf('@=') == 0) {
-							console.log('found tag', line)
 							this.doTagRead(line, atPrintedLine); 
 						} else if(line.indexOf('@actionOnRead=') == 0) {
 							var words =  line.split(' ');
@@ -486,16 +485,22 @@ App.SubtitleController = App.SmartController.extend({
 
 	},
 	
-	getActionEvent: function () {
-		console.log('getActionEvent', this.get('actionEvent'))
-		this.send(this.get('actionEvent'))
+	getLinkEvent: function () {
+		console.log('getLinkEvent', this.get('linkEvent'))
+		this.send(this.get('linkEvent'))
 	},
 	
 	doClicked: function () {
-		if (this.get('actionEvent')) {
-			this.send(this.get('actionEvent'));
+		if (this.get('linkEvent')) {
+			this.send(this.get('linkEvent'));
 		}
 		this.doForceFinish();
+	},
+	
+	doHover: function () {
+		if (this.get('hoverEvent')) {
+			this.set(this.get('hoverEvent'), this.get('isHover'))
+		}
 	},
 	
 	reDraw: function (adur, scope) {
