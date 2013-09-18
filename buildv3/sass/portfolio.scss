@@ -10,15 +10,29 @@ $navBarHeight: 45px;
 $col_TechGen: #BB8888;
 $col_TechPort: #88BB88;
 $col_Gen: #8888BB;
-
+$col_link: #FF6347;
+$col_link_visited:#A52A2A;
+$col_link_hover:#DC143C;
 $colDrk_TechGen: #996666;
 $colDrk_TechPort: #669966;
 $colDrk_Gen: #666699;
-
-$col_backGround: #666666;
+$col_offwhite: #CCCCCC;
+$col_bg: #666666;
+$col_bg_lit: lighten($col_bg, 25%);
+$gridHeight: 4px;
 /*
 http://jsfiddle.net/VAXrL/190/
 */
+
+@mixin link {
+	color:$col_link;
+	&:hover {
+		color:$col_link_hover;
+	}
+	&:visited {
+		color:$col_link_visited;	
+	}
+}
 
 $default-legacy-ie: 7 8 9 10 11 !default;
 
@@ -51,17 +65,103 @@ canvas, img {
 }
 
 html,body { 
-	height:100%; 
-	background: $col_backGround !important;
+	background-color: #fff;	
+	height: 100%;
 }
- 
+
+.app-container {
+	background-color: $col_bg;
+	height:100%;
+	min-height:100%;
+}
+
+.bg-layer {
+	height:100%;
+	width:100%;
+	position:absolute;
+	margin:0;
+	padding:0;
+}
+
+.y-ruler {
+	background-size: 30px $gridHeight;
+	background-position: center bottom;
+	background-image: linear-gradient(90deg, 
+						$col_bg_lit 0px, 
+						$col_bg_lit 2px,
+						transparent 2px),
+						linear-gradient(90deg, 
+						$col_bg_lit 0px, 
+						$col_bg_lit 1px, 
+						transparent 1px,
+						transparent 5px,
+						$col_bg_lit 5px, 
+						$col_bg_lit 6px, 
+						transparent 6px,
+						transparent 10px,
+						$col_bg_lit 10px, 
+						$col_bg_lit 11px, 
+						transparent 11px,
+						transparent 15px,
+						$col_bg_lit 15px, 
+						$col_bg_lit 16px, 
+						transparent 16px,
+						transparent 20px,
+						$col_bg_lit 20px, 
+						$col_bg_lit 21px, 
+						transparent 21px,
+						transparent 25px,
+						$col_bg_lit 25px, 
+						$col_bg_lit 26px, 
+						transparent 26px,
+						transparent 27px
+			);
+
+	background-repeat: repeat-x;
+}
+
+.x-ruler {
+	background-size: $gridHeight 30px;
+	background-position: right bottom;
+	background-image: linear-gradient( 
+						$col_bg_lit 0px, 
+						$col_bg_lit 2px,
+						transparent 2px),
+						linear-gradient(
+						$col_bg_lit 0px, 
+						$col_bg_lit 1px, 
+						transparent 1px,
+						transparent 5px,
+						$col_bg_lit 5px, 
+						$col_bg_lit 6px, 
+						transparent 6px,
+						transparent 10px,
+						$col_bg_lit 10px, 
+						$col_bg_lit 11px, 
+						transparent 11px,
+						transparent 15px,
+						$col_bg_lit 15px, 
+						$col_bg_lit 16px, 
+						transparent 16px,
+						transparent 20px,
+						$col_bg_lit 20px, 
+						$col_bg_lit 21px, 
+						transparent 21px,
+						transparent 25px,
+						$col_bg_lit 25px, 
+						$col_bg_lit 26px, 
+						transparent 26px,
+						transparent 27px
+			);
+	background-repeat: repeat-y;
+}
 
 .note {
 	font-size:0.33em;
 	color:#999;
 }
 
-
+ 
 .heartbeat-flash {
 	background:transparent;
 	position: fixed;
@@ -132,6 +232,7 @@ html,body {
 		text-decoration:none;
 		pointer-events:auto;
 		margin-top:0.5em;
+		@include link;
 		
 	}
 	.heading, p, li, ul {
@@ -144,7 +245,8 @@ html,body {
 	    }
 	}
 	h3 {
-		margin-bottom:0;
+		margin:0;
+		padding:0;
 		color:inherit;
 	}
 	span {
@@ -165,6 +267,7 @@ html,body {
 	span.heading {
 		font-weight:bold;
 		margin-top: 1em;
+		border-left-width: 0em;
 	}
 	li {
 		border-left-width: 3em;
@@ -178,19 +281,21 @@ html,body {
 		line-height:100%;
 	}
 	a p span {
-		color: darkorange;
+		@include link;
 	}
 }
 
 
 .remove-button-holder {
 	position: absolute;
-	top: -1em;
+	top: -1.25em;
 }
 
 .click-hint-holder {
-	color:white;
-	margin:0.5em 7em;
+	color:$col_offwhite;
+	margin:0.5em 0em;
+	position: absolute;
+	bottom:-0.5em;
 }
 .quote {
 	font-style:italic;
@@ -207,13 +312,7 @@ html,body {
 
  
 a {
-	color:darkorange;
-	&:hover {
-		color:red;
-	}
-	&:visited {
-		color:darkred;	
-	}
+	@include link;
 }
 
 
@@ -346,13 +445,20 @@ background-repeat: no-repeat;
 }
 
 .interactive-graph-output {
-	background-color: #333333;
+	background-color: $col_bg;
+	padding:0.5em;
 	font-family:monospace;
 	font-size:1.2em;
 	color:#CCCCCC;
 	h3 {
 		color: inherit;
 		font-family:inherit;
+	}
+	ul {
+		margin-left:1.5em;
+		ul {
+			list-style-type:inherit;
+		}
 	}
 }
 
@@ -381,15 +487,9 @@ background-repeat: no-repeat;
 	}
 }
 
-.graph-info {
-	position:absolute;
-	top:$navBarHeight*2;
-	font-size:18px;
+.graph-info { 
 	width:100%;
-	padding-left:1em 0;
-	padding:0 0.5em;
 	line-height: 100%;
-	text-transform: capitalize;
 	.graph-layer {
 		width:100%;
 		position:absolute;
@@ -403,9 +503,6 @@ background-repeat: no-repeat;
 	div, span {
 		float:left;
 	}
-	li {
-		margin-left:1.5em;
-	}
 	h1 {
 		color:inherit;
 	}
@@ -415,26 +512,39 @@ background-repeat: no-repeat;
 }
 
 .graph-legend {
+	display:none;
+	font-family:monospace;
 	position:absolute;
-	bottom:-50px;
-	right:0;
-	padding:0 1em;
-	color:darken($darkGrey, 3%);
+	bottom:-3em;
+	left:1em;
+	padding:1em;
+	color:#333333;
+	background-color:$col_bg;
+	span {
+		padding:0.2em;
+	}
 	 h3, h4, h5 {
 		color:inherit;
 		margin:0;
 		width:100%;
-		text-transform: uppercase;
+		padding:0 0 0.25em 0;
+		text-transform: capitalize;
 		color:$darkGrey;
 	}
-	li {
-		list-style: none;
-		.graph-legend-fill { 
-			width:2em;
-			height:1em;
-			margin-right:0.5em;
-			float:left;
-			clear:both;
+	ul, li {
+		padding:0;
+		margin:0;
+		li {
+			list-style: none;
+			.graph-legend-fill { 
+				width:2em;
+				height:1em;
+				padding:0;
+				margin:0;
+				margin-right:0.5em;
+				float:left;
+				clear:both;
+			}
 		}
 	}
 }

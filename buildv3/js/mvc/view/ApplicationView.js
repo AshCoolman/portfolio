@@ -9,8 +9,7 @@ App.ApplicationView = Ember.View.extend({
 		
 		this.set('el', this.get('element'));
 		this.set('$el', $(this.el));
-		
-		
+
 		
 	},
 	

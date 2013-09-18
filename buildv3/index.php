@@ -71,12 +71,12 @@ I value speed, elegance, and clarity.
 
 And as one <a href="http://goo.gl/O5dnGf" target="_blank">clever cookie</a> once said:
 
-<i class="quote">Real artists ship</i>
+<i class="quote"><sup class="icon-quote-left superscript"></sup> Real artists ship <sup class="icon-quote-right superscript"></sup>
 @actionOnRead=doSubtitle2 2000
 @actionOnRead=doSubtitle3 5000';
 $d1copyA = addcslashes($d1copyA, '"');
 
-$obligatoryList = '<span class="heading">' . htmlspecialchars("<OBLIGATORY SKILL LIST>") . '</span>
+$obligatoryList = '<span class="heading"> <i class="icon-chevron-left"></i> OBLIGATORY SKILL LIST <i class="icon-chevron-right"></i> </span>
 @=<div class="indent">
 	<span class="heading">Javascript</span>
 	JQuery 
@@ -127,7 +127,7 @@ $obligatoryList = '<span class="heading">' . htmlspecialchars("<OBLIGATORY SKILL
 
 @=</div>
 
-<span class="heading">' . htmlspecialchars("</OBLIGATORY SKILL LIST>") . '</span>';
+<span class="heading"> <i class="icon-chevron-left"></i>/ OBLIGATORY SKILL LIST <i class="icon-chevron-right"></i> </span>';
 
 $obligatoryList = addcslashes($obligatoryList, '"');			
 ?>
@@ -177,25 +177,31 @@ And knowing that somewhere there is a solution...
 
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-row">
 			<div class="row pointer-events-none">
-				<div class="columns subtitle-text-holder large-12 small-12">
- 					{{yield}}
+				<div class="columns large-12 small-12">
+					<div class="subtitle-text-holder">
+ 						{{yield}}
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-obligatory">
 			<div class="row">
-				<div class="columns subtitle-text-holder obligatory-list">
- 					{{yield}}
+				<div class="columns">
+					<div class="subtitle-text-holder obligatory-list">
+	 					{{yield}}
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-row-link">
 			<div class="row pointer-events-none">
-				<div class="columns subtitle-text-holder large-6 small-6 large-offset-6 small-offset-3">
-					<br/>
- 					{{yield}}
+				<div class="columns large-12 small-12">
+					<div class="subtitle-text-holder">
+						<br/>
+	 					{{yield}}
+					</div>
 				</div>
 			</div>
 		</script>
@@ -265,7 +271,7 @@ And knowing that somewhere there is a solution...
 		<script type="text/x-handlebars" data-template-name="index">		
 
 			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $indexCopyA; ?>"}}}
-			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="Go to dimension @edits=X...,One...,Who...,How..." isLink=true actionEvent="doGotoDimension1" }}}
+			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=X...,One...,Who...,How..." isLink=true actionEvent="doGotoDimension1" }}}
 
 		</script>
 
@@ -275,15 +281,22 @@ And knowing that somewhere there is a solution...
 				{{render 'heartbeat' heartbeat}}
 			</div>
 			<div class="row">
-				<div class="columns large-6 small-6 interactive-graph-output">
-					<h3>{{{this.interactiveGridData.heading}}}</h3>
-					{{#each this.interactiveGridData.items}}
-					<li>{{{this}}}</li>
-					{{/each}}
-				</div>
 				<div class="columns large-6 small-6">
+					<div class="interactive-graph-output">
+						<div class="graph-info" {{bindAttr class="this.interactiveGridData.cssClass"}}>
+							<h3>{{{this.interactiveGridData.number}}}</h3>
+						</div>
+						<strong>{{{this.interactiveGridData.heading}}}</strong>
+						<ul>
+						{{#each this.interactiveGridData.items}}
+							<li>{{{this}}}</li>
+						{{/each}}
+						</ul>
+					</div>
+				</div>
+				<div class="columns large-6  small-6">
 					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
-					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="Go to dimension @edits=Y...,Why?...,Motivation..."}} 
+					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true actionEvent="doGotoDimension2" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Y...,Why?...,Motivation..."}} 
 					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}} 
 				</div>
 			</div>
@@ -292,24 +305,10 @@ And knowing that somewhere there is a solution...
 		<script type="text/x-handlebars" data-template-name="interactive-grid" >
 				<div id="svg-raphaeljs"></div>
 				{{#if isPlotX}}	
-					<div class="graph-info" {{bindAttr class="plotClass"}}>
-						<div class="graph-layer">
-							<h1 class="graph-position">{{{positionText}}}</h1>
-						</div>
-						<div class="graph-layer">
-							<h1 class="graph-plot">{{{plotHeading}}}</h1>						
-							<ul class="graph-plot">
-								{{#each plotText}}
-								<li>{{{this}}}</li>
-								{{/each}}
-							</ul>
-						</div>
-					</div>
 					<div class="graph-legend" >
-						<h5>About...</h5>
 						<ul>
 							{{#each view.LEGEND}}
-							<li><span {{bindAttr class="cssClass"}}><div class="graph-legend-fill"></div></span>{{{label}}}</li>
+							<li><span {{bindAttr class="cssClass"}}><div class="graph-legend-fill"></div>{{{label}}}</span></li>
 							{{/each}}
 						<ul>
 					</div>
@@ -360,7 +359,7 @@ And knowing that somewhere there is a solution...
 				{{/if}}
 
 				{{#if controller.isHoverUnfinished}}
-					<div class="click-hint-holder"><i class="icon-exclamation remove-button"> Click to show all</i></div>
+					<div class="click-hint-holder"><i class="icon-exclamation-sign remove-button"> click to show all</i></div>
 				{{/if}}
 			{{/unless}}
 		</script>
@@ -380,7 +379,7 @@ And knowing that somewhere there is a solution...
 			</div>
 
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyA?>"}}}
-			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true actionEvent="doGotoDimension3" }}}
+			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true actionEvent="doGotoDimension3" }}}
 			
 			{{#if App.DEBUG}}
 				{{render 'world-2d-editor'}}
@@ -459,9 +458,17 @@ And knowing that somewhere there is a solution...
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
+		 
+			
 		<div class="app-container">
-			<div class="app"></div>	
+			
+			<div class="bg-layer x-ruler"></div>
+			<div class="bg-layer y-ruler"></div>
+			<div class="app">
+				
+			</div>	
 		</div>  
+		
 
 <?php
 

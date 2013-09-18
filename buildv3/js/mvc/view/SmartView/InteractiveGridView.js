@@ -3,20 +3,17 @@ App.IGVC = {
 		{
 			colour: '#99CC99',
 			fill: '#669966',
-			cssClass: 'graph-plot-tech-portfolio',
-			label: '...tech used in this site'
+			cssClass: 'graph-plot-tech-portfolio'
 		},
 		{
 			colour: '#CC9999',
 			fill: '#996666',
-			cssClass: 'graph-plot-tech-general',
-			label: '...my tech knowledge'
+			cssClass: 'graph-plot-tech-general'
 		},
 		{
 			colour: '#9999CC',
 			fill: '#666699',
-			cssClass: 'graph-plot-general',
-			label: '...me personally'
+			cssClass: 'graph-plot-general'
 		}
 	],
 	TECH_PORTFOLIO: 0,
@@ -35,19 +32,19 @@ App.InteractiveGridView = App.SmartView.extend({
 			colour: '#99CC99',
 			fill: '#669966',
 			cssClass: 'graph-plot-tech-portfolio',
-			label: 'this site'
+			label: 'about this site'
 		},
 		{
 			colour: '#CC9999',
 			fill: '#996666',
 			cssClass: 'graph-plot-tech-general',
-			label: 'my tech knowledge'
+			label: 'about my tech knowledge'
 		},
 		{
 			colour: '#9999CC',
 			fill: '#666699',
 			cssClass: 'graph-plot-general',
-			label: 'me generally'
+			label: 'other'
 		}
 	],
 	isDrawGrid: false,
@@ -55,20 +52,20 @@ App.InteractiveGridView = App.SmartView.extend({
 		{
 			x: 32,
 			text: 'years breathing',
-			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO]
+			type: App.IGVC.LEGEND[App.IGVC.GENERAL]
 		},
 		{
 			x: 9,
 			text: 'years as a developer',
-			type: App.IGVC.LEGEND[App.IGVC.GENERAL]
+			type: App.IGVC.LEGEND[App.IGVC.TECH_GENERAL]
 		},
 		{
 			x: 4,
-			text: 'years of study',
+			text: 'years of Computer Sc. &amp; Multimedia',
 			type: App.IGVC.LEGEND[App.IGVC.GENERAL]
 		},
 		{
-			text: 'applications I know well',
+			text: 'applications',
 			xList: [
 				'Adobe Photoshop',
 				'Adobe After Effects',
@@ -84,7 +81,7 @@ App.InteractiveGridView = App.SmartView.extend({
 			type: App.IGVC.LEGEND[App.IGVC.TECH_GENERAL]
 		},
 		{
-			text: 'frontend technologies I know',
+			text: 'frontend technologies',
 			xList: [
 				'Javascript',
 				'Actionscript 3.0',
@@ -99,7 +96,7 @@ App.InteractiveGridView = App.SmartView.extend({
 			type: App.IGVC.LEGEND[App.IGVC.TECH_GENERAL]
 		},
 		{
-			text: 'backend technologies I know',
+			text: 'backend technologies',
 			xList: [
 				'node.js',
 				'PHP',
@@ -110,7 +107,7 @@ App.InteractiveGridView = App.SmartView.extend({
 			type: App.IGVC.LEGEND[App.IGVC.TECH_GENERAL]
 		},
 		{
-			text: 'JS libraries I used in this site',
+			text: 'JS libraries',
 			xList: [
 				'JQuery',
 				'Emberjs',
@@ -124,11 +121,11 @@ App.InteractiveGridView = App.SmartView.extend({
 
 		{
 			x: 50,
-			text: 'Ember Views written for this site',
+			text: 'Emberjs Views written',
 			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO]
 		},
 		{
-			text: 'Frameworks I used in this site',
+			text: 'Frameworks',
 			xList: [
 				'Emberjs',
 				'Foundation 4'
@@ -136,12 +133,12 @@ App.InteractiveGridView = App.SmartView.extend({
 			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO]
 		},
 		{
-			text: 'GIT commits I made for this site',
+			text: 'GIT commits',
 			x: 44,
 			type: App.IGVC.LEGEND[App.IGVC.TECH_PORTFOLIO]
 		},
 		{
-			text: 'javascript features I used in the website',
+			text: 'javascript features used',
 			xList: [
 				'closures',
 				'request animation frame',
@@ -333,8 +330,10 @@ App.InteractiveGridView = App.SmartView.extend({
 						if (athePlotX['animateWidthTarget'] != clipX) {
 							console.log('triggered interactiveGridText')
 							App.eventMapper.triggerEvent( ragh.MEvt.create('interactiveGridText', {
-								heading: newPlot.x + ' ' +newPlot.text, 
-								items: newPlot.xList
+								heading: newPlot.text, 
+								number: newPlot.x,
+								items: newPlot.xList,
+								cssClass: newPlot.type.cssClass
 							}));
 							athePlotX.stop();
 							athePlotX.animate({   
@@ -344,7 +343,7 @@ App.InteractiveGridView = App.SmartView.extend({
 						    }, 300);
 							$('.graph-plot', me.get('$el')).css({opacity: 1});
 							athePlotX['animateWidthTarget'] = clipX;
-							acoordX.attr({ fill: '#999999' });
+							acoordX.attr({ fill: '#FF6347' });
 						}
 					} else {
 						if (athePlotX['animateWidthTarget'] != -1) {

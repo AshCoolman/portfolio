@@ -16,8 +16,32 @@ canvas, img {
   -ms-interpolation-mode: nearest-neighbor; }
 
 html, body {
+  background-color: #fff;
+  height: 100%; }
+
+.app-container {
+  background-color: #666666;
   height: 100%;
-  background: #666666 !important; }
+  min-height: 100%; }
+
+.bg-layer {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  margin: 0;
+  padding: 0; }
+
+.y-ruler {
+  background-size: 30px 4px;
+  background-position: center bottom;
+  background-image: linear-gradient(90deg, #a6a6a6 0px, #a6a6a6 2px, transparent 2px), linear-gradient(90deg, #a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 5px, #a6a6a6 5px, #a6a6a6 6px, transparent 6px, transparent 10px, #a6a6a6 10px, #a6a6a6 11px, transparent 11px, transparent 15px, #a6a6a6 15px, #a6a6a6 16px, transparent 16px, transparent 20px, #a6a6a6 20px, #a6a6a6 21px, transparent 21px, transparent 25px, #a6a6a6 25px, #a6a6a6 26px, transparent 26px, transparent 27px);
+  background-repeat: repeat-x; }
+
+.x-ruler {
+  background-size: 4px 30px;
+  background-position: right bottom;
+  background-image: linear-gradient(#a6a6a6 0px, #a6a6a6 2px, transparent 2px), linear-gradient(#a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 5px, #a6a6a6 5px, #a6a6a6 6px, transparent 6px, transparent 10px, #a6a6a6 10px, #a6a6a6 11px, transparent 11px, transparent 15px, #a6a6a6 15px, #a6a6a6 16px, transparent 16px, transparent 20px, #a6a6a6 20px, #a6a6a6 21px, transparent 21px, transparent 25px, #a6a6a6 25px, #a6a6a6 26px, transparent 26px, transparent 27px);
+  background-repeat: repeat-y; }
 
 .note {
   font-size: 0.33em;
@@ -81,7 +105,12 @@ html, body {
   .subtitle-text-holder a {
     text-decoration: none;
     pointer-events: auto;
-    margin-top: 0.5em; }
+    margin-top: 0.5em;
+    color: tomato; }
+    .subtitle-text-holder a:hover {
+      color: crimson; }
+    .subtitle-text-holder a:visited {
+      color: brown; }
   .subtitle-text-holder .heading, .subtitle-text-holder p, .subtitle-text-holder li, .subtitle-text-holder ul {
     margin: 0px;
     padding: 0px;
@@ -91,7 +120,8 @@ html, body {
       background-color: white;
       /* More background colour for browsers that don't support css pointer-events */ }
   .subtitle-text-holder h3 {
-    margin-bottom: 0;
+    margin: 0;
+    padding: 0;
     color: inherit; }
   .subtitle-text-holder span {
     margin: 0px;
@@ -109,7 +139,8 @@ html, body {
     cursor: pointer; }
   .subtitle-text-holder span.heading {
     font-weight: bold;
-    margin-top: 1em; }
+    margin-top: 1em;
+    border-left-width: 0em; }
   .subtitle-text-holder li {
     border-left-width: 3em;
     border-left-color: white;
@@ -120,15 +151,21 @@ html, body {
     border-left-style: solid;
     line-height: 100%; }
   .subtitle-text-holder a p span {
-    color: darkorange; }
+    color: tomato; }
+    .subtitle-text-holder a p span:hover {
+      color: crimson; }
+    .subtitle-text-holder a p span:visited {
+      color: brown; }
 
 .remove-button-holder {
   position: absolute;
-  top: -1em; }
+  top: -1.25em; }
 
 .click-hint-holder {
-  color: white;
-  margin: 0.5em 7em; }
+  color: #cccccc;
+  margin: 0.5em 0em;
+  position: absolute;
+  bottom: -0.5em; }
 
 .quote {
   font-style: italic;
@@ -138,11 +175,11 @@ html, body {
   line-height: 100%; }
 
 a {
-  color: darkorange; }
+  color: tomato; }
   a:hover {
-    color: red; }
+    color: crimson; }
   a:visited {
-    color: darkred; }
+    color: brown; }
 
 .relative-positioned {
   position: relative; }
@@ -247,13 +284,18 @@ a {
   top: -45px; }
 
 .interactive-graph-output {
-  background-color: #333333;
+  background-color: #666666;
+  padding: 0.5em;
   font-family: monospace;
   font-size: 1.2em;
   color: #CCCCCC; }
   .interactive-graph-output h3 {
     color: inherit;
     font-family: inherit; }
+  .interactive-graph-output ul {
+    margin-left: 1.5em; }
+    .interactive-graph-output ul ul {
+      list-style-type: inherit; }
 
 #svg-raphaeljs {
   position: absolute;
@@ -275,14 +317,8 @@ a {
     background-color: #666699; }
 
 .graph-info {
-  position: absolute;
-  top: 90px;
-  font-size: 18px;
   width: 100%;
-  padding-left: 1em 0;
-  padding: 0 0.5em;
-  line-height: 100%;
-  text-transform: capitalize; }
+  line-height: 100%; }
   .graph-info .graph-layer {
     width: 100%;
     position: absolute;
@@ -293,31 +329,40 @@ a {
     color: #595959; }
   .graph-info div, .graph-info span {
     float: left; }
-  .graph-info li {
-    margin-left: 1.5em; }
   .graph-info h1 {
     color: inherit; }
 
 .graph-legend {
+  display: none;
+  font-family: monospace;
   position: absolute;
-  bottom: -50px;
-  right: 0;
-  padding: 0 1em;
-  color: #515151; }
+  bottom: -3em;
+  left: 1em;
+  padding: 1em;
+  color: #333333;
+  background-color: #666666; }
+  .graph-legend span {
+    padding: 0.2em; }
   .graph-legend h3, .graph-legend h4, .graph-legend h5 {
     color: inherit;
     margin: 0;
     width: 100%;
-    text-transform: uppercase;
+    padding: 0 0 0.25em 0;
+    text-transform: capitalize;
     color: #595959; }
-  .graph-legend li {
-    list-style: none; }
-    .graph-legend li .graph-legend-fill {
-      width: 2em;
-      height: 1em;
-      margin-right: 0.5em;
-      float: left;
-      clear: both; }
+  .graph-legend ul, .graph-legend li {
+    padding: 0;
+    margin: 0; }
+    .graph-legend ul li, .graph-legend li li {
+      list-style: none; }
+      .graph-legend ul li .graph-legend-fill, .graph-legend li li .graph-legend-fill {
+        width: 2em;
+        height: 1em;
+        padding: 0;
+        margin: 0;
+        margin-right: 0.5em;
+        float: left;
+        clear: both; }
 
 /*
 .graph-plot {

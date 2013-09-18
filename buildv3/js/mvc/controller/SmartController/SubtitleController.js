@@ -510,7 +510,7 @@ App.SubtitleController = App.SmartController.extend({
 	doForceFinish: function () {
 		console.log('doForceFinish');
 
-		
+		this.set('isHoverUnfinished', false);
 		this.set('editList', []);
 		window.cancelAnimationFrame(this.get('raf'));
 		while (!this.get('isEnded') ) {
