@@ -5,6 +5,37 @@ App.Dimension1Route = App.SmartRoute.extend({
 	init: function () {
 		this._super();
 		this.isStarted = false;
+		this.addEvents({
+			SubtitleView_InsertViewDone: function (achildview, another) {},
+			SmartController_didInsertElement: function(acontroller, alabel) {;
+				switch (alabel) {
+					case 'SubtitleController': 
+						switch (acontroller.get('orderRead')) {
+							case '1': this.subtitleController1 = acontroller; break;
+							case '2': this.subtitleController2 = acontroller; break;
+							case '3': this.subtitleController3 = acontroller; break;
+						}
+						break;  
+					case 'Dimension1NavController':  	this.dimension1NavController = acontroller; 	break;
+					case 'HeartbeatController':  		this.heartbeatController = acontroller; 		break;
+					case 'ScalarController':  			this.scalarController = acontroller;			break;
+				}
+				this.tryStart();
+			},
+			SubtitleController_didInsertElement: function (acontroller, alabel) { 
+
+			},
+			doGotoDimension2: function () { 
+				window.location.hash = 'd2';
+			},
+			doSubtitle2: function () { 
+				this.subtitleController1.set('isCursor', false); 
+		        this.subtitleController2.startReading();
+			},
+			doSubtitle3: function () { 
+		        this.subtitleController3.startReading();
+			}
+		});
 	},
 	deactivate: function () {
 		this._super();
@@ -49,37 +80,7 @@ App.Dimension1Route = App.SmartRoute.extend({
 			}(this));
 		}
 	},
-	events: {
-		SubtitleView_InsertViewDone: function (achildview, another) {},
-		SmartController_didInsertElement: function(acontroller, alabel) {;
-			switch (alabel) {
-				case 'SubtitleController': 
-					switch (acontroller.get('orderRead')) {
-						case '1': this.subtitleController1 = acontroller; break;
-						case '2': this.subtitleController2 = acontroller; break;
-						case '3': this.subtitleController3 = acontroller; break;
-					}
-					break;  
-				case 'Dimension1NavController':  	this.dimension1NavController = acontroller; 	break;
-				case 'HeartbeatController':  		this.heartbeatController = acontroller; 		break;
-				case 'ScalarController':  			this.scalarController = acontroller;			break;
-			}
-			this.tryStart();
-		},
-		SubtitleController_didInsertElement: function (acontroller, alabel) { 
-		
-		},
-		doGotoDimension2: function () { 
-			window.location.hash = 'd2';
-		},
-		doSubtitle2: function () { 
-			this.subtitleController1.set('isCursor', false); 
-	        this.subtitleController2.startReading();
-		},
-		doSubtitle3: function () { 
-	        this.subtitleController3.startReading();
-		}
-	},
+	
 	tryStart: function () {
         if (!this.isStarted && this.subtitleController1 && this.subtitleController2 && this.subtitleController3) {
 			this.isStarted = true;
