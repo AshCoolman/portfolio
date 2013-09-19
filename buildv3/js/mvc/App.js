@@ -281,7 +281,7 @@ App.dictionary = Em.Object.create({
 					//console.log('dictionary read', heading[0], '\n', lines.join('\n'))
 				});
 				me.isReady = true;
-				App.eventMapper.triggerEvent(ragh.MEvt.create('isDictionaryReady'));
+				App.eventMapper.trigger('isDictionaryReady');
 			}
 		}(this));
 	}

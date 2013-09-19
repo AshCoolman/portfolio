@@ -159,8 +159,7 @@ And knowing that somewhere there is a solution...
 ?>
 
 		<script type="text/x-handlebars" data-template-name="application">
-		<div class="bg-layer x-ruler"></div>
-		<div class="bg-layer y-ruler"></div>		
+			{{render 'ruler'}}
 			 <row>
 				{{outlet "nav-list"}}
 			</row>
@@ -210,7 +209,12 @@ And knowing that somewhere there is a solution...
 
 		<script type="text/x-handlebars" data-template-name="preloader-content">
 			Preloading...<br/>
-			{{{infoHtml}}}
+			{{{infoHtml}}}	
+		</script>
+		
+		<script type="text/x-handlebars" data-template-name="ruler">
+			<div class="bg-layer x-ruler"></div>
+			<div class="bg-layer y-ruler"></div>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="transitions-holder">

@@ -19,7 +19,7 @@
 				delay = 1000,
 				speedFactors = this.speedFactors;
 				
-				App.eventMapper.triggerEvent(ragh.MEvt.create('heartbeat', {target: this}));
+				App.eventMapper.trigger('heartbeat', {target: this});
 				
 			for (sf = 0; sf < speedFactors.length; sf++) {
 				var speedFactor = speedFactors[sf]();

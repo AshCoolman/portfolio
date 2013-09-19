@@ -13,7 +13,7 @@ App.PreloaderContentController = App.SmartController.extend({
 				me.isLoadedList.push('All done.');
 				me.set('infoHtml', me.isLoadedList.join(' loaded<br/>'));
 				me.isLoaded = true;
-				App.eventMapper.triggerEvent(ragh.MEvt.create('preloaderIsLoaded', {target:me.queue}));
+				App.eventMapper.trigger('preloaderIsLoaded', {target:me.queue});
 			}
 		}(this)) );
 		

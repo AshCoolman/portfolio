@@ -6,12 +6,12 @@ App.EslEntityContainerController = App.SmartController.extend({
 		} else {
 			//aview.didInsertElement();
 		}
-	//	App.eventMapper.triggerEvent(ragh.MEvt.create('static_eslEntityContainerViewAdded'));
+	//	App.eventMapper.trigger('static_eslEntityContainerViewAdded'));
 	},
 	
 	view_eslEntityCreated: function (eslEntityController) {
 		console.log(' view_eslEntityCreated', eslEntityController)
-		App.eventMapper.triggerEvent(ragh.MEvt.create('eslViewAddedEsl', {label: eslEntityController.label, view: eslEntityController.get('view'), parentEslObj: eslEntityController.get('view').parentEslObj}));
+		App.eventMapper.trigger('eslViewAddedEsl', {label: eslEntityController.label, view: eslEntityController.get('view'), parentEslObj: eslEntityController.get('view').parentEslObj});
 
 	},
 });

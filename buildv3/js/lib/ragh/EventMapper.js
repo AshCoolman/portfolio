@@ -41,7 +41,9 @@ ragh.eventMapper = (function () {
 				});
 			}
 		},
-		triggerEvent: function ( e) {
+		trigger: function (atype, adata) {
+			//TODO, Allow for event object to be passed to this function
+			var e = ragh.MappedEvent.create(atype, adata);
 			if (!this.eventsAndListeners.hasOwnProperty(e.type)) {
 				this.eventsAndListeners[e.type] = [];
 			}
@@ -53,7 +55,7 @@ ragh.eventMapper = (function () {
 	};
 }());
 
-ragh.MappedEvent = ragh.MEvt = {
+ragh.MappedEvent = ragh.MEvt = ragh.ME = {
 	type: null,
 	data: null,
 	create: function (atype, adata) {

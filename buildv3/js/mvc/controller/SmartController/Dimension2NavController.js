@@ -3,7 +3,7 @@ App.Dimension2NavController = App.SmartController.extend({
 	isShowEnd: false,
 	label: 'Dimension2NavController',
 	doEnd: function () {
-		App.eventMapper.triggerEvent(ragh.MEvt.create('dim1Nav_end'));
+		App.eventMapper.trigger('dim1Nav_end');
 	}
 });
 App.register('controller:dimension2-nav', App.Dimension2NavController, {singleton: false });

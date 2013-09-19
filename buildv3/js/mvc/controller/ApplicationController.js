@@ -1,31 +1,18 @@
 App.ApplicationController = Em.Controller.extend({
-	className:'App.ApplicationController',
+	className: 'App.ApplicationController',
 	currentRoute: null,
-	notifyChange: function() {
+	notifyChange: function () {
 	previousPath: undefined,
 	Ember.run.schedule('afterRender', this, function() {
-	      App.eventMapper.triggerEvent( ragh.MEvt.create('doRoute', {routePath:this.get('currentPath')}));
+	      App.eventMapper.trigger('doRoute', {routePath:this.get('currentPath')});
 	    });
 		console.log('currentPath', this.get('currentPath'))
 		
 		switch (this.get('currentPath')) {
-			case 'index':
-			console.log('offing everything', $('.x-ruler'))
-				$('.x-ruler').css('display', 'none');
-				$('.y-ruler').css('display', 'none');
-				break;
-			case 'dimension1':
-				$('.x-ruler').css('display', 'block');
-				$('.y-ruler').css('display', 'none');
-				break;
-			case 'dimension2':
-				$('.x-ruler').css('display', 'block');
-				$('.y-ruler').css('display', 'block');
-				break;
-			case 'dimension3':
-				$('.x-ruler').css('display', 'block');
-				$('.y-ruler').css('display', 'block');
-				break;
+			case 'index': 		App.eventMapper.trigger('doHideRulers'); break;
+			case 'dimension1':	App.eventMapper.trigger('doShowRulerX'); break;
+			case 'dimension2':	App.eventMapper.trigger('doShowRulerY'); break;
+			case 'dimension3':	App.eventMapper.trigger('doShowRulerY'); break;
 		}
 		
 		if (App.transitionView) {

@@ -159,7 +159,7 @@ App.SubtitleController = App.SmartController.extend({
 
 	},
 	view_willDestroyElement: function () {
-		console.log('SubtitleController.deactivate()...')
+		//console.log('SubtitleController.deactivate()...')
 		var actionTOObjs = this.get('actionTimeouts');
 		for (var to in actionTOObjs) {
 			window.clearTimeout(to.id);
@@ -178,7 +178,6 @@ App.SubtitleController = App.SmartController.extend({
 	},
 	
 	readChar: function (dur, me, isEvents) {
-		if (Math.random() * 5000 < 1) console.log('******')
 		//console.log('readChar?', typeof(isEvents),  (typeof(isEvents) == 'undefined'));
 		var me = me || this,
 			isEvents = (typeof(isEvents) != 'undefined') ? isEvents : true,
@@ -271,11 +270,9 @@ App.SubtitleController = App.SmartController.extend({
 							var words =  line.split(' ');
 							var action = words[0].split('=')[1];
 							var delay = (words[1] && !isNaN(parseFloat(words[1])) && isFinite(words[1])) ? parseFloat(words[1]) : 0;
-							console.log('@action='+action, delay);
 							var actionFunc = function (my, myAction, pos) {
 								return function () {
 									var actionTOObjs = my.get('actionTimeouts');
-									console.log(pos, actionTOObjs[pos]+'');
 									window.clearTimeout(actionTOObjs[pos].to);
 									actionTOObjs[pos].to = null;
 									my.send(myAction)
@@ -289,7 +286,7 @@ App.SubtitleController = App.SmartController.extend({
 								to: to
 							});
 						} else {
-							App.eventMapper.triggerEvent(ragh.MEvt.create(line.split(' ')[1])); 
+							App.eventMapper.trigger(line.split(' ')[1]); 
 						}
 						atLine++;
 //						console.log('skipped to '+atLine+' of '+srcLines.length);
@@ -315,7 +312,7 @@ App.SubtitleController = App.SmartController.extend({
 			if (me.get('hasRemoveButton')) {
 				me.set('isRemoveButton', true);
 			}
-			App.eventMapper.triggerEvent(ragh.MEvt.create('sub_finishedReading', {target:this}))
+			App.eventMapper.trigger('sub_finishedReading', {target:this});
 		}
 		
 		me.set('srcLines', srcLines);
@@ -390,8 +387,6 @@ App.SubtitleController = App.SmartController.extend({
 	
 	createTaggedLines: function (aprintedLines, currentEditPrinted, context) {
 		
-			if (aprintedLines+'' == 'NaN')
-				console.log(aprintedLines, context);
 		var tagPositions = this.get('tagPositions'),
 			currentEditPrinted = currentEditPrinted || '',
 			pendingClosingTags = this.get('pendingClosingTags'),
@@ -437,7 +432,7 @@ App.SubtitleController = App.SmartController.extend({
 
 	
 	doRemoveClicked: function () {
-		console.log('this.get(view)', this.get('view'));
+		//console.log('this.get(view)', this.get('view'));
 		window.cancelAnimationFrame(this.get('raf'));
 		this.set('isEnded', true);
 		this.set('isRemoved', true);
@@ -486,7 +481,7 @@ App.SubtitleController = App.SmartController.extend({
 	},
 	
 	getLinkEvent: function () {
-		console.log('getLinkEvent', this.get('linkEvent'))
+		//console.log('getLinkEvent', this.get('linkEvent'))
 		this.send(this.get('linkEvent'))
 	},
 	
@@ -513,7 +508,7 @@ App.SubtitleController = App.SmartController.extend({
 		return adur;
     },
 	doForceFinish: function () {
-		console.log('doForceFinish');
+		///console.log('doForceFinish');
 
 		this.set('isHoverUnfinished', false);
 		this.set('editList', []);

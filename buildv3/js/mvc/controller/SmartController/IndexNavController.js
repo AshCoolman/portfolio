@@ -8,10 +8,10 @@ App.IndexNavController = App.SmartController.extend({
 		this.send('IndexNavController_didInsertElement', this);
 	},
 	doStart: function () {
-		App.eventMapper.triggerEvent(ragh.MEvt.create('indNav_start', {target:this}));
+		App.eventMapper.trigger('indNav_start', {target:this});
 	},
 	doEnd: function () {
-		App.eventMapper.triggerEvent(ragh.MEvt.create('indNav_end', {target:this}));
+		App.eventMapper.trigger('indNav_end', {target:this});
 	}
 });
 
