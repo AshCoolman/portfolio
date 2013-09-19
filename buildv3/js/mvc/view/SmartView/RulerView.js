@@ -1,42 +1,23 @@
 App.RulerView = App.SmartView.extend({
 	tagName:'span',
 	className: 'ruler-view',
-	SHOWN: { display:'block', opacity:1 }, 
-	HIDDEN: { display:'none' },
+	ANI_0: 0,
+	ANI_X: 500,
+	ANI_XY: 1000,
+	ANI_XYZ: 1500,
 	didInsertElement: function () {
 		this._super();
-		var $el = this.get('$element');
-		this.set('$rulerX', $('.x-ruler', $el));
-		this.set('$rulerY', $('.y-ruler', $el));
+		var $el = this.get('$element'),
+			xRuler = $('.x-ruler', $el)[0],
+			yRuler = $('.y-ruler', $el)[0],
+			timeline = new createjs.Timeline(null, null, {paused:true, position:0});
+		timeline.addTween(createjs.Tween.get( xRuler ).set({alpha:0}));	
+		timeline.addTween(createjs.Tween.get( yRuler ).set({alpha:0}));
+		timeline.addTween(createjs.Tween.get( xRuler ).to({alpha:1},1000));
+		timeline.addTween(createjs.Tween.get( yRuler ).to({alpha:1},1500));
+		this.set('timeline', timeline);
 	},
-	doHideRulers: function () {
-		this.showRulerX(this.set('$ruleX'), false);
-		this.showRulerY(this.set('$ruleY'), false);
-	},
-	animatedShowRulerX: function (isShow) {
-		this.animatedShow(this.set('$ruleX'), isShow);
-		this.animatedShow(this.set('$ruleY'), false);
-	},
-	animatedShowRulerY: function (isShow) {
-		this.animatedShow(this.set('$ruleX'), true);
-		this.animatedShow(this.set('$ruleY'), isShow);
-	},
-	animatedShow: function ($el, isShow) {
-		$el.stop();
-		isShow 
-			? $el.fadeIn() 
-			: $el.fadeOut();
-	},
-	showRulerX: function (isShow) {
-		this.show(this.set('$ruleX'), isReveal);
-	},
-	showRulerY: function (isShow) {
-		this.show(this.set('$ruleY'), isReveal);
-	},
-	show: function ($el, isShow) {
-		$el.stop();
-		isShow 
-			? $el.css(this.SHOWN) 
-			: $el.css(this.HIDDEN);
+	setRuler: function (data) {
+		createjs.Tween.get( this.get('timeline') ).to({position: this[data.posStr]}, 500);
 	}
 });

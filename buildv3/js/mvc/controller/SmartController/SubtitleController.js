@@ -44,6 +44,7 @@ App.SubtitleController = App.SmartController.extend({
 	isFreezeOnHover: true,
 	counter:0,
 	isHover:false,
+	hoverEvent:undefined,
 	isEdit: false,
 	tagStart:'<p><span>',
 	tagMid: '</span></p><p><span>',
@@ -492,9 +493,9 @@ App.SubtitleController = App.SmartController.extend({
 		this.doForceFinish();
 	},
 	
-	doHover: function () {
+	doHover: function (isHoverOn) {
 		if (this.get('hoverEvent')) {
-			this.set(this.get('hoverEvent'), this.get('isHover'))
+			this.send(this.get('hoverEvent'), isHoverOn);
 		}
 	},
 	

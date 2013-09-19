@@ -277,7 +277,7 @@ And knowing that somewhere there is a solution...
 		<script type="text/x-handlebars" data-template-name="index">		
 
 			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $indexCopyA; ?>"}}}
-			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=X...,One...,Who...,How..." isLink=true linkEvent="doGotoDimension1" hoverEvent="doSetRulerX"}}}
+			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=X...,One...,Who...,How..." isLink=true linkEvent="doGotoDimension1" hoverEvent="doDimensionNavHover"}}}
 
 		</script>
 

@@ -1,4 +1,4 @@
-App.Dimension1Route = Em.Route.extend({
+App.Dimension1Route = App.SmartRoute.extend({
 	subtitleController1:null,
 	subtitleController2:null,
 	dimension1NavController: null,
