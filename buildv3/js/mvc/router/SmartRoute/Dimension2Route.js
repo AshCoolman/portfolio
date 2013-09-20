@@ -3,7 +3,7 @@ App.Dimension2Route = App.SmartRoute.extend({
 	model: function () {
 		return (App.dimension2Model) ? App.dimension2Model : App.Dimension2Model.create();
 	},
-	init: function () { 
+	activate: function () { 
 		this._super();
 		this.addEvents({
 				SmartController_didInsertElement: function(acontroller, alabel) {
@@ -47,7 +47,6 @@ App.Dimension2Route = App.SmartRoute.extend({
 		this._super();
 		this.questionMarkController = null;
 		this.world2dController = null;
-		this.isStart = null;
 	},
 	renderTemplate: function () {
 		if ( App.PRELOADER.isLoaded ) {
@@ -63,8 +62,8 @@ App.Dimension2Route = App.SmartRoute.extend({
 	},
  
 	tryStart: function () {
-        if (!this.isStart && this.questionMarkController && this.world2dController && this.subtitleController1 && this.subtitleController2) {
-			this.isStart = true;
+        if (!this.get('isStarted') && this.questionMarkController && this.world2dController && this.subtitleController1 && this.subtitleController2) {
+			this.set('isStarted', true);
             this.doStart();
 		}
     },

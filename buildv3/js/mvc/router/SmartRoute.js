@@ -1,12 +1,17 @@
 App.SmartRoute = Em.Route.extend({
 	label: 'smartRoute',
-	ClassName: 'SmartRoute',
+	ClassName: 'SmartRoute',	
 	init: function () {
 		this._super();
 	},
 	activate: function () {
 		this._super();
-		this.events.doDimensionNavHover(false);
+		this.set('isStarted', false);
+		this.get('events').doDimensionNavHover(false);
+	},
+	deactivate: function () {
+		this._super();
+		this.set('isStarted', false);
 	},
 	events: {
 		//TODO window.location.hash optimum?
@@ -28,17 +33,13 @@ App.SmartRoute = Em.Route.extend({
 				}
 			}
 			//TODO maybe i can use the scheduleOnce method i keep seeing?
-			setTimeout(function (me) {
-				return function () {
-					App.eventMapper.trigger('setRuler', {posStr: rulerPosStr});
-				}
-			}(this), 0);
+			App.eventMapper.trigger('setRuler', {posStr: rulerPosStr});
 			
 		}
 	},
 	addEvents: function (added) {
 		var events = this.get('events');
-		$.extend(events, added)
+		$.extend(events, added);
 		this.set('events', events);
 	}
 });

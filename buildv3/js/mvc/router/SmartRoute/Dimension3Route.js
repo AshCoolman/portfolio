@@ -1,7 +1,6 @@
 App.Dimension3Route = App.SmartRoute.extend({ 
-	init: function () {
+	activate: function () {
 		this._super();
-		this.isStarted = false;
 		this.addEvents({
 
 			SmartController_didInsertElement: function(acontroller, alabel) {
@@ -42,10 +41,8 @@ App.Dimension3Route = App.SmartRoute.extend({
 	model: function () {
 		return (App.dimension3Model) ? App.dimension3Model : App.Dimension3Model.create();
 	},
-	activate: function () { 
-		//Application state 
-	},
 	deactivate: function () {  
+		this._super();
 		this.world3dController = null;
 		this.subtitle1Controller = null;
 	},
@@ -65,10 +62,9 @@ App.Dimension3Route = App.SmartRoute.extend({
 	
 
 	tryStart: function () {
-
-
-        if (/*this.world3dController && */this.subtitle1Controller && this.subtitle2Controller) {
-            this.doStart()
+        if (!this.get('isStarted') && /*this.world3dController && */this.subtitle1Controller && this.subtitle2Controller) {
+			this.set('isStarted', true);
+			this.doStart();
         }
 
     },

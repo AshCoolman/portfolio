@@ -24,6 +24,7 @@ App.RulerView = App.SmartView.extend({
 		timeline.add(TweenLite.set(yRuler, {'right':'-'+right}));
 		timeline.add(TweenLite.to(xRuler, 0.25, {'bottom':0}));
 		timeline.add(TweenLite.to(yRuler, 0.25, {'right':0}));
+		timeline.add(TweenLite.to(yRuler, 0.25, {'right':0}));
 		timeline.pause();
 		console.log('playing', right, bottom)
 		this.set('timeline', timeline);
@@ -32,6 +33,6 @@ App.RulerView = App.SmartView.extend({
 		console.log('setRuler()', data)
 		var timeline = this.get('timeline'),
 			time = timeline.time();
-		timeline.tweenTo(this[data.posStr]);
+		//timeline.tweenTo(this[data.posStr]);
 	}
 });

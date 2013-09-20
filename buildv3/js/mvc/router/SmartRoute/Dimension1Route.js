@@ -2,12 +2,15 @@ App.Dimension1Route = App.SmartRoute.extend({
 	subtitleController1:null,
 	subtitleController2:null,
 	dimension1NavController: null,
-	init: function () {
+	activate: function () {
 		this._super();
-		this.isStarted = false;
+		
 		this.addEvents({
-			SubtitleView_InsertViewDone: function (achildview, another) {},
-			SmartController_didInsertElement: function(acontroller, alabel) {;
+			SubtitleView_InsertViewDone: function (achildview, another) {
+				
+			},
+			SmartController_didInsertElement: function (acontroller, alabel) {
+				console.log('SmartController_didInsertElement')
 				switch (alabel) {
 					case 'SubtitleController': 
 						switch (acontroller.get('orderRead')) {
@@ -45,7 +48,6 @@ App.Dimension1Route = App.SmartRoute.extend({
 		this.subtitleController1 = null;
 		this.subtitleController2 = null;
 		this.subtitleController3 = null;
-		this.isStarted = null;
 		this.heartbeatController = null;
 		this.scalarController = null;
 	},
@@ -81,9 +83,11 @@ App.Dimension1Route = App.SmartRoute.extend({
 		}
 	},
 	
-	tryStart: function () {
-        if (!this.isStarted && this.subtitleController1 && this.subtitleController2 && this.subtitleController3) {
-			this.isStarted = true;
+	tryStart: function () {	
+		//console.log([this.isStarted, this.subtitleController1, this.subtitleController2, this.subtitleController3].join(', '))
+	
+		if (!this.get('isStarted') && this.subtitleController1 && this.subtitleController2 && this.subtitleController3) {
+		this.set('isStarted', true);
             this.doStart()
 		}
 

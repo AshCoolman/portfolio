@@ -304,8 +304,8 @@ And knowing that somewhere there is a solution...
 				</div>
 				<div class="columns large-6  small-6">
 					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
-					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2"  hoverEvent="doDimensionNavHover" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Y...,Why?...,Motivation..."}} 
-					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}} 
+					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2"  hoverEvent="doDimensionNavHover" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Y...,Why?...,Motivation..."}}} 
+					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}}}
 				</div>
 			</div>
 		</script>
@@ -387,7 +387,7 @@ And knowing that somewhere there is a solution...
 			</div>
 
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyA?>"}}}
-			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true linkEvent="doGotoDimension3"  hoverEvent="doDimensionNavHover" }}}
+			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true linkEvent="doGotoDimension3" hoverEvent="doDimensionNavHover" }}}
 			
 			{{#if App.DEBUG}}
 				{{render 'world-2d-editor'}}

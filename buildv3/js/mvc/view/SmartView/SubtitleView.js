@@ -30,6 +30,12 @@ App.SubtitleView = App.SmartView.extend({
 		}(this) );
 		return this._super();
 	},
+	willDestroyElement: function () {
+		this._super();
+		$('.text', this.get('$el')).unbind('mouseenter');
+		$('.text', this.get('$el')).unbind('mouseleave');
+		$('.text', this.get('$el')).unbind('click');
+	},
 	doRemove: function () {
 		console.log('removing')
 		this.get('$el').css('display', 'none');
