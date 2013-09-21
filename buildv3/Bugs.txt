@@ -1,0 +1,8 @@
+Bugs
+WHERE: Subtitle Controller 277
+WHAT: Uncaught TypeError: Cannot read property 'to' of undefined" 
+HOW Clicking really fast through dimension
+
+WHERE Y screen
+WHAT Dark grey box (about row height) Possibly behind cogs
+HOW unsure

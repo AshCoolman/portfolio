@@ -1,13 +1,19 @@
 App.SmartRoute = Em.Route.extend({
 	label: 'smartRoute',
-	ClassName: 'SmartRoute',	
+	ClassName: 'SmartRoute',
+	isStarted: false,
+	isStartedObserver: function (observed, val) {
+		if (val) {
+			this.get('events').doDimensionNavHover(false);
+		}
+	}.observes('isStarted'),
 	init: function () {
 		this._super();
 	},
 	activate: function () {
 		this._super();
 		this.set('isStarted', false);
-		this.get('events').doDimensionNavHover(false);
+		
 	},
 	deactivate: function () {
 		this._super();

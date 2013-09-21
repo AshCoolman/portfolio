@@ -310,6 +310,7 @@ html,body {
 	}
 	a p span {
 		@include link;
+		font-size:1em;
 	}
 }
 

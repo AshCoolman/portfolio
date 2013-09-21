@@ -173,7 +173,8 @@ html, body {
     border-left-style: solid;
     line-height: 100%; }
   .subtitle-text-holder a p span {
-    color: tomato; }
+    color: tomato;
+    font-size: 1em; }
     .subtitle-text-holder a p span:hover {
       color: crimson; }
     .subtitle-text-holder a p span:visited {

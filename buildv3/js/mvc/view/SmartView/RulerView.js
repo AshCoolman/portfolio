@@ -33,6 +33,6 @@ App.RulerView = App.SmartView.extend({
 		console.log('setRuler()', data)
 		var timeline = this.get('timeline'),
 			time = timeline.time();
-		//timeline.tweenTo(this[data.posStr]);
+		timeline.tweenTo(this[data.posStr]);
 	}
 });
