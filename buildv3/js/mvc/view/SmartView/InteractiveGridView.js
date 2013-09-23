@@ -211,31 +211,7 @@ App.InteractiveGridView = App.SmartView.extend({
 			return false;
 		};
 		
-		if (this.get('isDrawGrid')) {			
-			for (x = 0; x < w / pixW; x++) {
-				var attrIndex = (x) % 2;
-			
-				if (!grid[0]) {
-					grid[0] = [];
-				}
-				if (attrIndex == 1) {
-					grid[0][y] = raphaeljs.path('M'+(x*pixW)+' 0L'+(x*pixW)+' '+h);
-					grid[0][y].attr(attrs[attrIndex]);
-				}		
-			}
-		
-			for (y = 0; y < h / pixH; y++) {
-				var attrIndex = (y) % 2;
-			
-				if (!grid[1]) {
-					grid[1] = [];
-				}
-				if (attrIndex == 1) {
-					grid[1][y] = raphaeljs.path('M0 '+(y*pixH)+'L'+w+' '+y*pixH);
-					grid[1][y].attr(attrs[attrIndex]);
-				}
-			}	
-		}
+ 
 		
 		var thePlotX = raphaeljs.rect( 
 			0, 
@@ -279,7 +255,6 @@ App.InteractiveGridView = App.SmartView.extend({
 					y = mousePt.y,
 					gX = Math.floor(x / pixW),
 					gY = Math.floor(y / pixH),
-					attrIndex = (gX + gY) % 2,
 					ix,
 					iy,
 					prevPlotArea = me.get('prevPlotArea') || [[],[]];
@@ -316,7 +291,7 @@ App.InteractiveGridView = App.SmartView.extend({
 								smallestDeltaX = deltaX;
 								plotNumber = plots[p].x;
 						}
-					}
+					}	 
 					if (typeof(nearestIndex)!='undefined') {
 						var newPlot = plots[nearestIndex];
 						me.set('shownPlotIndex', nearestIndex);
@@ -349,8 +324,6 @@ App.InteractiveGridView = App.SmartView.extend({
 							acoordX.attr({ fill: '#595959' });
 							athePlotX['animateWidthTarget'] = -1;
 							$('.graph-plot', me.get('$el')).css({opacity: 0});
-							//createjs.Tween.get($('.graph-plot', me.get('$el'))[0], {override: true}).to({opacity: 0}, 500);
-							
 						}						
 					}
 					me.get('controller').set('positionText', positionText);

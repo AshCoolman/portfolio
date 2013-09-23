@@ -49,7 +49,17 @@ $default-legacy-ie: 7 8 9 10 11 !default;
 	
 .top-bar {
 	z-index: $zIndexButton;
+	background:#333333;
 } 
+.top-bar-section li a:not(.button) {
+	background:#333333;
+}
+
+
+.top-bar.expanded .title-area {
+	background: #333333;
+}
+
 
 button {
 	z-index: $zIndexButton;
@@ -88,9 +98,9 @@ html,body {
 
 .x-ruler {
 	background-size: 30px $rulerSize;
-	right:$rulerSize;
+	left:$rulerSize;
 	bottom:0;
-	background-position: right bottom;
+	background-position: left bottom;
 	background-image: linear-gradient(90deg, 
 						$col_bg_lit 0px, 
 						$col_bg_lit 1px,
@@ -102,10 +112,10 @@ html,body {
 }
 
 .x-ruler-minor {
-	right:$rulerSize;
+	left:$rulerSize;
 	background-size: 30px $rulerSize/2;
 	bottom:0;
-	background-position: right bottom;
+	background-position: left bottom;
 	background-image:linear-gradient(90deg, 
 						$col_bg_lit 0px, 
 						$col_bg_lit 1px, 
@@ -138,9 +148,9 @@ html,body {
 
 .y-ruler {
 	bottom:$rulerSize;
-	right:0;
+	left:0;
 	background-size: $rulerSize 30px;
-	background-position: right bottom;
+	background-position: left bottom;
 	background-image: linear-gradient( 
 						$col_bg_lit 0px, 
 						$col_bg_lit 1px,
@@ -152,9 +162,9 @@ html,body {
 
 .y-ruler-minor {
 	bottom:$rulerSize;
-	right:0;
+	left:0;
 	background-size: $rulerSize/2 30px;
-	background-position: right bottom;
+	background-position: left bottom;
 	background-image: linear-gradient(
 						$col_bg_lit 0px, 
 						$col_bg_lit 1px, 

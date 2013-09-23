@@ -15,18 +15,18 @@ App.RulerView = App.SmartView.extend({
 			xRuler = [xRulerMajor, xRulerMinor],
 			yRuler = [yRulerMajor, yRulerMinor],
 			timeline = new TimelineMax(),
-			right = $('.x-ruler').css('right'),
+			left = $('.x-ruler').css('left'),
 			bottom = $('.y-ruler').css('bottom');
 		
 		//timeline.add(TweenLite.set([xRuler, yRuler], {opacity:0}));
 		//timeline.staggerTo([xRuler, yRuler], 0.5, {opacity:1}, 0.5);	
 		timeline.add(TweenLite.set(xRuler, {'bottom':'-'+bottom}));
-		timeline.add(TweenLite.set(yRuler, {'right':'-'+right}));
+		timeline.add(TweenLite.set(yRuler, {'left':'-'+left}));
 		timeline.add(TweenLite.to(xRuler, 0.25, {'bottom':0}));
-		timeline.add(TweenLite.to(yRuler, 0.25, {'right':0}));
-		timeline.add(TweenLite.to(yRuler, 0.25, {'right':0}));
+		timeline.add(TweenLite.to(yRuler, 0.25, {'left':0}));
+		timeline.add(TweenLite.to(yRuler, 0.25, {'left':0}));
 		timeline.pause();
-		console.log('playing', right, bottom)
+		console.log('playing', left, bottom)
 		this.set('timeline', timeline);
 	},
 	setRuler: function (data) {

@@ -159,6 +159,7 @@ And knowing that somewhere there is a solution...
 ?>
 
 		<script type="text/x-handlebars" data-template-name="application">
+			{{outlet background}}
 			{{render 'ruler'}}
 			 <row>
 				{{outlet "nav-list"}}
@@ -283,11 +284,14 @@ And knowing that somewhere there is a solution...
 
 		</script>
 
-		<script type="text/x-handlebars" data-template-name="dimension1">
+		<script type="text/x-handlebars" data-template-name="dimension1-background">
 			<div class="full-width-centered" >
 				{{renderWithVars 'interactive-grid' pixW=20 isPlotX=true}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
+		</script>
+		
+		<script type="text/x-handlebars" data-template-name="dimension1">
 			<div class="row">
 				<div class="columns large-6 small-6">
 					<div class="interactive-graph-output">
@@ -373,28 +377,20 @@ And knowing that somewhere there is a solution...
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="dimension2">
-		
 			<div class="full-width-centered">
 				{{renderWithVars 'interactive-grid' pixW=20 pixH=20 isPlotX=false}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
-
-			<div class="relative-positioned">
-				<div class="absolute-positioned"> 
-					{{controlWithVars 'world-2d'}} 
-					{{controlWithVars 'esl-entity-container'}}
-				</div>
-			</div>
+			
+			{{controlWithVars 'world-2d' layoutName='lo-subtitle-row'}}
+			{{controlWithVars 'esl-entity-container'}}
 
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyA?>"}}}
 			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true linkEvent="doGotoDimension3" hoverEvent="doDimensionNavHover" }}}
-			
-			{{#if App.DEBUG}}
-				{{render 'world-2d-editor'}}
-			{{/if}}
 		</script>	
 
 		<script type="text/x-handlebars" data-template-name="world-2d">
+			
 			{{controlWithVars 'ash' ash x=-180 }}
 			{{controlWithVars 'question-mark' question-mark x=0 visible=false}}
 		</script>

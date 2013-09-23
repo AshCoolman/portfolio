@@ -74,6 +74,7 @@ App.Dimension1Route = App.SmartRoute.extend({
 		if ( ( App.PRELOADER ) ? ( App.PRELOADER.isLoaded ) : false ) {
 			this.render('dimension1');
 	     	this.render("nav-list", {outlet: "nav-list"});
+	     	this.render("dimension1-background", {outlet: "background"});
 		} else {
 			App.eventMapper.addEventListener('preloaderIsLoaded', this, function(me){
 				return function() {

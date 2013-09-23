@@ -65,12 +65,7 @@ App.World2dView = App.ActiveEslStageView.extend({
 	addQuestionMark: function () {
 		console.log('view.addQuestionMark()')	
 	},
-	resize: function() {
-		with (this) {	
-			_super();
 
-		}
-	},
 	reDraw: function(dur) {
 
 			
