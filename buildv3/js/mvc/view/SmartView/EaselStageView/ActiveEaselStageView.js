@@ -30,7 +30,6 @@ App.ActiveEslStageView = App.EslStageView.extend({
 
 		this.$canvas.parent().css({
 			width:'100%',
-			border: '1px solid red', 
 			position:'relative',
 			height: '350px'
 		})
@@ -39,7 +38,6 @@ App.ActiveEslStageView = App.EslStageView.extend({
 			width: App.BREAKPOINT.WIDTH_2,
 			height: App.BREAKPOINT.HEIGHT_2,
 			'margin-left': - App.BREAKPOINT.WIDTH_2 / 2,
-			border: '1px solid lightgreen',
 			position: 'absolute',
 			top:0,
 			left:'50%'
