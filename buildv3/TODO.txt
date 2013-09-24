@@ -6,7 +6,7 @@ address + contact detail
 2d and 3d in row
 Lineup 2d and 3d
 Mosiac effect
-
+World3d Click and drag on question mark itself does not work.
 Programatically calc 2d-3d transition image layout (mapping)
 Cross platform
 

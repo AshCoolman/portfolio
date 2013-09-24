@@ -315,6 +315,7 @@ App.InteractiveGridView = App.SmartView.extend({
 								width: clipX,
 								opacity:1
 						    }, 300);
+							$('.graph-info').css({display: 'block'});
 							$('.graph-plot', me.get('$el')).css({opacity: 1});
 							athePlotX['animateWidthTarget'] = clipX;
 							acoordX.attr({ fill: '#FF6347' });

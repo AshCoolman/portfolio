@@ -499,18 +499,20 @@ background-repeat: no-repeat;
 
 .interactive-graph-output {
 	background-color: $col_bg;
-	padding:0.5em;
 	font-family:monospace;
 	font-size:1.2em;
 	color:#CCCCCC;
+	line-height: 140%;
 	h3 {
-		color: inherit;
 		font-family:inherit;
 	}
 	ul {
 		margin-left:1.5em;
+		line-height: 140%;
+		list-style-type:inherit;
 		ul {
 			list-style-type:inherit;
+			line-height: inherit;
 		}
 	}
 }
@@ -520,29 +522,16 @@ background-repeat: no-repeat;
 	width:100%;
 }
 
-.graph-plot-tech-general {
-	color:$col_TechGen;
-	.graph-legend-fill {
-		background-color:$colDrk_TechGen;
-	}
-}
-.graph-plot-tech-portfolio {
-	color:$col_TechPort;
- 	.graph-legend-fill {
-		background-color:$colDrk_TechPort;
-	}
-}
 
-.graph-plot-general {
-	color:$col_Gen;
-	.graph-legend-fill {
-		background-color:$colDrk_Gen;
-	}
-}
 
 .graph-info { 
 	width:100%;
 	line-height: 100%;
+	padding:0.5em;
+	display:none;
+	.sub-heading {
+		text-transform:capitalize;
+	}
 	.graph-layer {
 		width:100%;
 		position:absolute;
@@ -557,7 +546,6 @@ background-repeat: no-repeat;
 		float:left;
 	}
 	h1 {
-		color:inherit;
 	}
 	h1.graph-position {
 	}
@@ -599,6 +587,26 @@ background-repeat: no-repeat;
 				clear:both;
 			}
 		}
+	}
+}
+
+.graph-plot-tech-general {
+	color:$col_TechGen;
+	.graph-legend-fill {
+		background-color:$colDrk_TechGen;
+	}
+}
+.graph-plot-tech-portfolio {
+	color:$col_TechPort;
+ 	.graph-legend-fill {
+		background-color:$colDrk_TechPort;
+	}
+}
+
+.graph-plot-general {
+	color:$col_Gen;
+	.graph-legend-fill {
+		background-color:$colDrk_Gen;
 	}
 }
 

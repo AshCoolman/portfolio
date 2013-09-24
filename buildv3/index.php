@@ -295,15 +295,15 @@ And knowing that somewhere there is a solution...
 			<div class="row">
 				<div class="columns large-6 small-6">
 					<div class="interactive-graph-output">
-						<div class="graph-info" {{bindAttr class="this.interactiveGridData.cssClass"}}>
-							<h3>{{{this.interactiveGridData.number}}}</h3>
+						<div class="graph-info">
+							<h3 {{bindAttr class="this.interactiveGridData.cssClass"}}>{{{this.interactiveGridData.number}}}</h3>
+							<strong class="sub-heading">{{{this.interactiveGridData.heading}}}</strong>
+							<ul>
+							{{#each this.interactiveGridData.items}}
+								<li>{{{this}}}</li>
+							{{/each}}
+							</ul>
 						</div>
-						<strong>{{{this.interactiveGridData.heading}}}</strong>
-						<ul>
-						{{#each this.interactiveGridData.items}}
-							<li>{{{this}}}</li>
-						{{/each}}
-						</ul>
 					</div>
 				</div>
 				<div class="columns large-6  small-6">

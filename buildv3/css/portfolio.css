@@ -324,40 +324,31 @@ a {
 
 .interactive-graph-output {
   background-color: #666666;
-  padding: 0.5em;
   font-family: monospace;
   font-size: 1.2em;
-  color: #CCCCCC; }
+  color: #CCCCCC;
+  line-height: 140%; }
   .interactive-graph-output h3 {
-    color: inherit;
     font-family: inherit; }
   .interactive-graph-output ul {
-    margin-left: 1.5em; }
+    margin-left: 1.5em;
+    line-height: 140%;
+    list-style-type: inherit; }
     .interactive-graph-output ul ul {
-      list-style-type: inherit; }
+      list-style-type: inherit;
+      line-height: inherit; }
 
 #svg-raphaeljs {
   position: absolute;
   width: 100%; }
 
-.graph-plot-tech-general {
-  color: #bb8888; }
-  .graph-plot-tech-general .graph-legend-fill {
-    background-color: #996666; }
-
-.graph-plot-tech-portfolio {
-  color: #88bb88; }
-  .graph-plot-tech-portfolio .graph-legend-fill {
-    background-color: #669966; }
-
-.graph-plot-general {
-  color: #8888bb; }
-  .graph-plot-general .graph-legend-fill {
-    background-color: #666699; }
-
 .graph-info {
   width: 100%;
-  line-height: 100%; }
+  line-height: 100%;
+  padding: 0.5em;
+  display: none; }
+  .graph-info .sub-heading {
+    text-transform: capitalize; }
   .graph-info .graph-layer {
     width: 100%;
     position: absolute;
@@ -368,8 +359,6 @@ a {
     color: #595959; }
   .graph-info div, .graph-info span {
     float: left; }
-  .graph-info h1 {
-    color: inherit; }
 
 .graph-legend {
   display: none;
@@ -402,6 +391,21 @@ a {
         margin-right: 0.5em;
         float: left;
         clear: both; }
+
+.graph-plot-tech-general {
+  color: #bb8888; }
+  .graph-plot-tech-general .graph-legend-fill {
+    background-color: #996666; }
+
+.graph-plot-tech-portfolio {
+  color: #88bb88; }
+  .graph-plot-tech-portfolio .graph-legend-fill {
+    background-color: #669966; }
+
+.graph-plot-general {
+  color: #8888bb; }
+  .graph-plot-general .graph-legend-fill {
+    background-color: #666699; }
 
 /*
 .graph-plot {
