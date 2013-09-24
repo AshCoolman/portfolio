@@ -103,17 +103,17 @@ App.World3dView = App.SmartView.extend({
 		
 		with (instanceVarObj) {
 			this._super(); 
+			this.set('$canvasHeroHolder', $('.canvas-hero-holder', this.get('$el')));
 			scene = new THREE.Scene();
 			renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true });
-			this.get('$el').append(renderer.domElement);
-			$(renderer.domElement).addClass('world-3d-renderer');
+			this.get('$canvasHeroHolder').append(renderer.domElement);
+			var $canvas = $(renderer.domElement).addClass('world-3d-renderer canvas-hero');
 			//rendererStats = tryCreateRenderStats();
 
 			// +Camera	
 			camera = new THREE.OrthographicCamera( WIDTH / - 2, WIDTH / 2, HEIGHT / 2, HEIGHT / - 2, 1, 5000 );
 			camera.position.set(WIDTH / 2, 0, 1000);
 			scene.add(camera);
-
 
 			// +Lighting
 			scene.add( new THREE.AmbientLight(0x333333).position.copy(new THREE.Vector3(0, 0, 50)) );
@@ -354,6 +354,22 @@ App.World3dView = App.SmartView.extend({
 	
 		this.w = w;
 		this.h = h;
+		
+		var $canvas = $(instanceVarObj.renderer.domElement);
+		$canvas.parent().css({
+			width:'100%',
+			position:'relative',
+			height: '350px'
+		})
+		$canvas.attr( { width: App.BREAKPOINT.WIDTH_2 , height: App.BREAKPOINT.HEIGHT_2 } );
+		$canvas.css( {
+			width: App.BREAKPOINT.WIDTH_2,
+			height: App.BREAKPOINT.HEIGHT_2,
+			'margin-left': - App.BREAKPOINT.WIDTH_2 / 2,
+			position: 'absolute',
+			top:0,
+			left:'50%'
+		});
 
 	},
 	

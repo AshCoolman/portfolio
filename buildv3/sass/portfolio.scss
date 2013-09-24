@@ -386,9 +386,23 @@ a {
 	display: block;
 }
 
-.world-2d canvas {
-	margin: 0 auto;
-	display: block;
+
+$hero_width: 1280px;
+$hero_height: 576px;
+
+.canvas-hero-holder {
+	width: 100%;
+	position: relative;
+	height: 350px;
+}
+
+.canvas-hero {
+	width: $hero_width;
+	height: $hero_height;
+	margin-left: - $hero_width / 2;
+	position: absolute;
+	top: 0;
+	left: 50%;
 }
 .el-no-effect-winsize-outer {
     position:absolute;

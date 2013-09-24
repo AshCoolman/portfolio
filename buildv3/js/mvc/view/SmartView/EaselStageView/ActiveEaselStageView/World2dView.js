@@ -12,22 +12,25 @@ App.World2dView = App.ActiveEslStageView.extend({
 	multiTween: undefined,
 	didInsertElement: function(scope) {
 		with (this) {
+			
 			set('multiData', { index: 0, roundIndex: 0, needsRedraw: false, values: [360, 256, 128, 64, 32, 24, 16, 8, 4, 1] });
-			_super();
-			//get('controller').send('view_didInsertElement', this);
-			src.$canvas = $canvas.addClass('src-world-2d');
+			_super(); 
+			//get('controller').send('view_didInsertElement', this); 
+			src.$canvas = $('.esl-stage-canvas', $el).addClass('src-world-2d');
+			src.$canvas.attr( { width: App.BREAKPOINT.WIDTH_2 , height: App.BREAKPOINT.HEIGHT_2 } );
+			console.log('src.$canvas', src.$canvas);
 			src.canvas=src.$canvas[0];
 			src.context = src.canvas.getContext("2d");
 			src.stage = stage;
 			src.stage.mouseMoveOutside = true;
 			src.stage.snapToPixelEnabled = true;
 			if (get('isVis')) {			
-				$el.append('<canvas class="min-world-2d">');
+				src.$canvas.parent().append('<canvas class="min-world-2d">');
 				min.$canvas = $('.min-world-2d', $el);
 				min.canvas = min.$canvas[0];
 				min.context = min.canvas.getContext("2d");
 				
-				$el.append('<canvas class="pix-world-2d">');
+				src.$canvas.parent().append('<canvas class="pix-world-2d">');
 				pix.$canvas = $('.pix-world-2d', $el);
 				pix.context = pix.$canvas[0].getContext("2d");
 				
@@ -38,6 +41,7 @@ App.World2dView = App.ActiveEslStageView.extend({
 			src.$canvas.css({display:'none'});
 			min.$canvas.css({display:'block'});
 			pix.$canvas.css({display:'none'}); 
+			
 		}
 		var multiData = this.get('multiData');
 		this.set('multiTween', createjs.Tween
@@ -50,6 +54,7 @@ App.World2dView = App.ActiveEslStageView.extend({
 									}
 									multiData.roundIndex = Math.round( multiData.index);
 								}));
+		this.resize();
 	},
 	addCog: function () {
 		console.log('adding cog')
@@ -121,6 +126,12 @@ App.World2dView = App.ActiveEslStageView.extend({
 			}
 		}	
 		
+	},
+	
+	resize: function () {
+		this._super();
+		var $canvas = $('.esl-stage-canvas');
+ 
 	},
 	willDestroyElement: function () {
 		createjs.Tween.removeTweens( this.get('multiTween') );

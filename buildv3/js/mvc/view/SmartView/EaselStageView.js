@@ -17,11 +17,10 @@ App.EslStageView = App.SmartView.extend({
 		//console.log('[]')
 		with (this) {
 			_super();
-			canvas = $el.append('<canvas class="esl-stage-canvas">');
+			set('$canvasHeroHolder', $('.canvas-hero-holder', get('$el')));
+			get('$canvasHeroHolder').append('<canvas class="esl-stage-canvas canvas-hero">');
 			$canvas = $('.esl-stage-canvas', $el);
-			
 			stage = new createjs.Stage( $canvas[0] );
-			
 			stage.x = 0.5
 			stage.y = 0.0; //http://stackoverflow.com/questions/6672870/esljs-line-fuzziness
 			

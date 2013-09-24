@@ -231,9 +231,18 @@ a {
 .transition-canvas {
   display: block; }
 
-.world-2d canvas {
-  margin: 0 auto;
-  display: block; }
+.canvas-hero-holder {
+  width: 100%;
+  position: relative;
+  height: 350px; }
+
+.canvas-hero {
+  width: 1280px;
+  height: 576px;
+  margin-left: -640px;
+  position: absolute;
+  top: 0;
+  left: 50%; }
 
 .el-no-effect-winsize-outer {
   position: absolute;

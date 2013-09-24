@@ -28,20 +28,7 @@ App.ActiveEslStageView = App.EslStageView.extend({
 		
 		this.set('raf', window.requestAnimationFrame(rafFunction));	
 
-		this.$canvas.parent().css({
-			width:'100%',
-			position:'relative',
-			height: '350px'
-		})
-		this.$canvas.attr( { width: App.BREAKPOINT.WIDTH_2 , height: App.BREAKPOINT.HEIGHT_2 } );
-		this.$canvas.css( {
-			width: App.BREAKPOINT.WIDTH_2,
-			height: App.BREAKPOINT.HEIGHT_2,
-			'margin-left': - App.BREAKPOINT.WIDTH_2 / 2,
-			position: 'absolute',
-			top:0,
-			left:'50%'
-		});
+
 		//this.resize();
 		this.reDraw();
 		

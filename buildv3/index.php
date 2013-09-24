@@ -390,7 +390,7 @@ And knowing that somewhere there is a solution...
 		</script>	
 
 		<script type="text/x-handlebars" data-template-name="world-2d">
-			
+			<div class="canvas-hero-holder"></div>
 			{{controlWithVars 'ash' ash x=-180 }}
 			{{controlWithVars 'question-mark' question-mark x=0 visible=false}}
 		</script>
@@ -440,19 +440,16 @@ And knowing that somewhere there is a solution...
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="dimension3">
-			<div class="relative-positioned">
-				<div class="absolute-positioned"> 
-					{{controlWithVars 'world-3d'}} 
-					{{controlWithVars 'esl-entity-container'}}
-				</div>
-			</div>
+			{{controlWithVars 'world-3d' layoutName='lo-subtitle-row'}}
+			
+			{{controlWithVars 'esl-entity-container'}}
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyA; ?>"}}}
 			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="i.e. The big idea."}}}
 
 		</script>
 
 	<script type="text/x-handlebars" data-template-name="world-3d">
-	
+		<div class="canvas-hero-holder"></div>
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="entity-3d">

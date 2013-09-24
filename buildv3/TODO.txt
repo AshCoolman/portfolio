@@ -1,7 +1,9 @@
 HIGH PRIORITY
 
+2d and 3d in row
+Lineup 2d and 3d
+Mosiac effect
 
-Ruler
 Programatically calc 2d-3d transition image layout (mapping)
 Cross platform
 
