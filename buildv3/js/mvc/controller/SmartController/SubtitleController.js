@@ -466,7 +466,11 @@ App.SubtitleController = App.SmartController.extend({
 						//console.log('>>', dur , last, dur+last)
 						dur += (last ? time - last : 0);		
 					me.set('lastRequestAnimationFrame', time);
-					if (!me.get('isHover')) { dur = me.reDraw(dur, me); }// stage.update() does not work... todo high 
+					if (!me.get('isHover')) { 
+						dur = me.reDraw(dur, me); // stage.update() does not work... todo high 
+					} else {
+						dur = 0;
+					}
 					me.set('durSinceReadChar', dur);
 					if (!me.get('isEnded') || me.get('isLooping')) {
 						

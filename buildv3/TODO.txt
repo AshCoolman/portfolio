@@ -2,7 +2,6 @@ HIGH PRIORITY
 
 Grey bg graph info
 hints
-stop Subtitle Controller calc duration on hover
 address + contact detail
 2d and 3d in row
 Lineup 2d and 3d
@@ -12,6 +11,7 @@ Programatically calc 2d-3d transition image layout (mapping)
 Cross platform
 
 MEDIUM
+webworker
 zindex text so don't use pointer events
 performance
 Mosaic SVG
