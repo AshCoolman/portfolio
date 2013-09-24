@@ -25,12 +25,12 @@ App.World2dView = App.ActiveEslStageView.extend({
 			src.stage.mouseMoveOutside = true;
 			src.stage.snapToPixelEnabled = true;
 			if (get('isVis')) {			
-				src.$canvas.parent().append('<canvas class="min-world-2d">');
+				src.$canvas.parent().append('<canvas class="min-world-2d canvas-hero">');
 				min.$canvas = $('.min-world-2d', $el);
 				min.canvas = min.$canvas[0];
 				min.context = min.canvas.getContext("2d");
 				
-				src.$canvas.parent().append('<canvas class="pix-world-2d">');
+				src.$canvas.parent().append('<canvas class="pix-world-2d canvas-hero">');
 				pix.$canvas = $('.pix-world-2d', $el);
 				pix.context = pix.$canvas[0].getContext("2d");
 				
@@ -87,10 +87,10 @@ App.World2dView = App.ActiveEslStageView.extend({
 					if (multiIndex < multiValues.length) {
 						var multi = multiValues[ multiIndex ],
 							invMulti = 1/multi,
-							widtht = src.$canvas.attr('width'),
+							width = src.$canvas.attr('width'),
 							height = src.$canvas.attr('height');
 					
-						/*
+						
 						with (min) {	
 							context.webkitImageSmoothingEnabled = context.mozImageSmoothingEnabled = context.imageSmoothingEnabled = false;
 							$canvas.attr({width: width/multi, height: height/multi});
@@ -99,6 +99,11 @@ App.World2dView = App.ActiveEslStageView.extend({
 							$canvas.css({width: width, height: height});
 							
 							//context.fillRect(0, 0, width/2, height/2) 
+							
+							src.$canvas.css({display:'none'});
+							min.$canvas.css({display:'block'});
+							pix.$canvas.css({display:'none'});
+							
 						}
 						with (pix) {
 							$canvas.attr({width: width, height: height});
@@ -110,7 +115,14 @@ App.World2dView = App.ActiveEslStageView.extend({
 							context.drawImage(min.canvas, 0,0);
 						
 							//min.context.clearRect(0, 0, width, height);
-						}*/
+							
+							
+							src.$canvas.css({display:'none'});
+							min.$canvas.css({display:'none'});
+							pix.$canvas.css({display:'block'});
+						}
+						/*
+						*/
 						
 						//App.transitionView.draw( pix.$canvas ); //should go in willDestroyElement callback, but does not work
 					} else if ( this.get('isMosaic')) {	
