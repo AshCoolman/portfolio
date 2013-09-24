@@ -258,7 +258,7 @@ App = Ember.Application.create({
 
 
 App.BREAKPOINT = {
-	WIDTH_2: 1280 ,
+	WIDTH_2: 1200 ,
 	HEIGHT_2: 576,
 	WIDTH_1: 768,
 	HEIGHT_1: 576,

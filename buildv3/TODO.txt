@@ -1,12 +1,13 @@
 HIGH PRIORITY
 Ruler Scale
-Lineup 2d and 3d
-World3d Click and drag on question mark itself does not work.
 Programatically calc 2d-3d transition image layout (mapping)
+World3d Click and drag on question mark itself does not work.
 Cross platform
 hints
+Remove 3d debug squares
 
 MEDIUM
+add 3d game
 webworker
 zindex text so don't use pointer events
 performance

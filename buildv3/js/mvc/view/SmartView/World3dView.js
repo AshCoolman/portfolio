@@ -92,8 +92,8 @@ App.World3dView = App.SmartView.extend({
 	didInsertElement: function () {
 		this._super();
 		var instanceVarObj = this.get('instanceVarObj')
-			WIDTH = 400,
-			HEIGHT = 300,
+			WIDTH = App.BREAKPOINT.WIDTH_2,
+			HEIGHT = App.BREAKPOINT.HEIGHT_2,
 			VIEW_ANGLE = 45,
 			ASPECT = WIDTH / HEIGHT,
 			NEAR = 0.1,
@@ -105,14 +105,14 @@ App.World3dView = App.SmartView.extend({
 			this._super(); 
 			this.set('$canvasHeroHolder', $('.canvas-hero-holder', this.get('$el')));
 			scene = new THREE.Scene();
-			renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true });
+			renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true,  clearColor: 0xff0000, clearAlpha: 0.1 });
 			this.get('$canvasHeroHolder').append(renderer.domElement);
 			var $canvas = $(renderer.domElement).addClass('world-3d-renderer canvas-hero');
 			//rendererStats = tryCreateRenderStats();
 
 			// +Camera	
-			camera = new THREE.OrthographicCamera( WIDTH / - 2, WIDTH / 2, HEIGHT / 2, HEIGHT / - 2, 1, 5000 );
-			camera.position.set(WIDTH / 2, 0, 1000);
+			camera = new THREE.OrthographicCamera( -WIDTH/2, WIDTH/2, HEIGHT/2, -HEIGHT/2, 1, 5000 );
+			camera.position.set(0, 0, 1000);
 			scene.add(camera);
 
 			// +Lighting
@@ -121,7 +121,7 @@ App.World3dView = App.SmartView.extend({
 			var directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
 			directionalLight.position.set( 0, 0, 1 );
 			scene.add( directionalLight );
-
+			console.log('scene\n\n', scene, $(renderer.domElement).attr('width', '1200'));
 			// +Cursor
 			cursor3D = new THREE.Object3D();
 			cursor3D.overdraw = true;
@@ -133,16 +133,23 @@ App.World3dView = App.SmartView.extend({
 			// Some temp variables 
 			voxelPosition = new THREE.Vector3();
 			normalMatrix = new THREE.Matrix3();
-			tmpVec = new THREE.Vector3();
+			tmpVec = new THREE.Vector3(); 
 			
+			
+			var planeW = 30; // pixels
+			var planeH = 30; // pixels 
+			var numW = 30; // how many wide (50*50 = 2500 pixels wide)
+			var numH = 30; // how many tall (50*50 = 2500 pixels tall)
+			var plane = new THREE.Mesh( new THREE.PlaneGeometry( planeW*30, planeH*30, planeW, planeH ), new   THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true } ) );
+			scene.add(plane);
  		}
 		
 		// Pixel Group
 		setTimeout( function (me, ainstanceVarObj) {
 			return  function () {
 				var plans = [ 
-					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('face-ash-pixel')), x: 50, label: me.FACE_ASH }, 
-					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('question-pixel')), x: 450, label: me.QUESTION_MARK }];
+					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('face-ash-pixel')), x: 0, label: me.FACE_ASH }, 
+					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('question-pixel')), x: 0, label: me.QUESTION_MARK }];
 				
 				for (var p = 0; p < plans.length; p++) {
 					var pixelatedObj = Object.createFromPrototype(CubeGroup, plans[p]),
@@ -222,7 +229,7 @@ App.World3dView = App.SmartView.extend({
 
 			this.resize();
 			
-			$('.world-3d-renderer', this.get('$el')).css('background-image', 'none');
+			//$('.world-3d-renderer', this.get('$el')).css('background-image', 'none');
 			
 		}
 	},
@@ -339,12 +346,15 @@ App.World3dView = App.SmartView.extend({
 		
 		with (instanceVarObj) {
 			$(renderer.domElement).attr( { width: w+'px' , height: h+'px'  } );
+	
 			renderer.setSize( w, h );
 			camera.left = -w/2;
 			camera.right = w/2;
 			camera.top = h/2;
 			camera.bottom = -h/2;	
+					/*
 			camera.position.set(200, -h/2, 1000);
+			*/
 		    camera.updateProjectionMatrix();
 			if (isControls) {
 				controls.handleResize();

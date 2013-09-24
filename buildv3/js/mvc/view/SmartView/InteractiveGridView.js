@@ -156,7 +156,7 @@ App.InteractiveGridView = App.SmartView.extend({
 		$('.graph-plot', this.get('$el')).css({opacity: 0});
 		
 		var raphaeljs,
-			w = 1200,
+			w = App.BREAKPOINT.WIDTH_2,
 			h = 2000,
 			pixW = 	this.get('controller').get('pixW') || h,
 			pixH= this.get('controller').get('pixH') || w ,
@@ -348,7 +348,7 @@ App.InteractiveGridView = App.SmartView.extend({
 
 	doResize: function (e) {
 		/* Resize campus element */ 
-		var campusW = 1200; 
+		var campusW = App.BREAKPOINT.WIDTH_2; 
 		var campusH = 2000; 
 		var curCampusW = this.get('$svgRaphaeljs').width(); 
 		var newCampusH = heightInRatio(campusH,campusW,curCampusW); 

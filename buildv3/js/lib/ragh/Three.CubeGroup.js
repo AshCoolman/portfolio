@@ -21,7 +21,7 @@ var CubeGroup = function () {
 CubeGroup.prototype = {
 	init: function (aplan) {
 		this.group = this.createFromMap(aplan.imgMap);
-		this.group.position.x = aplan['x'] || 0;
+		//this.group.position.x = aplan['x'] || 0;
 		this.label = aplan.label;
 	},
 
@@ -95,7 +95,7 @@ CubeGroup.prototype = {
 	        group.add(mesh);
 		}
 		
-		group.position.set(sz*(0.5), sz*(-0.5), 0);
+		group.position.set(sz*.5, -sz*.5, 0);
 		group.updateMatrix();
 		group.add( this.rollOverMesh = this.createRollOver() );
 		this.group = group;
