@@ -21,7 +21,8 @@ var CubeGroup = function () {
 CubeGroup.prototype = {
 	init: function (aplan) {
 		this.group = this.createFromMap(aplan.imgMap);
-		//this.group.position.x = aplan['x'] || 0;
+		this.group.position.x = aplan['x'] || 0;
+		this.group.position.y = aplan['y'] || 0;
 		this.label = aplan.label;
 	},
 
@@ -71,6 +72,7 @@ CubeGroup.prototype = {
 			geo = new THREE.Geometry();
 		}
 		
+		
 		for (var xs = 0; xs < map.length; xs++) {
 			if (!map[xs]) map[xs] = []
 			for (var ys = 0; ys < map[xs].length; ys++) {
@@ -80,7 +82,19 @@ CubeGroup.prototype = {
 						maxX = Math.max(maxX, xs);
 						maxY = Math.max(maxY, ys);
 						maxZ = Math.max(maxZ, zs);
-						this.createCube( this.SIZE, xs*sz, -ys*sz, zs*sz, map[xs][ys][zs], this.materialsDict, group, geo, materials, this.isMerge);
+					}
+				}
+			}
+		}
+		
+		console.log('MAX', maxX, maxY, maxZ);
+		for (var xs = 0; xs < map.length; xs++) {
+			if (!map[xs]) map[xs] = []
+			for (var ys = 0; ys < map[xs].length; ys++) {
+				if (!map[xs][ys]) map[xs][ys] = []
+				for (var zs = 0; zs < map[xs][ys].length; zs++) {
+					if (map[xs][ys][zs]) {
+						var cube = this.createCube( this.SIZE, xs*sz, -ys*sz, zs*sz, map[xs][ys][zs], this.materialsDict, group, geo, materials, this.isMerge);
 					}
 				}
 			}
@@ -95,7 +109,7 @@ CubeGroup.prototype = {
 	        group.add(mesh);
 		}
 		
-		group.position.set(sz*.5, -sz*.5, 0);
+		group.position.set(0, 0, 0);
 		group.updateMatrix();
 		group.add( this.rollOverMesh = this.createRollOver() );
 		this.group = group;

@@ -105,7 +105,7 @@ App.World3dView = App.SmartView.extend({
 			this._super(); 
 			this.set('$canvasHeroHolder', $('.canvas-hero-holder', this.get('$el')));
 			scene = new THREE.Scene();
-			renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true,  clearColor: 0xff0000, clearAlpha: 0.1 });
+			renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true });
 			this.get('$canvasHeroHolder').append(renderer.domElement);
 			var $canvas = $(renderer.domElement).addClass('world-3d-renderer canvas-hero');
 			//rendererStats = tryCreateRenderStats();
@@ -136,20 +136,20 @@ App.World3dView = App.SmartView.extend({
 			tmpVec = new THREE.Vector3(); 
 			
 			
-			var planeW = 30; // pixels
-			var planeH = 30; // pixels 
-			var numW = 30; // how many wide (50*50 = 2500 pixels wide)
-			var numH = 30; // how many tall (50*50 = 2500 pixels tall)
-			var plane = new THREE.Mesh( new THREE.PlaneGeometry( planeW*30, planeH*30, planeW, planeH ), new   THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true } ) );
+/*
+			var plane = new THREE.Mesh( new THREE.PlaneGeometry( WIDTH, HEIGHT, WIDTH/15, HEIGHT/15 ), new   THREE.MeshBasicMaterial( { color: 0xCCCCCC, wireframe: true } ) );
+			plane.position.x = 0;
 			scene.add(plane);
+			*/
+			
  		}
 		
 		// Pixel Group
 		setTimeout( function (me, ainstanceVarObj) {
 			return  function () {
 				var plans = [ 
-					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('face-ash-pixel')), x: 0, label: me.FACE_ASH }, 
-					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('question-pixel')), x: 0, label: me.QUESTION_MARK }];
+					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('face-ash-pixel')), x: -360/2 +15, y:270, label: me.FACE_ASH }, 
+					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('question-pixel')), x: 270, y:270, label: me.QUESTION_MARK }];
 				
 				for (var p = 0; p < plans.length; p++) {
 					var pixelatedObj = Object.createFromPrototype(CubeGroup, plans[p]),
@@ -249,14 +249,14 @@ App.World3dView = App.SmartView.extend({
 		} else {		
 			
 			var map = [[[]]],
-				w=12,
-				h=12,
+				w=img.width,
+				h=img.height,
 				pixel,
 				c = this.tcanvas,
 				ctx=c.getContext("2d"),
 				imgData,
 				id;
-			console.log(img)
+
 			ctx.drawImage( img, 0, 0 );
 			imgData = ctx.getImageData( 0, 0, w, h );
 			id = imgData.data;
