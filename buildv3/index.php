@@ -61,6 +61,21 @@ $indexCopyA = addcslashes($indexCopyA, '"');
 ?>
 
 <?php
+$indexCopyC = '@=<h3>
+Contact Details
+@=</h3>
+writetofish+portfolio@gmail.com
+(+61) 77 5298 3159
+London
+United Kingdom
+@actionOnRead=doSecondSubtitle
+@actionOnRead=doThirdSubtitle 2000';
+$indexCopyC = addcslashes($indexCopyC, '"');
+
+?>
+
+
+<?php
 $quot = htmlspecialchars("\"");
 
  $d1copyA = '@=<h3>
@@ -72,8 +87,8 @@ I value speed, elegance, and clarity.
 And as one <a href="http://goo.gl/O5dnGf" target="_blank">clever cookie</a> once said:
 
 <i class="quote"><sup class="icon-quote-left superscript"></sup> Real artists ship <sup class="icon-quote-right superscript"></sup>
-@actionOnRead=doSubtitle2 2000
-@actionOnRead=doSubtitle3 5000';
+@actionOnRead=doSubtitle2 1500
+@actionOnRead=doSubtitle3 2500';
 $d1copyA = addcslashes($d1copyA, '"');
 
 $obligatoryList = '<span class="heading"> <i class="icon-chevron-left"></i> OBLIGATORY SKILL LIST <i class="icon-chevron-right"></i> </span>
@@ -187,6 +202,16 @@ And knowing that somewhere there is a solution...
 			</div>
 		</script>
 
+		<script type="text/x-handlebars" data-template-name="lo-subtitle-instant-row">
+			<div class="row pointer-events-none">
+				<div class="columns large-12 small-12">
+					<div class="subtitle-text-holder subtitle-text-holder-instant">
+ 						{{yield}}
+					</div>
+				</div>
+			</div>
+		</script>
+
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-obligatory">
 			<div class="row">
 				<div class="columns">
@@ -281,7 +306,7 @@ And knowing that somewhere there is a solution...
 
 			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $indexCopyA; ?>"}}}
 			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=X...,One...,Who...,How..." isLink=true linkEvent="doGotoDimension1" hoverEvent="doDimensionNavHover"}}}
-
+			{{{controlWithVars 'subtitle' readOrder='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $indexCopyC; ?>"}}}
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="dimension1-background">
@@ -309,7 +334,7 @@ And knowing that somewhere there is a solution...
 				<div class="columns large-6  small-6">
 					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
 					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2"  hoverEvent="doDimensionNavHover" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Y...,Why?...,Motivation..."}}} 
-					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}}}
+					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}}}
 				</div>
 			</div>
 		</script>

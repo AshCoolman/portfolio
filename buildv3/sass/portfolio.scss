@@ -293,9 +293,6 @@ html,body {
 		display:inline-block;
 		background-color: $subtitleBackGroundColor;
 		line-height:1.6em;
-		border-left-width: 0.5em;
-		border-left-color: $subtitleBackGroundColor;
-		border-left-style: solid;
 		border-right-width: 0.5em;
 		border-right-color: $subtitleBackGroundColor;
 		border-right-style: solid;
@@ -322,6 +319,43 @@ html,body {
 		@include link;
 		font-size:1em;
 	}
+	p {
+		
+		border-left-width: 0.5em;
+		border-left-color: $subtitleBackGroundColor;
+		border-left-style: solid;
+	}
+}
+
+.subtitle .subtitle-text-holder-instant{
+	color:#CCCCCC;
+}
+
+$subtitleBackGroundInstantColor:#666666;
+.subtitle-text-holder-instant {
+	a {
+		
+	}
+	.heading, p, li, ul {
+		@include legacy-ie {
+			background-color: $subtitleBackGroundInstantColor; /* More background colour for browsers that don't support css pointer-events */
+	    }
+	}
+	span {
+		background-color: $subtitleBackGroundInstantColor;
+		border-left-color: $subtitleBackGroundInstantColor;
+		border-right-color: $subtitleBackGroundInstantColor;
+		cursor: text;
+	}
+	li {
+		border-left-color: $subtitleBackGroundInstantColor;
+	}
+	.indent {
+		border-left-color: $subtitleBackGroundInstantColor;
+	}
+		p {
+			border-left-color: $subtitleBackGroundInstantColor;
+		}
 }
 
 

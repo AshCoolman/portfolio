@@ -158,9 +158,6 @@ html, body {
     display: inline-block;
     background-color: white;
     line-height: 1.6em;
-    border-left-width: 0.5em;
-    border-left-color: white;
-    border-left-style: solid;
     border-right-width: 0.5em;
     border-right-color: white;
     border-right-style: solid;
@@ -186,6 +183,28 @@ html, body {
       color: crimson; }
     .subtitle-text-holder a p span:visited {
       color: brown; }
+  .subtitle-text-holder p {
+    border-left-width: 0.5em;
+    border-left-color: white;
+    border-left-style: solid; }
+
+.subtitle .subtitle-text-holder-instant {
+  color: #CCCCCC; }
+
+.ie7 .subtitle-text-holder-instant .heading, .ie8 .subtitle-text-holder-instant .heading, .ie9 .subtitle-text-holder-instant .heading, .ie10 .subtitle-text-holder-instant .heading, .ie11 .subtitle-text-holder-instant .heading, .ie7 .subtitle-text-holder-instant p, .ie8 .subtitle-text-holder-instant p, .ie9 .subtitle-text-holder-instant p, .ie10 .subtitle-text-holder-instant p, .ie11 .subtitle-text-holder-instant p, .ie7 .subtitle-text-holder-instant li, .ie8 .subtitle-text-holder-instant li, .ie9 .subtitle-text-holder-instant li, .ie10 .subtitle-text-holder-instant li, .ie11 .subtitle-text-holder-instant li, .ie7 .subtitle-text-holder-instant ul, .ie8 .subtitle-text-holder-instant ul, .ie9 .subtitle-text-holder-instant ul, .ie10 .subtitle-text-holder-instant ul, .ie11 .subtitle-text-holder-instant ul {
+  background-color: #666666;
+  /* More background colour for browsers that don't support css pointer-events */ }
+.subtitle-text-holder-instant span {
+  background-color: #666666;
+  border-left-color: #666666;
+  border-right-color: #666666;
+  cursor: text; }
+.subtitle-text-holder-instant li {
+  border-left-color: #666666; }
+.subtitle-text-holder-instant .indent {
+  border-left-color: #666666; }
+.subtitle-text-holder-instant p {
+  border-left-color: #666666; }
 
 .remove-button-holder {
   position: absolute;

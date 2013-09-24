@@ -7,6 +7,7 @@ App.IndexRoute = App.SmartRoute.extend({
 			SubtitleController_didInsertElement: function (acontroller, alabel) { 
 				if (acontroller.get('readOrder') == '1') { this.subtitleController1 = acontroller; }
 				if (acontroller.get('readOrder') == '2') { this.subtitleController2 = acontroller; }
+				if (acontroller.get('readOrder') == '3') { this.subtitleController3 = acontroller; }
 				this.tryStart();
 			},
 			IndexNavController_didInsertElement: function (acontroller, alabel) {
@@ -21,6 +22,12 @@ App.IndexRoute = App.SmartRoute.extend({
 			doSecondSubtitle: function () {
 				this.subtitleController1.set('isCursor', false);
 		        this.subtitleController2.startReading();
+				this.subtitleController3.set('isCursor', false);
+		        this.subtitleController3.startReading();
+			},
+			doThirdSubtitle: function () {
+				this.subtitleController2.set('isCursor', false);
+		        this.subtitleController3.startReading();
 			}
 		});
 
@@ -32,6 +39,7 @@ App.IndexRoute = App.SmartRoute.extend({
 		App.eventMapper.removeEventListener('indNav_end', this);
 		this.subtitleController1 = null;
 		this.subtitleController2 = null;
+		this.subtitleController3 = null;
 	},
     doStart: function (type, data) {
         this.subtitleController1.startReading();
@@ -55,7 +63,7 @@ App.IndexRoute = App.SmartRoute.extend({
 		}
 	},
 	tryStart: function () {
-        if (!this.get('isStarted') && this.subtitleController1 && this.subtitleController2) {
+        if (!this.get('isStarted') && this.subtitleController1 && this.subtitleController2 && this.subtitleController3) {
 			this.get('isStarted', true);
             this.doStart()
         }
