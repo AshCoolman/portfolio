@@ -7,7 +7,11 @@ App.World3dView = App.SmartView.extend({
 	textures: {},
 	VS: 10,
 	FACE_ASH: 'face-ash',
+	FACE_ASH_X:-420,
+	FACE_ASH_Y:270,
 	QUESTION_MARK: 'question-mark',
+	QUESTION_MARK_X: 30,
+	QUESTION_MARK_Y: 240,
 	isQuestionMarkRotate: false,
 	instanceVarNameArr: [			
 		'renderer',
@@ -107,6 +111,7 @@ App.World3dView = App.SmartView.extend({
 			scene = new THREE.Scene();
 			renderer = new THREE.WebGLRenderer( {  antialias: true, preserveDrawingBuffer: true });
 			this.get('$canvasHeroHolder').append(renderer.domElement);
+			
 			var $canvas = $(renderer.domElement).addClass('world-3d-renderer canvas-hero');
 			//rendererStats = tryCreateRenderStats();
 
@@ -136,7 +141,8 @@ App.World3dView = App.SmartView.extend({
 			tmpVec = new THREE.Vector3(); 
 			
 			
-/*
+
+			/*
 			var plane = new THREE.Mesh( new THREE.PlaneGeometry( WIDTH, HEIGHT, WIDTH/15, HEIGHT/15 ), new   THREE.MeshBasicMaterial( { color: 0xCCCCCC, wireframe: true } ) );
 			plane.position.x = 0;
 			scene.add(plane);
@@ -148,8 +154,8 @@ App.World3dView = App.SmartView.extend({
 		setTimeout( function (me, ainstanceVarObj) {
 			return  function () {
 				var plans = [ 
-					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('face-ash-pixel')), x: -360/2 +15, y:270, label: me.FACE_ASH }, 
-					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('question-pixel')), x: 270, y:270, label: me.QUESTION_MARK }];
+					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('face-ash-pixel')), x: me.FACE_ASH_X+15, y:me.FACE_ASH_Y, label: me.FACE_ASH }, 
+					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('question-pixel')), x: me.QUESTION_MARK_X+15, y:me.QUESTION_MARK_Y, label: me.QUESTION_MARK }];
 				
 				for (var p = 0; p < plans.length; p++) {
 					var pixelatedObj = Object.createFromPrototype(CubeGroup, plans[p]),
@@ -164,6 +170,13 @@ App.World3dView = App.SmartView.extend({
 				me.tryStart(ainstanceVarObj);
 			}
 		}(this, instanceVarObj), 0);
+		
+		
+		
+		this.get('$canvasHeroHolder').append('<div class="canvas-hero background-2d-to-3d-ash"></div>');
+		this.get('$canvasHeroHolder').append('<div class="canvas-hero background-2d-to-3d-question-mark"></div>');
+		this.set('$bg2dto3dAsh', $('.background-2d-to-3d-ash', this.get('$canvasHeroHolder')));
+		this.set('$bg2dto3dQuestionMark', $('.background-2d-to-3d-question-mark', this.get('$canvasHeroHolder')));
 		this.resize();
 		
 	},
@@ -229,7 +242,7 @@ App.World3dView = App.SmartView.extend({
 
 			this.resize();
 			
-			//$('.world-3d-renderer', this.get('$el')).css('background-image', 'none');
+			this.get('$bg2dto3dAsh').css('background-image', 'none');
 			
 		}
 	},
@@ -266,7 +279,7 @@ App.World3dView = App.SmartView.extend({
 					var x = pixel % w;
 					var y = Math.floor(pixel / w);
 					if (!map[x]) map[x]=[];
-					if (!map[x][y]) map[x][y]=[];
+					if (!map[x][y]) map[x][y]= [];
 					var decColor = ( 65536 * id[i+0] + 256 * id[i+1] + id[i+2] ).toString(16);
 					map[x][y][0] = {color: '#'+decColor};
 				}
@@ -371,16 +384,22 @@ App.World3dView = App.SmartView.extend({
 			position:'relative',
 			height: '350px'
 		})
-		$canvas.attr( { width: App.BREAKPOINT.WIDTH_2 , height: App.BREAKPOINT.HEIGHT_2 } );
+		$canvas.attr( { width: App.BREAKPOINT.WIDTH_2, height: App.BREAKPOINT.HEIGHT_2 } );
 		$canvas.css( {
 			width: App.BREAKPOINT.WIDTH_2,
 			height: App.BREAKPOINT.HEIGHT_2,
-			'margin-left': - App.BREAKPOINT.WIDTH_2 / 2,
+			'margin-left': - App.BREAKPOINT.WIDTH_2/2,
 			position: 'absolute',
 			top:0,
 			left:'50%'
 		});
-
+		
+		
+		
+		
+		this.get('$bg2dto3dAsh').css('background-position', (App.BREAKPOINT.WIDTH_2/2 + this.FACE_ASH_X)+'px '+(270 - this.FACE_ASH_Y)+'px');
+		this.get('$bg2dto3dQuestionMark').css('background-position', (App.BREAKPOINT.WIDTH_2/2 + this.QUESTION_MARK_X)+'px '+(270 - this.QUESTION_MARK_Y)+'px');
+		
 	},
 	
 	redraw: function (dur) {

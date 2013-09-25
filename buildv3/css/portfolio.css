@@ -313,8 +313,13 @@ a {
   margin: 0 auto;
   display: block; }
 
-.world-3d-renderer {
+.background-2d-to-3d-ash {
   background-image: url("../img/face-ash.png");
+  background-position: center top;
+  background-repeat: no-repeat; }
+
+.background-2d-to-3d-question-mark {
+  background-image: url("../img/question.png");
   background-position: center top;
   background-repeat: no-repeat; }
 

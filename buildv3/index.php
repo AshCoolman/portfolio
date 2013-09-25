@@ -416,7 +416,7 @@ And knowing that somewhere there is a solution...
 
 		<script type="text/x-handlebars" data-template-name="world-2d">
 			<div class="canvas-hero-holder"></div>
-			{{controlWithVars 'ash' ash x=-180 }}
+			{{controlWithVars 'ash' ash x=-420 }}
 			{{controlWithVars 'question-mark' question-mark x=0 visible=false}}
 		</script>
 
@@ -425,21 +425,17 @@ And knowing that somewhere there is a solution...
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="question-mark">
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=235 y=45 height=30 width=30}}
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=45 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=295 y=45 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=90 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=205 y=60 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=325 y=60 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=90 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=120 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=120 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=150 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=320 y=180 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=290 y=195 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=210 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=240 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=300 width=30 height=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=75 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=105 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=45 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=45 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=195 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=255 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=45 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=165 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=75 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=105 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=135 height=30 width=30}}
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="esl-entity-container">

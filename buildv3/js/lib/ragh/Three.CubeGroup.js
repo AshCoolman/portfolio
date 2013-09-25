@@ -87,6 +87,7 @@ CubeGroup.prototype = {
 			}
 		}
 		
+		var str = '\n\n';
 		console.log('MAX', maxX, maxY, maxZ);
 		for (var xs = 0; xs < map.length; xs++) {
 			if (!map[xs]) map[xs] = []
@@ -95,10 +96,13 @@ CubeGroup.prototype = {
 				for (var zs = 0; zs < map[xs][ys].length; zs++) {
 					if (map[xs][ys][zs]) {
 						var cube = this.createCube( this.SIZE, xs*sz, -ys*sz, zs*sz, map[xs][ys][zs], this.materialsDict, group, geo, materials, this.isMerge);
+
+						str += '{{controlWithVars "cogged-pixel" cogged-pixel x='+(-15+(xs+2)*sz)+' y='+(240+(0.5-maxY+ys)*sz)+' height=30 width=30}}\n';
 					}
 				}
 			}
 		}
+		console.log(str);
 		
 		if (this.isMerge) {
 			mesh = new THREE.Mesh( this.geo, new THREE.MeshFaceMaterial(this.materials));

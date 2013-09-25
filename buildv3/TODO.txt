@@ -1,20 +1,30 @@
 HIGH PRIORITY
-Ruler Scale
-Programatically calc 2d-3d transition image layout (mapping)
+
+2d & 3d
+	Resize
+		canvas-hero height and width
+		Row height
+		
+2d
+	Timing of Question Mark
+		Appearance should sympathise with text
+		Cogification should better sympathise with text
+		
+	Timing of Mosaic 
+		takes too long to appear
+	
 World3d Click and drag on question mark itself does not work.
+
 Cross platform
 hints
 Remove 3d debug squares
 
 MEDIUM
+Cogification Layout *need* to convery more meaning
 add 3d game
 webworker
 zindex text so don't use pointer events
 performance
-Mosaic SVG
-Ruler X Appear
-Ruler Y Appear
-Ruler Z Appear
 Typography
 Auto find unclosed tags and add to tag list
 
