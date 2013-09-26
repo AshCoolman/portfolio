@@ -470,7 +470,8 @@ And knowing that somewhere there is a solution...
 		</script>
 
 	<script type="text/x-handlebars" data-template-name="world-3d">
-		<div class="canvas-hero-holder"></div>
+		<div class="canvas-hero-holder">
+		</div>
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="entity-3d">

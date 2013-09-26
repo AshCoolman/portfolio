@@ -1,65 +1,467 @@
 /*
-Syntax error: (350 _66px) is not a number for `floor'
-        on line 436 of /Users/ashleycoleman/Dropbox/_PROJECTS/portfolio/buildv3/sass/portfolio.scss
-
-431: }
-432: 
-433: .canvas-hero-holder-66 {
-434: 	width: 100%;
-435: 	position: relative;
-436: 	height: floor(350_66px);
-437: }
-438: 
-439: 
-440: .canvas-hero-holder-50 {
-441: 	width: 100%;
-
-Backtrace:
-/Users/ashleycoleman/Dropbox/_PROJECTS/portfolio/buildv3/sass/portfolio.scss:436
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/script/funcall.rb:161:in `rescue in _perform'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/script/funcall.rb:99:in `_perform'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/script/node.rb:40:in `perform'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:298:in `visit_prop'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `visit'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:100:in `visit'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `map'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `visit_children'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `block in visit'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:320:in `visit_rule'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `visit'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:100:in `visit'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `map'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `visit_children'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `block in visit'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:128:in `visit_root'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `visit'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:100:in `visit'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:7:in `visit'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/tree/root_node.rb:20:in `render'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/engine.rb:315:in `_render'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/engine.rb:262:in `render'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:362:in `update_stylesheet'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:203:in `block in update_stylesheets'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:201:in `each'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:201:in `update_stylesheets'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:283:in `block in watch'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/vendor/listen/lib/listen/multi_listener.rb:108:in `call'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/vendor/listen/lib/listen/multi_listener.rb:108:in `on_change'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/vendor/listen/lib/listen/multi_listener.rb:117:in `block in initialize_adapter'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/vendor/listen/lib/listen/adapter.rb:198:in `call'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/vendor/listen/lib/listen/adapter.rb:198:in `report_changes'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/vendor/listen/lib/listen/adapter.rb:210:in `poll_changed_dirs'
-/Users/ashleycoleman/.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/sass-3.2.9/vendor/listen/lib/listen/adapters/darwin.rb:38:in `block in start'
+http://jsfiddle.net/VAXrL/190/
 */
-body:before {
-  white-space: pre;
+.top-bar {
+  z-index: 1000;
+  background: #333333; }
+
+.top-bar-section li a:not(.button) {
+  background: #333333; }
+
+.top-bar.expanded .title-area {
+  background: #333333; }
+
+button {
+  z-index: 1000; }
+
+canvas, img {
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -o-crisp-edges;
+  image-rendering: optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor; }
+
+html, body {
+  background-color: #666666;
+  height: 100%; }
+
+.app-container {
+  height: 100%;
+  min-height: 100%; }
+
+.application {
+  height: 100%; }
+
+.bg-layer {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  margin: 0;
+  padding: 0; }
+
+.x-ruler {
+  background-size: 30px 1.5em;
+  left: 1.5em;
+  bottom: 0;
+  background-position: left bottom;
+  background-image: linear-gradient(90deg, #a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 29px, #a6a6a6 29px);
+  background-repeat: repeat-x; }
+
+.x-ruler-minor {
+  left: 1.5em;
+  background-size: 30px 0.75em;
+  bottom: 0;
+  background-position: left bottom;
+  background-image: linear-gradient(90deg, #a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 5px, #a6a6a6 5px, #a6a6a6 6px, transparent 6px, transparent 10px, #a6a6a6 10px, #a6a6a6 11px, transparent 11px, transparent 15px, #a6a6a6 15px, #a6a6a6 16px, transparent 16px, transparent 20px, #a6a6a6 20px, #a6a6a6 21px, transparent 21px, transparent 25px, #a6a6a6 25px, #a6a6a6 26px, transparent 26px, transparent 27px);
+  background-repeat: repeat-x; }
+
+.y-ruler {
+  bottom: 1.5em;
+  left: 0;
+  background-size: 1.5em 30px;
+  background-position: left bottom;
+  background-image: linear-gradient(#a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 29px, #a6a6a6 29px);
+  background-repeat: repeat-y; }
+
+.y-ruler-minor {
+  bottom: 1.5em;
+  left: 0;
+  background-size: 0.75em 30px;
+  background-position: left bottom;
+  background-image: linear-gradient(#a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 5px, #a6a6a6 5px, #a6a6a6 6px, transparent 6px, transparent 10px, #a6a6a6 10px, #a6a6a6 11px, transparent 11px, transparent 15px, #a6a6a6 15px, #a6a6a6 16px, transparent 16px, transparent 20px, #a6a6a6 20px, #a6a6a6 21px, transparent 21px, transparent 25px, #a6a6a6 25px, #a6a6a6 26px, transparent 26px, transparent 27px);
+  background-repeat: repeat-y; }
+
+.note {
+  font-size: 0.33em;
+  color: #999; }
+
+.heartbeat-flash {
+  background: transparent;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1; }
+
+.heartbeat-on {
+  background: red;
+  -webkit-transition: background 0.4s;
+  -moz-transition: background 0.4s;
+  -o-transition: background 0.4s;
+  transition: background 0.4s; }
+
+.heartbeat-off {
+  -webkit-transition: background 1s;
+  -moz-transition: background 1s;
+  -o-transition: background 1s;
+  transition: background 1s; }
+
+.horizontal-centered {
+  margin: 0 auto;
+  display: block; }
+
+.vertical-centered-to-page {
+  position: fixed;
+  bottom: 50%;
+  left: 0;
+  width: 100%; }
+
+.vertical-centered-to-parent {
+  position: absolute;
+  bottom: 50%;
+  left: 0;
+  width: 100%; }
+
+.obligatory-list {
+  font-family: Monospace;
+  cursor: text;
+  pointer-events: auto !important;
+  color: #333333; }
+
+.subtitle {
+  color: #666666;
+  line-height: 100%;
+  display: inline; }
+
+.subtitle-text-holder {
+  margin-bottom: 1.5em;
+  pointer-events: none;
+  zoom: 1;
+  filter: alpha(opacity=95);
+  opacity: 0.95; }
+  .subtitle-text-holder a {
+    text-decoration: none;
+    pointer-events: auto;
+    margin-top: 0.5em;
+    color: tomato; }
+    .subtitle-text-holder a:hover {
+      color: crimson; }
+    .subtitle-text-holder a:visited {
+      color: brown; }
+  .subtitle-text-holder .heading, .subtitle-text-holder p, .subtitle-text-holder li, .subtitle-text-holder ul {
+    margin: 0px;
+    padding: 0px;
+    pointer-events: none;
+    line-height: 1.6em; }
+    .ie7 .subtitle-text-holder .heading, .ie8 .subtitle-text-holder .heading, .ie9 .subtitle-text-holder .heading, .ie10 .subtitle-text-holder .heading, .ie11 .subtitle-text-holder .heading, .ie7 .subtitle-text-holder p, .ie8 .subtitle-text-holder p, .ie9 .subtitle-text-holder p, .ie10 .subtitle-text-holder p, .ie11 .subtitle-text-holder p, .ie7 .subtitle-text-holder li, .ie8 .subtitle-text-holder li, .ie9 .subtitle-text-holder li, .ie10 .subtitle-text-holder li, .ie11 .subtitle-text-holder li, .ie7 .subtitle-text-holder ul, .ie8 .subtitle-text-holder ul, .ie9 .subtitle-text-holder ul, .ie10 .subtitle-text-holder ul, .ie11 .subtitle-text-holder ul {
+      background-color: white;
+      /* More background colour for browsers that don't support css pointer-events */ }
+  .subtitle-text-holder h3 {
+    margin: 0;
+    padding: 0;
+    color: inherit; }
+  .subtitle-text-holder span {
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+    background-color: white;
+    line-height: 1.6em;
+    border-right-width: 0.5em;
+    border-right-color: white;
+    border-right-style: solid;
+    pointer-events: auto;
+    cursor: pointer; }
+  .subtitle-text-holder span.heading {
+    font-weight: bold;
+    margin-top: 1em;
+    border-left-width: 0em; }
+  .subtitle-text-holder li {
+    border-left-width: 3em;
+    border-left-color: white;
+    border-left-style: solid; }
+  .subtitle-text-holder .indent {
+    border-left-width: 3em;
+    border-left-color: white;
+    border-left-style: solid;
+    line-height: 100%; }
+  .subtitle-text-holder a p span {
+    color: tomato;
+    font-size: 1em; }
+    .subtitle-text-holder a p span:hover {
+      color: crimson; }
+    .subtitle-text-holder a p span:visited {
+      color: brown; }
+  .subtitle-text-holder p {
+    border-left-width: 0.5em;
+    border-left-color: white;
+    border-left-style: solid; }
+
+.subtitle .subtitle-text-holder-instant {
+  color: #CCCCCC; }
+
+.ie7 .subtitle-text-holder-instant .heading, .ie8 .subtitle-text-holder-instant .heading, .ie9 .subtitle-text-holder-instant .heading, .ie10 .subtitle-text-holder-instant .heading, .ie11 .subtitle-text-holder-instant .heading, .ie7 .subtitle-text-holder-instant p, .ie8 .subtitle-text-holder-instant p, .ie9 .subtitle-text-holder-instant p, .ie10 .subtitle-text-holder-instant p, .ie11 .subtitle-text-holder-instant p, .ie7 .subtitle-text-holder-instant li, .ie8 .subtitle-text-holder-instant li, .ie9 .subtitle-text-holder-instant li, .ie10 .subtitle-text-holder-instant li, .ie11 .subtitle-text-holder-instant li, .ie7 .subtitle-text-holder-instant ul, .ie8 .subtitle-text-holder-instant ul, .ie9 .subtitle-text-holder-instant ul, .ie10 .subtitle-text-holder-instant ul, .ie11 .subtitle-text-holder-instant ul {
+  background-color: #666666;
+  /* More background colour for browsers that don't support css pointer-events */ }
+.subtitle-text-holder-instant span {
+  background-color: #666666;
+  border-left-color: #666666;
+  border-right-color: #666666;
+  cursor: text; }
+.subtitle-text-holder-instant li {
+  border-left-color: #666666; }
+.subtitle-text-holder-instant .indent {
+  border-left-color: #666666; }
+.subtitle-text-holder-instant p {
+  border-left-color: #666666; }
+
+.remove-button-holder {
+  position: absolute;
+  top: -1.25em; }
+
+.click-hint-holder {
+  color: #cccccc;
+  margin: 0.5em 0em;
+  position: absolute;
+  bottom: -0.5em; }
+
+.quote {
+  font-style: italic;
+  border-left-width: 3em;
+  border-left-color: white;
+  border-left-style: solid;
+  line-height: 100%; }
+
+a {
+  color: tomato; }
+  a:hover {
+    color: crimson; }
+  a:visited {
+    color: brown; }
+
+.relative-positioned {
+  position: relative; }
+
+.single {
+  text-align: center; }
+
+.standard-single-button {
+  width: 8em; }
+
+.preloader-content {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  float: left;
+  color: #c9c9c9;
+  display: none; }
+
+.transition-canvas {
+  display: block; }
+
+.canvas-hero-holder {
+  width: 100%;
+  position: relative;
+  height: 346px; }
+
+.canvas-hero-holder-med {
+  width: 100%;
+  position: relative;
+  height: 212px; }
+
+.canvas-hero-holder-small {
+  width: 100%;
+  position: relative;
+  height: 124px; }
+
+.canvas-hero {
+  width: 1248px;
+  height: 576px;
+  margin-left: -624px;
+  position: absolute;
+  top: 0;
+  left: 50%; }
+
+.canvas-hero-med {
+  width: 768px;
+  height: 354px;
+  margin-left: -384px;
+  position: absolute;
+  top: 0;
+  left: 50%; }
+
+.canvas-hero-small {
+  width: 448px;
+  height: 206px;
+  margin-left: -224px;
+  position: absolute;
+  top: 0;
+  left: 50%; }
+
+.background-2d-to-3d-ash {
+  background-image: url("../img/face-ash.png");
+  background-position: center top;
+  background-repeat: no-repeat; }
+
+.background-2d-to-3d-question-mark {
+  background-image: url("../img/question.png");
+  background-position: center top;
+  background-repeat: no-repeat; }
+
+.el-no-effect-winsize-outer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+.el-no-effect-winsize-inner {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0; }
+
+.navigation {
+  position: absolute; }
+
+.relative-wrapper {
+  position: relative; }
+
+.full-width-centered {
+  width: 100%;
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  overflow: hidden; }
+
+.absolute-positioned {
+  position: absolute; }
+
+.absolute-positioned-content {
+  position: absolute;
+  top: 45px; }
+
+.absolute-positioned-content-background {
+  position: absolute;
+  top: 45px;
+  overflow: hidden;
+  height: 100%; }
+
+.pointer-events-none {
+  /*pointer-events: none;*/ }
+
+.visible-world-2d, .transition-canvas {
+  margin: 0 auto;
+  display: block; }
+
+.world-1d-centerer {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  position: relative; }
+
+.world-1d {
+  width: 1000px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -500px; }
+
+.dimension1 {
+  overflow: hidden;
+  height: 100%; }
+
+.interactive-grid {
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  top: -45px; }
+
+.interactive-graph-output {
+  background-color: #666666;
   font-family: monospace;
-  content: "Syntax error: (350 _66px) is not a number for `floor'\A         on line 436 of /Users/ashleycoleman/Dropbox/_PROJECTS/portfolio/buildv3/sass/portfolio.scss\A \A 431: }\A 432: \A 433: .canvas-hero-holder-66 {\A 434: 	width: 100%;\A 435: 	position: relative;\A 436: 	height: floor(350_66px);\A 437: }\A 438: \A 439: \A 440: .canvas-hero-holder-50 {\A 441: 	width: 100%;"; }
+  font-size: 1.2em;
+  color: #CCCCCC;
+  line-height: 140%; }
+  .interactive-graph-output h3 {
+    font-family: inherit; }
+  .interactive-graph-output ul {
+    margin-left: 1.5em;
+    line-height: 140%;
+    list-style-type: inherit; }
+    .interactive-graph-output ul ul {
+      list-style-type: inherit;
+      line-height: inherit; }
+
+#svg-raphaeljs {
+  position: absolute;
+  width: 100%; }
+
+.graph-info {
+  width: 100%;
+  line-height: 100%;
+  padding: 0.5em;
+  display: none; }
+  .graph-info .sub-heading {
+    text-transform: capitalize; }
+  .graph-info .graph-layer {
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    padding: 0 1em; }
+  .graph-info .graph-position {
+    color: #595959; }
+  .graph-info div, .graph-info span {
+    float: left; }
+
+.graph-legend {
+  display: none;
+  font-family: monospace;
+  position: absolute;
+  bottom: -3em;
+  left: 1em;
+  padding: 1em;
+  color: #333333;
+  background-color: #666666; }
+  .graph-legend span {
+    padding: 0.2em; }
+  .graph-legend h3, .graph-legend h4, .graph-legend h5 {
+    color: inherit;
+    margin: 0;
+    width: 100%;
+    padding: 0 0 0.25em 0;
+    text-transform: capitalize;
+    color: #595959; }
+  .graph-legend ul, .graph-legend li {
+    padding: 0;
+    margin: 0; }
+    .graph-legend ul li, .graph-legend li li {
+      list-style: none; }
+      .graph-legend ul li .graph-legend-fill, .graph-legend li li .graph-legend-fill {
+        width: 2em;
+        height: 1em;
+        padding: 0;
+        margin: 0;
+        margin-right: 0.5em;
+        float: left;
+        clear: both; }
+
+.graph-plot-tech-general {
+  color: #bb8888; }
+  .graph-plot-tech-general .graph-legend-fill {
+    background-color: #996666; }
+
+.graph-plot-tech-portfolio {
+  color: #88bb88; }
+  .graph-plot-tech-portfolio .graph-legend-fill {
+    background-color: #669966; }
+
+.graph-plot-general {
+  color: #8888bb; }
+  .graph-plot-general .graph-legend-fill {
+    background-color: #666699; }
+
+/*
+.graph-plot {
+	h3 {
+		color:inherit;
+		text-transform:uppercase;
+	}
+}
+*/

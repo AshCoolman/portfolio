@@ -421,26 +421,39 @@ a {
 }
 
 
-$hero_width: 1200px;
+$visPerc: 0.6;
+
+$hero_width: 1248px;
 $hero_height: 576px;
+$hero_vis_height: round($visPerc * $hero_height);
+
+
+$hero_width_med: 768px;
+$hero_height_med: 354px;
+$hero_vis_height_med: round($visPerc * $hero_height_med);
+
+$hero_width_small: 448px;
+$hero_height_small: 206px;
+$hero_vis_height_small: round($visPerc * $hero_height_small);
+
 
 .canvas-hero-holder {
 	width: 100%;
 	position: relative;
-	height: 350px;
+	height: $hero_vis_height;
 }
 
-.canvas-hero-holder-66 {
+.canvas-hero-holder-med {
 	width: 100%;
 	position: relative;
-	height: floor(350_66px);
+	height: $hero_vis_height_med;
 }
 
 
-.canvas-hero-holder-50 {
+.canvas-hero-holder-small {
 	width: 100%;
 	position: relative;
-	height: floor(350_5px);
+	height: $hero_vis_height_small;
 }
 
 .canvas-hero {
@@ -452,24 +465,39 @@ $hero_height: 576px;
 	left: 50%;
 }
 
-.canvas-hero-66 {
-	width: floor($hero_width_66);
-	height: floor($hero_height_66);
-	margin-left: - floor($hero_width_66) / 2;
+.canvas-hero-med {
+	width: floor($hero_width_med);
+	height: floor($hero_height_med);
+	margin-left: - floor($hero_width_med) / 2;
 	position: absolute;
 	top: 0;
 	left: 50%;
 }
 
 
-.canvas-hero-50 {
-	width: floor($hero_width_5);
-	height: floor($hero_height_5);
-	margin-left: - floor($hero_width_5) / 2;
+.canvas-hero-small {
+	width: floor($hero_width_small);
+	height: floor($hero_height_small);
+	margin-left: - floor($hero_width_small) / 2;
 	position: absolute;
 	top: 0;
 	left: 50%;
 }
+
+
+.background-2d-to-3d-ash {
+	background-image: url('../img/face-ash.png');
+	background-position: center top;
+	background-repeat: no-repeat;
+} 
+
+
+.background-2d-to-3d-question-mark {
+	background-image: url('../img/question.png');
+	background-position: center top;
+	background-repeat: no-repeat;
+}
+
 
 .el-no-effect-winsize-outer {
     position:absolute;
@@ -535,17 +563,6 @@ $hero_height: 576px;
 }
 
 
-.background-2d-to-3d-ash {
-	background-image: url('../img/face-ash.png');
-	background-position: center top;
-	background-repeat: no-repeat;
-}
-
-.background-2d-to-3d-question-mark {
-	background-image: url('../img/question.png');
-	background-position: center top;
-	background-repeat: no-repeat;
-}
 
 .world-1d-centerer {
   width: 100%;

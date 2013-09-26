@@ -242,9 +242,6 @@ App.World3dView = App.SmartView.extend({
 			}(this));
 
 			this.resize();
-			
-			this.get('$bg2dto3dAsh').css('background-image', 'none');
-			
 		}
 	},
 	createFromImage: function (img, groupName, pixelWidth, pixelHeight) {
@@ -336,54 +333,62 @@ App.World3dView = App.SmartView.extend({
 		var $canvas = $(this.get('instanceVarObj').renderer.domElement),
 			w, 
 			h,
+			bp = App.BREAKPOINT,
+			W = bp.WIDTH_2,
+			H = bp.HEIGHT_2,
 			canvasHeroClass,
 			canvasHeroHolderClass,
 			tmpwinWidth = this.tmpwinWidth = $(window).width();
 
-		if (tmpwinWidth > App.BREAKPOINT.WIDTH_2) {
-			w = App.BREAKPOINT.WIDTH_2;
-			h = App.BREAKPOINT.HEIGHT_2; 
+		if (tmpwinWidth > bp.WIDTH_2) {
+			w = bp.WIDTH_2;
+			h = bp.HEIGHT_2; 
 			canvasHeroClass = 'canvas-hero';
 			canvasHeroHolderClass = 'canvas-hero-holder';
-		} else if (tmpwinWidth > App.BREAKPOINT.WIDTH_2 * 0.66) {
-			w = App.BREAKPOINT.WIDTH_2 * 0.66;
-			h = App.BREAKPOINT.HEIGHT_2 * 0.66;
-			canvasHeroClass = 'canvas-hero-66';
-			canvasHeroHolderClass = 'canvas-hero-holder-66';
+		} else if (tmpwinWidth > bp.WIDTH_1) {
+			w = bp.WIDTH_1;
+			h = bp.HEIGHT_1;
+			canvasHeroClass = 'canvas-hero-med';
+			canvasHeroHolderClass = 'canvas-hero-holder-med';
 		} else {
-			w = App.BREAKPOINT.WIDTH_0 * 0.5;
-			h = App.BREAKPOINT.HEIGHT_0 * 0.5;
-			canvasHeroClass = 'canvas-hero-50';
-			canvasHeroHolderClass = 'canvas-hero-holder-50';
+			w = bp.WIDTH_0;
+			h = bp.HEIGHT_0;
+			canvasHeroClass = 'canvas-hero-small';
+			canvasHeroHolderClass = 'canvas-hero-holder-small';
 		}
-		w = Math.round(w);
-		h = Math.round(h);
 		this.w = w;
 		this.h = h;
 		
-		$canvas.removeClass('canvas-hero canvas-hero-66 canvas-hero-50');
+		$canvas.removeClass('canvas-hero canvas-hero-med canvas-hero-small');
 		$canvas.addClass(canvasHeroClass);
-		$canvas.parent().removeClass('canvas-hero-holder canvas-hero-holder-66 canvas-hero-holder-50');
+		$canvas.parent().removeClass('canvas-hero-holder canvas-hero-holder-med canvas-hero-holder-small');
 		$canvas.parent().addClass(canvasHeroHolderClass);
 
-		this.get('$bg2dto3dAsh').css('background-position', (App.BREAKPOINT.WIDTH_2/2 + this.FACE_ASH_X)+'px '+(270 - this.FACE_ASH_Y)+'px');
-		this.get('$bg2dto3dQuestionMark').css('background-position', (App.BREAKPOINT.WIDTH_2/2 + this.QUESTION_MARK_X)+'px '+(270 - this.QUESTION_MARK_Y)+'px');
 		
-		/*
+		this.get('$bg2dto3dAsh').css({
+			'background-position': (w/2 + this.FACE_ASH_X)+'px '+(270 - this.FACE_ASH_Y)+'px'
+			});
+		this.get('$bg2dto3dQuestionMark').css({
+			'background-position': (w/2 + this.QUESTION_MARK_X)+'px '+(270 - this.QUESTION_MARK_Y)+'px'
+		});
+
+		
+		
+		
 		with (this.get('instanceVarObj')) {
-			//$(renderer.domElement).attr( { width: w+'px' , height: h+'px'  } );
 			renderer.setSize( w, h );
-			camera.left = -w/2;
-			camera.right = w/2;
-			camera.top = h/2;
-			camera.bottom = -h/2;	
+			camera.left = -W/2;
+			camera.right = W/2;
+			camera.top = H/2;
+			camera.bottom = -H/2;	
 			camera.position.set(0, 0, 1000);
 		    camera.updateProjectionMatrix();
 			if (isControls) {
 				controls.handleResize();
 			}
 		}
-		*/
+		
+		
 	},
 	/*
 	$canvas.attr( { width: App.BREAKPOINT.WIDTH_2, height: App.BREAKPOINT.HEIGHT_2 } );

@@ -4,6 +4,7 @@ HIGH PRIORITY
 	Resize
 		canvas-hero height and width
 		Row height
+	Change transition to fixedpos imgs ... shit...could make 3d version from them
 		
 2d
 	Timing of Question Mark
