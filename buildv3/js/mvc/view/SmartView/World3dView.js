@@ -12,6 +12,7 @@ App.World3dView = App.SmartView.extend({
 	QUESTION_MARK: 'question-mark',
 	QUESTION_MARK_X: 30,
 	QUESTION_MARK_Y: 240,
+	is3dCreated: false,
 	isQuestionMarkRotate: false,
 	instanceVarNameArr: [			
 		'renderer',
@@ -93,6 +94,13 @@ App.World3dView = App.SmartView.extend({
 		
 	}.observes('controller.isQuestionMarkRotating'),
 	
+	observingIs3dCreated: function (observed, val) {
+		if (val) {
+			$('.background-2d-to-3d-ash', this.get('$el')).css('display', 'none');
+			$('.background-2d-to-3d-question-mark', this.get('$el')).css('display', 'none');
+		}
+	}.observes('is3dCreated'),
+	
 	didInsertElement: function () {
 		this._super();
 		var instanceVarObj = this.get('instanceVarObj')
@@ -155,8 +163,8 @@ App.World3dView = App.SmartView.extend({
 		setTimeout( function (me, ainstanceVarObj) {
 			return  function () {
 				var plans = [ 
-					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('face-ash-pixel')), x: me.FACE_ASH_X+15, y:me.FACE_ASH_Y, label: me.FACE_ASH }, 
-					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('question-pixel')), x: me.QUESTION_MARK_X+15, y:me.QUESTION_MARK_Y, label: me.QUESTION_MARK }];
+					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('face-ash-pixel')), x: me.FACE_ASH_X+15, y:me.FACE_ASH_Y+15, label: me.FACE_ASH }, 
+					{ imgMap: me.createFromImage(App.PRELOADER.queue.getResult('question-pixel')), x: me.QUESTION_MARK_X+15, y:me.QUESTION_MARK_Y+15, label: me.QUESTION_MARK }];
 				
 				for (var p = 0; p < plans.length; p++) {
 					var pixelatedObj = Object.createFromPrototype(CubeGroup, plans[p]),
@@ -167,17 +175,19 @@ App.World3dView = App.SmartView.extend({
 					ainstanceVarObj.scene.add(pixelatedObjGroup);
 					ainstanceVarObj.pixelObjectList[plans[p].label] = pixelatedObj;
 				}
-					console.log('pushed voxel groups', ainstanceVarObj);
+				
 				me.tryStart(ainstanceVarObj);
 			}
 		}(this, instanceVarObj), 0);
 		
 		
 		
-		this.get('$canvasHeroHolder').append('<div class="canvas-hero background-2d-to-3d-ash"></div>');
-		this.get('$canvasHeroHolder').append('<div class="canvas-hero background-2d-to-3d-question-mark"></div>');
+		this.get('$canvasHeroHolder').append('<div class="canvas-hero background-2d-to-3d-ash"><div class="bg-ash"></div></div>');
+		this.get('$canvasHeroHolder').append('<div class="canvas-hero background-2d-to-3d-question-mark"><div class="bg-question-mark"></div></div>');
 		this.set('$bg2dto3dAsh', $('.background-2d-to-3d-ash', this.get('$canvasHeroHolder')));
+		this.set('$bg2dto3dAshBg', $('.bg-ash', this.get('$canvasHeroHolder')));
 		this.set('$bg2dto3dQuestionMark', $('.background-2d-to-3d-question-mark', this.get('$canvasHeroHolder')));
+		this.set('$bg2dto3dQuestionMarkBg', $('.bg-question-mark', this.get('$canvasHeroHolder')));
 		this.resize();
 		
 	},
@@ -240,7 +250,8 @@ App.World3dView = App.SmartView.extend({
 					me.resize();
 				}
 			}(this));
-
+			
+			this.set('is3dCreated', true);
 			this.resize();
 		}
 	},
@@ -328,8 +339,6 @@ App.World3dView = App.SmartView.extend({
 	},
 	
 	resize: function() {
-
-		
 		var $canvas = $(this.get('instanceVarObj').renderer.domElement),
 			w, 
 			h,
@@ -359,67 +368,43 @@ App.World3dView = App.SmartView.extend({
 		this.w = w;
 		this.h = h;
 		
-		$canvas.removeClass('canvas-hero canvas-hero-med canvas-hero-small');
-		$canvas.addClass(canvasHeroClass);
-		$canvas.parent().removeClass('canvas-hero-holder canvas-hero-holder-med canvas-hero-holder-small');
-		$canvas.parent().addClass(canvasHeroHolderClass);
-
-		
-		this.get('$bg2dto3dAsh').css({
-			'background-position': (w/2 + this.FACE_ASH_X)+'px '+(270 - this.FACE_ASH_Y)+'px'
+		if (this.get('is3dCreated')) {
+			$canvas.removeClass('canvas-hero canvas-hero-med canvas-hero-small');
+			$canvas.addClass(canvasHeroClass);
+			$canvas.parent().removeClass('canvas-hero-holder canvas-hero-holder-med canvas-hero-holder-small');
+			$canvas.parent().addClass(canvasHeroHolderClass);
+			
+			with (this.get('instanceVarObj')) {
+				renderer.setSize( w, h );
+				camera.left = -W/2;
+				camera.right = W/2;
+				camera.top = H/2;
+				camera.bottom = -H/2;	
+				camera.position.set(0, 0, 1000);
+			    camera.updateProjectionMatrix();
+				if (isControls) {
+					controls.handleResize();
+				}
+			}
+		} else {
+			this.get('$bg2dto3dAsh').css({
+				'margin-left': Math.round(this.FACE_ASH_X * (w/W))+'px ', 
+				'margin-top': Math.round((270 - this.FACE_ASH_Y) * (h/H))+'px'
 			});
-		this.get('$bg2dto3dQuestionMark').css({
-			'background-position': (w/2 + this.QUESTION_MARK_X)+'px '+(270 - this.QUESTION_MARK_Y)+'px'
-		});
+			this.get('$bg2dto3dAshBg').css({
+				'background-size': Math.round(100*w/W)+'%'
+			});
 
-		
-		
-		
-		with (this.get('instanceVarObj')) {
-			renderer.setSize( w, h );
-			camera.left = -W/2;
-			camera.right = W/2;
-			camera.top = H/2;
-			camera.bottom = -H/2;	
-			camera.position.set(0, 0, 1000);
-		    camera.updateProjectionMatrix();
-			if (isControls) {
-				controls.handleResize();
-			}
+			this.get('$bg2dto3dQuestionMark').css({
+				'margin-left': Math.round(this.QUESTION_MARK_X * (w/W))+'px ', 
+				'margin-top': Math.round((270 - this.QUESTION_MARK_Y) * (h/H))+'px'
+			});
+			this.get('$bg2dto3dQuestionMarkBg').css({
+				'background-size': Math.round(100*w/W)+'%'
+			});
 		}
-		
-		
 	},
-	/*
-	$canvas.attr( { width: App.BREAKPOINT.WIDTH_2, height: App.BREAKPOINT.HEIGHT_2 } );
-	$canvas.css( {
-		width: App.BREAKPOINT.WIDTH_2,
-		height: App.BREAKPOINT.HEIGHT_2,
-		'margin-left': - App.BREAKPOINT.WIDTH_2/2,
-		position: 'absolute',
-		top:0,
-		left:'50%'
-	});
-	
-	var instanceVarObj = this.get('instanceVarObj');
-	
-	with (instanceVarObj) {
-		if (false) {
-			$(renderer.domElement).attr( { width: w+'px' , height: h+'px'  } );
-			renderer.setSize( w, h );
-			camera.left = -w/2;
-			camera.right = w/2;
-			camera.top = h/2;
-			camera.bottom = -h/2;	
-			camera.position.set(0, -h/2, 1000);
-		    camera.updateProjectionMatrix();
-			if (isControls) {
-				controls.handleResize();
-			}
-		}
-	}
-	*/
-	
+
 	redraw: function (dur) {
 		var instanceVarObj = this.get('instanceVarObj');
 		

@@ -471,6 +471,7 @@ And knowing that somewhere there is a solution...
 
 	<script type="text/x-handlebars" data-template-name="world-3d">
 		<div class="canvas-hero-holder">
+			
 		</div>
 	</script>
 

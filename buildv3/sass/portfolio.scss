@@ -423,20 +423,20 @@ a {
 
 $visPerc: 0.6;
 
-$hero_width: 1248px;
-$hero_height: 576px;
+$hero_width: 1200px;
+$hero_height: 600px;
 $hero_vis_height: round($visPerc * $hero_height);
 
 
-$hero_width_med: 768px;
-$hero_height_med: 354px;
+$hero_width_med: 800px;
+$hero_height_med: 400px;
 $hero_vis_height_med: round($visPerc * $hero_height_med);
 
-$hero_width_small: 448px;
-$hero_height_small: 206px;
+$hero_width_small: 600px;
+$hero_height_small: 300px;
 $hero_vis_height_small: round($visPerc * $hero_height_small);
 
-
+$gridColor:rgba(50,50,50,0.25);
 .canvas-hero-holder {
 	width: 100%;
 	position: relative;
@@ -486,16 +486,27 @@ $hero_vis_height_small: round($visPerc * $hero_height_small);
 
 
 .background-2d-to-3d-ash {
-	background-image: url('../img/face-ash.png');
-	background-position: center top;
-	background-repeat: no-repeat;
+	width:360px;
+	height:360px;
 } 
-
+.bg-ash {
+	background-image: url('../img/face-ash.png');
+	background-position: left top;
+	background-repeat: no-repeat;
+	width:100%;
+	height:100%;
+}
 
 .background-2d-to-3d-question-mark {
+	width:150px;
+	height:240px;
+}
+.bg-question-mark {
 	background-image: url('../img/question.png');
-	background-position: center top;
+	background-position: left top;
 	background-repeat: no-repeat;
+	width:100%;
+	height:100%;
 }
 
 

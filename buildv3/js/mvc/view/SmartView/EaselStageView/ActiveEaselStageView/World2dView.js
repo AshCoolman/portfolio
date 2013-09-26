@@ -142,8 +142,27 @@ App.World2dView = App.ActiveEslStageView.extend({
 	
 	resize: function () {
 		this._super();
-		var $canvas = $('.esl-stage-canvas');
- 
+		var $canvas = $('canvas', this.get('$el')),
+			bp = App.BREAKPOINT,
+			canvasHeroClass,
+			canvasHeroHolderClass,
+			tmpwinWidth = this.tmpwinWidth = $(window).width();
+
+		if (tmpwinWidth > bp.WIDTH_2) {
+			canvasHeroClass = 'canvas-hero';
+			canvasHeroHolderClass = 'canvas-hero-holder';
+		} else if (tmpwinWidth > bp.WIDTH_1) {
+			canvasHeroClass = 'canvas-hero-med';
+			canvasHeroHolderClass = 'canvas-hero-holder-med';
+		} else {
+			canvasHeroClass = 'canvas-hero-small';
+			canvasHeroHolderClass = 'canvas-hero-holder-small';
+		}
+
+		$canvas.removeClass('canvas-hero canvas-hero-med canvas-hero-small');
+		$canvas.addClass(canvasHeroClass);
+		$canvas.parent().removeClass('canvas-hero-holder canvas-hero-holder-med canvas-hero-holder-small');
+		$canvas.parent().addClass(canvasHeroHolderClass);	
 	},
 	willDestroyElement: function () {
 		createjs.Tween.removeTweens( this.get('multiTween') );
