@@ -430,6 +430,19 @@ $hero_height: 576px;
 	height: 350px;
 }
 
+.canvas-hero-holder-66 {
+	width: 100%;
+	position: relative;
+	height: floor(350_66px);
+}
+
+
+.canvas-hero-holder-50 {
+	width: 100%;
+	position: relative;
+	height: floor(350_5px);
+}
+
 .canvas-hero {
 	width: $hero_width;
 	height: $hero_height;
@@ -438,6 +451,26 @@ $hero_height: 576px;
 	top: 0;
 	left: 50%;
 }
+
+.canvas-hero-66 {
+	width: floor($hero_width_66);
+	height: floor($hero_height_66);
+	margin-left: - floor($hero_width_66) / 2;
+	position: absolute;
+	top: 0;
+	left: 50%;
+}
+
+
+.canvas-hero-50 {
+	width: floor($hero_width_5);
+	height: floor($hero_height_5);
+	margin-left: - floor($hero_width_5) / 2;
+	position: absolute;
+	top: 0;
+	left: 50%;
+}
+
 .el-no-effect-winsize-outer {
     position:absolute;
     top:0px;
@@ -496,12 +529,11 @@ $hero_height: 576px;
 
 .grid-zone {
 }
-.visible-world-2d, .world-3d-renderer, .transition-canvas {
+.visible-world-2d, .transition-canvas {
 	margin: 0 auto;
 	display: block;
 }
-.world-3d-renderer {
-}
+
 
 .background-2d-to-3d-ash {
 	background-image: url('../img/face-ash.png');

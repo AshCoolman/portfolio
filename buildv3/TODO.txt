@@ -18,8 +18,14 @@ World3d Click and drag on question mark itself does not work.
 Cross platform
 hints
 Remove 3d debug squares
+Check phone number is ringable on iphone/skype?
+
 
 MEDIUM
+Refactor Word3d
+	Better functional grouping of cod
+	remove instanceVar (lol)
+	
 Cogification Layout *need* to convery more meaning
 add 3d game
 webworker

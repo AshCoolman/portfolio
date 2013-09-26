@@ -113,6 +113,7 @@ App.World3dView = App.SmartView.extend({
 			this.get('$canvasHeroHolder').append(renderer.domElement);
 			
 			var $canvas = $(renderer.domElement).addClass('world-3d-renderer canvas-hero');
+			
 			//rendererStats = tryCreateRenderStats();
 
 			// +Camera	
@@ -126,7 +127,7 @@ App.World3dView = App.SmartView.extend({
 			var directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
 			directionalLight.position.set( 0, 0, 1 );
 			scene.add( directionalLight );
-			console.log('scene\n\n', scene, $(renderer.domElement).attr('width', '1200'));
+			//console.log('scene\n\n', scene, $(renderer.domElement).attr('width', '1200'));
 			// +Cursor
 			cursor3D = new THREE.Object3D();
 			cursor3D.overdraw = true;
@@ -332,75 +333,87 @@ App.World3dView = App.SmartView.extend({
 	resize: function() {
 
 		
-		var w, 
-			h, 
-			trails = 0,
-			tmpbgColor,
-			renderer = this.renderer,
-			camera = this.camera,
+		var $canvas = $(this.get('instanceVarObj').renderer.domElement),
+			w, 
+			h,
+			canvasHeroClass,
+			canvasHeroHolderClass,
 			tmpwinWidth = this.tmpwinWidth = $(window).width();
 
-	
 		if (tmpwinWidth > App.BREAKPOINT.WIDTH_2) {
 			w = App.BREAKPOINT.WIDTH_2;
 			h = App.BREAKPOINT.HEIGHT_2; 
-			tmpbgColor = "rgba(200, 255, 200, " + (trails ? 1 / trails : 1) + ")";
-		} else if (tmpwinWidth > App.BREAKPOINT.WIDTH_1) {
-			w = App.BREAKPOINT.WIDTH_1;
-			h = App.BREAKPOINT.HEIGHT_1;
-			tmpbgColor = "rgba(200, 200, 255, "+ (trails ? 1 / trails : 1) + ")";
+			canvasHeroClass = 'canvas-hero';
+			canvasHeroHolderClass = 'canvas-hero-holder';
+		} else if (tmpwinWidth > App.BREAKPOINT.WIDTH_2 * 0.66) {
+			w = App.BREAKPOINT.WIDTH_2 * 0.66;
+			h = App.BREAKPOINT.HEIGHT_2 * 0.66;
+			canvasHeroClass = 'canvas-hero-66';
+			canvasHeroHolderClass = 'canvas-hero-holder-66';
 		} else {
-			w = App.BREAKPOINT.WIDTH_0;
-			h = App.BREAKPOINT.HEIGHT_0;
-			tmpbgColor = "rgba(255, 200, 200, "+ (trails ? 1 / trails : 1) + ")";
+			w = App.BREAKPOINT.WIDTH_0 * 0.5;
+			h = App.BREAKPOINT.HEIGHT_0 * 0.5;
+			canvasHeroClass = 'canvas-hero-50';
+			canvasHeroHolderClass = 'canvas-hero-holder-50';
 		}
+		w = Math.round(w);
+		h = Math.round(h);
+		this.w = w;
+		this.h = h;
 		
-		var instanceVarObj = this.get('instanceVarObj');
+		$canvas.removeClass('canvas-hero canvas-hero-66 canvas-hero-50');
+		$canvas.addClass(canvasHeroClass);
+		$canvas.parent().removeClass('canvas-hero-holder canvas-hero-holder-66 canvas-hero-holder-50');
+		$canvas.parent().addClass(canvasHeroHolderClass);
+
+		this.get('$bg2dto3dAsh').css('background-position', (App.BREAKPOINT.WIDTH_2/2 + this.FACE_ASH_X)+'px '+(270 - this.FACE_ASH_Y)+'px');
+		this.get('$bg2dto3dQuestionMark').css('background-position', (App.BREAKPOINT.WIDTH_2/2 + this.QUESTION_MARK_X)+'px '+(270 - this.QUESTION_MARK_Y)+'px');
 		
-		with (instanceVarObj) {
-			$(renderer.domElement).attr( { width: w+'px' , height: h+'px'  } );
-	
+		/*
+		with (this.get('instanceVarObj')) {
+			//$(renderer.domElement).attr( { width: w+'px' , height: h+'px'  } );
 			renderer.setSize( w, h );
 			camera.left = -w/2;
 			camera.right = w/2;
 			camera.top = h/2;
 			camera.bottom = -h/2;	
-					/*
-			camera.position.set(200, -h/2, 1000);
-			*/
+			camera.position.set(0, 0, 1000);
 		    camera.updateProjectionMatrix();
 			if (isControls) {
 				controls.handleResize();
 			}
 		}
-
-	
-		this.w = w;
-		this.h = h;
-		
-		var $canvas = $(instanceVarObj.renderer.domElement);
-		$canvas.parent().css({
-			width:'100%',
-			position:'relative',
-			height: '350px'
-		})
-		$canvas.attr( { width: App.BREAKPOINT.WIDTH_2, height: App.BREAKPOINT.HEIGHT_2 } );
-		$canvas.css( {
-			width: App.BREAKPOINT.WIDTH_2,
-			height: App.BREAKPOINT.HEIGHT_2,
-			'margin-left': - App.BREAKPOINT.WIDTH_2/2,
-			position: 'absolute',
-			top:0,
-			left:'50%'
-		});
-		
-		
-		
-		
-		this.get('$bg2dto3dAsh').css('background-position', (App.BREAKPOINT.WIDTH_2/2 + this.FACE_ASH_X)+'px '+(270 - this.FACE_ASH_Y)+'px');
-		this.get('$bg2dto3dQuestionMark').css('background-position', (App.BREAKPOINT.WIDTH_2/2 + this.QUESTION_MARK_X)+'px '+(270 - this.QUESTION_MARK_Y)+'px');
-		
+		*/
 	},
+	/*
+	$canvas.attr( { width: App.BREAKPOINT.WIDTH_2, height: App.BREAKPOINT.HEIGHT_2 } );
+	$canvas.css( {
+		width: App.BREAKPOINT.WIDTH_2,
+		height: App.BREAKPOINT.HEIGHT_2,
+		'margin-left': - App.BREAKPOINT.WIDTH_2/2,
+		position: 'absolute',
+		top:0,
+		left:'50%'
+	});
+	
+	var instanceVarObj = this.get('instanceVarObj');
+	
+	with (instanceVarObj) {
+		if (false) {
+			$(renderer.domElement).attr( { width: w+'px' , height: h+'px'  } );
+			renderer.setSize( w, h );
+			camera.left = -w/2;
+			camera.right = w/2;
+			camera.top = h/2;
+			camera.bottom = -h/2;	
+			camera.position.set(0, -h/2, 1000);
+		    camera.updateProjectionMatrix();
+			if (isControls) {
+				controls.handleResize();
+			}
+		}
+	}
+	*/
 	
 	redraw: function (dur) {
 		var instanceVarObj = this.get('instanceVarObj');
