@@ -2,9 +2,7 @@ HIGH PRIORITY
 
 		
 2d
-	Timing of Question Mark
-		Appearance should sympathise with text
-		Cogification should better sympathise with text
+
 		
 	Timing of Mosaic 
 		takes too long to appear
@@ -16,8 +14,13 @@ hints
 Remove 3d debug squares
 Check phone number is ringable on iphone/skype?
 
+Copy
+	Timing of 2d Question Mark
+		Appear
+		Coggify
 
 MEDIUM
+//TODO THIS IS SO YUK: see CoggedPixelController.view_didInsertElement()
 Refactor Word3d
 	Better functional grouping of cod
 	remove instanceVar (lol)

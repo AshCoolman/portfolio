@@ -2,6 +2,7 @@ App.QuestionMarkView = App.EslEntityView.extend({
 	templateName: 'question-mark',
 	className: 'QuestionMarkView',
 	label: 'question-mark',
+	pixels: [],
 	shp: null,
 	handle: null,
 	eslObjSettings: {
@@ -11,22 +12,31 @@ App.QuestionMarkView = App.EslEntityView.extend({
 		y: 0,
 		fromController: ['x', 'y', 'width', 'height', 'visible']
 	},
-	doShowPixelInChildren: function () {
+
+	doShowPixelInChildren: function (dur) {
+
+		console.log('view.doShowPixelInChildren');
+
 //		console.log(this.handle.children)
 		this.handle.visible = true;
-		var child,
-			c;
-			
-		for (c=0; c < this.handle.children.length; c++) {
-			child = this.handle.children[c];
-			child.visible = false;
-			setTimeout( function (me, achild) {
+		var rIndexAr = [],
+			pixels = this.handle.children,
+			step = dur/pixels.length;
+		
+		for (var r=0; r < pixels.length; r++) rIndexAr.push(r);
+		rIndexAr.sort(function() {return 0.5 - Math.random()})
+		
+		for (var c=0; c < this.handle.children.length; c++) {
+			var r = rIndexAr[c];
+			this.handle.children[r].visible = false;
+			setTimeout( function (me, ar) {
 				return function () {
-					achild.visible = true;
+					me.handle.children[ar].visible = true;
 				}
-			}(this, child), Math.random(4000))
+			}(this, r), step*c);
 		}
-	},
+		
+	},	
 	override_createEsl: function () {
 		this.shp = new createjs.Shape();
 		this.handle = new createjs.Container();

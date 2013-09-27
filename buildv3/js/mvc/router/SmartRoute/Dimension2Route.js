@@ -32,7 +32,15 @@ App.Dimension2Route = App.SmartRoute.extend({
 					window.location.hash = 'd3';
 				},
 				doShowQuestion: function () {
-					this.questionMarkController.setVisible();
+					//this.questionMarkController.setVisible();
+					
+					this.questionMarkController.doShowPixelInChildren(1200);
+					setTimeout(function (me) {
+						return function () {
+							me.questionMarkController.doCogOpen(1200);
+						}
+					}(this), 1400);
+					
 				},
 				doSubtitle2: function () {
 					this.subtitleController1.set('isCursor', false);

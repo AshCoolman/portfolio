@@ -142,7 +142,7 @@ App.World2dView = App.ActiveEslStageView.extend({
 	
 	resize: function () {
 		this._super();
-		var $canvas = $('canvas', this.get('$el')),
+		var $canvas = $('canvas', this.get('$el'))	,
 			bp = App.BREAKPOINT,
 			canvasHeroClass,
 			canvasHeroHolderClass,
