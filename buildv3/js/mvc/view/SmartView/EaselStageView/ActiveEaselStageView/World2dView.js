@@ -13,7 +13,7 @@ App.World2dView = App.ActiveEslStageView.extend({
 	didInsertElement: function(scope) {
 		with (this) {
 			
-			set('multiData', { index: 0, roundIndex: 0, needsRedraw: false, values: [360, 256, 128, 64, 32, 24, 16, 8, 4, 1] });
+			set('multiData', { index: 0, roundIndex: 0, needsRedraw: true, values: [256, 128, 64, 32, 24, 8, 1] });
 			_super(); 
 			//get('controller').send('view_didInsertElement', this); 
 			src.$canvas = $('.esl-stage-canvas', $el).addClass('src-world-2d');
@@ -46,7 +46,7 @@ App.World2dView = App.ActiveEslStageView.extend({
 		var multiData = this.get('multiData');
 		this.set('multiTween', createjs.Tween
 								.get(multiData, {})
-								.to( { index:multiData.values.length}, 3000, createjs.Ease.getPowIn(4.2) )
+								.to( { index:multiData.values.length}, 3000, createjs.Ease.getPowIn(2.2) )
 								.addEventListener("change", function (e) {
 									var multiData = e.target.target;
 									if (Math.round( multiData.index) != multiData.roundIndex) {
@@ -54,6 +54,7 @@ App.World2dView = App.ActiveEslStageView.extend({
 									}
 									multiData.roundIndex = Math.round( multiData.index);
 								}));
+							
 		this.resize();
 	},
 	addCog: function () {
