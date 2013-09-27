@@ -1,6 +1,5 @@
 HIGH PRIORITY
-Remove 3d debug squares
-World3d Click and drag on question mark itself does not work.
+World3d change color
 hints
 Cross platform
 

@@ -138,6 +138,7 @@ App.World3dView = App.SmartView.extend({
 			//console.log('scene\n\n', scene, $(renderer.domElement).attr('width', '1200'));
 			// +Cursor
 			cursor3D = new THREE.Object3D();
+			cursor3D.add( new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial()));
 			cursor3D.overdraw = true;
 			scene.add(cursor3D);
 
@@ -236,15 +237,12 @@ App.World3dView = App.SmartView.extend({
 			}(this);
 
 			this.set('raf', window.requestAnimationFrame(rafFunction));
-			
-
-			this.get('$el').mousemove( function(me) {
+			this.get('$el').on('mousemove', function(me) {
 				return function (event) {
 					me.onDocumentMouseMove(event);
 				}
-			}(this), false );
-
-
+			}(this));
+			
 			$(window).bind('resize.world3d', function(me) {
 			  	return function () {
 					me.resize();
@@ -299,16 +297,20 @@ App.World3dView = App.SmartView.extend({
 		}	
 	},
 	
-	onDocumentMouseMove: function ( event ) {
-		event.preventDefault();
+	onDocumentMouseMove: function ( e ) {
 		
 		var instanceVarObj = this.get('instanceVarObj');
-		var perc = ( event.clientX / window.innerWidth )
-			if (!window.evented) {
-				window.evented = true;
-			}
-		instanceVarObj.mouse2D.x = ( event.layerX / this.w) * 2 - 1;
-		instanceVarObj.mouse2D.y = - ( event.layerY / this.h ) * 2 + 1;
+		var X = $('body').offset().left;
+	    var Y = $('body').offset().top;
+	    mouseX = e.pageX - X;
+	    mouseY = e.pageY - Y;
+		var perc = App.BREAKPOINT.WIDTH_2 / this.w;
+		var offset = $('.world-3d-renderer', this.get('$el')).offset();
+		var x = mouseX - offset.left;
+		var y = mouseY - offset.top;
+		instanceVarObj.mouse2D.x = perc*(x-this.w/2);
+		instanceVarObj.mouse2D.y = perc*(-y+this.h/2);
+		console.log(instanceVarObj.mouse2D.x, instanceVarObj.mouse2D.y);
 	},
 	
 	onDocumentMouseDown: function ( event ) {
@@ -431,6 +433,8 @@ App.World3dView = App.SmartView.extend({
 		}
 		
 		with (instanceVarObj) {
+			cursor3D.position.x = mouse2D.x;
+			cursor3D.position.y = mouse2D.y;
 			var rayTouches,
 				touched,
 				pixelGroup;
@@ -440,9 +444,14 @@ App.World3dView = App.SmartView.extend({
 				
 				pixelGroup = pixelObjectList[i]; 
 				rayTouches = ray.intersectObjects( pixelGroup.group.children, true )
+				if (rayTouches.length > 0) console.log('checking touched ');
 				if ( touched = this.testIsIgnored( rayTouches ) ) {
 					if ( i == 0) { cursor3D.position = this.setVoxelPosition(instanceVarObj, touched ); }
 					pixelGroup.show(touched);
+				} else {
+					if ( i == 0) {
+						console.log('didnt touch');
+					}
 				}
 				
 

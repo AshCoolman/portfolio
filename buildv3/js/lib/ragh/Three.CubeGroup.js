@@ -16,6 +16,7 @@ var CubeGroup = function () {
 	this.SIZE = 30;
 	this.materialsDict = {};
 	this.group = null;
+	this.highlightCol = new THREE.MeshLambertMaterial( { color: 0xFF6347, opacity: 0.25, transparent: true} );
 }
 
 CubeGroup.prototype = {
@@ -39,6 +40,7 @@ CubeGroup.prototype = {
 		
 		var v0 = this.getFacePoint(intersector, this.SIZE);
 		this.rollOverMesh.position.copy(v0);
+		console.log('touched', this);
 		
 	},
 	
@@ -168,6 +170,10 @@ CubeGroup.prototype = {
 			}
 		}
 		return mesh;
+	},
+	
+	doRollOver: function () {
+		
 	},
 	
 	getMap: function () {
