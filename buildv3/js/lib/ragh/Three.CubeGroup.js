@@ -115,7 +115,8 @@ CubeGroup.prototype = {
 		
 		group.position.set(0, 0, 0);
 		group.updateMatrix();
-		group.add( this.rollOverMesh = this.createRollOver() );
+		this.rollOverMesh = this.createRollOver()
+		//group.add( this.rollOverMesh );
 		this.group = group;
 		/*
 		this.map = map;

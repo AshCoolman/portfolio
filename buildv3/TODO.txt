@@ -1,18 +1,8 @@
 HIGH PRIORITY
-
-		
-2d
-
-		
-	Timing of Mosaic 
-		takes too long to appear
-	
-World3d Click and drag on question mark itself does not work.
-
-Cross platform
-hints
 Remove 3d debug squares
-Check phone number is ringable on iphone/skype?
+World3d Click and drag on question mark itself does not work.
+hints
+Cross platform
 
 Copy
 	Timing of 2d Question Mark
@@ -20,6 +10,7 @@ Copy
 		Coggify
 
 MEDIUM
+Check phone number is ringable on iphone/skype?
 //TODO THIS IS SO YUK: see CoggedPixelController.view_didInsertElement()
 Refactor Word3d
 	Better functional grouping of cod
