@@ -396,9 +396,9 @@ App.SubtitleController = App.SmartController.extend({
 		
 		for (var l = 0; l < taggedLines.length; l++) {
 			if (l == taggedLines.length-1) {
-				taggedLines[l] = this.tagStart + taggedLines[l] +'<i>'+currentEditPrinted+'</i>'+ this.tagCursor + this.tagEnd;
+				taggedLines[l] = this.tagStart + taggedLines[l] +' '+'<i>'+currentEditPrinted+'</i>'+ this.tagCursor + this.tagEnd;
 			} else {
-				taggedLines[l] = this.tagStart + taggedLines[l] + this.tagEnd;
+				taggedLines[l] = this.tagStart + taggedLines[l] +' '+ this.tagEnd;
 			}
 		}
 		

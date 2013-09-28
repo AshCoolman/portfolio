@@ -160,7 +160,6 @@ html, body {
   display: inline; }
 
 .subtitle-text-holder {
-  white-space: break-word;
   margin-bottom: 1.5em;
   pointer-events: none;
   zoom: 1;
