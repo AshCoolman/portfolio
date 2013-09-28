@@ -1,14 +1,14 @@
 /*
 http://jsfiddle.net/VAXrL/190/
 */
-/*
-.top-bar {
-	font-family: 'Lato', sans-serif;
-}*/
+* {
+  font-family: 'Ubuntu', sans-serif; }
+
 .top-bar {
   z-index: 1000;
-  background: rgba(200, 200, 200, 0.15);
-  border-bottom: dashed 1px #cccccc; }
+  background: rgba(200, 200, 200, 0.25);
+  border-bottom: dashed 1px #cccccc;
+  padding-left: 1em; }
 
 .top-bar-section li a:not(.button) {
   background: transparent; }
@@ -22,6 +22,13 @@ http://jsfiddle.net/VAXrL/190/
 .top-bar-section > ul > .divider {
   border-right: dashed 0px #cccccc;
   border-left: dashed 1px #cccccc; }
+
+.top-bar.expanded {
+  background: rgba(200, 200, 200, 0.15); }
+
+.top-bar-section .divider, .top-bar-section [role="separator"] {
+  border-bottom: dashed 1px #cccccc;
+  border-top: dashed 1px #cccccc; }
 
 button {
   z-index: 1000; }
@@ -153,6 +160,7 @@ html, body {
   display: inline; }
 
 .subtitle-text-holder {
+  white-space: break-word;
   margin-bottom: 1.5em;
   pointer-events: none;
   zoom: 1;
@@ -182,7 +190,7 @@ html, body {
   .subtitle-text-holder span {
     margin: 0px;
     padding: 0px;
-    display: inline-block;
+    display: inline-table;
     background-color: white;
     line-height: 1.6em;
     border-right-width: 0.5em;
@@ -211,6 +219,7 @@ html, body {
     .subtitle-text-holder a p span:visited {
       color: crimson; }
   .subtitle-text-holder p {
+    font-weight: inherit;
     border-left-width: 0.5em;
     border-left-color: white;
     border-left-style: solid; }

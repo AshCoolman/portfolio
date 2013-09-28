@@ -48,15 +48,16 @@ $default-legacy-ie: 7 8 9 10 11 !default;
         @content;
     }
 }
-/*
-.top-bar {
-	font-family: 'Lato', sans-serif;
-}*/
+
+* {
+	font-family: 'Ubuntu', sans-serif;
+}
 
 .top-bar {
 	z-index: $zIndexButton;
-	background: rgba(200,200,200,0.15);
+	background: rgba(200,200,200,0.25);
 	border-bottom: dashed 1px #cccccc;
+	padding-left:1em;
 } 
 .top-bar-section li a:not(.button) {
 	background:transparent;
@@ -73,6 +74,14 @@ $default-legacy-ie: 7 8 9 10 11 !default;
 .top-bar-section > ul > .divider {
 border-right: dashed 0px #cccccc;
 border-left: dashed 1px #cccccc;
+}
+
+.top-bar.expanded  {
+background: rgba(200,200,200,0.15);
+}
+.top-bar-section .divider, .top-bar-section [role="separator"] {
+	border-bottom: dashed 1px #cccccc;
+	border-top: dashed 1px #cccccc;
 }
 
 button {
@@ -234,6 +243,7 @@ html,body {
 }
 
 .subtitle-text-holder {
+	white-space: break-word;
 	margin-bottom:1.5em;
 	pointer-events:none;
 	zoom: 1;
@@ -263,7 +273,7 @@ html,body {
 	span {
 		margin: 0px;
 		padding: 0px;
-		display:inline-block;
+		display:inline-table;
 		background-color: $subtitleBackGroundColor;
 		line-height:1.6em;
 		border-right-width: 0.5em;
@@ -294,6 +304,7 @@ html,body {
 	}
 	p {
 		
+		font-weight: inherit;
 		border-left-width: 0.5em;
 		border-left-color: $subtitleBackGroundColor;
 		border-left-style: solid;

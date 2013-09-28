@@ -5,7 +5,7 @@
 $IS_DEPLOY = false;
 ?>
 <head>
-	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
 	<title>Ashley Coleman</title>
@@ -52,7 +52,7 @@ $IS_DEPLOY = false;
 
 <?php
 $indexCopyA = '@=<h3>
-Ashley Coleman: The Origin
+The Origin: Ashley Coleman
 @=</h3>
 To teach you about myself, I start with my name.
 My name is an origin, from which I can illustrate the different dimensions that make me up.
@@ -262,7 +262,7 @@ And knowing that somewhere there is a solution...
 		<script type="text/x-handlebars" data-template-name="nav-list">
 			<nav class="top-bar">
 				<ul class="title-area">
-					<li class="name"> <h1><a href="#">Ashley Coleman</a></h1> </li>
+					<li class="name"> <h1><a href="#"><i class="icon-circle-blank"></i></a></h1> </li>
 			    	<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
 				</ul>
 			
