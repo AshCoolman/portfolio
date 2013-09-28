@@ -1,9 +1,11 @@
 HIGH PRIORITY
-Cross platform
-	Safari
-		Mosaic smoothed
-		Spazzes on responsive resize
 
+UX
+	Timed hints - move mouse to explore
+	Subtitle
+		only stop writing if link?
+		Read whole html tag as a letter
+	
 Copy
 	2d
 		Timing of 2d Question Mark
@@ -15,17 +17,17 @@ Copy
 	UI
 		More informative "Click to finish" icon/copy
 		
-Timed hints - move mouse to explore
-
 
 Subtitle
 	grab text from its dom element (SEO, no-js etc)
-	Crosses should better sympathise with text they close
-	only stop writing if link?
 
 CSS Sprites?
 MEDIUM
 
+Cross platform
+	Safari
+		Spazzes on responsive resize
+		
 Copy
 	World2d
 		"I induce change" = game where you draw smile on face
