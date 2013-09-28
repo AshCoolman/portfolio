@@ -39,8 +39,8 @@ App.World2dView = App.ActiveEslStageView.extend({
 			}
 			
 			src.$canvas.css({display:'none'});
-			min.$canvas.css({display:'block'});
-			pix.$canvas.css({display:'none'}); 
+			min.$canvas.css({display:'none'});
+			pix.$canvas.css({display:'block'}); 
 			
 		}
 		var multiData = this.get('multiData');
@@ -106,21 +106,32 @@ App.World2dView = App.ActiveEslStageView.extend({
 							pix.$canvas.css({display:'none'});
 							
 						}
-						with (pix) {
-							$canvas.attr({width: width, height: height});
-							context.webkitImageSmoothingEnabled = context.mozImageSmoothingEnabled = context.imageSmoothingEnabled = false;
-							//context.clearRect(0, 0, width, height)
-							context.setTransform(multi,0,0,multi,0,0);
-							//context.fillStyle = context.createPattern(min.$canvas[0], 'repeat');
-							//context.fillRect(0, 0, width, height);
-							context.drawImage(min.canvas, 0,0);
 						
-							//min.context.clearRect(0, 0, width, height);
+						//Todo better
+						var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+						var is_explorer = navigator.userAgent.indexOf('MSIE') > -1;
+						var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
+						var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+						var is_Opera = navigator.userAgent.indexOf("Presto") > -1;
+						if ((is_chrome)&&(is_safari)) {is_safari=false;}
+						
+						if (!is_safari ){
+							with (pix) {
+								$canvas.attr({width: width, height: height});
+								context.webkitImageSmoothingEnabled = context.mozImageSmoothingEnabled = context.imageSmoothingEnabled = false;
+								//context.clearRect(0, 0, width, height)
+								context.setTransform(multi,0,0,multi,0,0);
+								//context.fillStyle = context.createPattern(min.$canvas[0], 'repeat');
+								//context.fillRect(0, 0, width, height);
+								context.drawImage(min.canvas, 0,0);
+						
+								//min.context.clearRect(0, 0, width, height);
 							
 							
-							src.$canvas.css({display:'none'});
-							min.$canvas.css({display:'none'});
-							pix.$canvas.css({display:'block'});
+								src.$canvas.css({display:'none'});
+								min.$canvas.css({display:'none'});
+								pix.$canvas.css({display:'block'});
+							}
 						}
 						/*
 						*/
