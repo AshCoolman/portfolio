@@ -1,10 +1,22 @@
 HIGH PRIORITY
 Cross platform
+	Safari
+		Mosaic smoothed
+		No ruler
+		Spazzes on responsive resize
 
 Copy
-	Timing of 2d Question Mark
+	2d
+		Timing of 2d Question Mark
 		Appear
 		Coggify
+	3d
+		Timing on rotation hint and colour
+
+	UI
+		More informative "Click to finish" icon/copy
+		
+Timed hints - move mouse to explore
 
 
 Subtitle
@@ -12,7 +24,21 @@ Subtitle
 	Crosses should better sympathise with text they close
 	only stop writing if link?
 
+CSS Sprites?
 MEDIUM
+
+Copy
+	World2d
+		"I induce change" = game where you draw smile on face
+Copy
+	World3d
+		ie the big idea = pixels should reform into a light globe
+		Game could be something to do with linking coloured blocks
+			Coloured blocks could grow if you can align it somehow
+				Save (more the better) then shoot them at enemy when you get a bomb, but more can be destroyed.
+			
+				
+		
 Check phone number is ringable on iphone/skype?
 //TODO THIS IS SO YUK: see CoggedPixelController.view_didInsertElement()
 Refactor Word3d
