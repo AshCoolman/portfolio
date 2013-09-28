@@ -2,7 +2,6 @@ HIGH PRIORITY
 Cross platform
 	Safari
 		Mosaic smoothed
-		No ruler
 		Spazzes on responsive resize
 
 Copy
