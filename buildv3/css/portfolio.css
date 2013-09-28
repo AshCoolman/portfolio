@@ -139,7 +139,7 @@ html, body {
     .subtitle-text-holder a:hover {
       color: crimson; }
     .subtitle-text-holder a:visited {
-      color: brown; }
+      color: crimson; }
   .subtitle-text-holder .heading, .subtitle-text-holder p, .subtitle-text-holder li, .subtitle-text-holder ul {
     margin: 0px;
     padding: 0px;
@@ -182,7 +182,7 @@ html, body {
     .subtitle-text-holder a p span:hover {
       color: crimson; }
     .subtitle-text-holder a p span:visited {
-      color: brown; }
+      color: crimson; }
   .subtitle-text-holder p {
     border-left-width: 0.5em;
     border-left-color: white;
@@ -228,7 +228,7 @@ a {
   a:hover {
     color: crimson; }
   a:visited {
-    color: brown; }
+    color: crimson; }
 
 .relative-positioned {
   position: relative; }

@@ -64,10 +64,12 @@ $indexCopyA = addcslashes($indexCopyA, '"');
 $indexCopyC = '@=<h3>
 Contact Details
 @=</h3>
-writetofish+portfolio@gmail.com
-(+44) 77 5298 3159
-London
-United Kingdom
+<address>
+<i class="icon-envelope"></i> writetofish+cv<i>@</i>gmail.com
+<i class="icon-phone"></i> (+44) 77 5298 3159
+<i class="icon-twitter"></i> <a href="https://twitter.com/AshCoolman" target="_blank">@AshCoolman</a>
+<i class="icon-home"></i> London, United Kingdom (formally Australia)
+</address>
 @actionOnRead=doSecondSubtitle
 @actionOnRead=doThirdSubtitle 2000';
 $indexCopyC = addcslashes($indexCopyC, '"');

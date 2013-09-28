@@ -7,6 +7,8 @@ Copy
 		Appear
 		Coggify
 
+ARGH! Subtitle Controller should just grab text from its own element...For gods sakes...UGHHHH. SEO, no-js etc
+
 MEDIUM
 Check phone number is ringable on iphone/skype?
 //TODO THIS IS SO YUK: see CoggedPixelController.view_didInsertElement()
