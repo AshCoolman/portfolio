@@ -142,7 +142,7 @@ App.World3dView = App.SmartView.extend({
 			scene.add( directionalLight );
 			//console.log('scene\n\n', scene, $(renderer.domElement).attr('width', '1200'));
 			// +Cursor
-			cursor3D = new THREE.Object3D();//new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial());
+			cursor3D = new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial());
 			cursor3D.overdraw = true;
 			ignoreList.push(cursor3D);
 			scene.add(cursor3D);
@@ -460,8 +460,8 @@ App.World3dView = App.SmartView.extend({
 			//to a Raycaster that can be used for picking.
 			// NDC range from [-1..1] in x (left to right) and [1.0 .. -1.0] in y (top to bottom).
 			var amouse2D = mouse2D.clone();
-			amouse2D.x = 2*amouse2D.x/this.w;
-			amouse2D.y = 2*amouse2D.y/this.h;
+			amouse2D.x = 2*amouse2D.x/App.BREAKPOINT.WIDTH_2;
+			amouse2D.y = 2*amouse2D.y/App.BREAKPOINT.HEIGHT_2;
 			ray = pickProjector.pickingRay( amouse2D.clone(), camera );
 			var isAtLeastOneHover = false;
 			for (var i in pixelObjectList) {
