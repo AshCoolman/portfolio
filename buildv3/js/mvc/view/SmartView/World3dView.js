@@ -68,7 +68,12 @@ App.World3dView = App.SmartView.extend({
 			pixelObjectList = instanceVarObj.pixelObjectList,
 			camera = instanceVarObj.camera,
 			tweened = pixelObjectList[this.QUESTION_MARK].group.rotation;
-			createjs.Tween.get(tweened).to({y:Math.PI* 0.125}, 600);
+			createjs.Tween.get(tweened).to({y:Math.PI* 0.125}, 600).call(function (me, questionMark) {
+				return function () {
+					console.log('questionMark', questionMark);
+					questionMark.setInteractive(true);
+				}
+			}(this, pixelObjectList[this.QUESTION_MARK]));
 			
 		}
 	}.observes('controller.isQuestionMarkRotatingHint'),
@@ -137,9 +142,9 @@ App.World3dView = App.SmartView.extend({
 			scene.add( directionalLight );
 			//console.log('scene\n\n', scene, $(renderer.domElement).attr('width', '1200'));
 			// +Cursor
-			cursor3D = new THREE.Object3D();
-			cursor3D.add( new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial()));
+			cursor3D = new THREE.Object3D();//new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial());
 			cursor3D.overdraw = true;
+			ignoreList.push(cursor3D);
 			scene.add(cursor3D);
 
 			mouse2D = new THREE.Vector3( 0, 10000, 0.5 );
@@ -191,6 +196,15 @@ App.World3dView = App.SmartView.extend({
 		this.set('$bg2dto3dQuestionMarkBg', $('.bg-question-mark', this.get('$canvasHeroHolder')));
 		this.resize();
 		
+		
+		$('.world-3d-renderer', this.get('$el')).mouseleave( function(me) {
+			return function (e) {
+				var pixels = me.get('instanceVarObj').pixelObjectList;
+				for (var p = 0; p < pixels.length; p++ ) {
+					pixels[p].hoverOff();
+				}
+			}
+		}(this));
 	},
 	
 	tryCreateRenderStats: function () {
@@ -310,7 +324,8 @@ App.World3dView = App.SmartView.extend({
 		var y = mouseY - offset.top;
 		instanceVarObj.mouse2D.x = perc*(x-this.w/2);
 		instanceVarObj.mouse2D.y = perc*(-y+this.h/2);
-		console.log(instanceVarObj.mouse2D.x, instanceVarObj.mouse2D.y);
+		
+		//console.log(instanceVarObj.mouse2D.x, instanceVarObj.mouse2D.y);
 	},
 	
 	onDocumentMouseDown: function ( event ) {
@@ -439,16 +454,23 @@ App.World3dView = App.SmartView.extend({
 				touched,
 				pixelGroup;
 
-			ray = pickProjector.pickingRay( mouse2D.clone(), camera );
+			//Translates a 2D point from NDC (Normalized Device Coordinates) 
+			//to a Raycaster that can be used for picking.
+			// NDC range from [-1..1] in x (left to right) and [1.0 .. -1.0] in y (top to bottom).
+			var amouse2D = mouse2D.clone();
+			amouse2D.x = 2*amouse2D.x/this.w;
+			amouse2D.y = 2*amouse2D.y/this.h;
+			ray = pickProjector.pickingRay( amouse2D.clone(), camera );
 			for (var i in pixelObjectList) {
 				
 				pixelGroup = pixelObjectList[i]; 
-				rayTouches = ray.intersectObjects( pixelGroup.group.children, true )
-				if (rayTouches.length > 0) console.log('checking touched ');
+				rayTouches = ray.intersectObjects( pixelGroup.group.children, true, [] )
 				if ( touched = this.testIsIgnored( rayTouches ) ) {
-					if ( i == 0) { cursor3D.position = this.setVoxelPosition(instanceVarObj, touched ); }
+					//if ( i == 0) { cursor3D.position = this.setVoxelPosition(instanceVarObj, touched ); }
 					pixelGroup.show(touched);
+					pixelGroup.hoverOn();
 				} else {
+					pixelGroup.hoverOff();
 					if ( i == 0) {
 						console.log('didnt touch');
 					}

@@ -16,7 +16,11 @@ var CubeGroup = function () {
 	this.SIZE = 30;
 	this.materialsDict = {};
 	this.group = null;
-	this.highlightCol = new THREE.MeshLambertMaterial( { color: 0xFF6347, opacity: 0.25, transparent: true} );
+	this.isHover = false;
+	this._isInteractive = false;
+	this.hoverMat = new THREE.MeshLambertMaterial( { color: 0xDC143C} ); //, opacity: 0.25, transparent: true
+	this.linkMat = new THREE.MeshLambertMaterial( { color: 0xFF6347} ); //, opacity: 0.25, transparent: true
+	this.map = [];
 }
 
 CubeGroup.prototype = {
@@ -24,15 +28,38 @@ CubeGroup.prototype = {
 		this.group = this.createFromMap(aplan.imgMap);
 		this.group.position.x = aplan['x'] || 0;
 		this.group.position.y = aplan['y'] || 0;
+		this.setInteractive(aplan['isInteractive']);
 		this.label = aplan.label;
+		this.hoverOff();
 	},
 
+	setInteractive: function (val) {
+		val = val || false;
+		if (val && !this._isInteractive) {
+			this._isInteractive = val;
+			this.withEveryPixel(function (me) {
+				return function (pixel) {
+					pixel.object.material = me.linkMat;
+				} 
+			}(this));
+		} else if (!val && this._isInteractive) {
+			this._isInteractive = val;
+			this.withEveryPixel(function (me) {
+				return function (pixel) {
+					pixel.object.material = pixel.material;
+				} 
+			}(this));
+		}
+	},
+	
+	
+	
 	tryAddHere: function (intersector) {
 		/***
 		var v0 = this.getFacePoint(intersector, this.SIZE);
 		this.rollOverMesh.position.copy(v0);
 		this.createCube(this.SIZE, v0.x, v0.y, v0.z, {}, this.materialsDict, this.group, this.geo, this.materials, this.isMerge );
-		this.getMap();
+		
 		*/
 	},
 
@@ -40,8 +67,56 @@ CubeGroup.prototype = {
 		
 		var v0 = this.getFacePoint(intersector, this.SIZE);
 		this.rollOverMesh.position.copy(v0);
-		console.log('touched', this);
+//		console.log('touched', this.group.children[0]);
 		
+		
+	},
+	
+	hoverOn: function () {
+		if (!this.isHover && this._isInteractive) {
+			this.withEveryPixel(function (me) {
+				return function (pixel) {
+					pixel.object.material = me.hoverMat;
+					//pixel.object.rotation.z = Math.PI * .25;
+				} 
+			}(this));
+			this.isHover = true;
+		}
+
+	},
+	
+	hoverOff: function () {
+		if (this.isHover) {
+			this.withEveryPixel(function (me) {
+				return function (pixel) {
+					pixel.object.material = (me._isInteractive) ? me.linkMat : pixel.material;
+				} 
+			}(this));
+			this.isHover = false;
+		}
+		
+	},
+	
+	withEveryPixel: function (afunc) {
+		var map = this.map;
+		//console.log(this.map);
+		for (var xs = 0; xs < map.length; xs++) {
+			if (!map[xs]) map[xs] = []
+			for (var ys = 0; ys < map[xs].length; ys++) {
+				if (!map[xs][ys]) map[xs][ys] = []
+				for (var zs = 0; zs < map[xs][ys].length; zs++) {
+					if (map[xs][ys][zs]) {
+						setTimeout(function (me, amap, axs, ays, azs) {
+							return function () {
+								afunc(amap[axs][ays][azs], amap, axs, ays, azs );
+							}
+						}(this, map, xs, ys, zs),
+						30 * ys/*map[xs][ys][zs].childrenIndex*/);
+						
+					}
+				}
+			}
+		}
 	},
 	
 	getFacePoint: function ( intersector, size) {
@@ -169,6 +244,7 @@ CubeGroup.prototype = {
 				amaterials.push( color);
 			}
 		}
+		this.map = this.getMap(agroup);
 		return mesh;
 	},
 	
@@ -176,21 +252,22 @@ CubeGroup.prototype = {
 		
 	},
 	
-	getMap: function () {
+	getMap: function (agroup) {
 		var amap = [[[]]],
 			cube,
-			group = this.group,
+			group = agroup,
 			x, y, z;
-		for (var c = 0; c < group.children.length; c++, cube = group.children[c-1] ) {
+		for (var c = 0; c <= group.children.length; c++, cube = group.children[c-1] ) {
 			if (cube && cube != this.rollOverMesh) {	
 				x = Math.round( cube.position.x / this.SIZE);
-				y = Math.round( cube.position.y / this.SIZE);
+				y = -Math.round( cube.position.y / this.SIZE);
 				z = Math.round( cube.position.z / this.SIZE);
 				if (!amap[x]) amap[x]=[];
 				if (!amap[x][y]) amap[x][y]=[];
-				amap[x][y][z] = {name: c};
+				amap[x][y][z] = {childrenIndex: c, object:cube, material: cube.material};
 			}
 		}
+		return amap;
 		//console.log('EXPORT\n', JSON.stringify(amap));
 	},
 	cleanUp: function() {
