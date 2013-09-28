@@ -5,6 +5,7 @@
 $IS_DEPLOY = false;
 ?>
 <head>
+	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
 	<title>Ashley Coleman</title>
@@ -61,15 +62,13 @@ $indexCopyA = addcslashes($indexCopyA, '"');
 ?>
 
 <?php
-$indexCopyC = '@=<h3>
-Contact Details
-@=</h3>
-<address>
+$indexCopyC = '<h3>Contact Details</h3>
+@=<address>
 <i class="icon-envelope"></i> writetofish+cv<i>@</i>gmail.com
 <i class="icon-phone"></i> (+44) 77 5298 3159
 <i class="icon-twitter"></i> <a href="https://twitter.com/AshCoolman" target="_blank">@AshCoolman</a>
 <i class="icon-home"></i> London, United Kingdom (formally Australia)
-</address>
+@=</address>
 @actionOnRead=doSecondSubtitle
 @actionOnRead=doThirdSubtitle 2000';
 $indexCopyC = addcslashes($indexCopyC, '"');
@@ -393,6 +392,7 @@ And knowing that somewhere there is a solution...
 					<a {{action getLinkEvent}}>
 				{{/if}}
 				<div class="text"></div>
+				
 				{{#if isLink}}
 					</a>
 				{{/if}}

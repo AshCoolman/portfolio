@@ -1,15 +1,27 @@
 /*
 http://jsfiddle.net/VAXrL/190/
 */
+/*
+.top-bar {
+	font-family: 'Lato', sans-serif;
+}*/
 .top-bar {
   z-index: 1000;
-  background: #333333; }
+  background: rgba(200, 200, 200, 0.15);
+  border-bottom: dashed 1px #cccccc; }
 
 .top-bar-section li a:not(.button) {
-  background: #333333; }
+  background: transparent; }
+
+.top-bar-section ul {
+  background: transparent; }
 
 .top-bar.expanded .title-area {
-  background: #333333; }
+  background: transparent; }
+
+.top-bar-section > ul > .divider {
+  border-right: dashed 0px #cccccc;
+  border-left: dashed 1px #cccccc; }
 
 button {
   z-index: 1000; }
@@ -57,9 +69,9 @@ html, body {
   bottom: 0;
   background-position: left bottom;
   background-color: #a6a6a6;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #a6a6a6), color-stop(1px, #a6a6a6), color-stop(1px, transparent), color-stop(5px, transparent), color-stop(5px, #a6a6a6));
-  background-image: -webkit-linear-gradient(-360deg, #a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 5px, #a6a6a6 5px);
-  background-image: linear-gradient(90deg,#a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 5px, #a6a6a6 5px);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #a6a6a6), color-stop(1px, #a6a6a6), color-stop(1px, transparent), color-stop(4px, transparent));
+  background-image: -webkit-linear-gradient(-360deg, #a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 4px);
+  background-image: linear-gradient(90deg,#a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 4px);
   background-color: transparent !important;
   background-repeat: repeat-x; }
 

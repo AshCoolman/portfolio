@@ -49,7 +49,7 @@ App.SubtitleController = App.SmartController.extend({
 	tagStart:'<p><span>',
 	tagMid: '</span></p><p><span>',
 	tagEnd: '</span></p>',
-	tagCursor:'<img src="img/cursor.gif"/>',
+	tagCursor:'<i class="icon-italic></i>',//'"''<img src="img/cursor.gif"/>',
 	isForceFinish:false,
 	isCursor: true,
 	isLooping:false,
@@ -466,7 +466,7 @@ App.SubtitleController = App.SmartController.extend({
 						//console.log('>>', dur , last, dur+last)
 						dur += (last ? time - last : 0);		
 					me.set('lastRequestAnimationFrame', time);
-					if (!me.get('isHover')) { 
+					if (!me.get('isHover') || !me.get('isFreezeOnHover')) { 
 						dur = me.reDraw(dur, me); // stage.update() does not work... todo high 
 					} else {
 						dur = 0;

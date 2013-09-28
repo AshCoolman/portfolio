@@ -48,20 +48,32 @@ $default-legacy-ie: 7 8 9 10 11 !default;
         @content;
     }
 }
-	
+/*
+.top-bar {
+	font-family: 'Lato', sans-serif;
+}*/
+
 .top-bar {
 	z-index: $zIndexButton;
-	background:#333333;
+	background: rgba(200,200,200,0.15);
+	border-bottom: dashed 1px #cccccc;
 } 
 .top-bar-section li a:not(.button) {
-	background:#333333;
+	background:transparent;
 }
 
+.top-bar-section ul {
+	background:transparent;
+}
 
 .top-bar.expanded .title-area {
-	background: #333333;
+	background: transparent;
 }
 
+.top-bar-section > ul > .divider {
+border-right: dashed 0px #cccccc;
+border-left: dashed 1px #cccccc;
+}
 
 button {
 	z-index: $zIndexButton;
@@ -110,15 +122,15 @@ html,body {
 
 .x-ruler-minor {
 	left:$rulerSize;
-	background-size: 5px $rulerSize/2;
+	background-size:5px $rulerSize/2;
 	bottom:0;
 	background-position: left bottom;
 	@include linear-gradient(90deg, 
 						$col_bg_lit 0px, 
 						$col_bg_lit 1px, 
 						transparent 1px,
-						transparent 5px,
-						$col_bg_lit 5px
+						transparent 4px
+						
 			);
 	background-color: transparent !important;
 	background-repeat: repeat-x;
