@@ -142,7 +142,7 @@ App.World3dView = App.SmartView.extend({
 			scene.add( directionalLight );
 			//console.log('scene\n\n', scene, $(renderer.domElement).attr('width', '1200'));
 			// +Cursor
-			cursor3D = new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial());
+			cursor3D = new THREE.Object3D();//new THREE.Mesh(new THREE.SphereGeometry(15, 10, 10), new THREE.MeshNormalMaterial());
 			cursor3D.overdraw = true;
 			ignoreList.push(cursor3D);
 			scene.add(cursor3D);
