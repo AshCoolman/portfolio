@@ -201,8 +201,9 @@ App.World3dView = App.SmartView.extend({
 			return function (e) {
 				var pixels = me.get('instanceVarObj').pixelObjectList;
 				for (var p = 0; p < pixels.length; p++ ) {
-					pixels[p].hoverOff();
-					$canvas.removeClass('interactive');
+					if (pixels[p].hoverOff()) {
+						$canvas.removeClass('interactive');
+					}
 				}
 			}
 		}(this));
@@ -462,6 +463,7 @@ App.World3dView = App.SmartView.extend({
 			amouse2D.x = 2*amouse2D.x/this.w;
 			amouse2D.y = 2*amouse2D.y/this.h;
 			ray = pickProjector.pickingRay( amouse2D.clone(), camera );
+			var isAtLeastOneHover = false;
 			for (var i in pixelObjectList) {
 				
 				pixelGroup = pixelObjectList[i]; 
@@ -469,18 +471,19 @@ App.World3dView = App.SmartView.extend({
 				if ( touched = this.testIsIgnored( rayTouches ) ) {
 					//if ( i == 0) { cursor3D.position = this.setVoxelPosition(instanceVarObj, touched ); }
 					pixelGroup.show(touched);
-					if (pixelGroup.hoverOn()) {
-						this.get('$el').addClass('interactive');
-					}
+					pixelGroup.hoverOn();
+					isAtLeastOneHover = pixelGroup.getInteractive();
 				} else {
 					pixelGroup.hoverOff();
-					this.get('$el').removeClass('interactive');
 					if ( i == 0) {
 						console.log('didnt touch');
 					}
 				}
-				
-
+			} 
+			if (isAtLeastOneHover && !this.get('$el').hasClass('interactive')) {
+				this.get('$el').addClass('interactive');
+			} else if (!isAtLeastOneHover && this.get('$el').hasClass('interactive')) {
+				this.get('$el').removeClass('interactive');
 			}
 			renderer.render( scene, camera );
 			if (isControls) { controls.update(); }

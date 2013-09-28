@@ -32,7 +32,10 @@ CubeGroup.prototype = {
 		this.label = aplan.label;
 		this.hoverOff();
 	},
-
+	getInteractive: function (val) {
+		return this._isInteractive;
+	},
+	
 	setInteractive: function (val) {
 		val = val || false;
 		if (val && !this._isInteractive) {
@@ -73,6 +76,7 @@ CubeGroup.prototype = {
 	},
 	
 	hoverOn: function () {
+		var isChanged = false;
 		if (!this.isHover && this._isInteractive) {
 			this.withEveryPixel(function (me) {
 				return function (pixel) {
@@ -81,11 +85,13 @@ CubeGroup.prototype = {
 				} 
 			}(this));
 			this.isHover = true;
+			isChanged = true;
 		}
-
+		return isChanged;
 	},
 	
 	hoverOff: function () {
+		var isChanged = false;
 		if (this.isHover) {
 			this.withEveryPixel(function (me) {
 				return function (pixel) {
@@ -93,8 +99,9 @@ CubeGroup.prototype = {
 				} 
 			}(this));
 			this.isHover = false;
+			isChanged = true;
 		}
-		
+		return isChanged;
 	},
 	
 	withEveryPixel: function (afunc) {
