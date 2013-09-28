@@ -65,7 +65,7 @@ $indexCopyC = '@=<h3>
 Contact Details
 @=</h3>
 writetofish+portfolio@gmail.com
-(+61) 77 5298 3159
+(+44) 77 5298 3159
 London
 United Kingdom
 @actionOnRead=doSecondSubtitle

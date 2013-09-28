@@ -1,8 +1,6 @@
 HIGH PRIORITY
-
-hints
-	PixelGroups change color
 Cross platform
+Subtitle only stop writing if link?
 
 Copy
 	Timing of 2d Question Mark
