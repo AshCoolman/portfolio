@@ -342,6 +342,40 @@ $subtitleBackGroundInstantColor:#666666;
 }
 
 
+$subtitleInstructionCol:#37362a;
+$subtitleBackGroundInstructionColor: #eeec34;
+
+.subtitle .subtitle-text-holder-instruction {
+	color:$subtitleInstructionCol;
+}
+
+.subtitle-text-holder-instruction {
+	a {
+		
+	}
+	.heading, p, li, ul {
+		@include legacy-ie {
+			background-color: $subtitleBackGroundInstructionColor; /* More background colour for browsers that don't support css pointer-events */
+	    }
+	}
+	span {
+		background-color: $subtitleBackGroundInstructionColor;
+		border-left-color: $subtitleBackGroundInstructionColor;
+		border-right-color: $subtitleBackGroundInstructionColor;
+		cursor: text;
+	}
+	li {
+		border-left-color: $subtitleBackGroundInstructionColor;
+	}
+	.indent {
+		border-left-color: $subtitleBackGroundInstructionColor;
+	}
+		p {
+			border-left-color: $subtitleBackGroundInstructionColor;
+		}
+}
+
+
 .remove-button-holder {
 	position: absolute;
 	left: -0.1em;

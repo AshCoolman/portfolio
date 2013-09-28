@@ -241,6 +241,24 @@ html, body {
 .subtitle-text-holder-instant p {
   border-left-color: #666666; }
 
+.subtitle .subtitle-text-holder-instruction {
+  color: #37362a; }
+
+.ie7 .subtitle-text-holder-instruction .heading, .ie8 .subtitle-text-holder-instruction .heading, .ie9 .subtitle-text-holder-instruction .heading, .ie10 .subtitle-text-holder-instruction .heading, .ie11 .subtitle-text-holder-instruction .heading, .ie7 .subtitle-text-holder-instruction p, .ie8 .subtitle-text-holder-instruction p, .ie9 .subtitle-text-holder-instruction p, .ie10 .subtitle-text-holder-instruction p, .ie11 .subtitle-text-holder-instruction p, .ie7 .subtitle-text-holder-instruction li, .ie8 .subtitle-text-holder-instruction li, .ie9 .subtitle-text-holder-instruction li, .ie10 .subtitle-text-holder-instruction li, .ie11 .subtitle-text-holder-instruction li, .ie7 .subtitle-text-holder-instruction ul, .ie8 .subtitle-text-holder-instruction ul, .ie9 .subtitle-text-holder-instruction ul, .ie10 .subtitle-text-holder-instruction ul, .ie11 .subtitle-text-holder-instruction ul {
+  background-color: #eeec34;
+  /* More background colour for browsers that don't support css pointer-events */ }
+.subtitle-text-holder-instruction span {
+  background-color: #eeec34;
+  border-left-color: #eeec34;
+  border-right-color: #eeec34;
+  cursor: text; }
+.subtitle-text-holder-instruction li {
+  border-left-color: #eeec34; }
+.subtitle-text-holder-instruction .indent {
+  border-left-color: #eeec34; }
+.subtitle-text-holder-instruction p {
+  border-left-color: #eeec34; }
+
 .remove-button-holder {
   position: absolute;
   left: -0.1em;

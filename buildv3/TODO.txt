@@ -21,6 +21,10 @@ Copy
 Subtitle
 	grab text from its dom element (SEO, no-js etc)
 
+
+Animate Ruler
+	http://www.impressivewebs.com/animating-css3-gradients/
+
 CSS Sprites?
 MEDIUM
 

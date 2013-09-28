@@ -14,6 +14,7 @@ App.Dimension1Route = App.SmartRoute.extend({
 				switch (alabel) {
 					case 'SubtitleController': 
 						switch (acontroller.get('orderRead')) {
+							case '0': this.subtitleController0 = acontroller; break;
 							case '1': this.subtitleController1 = acontroller; break;
 							case '2': this.subtitleController2 = acontroller; break;
 							case '3': this.subtitleController3 = acontroller; break;
@@ -45,6 +46,7 @@ App.Dimension1Route = App.SmartRoute.extend({
 		App.eventMapper.removeEventListener('dim1Nav_start', this);
 		App.eventMapper.removeEventListener('dim1Nav_end', this);
 		App.eventMapper.removeEventListener('sub_finishedReading', this);
+		this.subtitleController0 = null;
 		this.subtitleController1 = null;
 		this.subtitleController2 = null;
 		this.subtitleController3 = null;
@@ -53,14 +55,17 @@ App.Dimension1Route = App.SmartRoute.extend({
 	},
 	doStart: function (type, data) { 
 				
+		this.subtitleController0.set('content', App.scriptModel); 
 		this.subtitleController1.set('content', App.scriptModel); 
 		this.subtitleController2.set('content', App.scriptModel);
 		this.subtitleController3.set('content', App.scriptModel); 
 		
+        this.subtitleController0.setup();
         this.subtitleController1.setup();
         this.subtitleController2.setup();
         this.subtitleController3.setup();
 
+        this.subtitleController0.startReading();
         this.subtitleController1.startReading();
 
     },
@@ -87,7 +92,7 @@ App.Dimension1Route = App.SmartRoute.extend({
 	tryStart: function () {	
 		//console.log([this.isStarted, this.subtitleController1, this.subtitleController2, this.subtitleController3].join(', '))
 	
-		if (!this.get('isStarted') && this.subtitleController1 && this.subtitleController2 && this.subtitleController3) {
+		if (!this.get('isStarted') && this.subtitleController0 && this.subtitleController1 && this.subtitleController2 && this.subtitleController3) {
 		this.set('isStarted', true);
             this.doStart()
 		}

@@ -79,6 +79,7 @@ $indexCopyC = addcslashes($indexCopyC, '"');
 <?php
 $quot = htmlspecialchars("\"");
 
+
  $d1copyA = '@=<h3>
 X: Software Engineer
 @=</h3>
@@ -212,7 +213,19 @@ And knowing that somewhere there is a solution...
 				</div>
 			</div>
 		</script>
+		
 
+		<script type="text/x-handlebars" data-template-name="lo-subtitle-instruction-row">
+			<div class="row pointer-events-none">
+				<div class="columns large-12 small-12">
+					<div class="subtitle-text-holder subtitle-text-holder-instruction">
+ 						{{yield}}
+					</div>
+				</div>
+			</div>
+		</script>
+		
+		
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-obligatory">
 			<div class="row">
 				<div class="columns">
@@ -333,6 +346,8 @@ And knowing that somewhere there is a solution...
 					</div>
 				</div>
 				<div class="columns large-6  small-6">
+				
+					{{{controlWithVars 'subtitle' orderRead='0' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Use mouse to find x values"}}}
 					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
 					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2"  hoverEvent="doDimensionNavHover" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Y...,Why?...,Motivation..."}}} 
 					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}}}
@@ -466,7 +481,9 @@ And knowing that somewhere there is a solution...
 			{{controlWithVars 'world-3d' layoutName='lo-subtitle-row'}}
 			
 			{{controlWithVars 'esl-entity-container'}}
+			
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyA; ?>"}}}
+			{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Laterally explore the question to find the answer..."}}}
 			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="i.e. The big idea."}}}
 
 		</script>

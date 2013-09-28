@@ -8,6 +8,7 @@ App.Dimension3Route = App.SmartRoute.extend({
 					case 'World3dController': this.world3dController = acontroller;  break;
 					case 'SubtitleController': 
 						switch (acontroller.get('orderRead')) {
+							case 'instruction': this.subtitleInstructionController = acontroller; break;
 							case '1': this.subtitle1Controller = acontroller; break;
 							case '2': this.subtitle2Controller = acontroller; break;
 						}
@@ -22,6 +23,7 @@ App.Dimension3Route = App.SmartRoute.extend({
 			doRotateQuestionMarkHint: function () {
 				console.log('ROTATE TIME HINT');
 				this.world3dController.doRotateQuestionMarkHint();
+				this.subtitleInstructionController.startReading();
 			},
 
 
@@ -33,7 +35,7 @@ App.Dimension3Route = App.SmartRoute.extend({
 
 
 			doQuestionMarkRotateDone: function () {
-				this.subtitle1Controller.doRemoveClicked();
+				this.subtitleInstructionController.doRemoveClicked();
 		        this.subtitle2Controller.startReading();
 			}
 		});
@@ -62,7 +64,7 @@ App.Dimension3Route = App.SmartRoute.extend({
 	
 
 	tryStart: function () {
-        if (!this.get('isStarted') && /*this.world3dController && */this.subtitle1Controller && this.subtitle2Controller) {
+        if (!this.get('isStarted') && /*this.world3dController && */this.subtitle1Controller && this.subtitleInstructionController && this.subtitle2Controller) {
 			this.set('isStarted', true);
 			this.doStart();
         }
