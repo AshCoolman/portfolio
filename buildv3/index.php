@@ -264,7 +264,7 @@ And knowing that somewhere there is a solution...
 			<nav class="top-bar">
 				<ul class="title-area">
 					<li class="name"> <h1><a href="#">Ashley Coleman</a></h1> </li>
-			    	<li class="toggle-topbar menu-icon"><a href="#"><span>Go</span></a></li>
+			    	<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
 				</ul>
 			
 				<section class="top-bar-section">
