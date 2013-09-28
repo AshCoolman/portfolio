@@ -126,7 +126,7 @@ App.World3dView = App.SmartView.extend({
 			this.get('$canvasHeroHolder').append(renderer.domElement);
 			
 			var $canvas = $(renderer.domElement).addClass('world-3d-renderer canvas-hero');
-			
+			this.set('$canvas', $canvas);
 			//rendererStats = tryCreateRenderStats();
 
 			// +Camera	
@@ -197,11 +197,12 @@ App.World3dView = App.SmartView.extend({
 		this.resize();
 		
 		
-		$('.world-3d-renderer', this.get('$el')).mouseleave( function(me) {
+		$canvas.mouseleave( function(me) {
 			return function (e) {
 				var pixels = me.get('instanceVarObj').pixelObjectList;
 				for (var p = 0; p < pixels.length; p++ ) {
 					pixels[p].hoverOff();
+					$canvas.removeClass('interactive');
 				}
 			}
 		}(this));
@@ -468,9 +469,12 @@ App.World3dView = App.SmartView.extend({
 				if ( touched = this.testIsIgnored( rayTouches ) ) {
 					//if ( i == 0) { cursor3D.position = this.setVoxelPosition(instanceVarObj, touched ); }
 					pixelGroup.show(touched);
-					pixelGroup.hoverOn();
+					if (pixelGroup.hoverOn()) {
+						this.get('$el').addClass('interactive');
+					}
 				} else {
 					pixelGroup.hoverOff();
+					this.get('$el').removeClass('interactive');
 					if ( i == 0) {
 						console.log('didnt touch');
 					}
