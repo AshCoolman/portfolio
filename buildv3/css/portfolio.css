@@ -63,10 +63,10 @@ html, body {
   left: 1.5em;
   bottom: 0;
   background-position: left bottom;
-  background-color: #a6a6a6;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #a6a6a6), color-stop(1px, #a6a6a6), color-stop(1px, transparent), color-stop(29px, transparent), color-stop(29px, #a6a6a6));
-  background-image: -webkit-linear-gradient(-360deg, #a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 29px, #a6a6a6 29px);
-  background-image: linear-gradient(90deg,#a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 29px, #a6a6a6 29px);
+  background-color: #d9d9d9;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #d9d9d9), color-stop(1px, #d9d9d9), color-stop(1px, transparent), color-stop(29px, transparent), color-stop(29px, #d9d9d9));
+  background-image: -webkit-linear-gradient(-360deg, #d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 29px, #d9d9d9 29px);
+  background-image: linear-gradient(90deg,#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 29px, #d9d9d9 29px);
   background-repeat: repeat-x;
   background-color: transparent !important; }
 
@@ -75,10 +75,10 @@ html, body {
   background-size: 5px 0.75em;
   bottom: 0;
   background-position: left bottom;
-  background-color: #a6a6a6;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #a6a6a6), color-stop(1px, #a6a6a6), color-stop(1px, transparent), color-stop(4px, transparent));
-  background-image: -webkit-linear-gradient(-360deg, #a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 4px);
-  background-image: linear-gradient(90deg,#a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 4px);
+  background-color: #d9d9d9;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #d9d9d9), color-stop(1px, #d9d9d9), color-stop(1px, transparent), color-stop(4px, transparent));
+  background-image: -webkit-linear-gradient(-360deg, #d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 4px);
+  background-image: linear-gradient(90deg,#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 4px);
   background-color: transparent !important;
   background-repeat: repeat-x; }
 
@@ -87,10 +87,10 @@ html, body {
   left: 0;
   background-size: 1.5em 30px;
   background-position: left bottom;
-  background-color: #a6a6a6;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #a6a6a6), color-stop(1px, #a6a6a6), color-stop(1px, transparent), color-stop(29px, transparent), color-stop(29px, #a6a6a6));
-  background-image: -webkit-linear-gradient(#a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 29px, #a6a6a6 29px);
-  background-image: linear-gradient(#a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 29px, #a6a6a6 29px);
+  background-color: #d9d9d9;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #d9d9d9), color-stop(1px, #d9d9d9), color-stop(1px, transparent), color-stop(29px, transparent), color-stop(29px, #d9d9d9));
+  background-image: -webkit-linear-gradient(#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 29px, #d9d9d9 29px);
+  background-image: linear-gradient(#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 29px, #d9d9d9 29px);
   background-color: transparent !important;
   background-repeat: repeat-y; }
 
@@ -99,10 +99,10 @@ html, body {
   left: 0;
   background-size: 0.75em 5px;
   background-position: left bottom;
-  background-color: #a6a6a6;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #a6a6a6), color-stop(1px, #a6a6a6), color-stop(1px, transparent), color-stop(5px, transparent), color-stop(5px, #a6a6a6));
-  background-image: -webkit-linear-gradient(#a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 5px, #a6a6a6 5px);
-  background-image: linear-gradient(#a6a6a6 0px, #a6a6a6 1px, transparent 1px, transparent 5px, #a6a6a6 5px);
+  background-color: #d9d9d9;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #d9d9d9), color-stop(1px, #d9d9d9), color-stop(1px, transparent), color-stop(5px, transparent), color-stop(5px, #d9d9d9));
+  background-image: -webkit-linear-gradient(#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 5px, #d9d9d9 5px);
+  background-image: linear-gradient(#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 5px, #d9d9d9 5px);
   background-color: transparent !important;
   background-repeat: repeat-y; }
 
@@ -441,27 +441,41 @@ a {
 .interactive-graph-output {
   background-color: #666666;
   font-family: monospace;
-  font-size: 1.2em;
-  color: #CCCCCC;
-  line-height: 140%; }
+  color: #CCCCCC; }
   .interactive-graph-output h3 {
     font-family: inherit; }
-  .interactive-graph-output ul {
+  .interactive-graph-output ul, .interactive-graph-output ol {
     margin-left: 1.5em;
     line-height: 140%;
     list-style-type: inherit; }
-    .interactive-graph-output ul ul {
+    .interactive-graph-output ul ul, .interactive-graph-output ol ul {
       list-style-type: inherit;
       line-height: inherit; }
+
+.row-link {
+  font-size: 1.25em; }
 
 #svg-raphaeljs {
   position: absolute;
   width: 100%; }
 
+.click-hint-holder {
+  -webkit-animation: pulsate 0.3s ease-out;
+  -webkit-animation-iteration-count: infinite; }
+
+@-webkit-keyframes pulsate {
+  0% {
+    opacity: 0.85; }
+
+  50% {
+    opacity: 1.0; }
+
+  100% {
+    opacity: 0.85; } }
+
 .graph-info {
   width: 100%;
-  line-height: 100%;
-  padding: 0.5em;
+  padding: 0.2em 1em;
   display: none; }
   .graph-info .sub-heading {
     text-transform: capitalize; }

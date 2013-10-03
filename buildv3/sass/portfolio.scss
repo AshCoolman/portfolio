@@ -20,7 +20,7 @@ $colDrk_TechPort: #669966;
 $colDrk_Gen: #666699;
 $col_offwhite: #CCCCCC;
 $col_bg: #666666;
-$col_bg_lit: lighten($col_bg, 25%);
+$col_bg_lit: lighten($col_bg, 45%);
 $rulerSize: 1.5em;
 /*
 http://jsfiddle.net/VAXrL/190/
@@ -622,13 +622,11 @@ $gridColor:rgba(50,50,50,0.25);
 .interactive-graph-output {
 	background-color: $col_bg;
 	font-family:monospace;
-	font-size:1.2em;
 	color:#CCCCCC;
-	line-height: 140%;
 	h3 {
 		font-family:inherit;
 	}
-	ul {
+	ul, ol {
 		margin-left:1.5em;
 		line-height: 140%;
 		list-style-type:inherit;
@@ -639,17 +637,29 @@ $gridColor:rgba(50,50,50,0.25);
 	}
 }
 
+.row-link {
+	font-size:1.25em;
+}
 #svg-raphaeljs {
 	position: absolute;
 	width:100%;
 }
 
 
+.click-hint-holder {
+	-webkit-animation: pulsate 0.3s ease-out;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes pulsate {
+    0% { opacity: 0.85;}
+    50% {opacity: 1.0;}
+    100% {opacity: 0.85;}
+}
 
 .graph-info { 
 	width:100%;
-	line-height: 100%;
-	padding:0.5em;
+	padding:0.2em 1em;
 	display:none;
 	.sub-heading {
 		text-transform:capitalize;

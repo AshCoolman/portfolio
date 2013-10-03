@@ -20,11 +20,11 @@ App.RulerView = App.SmartView.extend({
 		
 		//timeline.add(TweenLite.set([xRuler, yRuler], {opacity:0}));
 		//timeline.staggerTo([xRuler, yRuler], 0.5, {opacity:1}, 0.5);	
-		timeline.add(TweenLite.set(xRuler, {'bottom':'-'+bottom}));
-		timeline.add(TweenLite.set(yRuler, {'left':'-'+left}));
-		timeline.add(TweenLite.to(xRuler, 0.25, {'bottom':0}));
-		timeline.add(TweenLite.to(yRuler, 0.25, {'left':0}));
-		timeline.add(TweenLite.to(yRuler, 0.25, {'left':0}));
+		timeline.add(TweenLite.set(xRuler, {'bottom':'-'+bottom, ease:Strong.easeOut}));
+		timeline.add(TweenLite.set(yRuler, {'left':'-'+left, ease:Strong.easeOut}));
+		timeline.add(TweenLite.to(xRuler, 0.25, {'bottom':0, ease:Strong.easeOut}));
+		timeline.add(TweenLite.to(yRuler, 0.25, {'left':0, ease:Strong.easeOut}));
+		timeline.add(TweenLite.to(yRuler, 0.25, {'left':0, ease:Strong.easeOut}));
 		timeline.pause();
 		console.log('playing', left, bottom)
 		this.set('timeline', timeline);

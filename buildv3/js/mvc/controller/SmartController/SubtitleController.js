@@ -57,6 +57,7 @@ App.SubtitleController = App.SmartController.extend({
 	tagPositions:[],
 	pendingClosingTags:[],
 	actionTimeouts:[],
+	pendingWait: 0,
 	lastPrinted:null,
 	lastEdit:null,
 	isHoverUnfinished: false,
@@ -138,7 +139,7 @@ App.SubtitleController = App.SmartController.extend({
 		for (var l = 0; l < srcLines.length; l++ ) { 
 			srcLines[l] = srcLines[l].split('');
 			if (srcLines[l].length == 0) {
-				srcLines[l][0] = '&nbsp;';
+				srcLines[l][0] = '&nbsp;&nbsp;';
 			}	
 		} 
 		
@@ -179,6 +180,7 @@ App.SubtitleController = App.SmartController.extend({
 	},
 	
 	readChar: function (dur, me, isEvents) {
+		
 		//console.log('readChar?', typeof(isEvents),  (typeof(isEvents) == 'undefined'));
 		var me = me || this,
 			isEvents = (typeof(isEvents) != 'undefined') ? isEvents : true,
@@ -196,126 +198,133 @@ App.SubtitleController = App.SmartController.extend({
 			currentEdit,
 			isLastCharBeforeDisplay = false;
 		
-
-		for (var e = 0; e < editList.length; e++) {
-			if (editList[e].linePosition == atLine && editList[e].charPosition == atChar) {
-				currentEdit = editList[e];
-			}
-		}
-
-		if (atLine < srcLines.length ) {
-
-
-			if (currentEdit) {
-				if (currentEdit.editPause) {
-					delay = delayEditLine;
+		//Test if Pending wait (via @wait) has executed
+		if (dur > this.get('pendingWait')) {
+			dur -= this.get('pendingWait');
+			this.set('pendingWait', 0);
+			for (var e = 0; e < editList.length; e++) {
+				if (editList[e].linePosition == atLine && editList[e].charPosition == atChar) {
+					currentEdit = editList[e];
 				}
-			} else if ( atChar >= srcLines[ atLine].length) {	
-				delay = delayLine;
-
 			}
-			
-			if (dur > delay) {
-				dur -= delay;
-				
-				if (atChar == 0 && atLine == 0) {	
-					isNewLine = true;
-				} else if ( atChar >= srcLines[ atLine].length && !currentEdit) {
-//					console.log('Char means new line', atChar, atLine, srcLines[atLine], 'edit:', currentEdit)
-					isNewLine = true;
-					atChar = 0;
-					atLine++;
-					atPrintedLine++;
-				} 
-				
-				if (currentEdit) { 
-					with (currentEdit) {
-						editPause = false;
-						if ( currentDirection == 1 ) {
-							printed += editVals[currentVal][atChar];
-							atChar++;
-							if ( (atChar + 1) > editVals[currentVal].length ) { 
-								currentDirection = -1; 
-								editPause = true;
-							}	
-						} else {
-							printed = printed.substring(0, printed.length - 1);
-							if (printed.length == 0) {
-								currentDirection = 1;
-								atChar = 0;
-								currentVal++;
-								editPause = true;
-								if (currentVal >= editVals.length) { 
-									currentVal = 0;
-								}
 
+			if (atLine < srcLines.length ) {
+
+
+				if (currentEdit) {
+					if (currentEdit.editPause) {
+						delay = delayEditLine;
+					}
+				} else if ( atChar >= srcLines[ atLine].length) {	
+					delay = delayLine;
+
+				}
+			
+				if (dur > delay) {
+					dur -= delay;
+				
+					if (atChar == 0 && atLine == 0) {	
+						isNewLine = true;
+					} else if ( atChar >= srcLines[ atLine].length && !currentEdit) {
+	//					console.log('Char means new line', atChar, atLine, srcLines[atLine], 'edit:', currentEdit)
+						isNewLine = true;
+						atChar = 0;
+						atLine++;
+						atPrintedLine++;
+					} 
+				
+					if (currentEdit) { 
+						with (currentEdit) {
+							editPause = false;
+							if ( currentDirection == 1 ) {
+								printed += editVals[currentVal][atChar];
+								atChar++;
+								if ( (atChar + 1) > editVals[currentVal].length ) { 
+									currentDirection = -1; 
+									editPause = true;
+								}	
+							} else {
+								printed = printed.substring(0, printed.length - 1);
+								if (printed.length == 0) {
+									currentDirection = 1;
+									atChar = 0;
+									currentVal++;
+									editPause = true;
+									if (currentVal >= editVals.length) { 
+										currentVal = 0;
+									}
+
+								}
 							}
 						}
-					}
 					
-					me.set('editList', editList);
-					me.setText(this.get('printedLines'), currentEdit.printed);
+						me.set('editList', editList);
+						me.setText(this.get('printedLines'), currentEdit.printed);
 					
-				} else if (!isNewLine) {
-					printedLines[atPrintedLine] += srcLines[atLine][atChar];
-					me.setText(printedLines, null, 'char');
-					atChar++;
-					
-				} else if (isNewLine) {
-//					console.log('NEWLINE', atLine, atChar, srcLines);
-					while (isEvents && srcLines[atLine] && srcLines[atLine][0] && srcLines[atLine][0] == '@') {
-						var line = srcLines[atLine].join('');
-						if (line.indexOf('@=') == 0) {
-							this.doTagRead(line, atPrintedLine); 
-						} else if(line.indexOf('@actionOnRead=') == 0) {
-							var words =  line.split(' ');
-							var action = words[0].split('=')[1];
-							var delay = (words[1] && !isNaN(parseFloat(words[1])) && isFinite(words[1])) ? parseFloat(words[1]) : 0;
-							var actionFunc = function (my, myAction, pos) {
-								return function () {
-									var actionTOObjs = my.get('actionTimeouts');
-									window.clearTimeout(actionTOObjs[pos].to);
-									actionTOObjs[pos].to = null;
-									my.send(myAction)
-									
-								}
-							}(this, action, this.get('actionTimeouts').length);
-							var to = setTimeout( actionFunc, delay);
-
-							this.get('actionTimeouts').push( {
-								func: actionFunc,
-								to: to
-							});
-						} else {
-							App.eventMapper.trigger(line.split(' ')[1]); 
-						}
-						atLine++;
-//						console.log('skipped to '+atLine+' of '+srcLines.length);
-					}
-					
-					
-					if ( atLine < srcLines.length && srcLines[atLine].length > 0 ) {
-						printedLines[atPrintedLine]='';
+					} else if (!isNewLine) {
 						printedLines[atPrintedLine] += srcLines[atLine][atChar];
-						me.setText(printedLines, null, 'newline');
+						me.setText(printedLines, null, 'char');
 						atChar++;
-					}
+					
+					} else if (isNewLine) {
+	//					console.log('NEWLINE', atLine, atChar, srcLines);
+						while (isEvents && srcLines[atLine] && srcLines[atLine][0] && srcLines[atLine][0] == '@') {
+							var line = srcLines[atLine].join('');
+							if (line.indexOf('@=') == 0) {
+								this.doTagRead(line, atPrintedLine); 
+							} else if (line.indexOf('@wait=') == 0) { 
+								var pendingWait = parseInt(line.split('=')[1], 10);
+								Em.assert('@wait was given non-number value',  !isNaN(parseFloat(pendingWait)) && isFinite(pendingWait));
+								this.set('pendingWait', pendingWait);
+							} else if(line.indexOf('@actionOnRead=') == 0) {
+								var words =  line.split(' ');
+								var action = words[0].split('=')[1];
+								var delay = (words[1] && !isNaN(parseFloat(words[1])) && isFinite(words[1])) ? parseFloat(words[1]) : 0;
+								var actionFunc = function (my, myAction, pos) {
+									return function () {
+										var actionTOObjs = my.get('actionTimeouts');
+										window.clearTimeout(actionTOObjs[pos].to);
+										actionTOObjs[pos].to = null;
+										my.send(myAction)
+									
+									}
+								}(this, action, this.get('actionTimeouts').length);
+								var to = setTimeout( actionFunc, delay);
+
+								this.get('actionTimeouts').push( {
+									func: actionFunc,
+									to: to
+								});
+							} else {
+								App.eventMapper.trigger(line.split(' ')[1]); 
+							}
+							atLine++;
+	//						console.log('skipped to '+atLine+' of '+srcLines.length);
+						}
 					
 					
-				} 
+						if ( atLine < srcLines.length && srcLines[atLine].length > 0 ) {
+							printedLines[atPrintedLine]='';
+							printedLines[atPrintedLine] += srcLines[atLine][atChar];
+							me.setText(printedLines, null, 'newline');
+							atChar++;
+						}
+					
+					
+					} 
+				} else {
+					//this.printText();
+				};	
 			} else {
-				//this.printText();
-			};	
-		} else {
-//			console.log('Ended')
-			me.set('isEnded', true);
-			window.cancelAnimationFrame(me.get('raf'));
-			if (me.get('hasRemoveButton')) {
-				me.set('isRemoveButton', true);
+	//			console.log('Ended')
+				me.set('isEnded', true);
+				window.cancelAnimationFrame(me.get('raf'));
+				if (me.get('hasRemoveButton')) {
+					me.set('isRemoveButton', true);
+				}
+				App.eventMapper.trigger('sub_finishedReading', {target:this});
 			}
-			App.eventMapper.trigger('sub_finishedReading', {target:this});
 		}
-		
 		me.set('srcLines', srcLines);
 		me.set('printedLines', printedLines);
 		me.set('atLine', atLine);

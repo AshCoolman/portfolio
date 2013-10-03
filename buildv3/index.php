@@ -52,10 +52,18 @@ $IS_DEPLOY = false;
 
 <?php
 $indexCopyA = '@=<h3>
-The Origin: Ashley Coleman
+Starting point: Ashley Coleman
 @=</h3>
-To teach you about myself, I start with my name.
-My name is an origin, from which I can illustrate the different dimensions that make me up.
+
+Hi, I\'m Ash.
+
+I built this portfolio site (mainly) to give you a sense of who I am.
+You are at the site\'s starting point, a.k.a the origin.
+From this origin I will describe my different dimensions.
+
+This website is also my development sandbox.
+Over time I throw in new ideas, technology tests etc.
+But for now, to continue click below:
 @actionOnRead=doSecondSubtitle';
 $indexCopyA = addcslashes($indexCopyA, '"');
 
@@ -81,58 +89,49 @@ $quot = htmlspecialchars("\"");
 
 
  $d1copyA = '@=<h3>
-X: Software Engineer
+My X: Software engineering
 @=</h3>
-Web dev is my craft.
-I value speed, elegance, and clarity.
+<b>Multimedia development</b> is my craft. These days the web is my platform. Thus I have experience in a number of useful <b>front-end and back-end</b> technologies. 
 
-And as one <a href="http://goo.gl/O5dnGf" target="_blank">clever cookie</a> once said:
+I always look for a user experience that has humility and and utility. My project philosophy is to nurture the requirements.
+A coding style that emphases speed and reusability. And as a certain <a href="http://goo.gl/O5dnGf" target="_blank">clever cookie</a> once said:
 
 <i class="quote"><sup class="icon-quote-left superscript"></sup> Real artists ship <sup class="icon-quote-right superscript"></sup>
 @actionOnRead=doSubtitle2 1500
 @actionOnRead=doSubtitle3 2500';
 $d1copyA = addcslashes($d1copyA, '"');
 
-$obligatoryList = '<span class="heading"> <i class="icon-chevron-left"></i> OBLIGATORY SKILL LIST <i class="icon-chevron-right"></i> </span>
+$obligatoryList = '<span class="heading"> <i class="icon-chevron-left"></i> OBLIGATORY SKILL SUMMARY LIST <i class="icon-chevron-right"></i> </span>
 @=<div class="indent">
-	<span class="heading">Javascript</span>
+	<span class="heading">Javascript technologies</span>
 	JQuery 
-	AJAX 
-	nodejs 
 	Ember 
-	Handlebars 
 	threejs (WebGL) 
-	Google Closure Library 
-	Raphaeljs 
-	Createjs 
-	underscorejs 
+	nodejs
+	plus more!
 
-	<span class="heading">Flash</span>
+	<span class="heading">Markup languages</span>
+	HTML
+	HTML5
+	CSS
+	CSS3
+	SASS
+	SVG
+	
+	<span class="heading">Flash technologies</span>
 	AS3
-	AS2 
 	Flex
 	Flash Video
-
-	<span class="heading">HTML</span>
-	HTML5
-	CSS3
-	SVG
-
-	<span class="heading">Serverside</span>
+	
+	<span class="heading">Serverside technologies</span>
 	PHP
-	MySQL 
-	Postgres 
+	SQL 
 	Templating libraries 
 
 	<span class="heading">Coding Paradigms/Patterns</span>
 	OOP
 	MVC 
 	MVP 
-
-	<span class="heading">Tools</span>
-	JSList
-	Git, SVN, Mecurial
-	JIRA
 
 	<span class="heading">General Knowledge</span>
 	3d Math
@@ -144,7 +143,7 @@ $obligatoryList = '<span class="heading"> <i class="icon-chevron-left"></i> OBLI
 
 @=</div>
 
-<span class="heading"> <i class="icon-chevron-left"></i>/ OBLIGATORY SKILL LIST <i class="icon-chevron-right"></i> </span>';
+<span class="heading"> <i class="icon-chevron-left"></i>/ OBLIGATORY SKILL SUMMARY LIST<i class="icon-chevron-right"></i> </span>';
 
 $obligatoryList = addcslashes($obligatoryList, '"');			
 ?>
@@ -153,25 +152,28 @@ $obligatoryList = addcslashes($obligatoryList, '"');
 $d2copyA =  '@=<h3>
 Y: The Storyteller
 @=</h3>
-I like induce change in the audience, be it emotion, thought, excitement, knowledge...
-Simply put, I am a story teller.
-
-If the question is how to best communicate to an audience, 
+I love to induce change in an audience, be it knowledge, emotion or opinion.
+To induce change, the user must be guided through a carefully curated environment to an end goal. 
+ 
+If the question is how to build a communicate environment...
 @actionOnRead=doShowQuestion
-then I have the technical skills can be used to craft an answering experience.
+@wait=1200
+ ...I understand how to work technology into the background, to leave an answer.
 @actionOnRead=doSubtitle2';
 ?>
 
 <?php
 $d3copyA = '@=<h3>
-Z: The Creative
+Z: The Creative 
 @=</h3>
-I am committed to creative thinking.
-It means discarding your <i>first thoughts</i>, and what seems <i>obvious</i>.
-
-And knowing that somewhere there is a solution...
+Creative thinking is important to me.
+I know if I think about a problem laterally... 
+@wait=1000
 @actionOnRead=doRotateQuestionMarkHint
-...that is simple and elegant...
+@wait=2000
+
+...very often a simple and elegant solution can be found.
+@wait=2000
 @actionOnRead=doRotateQuestionMark'; 
 ?>
 
@@ -239,7 +241,7 @@ And knowing that somewhere there is a solution...
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-row-link">
 			<div class="row pointer-events-none">
 				<div class="columns large-12 small-12">
-					<div class="subtitle-text-holder">
+					<div class="subtitle-text-holder row-link">
 						<br/>
 	 					{{yield}}
 					</div>
@@ -319,7 +321,7 @@ And knowing that somewhere there is a solution...
 		<script type="text/x-handlebars" data-template-name="index">		
 
 			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $indexCopyA; ?>"}}}
-			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=X...,One...,Who...,How..." isLink=true linkEvent="doGotoDimension1" hoverEvent="doDimensionNavHover"}}}
+			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=X...,One...,Who...,What..." isLink=true linkEvent="doGotoDimension1" hoverEvent="doDimensionNavHover"}}}
 			{{{controlWithVars 'subtitle' readOrder='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $indexCopyC; ?>"}}}
 		</script>
 
@@ -332,25 +334,26 @@ And knowing that somewhere there is a solution...
 		
 		<script type="text/x-handlebars" data-template-name="dimension1">
 			<div class="row">
-				<div class="columns large-6 small-6">
-					<div class="interactive-graph-output">
-						<div class="graph-info">
-							<h3 {{bindAttr class="this.interactiveGridData.cssClass"}}>{{{this.interactiveGridData.number}}}</h3>
-							<strong class="sub-heading">{{{this.interactiveGridData.heading}}}</strong>
-							<ul>
-							{{#each this.interactiveGridData.items}}
-								<li>{{{this}}}</li>
-							{{/each}}
-							</ul>
-						</div>
-					</div>
-				</div>
 				<div class="columns large-6  small-6">
-				
-					{{{controlWithVars 'subtitle' orderRead='0' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Use mouse to find x values"}}}
 					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
 					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2"  hoverEvent="doDimensionNavHover" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Y...,Why?...,Motivation..."}}} 
 					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}}}
+				</div>
+				<div class="columns large-6 small-6">
+					{{{controlWithVars 'subtitle' orderRead='0' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Use mouse to find my x values "}}}
+					<div class="interactive-graph-output">
+						<div class="graph-info">
+							<h3 {{bindAttr class="interactiveGridData.0.type.cssClass"}}>{{{interactiveGridData.0.x}}}</h3>
+							{{#each this.interactiveGridData}}
+								<strong class="sub-heading">{{{this.text}}}</strong>
+								<ol>
+								{{#each this.xList}}
+									<li>{{{this}}}</li>
+								{{/each}}
+								</ol>
+							{{/each}}
+						</div>
+					</div>
 				</div>
 			</div>
 		</script>
@@ -366,6 +369,99 @@ And knowing that somewhere there is a solution...
 						<ul>
 					</div>
 				{{/if}}
+				<div style="display:none" class="interactive-grid-values">Javascript technologies I know
+
+Libraries (JQuery, Google Glosue Library etc)
+Frameworks (Foundation4, Ember, bootstrap, HTML5 bp etc)
+Service APIs ( Google Maps, Facebook Graph etc )
+HTML APIs (WebGL, geolocation, sound, video etc)
+
+## Web markup languages I know
+
+HTML(5)
+CSS(3)
+SASS & LESS
+SVG 
+
+## Web development experience I have
+
+AJAX
+Cross-domain problems
+UX & Performance
+SEO & Analytics
+Cross browser (Responsive, graceful degradation etc)
+Input validation
+Profiling tools (jankfree.org!)
+
+## Flash technologies I know
+
+AS2 & AS3
+Flash Video 
+Flex
+MXML
+
+## Backend technology I know
+
+PHP 
+SQL (mySQL, PostgresSQL)
+Nodejs
+
+## Development tools & techniques I know
+
+Make files
+Minification (YUI Compressor, Closure Compiler)
+Unit testing (QUnitjs)
+Doc generation
+Chrome Dev tools (and other browser equivalents)
+User testing
+API creation
+
+## Project tools & techniques I know
+
+Version control (SVN, Git, Mecurial)
+Issue tracking (JIRA, bugzila etc) 
+Wire-framing & Prototyping (Adobe Fireworks, Axure etc)
+
+## General knowledge
+
+2d / 3d Physics Math
+Geo-location algorithms
+Images manipulation (Adobe Photoshop)
+Video manipulation (Adobe After Effects)
+Video encoding (Adobe Media Encoder)
+Sound editing (Adacity)
+
+## Notable technologies used in this website
+
+Emberjs
+Foundation 4
+JQuery
+Createjs
+Threejs
+Raphaeljs
+Underscorejs 
+Createjs
+Greensock animation platform
+WebGL
+SVG
+Request Animation Frame
+Closures
+Prototype inheritance
+
+## thousand lines of code written for this site
+5
+
+## Random quotes I like
+
+"Real artists ship" - Steve Jobs
+"Dont guess it, test it" -Paul Lewis
+
+## Years of syntax errors
+9
+
+## Years of Computer Science and Multimedia
+4
+</div>
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="scalar">
@@ -413,7 +509,7 @@ And knowing that somewhere there is a solution...
 				{{/if}}
 
 				{{#if controller.isHoverUnfinished}}
-					<div class="click-hint-holder"><i class="icon-exclamation-sign remove-button"> click to show all</i></div>
+					<div class="click-hint-holder"><i class="icon-exclamation-sign remove-button"> Paused: click to show all</i></div>
 				{{/if}}
 			{{/unless}}
 		</script>
@@ -483,7 +579,7 @@ And knowing that somewhere there is a solution...
 			{{controlWithVars 'esl-entity-container'}}
 			
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyA; ?>"}}}
-			{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Laterally explore the question to find the answer..."}}}
+			{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Find the elegant solution above..."}}}
 			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="i.e. The big idea."}}}
 
 		</script>
