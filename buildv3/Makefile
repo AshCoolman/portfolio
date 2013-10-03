@@ -9,7 +9,7 @@ CSS_FILES = $(filter-out %-min.css,$(wildcard \
 # Patterns matching JS files that should be minified. Files with a -min.js
 # suffix will be ignored.
 
-JS_GROUP = "lib"
+#JS_GROUP = "lib"
 #JS_GROUP = "custom"
 #JS_GROUP = "foundation"
 
@@ -104,7 +104,7 @@ js/foundation.min.js:$(JS_MINIFIED)
 endif
 
 css/all.min.css:$(CSS_MINIFIED)
-	@echo '==> concating css $<'
+	@echo '==>==>==>==> concating css $<'
 	cat $^ >$@
 	@echo
 

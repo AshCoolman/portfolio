@@ -3,14 +3,16 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
 	<title>Ashley Coleman</title>
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+	
 	<link rel="stylesheet" href="///cdnjs.cloudflare.com/ajax/libs/foundation/4.3.1/css/foundation.min.css" />
-		<link rel="stylesheet" href="css/all.min.css" />
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<link rel="stylesheet" href="css/all.min.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="//cdn.jsdelivr.net/modernizr/2.6.2/modernizr.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.min.js"></script>
@@ -28,7 +30,14 @@
 
 
 
-		<script type="text/x-handlebars" data-template-name="application">		
+
+
+
+
+
+		<script type="text/x-handlebars" data-template-name="application">
+			{{outlet background}}
+			{{render 'ruler'}}
 			 <row>
 				{{outlet "nav-list"}}
 			</row>
@@ -47,32 +56,70 @@
 
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-row">
 			<div class="row pointer-events-none">
-				<div class="columns subtitle-text-holder large-9 large-offset-3 small-9 small-offset-1">
- 					{{yield}}
+				<div class="columns large-12 small-12">
+					<div class="subtitle-text-holder">
+ 						{{yield}}
+					</div>
 				</div>
 			</div>
 		</script>
 
+		<script type="text/x-handlebars" data-template-name="lo-subtitle-instant-row">
+			<div class="row pointer-events-none">
+				<div class="columns large-12 small-12">
+					<div class="subtitle-text-holder subtitle-text-holder-instant">
+ 						{{yield}}
+					</div>
+				</div>
+			</div>
+		</script>
+		
+
+		<script type="text/x-handlebars" data-template-name="lo-subtitle-instruction-row">
+			<div class="row pointer-events-none">
+				<div class="columns large-12 small-12">
+					<div class="subtitle-text-holder subtitle-text-holder-instruction">
+ 						{{yield}}
+					</div>
+				</div>
+			</div>
+		</script>
+		
+		
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-obligatory">
 			<div class="row">
-				<div class="columns subtitle-text-holder obligatory-list">
- 					{{yield}}
+				<div class="columns">
+					<div class="subtitle-text-holder obligatory-list">
+	 					{{yield}}
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-row-link">
 			<div class="row pointer-events-none">
-				<div class="columns subtitle-text-holder large-6 small-6 large-offset-6 small-offset-3">
-					<br/>
- 					{{yield}}
+				<div class="columns large-12 small-12">
+					<div class="subtitle-text-holder row-link">
+						<br/>
+	 					{{yield}}
+					</div>
 				</div>
 			</div>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="preloader-content">
 			Preloading...<br/>
-			{{{infoHtml}}}
+			{{{infoHtml}}}	
+		</script>
+		
+		<script type="text/x-handlebars" data-template-name="ruler">
+			<div class="bg-layer x-ruler"></div>
+			<div class="bg-layer y-ruler"></div>
+			<div class="bg-layer x-ruler-minor"></div>
+			<div class="bg-layer y-ruler-minor"></div>
+			<div class="bg-layer origin-x"></div>
+			<div class="bg-layer origin-y"></div>
+			<div class="origin-name">ASHLEY COLEMAN</div>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="transitions-holder">
@@ -91,8 +138,8 @@
 		<script type="text/x-handlebars" data-template-name="nav-list">
 			<nav class="top-bar">
 				<ul class="title-area">
-					<li class="name"> <h1><a href="#">Ashley Coleman</a></h1> </li>
-			    	<li class="toggle-topbar menu-icon"><a href="#"><span>Go</span></a></li>
+					<li class="name"> <h1>Ashley Coleman by dimension:</h1> </li>
+			    	<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
 				</ul>
 			
 				<section class="top-bar-section">
@@ -100,18 +147,23 @@
 						<!-- Title Area -->
 			
 					    <li class="divider"></li>
+						{{#view view.NavListItemView item="doIndex" }}
+				            <a {{action doIndex}} >0</a>
+				        {{/view}}
+			
+					    <li class="divider"></li>
 						{{#view view.NavListItemView item="doDimension1" }}
-				            <a {{action doDimension1}} >X</a>
+				            <a {{action doDimension1}} >1</a>
 				        {{/view}}
 			
 						<li class="divider"></li>
 				        {{#view view.NavListItemView item="doDimension2" }}
-				            <a {{action doDimension2}} >Y</a>
+				            <a {{action doDimension2}} >2</a>
 				        {{/view}}
 			
 						<li class="divider"></li>
 				        {{#view view.NavListItemView item="doDimension3" }}
-				            <a {{action doDimension3}} >Z</a>
+				            <a {{action doDimension3}} >3</a>
 				        {{/view}}   
 		
 						
@@ -133,74 +185,99 @@
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="index">		
-
-			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="@=<h3>
-Ashley Coleman: The Origin
+			
+			<div class="row">
+				<div class="columns large-6  small-6">		
+					{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="Starting point:
+@=<h3>
+Ashley Coleman
 @=</h3>
-To teach you about myself, I start with my name.
-My name is an origin, from which I can illustrate the different dimensions that make me up.
-@actionOnRead=doSecondSubtitle"}}}
-			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="Go to dimension @edits=X...,One...,Who...,How..." isLink=true linkEvent="doGotoDimension1" }}}
 
+Hi, I'm Ash.
+I built this portfolio site (mainly) to show who I am.
+You are at the site's starting point, a.k.a the origin.
+From this origin I will describe my different dimensions.
+
+@actionOnRead=doSecondSubtitle
+@wait=1000
+@actionOnRead=doFourthSubtitle"}}}
+					{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=X...,One...,Who...,What..." isLink=true linkEvent="doGotoDimension1" hoverEvent="doDimensionNavHover"}}}
+					
+				</div>
+				<div class="columns large-6 small-6">
+					{{{controlWithVars 'subtitle' readOrder='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<h3>Contact Details</h3>
+@=<address>
+<i class=\"icon-envelope\"></i> writetofish+cv<i>@</i>gmail.com
+<i class=\"icon-phone\"></i> (+44) 77 5298 3159
+<i class=\"icon-twitter\"></i> <a href=\"https://twitter.com/AshCoolman\" target=\"_blank\">@AshCoolman</a>
+<i class=\"icon-home\"></i> London, United Kingdom (formally Australia)
+@=</address>
+@actionOnRead=doSecondSubtitle
+@actionOnRead=doThirdSubtitle 2000"}}}
+					{{{controlWithVars 'subtitle' readOrder='4' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="@=<h3>
+My Sandbox
+@=</h3>
+
+This website is also my development sandbox.
+Here I will experiment with new ideas, technology tests etc.
+So don't be surprised if things change!"}}}
+				</div>
+			</div>
 		</script>
 
-		<script type="text/x-handlebars" data-template-name="dimension1">
+		<script type="text/x-handlebars" data-template-name="dimension1-background">
 			<div class="full-width-centered" >
 				{{renderWithVars 'interactive-grid' pixW=20 isPlotX=true}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
-			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="@=<h3>
-X: Software Engineer
+		</script>
+		
+		<script type="text/x-handlebars" data-template-name="dimension1">
+			<div class="row">
+				<div class="columns large-6  small-6">
+					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="My 1st dimension:
+@=<h3>
+Web development
 @=</h3>
-Web dev is my craft.
-I value speed, elegance, and clarity.
+Developing <b>multimedia</b> for the web is my craft and passion. I am mainly a <b>front-end</b> guy, but I am confident in the <b>back-end</b>. I have worked in teams big and small, and in every stage of development. I like my code to be quick and reusable, and I am comfortable integrating processing and tools into my workflow to produce compliant code. 
 
-And as one <a href=\"http://goo.gl/O5dnGf\">clever cookie</a> once said:
+However, if the the need arises I am happy to hack it. As a certain <a href=\"http://goo.gl/O5dnGf\" target=\"_blank\">clever cookie</a> once said:
 
-<i class=\"quote\"><i class=\"icon-quote-left\"></i>Real artists ship<i class=\"icon-quote-right\"></i></i>
-@actionOnRead=doSubtitle2 2000
-@actionOnRead=doSubtitle3 5000"}}}
-			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2" hasRemoveButton=true thescript="Go to dimension @edits=Y...,Why?...,Motivation..."}} 
-			{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-row' isInstant=true hasRemoveButton=true thescript="<span class=\"heading\">&lt;OBLIGATORY SKILL LIST&gt;</span>
+<i class=\"quote\"><sup class=\"icon-quote-left superscript\"></sup> Real artists ship <sup class=\"icon-quote-right superscript\"></sup>
+@actionOnRead=doSubtitle2 1500
+@actionOnRead=doSubtitle3 2500"}}}
+					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2"  hoverEvent="doDimensionNavHover" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Y...,Why?...,Motivation..."}}} 
+					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<span class=\"heading\"> <i class=\"icon-chevron-left\"></i> OBLIGATORY SKILL SUMMARY LIST <i class=\"icon-chevron-right\"></i> </span>
 @=<div class=\"indent\">
-	<span class=\"heading\">Javascript</span>
+	<span class=\"heading\">Javascript technologies</span>
 	JQuery 
-	AJAX 
-	nodejs 
 	Ember 
-	Handlebars 
 	threejs (WebGL) 
-	Google Closure Library 
-	Raphaeljs 
-	Createjs 
-	underscorejs 
+	nodejs
+	plus more!
 
-	<span class=\"heading\">Flash</span>
+	<span class=\"heading\">Markup languages</span>
+	HTML
+	HTML5
+	CSS
+	CSS3
+	SASS
+	SVG
+	
+	<span class=\"heading\">Flash technologies</span>
 	AS3
-	AS2 
 	Flex
 	Flash Video
-
-	<span class=\"heading\">HTML</span>
-	HTML5
-	CSS3
-	SVG
-
-	<span class=\"heading\">Serverside</span>
+	
+	<span class=\"heading\">Serverside technologies</span>
 	PHP
-	MySQL 
-	Postgres 
+	SQL 
 	Templating libraries 
 
 	<span class=\"heading\">Coding Paradigms/Patterns</span>
 	OOP
 	MVC 
 	MVP 
-
-	<span class=\"heading\">Tools</span>
-	JSList
-	Git, SVN, Mecurial
-	JIRA
 
 	<span class=\"heading\">General Knowledge</span>
 	3d Math
@@ -212,34 +289,131 @@ And as one <a href=\"http://goo.gl/O5dnGf\">clever cookie</a> once said:
 
 @=</div>
 
-<span class=\"heading\">&lt;/OBLIGATORY SKILL LIST&gt;</span>"}} 
+<span class=\"heading\"> <i class=\"icon-chevron-left\"></i>/ OBLIGATORY SKILL SUMMARY LIST<i class=\"icon-chevron-right\"></i> </span>"}}}
+				</div>
+				<div class="columns large-6 small-6">
+					{{{controlWithVars 'subtitle' orderRead='0' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Use mouse to find my x values "}}}
+					<div class="interactive-graph-output">
+						<div class="graph-info">
+							<h3 {{bindAttr class="interactiveGridData.0.type.cssClass"}}>{{{interactiveGridData.0.x}}}</h3>
+							{{#each this.interactiveGridData}}
+								<strong class="sub-heading">{{{this.text}}}</strong>
+								<ol>
+								{{#each this.xList}}
+									<li>{{{this}}}</li>
+								{{/each}}
+								</ol>
+							{{/each}}
+						</div>
+					</div>
+				</div>
+			</div>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="interactive-grid" >
 				<div id="svg-raphaeljs"></div>
 				{{#if isPlotX}}	
-					<div id="graph-info" {{bindAttr class="plotClass"}}>
-						<div class="graph-layer">
-							<h1 class="graph-position">{{{positionText}}}</h1>
-						</div>
-						<div class="graph-layer">
-							<h1 class="graph-plot">{{{plotHeading}}}</h1>						
-							<ul class="graph-plot">
-								{{#each plotText}}
-								<li>{{{this}}}</li>
-								{{/each}}
-							</ul>
-						</div>
-					</div>
 					<div class="graph-legend" >
-						<h5>About...</h5>
 						<ul>
 							{{#each view.LEGEND}}
-							<li><span {{bindAttr class="cssClass"}}><div class="graph-legend-fill"></div></span>{{{label}}}</li>
+							<li><span {{bindAttr class="cssClass"}}><div class="graph-legend-fill"></div>{{{label}}}</span></li>
 							{{/each}}
 						<ul>
 					</div>
 				{{/if}}
+				<div style="display:none" class="interactive-grid-values">Javascript technologies I know
+
+Libraries (JQuery, Google Glosue Library etc)
+Frameworks (Foundation4, Ember, bootstrap, HTML5 bp etc)
+Service APIs ( Google Maps, Facebook Graph etc )
+HTML APIs (WebGL, geolocation, sound, video etc)
+
+## Web markup languages I know
+
+HTML(5)
+CSS(3)
+SASS & LESS
+SVG 
+
+## Web development experience I have
+
+AJAX
+Cross-domain problems
+UX & Performance
+SEO & Analytics
+Cross browser (Responsive, graceful degradation etc)
+Input validation
+Profiling tools (jankfree.org!)
+
+## Flash technologies I know
+
+AS2 & AS3
+Flash Video 
+Flex
+MXML
+
+## Backend technology I know
+
+PHP 
+SQL (mySQL, PostgresSQL)
+Nodejs
+
+## Development tools & techniques I know
+
+Make files
+Minification (YUI Compressor, Closure Compiler)
+Unit testing (QUnitjs)
+Doc generation
+Chrome Dev tools (and other browser equivalents)
+User testing
+API creation
+
+## Project tools & techniques I know
+
+Version control (SVN, Git, Mecurial)
+Issue tracking (JIRA, bugzila etc) 
+Wire-framing & Prototyping (Adobe Fireworks, Axure etc)
+
+## General knowledge
+
+2d / 3d Physics Math
+Geo-location algorithms
+Images manipulation (Adobe Photoshop)
+Video manipulation (Adobe After Effects)
+Video encoding (Adobe Media Encoder)
+Sound editing (Adacity)
+
+## Notable technologies used in this website
+
+Emberjs
+Foundation 4
+JQuery
+Createjs
+Threejs
+Raphaeljs
+Underscorejs 
+Createjs
+Greensock animation platform
+WebGL
+SVG
+Request Animation Frame
+Closures
+Prototype inheritance
+
+## thousand lines of code written for this site
+5
+
+## Random quotes I like
+
+"Real artists ship" - Steve Jobs
+"Dont guess it, test it" -Paul Lewis
+
+## Years of syntax errors
+9
+
+## Years of Computer Science and Multimedia
+4
+</div>
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="scalar">
@@ -281,49 +455,44 @@ And as one <a href=\"http://goo.gl/O5dnGf\">clever cookie</a> once said:
 					<a {{action getLinkEvent}}>
 				{{/if}}
 				<div class="text"></div>
+				
 				{{#if isLink}}
 					</a>
 				{{/if}}
 
 				{{#if controller.isHoverUnfinished}}
-					<div class="click-hint-holder"><i class="icon-exclamation remove-button"> Click to show all</i></div>
+					<div class="click-hint-holder"><i class="icon-exclamation-sign remove-button"> Paused: click to show all</i></div>
 				{{/if}}
 			{{/unless}}
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="dimension2">
-		
 			<div class="full-width-centered">
 				{{renderWithVars 'interactive-grid' pixW=20 pixH=20 isPlotX=false}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
-
-			<div class="relative-positioned">
-				<div class="absolute-positioned"> 
-					{{controlWithVars 'world-2d'}} 
-					{{controlWithVars 'esl-entity-container'}}
-				</div>
-			</div>
-
-			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="@=<h3>
-Y: The Storyteller
-@=</h3>
-I like induce change in the audience, be it emotion, thought, excitement, knowledge...
-Simply put, I am a story teller.
-
-If the question is how to best communicate to an audience, 
-@actionOnRead=doShowQuestion
-then I have the technical skills can be used to craft an answering experience.
-@actionOnRead=doSubtitle2"}}}
-			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true linkEvent="doGotoDimension3" }}}
 			
-			{{#if App.DEBUG}}
-				{{render 'world-2d-editor'}}
-			{{/if}}
+			{{controlWithVars 'world-2d' layoutName='lo-subtitle-row'}}
+			{{controlWithVars 'esl-entity-container'}}
+
+			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="My 2nd dimension:
+@=<h3>
+Storytelling
+@=</h3>
+I love to induce change in an audience, be it knowledge, emotion or opinion.
+To induce change, the user must be guided through a carefully curated environment to an end goal. 
+ 
+If the question is how to build a communicate environment...
+@actionOnRead=doShowQuestion
+@wait=1200
+ ...I understand how to work technology into the background, to leave an answer.
+@actionOnRead=doSubtitle2"}}}
+			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true linkEvent="doGotoDimension3" hoverEvent="doDimensionNavHover" }}}
 		</script>	
 
 		<script type="text/x-handlebars" data-template-name="world-2d">
-			{{controlWithVars 'ash' ash x=-180 }}
+			<div class="canvas-hero-holder"></div>
+			{{controlWithVars 'ash' ash x=-420 }}
 			{{controlWithVars 'question-mark' question-mark x=0 visible=false}}
 		</script>
 
@@ -332,21 +501,17 @@ then I have the technical skills can be used to craft an answering experience.
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="question-mark">
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=235 y=45 height=30 width=30}}
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=45 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=295 y=45 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=90 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=205 y=60 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=325 y=60 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=90 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=190 y=120 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=120 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=335 y=150 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=320 y=180 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=290 y=195 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=210 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=240 width=30 height=30}} 
-			{{ controlWithVars "cogged-pixel" cogged-pixel x=265 y=300 width=30 height=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=75 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=105 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=45 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=45 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=195 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=255 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=45 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=165 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=75 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=105 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=135 height=30 width=30}}
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="esl-entity-container">
@@ -372,28 +537,33 @@ then I have the technical skills can be used to craft an answering experience.
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="dimension3">
-			<div class="relative-positioned">
-				<div class="absolute-positioned"> 
-					{{controlWithVars 'world-3d'}} 
-					{{controlWithVars 'esl-entity-container'}}
-				</div>
-			</div>
-			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="@=<h3>
-Z: The Creative
+			{{controlWithVars 'world-3d' layoutName='lo-subtitle-row'}}
+			
+			{{controlWithVars 'esl-entity-container'}}
+			
+			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="My 3rd dimension:
+@=<h3>
+Creativity 
 @=</h3>
-I am committed to creative thinking.
-It means discarding your <i>first thoughts</i>, and what seems <i>obvious</i>.
-
-And knowing that somewhere there is a solution...
+Creative thinking is important to me.
+I know if I think about a problem laterally... 
+@wait=1000
 @actionOnRead=doRotateQuestionMarkHint
-...that is simple and elegant...
-@actionOnRead=doRotateQuestionMark"}}}
-			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="i.e. The big idea."}}}
+@wait=2000
+...very often a simple and elegant solution can be found...
+@wait=2000
+@actionOnRead=doRotateQuestionMark
+@wait=500
+@actionOnRead=doRotateQuestionMarkInstruction"}}}
+			{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Find the elegant idea above (think <i>laterally</i>)..."}}}
+			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="Nice one!"}}}
 
 		</script>
 
 	<script type="text/x-handlebars" data-template-name="world-3d">
-	
+		<div class="canvas-hero-holder">
+			
+		</div>
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="entity-3d">
@@ -403,10 +573,16 @@ And knowing that somewhere there is a solution...
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-		<div class="app-container">
-			<div class="app"></div>	
-		</div>  
+		 
+			
 
+		<div class="app-container">
+			<div class="app">
+			</div>	
+		</div>  
+		
+
+ 
 
 <script src="js/custom.min.js"></script> 	<script>
 		$(document).foundation();
