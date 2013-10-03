@@ -9,9 +9,9 @@ CSS_FILES = $(filter-out %-min.css,$(wildcard \
 # Patterns matching JS files that should be minified. Files with a -min.js
 # suffix will be ignored.
 
-#s JS_GROUP = "lib"
-# JS_GROUP = "custom"
-#s JS_GROUP = "foundation"
+JS_GROUP = "lib"
+#JS_GROUP = "custom"
+#JS_GROUP = "foundation"
 
 ifeq ($(JS_GROUP),"lib")
 JS_FILES = $(filter-out %-min.js,$(wildcard \
@@ -22,6 +22,9 @@ JS_FILES = $(filter-out %-min.js,$(wildcard \
 	js/lib/THREEx.WindowResize.js \
 	js/lib/Ease.js \
 	js/lib/CSSPlugin.js \
+	js/lib/greensock/plugins/CSSPlugin.min.js \
+	js/lib/greensock/easing/EasePack.min.js \
+	js/lib/greensock/TweenMax.min.js \
 ))
 endif
 

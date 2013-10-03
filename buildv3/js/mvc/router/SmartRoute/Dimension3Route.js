@@ -29,7 +29,6 @@ App.Dimension3Route = App.SmartRoute.extend({
 			},
 
 			doRotateQuestionMark: function () {
-				console.log('ROTATE TIME');
 				this.world3dController.doQuestionMarkRotate();
 			},
 

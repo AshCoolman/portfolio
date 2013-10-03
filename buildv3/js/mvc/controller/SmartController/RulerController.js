@@ -5,7 +5,6 @@ App.RulerController = App.SmartController.extend({
 		this._super(aview);
 		App.eventMapper.addEventListener('setRuler', this, function (me) {
 			return function (type, data) {
-				console.log('C:setRuler()', type, data)
 				 aview.setRuler(data);
 			}
 		}(this));

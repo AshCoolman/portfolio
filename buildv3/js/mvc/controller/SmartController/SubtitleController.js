@@ -159,7 +159,6 @@ App.SubtitleController = App.SmartController.extend({
 						open ='';				//...reset open
 					//cut tag's letters out
 					open += line.splice(o0,  o1-o0).join('');
-					console.log('+', open);
 					//reinsert tag's letters joined into single word (and position tag)
 					line.splice((prevo1 = o0), 0, open);
 				}

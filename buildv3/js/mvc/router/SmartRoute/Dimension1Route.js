@@ -10,7 +10,6 @@ App.Dimension1Route = App.SmartRoute.extend({
 				
 			},
 			SmartController_didInsertElement: function (acontroller, alabel) {
-				console.log('SmartController_didInsertElement')
 				switch (alabel) {
 					case 'SubtitleController': 
 						switch (acontroller.get('orderRead')) {

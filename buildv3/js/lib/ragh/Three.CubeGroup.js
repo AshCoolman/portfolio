@@ -172,7 +172,6 @@ CubeGroup.prototype = {
 		}
 		
 		var str = '\n\n';
-		console.log('MAX', maxX, maxY, maxZ);
 		for (var xs = 0; xs < map.length; xs++) {
 			if (!map[xs]) map[xs] = []
 			for (var ys = 0; ys < map[xs].length; ys++) {
@@ -186,7 +185,7 @@ CubeGroup.prototype = {
 				}
 			}
 		}
-		console.log(str);
+//		console.log(str);
 		
 		if (this.isMerge) {
 			mesh = new THREE.Mesh( this.geo, new THREE.MeshFaceMaterial(this.materials));

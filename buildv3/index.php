@@ -2,7 +2,7 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <?php
-$IS_DEPLOY = false;
+$IS_DEPLOY = true;
 ?>
 <head>
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
@@ -305,22 +305,22 @@ I know if I think about a problem laterally...
 			
 					    <li class="divider"></li>
 						{{#view view.NavListItemView item="doIndex" }}
-				            <a {{action doDimension1}} >1</a>
+				            <a {{action doIndex}} >0</a>
 				        {{/view}}
 			
 					    <li class="divider"></li>
 						{{#view view.NavListItemView item="doDimension1" }}
-				            <a {{action doDimension1}} >2</a>
+				            <a {{action doDimension1}} >1</a>
 				        {{/view}}
 			
 						<li class="divider"></li>
 				        {{#view view.NavListItemView item="doDimension2" }}
-				            <a {{action doDimension2}} >3</a>
+				            <a {{action doDimension2}} >2</a>
 				        {{/view}}
 			
 						<li class="divider"></li>
 				        {{#view view.NavListItemView item="doDimension3" }}
-				            <a {{action doDimension3}} >4</a>
+				            <a {{action doDimension3}} >3</a>
 				        {{/view}}   
 		
 						
@@ -641,7 +641,7 @@ Prototype inheritance
 
 if (!$IS_DEPLOY) { 
 	try {
-		$paths = array('js/lib/greensock/', 'js/lib/ragh/', 'js/mvc/');
+		$paths = array('js/lib/ragh/', 'js/mvc/');
 		foreach($paths as $path) {
 
 			$simpath = $path;
@@ -672,6 +672,12 @@ if (!$IS_DEPLOY) {
 	}
 }
 ?>
+ 
+<?php if (!$IS_DEPLOY) { ?>
+<script src="js/lib/greensock/plugins/CSSPlugin.min.js"></script>
+<script src="js/lib/greensock/easing/EasePack.min.js"></script>
+<script src="js/lib/greensock/TweenMax.min.js"></script>
+<?php } ?>
 
 <?php if ($IS_DEPLOY) { ?><script src="js/custom.min.js"></script> <?php } ?>
 	<script>

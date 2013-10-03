@@ -26,11 +26,9 @@ App.RulerView = App.SmartView.extend({
 		timeline.add(TweenLite.to(yRuler, 0.25, {'left':0, ease:Strong.easeOut}));
 		timeline.add(TweenLite.to(yRuler, 0.25, {'left':0, ease:Strong.easeOut}));
 		timeline.pause();
-		console.log('playing', left, bottom)
 		this.set('timeline', timeline);
 	},
 	setRuler: function (data) {
-		console.log('setRuler()', data)
 		var timeline = this.get('timeline'),
 			time = timeline.time();
 		timeline.tweenTo(this[data.posStr]);

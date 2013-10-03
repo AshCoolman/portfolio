@@ -9,7 +9,6 @@ App.QuestionMarkController = App.EslEntityController.extend({
 		var pixels = this.get('pixels');
 		pixels.push(apixelController); //TODO THIS IS SO YUK: see CoggedPixelController.view_didInsertElement()
 		this.set('pixels', pixels);
-		console.log('pixels['+pixels.length+']')
 	},
 	setVisible: function (val) {
 		this.get('view').doShowPixelInChildren();

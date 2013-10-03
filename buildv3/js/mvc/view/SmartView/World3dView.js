@@ -37,7 +37,7 @@ App.World3dView = App.SmartView.extend({
 	init: function () {
 		this._super();
 		
-		console.log('init');
+
 		this.set('isControls', false);
 		this.set('scene', null);
 		this.set('renderer', null);
@@ -85,7 +85,6 @@ App.World3dView = App.SmartView.extend({
 			camera = instanceVarObj.camera;
 			
 		if (val && !this.isQuestionMarkRotate && camera && pixelObjectList[this.QUESTION_MARK] && this.el) {
-			console.log('OBSERVED', val, this.el);
 			this.isQuestionMarkRotate = Object.createFromPrototype(
 					ragh.THREE.Dragger, 
 					{	camera:camera, 
@@ -176,7 +175,6 @@ App.World3dView = App.SmartView.extend({
 					var pixelatedObj = Object.createFromPrototype(CubeGroup, plans[p]),
 						pixelatedObjGroup = pixelatedObj.group;
 					
- 					console.log('pixelatedObj', plans[p].label,  pixelatedObj);
 					ainstanceVarObj.ignoreList.push(pixelatedObj.rollOverMesh);
 					ainstanceVarObj.scene.add(pixelatedObjGroup);
 					ainstanceVarObj.pixelObjectList[plans[p].label] = pixelatedObj;
@@ -239,7 +237,6 @@ App.World3dView = App.SmartView.extend({
 	},
 	
 	tryStart: function (ainstanceVarObj) {
-		console.log('tryStart', ainstanceVarObj.pixelObjectList[this.FACE_ASH], ainstanceVarObj.pixelObjectList[this.QUESTION_MARK], ainstanceVarObj.pixelObjectList);
 		
 		if (ainstanceVarObj.pixelObjectList[this.FACE_ASH] && ainstanceVarObj.pixelObjectList[this.QUESTION_MARK]) {
 			var rafFunction = function (me) {
