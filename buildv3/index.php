@@ -2,7 +2,7 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <?php
-$IS_DEPLOY = true;
+$IS_DEPLOY = false;
 ?>
 <head>
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
@@ -677,6 +677,8 @@ if (!$IS_DEPLOY) {
 <script src="js/lib/greensock/plugins/CSSPlugin.min.js"></script>
 <script src="js/lib/greensock/easing/EasePack.min.js"></script>
 <script src="js/lib/greensock/TweenMax.min.js"></script>
+<script src="js/lib/greensock/TimelineMax.min.js"></script>
+
 <?php } ?>
 
 <?php if ($IS_DEPLOY) { ?><script src="js/custom.min.js"></script> <?php } ?>

@@ -9,7 +9,7 @@ CSS_FILES = $(filter-out %-min.css,$(wildcard \
 # Patterns matching JS files that should be minified. Files with a -min.js
 # suffix will be ignored.
 
-#JS_GROUP = "lib"
+JS_GROUP = "lib"
 #JS_GROUP = "custom"
 #JS_GROUP = "foundation"
 
@@ -25,6 +25,7 @@ JS_FILES = $(filter-out %-min.js,$(wildcard \
 	js/lib/greensock/plugins/CSSPlugin.min.js \
 	js/lib/greensock/easing/EasePack.min.js \
 	js/lib/greensock/TweenMax.min.js \
+	js/lib/greensock/TimelineMax.min.js \
 ))
 endif
 
@@ -105,7 +106,7 @@ endif
 
 css/all.min.css:$(CSS_MINIFIED)
 	@echo '==>==>==>==> concating css $<'
-	cat $^ >$@
+	cat $^ =>$@
 	@echo
 
 

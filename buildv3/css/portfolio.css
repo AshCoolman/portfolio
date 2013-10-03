@@ -68,7 +68,9 @@ html, body {
   width: 100%;
   position: fixed;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  background-color: transparent !important;
+  background-position: left bottom; }
 
 .origin-name {
   position: fixed;
@@ -78,75 +80,63 @@ html, body {
   font-size: 14px; }
 
 .origin-x {
-  background-size: 40px 40px;
   left: 0;
   bottom: 0;
-  background-position: left bottom;
+  background-size: 40px 40px;
   background-color: transparent;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(19px, transparent), color-stop(19px, #d9d9d9), color-stop(20px, #d9d9d9), color-stop(20px, transparent));
   background-image: -webkit-linear-gradient(-180deg, transparent 19px, #d9d9d9 19px, #d9d9d9 20px, transparent 20px);
   background-image: linear-gradient(-90deg,transparent 19px, #d9d9d9 19px, #d9d9d9 20px, transparent 20px);
-  background-repeat: no-repeat;
-  background-color: transparent !important; }
+  background-repeat: no-repeat; }
 
 .origin-y {
-  background-size: 40px 40px;
   left: 0;
   bottom: 0;
-  background-position: left bottom;
+  background-size: 40px 40px;
   background-color: transparent;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(19px, transparent), color-stop(19px, #d9d9d9), color-stop(20px, #d9d9d9), color-stop(20px, transparent));
   background-image: -webkit-linear-gradient(transparent 19px, #d9d9d9 19px, #d9d9d9 20px, transparent 20px);
   background-image: linear-gradient(transparent 19px, #d9d9d9 19px, #d9d9d9 20px, transparent 20px);
-  background-repeat: no-repeat;
-  background-color: transparent !important; }
+  background-repeat: no-repeat; }
 
 .x-ruler {
-  background-size: 30px 20px;
   left: 20px;
   bottom: 0;
-  background-position: left bottom;
+  background-size: 30px 20px;
   background-color: #d9d9d9;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #d9d9d9), color-stop(1px, #d9d9d9), color-stop(1px, transparent), color-stop(29px, transparent), color-stop(29px, #d9d9d9));
   background-image: -webkit-linear-gradient(-360deg, #d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 29px, #d9d9d9 29px);
   background-image: linear-gradient(90deg,#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 29px, #d9d9d9 29px);
-  background-repeat: repeat-x;
-  background-color: transparent !important; }
+  background-repeat: repeat-x; }
 
 .x-ruler-minor {
   left: 20px;
-  background-size: 5px 10px;
   bottom: 0;
-  background-position: left bottom;
+  background-size: 5px 16px;
   background-color: #d9d9d9;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #d9d9d9), color-stop(1px, #d9d9d9), color-stop(1px, transparent), color-stop(4px, transparent));
   background-image: -webkit-linear-gradient(-360deg, #d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 4px);
   background-image: linear-gradient(90deg,#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 4px);
-  background-color: transparent !important;
   background-repeat: repeat-x; }
 
 .y-ruler {
-  bottom: 20px;
   left: 0;
+  bottom: 20px;
   background-size: 20px 30px;
-  background-position: left bottom;
   background-color: #d9d9d9;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #d9d9d9), color-stop(1px, #d9d9d9), color-stop(1px, transparent), color-stop(29px, transparent), color-stop(29px, #d9d9d9));
   background-image: -webkit-linear-gradient(#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 29px, #d9d9d9 29px);
   background-image: linear-gradient(#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 29px, #d9d9d9 29px);
-  background-color: transparent !important;
   background-repeat: repeat-y; }
 
 .y-ruler-minor {
-  bottom: 20px;
   left: 0;
-  background-size: 10px 5px;
-  background-position: left bottom;
+  bottom: 20px;
+  background-size: 16px 5px;
   background-color: #d9d9d9;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #d9d9d9), color-stop(1px, #d9d9d9), color-stop(1px, transparent), color-stop(5px, transparent), color-stop(5px, #d9d9d9));
   background-image: -webkit-linear-gradient(#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 5px, #d9d9d9 5px);
   background-image: linear-gradient(#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 5px, #d9d9d9 5px);
-  background-color: transparent !important;
   background-repeat: repeat-y; }
 
 .note {

@@ -127,6 +127,8 @@ html,body {
 	position:fixed;
 	margin:0;
 	padding:0;
+	background-color: transparent !important;
+	background-position: left bottom;
 }
 
 .origin-name {
@@ -138,94 +140,50 @@ html,body {
 }
 
 .origin-x {
-	background-size: 2*$rulerSize 2*$rulerSize;
 	left:0;
 	bottom:0;
-	background-position: left bottom;
-	@include linear-gradient(
-					-90deg,
-						transparent ($rulerSize - 1), 
-						$col_bg_lit ($rulerSize - 1),
-						$col_bg_lit $rulerSize,
-						transparent $rulerSize
-					);
-	background-repeat: no-repeat;
-	background-color: transparent !important	
+	background-size: 2*$rulerSize 2*$rulerSize;
+	@include linear-gradient( -90deg, transparent ($rulerSize - 1), $col_bg_lit ($rulerSize - 1), $col_bg_lit $rulerSize, transparent $rulerSize );
+	background-repeat: no-repeat;	
 }
 
 .origin-y {
-	background-size: 2*$rulerSize 2*$rulerSize;
 	left:0;
 	bottom:0;
-	background-position: left bottom;
-	@include linear-gradient(
-		transparent ($rulerSize - 1 ), 
-		$col_bg_lit ($rulerSize - 1),
-		$col_bg_lit $rulerSize,
-		transparent $rulerSize
-					);		
-	background-repeat: no-repeat;
-	background-color: transparent !important	
+	background-size: 2*$rulerSize 2*$rulerSize;
+	@include linear-gradient( transparent ($rulerSize - 1 ), $col_bg_lit ($rulerSize - 1), $col_bg_lit $rulerSize, transparent $rulerSize );		
+	background-repeat: no-repeat;	
 }
 
-
 .x-ruler {
-	background-size: 30px $rulerSize;
 	left:$rulerSize;
 	bottom:0;
-	background-position: left bottom;
-	@include linear-gradient(90deg, 
-						$col_bg_lit 0px, 
-						$col_bg_lit 1px,
-						transparent 1px,
-						transparent 29px,
-						$col_bg_lit 29px);
+	background-size: 30px $rulerSize;
+	@include linear-gradient(90deg, $col_bg_lit 0px, $col_bg_lit 1px, transparent 1px, transparent 29px, $col_bg_lit 29px);
 	background-repeat: repeat-x;
-	background-color: transparent !important;
 }
 
 .x-ruler-minor {
 	left:$rulerSize;
-	background-size:5px $rulerSize/2;
 	bottom:0;
-	background-position: left bottom;
-	@include linear-gradient(90deg, 
-						$col_bg_lit 0px, 
-						$col_bg_lit 1px, 
-						transparent 1px,
-						transparent 4px);
-	background-color: transparent !important;
+	background-size:5px $rulerSize*0.8;
+	@include linear-gradient(90deg, $col_bg_lit 0px, $col_bg_lit 1px, transparent 1px, transparent 4px);
 	background-repeat: repeat-x;
 }
 
 .y-ruler {
-	bottom:$rulerSize;
 	left:0;
+	bottom:$rulerSize;
 	background-size: $rulerSize 30px;
-	background-position: left bottom;
-	@include linear-gradient( 
-						$col_bg_lit 0px, 
-						$col_bg_lit 1px,
-						transparent 1px,
-						transparent 29px,
-						$col_bg_lit 29px);
-				background-color: transparent !important;
+	@include linear-gradient( $col_bg_lit 0px, $col_bg_lit 1px, transparent 1px, transparent 29px, $col_bg_lit 29px);
 	background-repeat: repeat-y;
 }
 
 .y-ruler-minor {
-	bottom:$rulerSize;
 	left:0;
-	background-size: $rulerSize/2 5px;
-	background-position: left bottom;
-	@include linear-gradient(
-						$col_bg_lit 0px, 
-						$col_bg_lit 1px, 
-						transparent 1px,
-						transparent 5px,
-						$col_bg_lit 5px
-			);
-				background-color: transparent !important;
+	bottom:$rulerSize;
+	background-size: $rulerSize*0.8 5px;
+	@include linear-gradient( $col_bg_lit 0px, $col_bg_lit 1px, transparent 1px, transparent 5px, $col_bg_lit 5px);
 	background-repeat: repeat-y;
 }
 
