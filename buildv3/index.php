@@ -579,7 +579,7 @@ Prototype inheritance
 			{{controlWithVars 'esl-entity-container'}}
 			
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyA; ?>"}}}
-			{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Find the elegant solution above..."}}}
+			{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Find the elegant idea above..."}}}
 			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="i.e. The big idea."}}}
 
 		</script>

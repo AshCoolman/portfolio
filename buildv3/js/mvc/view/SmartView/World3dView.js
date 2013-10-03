@@ -366,14 +366,15 @@ App.World3dView = App.SmartView.extend({
 			H = bp.HEIGHT_2,
 			canvasHeroClass,
 			canvasHeroHolderClass,
-			tmpwinWidth = this.tmpwinWidth = $(window).width();
+			tmpwinWidth = this.tmpwinWidth = $(window).width(),
+			tmpwinHeight = this.tmpwinHeight = $(window).height();
 
-		if (tmpwinWidth > bp.WIDTH_2) {
+		if (tmpwinWidth > bp.WIDTH_2 && tmpwinHeight > bp.HEIGHT_2 ) {
 			w = bp.WIDTH_2;
 			h = bp.HEIGHT_2; 
 			canvasHeroClass = 'canvas-hero';
 			canvasHeroHolderClass = 'canvas-hero-holder';
-		} else if (tmpwinWidth > bp.WIDTH_1) {
+		} else if (tmpwinWidth > bp.WIDTH_1 && tmpwinHeight > bp.HEIGHT_1 ) {
 			w = bp.WIDTH_1;
 			h = bp.HEIGHT_1;
 			canvasHeroClass = 'canvas-hero-med';
