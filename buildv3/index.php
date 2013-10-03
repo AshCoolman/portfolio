@@ -259,6 +259,9 @@ I know if I think about a problem laterally...
 			<div class="bg-layer y-ruler"></div>
 			<div class="bg-layer x-ruler-minor"></div>
 			<div class="bg-layer y-ruler-minor"></div>
+			<div class="bg-layer origin-x"></div>
+			<div class="bg-layer origin-y"></div>
+			<div class="origin-name">ASHLEY COLEMAN</div>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="transitions-holder">

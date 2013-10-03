@@ -21,7 +21,7 @@ $colDrk_Gen: #666699;
 $col_offwhite: #CCCCCC;
 $col_bg: #666666;
 $col_bg_lit: lighten($col_bg, 45%);
-$rulerSize: 1.5em;
+$rulerSize: 20px;
 /*
 http://jsfiddle.net/VAXrL/190/
 */
@@ -114,6 +114,46 @@ html,body {
 	padding:0;
 }
 
+.origin-name {
+	position: fixed;
+	bottom: 22px;
+	left: 43px;
+	color: #BBB;
+	font-size: 14px;
+}
+
+.origin-x {
+	background-size: 2*$rulerSize 2*$rulerSize;
+	left:0;
+	bottom:0;
+	background-position: left bottom;
+	@include linear-gradient(
+					-90deg,
+						transparent ($rulerSize - 1), 
+						$col_bg_lit ($rulerSize - 1),
+						$col_bg_lit $rulerSize,
+						transparent $rulerSize
+					);
+	background-repeat: no-repeat;
+	background-color: transparent !important	
+}
+
+.origin-y {
+	background-size: 2*$rulerSize 2*$rulerSize;
+	left:0;
+	bottom:0;
+	background-position: left bottom;
+	@include linear-gradient(
+		transparent ($rulerSize - 1 ), 
+		$col_bg_lit ($rulerSize - 1),
+		$col_bg_lit $rulerSize,
+		transparent $rulerSize
+					);		
+	background-repeat: no-repeat;
+	background-color: transparent !important	
+}
+
+
 .x-ruler {
 	background-size: 30px $rulerSize;
 	left:$rulerSize;
@@ -138,9 +178,7 @@ html,body {
 						$col_bg_lit 0px, 
 						$col_bg_lit 1px, 
 						transparent 1px,
-						transparent 4px
-						
-			);
+						transparent 4px);
 	background-color: transparent !important;
 	background-repeat: repeat-x;
 }
