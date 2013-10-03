@@ -53,14 +53,29 @@ $default-legacy-ie: 7 8 9 10 11 !default;
 	font-family: 'Ubuntu', sans-serif;
 }
 
+
 .top-bar {
+	font-weight: normal !important;
+	color:white !important;
 	z-index: $zIndexButton;
 	background: rgba(200,200,200,0.25);
 	border-bottom: dashed 1px #cccccc;
 	padding-left:1em;
 } 
+
+.top-bar ul, .top-bar h1, .top-bar li {
+	font-size:1.05em !important;
+}
+ .top-bar h1 {
+	font-weight: normal !important;
+	color:white !important;
+	padding:0 1em;
+}
+
 .top-bar-section li a:not(.button) {
 	background:transparent;
+	font-weight: normal !important;
+	color:white !important;
 }
 
 .top-bar-section ul {
@@ -284,8 +299,9 @@ html,body {
 	margin-bottom:1.5em;
 	pointer-events:none;
 	zoom: 1;
-	filter: alpha(opacity=95);
-	opacity: 0.95;
+	.text {
+		border-left: solid 0.5em $subtitleBackGroundColor;
+	}
 	a {
 		text-decoration:none;
 		pointer-events:auto;
@@ -342,7 +358,7 @@ html,body {
 	p {
 		
 		font-weight: inherit;
-		border-left-width: 0.5em;
+		border-left-width: 0em;
 		border-left-color: $subtitleBackGroundColor;
 		border-left-style: solid;
 	}
@@ -354,6 +370,10 @@ html,body {
 
 $subtitleBackGroundInstantColor:#666666;
 .subtitle-text-holder-instant {
+	
+	.text {
+		border-left: solid 0.5em $subtitleBackGroundInstantColor;
+	}
 	a {
 		
 	}
@@ -388,6 +408,9 @@ $subtitleBackGroundInstructionColor: #eeec34;
 }
 
 .subtitle-text-holder-instruction {
+	.text {
+		border-left: solid 0.5em $subtitleBackGroundInstructionColor;
+	}
 	a {
 		
 	}
@@ -420,12 +443,7 @@ $subtitleBackGroundInstructionColor: #eeec34;
 	top: -0.25em;
 }
 
-.click-hint-holder {
-	color:$col_offwhite;
-	margin:0.5em 0em;
-	position: absolute;
-	bottom:-0.5em;
-}
+
 .quote {
 	font-style:italic;
 	border-left-width: 3em;
@@ -685,14 +703,18 @@ $gridColor:rgba(50,50,50,0.25);
 
 
 .click-hint-holder {
+	color:$subtitleBackGroundInstructionColor;
+	margin:0.5em 0em;
+	position: absolute;
+	bottom:-0.5em;
 	-webkit-animation: pulsate 0.3s ease-out;
 	-webkit-animation-iteration-count: infinite;
 }
 
 @-webkit-keyframes pulsate {
-    0% { opacity: 0.85;}
+    0% { opacity: 0.65;}
     50% {opacity: 1.0;}
-    100% {opacity: 0.85;}
+    100% {opacity: 0.65;}
 }
 
 .graph-info { 

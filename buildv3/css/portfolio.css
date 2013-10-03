@@ -5,13 +5,25 @@ http://jsfiddle.net/VAXrL/190/
   font-family: 'Ubuntu', sans-serif; }
 
 .top-bar {
+  font-weight: normal !important;
+  color: white !important;
   z-index: 1000;
   background: rgba(200, 200, 200, 0.25);
   border-bottom: dashed 1px #cccccc;
   padding-left: 1em; }
 
+.top-bar ul, .top-bar h1, .top-bar li {
+  font-size: 1.05em !important; }
+
+.top-bar h1 {
+  font-weight: normal !important;
+  color: white !important;
+  padding: 0 1em; }
+
 .top-bar-section li a:not(.button) {
-  background: transparent; }
+  background: transparent;
+  font-weight: normal !important;
+  color: white !important; }
 
 .top-bar-section ul {
   background: transparent; }
@@ -193,9 +205,9 @@ html, body {
 .subtitle-text-holder {
   margin-bottom: 1.5em;
   pointer-events: none;
-  zoom: 1;
-  filter: alpha(opacity=95);
-  opacity: 0.95; }
+  zoom: 1; }
+  .subtitle-text-holder .text {
+    border-left: solid 0.5em white; }
   .subtitle-text-holder a {
     text-decoration: none;
     pointer-events: auto;
@@ -250,13 +262,15 @@ html, body {
       color: crimson; }
   .subtitle-text-holder p {
     font-weight: inherit;
-    border-left-width: 0.5em;
+    border-left-width: 0em;
     border-left-color: white;
     border-left-style: solid; }
 
 .subtitle .subtitle-text-holder-instant {
   color: #CCCCCC; }
 
+.subtitle-text-holder-instant .text {
+  border-left: solid 0.5em #666666; }
 .ie7 .subtitle-text-holder-instant .heading, .ie8 .subtitle-text-holder-instant .heading, .ie9 .subtitle-text-holder-instant .heading, .ie10 .subtitle-text-holder-instant .heading, .ie11 .subtitle-text-holder-instant .heading, .ie7 .subtitle-text-holder-instant p, .ie8 .subtitle-text-holder-instant p, .ie9 .subtitle-text-holder-instant p, .ie10 .subtitle-text-holder-instant p, .ie11 .subtitle-text-holder-instant p, .ie7 .subtitle-text-holder-instant li, .ie8 .subtitle-text-holder-instant li, .ie9 .subtitle-text-holder-instant li, .ie10 .subtitle-text-holder-instant li, .ie11 .subtitle-text-holder-instant li, .ie7 .subtitle-text-holder-instant ul, .ie8 .subtitle-text-holder-instant ul, .ie9 .subtitle-text-holder-instant ul, .ie10 .subtitle-text-holder-instant ul, .ie11 .subtitle-text-holder-instant ul {
   background-color: #666666;
   /* More background colour for browsers that don't support css pointer-events */ }
@@ -275,6 +289,8 @@ html, body {
 .subtitle .subtitle-text-holder-instruction {
   color: #37362a; }
 
+.subtitle-text-holder-instruction .text {
+  border-left: solid 0.5em #eeec34; }
 .ie7 .subtitle-text-holder-instruction .heading, .ie8 .subtitle-text-holder-instruction .heading, .ie9 .subtitle-text-holder-instruction .heading, .ie10 .subtitle-text-holder-instruction .heading, .ie11 .subtitle-text-holder-instruction .heading, .ie7 .subtitle-text-holder-instruction p, .ie8 .subtitle-text-holder-instruction p, .ie9 .subtitle-text-holder-instruction p, .ie10 .subtitle-text-holder-instruction p, .ie11 .subtitle-text-holder-instruction p, .ie7 .subtitle-text-holder-instruction li, .ie8 .subtitle-text-holder-instruction li, .ie9 .subtitle-text-holder-instruction li, .ie10 .subtitle-text-holder-instruction li, .ie11 .subtitle-text-holder-instruction li, .ie7 .subtitle-text-holder-instruction ul, .ie8 .subtitle-text-holder-instruction ul, .ie9 .subtitle-text-holder-instruction ul, .ie10 .subtitle-text-holder-instruction ul, .ie11 .subtitle-text-holder-instruction ul {
   background-color: #eeec34;
   /* More background colour for browsers that don't support css pointer-events */ }
@@ -294,12 +310,6 @@ html, body {
   position: absolute;
   left: -0.1em;
   top: -0.25em; }
-
-.click-hint-holder {
-  color: #cccccc;
-  margin: 0.5em 0em;
-  position: absolute;
-  bottom: -0.5em; }
 
 .quote {
   font-style: italic;
@@ -491,18 +501,22 @@ a {
   width: 100%; }
 
 .click-hint-holder {
+  color: #eeec34;
+  margin: 0.5em 0em;
+  position: absolute;
+  bottom: -0.5em;
   -webkit-animation: pulsate 0.3s ease-out;
   -webkit-animation-iteration-count: infinite; }
 
 @-webkit-keyframes pulsate {
   0% {
-    opacity: 0.85; }
+    opacity: 0.65; }
 
   50% {
     opacity: 1.0; }
 
   100% {
-    opacity: 0.85; } }
+    opacity: 0.65; } }
 
 .graph-info {
   width: 100%;

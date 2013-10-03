@@ -8,6 +8,7 @@ App.IndexRoute = App.SmartRoute.extend({
 				if (acontroller.get('readOrder') == '1') { this.subtitleController1 = acontroller; }
 				if (acontroller.get('readOrder') == '2') { this.subtitleController2 = acontroller; }
 				if (acontroller.get('readOrder') == '3') { this.subtitleController3 = acontroller; }
+				if (acontroller.get('readOrder') == '4') { this.subtitleController4 = acontroller; }
 				this.tryStart();
 			},
 			IndexNavController_didInsertElement: function (acontroller, alabel) {
@@ -28,6 +29,9 @@ App.IndexRoute = App.SmartRoute.extend({
 			doThirdSubtitle: function () {
 				this.subtitleController2.set('isCursor', false);
 		        this.subtitleController3.startReading();
+			},
+			doFourthSubtitle: function () {
+		        this.subtitleController4.startReading();
 			}
 		});
 
@@ -40,6 +44,7 @@ App.IndexRoute = App.SmartRoute.extend({
 		this.subtitleController1 = null;
 		this.subtitleController2 = null;
 		this.subtitleController3 = null;
+		this.subtitleController4 = null;
 	},
     doStart: function (type, data) {
         this.subtitleController1.startReading();
@@ -63,7 +68,7 @@ App.IndexRoute = App.SmartRoute.extend({
 		}
 	},
 	tryStart: function () {
-        if (!this.get('isStarted') && this.subtitleController1 && this.subtitleController2 && this.subtitleController3) {
+        if (!this.get('isStarted') && this.subtitleController1 && this.subtitleController2 && this.subtitleController3 && this.subtitleController4) {
 			this.get('isStarted', true);
             this.doStart()
         }

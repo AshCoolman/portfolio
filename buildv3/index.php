@@ -51,23 +51,35 @@ $IS_DEPLOY = false;
 
 
 <?php
-$indexCopyA = '@=<h3>
-Starting point: Ashley Coleman
+$indexCopyA = 'Starting point:
+@=<h3>
+Ashley Coleman
 @=</h3>
 
 Hi, I\'m Ash.
-
-I built this portfolio site (mainly) to give you a sense of who I am.
+I built this portfolio site (mainly) to show who I am.
 You are at the site\'s starting point, a.k.a the origin.
 From this origin I will describe my different dimensions.
 
-This website is also my development sandbox.
-Over time I throw in new ideas, technology tests etc.
-But for now, to continue click below:
-@actionOnRead=doSecondSubtitle';
+@actionOnRead=doSecondSubtitle
+@wait=1000
+@actionOnRead=doFourthSubtitle';
 $indexCopyA = addcslashes($indexCopyA, '"');
 
 ?>
+
+<?php
+$indexCopyB = '@=<h3>
+My Sandbox
+@=</h3>
+
+This website is also my development sandbox.
+Here I will experiment with new ideas, technology tests etc.
+So don\'t be surprised if things change!';
+$indexCopyB = addcslashes($indexCopyB, '"');
+
+?>
+
 
 <?php
 $indexCopyC = '<h3>Contact Details</h3>
@@ -88,13 +100,13 @@ $indexCopyC = addcslashes($indexCopyC, '"');
 $quot = htmlspecialchars("\"");
 
 
- $d1copyA = '@=<h3>
-My X: Software engineering
+ $d1copyA = 'My 1st dimension:
+@=<h3>
+Web development
 @=</h3>
-<b>Multimedia development</b> is my craft. These days the web is my platform. Thus I have experience in a number of useful <b>front-end and back-end</b> technologies. 
+Developing <b>multimedia</b> for the web is my craft and passion. I am mainly a <b>front-end</b> guy, but I am confident in the <b>back-end</b>. I have worked in teams big and small, and in every stage of development. I like my code to be quick and reusable, and I am comfortable integrating processing and tools into my workflow to produce compliant code. 
 
-I always look for a user experience that has humility and and utility. My project philosophy is to nurture the requirements.
-A coding style that emphases speed and reusability. And as a certain <a href="http://goo.gl/O5dnGf" target="_blank">clever cookie</a> once said:
+However, if the the need arises I am happy to hack it. As a certain <a href="http://goo.gl/O5dnGf" target="_blank">clever cookie</a> once said:
 
 <i class="quote"><sup class="icon-quote-left superscript"></sup> Real artists ship <sup class="icon-quote-right superscript"></sup>
 @actionOnRead=doSubtitle2 1500
@@ -149,8 +161,9 @@ $obligatoryList = addcslashes($obligatoryList, '"');
 ?>
 
 <?php 
-$d2copyA =  '@=<h3>
-Y: The Storyteller
+$d2copyA =  'My 2nd dimension:
+@=<h3>
+Storytelling
 @=</h3>
 I love to induce change in an audience, be it knowledge, emotion or opinion.
 To induce change, the user must be guided through a carefully curated environment to an end goal. 
@@ -163,18 +176,20 @@ If the question is how to build a communicate environment...
 ?>
 
 <?php
-$d3copyA = '@=<h3>
-Z: The Creative 
+$d3copyA = 'My 3rd dimension:
+@=<h3>
+Creativity 
 @=</h3>
 Creative thinking is important to me.
 I know if I think about a problem laterally... 
 @wait=1000
 @actionOnRead=doRotateQuestionMarkHint
 @wait=2000
-
-...very often a simple and elegant solution can be found.
+...very often a simple and elegant solution can be found...
 @wait=2000
-@actionOnRead=doRotateQuestionMark'; 
+@actionOnRead=doRotateQuestionMark
+@wait=500
+@actionOnRead=doRotateQuestionMarkInstruction'; 
 ?>
 
 		<script type="text/x-handlebars" data-template-name="application">
@@ -280,7 +295,7 @@ I know if I think about a problem laterally...
 		<script type="text/x-handlebars" data-template-name="nav-list">
 			<nav class="top-bar">
 				<ul class="title-area">
-					<li class="name"> <h1><a href="#"><i class="icon-circle-blank"></i></a></h1> </li>
+					<li class="name"> <h1>Ashley Coleman by dimension:</h1> </li>
 			    	<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
 				</ul>
 			
@@ -289,18 +304,23 @@ I know if I think about a problem laterally...
 						<!-- Title Area -->
 			
 					    <li class="divider"></li>
+						{{#view view.NavListItemView item="doIndex" }}
+				            <a {{action doDimension1}} >1</a>
+				        {{/view}}
+			
+					    <li class="divider"></li>
 						{{#view view.NavListItemView item="doDimension1" }}
-				            <a {{action doDimension1}} >X</a>
+				            <a {{action doDimension1}} >2</a>
 				        {{/view}}
 			
 						<li class="divider"></li>
 				        {{#view view.NavListItemView item="doDimension2" }}
-				            <a {{action doDimension2}} >Y</a>
+				            <a {{action doDimension2}} >3</a>
 				        {{/view}}
 			
 						<li class="divider"></li>
 				        {{#view view.NavListItemView item="doDimension3" }}
-				            <a {{action doDimension3}} >Z</a>
+				            <a {{action doDimension3}} >4</a>
 				        {{/view}}   
 		
 						
@@ -322,10 +342,18 @@ I know if I think about a problem laterally...
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="index">		
-
-			{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $indexCopyA; ?>"}}}
-			{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=X...,One...,Who...,What..." isLink=true linkEvent="doGotoDimension1" hoverEvent="doDimensionNavHover"}}}
-			{{{controlWithVars 'subtitle' readOrder='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $indexCopyC; ?>"}}}
+			
+			<div class="row">
+				<div class="columns large-6  small-6">		
+					{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $indexCopyA; ?>"}}}
+					{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=X...,One...,Who...,What..." isLink=true linkEvent="doGotoDimension1" hoverEvent="doDimensionNavHover"}}}
+					
+				</div>
+				<div class="columns large-6 small-6">
+					{{{controlWithVars 'subtitle' readOrder='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $indexCopyC; ?>"}}}
+					{{{controlWithVars 'subtitle' readOrder='4' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $indexCopyB; ?>"}}}
+				</div>
+			</div>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="dimension1-background">
@@ -582,8 +610,8 @@ Prototype inheritance
 			{{controlWithVars 'esl-entity-container'}}
 			
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyA; ?>"}}}
-			{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Find the elegant idea above..."}}}
-			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="i.e. The big idea."}}}
+			{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Find the elegant idea above (think <i>laterally</i>)..."}}}
+			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="Nice one!"}}}
 
 		</script>
 

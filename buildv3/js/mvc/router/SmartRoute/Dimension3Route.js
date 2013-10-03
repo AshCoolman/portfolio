@@ -21,12 +21,12 @@ App.Dimension3Route = App.SmartRoute.extend({
 			SubtitleController_didInsertElement: function (acontroller, alabel) { },
 
 			doRotateQuestionMarkHint: function () {
-				console.log('ROTATE TIME HINT');
 				this.world3dController.doRotateQuestionMarkHint();
-				this.subtitleInstructionController.startReading();
 			},
 
-
+			doRotateQuestionMarkInstruction: function () {
+				this.subtitleInstructionController.startReading();
+			},
 
 			doRotateQuestionMark: function () {
 				console.log('ROTATE TIME');
