@@ -547,7 +547,6 @@ Prototype inheritance
 		
 		<script type="text/x-handlebars" data-template-name="dimension2">
 			<div class="full-width-centered">
-				{{renderWithVars 'interactive-grid' pixW=20 pixH=20 isPlotX=false}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
 			
