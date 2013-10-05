@@ -12,12 +12,30 @@ App.QuestionMarkView = App.EslEntityView.extend({
 		y: 0,
 		fromController: ['x', 'y', 'width', 'height', 'visible']
 	},
-
+	didInsertElement: function () {
+		
+		var img = App.PRELOADER.queue.getResult('question-pixel'),
+			str = '\n\n';
+		
+		if (img) {
+			var mapElementFunc = function (me) {
+					return function (x, y, z, col) {
+						console.log('watched', x, y, z, col);
+						str += '{{controlWithVars "cogged-pixel" cogged-pixel x='+(-15+(xs+2)*sz)+' y='+(240+(0.5-maxY+ys)*sz)+' height=30 width=30}}\n'
+					}
+				}(this),
+				onCompleteFunc = function (me) {
+					return function (amap) {
+						console.log('map is completed\n'+str)
+					}
+				}(this);
+			ragh.createJsonMapFromImage(img, mapElementFunc, onCompleteFunc);
+		}
+	},
+	
 	doShowPixelInChildren: function (dur) {
 
 		console.log('view.doShowPixelInChildren');
-
-//		console.log(this.handle.children)
 		this.handle.visible = true;
 		var rIndexAr = [],
 			pixels = this.handle.children,

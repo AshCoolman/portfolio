@@ -18,7 +18,6 @@ App.World2dView = App.ActiveEslStageView.extend({
 			//get('controller').send('view_didInsertElement', this); 
 			src.$canvas = $('.esl-stage-canvas', $el).addClass('src-world-2d');
 			src.$canvas.attr( { width: App.BREAKPOINT.WIDTH_2 , height: App.BREAKPOINT.HEIGHT_2 } );
-			console.log('src.$canvas', src.$canvas);
 			src.canvas=src.$canvas[0];
 			src.context = src.canvas.getContext("2d");
 			src.stage = stage;

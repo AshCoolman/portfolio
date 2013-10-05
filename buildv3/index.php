@@ -51,16 +51,15 @@ $IS_DEPLOY = false;
 
 
 <?php
-$indexCopyA = 'Starting point:
+$indexCopyA = '@actionOnRead=doInstruction
 @=<h3>
-Ashley Coleman
+Hi, I\'m Ashley Coleman 
 @=</h3>
+<i>The starting point</i>
 
-Hi, I\'m Ash.
-I built this portfolio site (mainly) to show who I am.
-You are at the site\'s starting point, a.k.a the origin.
+I built this portfolio site to show who I am.
+You are at the site\'s starting point, a.k.a the <i>origin</i>.
 From this origin I will describe my different dimensions.
-
 @actionOnRead=doSecondSubtitle
 @wait=1000
 @actionOnRead=doFourthSubtitle';
@@ -72,8 +71,7 @@ $indexCopyA = addcslashes($indexCopyA, '"');
 $indexCopyB = '@=<h3>
 My Sandbox
 @=</h3>
-
-This website is also my development sandbox.
+This website has a secondary role as a development sandbox.
 Here I will experiment with new ideas, technology tests etc.
 So don\'t be surprised if things change!';
 $indexCopyB = addcslashes($indexCopyB, '"');
@@ -100,13 +98,14 @@ $indexCopyC = addcslashes($indexCopyC, '"');
 $quot = htmlspecialchars("\"");
 
 
- $d1copyA = 'My 1st dimension:
-@=<h3>
+ $d1copyA = '@=<h3>
 Web development
 @=</h3>
-Developing <b>multimedia</b> for the web is my craft and passion. I am mainly a <b>front-end</b> guy, but I am confident in the <b>back-end</b>. I have worked in teams big and small, and in every stage of development. I like my code to be quick and reusable, and I am comfortable integrating processing and tools into my workflow to produce compliant code. 
+<i>My 1<sup>st</sup> dimension</i>
 
-However, if the the need arises I am happy to hack it. As a certain <a href="http://goo.gl/O5dnGf" target="_blank">clever cookie</a> once said:
+Developing <b>multimedia</b> for the web is my craft and passion. I\'ve worked in <b>front-end</b> and <b>back-end</b>, in teams and solo, and in every stage of development. I like my code to be reusable and readable, and am comfortable with a variety of development tools. 
+
+However, if the the need arises I\'m not above hacking it. As a certain <a href="http://goo.gl/O5dnGf" target="_blank">clever cookie</a> once said:
 
 <i class="quote"><sup class="icon-quote-left superscript"></sup> Real artists ship <sup class="icon-quote-right superscript"></sup>
 @actionOnRead=doSubtitle2 1500
@@ -161,25 +160,27 @@ $obligatoryList = addcslashes($obligatoryList, '"');
 ?>
 
 <?php 
-$d2copyA =  'My 2nd dimension:
-@=<h3>
+$d2copyA =  '@=<h3>
 Storytelling
 @=</h3>
-I love to induce change in an audience, be it knowledge, emotion or opinion.
-To induce change, the user must be guided through a carefully curated environment to an end goal. 
- 
-If the question is how to build a communicate environment...
+<i>My 2<sup>nd</sup> dimension</i>
+
+The reason I build things, is because I love inducing change in an audience.
+That change could be knowledge, or opinion, or emotion.
+
+If the question is how to build a communicate environment,
 @actionOnRead=doShowQuestion
 @wait=1200
- ...I understand how to work technology into the background, to leave an answer.
+ then I understand how to work technology into the background, to leave an answer.
 @actionOnRead=doSubtitle2';
 ?>
 
 <?php
-$d3copyA = 'My 3rd dimension:
-@=<h3>
+$d3copyA = '@=<h3>
 Creativity 
 @=</h3>
+<i>My 3<sup>rd</sup> dimension</i>
+
 Creative thinking is important to me.
 I know if I think about a problem laterally... 
 @wait=1000
@@ -190,6 +191,10 @@ I know if I think about a problem laterally...
 @actionOnRead=doRotateQuestionMark
 @wait=500
 @actionOnRead=doRotateQuestionMarkInstruction'; 
+
+$d3copyB = 'Nice one!
+
+That little jolt of inspiration where it just comes together, that is what I am after.';
 ?>
 
 		<script type="text/x-handlebars" data-template-name="application">
@@ -305,22 +310,22 @@ I know if I think about a problem laterally...
 			
 					    <li class="divider"></li>
 						{{#view view.NavListItemView item="doIndex" }}
-				            <a {{action doIndex}} >0</a>
+				            <h1><a {{action doIndex}} >0d</a></h1>
 				        {{/view}}
 			
 					    <li class="divider"></li>
 						{{#view view.NavListItemView item="doDimension1" }}
-				            <a {{action doDimension1}} >1</a>
+				            <h1><a {{action doDimension1}} >1d</a></h1>
 				        {{/view}}
 			
 						<li class="divider"></li>
 				        {{#view view.NavListItemView item="doDimension2" }}
-				            <a {{action doDimension2}} >2</a>
+				            <h1><a {{action doDimension2}} >2d</a></h1>
 				        {{/view}}
 			
 						<li class="divider"></li>
 				        {{#view view.NavListItemView item="doDimension3" }}
-				            <a {{action doDimension3}} >3</a>
+				            <h1><a {{action doDimension3}} >3d</a></h1>
 				        {{/view}}   
 		
 						
@@ -610,7 +615,7 @@ Prototype inheritance
 			
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyA; ?>"}}}
 			{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Find the elegant idea above (think <i>laterally</i>)..."}}}
-			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="Nice one!"}}}
+			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyB; ?>"}}}
 
 		</script>
 

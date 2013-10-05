@@ -143,27 +143,32 @@ App.SubtitleController = App.SmartController.extend({
 			}	
 		} 
 		
-		//Put tags back together again as letters
+		
+		if (editList.length == 0) {
 
-		for (var l = 0; l < srcLines.length; l++) {
-			var open = line = o0 = o1 = prevo1 = 0;
-			//if line is not a special '@' command
-			if (((line = srcLines[l])[0]) != '@') {
-				//If no open, find it
-				while ((o0 = line.indexOf('<')) != -1 && (o1 = line.indexOf('>', o0)) != -1) {
-					
-					//if prev tag is right next to this...
-					if (false &&  prevo1 && prevo1 == o0 + 1 )
-						line.splice(prevo1, 1); //...remove prev tag
-					else 
-						open ='';				//...reset open
-					//cut tag's letters out
-					open += line.splice(o0,  o1-o0).join('');
-					//reinsert tag's letters joined into single word (and position tag)
-					line.splice((prevo1 = o0), 0, open);
+			//Put tags back together again as letters
+
+			for (var l = 0; l < srcLines.length; l++) {
+				var open = line = o0 = o1 = prevo1 = 0;
+				//if line is not a special '@' command
+				if (((line = srcLines[l])[0]) != '@') {
+					//If no open, find it
+					while ((o0 = line.indexOf('<')) != -1 && (o1 = line.indexOf('>', o0)) != -1) {
+
+						//if prev tag is right next to this...
+						if (false &&  prevo1 && prevo1 == o0 + 1 )
+							line.splice(prevo1, 1); //...remove prev tag
+						else 
+							open ='';				//...reset open
+						//cut tag's letters out
+						open += line.splice(o0,  o1-o0).join('');
+						//reinsert tag's letters joined into single word (and position tag)
+						line.splice((prevo1 = o0), 0, open);
+					}
 				}
-			}
+			}	
 		}
+		
 		
 		this.setText(['']);
 		this.set('atLine', atLine);
@@ -487,6 +492,7 @@ App.SubtitleController = App.SmartController.extend({
 	startReading: function () {
 //		console.log('start reading', this.get('orderRead'))
 		if (this.get('isInstant')) {
+			this.get('view').doShow();
 			this.doForceFinish();
 		} else {
 			var rafFunction = function(me) {

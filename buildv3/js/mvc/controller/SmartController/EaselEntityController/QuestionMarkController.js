@@ -2,9 +2,6 @@ App.QuestionMarkController = App.EslEntityController.extend({
 	className:'QuestionMarkController',
 	label:'QuestionMarkController',
 	pixels: [],
-	view_eslEntityCreated: function (acontroller) {
-		this._super(acontroller);
-	},
 	CoggedPixelControllerCreated: function (apixelController) {
 		var pixels = this.get('pixels');
 		pixels.push(apixelController); //TODO THIS IS SO YUK: see CoggedPixelController.view_didInsertElement()

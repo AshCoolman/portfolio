@@ -28,7 +28,14 @@ App.SubtitleView = App.SmartView.extend({
 				me.get('controller').send('doClicked');
 			}
 		}(this) );
+		if (this.get('controller').get('isInstant')) {
+			$('.text', this.get('$el')).addClass('fader fade-out');
+		}
 		return this._super();
+	},
+	
+	doShow: function () {
+		$('.text', this.get('$el')).removeClass('fade-out').addClass('fade-in');
 	},
 	
 	willDestroyElement: function () {

@@ -20,6 +20,9 @@ App.IndexRoute = App.SmartRoute.extend({
 			doGotoDimension1: function () {	
 				window.location.hash = 'd1';
 			},
+			doInstruction: function () {
+				
+			},
 			doSecondSubtitle: function () {
 				this.subtitleController1.set('isCursor', false);
 		        this.subtitleController2.startReading();

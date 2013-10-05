@@ -18,7 +18,6 @@ App.World2dController = App.ActiveEslStageController.extend({
 		App.eventMapper.removeEventListener( 'W2dE_addPixel', this );
 	},
 	addQuestionMark: function () {
-		console.log('C.addQuestionMark')
 		this.get('view').addQuestionMark();
 	}
 })
