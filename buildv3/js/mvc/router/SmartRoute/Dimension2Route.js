@@ -1,5 +1,5 @@
 App.Dimension2Route = App.SmartRoute.extend({ 
-	questionMarkController: null,
+	questionController: null,
 	model: function () {
 		return (App.dimension2Model) ? App.dimension2Model : App.Dimension2Model.create();
 	},
@@ -11,8 +11,8 @@ App.Dimension2Route = App.SmartRoute.extend({
 						case 'World2dController': 
 							this.world2dController = acontroller;
 							break;
-						case 'QuestionMarkController': 
-							this.questionMarkController = acontroller; 
+						case 'QuestionController': 
+							this.questionController = acontroller; 
 							break;
 						case 'SubtitleController': 
 							switch (acontroller.get('orderRead')) {
@@ -32,12 +32,12 @@ App.Dimension2Route = App.SmartRoute.extend({
 					window.location.hash = 'd3';
 				},
 				doShowQuestion: function () {
-					//this.questionMarkController.setVisible();
+					//this.questionController.setVisible();
 					
-					this.questionMarkController.doShowPixelInChildren(1200);
+					this.questionController.doShowPixelInChildren(1200);
 					setTimeout(function (me) {
 						return function () {
-							me.questionMarkController.doCogOpen(1200);
+							me.questionController.doCogOpen(1200);
 						}
 					}(this), 1400);
 					
@@ -53,7 +53,7 @@ App.Dimension2Route = App.SmartRoute.extend({
 	},
 	deactivate: function () {
 		this._super();
-		this.questionMarkController = null;
+		this.questionController = null;
 		this.world2dController = null;
 	},
 	renderTemplate: function () {
@@ -70,7 +70,7 @@ App.Dimension2Route = App.SmartRoute.extend({
 	},
  
 	tryStart: function () {
-        if (!this.get('isStarted') && this.questionMarkController && this.world2dController && this.subtitleController1 && this.subtitleController2) {
+        if (!this.get('isStarted') && this.questionController && this.world2dController && this.subtitleController1 && this.subtitleController2) {
 			this.set('isStarted', true);
             this.doStart();
 		}

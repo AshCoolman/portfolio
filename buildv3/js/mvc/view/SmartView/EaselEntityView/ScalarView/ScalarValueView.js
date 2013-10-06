@@ -46,7 +46,7 @@ App.ScalarValueView = App.ScalarView.extend({
 	},
 	override_draw: function (asettings) {
 		//console.log('scalar.override_draw() VALUE', this.controller.get('value'));
-			var settings = asettings ? asettings : this.eslObj,
+			var settings = asettings ? asettings : this.get('eslObj'),
 				shp = this.shp,
 				container = this.container,
 				text = this.text;

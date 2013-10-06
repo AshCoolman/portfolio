@@ -40,11 +40,11 @@ ragh.createJsonMapFromImage = function (img, mapElementFunc, onCompleteFunc) {
 				var decColor = ( 65536 * id[i+0] + 256 * id[i+1] + id[i+2] ).toString(16);
 				
 				map[x][y][0] = {color: '#'+decColor};
-				mapElementFunc(x, y, 0, map[x][y][0]);
 			}
 		}
 		//Get maximums TODO get from imgData
-		for (var xs = 0; xs < map.length; xs++) {
+		var maxX = maxY = maxZ = 0;
+		for (var xs = 0; xs < map.length; xs++) { 
 			if (!map[xs]) map[xs] = []
 			for (var ys = 0; ys < map[xs].length; ys++) {
 				if (!map[xs][ys]) map[xs][ys] = []
@@ -57,6 +57,7 @@ ragh.createJsonMapFromImage = function (img, mapElementFunc, onCompleteFunc) {
 				}
 			}
 		}
+		console.log('set maxs', maxX, maxY, maxZ)
 		//Call mapElementFunc
 		for (var xs = 0; xs < map.length; xs++) {
 			if (!map[xs]) map[xs] = []
@@ -64,7 +65,7 @@ ragh.createJsonMapFromImage = function (img, mapElementFunc, onCompleteFunc) {
 				if (!map[xs][ys]) map[xs][ys] = []
 				for (var zs = 0; zs < map[xs][ys].length; zs++) {
 					if (map[xs][ys][zs]) {
-						mapElementFunc(x, y, 0, map[x][y][0], maxX, maxY, 0);
+						mapElementFunc(xs, ys, 0, map[xs][ys][0], maxX, maxY, 0);
 					}
 				}
 			}

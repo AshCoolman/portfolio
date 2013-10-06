@@ -1,27 +1,31 @@
-App.QuestionMarkView = App.EslEntityView.extend({
-	templateName: 'question-mark',
-	className: 'QuestionMarkView',
-	label: 'question-mark',
+App.TemplatedPixelGroupView = App.EslEntityView.extend({
+	templateName: 'templated-pixel-group',
+	className: 'TemplatedPixelGroupView',
+	label: 'templated-pixel-group',
 	pixels: [],
 	shp: null,
 	handle: null,
+	imgPreloadId: 'question-pixel',
 	eslObjSettings: {
-		width: 30,
-		height: 30,
+		width: App.PIXEL_SIZE,
+		height: App.PIXEL_SIZE,
 		x: 0,
 		y: 0,
 		fromController: ['x', 'y', 'width', 'height', 'visible']
 	},
 	didInsertElement: function () {
-		
-		var img = App.PRELOADER.queue.getResult('question-pixel'),
-			str = '\n\n';
+		this._super();
+		var img = App.preloadedImages[this.get('imgPreloadId')],
+			str = '\n'+this.get('imgPreloadId')+'\n';
 		
 		if (img) {
 			var mapElementFunc = function (me) {
-					return function (x, y, z, col) {
-						console.log('watched', x, y, z, col);
-						str += '{{controlWithVars "cogged-pixel" cogged-pixel x='+(-15+(xs+2)*sz)+' y='+(240+(0.5-maxY+ys)*sz)+' height=30 width=30}}\n'
+					return function (x, y, z, el, maxX, maxY, maxZ) {
+					
+						var x2d = (-15+(x+2)*App.PIXEL_SIZE),
+							y2d = (240+(0.5-maxY+y)*App.PIXEL_SIZE);
+						
+						str += '{{controlWithVars "cogged-pixel" cogged-pixel x='+x2d+' y='+y2d+' height='+App.PIXEL_SIZE+' width='+App.PIXEL_SIZE+'}}\n'
 					}
 				}(this),
 				onCompleteFunc = function (me) {
@@ -70,11 +74,11 @@ App.QuestionMarkView = App.EslEntityView.extend({
 	},
 	
 	override_draw: function(asettings) {
-		Em.assert('App.PixelView.draw(): method can\'t run without eslObj being created. eslObj = '+ this.eslObj, this.eslObj);
+		Em.assert('App.PixelView.draw(): method can\'t run without eslObj being created. eslObj = '+ this.get('eslObj'), this.get('eslObj'));
 		Em.assert('App.PixelView.draw(): method can\'t run without handle being created. handle = '+ this.handle, this.handle);
 		Em.assert('App.PixelView.draw(): method can\'t run without shp being created. shp = '+ this.shp, this.shp);
 		
-		var settings = asettings ? asettings : this.eslObj,
+		var settings = asettings ? asettings : this.get('eslObj'),
 			shp = this.shp,
 			handle = this.handle;
 			

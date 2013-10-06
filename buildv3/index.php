@@ -564,28 +564,178 @@ Prototype inheritance
 
 		<script type="text/x-handlebars" data-template-name="world-2d">
 			<div class="canvas-hero-holder"></div>
-			{{controlWithVars 'ash' ash x=-420 }}
-			{{controlWithVars 'question-mark' question-mark x=0 visible=false}}
+			{{controlWithVars 'ash' ash x=-540 img="img//face-ash.png"}}
+			
+			{{controlWithVars 'machine' machine x=-180 y=90 visible=true}}
+			{{controlWithVars 'question' question x=-120 y=0 visible=false}}
+			{{controlWithVars 'user' user x=120 y=90 visible=true}}
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="knob">
 		    knob
 		</script>
 
-		<script type="text/x-handlebars" data-template-name="question-mark">
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=75 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=105 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=45 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=45 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=195 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=255 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=45 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=165 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=75 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=105 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=135 height=30 width=30}}
+		<script type="text/x-handlebars" data-template-name="question">
+			{{controlWithVars "pixel" pixel x=45 y=105 height=30 width=30}}
+			{{controlWithVars "pixel" pixel x=75 y=75 height=30 width=30}}
+			{{controlWithVars "pixel" pixel x=105 y=75 height=30 width=30}}
+			{{controlWithVars "pixel" pixel x=105 y=195 height=30 width=30}}
+			{{controlWithVars "pixel" pixel x=105 y=255 height=30 width=30}}
+			{{controlWithVars "pixel" pixel x=135 y=75 height=30 width=30}}
+			{{controlWithVars "pixel" pixel x=135 y=165 height=30 width=30}}
+			{{controlWithVars "pixel" pixel x=165 y=105 height=30 width=30}}
+			{{controlWithVars "pixel" pixel x=165 y=135 height=30 width=30}}
 		</script>
 
+		<script type="text/x-handlebars" data-template-name="user">
+		{{controlWithVars "pixel" pixel x=45 y=105 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=75 y=-45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=75 y=-15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=75 y=15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=75 y=45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=75 y=75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=75 y=105 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=75 y=135 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=75 y=165 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=75 y=195 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=105 y=-75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=105 y=-45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=105 y=-15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=105 y=15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=105 y=45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=105 y=75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=105 y=105 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=105 y=135 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=105 y=165 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=105 y=195 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=135 y=-75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=135 y=-45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=135 y=-15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=135 y=15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=135 y=45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=135 y=75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=135 y=105 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=135 y=135 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=135 y=165 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=135 y=195 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=165 y=-75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=165 y=-45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=165 y=-15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=165 y=15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=165 y=45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=165 y=75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=165 y=105 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=165 y=135 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=165 y=165 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=165 y=195 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=195 y=-75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=195 y=-45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=195 y=-15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=195 y=15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=195 y=45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=195 y=75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=195 y=105 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=195 y=135 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=195 y=165 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=195 y=195 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=195 y=225 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=195 y=255 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=225 y=-75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=225 y=-45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=225 y=-15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=225 y=15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=225 y=45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=225 y=75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=225 y=105 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=225 y=135 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=225 y=165 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=225 y=195 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=225 y=225 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=225 y=255 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=255 y=-75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=255 y=-45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=255 y=-15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=255 y=15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=255 y=45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=255 y=75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=255 y=105 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=255 y=135 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=255 y=165 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=255 y=195 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=255 y=225 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=255 y=255 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=285 y=-75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=285 y=-45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=285 y=-15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=285 y=15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=285 y=45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=285 y=75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=285 y=105 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=285 y=135 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=285 y=165 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=285 y=195 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=285 y=225 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=285 y=255 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=315 y=-75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=315 y=-45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=315 y=-15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=315 y=15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=315 y=45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=315 y=75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=315 y=105 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=315 y=135 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=315 y=165 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=315 y=225 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=315 y=255 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=345 y=-45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=345 y=-15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=345 y=15 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=345 y=45 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=345 y=75 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=345 y=105 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=345 y=135 height=30 width=30}}
+		{{controlWithVars "pixel" pixel x=345 y=255 height=30 width=30}}
+		</script>
+		
+		
+		<script type="text/x-handlebars" data-template-name="machine">
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=-45 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=-15 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=15 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=45 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=75 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=105 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=135 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=165 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=195 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=225 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=-75 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=255 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=-75 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=255 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=-75 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=255 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=-75 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=255 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=-75 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=255 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=-75 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=255 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=-75 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=255 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=-45 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=-15 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=15 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=45 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=75 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=105 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=135 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=165 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=195 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=225 height=30 width=30}}
+		</script>
+		
+		
 		<script type="text/x-handlebars" data-template-name="esl-entity-container">
 
 		</script>

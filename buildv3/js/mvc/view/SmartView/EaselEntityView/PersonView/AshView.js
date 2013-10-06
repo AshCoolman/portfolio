@@ -6,21 +6,22 @@ App.AshView = App.EslEntityView.extend({
 	eslObjSettings: {
 		x: 0,
 		y: 0,
-		fromController: ['x', 'y']
+		fromController: ['x', 'y', 'img', 'scaleX']
 	},
-	override_createEsl: function () {
+	override_createEsl: function (asettings) {
 		var shp = new createjs.Shape();
-		var img = new createjs.Bitmap('img//face-ash.png');
+		var img = new createjs.Bitmap(asettings.img);
+		console.log('img', asettings.img)
 		var container = new createjs.Container();
 		container.addChild(shp);
 		container.addChild(img);
 		return container;
 	},
 	override_draw: function(asettings) {
-		var settings = asettings ? asettings : this.eslObj
- 		this.eslObj.scaleX = 1;
-		this.eslObj.x=settings.x; //-1; //HACK WHY?
-		this.eslObj.y=settings.y; //-1; //HACK WHY?
+		var settings = asettings ? asettings : this.get('eslObj')
+ 		this.get('eslObj').scaleX = settings.scaleX || 1;
+		this.get('eslObj').x=settings.x; //-1; //HACK WHY?
+		this.get('eslObj').y=settings.y; //-1; //HACK WHY?
 		
 		
 	},
@@ -30,8 +31,8 @@ App.AshView = App.EslEntityView.extend({
 	override_reDraw: function (dur) {
 		
 		var change = 30/1000 * dur; //per second
-		if (this.eslObj) {
-			with (this.eslObj) {
+		if (this.get('eslObj')) {
+			with (this.get('eslObj')) {
 				//x = (x > 1200) ? -300 : x+change;
 			}
 		}

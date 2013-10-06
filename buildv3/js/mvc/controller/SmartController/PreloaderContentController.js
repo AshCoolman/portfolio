@@ -24,15 +24,20 @@ App.PreloaderContentController = App.SmartController.extend({
 				me.isLoadedList.push(item.src);
 				me.set('infoHtml', me.isLoadedList.join(' loaded<br/>'));			
 			     if (type == createjs.LoadQueue.IMAGE) { }
+		
+				App.preloadedImages[item.id] = event.result;
 			}
 		}(this)) );
 		//queue.loadFile({id:"sound", src:"http://path/to/sound.mp3"});
 		this.queue.loadManifest([
 		  	{id: "copy", src:"txt/copy.txt"+(App.DEBUG ? '?'+Math.random() : '')},
 			{id: "face-ash-pixel", src:'img//face-ash-pixel.png'},
-			{id: "question-pixel", src:'img//question-pixel.png'},
 			{id: "face-ash", src:'img//face-ash.png'},
-			{id: "brain", src:'img//brain.jpg'},
+			{id: "face-user-pixel", src:'img//face-user-pixel.png'},
+			{id: "face-user-pixel", src:'img//face-user-pixel.png'},
+			{id: "question-pixel", src:'img//question-pixel.png'},
+			{id: "question", src:'img//question.png'},
+			{id: "machine-pixel", src:'img//machine-pixel.png'},
 			{id: "cog", src:'img/cog.png'}
 		]);
 	},

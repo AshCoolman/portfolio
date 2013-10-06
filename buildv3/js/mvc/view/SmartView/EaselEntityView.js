@@ -20,32 +20,31 @@ App.EslEntityView = App.SmartView.extend({
 	},
 	didInsertElement: function () {
 		this._super();
-		this.eslObj = this.override_createEsl();
-		if (this.get('parentView').eslObj) {
-			this.parentEslObj = this.get('parentView').eslObj;
-		}
+
 		this.initialDraw();		
 		this.get('controller').send('view_eslEntityCreated', this.get('controller'));
-		this.dispatchEvent($.extend(new Event('eslObjCreated'), {view:this, eslObj:this.eslObj, parentEslObj: this.parentEslObj}));
+		this.dispatchEvent($.extend(new Event('eslObjCreated'), {view:this, eslObj:this.get('eslObj'), parentEslObj: this.parentEslObj}));
 	},
 	initialDraw: function () {
-		
 		var controllerSettings = {},
 			eslObjSettings = this.get('eslObjSettings'),
 			controller = this.get('controller'),
-			fromController = eslObjSettings.fromController;
-			
-			
+			fromController = eslObjSettings.fromController,
+			allSettings;
+
 		for (var i = 0, s = fromController[i]; i < fromController.length; i++) {
 			 s = fromController[i];
-			//console.log('from controller', this.get('className'), s, controller[s]);
-			
 			if (typeof controller[s] != 'undefined')  {
 				controllerSettings[s] = controller[s];
 			}
-		}	
-		//console.log('this.override_draw()', eslObjSettings, controllerSettings );
-		this.override_draw( $.extend({}, eslObjSettings, controllerSettings) );
+		}
+		allSettings =  $.extend({}, eslObjSettings, controllerSettings);
+
+		this.set('eslObj', this.override_createEsl(allSettings));
+		if (this.get('parentView').eslObj) {
+			this.parentEslObj = this.get('parentView').eslObj;
+		}
+		this.override_draw(allSettings );
 	},
 	willDestroyElement: function () {
 

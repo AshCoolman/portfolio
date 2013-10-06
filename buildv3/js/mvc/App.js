@@ -234,6 +234,7 @@ createjs.CSSPlugin.install();
 App = Ember.Application.create({
 	DEBUG: false,
 	PRELOADER: {},
+	preloadedImages:{},
 	scriptModel: null,
 	rootElement:$('.app')[0],
 	ready: function () {
@@ -265,6 +266,7 @@ App.BREAKPOINT = {
 	WIDTH_0: 600,
 	HEIGHT_0: 300
 }
+App.PIXEL_SIZE = 30;
 
 App.dictionary = Em.Object.create({
 	copy: {},

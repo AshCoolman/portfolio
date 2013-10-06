@@ -171,7 +171,7 @@ CubeGroup.prototype = {
 			}
 		}
 		
-		var str = '\n\n';
+		
 		for (var xs = 0; xs < map.length; xs++) {
 			if (!map[xs]) map[xs] = []
 			for (var ys = 0; ys < map[xs].length; ys++) {
@@ -180,7 +180,7 @@ CubeGroup.prototype = {
 					if (map[xs][ys][zs]) {
 						var cube = this.createCube( this.SIZE, xs*sz, -ys*sz, zs*sz, map[xs][ys][zs], this.materialsDict, group, geo, materials, this.isMerge);
 
-						str += '{{controlWithVars "cogged-pixel" cogged-pixel x='+(-15+(xs+2)*sz)+' y='+(240+(0.5-maxY+ys)*sz)+' height=30 width=30}}\n';
+					
 					}
 				}
 			}

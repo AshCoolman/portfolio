@@ -1,6 +1,6 @@
-App.QuestionMarkController = App.EslEntityController.extend({
-	className:'QuestionMarkController',
-	label:'QuestionMarkController',
+App.TemplatedPixelGroupController = App.EslEntityController.extend({
+	className:'TemplatedPixelGroupController',
+	label:'TemplatedPixelGroupController',
 	pixels: [],
 	CoggedPixelControllerCreated: function (apixelController) {
 		var pixels = this.get('pixels');
@@ -14,6 +14,10 @@ App.QuestionMarkController = App.EslEntityController.extend({
 		this.get('view').doShowPixelInChildren(dur);
 		
 	},
+	createPixel: function () {
+		
+	},
+	
 	doCogOpen: function (dur) {
 		var rIndexAr = [],
 			pixels = this.get('pixels'),
@@ -32,4 +36,4 @@ App.QuestionMarkController = App.EslEntityController.extend({
 		}
 	}
 });
-App.register('controller:question-mark', App.QuestionMarkController, {singleton:false})
+App.register('controller:templated-pixel-group', App.TemplatedPixelGroupController, {singleton:false})

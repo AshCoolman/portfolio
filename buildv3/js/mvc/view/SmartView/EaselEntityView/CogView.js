@@ -23,8 +23,8 @@ App.CogView = App.EslEntityView.extend({
 		return this.dragger;
 	},
 	override_draw: function (asettings) {
-		var settings = asettings ? asettings : this.eslObj;
-		Em.assert('CogView.override_draw(): function called before eslObj was created ', this.eslObj)
+		var settings = asettings ? asettings : this.get('eslObj');
+		Em.assert('CogView.override_draw(): function called before eslObj was created ', this.get('eslObj'))
 		if (this.cog.isImgLoaded) {
 			this.cog.regX = this.cog.image.width / 2;
 			this.cog.regY = this.cog.image.height / 2;

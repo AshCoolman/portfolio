@@ -25,11 +25,11 @@ App.PixelView = App.EslEntityView.extend({
 	},
 	
 	override_draw: function(asettings) {
-		Em.assert('App.PixelView.draw(): method can\'t run without eslObj being created. eslObj = '+ this.eslObj, this.eslObj);
+		Em.assert('App.PixelView.draw(): method can\'t run without eslObj being created. eslObj = '+ this.get('eslObj'), this.get('eslObj'));
 		Em.assert('App.PixelView.draw(): method can\'t run without handle being created. handle = '+ this.handle, this.handle);
 		Em.assert('App.PixelView.draw(): method can\'t run without shp being created. shp = '+ this.shp, this.shp);
 		
-		var settings = asettings ? asettings : this.eslObj,
+		var settings = asettings ? asettings : this.get('eslObj'),
 			shp = this.shp,
 			handle = this.handle;
 			
