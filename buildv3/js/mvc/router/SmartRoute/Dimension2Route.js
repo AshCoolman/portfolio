@@ -17,6 +17,9 @@ App.Dimension2Route = App.SmartRoute.extend({
 						case 'MachineController':
 							this.machineController = acontroller;
 							break;
+						case 'UserController':
+							this.userController = acontroller;
+							break;
 						case 'SubtitleController': 
 							switch (acontroller.get('orderRead')) {
 								case '1': this.subtitleController1 = acontroller; break;
@@ -82,7 +85,8 @@ App.Dimension2Route = App.SmartRoute.extend({
 	},
  
 	tryStart: function () {
-        if (!this.get('isStarted') && this.questionController && this.world2dController && this.subtitleController1 && this.subtitleController2 && this.machineController) {
+        if (!this.get('isStarted') && this.questionController && this.world2dController && this.subtitleController1 && this.subtitleController2 && this.machineController && this.userController) {
+			this.machineController.setTarget(this.userController );
 			this.set('isStarted', true);
             this.doStart();
 		}

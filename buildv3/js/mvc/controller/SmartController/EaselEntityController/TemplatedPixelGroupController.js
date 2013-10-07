@@ -6,6 +6,13 @@ App.TemplatedPixelGroupController = App.EslEntityController.extend({
 		var pixels = this.get('pixels');
 		pixels.push(apixelController); //TODO THIS IS SO YUK: see CoggedPixelController.view_didInsertElement()
 		this.set('pixels', pixels);
+		this.get('view').addPixel(apixelController);
+	},
+	CoggedPixelControllerDestroyed: function (apixelController) {
+		var pixels = this.get('pixels');
+		pixels.splice(pixels.indexOf(apixelController), 1); //TODO THIS IS SO YUK: see CoggedPixelController.view_willDestroyElement()
+		this.set('pixels', pixels);
+		this.get('view').removePixel(apixelController);
 	},
 	setVisible: function (val) {
 		this.get('view').doShowPixelInChildren();

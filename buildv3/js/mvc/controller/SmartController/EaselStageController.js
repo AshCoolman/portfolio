@@ -29,9 +29,11 @@ App.EslStageController = App.SmartController.extend({
 	tryProcessPendingEE: function () {
 		if (this.view) {
 			if (!this.view.addEslEnt)  throw "EslStageController._processQ() the view ( subclass ) does not implememnt addEslEnt()"
-			this.pendingEE.forEach( function(me) { return function (eo, index, array) {
+			this.pendingEE.forEach( function(me) { 
+				return function (eo, index, array) {
 					me.view.addEslEnt( eo.label, eo.view, eo.parentEslObj );
-			}}(this));
+				}
+			}(this));
 			this.pendingEE = [];
 		} else {
 			throw 'tryProcessPendingEE() view not set'

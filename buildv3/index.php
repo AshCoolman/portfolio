@@ -165,7 +165,7 @@ Storytelling
 @=</h3>
 <i>My 2<sup>nd</sup> dimension</i>
 @actionOnRead=doShowMachine
-The reason I build things, is because I love inducing change in an audience.
+The reason I build things, is because I love inducing change in people.
 That change could be knowledge, or opinion, or emotion.
 
 If the question is how to build a communicate environment,
@@ -555,11 +555,12 @@ Prototype inheritance
 				{{render 'heartbeat' heartbeat}}
 			</div>
 			
-			{{controlWithVars 'world-2d' layoutName='lo-subtitle-row'}}
 			{{controlWithVars 'esl-entity-container'}}
 
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyA?>"}}}
 			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true linkEvent="doGotoDimension3" hoverEvent="doDimensionNavHover" }}}
+			
+				{{controlWithVars 'world-2d'}}
 		</script>	
 
 		<script type="text/x-handlebars" data-template-name="world-2d">

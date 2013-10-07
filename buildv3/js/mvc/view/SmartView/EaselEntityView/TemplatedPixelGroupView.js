@@ -2,7 +2,24 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 	templateName: 'templated-pixel-group',
 	className: 'TemplatedPixelGroupView',
 	label: 'templated-pixel-group',
-	pixels: [],
+	pixelHash: {},
+	//TODO Improve coord system, then use pixel cords
+	addPixel: function (pixCon) {
+		var pixelHash = this.get('pixelHash'),
+			mapX = String( pixCon.x ),
+			mapY = String( pixCon.y );
+		if (!pixelHash[mapX]) pixelHash[mapX] = {};
+		pixelHash[mapX][mapY] = pixCon;
+		this.set('pixelhash', pixelHash);
+	},
+	removePixel: function (pixCon) {
+		var pixelHash = this.get('pixelHash'),
+			mapX = String( pixCon.x ),
+			mapY = String( pixCon.y );
+			coordArr = pixelHash[mapX][mapY];
+		coordArr.splice(coordArr.indexOf(pixCon), 1);
+		this.set('pixelhash', pixelHash);
+	},
 	shp: null,
 	handle: null,
 	imgPreloadId: 'question-pixel',
@@ -18,22 +35,28 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 		var img = App.preloadedImages[this.get('imgPreloadId')],
 			str = '\n'+this.get('imgPreloadId')+'\n';
 		
+		//create string for template
 		if (img) {
 			var mapElementFunc = function (me) {
 					return function (x, y, z, el, maxX, maxY, maxZ) {
-					
+						
 						var x2d = (-15+(x+2)*App.PIXEL_SIZE),
 							y2d = (240+(0.5-maxY+y)*App.PIXEL_SIZE);
 						
 						str += '{{controlWithVars "cogged-pixel" cogged-pixel x='+x2d+' y='+y2d+' height='+App.PIXEL_SIZE+' width='+App.PIXEL_SIZE+' col="'+el.color+'"}}\n'
+						el.x2d = x2d;
+						el.y2d = y2d;
 					}
 				}(this),
 				onCompleteFunc = function (me) {
 					return function (amap) {
 						//console.log('map is completed\n'+str)
+						//me.set('pixelMap', amap);
 					}
 				}(this);
 			ragh.createJsonMapFromImage(img, mapElementFunc, onCompleteFunc);
+			
+
 		}
 	},
 	

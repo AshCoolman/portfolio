@@ -24,7 +24,7 @@ ragh.createJsonMapFromImage = function (img, mapElementFunc, onCompleteFunc) {
 			ctx=c.getContext("2d"),
 			imgData,
 			id;
-
+		ctx.clearRect(0,0, w, h);
 		ctx.drawImage( img, 0, 0 );
 		imgData = ctx.getImageData( 0, 0, w, h );
 		id = imgData.data;
@@ -43,20 +43,9 @@ ragh.createJsonMapFromImage = function (img, mapElementFunc, onCompleteFunc) {
 			}
 		}
 		//Get maximums TODO get from imgData
-		var maxX = maxY = maxZ = 0;
-		for (var xs = 0; xs < map.length; xs++) { 
-			if (!map[xs]) map[xs] = []
-			for (var ys = 0; ys < map[xs].length; ys++) {
-				if (!map[xs][ys]) map[xs][ys] = []
-				for (var zs = 0; zs < map[xs][ys].length; zs++) {
-					if (map[xs][ys][zs]) {
-						maxX = Math.max(maxX, xs);
-						maxY = Math.max(maxY, ys);
-						maxZ = Math.max(maxZ, zs);
-					}
-				}
-			}
-		}
+		maxX = w-1	;
+		maxY = h-1;
+		maxZ = 0;
 		console.log('set maxs', maxX, maxY, maxZ)
 		//Call mapElementFunc
 		for (var xs = 0; xs < map.length; xs++) {
@@ -66,6 +55,7 @@ ragh.createJsonMapFromImage = function (img, mapElementFunc, onCompleteFunc) {
 				for (var zs = 0; zs < map[xs][ys].length; zs++) {
 					if (map[xs][ys][zs]) {
 						mapElementFunc(xs, ys, 0, map[xs][ys][0], maxX, maxY, 0);
+						
 					}
 				}
 			}
@@ -75,5 +65,5 @@ ragh.createJsonMapFromImage = function (img, mapElementFunc, onCompleteFunc) {
 		this.$tcanvas = this.tcanvas = null;
 		
 		onCompleteFunc(map, mapElementFunc, onCompleteFunc);
-	}	
+	}
 };
