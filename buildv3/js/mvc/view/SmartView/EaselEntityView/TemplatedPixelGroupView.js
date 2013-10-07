@@ -25,12 +25,12 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 						var x2d = (-15+(x+2)*App.PIXEL_SIZE),
 							y2d = (240+(0.5-maxY+y)*App.PIXEL_SIZE);
 						
-						str += '{{controlWithVars "cogged-pixel" cogged-pixel x='+x2d+' y='+y2d+' height='+App.PIXEL_SIZE+' width='+App.PIXEL_SIZE+'}}\n'
+						str += '{{controlWithVars "cogged-pixel" cogged-pixel x='+x2d+' y='+y2d+' height='+App.PIXEL_SIZE+' width='+App.PIXEL_SIZE+' col="'+el.color+'"}}\n'
 					}
 				}(this),
 				onCompleteFunc = function (me) {
 					return function (amap) {
-						console.log('map is completed\n'+str)
+						//console.log('map is completed\n'+str)
 					}
 				}(this);
 			ragh.createJsonMapFromImage(img, mapElementFunc, onCompleteFunc);
@@ -59,18 +59,55 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 		}
 		
 	},	
+	
+	
+	
+	doShowLineInChildren: function (dur) {
+		var handle = this.get('handle'),
+			shp = this.get('shp'),
+			rIndexAr = [],
+			pixels = this.handle.children,
+			maxY = 0,
+			minY = 0,
+			yRange,
+			step;
+		
+		handle.visible = true;
+		
+		for (var c=0; c < pixels.length; c++) {
+			maxY = Math.max(pixels[c].y, maxY);
+			minY = Math.min(pixels[c].y, minY);
+		}
+		maxY = maxY / App.PIXEL_SIZE;
+		minY = minY / App.PIXEL_SIZE;
+		yRange = Math.abs(maxY - minY)
+		step = dur / yRange;
+ 		console.log('yRange='+yRange, 'maxY='+maxY, 'minY='+minY);
+		for (var c=0; c < pixels.length; c++) {
+			var pix = pixels[c];
+			pix.visible = false;
+			setTimeout( function (me, apix) {
+				return function () {
+					apix.visible = true;
+				}
+			}(this, pix), step*Math.abs(maxY - pix.y/ App.PIXEL_SIZE));
+		}
+		
+	},
+	
 	override_createEsl: function () {
-		this.shp = new createjs.Shape();
-		this.handle = new createjs.Container();
-		this.handle.addChild(this.shp);
-		this.handle.addEventListener("mousedown",  (function(me) { return function(evt) {
+		var shp, handle;
+		this.set('shp',  shp = new createjs.Shape());
+		this.set('handle', handle = new createjs.Container());
+		handle.addChild( shp );
+		handle.addEventListener("mousedown",  (function(me) { return function(evt) {
 					var o={x: evt.target.x-evt.stageX, y: evt.target.y-evt.stageY };
 					evt.addEventListener("mousemove", function(ev) {
 					   	ev.target.x = me.snap(ev.stageX + o.x);
 						ev.target.y = me.snap(ev.stageY + o.y);
 					});
 			} }(this)));
-		return this.handle;
+		return handle;
 	},
 	
 	override_draw: function(asettings) {
@@ -79,8 +116,8 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 		Em.assert('App.PixelView.draw(): method can\'t run without shp being created. shp = '+ this.shp, this.shp);
 		
 		var settings = asettings ? asettings : this.get('eslObj'),
-			shp = this.shp,
-			handle = this.handle;
+			shp = this.get('shp'),
+			handle = this.get('handle');
 			
 		settings.x = Number(settings.x);	
 		settings.y = Number(settings.y);
@@ -105,8 +142,8 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 		handle.y = Number(settings.y);
 		handle.visible = settings.visible;
 		//console.log('settings visible', settings.visible)
-		this.handle = handle;
-		this.shp = shp;
+		this.set('handle', handle);
+		this.set('shp', shp);
 
 	},
 	override_reDraw: function () {

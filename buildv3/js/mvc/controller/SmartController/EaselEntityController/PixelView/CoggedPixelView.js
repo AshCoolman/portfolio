@@ -12,7 +12,7 @@ App.CoggedPixelView = App.PixelView.extend({
 		height: 30,
 		x: 0,
 		y: 0,
-		fromController: ['x', 'y', 'width', 'height']
+		fromController: ['x', 'y', 'width', 'height', 'col']
 	},
 	override_createEsl: function () {
 		this.handle = this._super();

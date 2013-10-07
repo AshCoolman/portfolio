@@ -14,6 +14,9 @@ App.Dimension2Route = App.SmartRoute.extend({
 						case 'QuestionController': 
 							this.questionController = acontroller; 
 							break;
+						case 'MachineController':
+							this.machineController = acontroller;
+							break;
 						case 'SubtitleController': 
 							switch (acontroller.get('orderRead')) {
 								case '1': this.subtitleController1 = acontroller; break;
@@ -40,6 +43,15 @@ App.Dimension2Route = App.SmartRoute.extend({
 							me.questionController.doCogOpen(1200);
 						}
 					}(this), 1400);
+					
+				},
+				doShowMachine: function () {
+					this.machineController.doShowLineInChildren(800);
+					setTimeout(function (me) {
+						return function () {
+							me.machineController.set('isOn', true);
+						}
+					}(this), 1200);
 					
 				},
 				doSubtitle2: function () {
@@ -70,7 +82,7 @@ App.Dimension2Route = App.SmartRoute.extend({
 	},
  
 	tryStart: function () {
-        if (!this.get('isStarted') && this.questionController && this.world2dController && this.subtitleController1 && this.subtitleController2) {
+        if (!this.get('isStarted') && this.questionController && this.world2dController && this.subtitleController1 && this.subtitleController2 && this.machineController) {
 			this.set('isStarted', true);
             this.doStart();
 		}
@@ -79,5 +91,6 @@ App.Dimension2Route = App.SmartRoute.extend({
 		this.subtitleController1.set('content', App.scriptModel); 
         this.subtitleController1.setup();
         this.subtitleController1.startReading();
+		
     }
 })

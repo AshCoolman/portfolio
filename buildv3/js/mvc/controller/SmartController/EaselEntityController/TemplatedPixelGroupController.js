@@ -10,10 +10,16 @@ App.TemplatedPixelGroupController = App.EslEntityController.extend({
 	setVisible: function (val) {
 		this.get('view').doShowPixelInChildren();
 	},
+	
 	doShowPixelInChildren: function (dur) {
 		this.get('view').doShowPixelInChildren(dur);
 		
 	},
+	doShowLineInChildren: function (dur) {
+		this.get('view').doShowLineInChildren(dur);
+		
+	},
+	
 	createPixel: function () {
 		
 	},

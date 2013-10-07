@@ -164,7 +164,7 @@ $d2copyA =  '@=<h3>
 Storytelling
 @=</h3>
 <i>My 2<sup>nd</sup> dimension</i>
-
+@actionOnRead=doShowMachine
 The reason I build things, is because I love inducing change in an audience.
 That change could be knowledge, or opinion, or emotion.
 
@@ -566,7 +566,7 @@ Prototype inheritance
 			<div class="canvas-hero-holder"></div>
 			{{controlWithVars 'ash' ash x=-540 img="img//face-ash.png"}}
 			
-			{{controlWithVars 'machine' machine x=-180 y=90 visible=true}}
+			{{controlWithVars 'machine' machine x=-180 y=90 visible=false}}
 			{{controlWithVars 'question' question x=-120 y=0 visible=false}}
 			{{controlWithVars 'user' user x=120 y=90 visible=true}}
 		</script>
@@ -699,40 +699,40 @@ Prototype inheritance
 		
 		
 		<script type="text/x-handlebars" data-template-name="machine">
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=-45 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=-15 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=15 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=45 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=75 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=105 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=135 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=165 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=195 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=225 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=-75 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=255 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=-75 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=255 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=-75 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=255 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=-75 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=255 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=-75 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=255 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=-75 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=255 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=-75 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=255 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=-45 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=-15 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=15 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=45 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=75 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=105 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=135 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=165 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=195 height=30 width=30}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=225 height=30 width=30}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=-45 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=-15 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=15 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=45 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=75 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=105 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=135 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=165 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=195 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=225 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=-75 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=255 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=-75 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=255 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=-75 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=255 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=-75 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=255 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=-75 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=255 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=-75 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=255 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=-75 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=255 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=-45 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=-15 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=15 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=45 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=75 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=105 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=135 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=165 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=195 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=225 height=30 width=30 col="#bfbfbf"}}
 		</script>
 		
 		
