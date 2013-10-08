@@ -230,6 +230,7 @@ Ember.Handlebars.registerHelper('renderWithVars', function(name, contextString, 
 
 
 createjs.CSSPlugin.install();
+//createjs.Ticker.addEventListener = createjs.EventDispatcher.prototype.addEventListener;
 
 App = Ember.Application.create({
 	DEBUG: false,

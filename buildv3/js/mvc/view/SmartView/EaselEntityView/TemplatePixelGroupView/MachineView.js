@@ -4,6 +4,7 @@ var MachineViewLed = function () {
 	this.COL_ACTIVITY_OFF = '#557777';
 	this.COL_POWER_ON = '#5555CC';
 	this.colOn = '#33CC33';
+	this.colStandBy = '#33CC33';
 	this.colOff = '#005500';
 	this.shp = null;
 }
@@ -11,10 +12,14 @@ MachineViewLed.prototype = {
 	init: function (aplan) {
 		this.colOn = aplan.colOn || this.colOn;
 		this.colOff = aplan.colOff || this.colOff;
+		this.colStandBy = aplan.colStandBy || this.colStandBy;
 		this.shp = aplan.shp || this.shp;
 	},
 	showOn: function () {
 		this._show(this.colOn);
+	},
+	showStandBy: function () {
+		this._show(this.colStandBy);
 	},
 	showOff: function () {
 		this._show(this.colOff);
@@ -107,6 +112,7 @@ App.MachineView = App.TemplatedPixelGroupView.extend({
 		} else {
 			clearInterval(this.get('toggleActivityInterval'));
 			this.set('toggleActivityInterval', null);
+			this.set('isActivity', false);
 			ledHash.power && ledHash.power.showOff();
 		}
 	}.observes('controller.isOn'),
@@ -114,6 +120,7 @@ App.MachineView = App.TemplatedPixelGroupView.extend({
 	isActivity:false,
 	isActivityObserver: function (obj, val) {
 		var ledHash = this.get('ledHash');
+
 		if (this.get(val)) {
 			ledHash.activity && ledHash.activity.showOn();
 			var ray = this.shootRay();
@@ -128,13 +135,17 @@ App.MachineView = App.TemplatedPixelGroupView.extend({
 	trySetPowerLed: function ( eslObj, shp ) {
 		var ledHash = this.get('ledHash');
 		if (!ledHash.power) {
-			shp.cursor = eslObj.cursor = 'pointer';
-			shp.mouseEnabled = true;
+			var hit = new createjs.Shape();
+			
+			shp.cursor = 'pointer';
 			shp.addEventListener('click', function (me) {
 				return function (e) {
-					console.log('Did I click', e);
+					if (me.get('controller').isInteractive)
+						me.get('controller').togglePower();
 				}
 			}(this), false);
+			
+			
 			eslObj.cursor = 'pointer';
 			ledHash.power = Object.createFromPrototype(MachineViewLed, {});
 			ledHash.power.shp = shp;
@@ -148,7 +159,8 @@ App.MachineView = App.TemplatedPixelGroupView.extend({
 			ledHash.activity = Object.createFromPrototype(MachineViewLed, {});
 			ledHash.activity.shp = shp;
 			ledHash.activity.colOn = '#0040FF';
-			ledHash.activity.colOff = '#EB9946';
+			ledHash.activity.colOff = '#d2691e';
+			ledHash.activity.colStandBy = '#EB9946';
 			ledHash.activity.showOff();
 		}
 	},

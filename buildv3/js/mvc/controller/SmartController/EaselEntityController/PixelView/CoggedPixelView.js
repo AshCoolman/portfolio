@@ -60,6 +60,34 @@ App.CoggedPixelView = App.PixelView.extend({
 			window.createjs.Tween.get(me.e_cog).to(t1, 750).wait(2000).to(t0, 750);	
 		}(this));
 		
+	},
+	doOpenAndFadeOut: function() {
+
+		(function(me) {
+			var t0 = {}, 
+				t1 = {},
+				prop = ragh.one(['x', 'y']), 
+				dir = ragh.one([1, -1]) * me.shp.width * 0.8;
+			t0[ prop ] = me.shp[ prop ];	
+			t1[ prop ] = dir;
+			t0['alpha'] = 1;
+			t1['alpha'] = 0;
+			window.createjs.Tween.get(me.shp).to(t1, 750).wait(2000);	
+		}(this));
+
+		(function(me) {
+			var t0 = {}, 
+				t1 = {},
+				t2 = {},
+				prop = 'rotation', 
+				dir = ragh.one([1, -1]) * 20 * 2 *Math.PI;
+			t0[ prop ] = me.shp[ prop ];	
+			t1[ prop ] = dir;
+			t2.alpha = 0;
+			t2[ prop ] = dir*2;
+			window.createjs.Tween.get(me.e_cog).to(t1, 1500).to(t2, 1500);	
+		}(this));
+
 	}
 
 	

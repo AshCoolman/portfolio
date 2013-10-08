@@ -60,25 +60,25 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 		}
 	},
 	
-	doShowPixelInChildren: function (dur) {
-
+	doShowPixelChildrenTo: function (isVis, dur) {
+		var handle = this.get('handle');
 		console.log('view.doShowPixelInChildren');
-		this.handle.visible = true;
+		handle.visible = true;
 		var rIndexAr = [],
-			pixels = this.handle.children,
+			pixels = handle.children,
 			step = dur/pixels.length;
 		
 		for (var r=0; r < pixels.length; r++) rIndexAr.push(r);
 		rIndexAr.sort(function() {return 0.5 - Math.random()})
 		
-		for (var c=0; c < this.handle.children.length; c++) {
+		for (var c=0; c < handle.children.length; c++) {
 			var r = rIndexAr[c];
-			this.handle.children[r].visible = false;
-			setTimeout( function (me, ar) {
+			handle.children[r].visible = !isVis;
+			setTimeout( function (me, ar, aisVis) {
 				return function () {
-					me.handle.children[ar].visible = true;
+					me.handle.children[ar].visible = aisVis;
 				}
-			}(this, r), step*c);
+			}(this, r, isVis), step*c);
 		}
 		
 	},	
@@ -86,7 +86,7 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 	
 	
 	doShowLineInChildren: function (dur) {
-		var handle = this.get('handle'),
+		var handle = this.get('eslObj'),
 			shp = this.get('shp'),
 			rIndexAr = [],
 			pixels = this.handle.children,

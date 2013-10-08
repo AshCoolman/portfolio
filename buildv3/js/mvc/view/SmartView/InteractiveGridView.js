@@ -179,6 +179,7 @@ App.InteractiveGridView = App.SmartView.extend({
 							App.eventMapper.trigger('interactiveGridText', shownPlotList);
 							//Show dom elements
 							$('.graph-info').css({display: 'block'});
+							$('.graph-info h3').addClass('highlight');
 							$('.graph-plot', me.get('$el')).css({opacity: 1});
 							//Animate the x bar
 							athePlotX
@@ -190,11 +191,13 @@ App.InteractiveGridView = App.SmartView.extend({
 							    }, 300);
 							//Animate the mouse's x plot
 							acoordX.attr({ fill: '#FF6347' })
+							
 								
 						}
 					} else {
 					// else if no plots should be shown, hide them all
 						if (athePlotX['animateWidthTarget'] != -1) {
+							$('.graph-info h3').removeClass('highlight')
 							acoordX.attr({ fill: '#595959' });
 							athePlotX['animateWidthTarget'] = -1;
 							$('.graph-plot', me.get('$el')).css({opacity: 0});

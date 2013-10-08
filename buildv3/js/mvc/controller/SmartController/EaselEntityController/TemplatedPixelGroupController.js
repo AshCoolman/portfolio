@@ -19,11 +19,16 @@ App.TemplatedPixelGroupController = App.EslEntityController.extend({
 	},
 	
 	doShowPixelInChildren: function (dur) {
-		this.get('view').doShowPixelInChildren(dur);
+		this.get('view').doShowPixelChildrenTo(true, dur);
+		
+	},
+	
+	doShowPixelOutChildren: function (dur) {
+		this.get('view').doShowPixelChildrenTo(false, dur);
 		
 	},
 	doShowLineInChildren: function (dur) {
-		this.get('view').doShowLineInChildren(dur);
+		this.get('view').doShowLineInChildren( dur);
 		
 	},
 	
@@ -47,6 +52,26 @@ App.TemplatedPixelGroupController = App.EslEntityController.extend({
 				}
 			}(this, r), step*c);
 		}
+	},
+	
+	
+	doCogOpenAndFadeOut: function (dur) {
+		var rIndexAr = [],
+			pixels = this.get('pixels'),
+			step = dur/pixels.length;
+
+		for (var r=0; r < pixels.length; r++) rIndexAr.push(r);
+		rIndexAr.sort(function() {return 0.5 - Math.random()})
+
+		for (var c=0; c < pixels.length; c++) {
+			var r = rIndexAr[c];
+			setTimeout( function (me, ar) {
+				return function () {
+					pixels[ar].doOpenAndFadeOut();
+				}
+			}(this, r), step*c);
+		}
 	}
+	
 });
 App.register('controller:templated-pixel-group', App.TemplatedPixelGroupController, {singleton:false})

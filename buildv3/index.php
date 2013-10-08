@@ -2,10 +2,12 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <?php
-$IS_DEPLOY = false;
+$IS_DEPLOY = true;
 ?>
 <head>
-	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
+	<!--link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'-->
+
+	
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
 	<title>Ashley Coleman</title>
@@ -14,13 +16,21 @@ $IS_DEPLOY = false;
 <? if ($IS_DEPLOY) {?>	
 	<link rel="stylesheet" href="///cdnjs.cloudflare.com/ajax/libs/foundation/4.3.1/css/foundation.min.css" />
 	<link rel="stylesheet" href="css/all.min.css" />
+	<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+	<script>
+	  WebFont.load({
+	    google: {
+	      families: ['Ubuntu:400,700']
+	    }
+	  });
+	</script>
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="//cdn.jsdelivr.net/modernizr/2.6.2/modernizr.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.min.js"></script>
-	<script src="http://code.createjs.com/easeljs-0.6.0.min.js"></script>
-	<script src="http://code.createjs.com/tweenjs-0.4.0.min.js"></script>
-	<script src="http://code.createjs.com/movieclip-0.6.0.min.js"></script>
+	<script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
+	<script src="http://code.createjs.com/tweenjs-0.5.0.min.js"></script>
+	<script src="http://code.createjs.com/movieclip-0.7.0.min.js"></script>
 	<script src="http://code.createjs.com/preloadjs-0.3.0.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
@@ -37,9 +47,9 @@ $IS_DEPLOY = false;
 	<script src="javascripts/vendor/custom.modernizr.js"></script>
 	<script src="javascripts/vendor/zepto.js"></script>
 	<script src="js/lib/handlebars.js"></script>
-	<script src="js/lib/easeljs-0.6.0.min.js"></script>
-	<script src="js/lib/tweenjs-0.4.0.min.js"></script>
-	<script src="js/lib/movieclip-0.6.0.min.js"></script>
+	<script src="js/lib/easeljs-0.7.0.min.js"></script>
+	<script src="js/lib/tweenjs-0.5.0.min.js"></script>
+	<script src="js/lib/movieclip-0.7.0.min.js"></script>
 	<script src="js/lib/preloadjs-0.3.0.min.js"></script>
 	<script src="js/lib/three.js"></script>
 	<script src="js/lib/raphael.js"></script>
@@ -57,9 +67,9 @@ Hi, I\'m Ashley Coleman
 @=</h3>
 <i>The starting point</i>
 
-I built this portfolio site to show who I am.
-You are at the site\'s starting point, a.k.a the <i>origin</i>.
-From this origin I will describe my different dimensions.
+I built this portfolio site to show who I am. 
+You are at the start page aka the <i>origin</i>. 
+Continue on to learn about my different dimensions. 
 @actionOnRead=doSecondSubtitle
 @wait=1000
 @actionOnRead=doFourthSubtitle';
@@ -69,10 +79,10 @@ $indexCopyA = addcslashes($indexCopyA, '"');
 
 <?php
 $indexCopyB = '@=<h3>
-My Sandbox
+Welcome to my Sandbox
 @=</h3>
 This website has a secondary role as a development sandbox.
-Here I will experiment with new ideas, technology tests etc.
+Here I experiment with new ideas, technology tests etc.
 So don\'t be surprised if things change!';
 $indexCopyB = addcslashes($indexCopyB, '"');
 
@@ -80,7 +90,9 @@ $indexCopyB = addcslashes($indexCopyB, '"');
 
 
 <?php
-$indexCopyC = '<h3>Contact Details</h3>
+$indexCopyC = '@=<h3>
+Contact Details
+@=</h3>
 @=<address>
 <i class="icon-envelope"></i> writetofish+cv<i>@</i>gmail.com
 <i class="icon-phone"></i> (+44) 77 5298 3159
@@ -108,7 +120,7 @@ Developing <b>multimedia</b> for the web is my craft and passion. I\'ve worked i
 However, if the the need arises I\'m not above hacking it. As a certain <a href="http://goo.gl/O5dnGf" target="_blank">clever cookie</a> once said:
 
 <i class="quote"><sup class="icon-quote-left superscript"></sup> Real artists ship <sup class="icon-quote-right superscript"></sup>
-@actionOnRead=doSubtitle2 1500
+@actionOnRead=doSubtitle2 0
 @actionOnRead=doSubtitle3 2500';
 $d1copyA = addcslashes($d1copyA, '"');
 
@@ -144,7 +156,7 @@ $obligatoryList = '<span class="heading"> <i class="icon-chevron-left"></i> OBLI
 	MVC 
 	MVP 
 
-	<span class="heading">General Knowledge</span>
+	<span class="heading">General knowledge</span>
 	3d Math
 	2d / 3d Physics
 	Geolocation
@@ -164,14 +176,18 @@ $d2copyA =  '@=<h3>
 Storytelling
 @=</h3>
 <i>My 2<sup>nd</sup> dimension</i>
+@actionOnRead=doShowUser
+I build stuff because I love inducing change in people.
 @actionOnRead=doShowMachine
-The reason I build things, is because I love inducing change in people.
-That change could be knowledge, or opinion, or emotion.
+That change might be from creating emotional impact, message, and/or service.
+@actionOnRead=doInstructionTurnOnController 1000';
 
-If the question is how to build a communicate environment,
+$d2copyB =  '@actionOnRead=doHideUser
+If the question is how create change from the web, 
 @actionOnRead=doShowQuestion
 @wait=1200
- then I understand how to work technology into the background, to leave an answer.
+ I can work the underlying technology to leave an answer.
+@actionOnRead=doShowMachineCogs
 @actionOnRead=doSubtitle2';
 ?>
 
@@ -180,21 +196,18 @@ $d3copyA = '@=<h3>
 Creativity 
 @=</h3>
 <i>My 3<sup>rd</sup> dimension</i>
-
-Creative thinking is important to me.
-I know if I think about a problem laterally... 
-@wait=1000
+I keep an eye out for sneaky bolts of inspiration.
+<b>Thinking laterally</b> on a problem can often reveal an elegant idea... 
+@wait=3000
 @actionOnRead=doRotateQuestionMarkHint
-@wait=2000
-...very often a simple and elegant solution can be found...
-@wait=2000
+@wait=5000
 @actionOnRead=doRotateQuestionMark
 @wait=500
 @actionOnRead=doRotateQuestionMarkInstruction'; 
 
-$d3copyB = 'Nice one!
+$d3copyB = '<i>Nice one!</i>
 
-That little jolt of inspiration where it just comes together, that is what I am after.';
+ ...and an elegant idea is a great idea.';
 ?>
 
 		<script type="text/x-handlebars" data-template-name="application">
@@ -281,7 +294,7 @@ That little jolt of inspiration where it just comes together, that is what I am 
 			<div class="bg-layer y-ruler-minor"></div>
 			<div class="bg-layer origin-x"></div>
 			<div class="bg-layer origin-y"></div>
-			<div class="origin-name">ASHLEY COLEMAN</div>
+			<div class="origin-name"></div>
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="transitions-holder">
@@ -300,7 +313,7 @@ That little jolt of inspiration where it just comes together, that is what I am 
 		<script type="text/x-handlebars" data-template-name="nav-list">
 			<nav class="top-bar">
 				<ul class="title-area">
-					<li class="name"> <h1>Ashley Coleman by dimension:</h1> </li>
+					<li class="name"> <h1>Ashley by dimension </h1> </li>
 			    	<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
 				</ul>
 			
@@ -310,7 +323,7 @@ That little jolt of inspiration where it just comes together, that is what I am 
 			
 					    <li class="divider"></li>
 						{{#view view.NavListItemView item="doIndex" }}
-				            <h1><a {{action doIndex}} >0d</a></h1>
+				            <h1><a {{action doIndex}} >Start</a></h1>
 				        {{/view}}
 			
 					    <li class="divider"></li>
@@ -329,7 +342,6 @@ That little jolt of inspiration where it just comes together, that is what I am 
 				        {{/view}}   
 		
 						
-						<li class="divider"></li>
 						<span class="top-bar-hint"> </span>
 				    </ul>
 				 	<ul class="right">
@@ -455,15 +467,15 @@ API creation
 ## Project tools & techniques I know
 
 Version control (SVN, Git, Mecurial)
-Issue tracking (JIRA, bugzila etc) 
-Wire-framing & Prototyping (Adobe Fireworks, Axure etc)
+Issue tracking (JIRA, Bugzila etc) 
+Wireframing & Prototyping (Fireworks, Axure etc)
 
-## General knowledge
+## Useful areas of general knowledge I have
 
-2d / 3d Physics Math
+2d / 3d Physics math
 Geo-location algorithms
-Images manipulation (Adobe Photoshop)
-Video manipulation (Adobe After Effects)
+Image editing (Adobe Photoshop)
+Video editing (Adobe After Effects)
 Video encoding (Adobe Media Encoder)
 Sound editing (Adacity)
 
@@ -475,8 +487,7 @@ JQuery
 Createjs
 Threejs
 Raphaeljs
-Underscorejs 
-Createjs
+Underscorejs
 Greensock animation platform
 WebGL
 SVG
@@ -492,7 +503,7 @@ Prototype inheritance
 "Real artists ship" - Steve Jobs
 "Dont guess it, test it" -Paul Lewis
 
-## Years of syntax errors
+## Years of experience
 9
 
 ## Years of Computer Science and Multimedia
@@ -554,13 +565,18 @@ Prototype inheritance
 			<div class="full-width-centered">
 				{{render 'heartbeat' heartbeat}}
 			</div>
-			
+			{{controlWithVars 'world-2d' layoutName='lo-subtitle-row'}} 
 			{{controlWithVars 'esl-entity-container'}}
 
+			{{{controlWithVars 'subtitle' orderRead='instructionTurnOn' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> I built a change inducer! Press the <span style=\"background-color:#005500; width:2em; height:1.2em; color:#005500\">ON</span> button above to turn it on"}}}
+			{{{controlWithVars 'subtitle' orderRead='instructionTurnOff' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Behold, change! Once satisfied, press the <span style=\"background-color:#33CC33; width:2em; height:1.2em; color:#33CC33\">ON</span> button above to continue"}}}
+			
 			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyA?>"}}}
+			
+			{{{controlWithVars 'subtitle' orderRead='1a' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyB?>"}}}			
 			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true linkEvent="doGotoDimension3" hoverEvent="doDimensionNavHover" }}}
 			
-				{{controlWithVars 'world-2d'}}
+			
 		</script>	
 
 		<script type="text/x-handlebars" data-template-name="world-2d">
@@ -569,7 +585,7 @@ Prototype inheritance
 			
 			{{controlWithVars 'machine' machine x=-180 y=90 visible=false}}
 			{{controlWithVars 'question' question x=-120 y=0 visible=false}}
-			{{controlWithVars 'user' user x=120 y=90 visible=true}}
+			{{controlWithVars 'user' user x=120 y=90 visible=false}}
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="knob">
@@ -764,8 +780,8 @@ Prototype inheritance
 			
 			{{controlWithVars 'esl-entity-container'}}
 			
-			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyA; ?>"}}}
 			{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Find the elegant idea above (think <i>laterally</i>)..."}}}
+			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyA; ?>"}}}
 			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyB; ?>"}}}
 
 		</script>

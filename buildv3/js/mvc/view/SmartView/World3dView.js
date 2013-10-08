@@ -7,11 +7,11 @@ App.World3dView = App.SmartView.extend({
 	textures: {},
 	VS: 10,
 	FACE_ASH: 'face-ash',
-	FACE_ASH_X:-420,
+	FACE_ASH_X:-540,
 	FACE_ASH_Y:270,
 	QUESTION_MARK: 'question-mark',
-	QUESTION_MARK_X: 30,
-	QUESTION_MARK_Y: 240,
+	QUESTION_MARK_X: -90,
+	QUESTION_MARK_Y: 210,
 	is3dCreated: false,
 	isQuestionMarkRotate: false,
 	instanceVarNameArr: [			
@@ -63,6 +63,7 @@ App.World3dView = App.SmartView.extend({
 	},
 	
 	observingIsQuestionMarkRotateHint: function () {
+		var questionMark = this.get('instanceVarObj').pixelObjectList[this.QUESTION_MARK];
 		if (this.get('controller.isQuestionMarkRotatingHint')) {
 			var instanceVarObj = this.get('instanceVarObj'),
 			pixelObjectList = instanceVarObj.pixelObjectList,
@@ -75,7 +76,7 @@ App.World3dView = App.SmartView.extend({
 				}
 			}(this, pixelObjectList[this.QUESTION_MARK]));
 			
-		}
+		} 
 	}.observes('controller.isQuestionMarkRotatingHint'),
 	
 	observingIsQuestionMarkRotate: function () {
@@ -92,6 +93,7 @@ App.World3dView = App.SmartView.extend({
 						el: this.el});
 			
 		} else if (!val && this.isQuestionMarkRotate) {
+			pixelObjectList[this.QUESTION_MARK] && pixelObjectList[this.QUESTION_MARK].setInteractive(false);
 			this.isQuestionMarkRotate.destroy();
 			this.isQuestionMarkRotate = false;
 		}

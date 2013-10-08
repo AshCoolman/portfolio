@@ -49,10 +49,10 @@ $default-legacy-ie: 7 8 9 10 11 !default;
 }
 
 * {
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Ubuntu', 'Helvetica', 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
 }
 
-
+$col_unselectable-topbar:#777777;
 .top-bar {
 	font-weight: normal !important;
 	color:white !important;
@@ -60,18 +60,22 @@ $default-legacy-ie: 7 8 9 10 11 !default;
 	background: rgba(200,200,200,0.25);
 	border-bottom: solid 1px #919191;
 	padding-left:1em;
+	text-transform: uppercase;
 } 
 
 .top-bar ul, .top-bar h1, .top-bar li {
-	font-size:1.05em !important;
+	font-size:.95em !important;
 	margin:0;
 }
  .top-bar h1 {
 	font-weight: normal !important;
-	color:$col_offwhite !important;
-	padding:0 0.5em;
+	color:darken($col_offwhite, 10%) !important;
+	padding: 0.25em 0.15em;
 }
 
+.top-bar .title-area h1 {
+	margin-right:1em;
+}
 .top-bar-section li a:not(.button) {
 	background:transparent;
 	font-weight: normal !important;
@@ -138,7 +142,7 @@ $rulerLen: 30px;
 $rulerHeight: 8px;
 $rulerHeightMinor: 6px;
 $rulerOriginSize: 60px;
-
+$col_ruler: $col_bg_lit;
 .origin-name {
 	position: fixed;
 	bottom: 22px;
@@ -152,13 +156,13 @@ $rulerOriginSize: 60px;
 	bottom:0;
 	background-size: $rulerOriginSize $rulerOriginSize;
 	/*
-	@include linear-gradient( -90deg, transparent ($rulerHeight - 1), $col_bg_lit ($rulerHeight - 1), $col_bg_lit $rulerHeight, transparent $rulerHeight );
-	@include radial-gradient( transparent 15px, $col_bg_lit 15px, $col_bg_lit 16px, transparent 16px );
+	@include linear-gradient( -90deg, transparent ($rulerHeight - 1), $col_ruler ($rulerHeight - 1), $col_ruler $rulerHeight, transparent $rulerHeight );
+	@include radial-gradient( transparent 15px, $col_ruler 15px, $col_ruler 16px, transparent 16px );
 	-webkit-animation: pulse-origin 1s linear 0s infinite alternate;
 	animation: pulse-origin 1s linear 0s infinite alternate;
-	*/
-	@include radial-gradient( transparent 15px, $col_bg_lit 15px, $col_bg_lit 16px, transparent 16px );
-	animation: pulse-origin 1s linear 0s infinite alternate;
+	
+	@include radial-gradient( transparent 15px, $col_ruler 15px, $col_ruler 16px, transparent 16px );
+	animation: pulse-origin 1s linear 0s infinite alternate;*/
 	background-repeat: no-repeat;
 	background-color:red;
     background-position:100%;
@@ -177,7 +181,9 @@ $rulerOriginSize: 60px;
 	left:0;
 	bottom:0;
 	background-size: $rulerOriginSize $rulerOriginSize;
-	@include linear-gradient( transparent ($rulerHeight - 1 ), $col_bg_lit ($rulerHeight - 1), $col_bg_lit $rulerHeight, transparent $rulerHeight );		
+	/*
+	@include linear-gradient( transparent ($rulerHeight - 1 ), $col_ruler ($rulerHeight - 1), $col_ruler $rulerHeight, transparent $rulerHeight );		
+	*/
 	background-repeat: no-repeat;	
 }
 
@@ -185,7 +191,7 @@ $rulerOriginSize: 60px;
 	left:$rulerHeight;
 	bottom:0;
 	background-size: $rulerLen $rulerHeight;
-	@include linear-gradient(90deg, $col_bg_lit 0px, $col_bg_lit 1px, transparent 1px, transparent 29px, $col_bg_lit 29px);
+	@include linear-gradient(90deg, $col_ruler 0px, $col_ruler 1px, transparent 1px, transparent 29px, $col_ruler 29px);
 	background-repeat: repeat-x;
 }
 
@@ -193,7 +199,7 @@ $rulerOriginSize: 60px;
 	left:$rulerHeight;
 	bottom:0;
 	background-size:5px $rulerHeightMinor;
-	@include linear-gradient(90deg, $col_bg_lit 0px, $col_bg_lit 1px, transparent 1px, transparent 4px);
+	@include linear-gradient(90deg, $col_ruler 0px, $col_ruler 1px, transparent 1px, transparent 4px);
 	background-repeat: repeat-x;
 }
 
@@ -201,7 +207,7 @@ $rulerOriginSize: 60px;
 	left:0;
 	bottom:$rulerHeight;
 	background-size: $rulerHeight $rulerLen;
-	@include linear-gradient( $col_bg_lit 0px, $col_bg_lit 1px, transparent 1px, transparent 29px, $col_bg_lit 29px);
+	@include linear-gradient( $col_ruler 0px, $col_ruler 1px, transparent 1px, transparent 29px, $col_ruler 29px);
 	background-repeat: repeat-y;
 }
 
@@ -209,7 +215,7 @@ $rulerOriginSize: 60px;
 	left:0;
 	bottom:$rulerHeight;
 	background-size: $rulerHeightMinor 5px;
-	@include linear-gradient( $col_bg_lit 0px, $col_bg_lit 1px, transparent 1px, transparent 5px, $col_bg_lit 5px);
+	@include linear-gradient( $col_ruler 0px, $col_ruler 1px, transparent 1px, transparent 5px, $col_ruler 5px);
 	background-repeat: repeat-y;
 }
 
@@ -495,15 +501,19 @@ $hero_height_small: 300px;
 $hero_vis_height_small: round($visPerc * $hero_height_small);
 
 $gridColor:rgba(50,50,50,0.25);
+
+
 .canvas-hero-holder {
 	width: 100%;
 	position: relative;
+	pointer-events:all;
 	height: $hero_vis_height;
 }
 
 .canvas-hero-holder-med {
 	width: 100%;
 	position: relative;
+	pointer-events:all;
 	height: $hero_vis_height_med;
 }
 
@@ -511,6 +521,7 @@ $gridColor:rgba(50,50,50,0.25);
 .canvas-hero-holder-small {
 	width: 100%;
 	position: relative;
+	pointer-events:all;
 	height: $hero_vis_height_small;
 }
 
@@ -741,6 +752,9 @@ $gridColor:rgba(50,50,50,0.25);
 	h1 {
 	}
 	h1.graph-position {
+	}
+	h3.highlight {
+		color:$col_link !important;
 	}
 
 }

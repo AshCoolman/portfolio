@@ -23,7 +23,10 @@ App.Dimension2Route = App.SmartRoute.extend({
 						case 'SubtitleController': 
 							switch (acontroller.get('orderRead')) {
 								case '1': this.subtitleController1 = acontroller; break;
+								case '1a': this.subtitleController1a = acontroller; break;
 								case '2': this.subtitleController2 = acontroller; break;
+								case 'instructionTurnOn': this.instructionTurnOnController = acontroller; break;
+								case 'instructionTurnOff': this.instructionTurnOffController = acontroller; break;
 							}
 							break;
 						case 'Dimension2NavController':
@@ -37,28 +40,44 @@ App.Dimension2Route = App.SmartRoute.extend({
 				doGotoDimension3: function () {
 					window.location.hash = 'd3';
 				},
+				doShowUser: function () {
+					this.userController.doShowPixelInChildren(1200);
+				},
+				doHideUser:function () {
+					this.userController.doShowPixelOutChildren(1200);
+				},
 				doShowQuestion: function () {
-					//this.questionController.setVisible();
-					
-					this.questionController.doShowPixelInChildren(1200);
-					setTimeout(function (me) {
-						return function () {
-							me.questionController.doCogOpen(1200);
-						}
-					}(this), 1400);
-					
+					this.questionController.doShowPixelInChildren(300);
+				},
+				doShowMachineCogs: function () {
+					this.questionController.doCogOpenAndFadeOut(1200);
+					this.machineController.setInteractive(false);
 				},
 				doShowMachine: function () {
-					this.machineController.doShowLineInChildren(800);
-					setTimeout(function (me) {
-						return function () {
-							me.machineController.set('isOn', true);
-						}
-					}(this), 1200);
+					this.machineController.doShowLineInChildren(2000);
 					
 				},
+				doInstructionTurnOnController: function () {
+					this.machineController.setInteractive(true);
+					this.instructionTurnOnController.startReading();
+				},
+				doMachineTurnOn: function () {
+					if (!this.isFirstTurnOn) {
+						this.isFirstTurnOn = true;
+						this.instructionTurnOnController.doRemoveClicked();
+						this.instructionTurnOffController.startReading();
+					}
+				},
+				doMachineTurnOff: function () {
+					if (!this.isFirstTurnOff) {
+						this.isFirstTurnOff = true;
+						this.instructionTurnOffController.doRemoveClicked();
+						this.subtitleController1.set('isCursor', false);
+						this.subtitleController1a.startReading();
+					}
+				},
 				doSubtitle2: function () {
-					this.subtitleController1.set('isCursor', false);
+					this.subtitleController1a.set('isCursor', false);
 			        this.subtitleController2.startReading();
 				},
 				doMosaicFinished: function () {
@@ -85,7 +104,16 @@ App.Dimension2Route = App.SmartRoute.extend({
 	},
  
 	tryStart: function () {
-        if (!this.get('isStarted') && this.questionController && this.world2dController && this.subtitleController1 && this.subtitleController2 && this.machineController && this.userController) {
+        if (	!this.get('isStarted') && 
+				this.questionController && 
+				this.world2dController && 
+				this.subtitleController1 && 
+				this.subtitleController1a &&
+				this.subtitleController2 && 
+				this.machineController && 
+				this.userController &&
+				this.instructionTurnOnController && 
+				this.instructionTurnOffController ) {
 			this.machineController.setTarget(this.userController );
 			this.set('isStarted', true);
             this.doStart();

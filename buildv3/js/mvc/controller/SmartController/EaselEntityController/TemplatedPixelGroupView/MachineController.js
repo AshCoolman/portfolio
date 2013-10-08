@@ -3,6 +3,7 @@ App.MachineController = App.TemplatedPixelGroupController.extend({
 	label:'MachineController',
 	targetController: null,
 	isOn: false,
+	isInteractive:false,
 	CoggedPixelControllerCreated: function (apixelController) {
 		this._super(apixelController);		
 		var pixelEslObj = apixelController.get('view').addEventListener('eslObjCreated', function (me) {
@@ -19,6 +20,25 @@ App.MachineController = App.TemplatedPixelGroupController.extend({
 	setTarget: function ( atarget) {
 		this.set('targetController', atarget);
 	},
+	setInteractive: function (val) {
+		if (!val) {
+			this.set('isOn', false);
+		}
+		if ( val != this.get('isInteractive')) {
+			this.set('isInteractive', val);
+		}
+	},
+	
+	togglePower: function ( ) {
+		console.log('toggled power');
+		this.set('isOn', !this.get('isOn'));
+		if (this.get('isOn')) {
+			this.send('doMachineTurnOn');
+		} else {
+			this.send('doMachineTurnOff');
+		}
+	},
+	
 	doActivateTarget: function () {
 		var t = this.get('targetController');
 		t && t.doActivate && t.doActivate();
