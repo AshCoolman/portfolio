@@ -45,8 +45,7 @@ ragh.createJsonMapFromImage = function (img, mapElementFunc, onCompleteFunc) {
 		//Get maximums TODO get from imgData
 		maxX = w-1	;
 		maxY = h-1;
-		maxZ = 0;
-		console.log('set maxs', maxX, maxY, maxZ)
+		maxZ = 0; 
 		//Call mapElementFunc
 		for (var xs = 0; xs < map.length; xs++) {
 			if (!map[xs]) map[xs] = []

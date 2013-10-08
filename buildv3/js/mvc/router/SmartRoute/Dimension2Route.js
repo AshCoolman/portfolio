@@ -89,6 +89,14 @@ App.Dimension2Route = App.SmartRoute.extend({
 		this._super();
 		this.questionController = null;
 		this.world2dController = null;
+		this.subtitleController1 = null;
+		this.subtitleController1a = null;
+		this.subtitleController2 = null;
+		this.machineController = null;
+		this.userController = null;
+		this.instructionTurnOnController = null;
+		this.instructionTurnOffController= null;
+		
 	},
 	renderTemplate: function () {
 		if ( App.PRELOADER.isLoaded ) {

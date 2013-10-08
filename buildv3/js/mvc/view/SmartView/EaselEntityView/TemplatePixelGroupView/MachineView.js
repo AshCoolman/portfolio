@@ -7,6 +7,7 @@ var MachineViewLed = function () {
 	this.colStandBy = '#33CC33';
 	this.colOff = '#005500';
 	this.shp = null;
+	this.clickFunc = null;
 }
 MachineViewLed.prototype = {
 	init: function (aplan) {
@@ -14,6 +15,12 @@ MachineViewLed.prototype = {
 		this.colOff = aplan.colOff || this.colOff;
 		this.colStandBy = aplan.colStandBy || this.colStandBy;
 		this.shp = aplan.shp || this.shp;
+		this.clickFunc = aplan.clickFunc || null;
+		
+		if (this.clickFunc) {
+			this.shp.cursor = 'pointer';
+			this.shp.addEventListener('click', this.clickFunc, false);
+		}
 	},
 	showOn: function () {
 		this._show(this.colOn);
@@ -30,6 +37,16 @@ MachineViewLed.prototype = {
 			this.shp.graphics.beginFill(col);
 			this.shp.graphics.drawRect( 0, 0, this.shp.width, this.shp.height);
 		}
+	},
+	cleanUp: function() {
+		if (this.clickFunc) {
+			this.shp.removeEventListener('click', this.clickFunc);
+		}
+		
+		this.colOn = null;
+		this.colOff =null;
+		this.colStandBy = null;
+		this.shp = null;
 	}
 }
 
@@ -40,6 +57,7 @@ var MachineViewRayParticle = function () {
 	this.col = null;
 	this.shp = null;
 	this.eslObj = null;
+	this.tween = null;
 }
 MachineViewRayParticle.prototype = {
 	init: function (aplan) {
@@ -68,13 +86,16 @@ MachineViewRayParticle.prototype = {
 		onCompleteFunc = function (me) {
 			return function () {
 				me.eslObj.removeAllChildren();
-				me.eslObj.parent.removeChild(me.eslObj);
-				me.eslObj = me.shp = me.COL_LIST = me.col = null
+				if (me.eslObj.parent) {
+					me.eslObj.parent.removeChild(me.eslObj);
+					me.eslObj = me.shp = me.COL_LIST = me.col = null
+				}
+				me.cleanUp();
 				
 			}
 		}(this);
 
-		var tween = TweenMax.to(this.eslObj, 0.1, {alpha:0.2, repeat:8, yoyo:true, onComplete: onCompleteFunc});
+		this.tween = TweenMax.to(this.eslObj, 0.1, {alpha:0.2, repeat:8, yoyo:true, onComplete: onCompleteFunc});
 		//var tween = TweenMax.to(this.eslObj, 0.8, {alpha:0.2, proxyX: this.eslObj.proxyX + 4 * aplan.w, onUpdate: updateFunc, onComplete: onCompleteFunc});
 	},
 	createShape: function (aplan) {
@@ -89,6 +110,14 @@ MachineViewRayParticle.prototype = {
 		shp.graphics.beginFill(col);
 		shp.graphics.drawRect( 0, 0, shp.width, shp.height);
 		return shp;
+	},
+	cleanUp: function() {
+		this.COL_LIST = null;
+		this.col = null;
+		this.shp = null;
+		this.eslObj = null;
+		this.tween && this.tween.kill && this.tween.kill();
+		this.tween = null;
 	}
 }
 
@@ -116,12 +145,13 @@ App.MachineView = App.TemplatedPixelGroupView.extend({
 			ledHash.power && ledHash.power.showOff();
 		}
 	}.observes('controller.isOn'),
-	activityCycleInterval: null,
+	toggleActivityInterval: null,
 	isActivity:false,
 	isActivityObserver: function (obj, val) {
+		
 		var ledHash = this.get('ledHash');
 
-		if (this.get(val)) {
+		if (this.get(val) && this.get('controller.isOn')) {
 			ledHash.activity && ledHash.activity.showOn();
 			var ray = this.shootRay();
 			this.get('controller').doActivateTarget({ray:ray});
@@ -132,24 +162,38 @@ App.MachineView = App.TemplatedPixelGroupView.extend({
 	activateOn: function () {
 		
 	},
-	trySetPowerLed: function ( eslObj, shp ) {
+	didInsertElement: function () {
+		this._super();
+		console.log('creating machine view')
+	},
+	willDestroyElement: function () {
+		this._super();
+		console.log('destroying machine view')
+		clearInterval(this.get('toggleActivityInterval'));
+		this.set('toggleActivityInterval', null);
 		var ledHash = this.get('ledHash');
+		if (ledHash) {
+			ledHash.power && ledHash.power.cleanUp();
+			ledHash.activity && ledHash.activity.cleanUp();
+			ledHash.power = ledHash.activity = null;
+		}
+		this.set('ledHash', ledHash = null);
+	},
+	trySetPowerLed: function ( eslObj, shp ) {
+		
+		var ledHash = this.get('ledHash'),
+			clickPowerFunc;
 		if (!ledHash.power) {
-			var hit = new createjs.Shape();
-			
-			shp.cursor = 'pointer';
-			shp.addEventListener('click', function (me) {
+			clickPowerFunc = function (me) {
 				return function (e) {
 					if (me.get('controller').isInteractive)
 						me.get('controller').togglePower();
 				}
-			}(this), false);
-			
-			
-			eslObj.cursor = 'pointer';
-			ledHash.power = Object.createFromPrototype(MachineViewLed, {});
-			ledHash.power.shp = shp;
+			}(this);
+			ledHash.power = Object.createFromPrototype(MachineViewLed, {clickFunc: clickPowerFunc, shp: shp});
 			ledHash.power.showOff();
+		} else {
+			console.log('already this.get ledHash.power')
 		}
 	},
 	
@@ -172,6 +216,7 @@ App.MachineView = App.TemplatedPixelGroupView.extend({
 			pixels = this.get('controller.pixels'),
 			pix;
 			
+		console.log('shoot ray', pixels.length, pixels)
 		for (var p = 0; p < pixels.length; p++) {
 			pix = pixels[p].get('view.eslObj');
 			if (!edgeX || pix.x > edgeX) {

@@ -2,6 +2,15 @@ App.TemplatedPixelGroupController = App.EslEntityController.extend({
 	className:'TemplatedPixelGroupController',
 	label:'TemplatedPixelGroupController',
 	pixels: [],
+	view_didInsertElement: function (aview) {
+		this._super(aview);
+		this.set('pixels', []);
+	},
+	view_willDestroyElement: function (aview) {
+		this._super(aview);
+		this.set('pixels', null);
+		
+	},
 	CoggedPixelControllerCreated: function (apixelController) {
 		var pixels = this.get('pixels');
 		pixels.push(apixelController); //TODO THIS IS SO YUK: see CoggedPixelController.view_didInsertElement()

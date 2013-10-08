@@ -45,7 +45,6 @@ App.SubtitleView = App.SmartView.extend({
 		$('.text', this.get('$el')).unbind('click');
 	},
 	doRemove: function () {
-		console.log('removing')
 		this.get('$el').css('display', 'none');
 	}
 });

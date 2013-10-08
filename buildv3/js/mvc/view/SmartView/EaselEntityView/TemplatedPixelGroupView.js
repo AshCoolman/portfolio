@@ -62,7 +62,7 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 	
 	doShowPixelChildrenTo: function (isVis, dur) {
 		var handle = this.get('handle');
-		console.log('view.doShowPixelInChildren');
+		//console.log('view.doShowPixelInChildren');
 		handle.visible = true;
 		var rIndexAr = [],
 			pixels = handle.children,
@@ -105,7 +105,7 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 		minY = minY / App.PIXEL_SIZE;
 		yRange = Math.abs(maxY - minY)
 		step = dur / yRange;
- 		console.log('yRange='+yRange, 'maxY='+maxY, 'minY='+minY);
+ 		//console.log('yRange='+yRange, 'maxY='+maxY, 'minY='+minY);
 		for (var c=0; c < pixels.length; c++) {
 			var pix = pixels[c];
 			pix.visible = false;

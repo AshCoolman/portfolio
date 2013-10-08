@@ -15,8 +15,13 @@ App.UserView = App.TemplatedPixelGroupView.extend({
 		}
 		
 	},
-	
+	willDestroyElement: function ( ) {
+		this._super();
+		this.set('faceChangeMaps', null);
+		this.set('faceChangeImgPreloadIds', null);
+	},
 	doActivate: function () {
+		console.log('UserView.doActivate() child views', this.get('childViews').length)
 		this.clearFace();
 		this.makeFaceChange();
 	},

@@ -11,7 +11,6 @@ App.AshView = App.EslEntityView.extend({
 	override_createEsl: function (asettings) {
 		var shp = new createjs.Shape();
 		var img = new createjs.Bitmap(asettings.img);
-		console.log('img', asettings.img)
 		var container = new createjs.Container();
 		container.addChild(shp);
 		container.addChild(img);
