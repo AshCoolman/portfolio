@@ -145,8 +145,9 @@ html,body {
 }
 
 $rulerLen: 30px;
+$rulerLenMinor:5px;
 $rulerHeight: 8px;
-$rulerHeightMinor: 6px;
+$rulerHeightMinor: 5px;
 $rulerOriginSize: 60px;
 $col_ruler: $col_bg_lit;
 .origin-name {
@@ -197,15 +198,15 @@ $col_ruler: $col_bg_lit;
 	left:$rulerHeight;
 	bottom:0;
 	background-size: $rulerLen $rulerHeight;
-	@include linear-gradient(90deg, $col_ruler 0px, $col_ruler 1px, transparent 1px, transparent 29px, $col_ruler 29px);
+	@include linear-gradient(90deg, $col_ruler 0px, $col_ruler 2px, transparent 2px, transparent 30px);
 	background-repeat: repeat-x;
 }
 
 .x-ruler-minor {
 	left:$rulerHeight;
 	bottom:0;
-	background-size:5px $rulerHeightMinor;
-	@include linear-gradient(90deg, $col_ruler 0px, $col_ruler 1px, transparent 1px, transparent 4px);
+	background-size:$rulerLenMinor $rulerHeightMinor;
+	@include linear-gradient(90deg, $col_ruler 0px, $col_ruler 1px, transparent 1px, transparent 5px);
 	background-repeat: repeat-x;
 }
 
@@ -220,7 +221,7 @@ $col_ruler: $col_bg_lit;
 .y-ruler-minor {
 	left:0;
 	bottom:$rulerHeight;
-	background-size: $rulerHeightMinor 5px;
+	background-size: $rulerHeightMinor $rulerLenMinor;
 	@include linear-gradient( $col_ruler 0px, $col_ruler 1px, transparent 1px, transparent 5px, $col_ruler 5px);
 	background-repeat: repeat-y;
 }
@@ -314,7 +315,7 @@ $col_ruler: $col_bg_lit;
 			background-color: $subtitleBackGroundColor; /* More background colour for browsers that don't support css pointer-events */
 	    }
 	}
-	h3 {
+	h3,h4,h5 {
 		margin:0;
 		padding:0;
 		color:inherit;

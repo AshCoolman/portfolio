@@ -9,6 +9,7 @@ App.Dimension3Route = App.SmartRoute.extend({
 					case 'SubtitleController': 
 						switch (acontroller.get('orderRead')) {
 							case 'instruction': this.subtitleInstructionController = acontroller; break;
+							case 'heading': this.subtitleHeadingController = acontroller; break;
 							case '1': this.subtitle1Controller = acontroller; break;
 							case '2': this.subtitle2Controller = acontroller; break;
 							case 'art': this.subArtController = acontroller; break;
@@ -20,8 +21,12 @@ App.Dimension3Route = App.SmartRoute.extend({
 
 				this.tryStart();	
 			},
+			
 			SubtitleController_didInsertElement: function (acontroller, alabel) { },
 
+			doSubtitle1: function () {
+			},
+			
 			doRotateQuestionMarkHint: function () {
 				this.world3dController.doRotateQuestionMarkHint();
 			},
@@ -38,6 +43,17 @@ App.Dimension3Route = App.SmartRoute.extend({
 			doQuestionMarkRotateDone: function () {
 				this.subtitleInstructionController.doRemoveClicked();
 		        this.subtitle2Controller.startReading();
+				setTimeout(function (me ) {
+					return function () {
+						me.subArtController.startReading();
+					}
+				}(this), 2400);
+
+				setTimeout(function (me ) {
+					return function () {
+						me.subAwardController.startReading();
+					}
+				}(this), 3200);
 			}
 		});
 	},
@@ -50,6 +66,7 @@ App.Dimension3Route = App.SmartRoute.extend({
 		this.subtitle1Controller = null;
 		this.subAwardController = null;
 		this.subArtController = null;
+		this.subtitleHeadingController = null;
 	},
 
 	renderTemplate: function () {
@@ -69,6 +86,7 @@ App.Dimension3Route = App.SmartRoute.extend({
 
 	tryStart: function () {
         if (!this.get('isStarted') && 
+				this.subtitleHeadingController &&
 				this.subtitle1Controller && 
 				this.subtitleInstructionController && 
 				this.subtitle2Controller &&
@@ -81,20 +99,16 @@ App.Dimension3Route = App.SmartRoute.extend({
     },
 	doStart: function (type, data) {
 		
-		this.subtitle1Controller.set('content', App.scriptModel); 
-	    this.subtitle1Controller.setup();
-        this.subtitle1Controller.startReading();
+        this.subtitleHeadingController.startReading();
+		this.subtitleHeadingController.set('isCursor', false);
+	
 		setTimeout(function (me ) {
 			return function () {
-				me.subArtController.startReading();
+				me.subtitle1Controller.startReading();
 			}
-		}(this), 400);
-		
-		setTimeout(function (me ) {
-			return function () {
-				me.subAwardController.startReading();
-			}
-		}(this), 1200);
+		}(this), 1800);
+			
+
 		
     }
 })

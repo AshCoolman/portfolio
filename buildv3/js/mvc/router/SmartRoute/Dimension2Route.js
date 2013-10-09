@@ -22,9 +22,10 @@ App.Dimension2Route = App.SmartRoute.extend({
 							break;
 						case 'SubtitleController': 
 							switch (acontroller.get('orderRead')) {
-								case '1': this.subtitleController1 = acontroller; break;
-								case '1a': this.subtitleController1a = acontroller; break;
-								case '2': this.subtitleController2 = acontroller; break;
+								case 'heading': this.subHeadingController = acontroller; break;
+								case '1': this.sub1Controller = acontroller; break;
+								case '2': this.sub2Controller = acontroller; break;
+								case '3': this.sub3Controller = acontroller; break;
 								case 'instructionTurnOn': this.instructionTurnOnController = acontroller; break;
 								case 'instructionTurnOff': this.instructionTurnOffController = acontroller; break;
 								case 'example': this.subExampleController = acontroller; break;
@@ -76,14 +77,27 @@ App.Dimension2Route = App.SmartRoute.extend({
 					if (!this.isFirstTurnOff) {
 						this.isFirstTurnOff = true;
 						this.instructionTurnOffController.doRemoveClicked();
-						this.subtitleController1.set('isCursor', false);
-						this.subtitleController1a.startReading();
+						this.sub1Controller.set('isCursor', false);
+						this.sub2Controller.startReading();
 					}
 				}, 
-				doSubtitle2: function () {
-					this.subtitleController1a.set('isCursor', false);
-			        this.subtitleController2.startReading();
+				doSubtitle1: function () {
+					this.subHeadingController.set('isCursor', false);
+			        this.sub1Controller.startReading();
 				},
+				doSubtitle2: function () {
+					this.sub1Controller.set('isCursor', false);
+			        this.sub2Controller.startReading();
+				},
+				doSubtitle3: function () {
+					this.sub2Controller.set('isCursor', false);
+			        this.sub3Controller.startReading();
+				},
+				doSubtitleExample: function () {
+					setTimeout(function (me) { return function () { me.subExampleController.startReading();}}(this), 2200);
+				},
+				
+				
 				doMosaicFinished: function () {
 					//console.log('Route doMosaicFinished')
 				}
@@ -93,16 +107,17 @@ App.Dimension2Route = App.SmartRoute.extend({
 		this._super();
 		this.questionController = null;
 		this.world2dController = null;
-		this.subtitleController1 = null;
-		this.subtitleController1a = null;
-		this.subtitleController2 = null;
-		this.machineController = null;
-		this.userController = null;
+		this.subHeadingController = null;
+		this.sub1Controller = null;
+		this.sub2Controller = null;
+		this.sub3Controller = null;
 		this.instructionTurnOnController = null;
 		this.instructionTurnOffController = null;
+		this.subExampleController = null;
+		this.machineController = null;
+		this.userController = null;
 		this.isFirstTurnOn = null;
 		this.isFirstTurnOff = null;
-		this.subExampleController = null;
 		
 	},
 	renderTemplate: function () {
@@ -122,24 +137,21 @@ App.Dimension2Route = App.SmartRoute.extend({
         if (	!this.get('isStarted') && 
 				this.questionController && 
 				this.world2dController && 
-				this.subtitleController1 && 
-				this.subtitleController1a &&
-				this.subtitleController2 && 
 				this.machineController && 
 				this.userController &&
+				this.subHeadingController &&
+				this.sub1Controller && 
+				this.sub2Controller &&
+				this.sub3Controller && 
 				this.instructionTurnOnController && 
-				this.subExampleController &&
-				this.instructionTurnOffController ) {
+				this.instructionTurnOffController &&
+				this.subExampleController  ) {
 			this.machineController.setTarget(this.userController );
 			this.set('isStarted', true);
             this.doStart();
 		}
     },
 	doStart: function (type, data) {
-		this.subtitleController1.set('content', App.scriptModel); 
-        this.subtitleController1.setup();
-        this.subtitleController1.startReading();
-		this.subExampleController.startReading();
-		
+        this.subHeadingController.startReading();
     }
 })

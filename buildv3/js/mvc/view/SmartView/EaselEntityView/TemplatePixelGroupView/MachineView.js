@@ -20,7 +20,20 @@ MachineViewLed.prototype = {
 		if (this.clickFunc) {
 			this.shp.cursor = 'pointer';
 			this.shp.addEventListener('click', this.clickFunc, false);
+		
+			$(this.shp).on("rollover", function(evt) {
+							this.filters = [new createjs.ColorFilter(120,120,120,1, 120,120,120,0)];
+							this.cache(0, 0, this.width, this.width);
+							update = true;
+						});
+
+			$(this.shp).on("rollout", function(evt) {
+				this.filters = [	];
+				this.cache(0, 0, this.width, this.width);
+				update = true;
+			});	
 		}
+					
 	},
 	showOn: function () {
 		this._show(this.colOn);

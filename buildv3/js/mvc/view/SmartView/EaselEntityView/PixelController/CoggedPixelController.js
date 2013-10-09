@@ -16,6 +16,10 @@ App.CoggedPixelController = App.PixelController.extend({
 	},
 	doOpenAndFadeOut: function () {
 		this.get('view').doOpenAndFadeOut();
+	},
+	
+	doCloseAndFadeIn: function () {
+		this.get('view').doOpenAndFadeOut();
 	}
 })
 App.register('controller:cogged-pixel', App.CoggedPixelController, {singleton:false});

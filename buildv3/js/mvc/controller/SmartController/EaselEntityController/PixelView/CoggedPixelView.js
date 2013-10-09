@@ -27,9 +27,10 @@ App.CoggedPixelView = App.PixelView.extend({
 		return this.handle
 	},
 	addCogEsl: function (e) {
-		this.e_cog = e.eslObj;
-		this.e_cog.x=this.e_cog.y=0;
-		this.handle.addChildAt(this.e_cog)
+		var e_cog;
+		this.set('e_cog', e_cog = e.eslObj);
+		e_cog.x=e_cog.y=0;
+		this.handle.addChildAt(e_cog)
 	},
 	override_draw: function (settings) {
 		this._super(settings);
@@ -81,12 +82,14 @@ App.CoggedPixelView = App.PixelView.extend({
 				t2 = {},
 				prop = 'rotation', 
 				dir = ragh.one([1, -1]) * 20 * 2 *Math.PI;
+			scale = {scaleX: 1.2, scaleY:1.2};
 			t0[ prop ] = me.shp[ prop ];	
 			t1[ prop ] = dir;
 			t2.alpha = 0;
 			t2[ prop ] = dir*2;
-			window.createjs.Tween.get(me.e_cog).to(t1, 1500).to(t2, 1500);	
+			window.createjs.Tween.get(me.get('e_cog')).to(scale, 500).to(t1, 1500).to(t2, 1500);	
 		}(this));
+		
 
 	}
 

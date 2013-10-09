@@ -45,6 +45,23 @@ App.TemplatedPixelGroupController = App.EslEntityController.extend({
 		
 	},
 	
+	doCogClose: function (dur) {
+		var rIndexAr = [],
+			pixels = this.get('pixels'),
+			step = dur/pixels.length;
+
+		for (var r=0; r < pixels.length; r++) rIndexAr.push(r);
+		rIndexAr.sort(function() {return 0.5 - Math.random()})
+
+		for (var c=0; c < pixels.length; c++) {
+			var r = rIndexAr[c];
+			setTimeout( function (me, ar) {
+				return function () {
+					pixels[ar].doClose();
+				}
+			}(this, r), step*c);
+		}
+	},
 	doCogOpen: function (dur) {
 		var rIndexAr = [],
 			pixels = this.get('pixels'),
@@ -76,6 +93,7 @@ App.TemplatedPixelGroupController = App.EslEntityController.extend({
 			var r = rIndexAr[c];
 			setTimeout( function (me, ar) {
 				return function () {
+					
 					pixels[ar].doOpenAndFadeOut();
 				}
 			}(this, r), step*c);

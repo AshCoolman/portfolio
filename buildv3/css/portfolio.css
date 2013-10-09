@@ -126,19 +126,19 @@ html, body {
   bottom: 0;
   background-size: 30px 8px;
   background-color: #d9d9d9;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #d9d9d9), color-stop(1px, #d9d9d9), color-stop(1px, transparent), color-stop(29px, transparent), color-stop(29px, #d9d9d9));
-  background-image: -webkit-linear-gradient(-360deg, #d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 29px, #d9d9d9 29px);
-  background-image: linear-gradient(90deg,#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 29px, #d9d9d9 29px);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #d9d9d9), color-stop(2px, #d9d9d9), color-stop(2px, transparent), color-stop(30px, transparent));
+  background-image: -webkit-linear-gradient(-360deg, #d9d9d9 0px, #d9d9d9 2px, transparent 2px, transparent 30px);
+  background-image: linear-gradient(90deg,#d9d9d9 0px, #d9d9d9 2px, transparent 2px, transparent 30px);
   background-repeat: repeat-x; }
 
 .x-ruler-minor {
   left: 8px;
   bottom: 0;
-  background-size: 5px 6px;
+  background-size: 5px 5px;
   background-color: #d9d9d9;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #d9d9d9), color-stop(1px, #d9d9d9), color-stop(1px, transparent), color-stop(4px, transparent));
-  background-image: -webkit-linear-gradient(-360deg, #d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 4px);
-  background-image: linear-gradient(90deg,#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 4px);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #d9d9d9), color-stop(1px, #d9d9d9), color-stop(1px, transparent), color-stop(5px, transparent));
+  background-image: -webkit-linear-gradient(-360deg, #d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 5px);
+  background-image: linear-gradient(90deg,#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 5px);
   background-repeat: repeat-x; }
 
 .y-ruler {
@@ -154,7 +154,7 @@ html, body {
 .y-ruler-minor {
   left: 0;
   bottom: 8px;
-  background-size: 6px 5px;
+  background-size: 5px 5px;
   background-color: #d9d9d9;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0px, #d9d9d9), color-stop(1px, #d9d9d9), color-stop(1px, transparent), color-stop(5px, transparent), color-stop(5px, #d9d9d9));
   background-image: -webkit-linear-gradient(#d9d9d9 0px, #d9d9d9 1px, transparent 1px, transparent 5px, #d9d9d9 5px);
@@ -237,7 +237,7 @@ html, body {
     .ie7 .subtitle-text-holder .heading, .ie8 .subtitle-text-holder .heading, .ie9 .subtitle-text-holder .heading, .ie10 .subtitle-text-holder .heading, .ie11 .subtitle-text-holder .heading, .ie7 .subtitle-text-holder p, .ie8 .subtitle-text-holder p, .ie9 .subtitle-text-holder p, .ie10 .subtitle-text-holder p, .ie11 .subtitle-text-holder p, .ie7 .subtitle-text-holder li, .ie8 .subtitle-text-holder li, .ie9 .subtitle-text-holder li, .ie10 .subtitle-text-holder li, .ie11 .subtitle-text-holder li, .ie7 .subtitle-text-holder ul, .ie8 .subtitle-text-holder ul, .ie9 .subtitle-text-holder ul, .ie10 .subtitle-text-holder ul, .ie11 .subtitle-text-holder ul {
       background-color: white;
       /* More background colour for browsers that don't support css pointer-events */ }
-  .subtitle-text-holder h3 {
+  .subtitle-text-holder h3, .subtitle-text-holder h4, .subtitle-text-holder h5 {
     margin: 0;
     padding: 0;
     color: inherit; }
