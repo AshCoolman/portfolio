@@ -2,7 +2,7 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <?php
-$IS_DEPLOY = false;
+$IS_DEPLOY = true;
 ?>
 <head>
 	<!--link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'-->
@@ -196,7 +196,7 @@ If the question is how create change from the web,
 $d2Example = '@=<h3>
 Example Infographic
 @=</h3>
-Check out how I used an <a href=\"http://media.adelaidenow.com.au/multimedia/2011/r18games/R18v6.swf\" target=\"_blank\">interactive infographic</a> to explain a complex story. <i>This was for NewsCorp\'s Australian news network</i>';
+Check out how I used an <a href=\"http://www.adelaidenow.com.au/news/ban-lifted-it-only-took-10-years-but-government-gives-r18-video-games-the-go-ahead/story-e6freaal-1226271799644\" target=\"_blank\">interactive infographic</a> to explain a complex story. <i>This was for NewsCorp\'s Australian news network</i>';
 ?>
 
 <?php
