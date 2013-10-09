@@ -159,10 +159,10 @@ App.World2dView = App.ActiveEslStageView.extend({
 			canvasHeroHolderClass,
 			tmpwinWidth = this.tmpwinWidth = $(window).width(),
 			tmpwinHeight = this.tmpwinHeight = $(window).height();
-		if (tmpwinWidth > bp.WIDTH_2 && tmpwinHeight > bp.HEIGHT_2) {
+		if (tmpwinWidth > bp.WIDTH_2 && tmpwinHeight > bp.HEIGHT_2 * 1.5) {
 			canvasHeroClass = 'canvas-hero';
 			canvasHeroHolderClass = 'canvas-hero-holder';
-		} else if (tmpwinWidth > bp.WIDTH_1 && tmpwinHeight > bp.HEIGHT_1) {
+		} else if (tmpwinWidth > bp.WIDTH_1 && tmpwinHeight > bp.HEIGHT_1 * 1.5) {
 			canvasHeroClass = 'canvas-hero-med';
 			canvasHeroHolderClass = 'canvas-hero-holder-med';
 		} else {

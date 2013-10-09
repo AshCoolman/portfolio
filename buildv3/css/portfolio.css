@@ -10,8 +10,7 @@ http://jsfiddle.net/VAXrL/190/
   z-index: 1000;
   background: rgba(200, 200, 200, 0.25);
   border-bottom: solid 1px #919191;
-  padding-left: 1em;
-  text-transform: uppercase; }
+  padding-left: 1em; }
 
 .top-bar ul, .top-bar h1, .top-bar li {
   font-size: .95em !important;
@@ -25,10 +24,15 @@ http://jsfiddle.net/VAXrL/190/
 .top-bar .title-area h1 {
   margin-right: 1em; }
 
+.top-bar-section li {
+  padding-right: 0.5em; }
+
 .top-bar-section li a:not(.button) {
   background: transparent;
   font-weight: normal !important;
-  color: white !important; }
+  color: white !important;
+  padding-right: 0em;
+  padding-left: 0em; }
 
 .top-bar-section ul {
   background: transparent; }
@@ -211,7 +215,7 @@ html, body {
   display: inline; }
 
 .subtitle-text-holder {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.25em;
   pointer-events: none;
   zoom: 1; }
   .subtitle-text-holder .text {
@@ -229,7 +233,7 @@ html, body {
     margin: 0px;
     padding: 0px;
     pointer-events: none;
-    line-height: 1.6em; }
+    line-height: 0em; }
     .ie7 .subtitle-text-holder .heading, .ie8 .subtitle-text-holder .heading, .ie9 .subtitle-text-holder .heading, .ie10 .subtitle-text-holder .heading, .ie11 .subtitle-text-holder .heading, .ie7 .subtitle-text-holder p, .ie8 .subtitle-text-holder p, .ie9 .subtitle-text-holder p, .ie10 .subtitle-text-holder p, .ie11 .subtitle-text-holder p, .ie7 .subtitle-text-holder li, .ie8 .subtitle-text-holder li, .ie9 .subtitle-text-holder li, .ie10 .subtitle-text-holder li, .ie11 .subtitle-text-holder li, .ie7 .subtitle-text-holder ul, .ie8 .subtitle-text-holder ul, .ie9 .subtitle-text-holder ul, .ie10 .subtitle-text-holder ul, .ie11 .subtitle-text-holder ul {
       background-color: white;
       /* More background colour for browsers that don't support css pointer-events */ }
@@ -248,6 +252,8 @@ html, body {
     border-right-style: solid;
     pointer-events: auto;
     cursor: pointer; }
+  .subtitle-text-holder span span {
+    display: inline; }
   .subtitle-text-holder span.heading {
     font-weight: bold;
     margin-top: 1em;
@@ -357,7 +363,7 @@ a {
   width: 100%;
   position: relative;
   pointer-events: all;
-  height: 360px; }
+  height: 345px; }
 
 .canvas-hero-holder-med {
   width: 100%;
@@ -487,11 +493,11 @@ a {
   opacity: 1; }
 
 .fader {
-  -webkit-transition: opacity 1s ease-in-out;
-  -moz-transition: opacity 1s ease-in-out;
-  -o-transition: opacity 1s ease-in-out;
-  -ms-transition: opacity 1s ease-in-out;
-  transition: opacity 1s ease-in-out; }
+  -webkit-transition: opacity 2s ease;
+  -moz-transition: opacity 2s ease;
+  -o-transition: opacity 2s ease;
+  -ms-transition: opacity 2s ease;
+  transition: opacity 2s ease; }
 
 .dimension1 {
   overflow: hidden;

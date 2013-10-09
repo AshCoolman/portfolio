@@ -2,7 +2,10 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 	templateName: 'templated-pixel-group',
 	className: 'TemplatedPixelGroupView',
 	label: 'templated-pixel-group',
+	isCreateFromImage: false,
 	pixelHash: {},
+	pixelsFromImgMap: null,
+	pixelsFromImgList: null,
 	//TODO Improve coord system, then use pixel cords
 	addPixel: function (pixCon) {
 		var pixelHash = this.get('pixelHash'),
@@ -46,12 +49,39 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 						str += '{{controlWithVars "cogged-pixel" cogged-pixel x='+x2d+' y='+y2d+' height='+App.PIXEL_SIZE+' width='+App.PIXEL_SIZE+' col="'+el.color+'"}}\n'
 						el.x2d = x2d;
 						el.y2d = y2d;
+						
+						if (me.get('isCreateFromImage')) {
+							
+							var pixelsFromImgList = me.get('pixelsFromImgList') || [],
+								container = new createjs.Container(),
+								shp = new createjs.Shape();
+								
+							container.addChild(shp);
+							shp.width = App.PIXEL_SIZE;
+							shp.height = App.PIXEL_SIZE;
+							shp.graphics.clear();
+							shp.graphics.beginFill(el.color);
+							shp.graphics.drawRect( 0, 0, shp.width, shp.height);
+							container.regX = App.PIXEL_SIZE / 2;
+							container.regY = App.PIXEL_SIZE / 2;
+							container.x = x2d;
+							container.y = y2d;
+							me.get('eslObj').addChild(container);
+							el.container = container;
+							el.shp = shp;
+							pixelsFromImgList.push(el)
+							me.set('pixelsFromImgList', pixelsFromImgList);
+							
+						}
+
 					}
 				}(this),
 				onCompleteFunc = function (me) {
 					return function (amap) {
-						//console.log('map is completed\n'+str)
-						//me.set('pixelMap', amap);
+						console.log('map is completed\n'+str)
+						if (me.get('isCreateFromImage')) {
+							me.set('pixelsFromImgMap', amap);
+						}
 					}
 				}(this);
 			ragh.createJsonMapFromImage(img, mapElementFunc, onCompleteFunc);
@@ -62,7 +92,7 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 	
 	doShowPixelChildrenTo: function (isVis, dur) {
 		var handle = this.get('handle');
-		//console.log('view.doShowPixelInChildren');
+		console.log('view.doShowPixelInChildren', this.handle.children.length);
 		handle.visible = true;
 		var rIndexAr = [],
 			pixels = handle.children,

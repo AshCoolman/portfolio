@@ -310,9 +310,11 @@ App.SubtitleController = App.SmartController.extend({
 								var actionFunc = function (my, myAction, pos) {
 									return function () {
 										var actionTOObjs = my.get('actionTimeouts');
-										window.clearTimeout(actionTOObjs[pos].to);
-										actionTOObjs[pos].to = null;
-										my.send(myAction)
+										if (actionTOObjs[pos]) {
+											window.clearTimeout(actionTOObjs[pos].to);
+											actionTOObjs[pos].to = null;
+											my.send(myAction)
+										}
 									
 									}
 								}(this, action, this.get('actionTimeouts').length);

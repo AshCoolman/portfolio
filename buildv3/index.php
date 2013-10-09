@@ -63,9 +63,9 @@ $IS_DEPLOY = false;
 <?php
 $indexCopyA = '@actionOnRead=doInstruction
 @=<h3>
-Hi, I\'m Ashley Coleman 
+Hi, my name is Ashley Coleman 
 @=</h3>
-<i>The starting point</i>
+<i>A good starting point</i>
 
 I built this portfolio site to show who I am. 
 You are at the start page aka the <i>origin</i>. 
@@ -111,14 +111,16 @@ $quot = htmlspecialchars("\"");
 
 
  $d1copyA = '@=<h3>
-Web development
+Developer
 @=</h3>
-<i>My 1<sup>st</sup> dimension</i>
+<i>My 1st dimension</i>
 
-Developing <b>multimedia</b> for the web is my craft and passion. I\'ve worked in <b>front-end</b> and <b>back-end</b>, in teams and solo, and in every stage of development. I like my code to be reusable and readable, and am comfortable with a variety of development tools. 
+Developing <b>multimedia</b> is my craft and passion.
+I care about tech\'s <i>bleeding edge</i> and the <i>ubiquitous mainstream</i>, but most of all I care about the user objectives.
 
-However, if the the need arises I\'m not above hacking it. As a certain <a href="http://goo.gl/O5dnGf" target="_blank">clever cookie</a> once said:
+I\'ve worked in <b>front-end</b>,  <b>back-end</b>, in teams, solo, and in every stage of development. I value code decoupling and clarity, and I am comfortable with a variety of development tools. 
 
+And I know when something just needs to be hacked. As a certain <a href="http://goo.gl/O5dnGf" target="_blank">clever cookie</a> once said:
 <i class="quote"><sup class="icon-quote-left superscript"></sup> Real artists ship <sup class="icon-quote-right superscript"></sup>
 @actionOnRead=doSubtitle2 0
 @actionOnRead=doSubtitle3 2500';
@@ -173,13 +175,14 @@ $obligatoryList = addcslashes($obligatoryList, '"');
 
 <?php 
 $d2copyA =  '@=<h3>
-Storytelling
+Storyteller
 @=</h3>
-<i>My 2<sup>nd</sup> dimension</i>
+<i>My 2nd dimension</i>
+
 @actionOnRead=doShowUser
-I build stuff because I love inducing change in people.
+I build stuff because I love to create change in other people.
 @actionOnRead=doShowMachine
-That change might be from creating emotional impact, message, and/or service.
+That change could be via emotional impact, a message, or even a by providing a service.
 @actionOnRead=doInstructionTurnOnController 1000';
 
 $d2copyB =  '@actionOnRead=doHideUser
@@ -189,15 +192,20 @@ If the question is how create change from the web,
  I can work the underlying technology to leave an answer.
 @actionOnRead=doShowMachineCogs
 @actionOnRead=doSubtitle2';
+
+$d2Example = '@=<h3>
+Example Infographic
+@=</h3>
+Check out how I used an <a href=\"http://media.adelaidenow.com.au/multimedia/2011/r18games/R18v6.swf\" target=\"_blank\">interactive infographic</a> to explain a complex story. <i>This was for NewsCorp\'s Australian news network</i>';
 ?>
 
 <?php
 $d3copyA = '@=<h3>
-Creativity 
+Creative 
 @=</h3>
-<i>My 3<sup>rd</sup> dimension</i>
-I keep an eye out for sneaky bolts of inspiration.
-<b>Thinking laterally</b> on a problem can often reveal an elegant idea... 
+<i>My 3rd dimension</i>
+Creativity can turn a message into impact, data into knowledge, and function into fun.
+The key is to <b>think laterally</b> to turn a problem into an elegant idea... 
 @wait=3000
 @actionOnRead=doRotateQuestionMarkHint
 @wait=5000
@@ -207,7 +215,21 @@ I keep an eye out for sneaky bolts of inspiration.
 
 $d3copyB = '<i>Nice one!</i>
 
- ...and an elegant idea is a great idea.';
+ ...once you have that, everything else slots into place.';
+
+$d3award = '@=<h3>
+Advertising school 
+@=</h3>
+In 2010, I was selected for and completed AWARD school, Australias best regarded advertising creative course:
+<a href=\"http://awardonline.com/education/award-school#.UlSoM2TF1LU\" target=\"_blank\">AWARD School</a>';
+
+
+$d3art = '@=<h3>
+Art lover
+@=</h3>
+I have a great love of art, and in 2012 I curated a pop up art gallery:
+<a href=\"http://www.deathrattleshows.com/\" target=\"_blank\">The Death Rattle Shows</a>';
+
 ?>
 
 		<script type="text/x-handlebars" data-template-name="application">
@@ -323,22 +345,22 @@ $d3copyB = '<i>Nice one!</i>
 			
 					    <li class="divider"></li>
 						{{#view view.NavListItemView item="doIndex" }}
-				            <h1><a {{action doIndex}} >Start</a></h1>
+				            <h1>0d <a {{action doIndex}} >Intro</a></h1>
 				        {{/view}}
 			
 					    <li class="divider"></li>
 						{{#view view.NavListItemView item="doDimension1" }}
-				            <h1><a {{action doDimension1}} >1d</a></h1>
+				            <h1>1d <a {{action doDimension1}} >Developer</a></h1>
 				        {{/view}}
 			
 						<li class="divider"></li>
 				        {{#view view.NavListItemView item="doDimension2" }}
-				            <h1><a {{action doDimension2}} >2d</a></h1>
+				            <h1>2d <a {{action doDimension2}} >Storyteller</a></h1>
 				        {{/view}}
 			
 						<li class="divider"></li>
 				        {{#view view.NavListItemView item="doDimension3" }}
-				            <h1><a {{action doDimension3}} >3d</a></h1>
+				            <h1>3d <a {{action doDimension3}} >Creative</a></h1>
 				        {{/view}}   
 		
 						
@@ -362,13 +384,13 @@ $d3copyB = '<i>Nice one!</i>
 			
 			<div class="row">
 				<div class="columns large-6  small-6">		
-					{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $indexCopyA; ?>"}}}
-					{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=X...,One...,Who...,What..." isLink=true linkEvent="doGotoDimension1" hoverEvent="doDimensionNavHover"}}}
+					{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $indexCopyA; ?>"}}}
+					{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=One...,X...,Who...,What..." isLink=true linkEvent="doGotoDimension1" hoverEvent="doDimensionNavHover"}}}
 					
 				</div>
 				<div class="columns large-6 small-6">
-					{{{controlWithVars 'subtitle' readOrder='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $indexCopyC; ?>"}}}
-					{{{controlWithVars 'subtitle' readOrder='4' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $indexCopyB; ?>"}}}
+					{{{controlWithVars 'subtitle' readOrder='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=false thescript="<?php echo $indexCopyC; ?>"}}}
+					{{{controlWithVars 'subtitle' readOrder='4' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=false thescript="<?php echo $indexCopyB; ?>"}}}
 				</div>
 			</div>
 		</script>
@@ -384,7 +406,7 @@ $d3copyB = '<i>Nice one!</i>
 			<div class="row">
 				<div class="columns large-6  small-6">
 					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
-					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2"  hoverEvent="doDimensionNavHover" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Y...,Why?...,Motivation..."}}} 
+					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2"  hoverEvent="doDimensionNavHover" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Two...,Y...,Why?...,Motivation..."}}} 
 					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}}}
 				</div>
 				<div class="columns large-6 small-6">
@@ -420,18 +442,18 @@ $d3copyB = '<i>Nice one!</i>
 				<div style="display:none" class="interactive-grid-values">Javascript technologies I know
 
 Libraries (JQuery, Google Glosue Library etc)
-Frameworks (Foundation4, Ember, bootstrap, HTML5 bp etc)
+Frameworks (Foundation 4, Ember, bootstrap etc)
 Service APIs ( Google Maps, Facebook Graph etc )
 HTML APIs (WebGL, geolocation, sound, video etc)
 
-## Web markup languages I know
+## web markup languages I know
 
 HTML(5)
 CSS(3)
 SASS & LESS
 SVG 
 
-## Web development experience I have
+## web development experience I have
 
 AJAX
 Cross-domain problems
@@ -441,20 +463,20 @@ Cross browser (Responsive, graceful degradation etc)
 Input validation
 Profiling tools (jankfree.org!)
 
-## Flash technologies I know
+## flash technologies I know
 
 AS2 & AS3
 Flash Video 
 Flex
 MXML
 
-## Backend technology I know
+## backend technology I know
 
 PHP 
 SQL (mySQL, PostgresSQL)
 Nodejs
 
-## Development tools & techniques I know
+## development tools & techniques I know
 
 Make files
 Minification (YUI Compressor, Closure Compiler)
@@ -464,13 +486,13 @@ Chrome Dev tools (and other browser equivalents)
 User testing
 API creation
 
-## Project tools & techniques I know
+## project tools & techniques I know
 
 Version control (SVN, Git, Mecurial)
 Issue tracking (JIRA, Bugzila etc) 
 Wireframing & Prototyping (Fireworks, Axure etc)
 
-## Useful areas of general knowledge I have
+## useful areas of general knowledge I have
 
 2d / 3d Physics math
 Geo-location algorithms
@@ -479,7 +501,7 @@ Video editing (Adobe After Effects)
 Video encoding (Adobe Media Encoder)
 Sound editing (Adacity)
 
-## Notable technologies used in this website
+## notable technologies used in this website
 
 Emberjs
 Foundation 4
@@ -498,15 +520,18 @@ Prototype inheritance
 ## thousand lines of code written for this site
 5
 
-## Random quotes I like
+## laptops stolen while making this site
+1
+
+## random quotes I like
 
 "Real artists ship" - Steve Jobs
 "Dont guess it, test it" -Paul Lewis
 
-## Years of experience
+## years of experience
 9
 
-## Years of Computer Science and Multimedia
+## years of Computer Science and Multimedia degree
 4
 </div>
 		</script>
@@ -567,15 +592,26 @@ Prototype inheritance
 			</div>
 			{{controlWithVars 'world-2d' layoutName='lo-subtitle-row'}} 
 			{{controlWithVars 'esl-entity-container'}}
-
-			{{{controlWithVars 'subtitle' orderRead='instructionTurnOn' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> I built a change inducer! Press the <span style=\"background-color:#005500; width:2em; height:1.2em; color:#005500\">ON</span> button above to turn it on"}}}
-			{{{controlWithVars 'subtitle' orderRead='instructionTurnOff' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Behold, change! Once satisfied, press the <span style=\"background-color:#33CC33; width:2em; height:1.2em; color:#33CC33\">ON</span> button above to continue"}}}
-			
-			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyA?>"}}}
-			
-			{{{controlWithVars 'subtitle' orderRead='1a' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyB?>"}}}			
-			{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Z...,Depth...,Exploration..." isLink=true linkEvent="doGotoDimension3" hoverEvent="doDimensionNavHover" }}}
-			
+			<div class="row">
+				<div class="columns large-8 small-12">
+					<div class="row">
+						<div class="columns large-6 small-12">
+							{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyA?>"}}}
+							{{{controlWithVars 'subtitle' orderRead='1a' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copyB?>"}}}			
+							{{{controlWithVars 'subtitle' orderRead="2" layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Three...,Z...,Depth...,Exploration..." isLink=true linkEvent="doGotoDimension3" hoverEvent="doDimensionNavHover" }}}
+						</div>
+						
+						<div class="columns large-6 small-12">
+							{{{controlWithVars 'subtitle' orderRead='instructionTurnOn' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Press <span style=\"background-color:#005500; width:2em; height:1.2em; color:#005500\">ON</span> on the above <i>Change Inducer &trade;</i> I just created for you"}}}
+							{{{controlWithVars 'subtitle' orderRead='instructionTurnOff' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Once you are satisfied with your inducing, press the <span style=\"background-color:#33CC33; width:2em; height:1.2em; color:#33CC33\">ON</span> button above to continue"}}}
+						
+						</div>
+					</div>
+				</div>
+				<div class="columns large-4  small-12">				
+					{{{controlWithVars 'subtitle' orderRead="example" layoutName="lo-subtitle-instant-row" thescript="<?php echo $d2Example ?>" isLink=false isInstant=true }}}
+				</div>
+			</div>
 			
 		</script>	
 
@@ -583,7 +619,7 @@ Prototype inheritance
 			<div class="canvas-hero-holder"></div>
 			{{controlWithVars 'ash' ash x=-540 img="img//face-ash.png"}}
 			
-			{{controlWithVars 'machine' machine x=-180 y=90 visible=false}}
+			{{controlWithVars 'machine' machine x=-180 y=90 visible=false	}}
 			{{controlWithVars 'question' question x=-120 y=0 visible=false}}
 			{{controlWithVars 'user' user x=120 y=90 visible=false}}
 		</script>
@@ -716,40 +752,112 @@ Prototype inheritance
 		
 		
 		<script type="text/x-handlebars" data-template-name="machine">
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=-45 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=-15 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=15 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=45 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=75 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=105 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=135 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=165 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=195 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=225 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=-75 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=255 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=-75 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=255 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=-75 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=255 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=-75 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=255 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=-75 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=255 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=-75 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=255 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=-75 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=255 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=-45 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=-15 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=15 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=45 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=75 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=105 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=135 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=165 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=195 height=30 width=30 col="#bfbfbf"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=225 height=30 width=30 col="#bfbfbf"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=-45 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=-15 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=15 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=45 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=75 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=105 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=135 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=165 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=195 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=225 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=255 height=30 width=30 col="#414141"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=-75 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=-45 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=-15 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=15 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=45 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=75 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=105 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=135 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=165 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=195 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=225 height=30 width=30 col="#414141"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=255 height=30 width=30 col="#414141"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=-75 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=-45 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=-15 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=15 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=45 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=75 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=105 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=135 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=165 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=195 height=30 width=30 col="#474747"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=225 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=255 height=30 width=30 col="#414141"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=-75 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=-45 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=-15 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=15 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=45 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=75 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=105 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=135 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=165 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=195 height=30 width=30 col="#474747"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=225 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=255 height=30 width=30 col="#414141"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=-75 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=-45 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=-15 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=15 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=45 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=75 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=105 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=135 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=165 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=195 height=30 width=30 col="#474747"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=225 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=255 height=30 width=30 col="#414141"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=-75 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=-45 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=-15 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=15 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=45 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=75 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=105 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=135 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=165 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=195 height=30 width=30 col="#474747"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=225 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=255 height=30 width=30 col="#414141"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=-75 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=-45 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=-15 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=15 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=45 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=75 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=105 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=135 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=165 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=195 height=30 width=30 col="#474747"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=225 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=255 height=30 width=30 col="#414141"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=-75 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=-45 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=-15 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=15 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=45 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=75 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=105 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=135 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=165 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=195 height=30 width=30 col="#3a3a3a"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=225 height=30 width=30 col="#414141"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=255 height=30 width=30 col="#414141"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=-45 height=30 width=30 col="#5a5b5d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=-15 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=15 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=45 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=75 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=105 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=135 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=165 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=195 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=225 height=30 width=30 col="#4d4d4d"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=255 height=30 width=30 col="#414141"}}
 		</script>
 		
 		
@@ -780,10 +888,18 @@ Prototype inheritance
 			
 			{{controlWithVars 'esl-entity-container'}}
 			
-			{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Find the elegant idea above (think <i>laterally</i>)..."}}}
-			{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyA; ?>"}}}
-			{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d3copyB; ?>"}}}
-
+			<div class="row">
+				<div class="large-8 small-12 columns">
+					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d3copyA; ?>"}}}
+					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d3copyB; ?>"}}}
+					{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Find the elegant idea above (think <i>laterally</i>)..."}}}
+				</div>
+				<div class="large-4 small-12 columns">
+					{{{controlWithVars 'subtitle' orderRead='art' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=false thescript="<?php echo $d3art; ?>"}}}
+					{{{controlWithVars 'subtitle' orderRead='award' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=false thescript="<?php echo $d3award; ?>"}}}
+				</div>
+			</div>
+				
 		</script>
 
 	<script type="text/x-handlebars" data-template-name="world-3d">

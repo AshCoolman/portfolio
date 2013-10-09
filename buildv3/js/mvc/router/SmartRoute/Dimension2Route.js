@@ -27,6 +27,7 @@ App.Dimension2Route = App.SmartRoute.extend({
 								case '2': this.subtitleController2 = acontroller; break;
 								case 'instructionTurnOn': this.instructionTurnOnController = acontroller; break;
 								case 'instructionTurnOff': this.instructionTurnOffController = acontroller; break;
+								case 'example': this.subExampleController = acontroller; break;
 							}
 							break;
 						case 'Dimension2NavController':
@@ -41,16 +42,19 @@ App.Dimension2Route = App.SmartRoute.extend({
 					window.location.hash = 'd3';
 				},
 				doShowUser: function () {
+					console.log('doShowUser');
 					this.userController.doShowPixelInChildren(1200);
 				},
 				doHideUser:function () {
+					console.log('doHideUser');
 					this.userController.doShowPixelOutChildren(1200);
 				},
 				doShowQuestion: function () {
 					this.questionController.doShowPixelInChildren(300);
 				},
 				doShowMachineCogs: function () {
-					this.questionController.doCogOpenAndFadeOut(1200);
+					console.log('doShowMachineCogs');
+					this.machineController.doCogOpenAndFadeOut(1200);
 					this.machineController.setInteractive(false);
 				},
 				doShowMachine: function () {
@@ -75,7 +79,7 @@ App.Dimension2Route = App.SmartRoute.extend({
 						this.subtitleController1.set('isCursor', false);
 						this.subtitleController1a.startReading();
 					}
-				},
+				}, 
 				doSubtitle2: function () {
 					this.subtitleController1a.set('isCursor', false);
 			        this.subtitleController2.startReading();
@@ -95,7 +99,10 @@ App.Dimension2Route = App.SmartRoute.extend({
 		this.machineController = null;
 		this.userController = null;
 		this.instructionTurnOnController = null;
-		this.instructionTurnOffController= null;
+		this.instructionTurnOffController = null;
+		this.isFirstTurnOn = null;
+		this.isFirstTurnOff = null;
+		this.subExampleController = null;
 		
 	},
 	renderTemplate: function () {
@@ -121,6 +128,7 @@ App.Dimension2Route = App.SmartRoute.extend({
 				this.machineController && 
 				this.userController &&
 				this.instructionTurnOnController && 
+				this.subExampleController &&
 				this.instructionTurnOffController ) {
 			this.machineController.setTarget(this.userController );
 			this.set('isStarted', true);
@@ -131,6 +139,7 @@ App.Dimension2Route = App.SmartRoute.extend({
 		this.subtitleController1.set('content', App.scriptModel); 
         this.subtitleController1.setup();
         this.subtitleController1.startReading();
+		this.subExampleController.startReading();
 		
     }
 })

@@ -1,41 +1,21 @@
 HIGH PRIORITY
 Bring back cursor
 Ruler needs to be more prominent
-Wait
-
-Copy
-	2d
-		Timing of 2d Question Mark
-		Appear
-		Coggify
-	3d
-		Timing on rotation hint and colour
-
-	UI
-		More informative "Click to finish" icon/copy
-		
-
 
 MEDIUM
 
 Subtitle
 	grab text from its dom element (SEO, no-js etc)
 
-
-Animate Ruler
-	http://www.impressivewebs.com/animating-css3-gradients/
-
 CSS Sprites?
 
 
 UX
-	Subtitle
-		Read whole html tag as a letter
 		
 Cross platform
 	Safari
 		Spazzes on responsive resize
-		
+		 
 Copy
 	World2d
 		"I induce change" = game where you draw smile on face

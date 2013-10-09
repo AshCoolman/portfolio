@@ -37,6 +37,7 @@ App.MachineController = App.TemplatedPixelGroupController.extend({
 		
 	},
 	setTarget: function ( atarget) {
+		
 		this.set('targetController', atarget);
 	},
 	setInteractive: function (val) {

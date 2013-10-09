@@ -50,7 +50,8 @@ App.UserView = App.TemplatedPixelGroupView.extend({
 		
 		faceChangeMaps.splice(0, 1);
 		faceChangeMaps.push(changeMap);
-			
+		this.set('faceChangeMaps', faceChangeMaps);
+		
 		for (var x = 0; x < changeMap.length; x++) {
 			for (var y = 0; y < changeMap[x].length; y++) {
 				var coord = changeMap[x][y][0];

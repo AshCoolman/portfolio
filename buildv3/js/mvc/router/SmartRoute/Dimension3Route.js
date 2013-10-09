@@ -11,6 +11,8 @@ App.Dimension3Route = App.SmartRoute.extend({
 							case 'instruction': this.subtitleInstructionController = acontroller; break;
 							case '1': this.subtitle1Controller = acontroller; break;
 							case '2': this.subtitle2Controller = acontroller; break;
+							case 'art': this.subArtController = acontroller; break;
+							case 'award': this.subAwardController = acontroller; break;
 						}
 						break;
 					default: /* console.log('++'+alabel);*/ break;
@@ -46,6 +48,8 @@ App.Dimension3Route = App.SmartRoute.extend({
 		this._super();
 		this.world3dController = null;
 		this.subtitle1Controller = null;
+		this.subAwardController = null;
+		this.subArtController = null;
 	},
 
 	renderTemplate: function () {
@@ -62,14 +66,35 @@ App.Dimension3Route = App.SmartRoute.extend({
 	},
 	
 
+
 	tryStart: function () {
-        if (!this.get('isStarted') && /*this.world3dController && */this.subtitle1Controller && this.subtitleInstructionController && this.subtitle2Controller) {
+        if (!this.get('isStarted') && 
+				this.subtitle1Controller && 
+				this.subtitleInstructionController && 
+				this.subtitle2Controller &&
+				this.subArtController &&
+				this.subAwardController) {
 			this.set('isStarted', true);
 			this.doStart();
         }
 
     },
 	doStart: function (type, data) {
+		
+		this.subtitle1Controller.set('content', App.scriptModel); 
+	    this.subtitle1Controller.setup();
         this.subtitle1Controller.startReading();
+		setTimeout(function (me ) {
+			return function () {
+				me.subArtController.startReading();
+			}
+		}(this), 400);
+		
+		setTimeout(function (me ) {
+			return function () {
+				me.subAwardController.startReading();
+			}
+		}(this), 1200);
+		
     }
 })
