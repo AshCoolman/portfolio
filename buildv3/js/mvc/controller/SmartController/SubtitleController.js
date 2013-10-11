@@ -303,6 +303,7 @@ App.SubtitleController = App.SmartController.extend({
 								var pendingWait = parseInt(line.split('=')[1], 10);
 								Em.assert('@wait was given non-number value',  !isNaN(parseFloat(pendingWait)) && isFinite(pendingWait));
 								this.set('pendingWait', pendingWait);
+								
 							} else if(line.indexOf('@actionOnRead=') == 0) {
 								var words =  line.split(' ');
 								var action = words[0].split('=')[1];
@@ -332,10 +333,11 @@ App.SubtitleController = App.SmartController.extend({
 						}
 					
 					
-						if ( atLine < srcLines.length && srcLines[atLine].length > 0 ) {
+						if ( atLine < srcLines.length && srcLines[atLine].length > 0) {
 							printedLines[atPrintedLine]='';
 							printedLines[atPrintedLine] += srcLines[atLine][atChar];
-							me.setText(printedLines, null, 'newline');
+							console.log()
+							//me.setText(printedLines, null, 'newline');
 							atChar++;
 						}
 					
@@ -471,7 +473,7 @@ App.SubtitleController = App.SmartController.extend({
 
 	
 	doRemoveClicked: function () {
-		//console.log('this.get(view)', this.get('view'));
+		console.log('doRemoveClicked', this.get('orderRead'));
 		window.cancelAnimationFrame(this.get('raf'));
 		this.set('isEnded', true);
 		this.set('isRemoved', true);
@@ -492,11 +494,13 @@ App.SubtitleController = App.SmartController.extend({
 	},
 	
 	startReading: function () {
-//		console.log('start reading', this.get('orderRead'))
+		console.log('start reading', this.get('orderRead'))
+		
 		if (this.get('isInstant')) {
-			this.get('view').doShow();
+			this.get('view').doShowInstant();
 			this.doForceFinish();
 		} else {
+			this.get('view').doShow();
 			var rafFunction = function(me) {
 				var animloop = function (time) {
 					var last = me.get('lastRequestAnimationFrame'),

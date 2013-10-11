@@ -69,15 +69,20 @@ var MachineViewRayParticle = function () {
 	this.COL_LIST = ['#40FF00', '#FFEA00', '#FF00CB', '#00FFEF', '#008FFF'];
 	this.col = null;
 	this.shp = null;
+	this.shpGlow = null;
 	this.eslObj = null;
 	this.tween = null;
+	this.beamList = [];
+	this.LEN = 2;
+	this.RANGE = App.PIXEL_SIZE * 6;
 }
 MachineViewRayParticle.prototype = {
 	init: function (aplan) {
 		var updateFunc,
 			onCompleteFunc;
 			
-		aplan.w = aplan.w || App.PIXEL_SIZE * 6;	
+			
+		aplan.w = aplan.w || App.PIXEL_SIZE * this.LEN;	
 		aplan.h = aplan.h || App.PIXEL_SIZE;
 		aplan.x = aplan.x || 0;
 		aplan.y = aplan.y || 0;
@@ -85,9 +90,11 @@ MachineViewRayParticle.prototype = {
 		
 		this.eslObj = new createjs.Container();
 		this.eslObj.addChild( this.shp = this.createShape(aplan) );
+		this.beamList = [];
+		for (var b = 0; b < 5; b++)
+			this.eslObj.addChild( this.beamList[b] = this.createShape(aplan) );
 		this.eslObj.x = this.eslObj.proxyX = aplan.x;
 		this.eslObj.y = this.eslObj.proxyY = aplan.y;
-		this.eslObj.alpha = 0.8;
 		
 		updateFunc = function (me, aeslObj, w, h) {
 			return function () {
@@ -107,9 +114,23 @@ MachineViewRayParticle.prototype = {
 				
 			}
 		}(this);
-
-		this.tween = TweenMax.to(this.eslObj, 0.1, {alpha:0.2, repeat:8, yoyo:true, onComplete: onCompleteFunc});
-		//var tween = TweenMax.to(this.eslObj, 0.8, {alpha:0.2, proxyX: this.eslObj.proxyX + 4 * aplan.w, onUpdate: updateFunc, onComplete: onCompleteFunc});
+		
+		
+			
+		//this.tween = TweenMax.to(this.eslObj, 0.1, {alpha:0.2, repeat:8, yoyo:true, onComplete: onCompleteFunc});
+		var tween = TweenMax.to(this.eslObj, 0.8, {alpha:0.2, proxyX: this.eslObj.proxyX + this.RANGE, onUpdate: updateFunc, onComplete: onCompleteFunc});
+		
+		
+		var i,
+			b
+			bList = this.beamList,
+			bNum = bList.length;
+		for (i= 0; i < bNum; i++) {
+			b = bList[i];
+			b.x = App.PIXEL_SIZE * b;
+			b.alpha = bNum - (b / bNum);
+		}
+			
 	},
 	createShape: function (aplan) {
 		var shp = new createjs.Shape(),
@@ -131,6 +152,7 @@ MachineViewRayParticle.prototype = {
 		this.eslObj = null;
 		this.tween && this.tween.kill && this.tween.kill();
 		this.tween = null;
+		
 	}
 }
 

@@ -39,6 +39,7 @@ App.PreloaderContentController = App.SmartController.extend({
 			{id: "face-user-pixel-change03", src:'img//face-user-pixel-change03.png'},
 			{id: "face-user-pixel", src:'img//face-user-pixel.png'},
 			{id: "question-pixel", src:'img//question-pixel.png'},
+			{id: "hammer", src:'img//hammer.png'},
 			{id: "question", src:'img//question.png'},
 			{id: "machine-pixel", src:'img//machine-pixel.png'},
 			{id: "cog", src:'img/cog.png'}

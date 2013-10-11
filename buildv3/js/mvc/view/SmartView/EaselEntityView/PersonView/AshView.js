@@ -24,8 +24,34 @@ App.AshView = App.EslEntityView.extend({
 		
 		
 	},
+	willDestroyElement: function () {
+		this.removeHammer();
+	},
 	doMosaicEffect: function () {
 	
+	},
+	doHammer: function () {
+		var spriteSheet = {
+			images: ["img/hammer.png"],
+			frames: {width:270, height:360},
+			animations: {hammer:[0,2,'hammer', .1]}
+		}
+		var hammer = new createjs.Sprite(new createjs.SpriteSheet(spriteSheet), "hammer");
+		hammer.framerate = 20;
+		hammer.x = (parseInt(this.get('eslObj').x) + parseInt(App.PIXEL_SIZE * 9));
+		hammer.y = (parseInt(this.get('eslObj').y) + parseInt(App.PIXEL_SIZE * 2));
+		console.log('hammer', hammer, this.get('eslObj').x	)
+		this.set('hammer', hammer);
+		this.get('eslObj').parent.addChild(hammer);
+		
+	},
+	removeHammer: function () {
+		var hammer = this.get('hammer');
+		if (hammer)
+			hammer.parent.removeChild(hammer);
+		clearInterval(this.get('hammerInt'));
+		this.set('hammer', null);
+		this.set('hammerInt', null);
 	},
 	override_reDraw: function (dur) {
 		

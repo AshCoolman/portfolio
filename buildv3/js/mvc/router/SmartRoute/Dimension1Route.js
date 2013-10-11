@@ -23,7 +23,7 @@ App.Dimension1Route = App.SmartRoute.extend({
 					case 'HeartbeatController':  		this.heartbeatController = acontroller; 		break;
 					case 'ScalarController':  			this.scalarController = acontroller;			break;
 				}
-				this.tryStart();
+					setTimeout(function (me) {return function () {me.tryStart();}}(this), 0);
 			},
 			SubtitleController_didInsertElement: function (acontroller, alabel) { 
 

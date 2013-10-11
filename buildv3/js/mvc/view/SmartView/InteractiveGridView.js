@@ -122,7 +122,17 @@ App.InteractiveGridView = App.SmartView.extend({
 		  return svgPoint.matrixTransform($mouseZone.parent()[0].getScreenCTM().inverse());
 		}
 		
+		//Create plot markers
+		var plotMarkers = {};
+		for (var p = 0; p < plots.length; p++) {
+			if (!plotMarkers[plots[p].x]) {
+				plotMarkers[plots[p].x] = raphaeljs.rect(0,0,1,h).attr({fill: '#999999', 'stroke-width': 0, opacity:0.25});
+				plotMarkers[plots[p].x].attr({x: unitX * plots[p].x });
+			}
+			plots[p].marker = plotMarkers[plots[p].x];
+		}
 		
+		//Create mouse X
 		var coordX = raphaeljs.rect(0,0,3,h).attr({fill: '#595959', 'stroke-width': 0});
 		$( this.get('$el'), mouseZone).mousedown( function (me) {
 			return function (e) {
@@ -180,6 +190,7 @@ App.InteractiveGridView = App.SmartView.extend({
 							//Show dom elements
 							$('.graph-info').css({display: 'block'});
 							$('.graph-info h3').addClass('highlight');
+							$('.d1-content').addClass('graph-highlight');
 							$('.graph-plot', me.get('$el')).css({opacity: 1});
 							//Animate the x bar
 							athePlotX
@@ -198,6 +209,7 @@ App.InteractiveGridView = App.SmartView.extend({
 					// else if no plots should be shown, hide them all
 						if (athePlotX['animateWidthTarget'] != -1) {
 							$('.graph-info h3').removeClass('highlight')
+							$('.d1-content').removeClass('graph-highlight');
 							acoordX.attr({ fill: '#595959' });
 							athePlotX['animateWidthTarget'] = -1;
 							$('.graph-plot', me.get('$el')).css({opacity: 0});

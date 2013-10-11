@@ -37,12 +37,14 @@ CubeGroup.prototype = {
 	},
 	
 	setInteractive: function (val) {
+	
 		val = val || false;
 		if (val && !this._isInteractive) {
 			this._isInteractive = val;
 			this.withEveryPixel(function (me) {
 				return function (pixel) {
 					pixel.object.material = me.linkMat;
+					console.log('pixel interactive',pixel);
 				} 
 			}(this));
 		} else if (!val && this._isInteractive) {
@@ -76,6 +78,7 @@ CubeGroup.prototype = {
 	},
 	
 	hoverOn: function () {
+		$('.world-3d-renderer').addClass('rotate-hint');
 		var isChanged = false;
 		if (!this.isHover && this._isInteractive) {
 			this.withEveryPixel(function (me) {
@@ -91,6 +94,7 @@ CubeGroup.prototype = {
 	},
 	
 	hoverOff: function () {
+		$('.world-3d-renderer').removeClass('rotate-hint');
 		var isChanged = false;
 		if (this.isHover) {
 			this.withEveryPixel(function (me) {

@@ -17,6 +17,9 @@ App.Dimension2Route = App.SmartRoute.extend({
 						case 'MachineController':
 							this.machineController = acontroller;
 							break;
+						case 'AshController':
+							this.ash = acontroller;
+							break;
 						case 'UserController':
 							this.userController = acontroller;
 							break;
@@ -35,7 +38,7 @@ App.Dimension2Route = App.SmartRoute.extend({
 							this.dimension2NavController = acontroller;
 						default: /* console.log('++'+alabel);*/ break;
 					}	
-					this.tryStart();
+						setTimeout(function (me) {return function () {me.tryStart();}}(this), 0);
 				},
 				SubtitleController_didInsertElement: function () {
 				},
@@ -59,7 +62,19 @@ App.Dimension2Route = App.SmartRoute.extend({
 					this.machineController.setInteractive(false);
 				},
 				doShowMachine: function () {
-					this.machineController.doShowLineInChildren(2000);
+					this.ash.doHammer();
+					
+					setTimeout( function (me) {
+						return function () {
+							me.machineController.doShowLineInChildren(2000);
+						}
+					}(this), 500);
+					
+					setTimeout( function (me) {
+						return function () {
+							me.ash.removeHammer();
+						}
+					}(this), 2500);
 					
 				},
 				doInstructionTurnOnController: function () {
@@ -118,6 +133,7 @@ App.Dimension2Route = App.SmartRoute.extend({
 		this.userController = null;
 		this.isFirstTurnOn = null;
 		this.isFirstTurnOff = null;
+		this.ash = null;
 		
 	},
 	renderTemplate: function () {
@@ -145,6 +161,7 @@ App.Dimension2Route = App.SmartRoute.extend({
 				this.sub3Controller && 
 				this.instructionTurnOnController && 
 				this.instructionTurnOffController &&
+				this.ash &&
 				this.subExampleController  ) {
 			this.machineController.setTarget(this.userController );
 			this.set('isStarted', true);

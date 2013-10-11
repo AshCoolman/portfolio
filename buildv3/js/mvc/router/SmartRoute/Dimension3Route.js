@@ -18,8 +18,10 @@ App.Dimension3Route = App.SmartRoute.extend({
 						break;
 					default: /* console.log('++'+alabel);*/ break;
 				}
-
-				this.tryStart();	
+				
+				//Give time for SubtitleController ancestors.didInsertElement() to run
+				//Otherwise tryStart interupts the execution send('blah') IS NOT ASYNCRHONOUS
+				setTimeout(function (me) {return function () {me.tryStart();}}(this), 0);
 			},
 			
 			SubtitleController_didInsertElement: function (acontroller, alabel) { },
@@ -100,7 +102,6 @@ App.Dimension3Route = App.SmartRoute.extend({
 	doStart: function (type, data) {
 		
         this.subtitleHeadingController.startReading();
-		this.subtitleHeadingController.set('isCursor', false);
 	
 		setTimeout(function (me ) {
 			return function () {

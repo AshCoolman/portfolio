@@ -473,6 +473,13 @@ a {
   margin: 0 auto;
   display: block; }
 
+.rotate-hint {
+  cursor: w-resize; }
+
+.click-drag-hint-shown {
+  opacity: 1;
+  color: green; }
+
 .world-1d-centerer {
   width: 100%;
   height: 400px;
@@ -502,6 +509,19 @@ a {
 .dimension1 {
   overflow: hidden;
   height: 100%; }
+
+.d1-content .d1-content-text {
+  -webkit-transition: opacity 0.1s ease;
+  -moz-transition: opacity 0.1s ease;
+  transition: opacity 0.1s ease; }
+.d1-content .d1-content-graph {
+  -webkit-transition: opacity 0.1s ease;
+  -moz-transition: opacity 0.1s ease;
+  transition: opacity 0.1s ease;
+  opacity: 0; }
+
+.graph-highlight .d1-content-graph {
+  opacity: 1; }
 
 .interactive-grid {
   position: absolute;
@@ -552,8 +572,6 @@ a {
   width: 100%;
   padding: 0.2em 1em;
   display: none; }
-  .graph-info .sub-heading {
-    text-transform: capitalize; }
   .graph-info .graph-layer {
     width: 100%;
     position: absolute;

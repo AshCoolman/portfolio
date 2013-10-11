@@ -9,7 +9,8 @@ App.IndexRoute = App.SmartRoute.extend({
 				if (acontroller.get('readOrder') == '2') { this.subtitleController2 = acontroller; }
 				if (acontroller.get('readOrder') == '3') { this.subtitleController3 = acontroller; }
 				if (acontroller.get('readOrder') == '4') { this.subtitleController4 = acontroller; }
-				this.tryStart();
+				
+				setTimeout(function (me) {return function () {me.tryStart();}}(this), 0);
 			},
 			IndexNavController_didInsertElement: function (acontroller, alabel) {
 				this.indexNavController = acontroller;

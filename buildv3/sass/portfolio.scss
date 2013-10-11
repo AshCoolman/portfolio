@@ -651,7 +651,14 @@ $gridColor:rgba(50,50,50,0.25);
 	margin: 0 auto;
 	display: block;
 }
+.rotate-hint {
+	cursor:w-resize;
+}
 
+.click-drag-hint-shown {
+	opacity:1;
+	color:green;
+}
 
 
 .world-1d-centerer {
@@ -690,6 +697,26 @@ $gridColor:rgba(50,50,50,0.25);
 	overflow:hidden; 
 	height:100%;
 }
+
+.d1-content {
+	.d1-content-text {
+		@include transition( opacity 0.1s ease);
+	}
+	.d1-content-graph {
+	@include transition( opacity 0.1s ease);
+		opacity:0;
+		
+	}
+}
+
+.graph-highlight {
+	.d1-content-text {
+	}
+	.d1-content-graph {
+		opacity:1;
+	}
+}
+
 .interactive-grid {
 	position: absolute;
 	width:100%;
@@ -744,7 +771,6 @@ $gridColor:rgba(50,50,50,0.25);
 	padding:0.2em 1em;
 	display:none;
 	.sub-heading {
-		text-transform:capitalize;
 	}
 	.graph-layer {
 		width:100%;

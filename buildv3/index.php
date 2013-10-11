@@ -37,6 +37,8 @@ $IS_DEPLOY = false;
 	<script src="js/lib.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.0.0-rc.1/ember.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/foundation/4.3.1/js/foundation.min.js"></script>
+	
+	
 <?php } else { ?>
 	<link rel="stylesheet" href="css/foundation4.css" />
 	<link rel="stylesheet" href="css/html5bp.css" />
@@ -56,6 +58,8 @@ $IS_DEPLOY = false;
 	<script src="js/lib.min.js"></script>
 	<script src="js/lib/embermandl.js"></script>
 	<script src="js/foundation.min.js"></script>
+	
+	
 
 <?php } ?>
 
@@ -63,9 +67,9 @@ $IS_DEPLOY = false;
 <?php
 $indexCopyA = '@actionOnRead=doInstruction
 @=<h3>
-Hi, my name is Ashley Coleman 
+Hi, I\'m Ashley 
 @=</h3>
-<i>A good starting point</i>
+<i>The starting point</i>
 
 I built this portfolio site to show who I am. 
 You are at the start page aka the <i>origin</i>. 
@@ -114,16 +118,7 @@ $quot = htmlspecialchars("\"");
 Developer
 @=</h3>
 <i>My 1st dimension</i>
-
-Developing <b>multimedia</b> is my craft and passion.
-I care about tech\'s <i>bleeding edge</i> and the <i>ubiquitous mainstream</i>, but most of all I care about the user objectives.
-
-I\'ve worked in <b>front-end</b>,  <b>back-end</b>, in teams, solo, and in every stage of development. I value code decoupling and clarity, and I am comfortable with a variety of development tools. 
-
-And I know when something just needs to be hacked. As a certain <a href="http://goo.gl/O5dnGf" target="_blank">clever cookie</a> once said:
-<i class="quote"><sup class="icon-quote-left superscript"></sup> Real artists ship <sup class="icon-quote-right superscript"></sup>
-@actionOnRead=doSubtitle2 0
-@actionOnRead=doSubtitle3 2500';
+@actionOnRead=doSubtitle2';
 $d1copyA = addcslashes($d1copyA, '"');
 
 $obligatoryList = '<span class="heading"> <i class="icon-chevron-left"></i> OBLIGATORY SKILL SUMMARY LIST <i class="icon-chevron-right"></i> </span>
@@ -181,20 +176,27 @@ Storyteller
 @actionOnRead=doSubtitle1';
 
 
-$d2copy1 =  'I create web stuff to make an impact on the user.
+$d2copy1 =  '@wait=1200
+This is me 
+@wait=500
+I love to trigger changes in people.
 @actionOnRead=doShowUser
-That impact might be emotional, a message, or even a service.
-It does not really matter to me,
-I just love building <i>agents of change</i>.
-@actionOnRead=doShowMachine
-@actionOnRead=doInstructionTurnOnController 1000';
+@wait=1500
+ So I <b>build</b> things that create <b>function</b>, <b>emotion</b> and <b>message</b>
+@actionOnRead=doShowMachine 1500
+@wait=2500	
+@actionOnRead=doInstructionTurnOnController 1600';
 
 $d2copy2 =  '@actionOnRead=doHideUser
+@wait=1500
 If the question is how create change from the web, 
 @actionOnRead=doShowQuestion
-@wait=1200
- I can work the underlying technology to leave an answer.
+@wait=1500
+ I can work the underlying technology...
 @actionOnRead=doShowMachineCogs
+@wait=2500
+ ...to leave an answer
+@wait=1000
 @actionOnRead=doSubtitle3
 @actionOnRead=doSubtitleExample';
 
@@ -221,7 +223,7 @@ The key is to <b>think laterally</b> to turn a problem into an elegant idea...
 
 $d3copyB = '<i>Nice one!</i>
 
- ...once you have that, everything else slots into place.';
+ ...once you have an elegant idea, everything else slots into place.';
 
 $d3award = '@=<h5>
 Advertising school 
@@ -279,7 +281,7 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 		
 
 		<script type="text/x-handlebars" data-template-name="lo-subtitle-instruction-row">
-			<div class="row pointer-events-none">
+			<div class="row pointer-events-none lo-subtitle-instruction-row">
 				<div class="columns large-12 small-12">
 					<div class="subtitle-text-holder subtitle-text-holder-instruction">
  						{{yield}}
@@ -409,17 +411,18 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="dimension1">
-			<div class="row">
-				<div class="columns large-6  small-6">
+			<div class="row d1-content">
+				<div class="columns large-6  small-6 d1-content-text">
 					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
+					{{{controlWithVars 'subtitle' orderRead='0' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Use mouse to find my x values "}}}
+					
 					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2"  hoverEvent="doDimensionNavHover" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Two...,Y...,Why?...,Motivation..."}}} 
 					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}}}
 				</div>
-				<div class="columns large-6 small-6">
-					{{{controlWithVars 'subtitle' orderRead='0' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Use mouse to find my x values "}}}
+				<div class="columns large-6 small-6 d1-content-graph">
 					<div class="interactive-graph-output">
 						<div class="graph-info">
-							<h3 {{bindAttr class="interactiveGridData.0.type.cssClass"}}>{{{interactiveGridData.0.x}}}</h3>
+							<h3 {{bindAttr class="interactiveGridData.0.type.cssClass"}}>{{{interactiveGridData.0.x}}} &#215;</h3>
 							{{#each this.interactiveGridData}}
 								<strong class="sub-heading">{{{this.text}}}</strong>
 								<ol>
@@ -526,9 +529,6 @@ Prototype inheritance
 ## thousand lines of code written for this site
 5
 
-## laptops stolen while making this site
-1
-
 ## random quotes I like
 
 "Real artists ship" - Steve Jobs
@@ -602,10 +602,10 @@ Prototype inheritance
 								{{controlWithVars 'esl-entity-container'}}
 								<div class="row">
 									<div class="columns large-8 small-12">
-										{{{controlWithVars 'subtitle' orderRead='instructionTurnOn' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Press <span style=\"background-color:#005500; width:2em; height:1.2em; color:#005500\">ON</span> on the above <i>Change Agent &trade;</i>"}}}
-										{{{controlWithVars 'subtitle' orderRead='instructionTurnOff' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Press <span style=\"background-color:#33CC33; width:2em; height:1.2em; color:#33CC33\">ON</span> once satisfied with the changes made"}}}
+										{{{controlWithVars 'subtitle' orderRead='instructionTurnOn' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Press <span style=\"background-color:#005500; width:2em; height:1.2em; color:#005500\">ON</span> on the above <i>Changimicator &trade;</i>"}}}
 										{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copy1?>"}}}
 										{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copy2?>"}}}			
+										{{{controlWithVars 'subtitle' orderRead='instructionTurnOff' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Press <span style=\"background-color:#33CC33; width:2em; height:1.2em; color:#33CC33\">ON</span> when you are satisfied with the changes made"}}}
 										{{{controlWithVars 'subtitle' orderRead='3' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Three...,Z...,Depth...,Exploration..." isLink=true linkEvent="doGotoDimension3" hoverEvent="doDimensionNavHover" }}}
 									</div>
 									<div class="columns large-4  small-12">				
@@ -893,16 +893,22 @@ Prototype inheritance
 						
 							<div style="position:absolute; width:100%">
 								{{controlWithVars 'world-3d' layoutName='lo-subtitle-row'}}
-
+		
 								<div class="row">
-									<div class="columns large-8 small-12">
+									<div class="columns large-4 small-12">
 										{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d3copyA; ?>"}}}
+										</div>
+									
+									<div class="columns large-4	  small-12">
 										{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d3copyB; ?>"}}}
-										{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Find the elegant idea above (think <i>laterally</i>)..."}}}
+										{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Find the elegant idea above (think <i>laterally</i>)..."}}}				
+										
 									</div>
-									<div class="columns large-4  small-12">				
+									
+									<div class="columns large-4	  small-12">
+									{{{controlWithVars 'subtitle' orderRead='award' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=false thescript="<?php echo $d3award; ?>"}}}
 										{{{controlWithVars 'subtitle' orderRead='art' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=false thescript="<?php echo $d3art; ?>"}}}
-										{{{controlWithVars 'subtitle' orderRead='award' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=false thescript="<?php echo $d3award; ?>"}}}
+										
 									</div>
 								</div>
 							</div>	
@@ -910,7 +916,6 @@ Prototype inheritance
 							<div style="position:absolute">
 								{{{controlWithVars 'subtitle' orderRead='heading'  layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d3heading?>"}}}
 							</div>
-							
 						</div>
 					</div>
 				</div>

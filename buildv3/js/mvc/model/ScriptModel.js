@@ -19,7 +19,7 @@ App.ScriptModel = Em.Object.extend({
 	scriptIndex	: '',
 	scriptD1: '',
 	wpm: false&&999||280,
-	editDelay: false&&120 || 600,
+	editDelay: false&&120 || 1600,
 	newLineDelay: false&&80||800,
 	progress: 0.0,
 	subtitleText: function() {
