@@ -13,6 +13,11 @@ App.MachineController = App.TemplatedPixelGroupController.extend({
 		if (!coggedPixelCreatedFunc) {
 			coggedPixelCreatedFunc = function (me) {
 				return function (e) {
+				if (e.eslObj.on('click', function (me) {
+					return function () {
+						console.log(me.eslObj);
+					}
+				}))
 					me.get('view').trySetPowerLed(e.eslObj, e.view.get('shp'));
 					me.get('view').trySetActivityLed(e.eslObj, e.view.get('shp'));
 				}

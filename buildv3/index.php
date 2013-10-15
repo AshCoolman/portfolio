@@ -2,7 +2,7 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <?php
-$IS_DEPLOY = false;
+$IS_DEPLOY = true;
 ?>
 <head>
 	<!--link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'-->
@@ -16,14 +16,7 @@ $IS_DEPLOY = false;
 <? if ($IS_DEPLOY) {?>	
 	<link rel="stylesheet" href="///cdnjs.cloudflare.com/ajax/libs/foundation/4.3.1/css/foundation.min.css" />
 	<link rel="stylesheet" href="css/all.min.css" />
-	<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
-	<script>
-	  WebFont.load({
-	    google: {
-	      families: ['Ubuntu:400,700']
-	    }
-	  });
-	</script>
+
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="//cdn.jsdelivr.net/modernizr/2.6.2/modernizr.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js"></script>
@@ -69,14 +62,13 @@ $indexCopyA = '@actionOnRead=doInstruction
 @=<h3>
 Hi, I\'m Ashley 
 @=</h3>
-<i>The starting point</i>
 
 I built this portfolio site to show who I am. 
 You are at the start page aka the <i>origin</i>. 
 Continue on to learn about my different dimensions. 
-@actionOnRead=doSecondSubtitle
-@wait=1000
-@actionOnRead=doFourthSubtitle';
+@actionOnRead=doSecondSubtitle 1000
+@actionOnRead=doThirdSubtitle 2000
+@actionOnRead=doFourthSubtitle 3000';
 $indexCopyA = addcslashes($indexCopyA, '"');
 
 ?>
@@ -102,9 +94,7 @@ Contact Details
 <i class="icon-phone"></i> (+44) 77 5298 3159
 <i class="icon-twitter"></i> <a href="https://twitter.com/AshCoolman" target="_blank">@AshCoolman</a>
 <i class="icon-home"></i> London, United Kingdom (formally Australia)
-@=</address>
-@actionOnRead=doSecondSubtitle
-@actionOnRead=doThirdSubtitle 2000';
+@=</address>';
 $indexCopyC = addcslashes($indexCopyC, '"');
 
 ?>
@@ -177,21 +167,20 @@ Storyteller
 
 
 $d2copy1 =  '@wait=1200
-This is me 
+This is me
 @wait=500
-I love to trigger changes in people.
+I love to create experiences that trigger changes in people
 @actionOnRead=doShowUser
 @wait=1500
- So I <b>build</b> things that create <b>function</b>, <b>emotion</b> and <b>message</b>
+ So I <b>build</b> things that combine <b>function</b>, <b>emotion</b> and <b>message</b> to tell <b>stories</b>
 @actionOnRead=doShowMachine 1500
-@wait=2500	
-@actionOnRead=doInstructionTurnOnController 1600';
+@actionOnRead=doInstructionTurnOnController 4000';
 
 $d2copy2 =  '@actionOnRead=doHideUser
 @wait=1500
 If the question is how create change from the web, 
 @actionOnRead=doShowQuestion
-@wait=1500
+@wait=2000
  I can work the underlying technology...
 @actionOnRead=doShowMachineCogs
 @wait=2500
@@ -213,7 +202,7 @@ Creative
 <i>My 3rd dimension</i>';
 
 $d3copyA = 'Creativity can turn a message into impact, data into knowledge, and function into fun.
-The key is to <b>think laterally</b> to turn a problem into an elegant idea... 
+The key is to <b>think laterally</b> about a given problem, and find an elegant idea... 
 @wait=3000
 @actionOnRead=doRotateQuestionMarkHint
 @wait=5000
@@ -221,9 +210,7 @@ The key is to <b>think laterally</b> to turn a problem into an elegant idea...
 @wait=500
 @actionOnRead=doRotateQuestionMarkInstruction'; 
 
-$d3copyB = '<i>Nice one!</i>
-
- ...once you have an elegant idea, everything else slots into place.';
+$d3copyB = '...once you have an elegant idea, everything else slots into place.';
 
 $d3award = '@=<h5>
 Advertising school 
@@ -343,7 +330,7 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 		<script type="text/x-handlebars" data-template-name="nav-list">
 			<nav class="top-bar">
 				<ul class="title-area">
-					<li class="name"> <h1>Ashley by dimension <?php if (!$isDeploy) echo "";?></h1> </li>
+					<li class="name"> <h1>Ashley by dimension <?php if (!$IS_DEPLOY) echo "";?></h1> </li>
 			    	<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
 				</ul>
 			
@@ -353,7 +340,7 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 			
 					    <li class="divider"></li>
 						{{#view view.NavListItemView item="doIndex" }}
-				            <h1>0d <a {{action doIndex}} >Intro</a></h1>
+				            <h1><a {{action doIndex}} >Intro</a></h1>
 				        {{/view}}
 			
 					    <li class="divider"></li>
@@ -602,7 +589,7 @@ Prototype inheritance
 								{{controlWithVars 'esl-entity-container'}}
 								<div class="row">
 									<div class="columns large-8 small-12">
-										{{{controlWithVars 'subtitle' orderRead='instructionTurnOn' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Press <span style=\"background-color:#005500; width:2em; height:1.2em; color:#005500\">ON</span> on the above <i>Changimicator &trade;</i>"}}}
+										{{{controlWithVars 'subtitle' orderRead='instructionTurnOn' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Press <span style=\"background-color:#005500; width:2em; height:1.2em; color:#005500\">ON</span> on the storytelling device I built"}}}
 										{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copy1?>"}}}
 										{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copy2?>"}}}			
 										{{{controlWithVars 'subtitle' orderRead='instructionTurnOff' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Press <span style=\"background-color:#33CC33; width:2em; height:1.2em; color:#33CC33\">ON</span> when you are satisfied with the changes made"}}}
@@ -761,18 +748,18 @@ Prototype inheritance
 		
 		
 		<script type="text/x-handlebars" data-template-name="machine">
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=-45 height=30 width=30 col="#9c9a95"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=-15 height=30 width=30 col="#8d8b87"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=15 height=30 width=30 col="#8d8b87"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=45 height=30 width=30 col="#8d8b87"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=75 height=30 width=30 col="#8d8b87"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=105 height=30 width=30 col="#8d8b87"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=135 height=30 width=30 col="#8d8b87"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=165 height=30 width=30 col="#8d8b87"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=195 height=30 width=30 col="#878581"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=225 height=30 width=30 col="#575754"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=-75 height=30 width=30 col="#b6b5b1"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=-45 height=30 width=30 col="#8d8b87"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=-45 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=-15 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=15 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=45 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=75 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=105 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=135 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=165 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=195 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=45 y=225 height=30 width=30 col="#272727"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=-75 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=-45 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=-15 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=15 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=45 height=30 width=30 col="#2e2e2e"}}
@@ -782,7 +769,7 @@ Prototype inheritance
 		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=165 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=195 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=75 y=225 height=30 width=30 col="#272727"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=-75 height=30 width=30 col="#b6b5b1"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=-75 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=-45 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=-15 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=15 height=30 width=30 col="#2e2e2e"}}
@@ -793,8 +780,8 @@ Prototype inheritance
 		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=165 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=195 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=225 height=30 width=30 col="#272727"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=255 height=30 width=30 col="#575754"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=-75 height=30 width=30 col="#b6b5b1"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=105 y=255 height=30 width=30 col="#272727"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=-75 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=-45 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=-15 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=15 height=30 width=30 col="#2e2e2e"}}
@@ -805,7 +792,8 @@ Prototype inheritance
 		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=165 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=195 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=225 height=30 width=30 col="#272727"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=-75 height=30 width=30 col="#b6b5b1"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=135 y=255 height=30 width=30 col="#272727"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=-75 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=-45 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=-15 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=15 height=30 width=30 col="#2e2e2e"}}
@@ -816,7 +804,7 @@ Prototype inheritance
 		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=165 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=195 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=165 y=225 height=30 width=30 col="#272727"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=-75 height=30 width=30 col="#b6b5b1"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=-75 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=-45 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=-15 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=15 height=30 width=30 col="#2e2e2e"}}
@@ -827,21 +815,22 @@ Prototype inheritance
 		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=165 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=195 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=195 y=225 height=30 width=30 col="#272727"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=-75 height=30 width=30 col="#b6b5b1"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=-75 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=-45 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=-15 height=30 width=30 col="#2e2e2e"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=15 height=30 width=30 col="#8d8b87"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=15 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=45 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=75 height=30 width=30 col="#2e2e2e"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=105 height=30 width=30 col="#8d8b87"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=135 height=30 width=30 col="#8d8b87"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=105 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=135 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=165 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=195 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=225 height=30 width=30 col="#272727"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=-75 height=30 width=30 col="#b6b5b1"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=-45 height=30 width=30 col="#8d8b87"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=225 y=255 height=30 width=30 col="#272727"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=-75 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=-45 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=-15 height=30 width=30 col="#2e2e2e"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=15 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=15 height=30 width=30 col="#8d8b87"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=45 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=75 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=105 height=30 width=30 col="#8d8b87"}}
@@ -849,17 +838,17 @@ Prototype inheritance
 		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=165 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=195 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=225 height=30 width=30 col="#272727"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=255 height=30 width=30 col="#575754"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=-45 height=30 width=30 col="#9c9a95"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=-15 height=30 width=30 col="#8d8b87"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=15 height=30 width=30 col="#8d8b87"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=45 height=30 width=30 col="#8d8b87"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=75 height=30 width=30 col="#8d8b87"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=255 y=255 height=30 width=30 col="#272727"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=-45 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=-15 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=15 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=45 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=75 height=30 width=30 col="#2e2e2e"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=105 height=30 width=30 col="#8d8b87"}}
 		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=135 height=30 width=30 col="#8d8b87"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=165 height=30 width=30 col="#8d8b87"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=195 height=30 width=30 col="#878581"}}
-		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=225 height=30 width=30 col="#575754"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=165 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=195 height=30 width=30 col="#2e2e2e"}}
+		{{controlWithVars "cogged-pixel" cogged-pixel x=285 y=225 height=30 width=30 col="#272727"}}
 		</script>
 		
 		
@@ -901,7 +890,7 @@ Prototype inheritance
 									
 									<div class="columns large-4	  small-12">
 										{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d3copyB; ?>"}}}
-										{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Find the elegant idea above (think <i>laterally</i>)..."}}}				
+										{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> <i>Turn</i> the problem into an elegant idea"}}}				
 										
 									</div>
 									

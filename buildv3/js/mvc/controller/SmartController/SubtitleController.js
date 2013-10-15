@@ -49,7 +49,7 @@ App.SubtitleController = App.SmartController.extend({
 	tagStart:'<p><span>',
 	tagMid: '</span></p><p><span>',
 	tagEnd: '</span></p>',
-	tagCursor:'<i class="icon-italic></i>',//'"''<img src="img/cursor.gif"/>',
+	tagCursor:'<img src="img/cursor.gif"/>',
 	isForceFinish:false,
 	isCursor: true,
 	isLooping:false,
@@ -228,39 +228,40 @@ App.SubtitleController = App.SmartController.extend({
 		//Test if Pending wait (via @wait) has executed
 		if (dur > this.get('pendingWait')) {
 			dur -= this.get('pendingWait');
+			if ( this.get('pendingWait') > 0) console.log('waited line:'+atLine+' char:'+atChar);
 			this.set('pendingWait', 0);
-			for (var e = 0; e < editList.length; e++) {
-				if (editList[e].linePosition == atLine && editList[e].charPosition == atChar) {
-					currentEdit = editList[e];
-				}
-			}
-
-			if (atLine < srcLines.length ) {
-
-
-				if (currentEdit) {
-					if (currentEdit.editPause) {
-						delay = delayEditLine;
-					}
-				} else if ( atChar >= srcLines[ atLine].length) {	
-					delay = delayLine;
-
-				}
 			
+
+
+			//If more lines
+			if (atLine < srcLines.length ) {
+				//If we are at current edit,  record it
+				for (var e = 0; e < editList.length; e++) {
+					if (editList[e].linePosition == atLine && editList[e].charPosition == atChar)
+						currentEdit = editList[e];
+				}
+				//set delay if edit is pausing...else...if at end of the line
+				if (currentEdit && currentEdit.editPause) {
+					delay = delayEditLine;
+				} else if ( !currentEdit && atChar >= srcLines[ atLine].length) {	
+					delay = delayLine;
+				}
+				
+				//if dur is bigger than the delay...
 				if (dur > delay) {
 					dur -= delay;
-				
-					if (atChar == 0 && atLine == 0) {	
+					//if at very start else at end of line, THEN newLine
+					if (atChar == 0 && atLine == 0) {
 						isNewLine = true;
-					} else if ( atChar >= srcLines[ atLine].length && !currentEdit) {
-	//					console.log('Char means new line', atChar, atLine, srcLines[atLine], 'edit:', currentEdit)
+					} else if ( atChar >= srcLines[ atLine].length && !currentEdit) {	
 						isNewLine = true;
 						atChar = 0;
 						atLine++;
 						atPrintedLine++;
 					} 
-				
-					if (currentEdit) { 
+					//======== Read Char ===========
+					if (currentEdit) {  
+						//If editing, do edit
 						with (currentEdit) {
 							editPause = false;
 							if ( currentDirection == 1 ) {
@@ -280,22 +281,22 @@ App.SubtitleController = App.SmartController.extend({
 									if (currentVal >= editVals.length) { 
 										currentVal = 0;
 									}
-
 								}
 							}
 						}
-					
 						me.set('editList', editList);
 						me.setText(this.get('printedLines'), currentEdit.printed);
 					
 					} else if (!isNewLine) {
+						//ELSE IF not newline print next char
 						printedLines[atPrintedLine] += srcLines[atLine][atChar];
 						me.setText(printedLines, null, 'char');
 						atChar++;
 					
 					} else if (isNewLine) {
-	//					console.log('NEWLINE', atLine, atChar, srcLines);
+						//ELSE IF newline...
 						while (isEvents && srcLines[atLine] && srcLines[atLine][0] && srcLines[atLine][0] == '@') {
+							//Read through instruction lines
 							var line = srcLines[atLine].join('');
 							if (line.indexOf('@=') == 0) {
 								this.doTagRead(line, atPrintedLine); 
@@ -303,7 +304,6 @@ App.SubtitleController = App.SmartController.extend({
 								var pendingWait = parseInt(line.split('=')[1], 10);
 								Em.assert('@wait was given non-number value',  !isNaN(parseFloat(pendingWait)) && isFinite(pendingWait));
 								this.set('pendingWait', pendingWait);
-								
 							} else if(line.indexOf('@actionOnRead=') == 0) {
 								var words =  line.split(' ');
 								var action = words[0].split('=')[1];
@@ -316,11 +316,9 @@ App.SubtitleController = App.SmartController.extend({
 											actionTOObjs[pos].to = null;
 											my.send(myAction)
 										}
-									
 									}
 								}(this, action, this.get('actionTimeouts').length);
 								var to = setTimeout( actionFunc, delay);
-
 								this.get('actionTimeouts').push( {
 									func: actionFunc,
 									to: to
@@ -329,16 +327,16 @@ App.SubtitleController = App.SmartController.extend({
 								App.eventMapper.trigger(line.split(' ')[1]); 
 							}
 							atLine++;
-	//						console.log('skipped to '+atLine+' of '+srcLines.length);
 						}
 					
-					
-						if ( atLine < srcLines.length && srcLines[atLine].length > 0) {
-							printedLines[atPrintedLine]='';
-							printedLines[atPrintedLine] += srcLines[atLine][atChar];
-							console.log()
-							//me.setText(printedLines, null, 'newline');
-							atChar++;
+						
+						if (this.get('pendingWait') >= 0) {
+							if ( atLine < srcLines.length && srcLines[atLine].length > 0) {
+									printedLines[atPrintedLine]='';
+										printedLines[atPrintedLine] += srcLines[atLine][atChar];
+									atChar++;
+								//me.setText(printedLines, null, 'newline');
+							}	
 						}
 					
 					
@@ -349,6 +347,7 @@ App.SubtitleController = App.SmartController.extend({
 			} else {
 	//			console.log('Ended')
 				me.set('isEnded', true);
+				me.set('isCursor', false);
 				window.cancelAnimationFrame(me.get('raf'));
 				if (me.get('hasRemoveButton')) {
 					me.set('isRemoveButton', true);
@@ -436,7 +435,7 @@ App.SubtitleController = App.SmartController.extend({
 		
 		for (var l = 0; l < taggedLines.length; l++) {
 			if (l == taggedLines.length-1) {
-				taggedLines[l] = this.tagStart + taggedLines[l] +' '+'<i>'+currentEditPrinted+'</i>'+ this.tagCursor + this.tagEnd;
+				taggedLines[l] = this.tagStart + taggedLines[l] +' '+'<i>'+currentEditPrinted+'</i>'+ this.get('tagCursor') + this.tagEnd;
 			} else {
 				taggedLines[l] = this.tagStart + taggedLines[l] +' '+ this.tagEnd;
 			}
@@ -494,7 +493,7 @@ App.SubtitleController = App.SmartController.extend({
 	},
 	
 	startReading: function () {
-		console.log('start reading', this.get('orderRead'))
+		console.log('start reading', this.get('orderRead'), this.get('isInstant'))
 		
 		if (this.get('isInstant')) {
 			this.get('view').doShowInstant();

@@ -55,7 +55,12 @@ App.SubtitleView = App.SmartView.extend({
 	//Instantly typed text appears all at once
 	doShowInstant: function () {
 		this.doShow();
-		this.get('$el').removeClass('fade-out').addClass('fade-in');
+		setTimeout(function (me) {
+			return function () {
+				me.get('$el').removeClass('fade-out').addClass('fade-in');
+			}
+		}(this), 0)
+		
 	},
 	
 	willDestroyElement: function () {

@@ -131,7 +131,7 @@ App.World3dView = App.SmartView.extend({
 			//rendererStats = tryCreateRenderStats();
 
 			// +Camera	
-			camera = new THREE.OrthographicCamera( -WIDTH/2, WIDTH/2, HEIGHT/2, -HEIGHT/2, 1, 5000 );
+			this.set('camera', camera = new THREE.OrthographicCamera( -WIDTH/2, WIDTH/2, HEIGHT/2, -HEIGHT/2, 1, 5000 ));
 			camera.position.set(0, 0, 1000);
 			scene.add(camera);
 

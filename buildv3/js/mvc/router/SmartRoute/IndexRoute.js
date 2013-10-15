@@ -9,8 +9,8 @@ App.IndexRoute = App.SmartRoute.extend({
 				if (acontroller.get('readOrder') == '2') { this.subtitleController2 = acontroller; }
 				if (acontroller.get('readOrder') == '3') { this.subtitleController3 = acontroller; }
 				if (acontroller.get('readOrder') == '4') { this.subtitleController4 = acontroller; }
-				
-				setTimeout(function (me) {return function () {me.tryStart();}}(this), 0);
+				this.tryStart();
+				//setTimeout(function (me) {return function () {me.tryStart();}}(this), 0);
 			},
 			IndexNavController_didInsertElement: function (acontroller, alabel) {
 				this.indexNavController = acontroller;
@@ -27,8 +27,6 @@ App.IndexRoute = App.SmartRoute.extend({
 			doSecondSubtitle: function () {
 				this.subtitleController1.set('isCursor', false);
 		        this.subtitleController2.startReading();
-				this.subtitleController3.set('isCursor', false);
-		        this.subtitleController3.startReading();
 			},
 			doThirdSubtitle: function () {
 				this.subtitleController2.set('isCursor', false);

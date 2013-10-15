@@ -38,8 +38,8 @@ App.AshView = App.EslEntityView.extend({
 		}
 		var hammer = new createjs.Sprite(new createjs.SpriteSheet(spriteSheet), "hammer");
 		hammer.framerate = 20;
-		hammer.x = (parseInt(this.get('eslObj').x) + parseInt(App.PIXEL_SIZE * 9));
-		hammer.y = (parseInt(this.get('eslObj').y) + parseInt(App.PIXEL_SIZE * 2));
+		hammer.x = (parseInt(this.get('eslObj').x) + parseInt(App.PIXEL_SIZE * 6));
+		hammer.y = (parseInt(this.get('eslObj').y) + parseInt(App.PIXEL_SIZE * 3));
 		console.log('hammer', hammer, this.get('eslObj').x	)
 		this.set('hammer', hammer);
 		this.get('eslObj').parent.addChild(hammer);
@@ -47,11 +47,23 @@ App.AshView = App.EslEntityView.extend({
 	},
 	removeHammer: function () {
 		var hammer = this.get('hammer');
-		if (hammer)
-			hammer.parent.removeChild(hammer);
-		clearInterval(this.get('hammerInt'));
-		this.set('hammer', null);
-		this.set('hammerInt', null);
+		if (hammer) {
+			hammer.stop();
+			var onCompleteFunc = function (me, ahammer) { 
+				return function () {
+					if (ahammer)
+						ahammer.getStage().removeChild(ahammer);
+					if (me.set)
+						me.set('hammer', null);
+				}
+			}(this, hammer);
+			
+			var timeLine = new TimelineMax();
+			timeLine.add(TweenMax.to(hammer, 0.5, {y:"-=120", yoyo:true, repeat:1,  ease:Ease.easeOut}));
+			timeLine.add(TweenMax.to(hammer, 0.2, {delay:0.2, alpha:0, ease:Ease.easeOut}));
+			timeLine.add(TweenMax.to(hammer, 0.0, {delay:1, alpha:0, ease:Ease.easeOut, onComplete: onCompleteFunc}))
+			timeLine.resume();
+		}
 	},
 	override_reDraw: function (dur) {
 		

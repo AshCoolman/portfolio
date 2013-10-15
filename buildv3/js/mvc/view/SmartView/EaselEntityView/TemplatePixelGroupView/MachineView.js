@@ -73,7 +73,7 @@ var MachineViewRayParticle = function () {
 	this.eslObj = null;
 	this.tween = null;
 	this.beamList = [];
-	this.LEN = 2;
+	this.LEN = 1;
 	this.RANGE = App.PIXEL_SIZE * 6;
 }
 MachineViewRayParticle.prototype = {
@@ -118,7 +118,10 @@ MachineViewRayParticle.prototype = {
 		
 			
 		//this.tween = TweenMax.to(this.eslObj, 0.1, {alpha:0.2, repeat:8, yoyo:true, onComplete: onCompleteFunc});
-		var tween = TweenMax.to(this.eslObj, 0.8, {alpha:0.2, proxyX: this.eslObj.proxyX + this.RANGE, onUpdate: updateFunc, onComplete: onCompleteFunc});
+		var tweenObj = {alpha:0.2, proxyY: aplan.startY,  proxyX: this.eslObj.proxyX + this.RANGE, onUpdate: updateFunc, onComplete: onCompleteFunc};
+		if (aplan.yTween) tweenObj['proxyY'] = aplan.yTween;
+		if (aplan.xTween) tweenObj['proxyX'] = aplan.xTween;
+		var tween = TweenMax.to(this.eslObj, 0.8, tweenObj);
 		
 		
 		var i,
@@ -251,9 +254,9 @@ App.MachineView = App.TemplatedPixelGroupView.extend({
 		if (ledHash.power && !ledHash.activity && ledHash.power.shp != shp) {
 			ledHash.activity = Object.createFromPrototype(MachineViewLed, {});
 			ledHash.activity.shp = shp;
-			ledHash.activity.colOn = '#0066FF';
-			ledHash.activity.colOff = '#773d32';
-			ledHash.activity.colStandBy = '#EB9946';
+			ledHash.activity.colOn = '#EB9946';
+			ledHash.activity.colOff = '#2e2e2e';
+			ledHash.activity.colStandBy = '#773d32';
 			ledHash.activity.showOff();
 		}
 	},
@@ -309,15 +312,25 @@ App.MachineView = App.TemplatedPixelGroupView.extend({
 			}
 		}
 		
-		//create particle on edge
-		for (var e = 0; e < edge.length; e++) {
-			//console.log('particle', eslObj.x + edge[e].x, eslObj.y, edge[e].y)
-			var rayParticle = Object.createFromPrototype(MachineViewRayParticle, {
-						x: eslObj.x + edge[e].x + App.PIXEL_SIZE, 
-						y: eslObj.y + edge[e].y
-					});
-			eslObj.parent.addChild(rayParticle.eslObj);
+		for (var w = 0; w < 4; w++) {
+			//create particle on edge
+			setTimeout( function (me) {
+				return function () {
+					for (var e = 0; e < edge.length; e++) {
+						//console.log('particle', eslObj.x + edge[e].x, eslObj.y, edge[e].y)
+						var middleEdge = Math.round(edge.length / 2)
+						var rayParticle = Object.createFromPrototype(MachineViewRayParticle, {
+									x: eslObj.x + edge[e].x, 
+									y: eslObj.y + (middleEdge-1) * App.PIXEL_SIZE,
+									yTween: eslObj.y + edge[e].y,
+									xTween: eslObj.x + edge[e].x + Math.abs(App.PIXEL_SIZE*8) /*+ Math.abs((-e + middleEdge))  * App.PIXEL_SIZE*/
+								});
+						eslObj.parent.addChild(rayParticle.eslObj);
+					}
+				}
+			}(this), w * 200)
 		}
+
 		
 		
 	}

@@ -49,13 +49,13 @@ App.Dimension3Route = App.SmartRoute.extend({
 					return function () {
 						me.subArtController.startReading();
 					}
-				}(this), 2400);
+				}(this), 3200);
 
 				setTimeout(function (me ) {
 					return function () {
 						me.subAwardController.startReading();
 					}
-				}(this), 3200);
+				}(this), 2400);
 			}
 		});
 	},
