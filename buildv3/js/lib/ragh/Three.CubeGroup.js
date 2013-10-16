@@ -148,7 +148,9 @@ CubeGroup.prototype = {
 			maxX = 0, 
 			maxY = 0, 
 			maxZ = 0,
-			group = new THREE.Object3D(),
+			group = new THREE.Object3D(), //top right aligned Object3D for cubes
+			centeredGroup = new THREE.Object3D(), //centered offset for centerpoint rotation
+			reoffsetGroup = new THREE.Object3D(), //re-offset Object3D to ensure top right aligned
 			map = (amap ? amap : this.defaultMap),
 			materials,
 			geo,
@@ -182,7 +184,7 @@ CubeGroup.prototype = {
 				if (!map[xs][ys]) map[xs][ys] = []
 				for (var zs = 0; zs < map[xs][ys].length; zs++) {
 					if (map[xs][ys][zs]) {
-						var cube = this.createCube( this.SIZE, xs*sz, -ys*sz, zs*sz, map[xs][ys][zs], this.materialsDict, group, geo, materials, this.isMerge);
+						var cube = this.createCube( this.SIZE, xs*sz, -ys*sz, zs*sz, map[xs][ys][zs], this.materialsDict, pixelGroup, geo, materials, this.isMerge);
 
 					
 					}
@@ -197,21 +199,26 @@ CubeGroup.prototype = {
 			mesh.updateMatrix();
 			mesh.overdraw = false;
 			mesh.name = 'cubeGroup';
-	        group.add(mesh);
+	        pixelGroup.add(mesh);
 		}
 		
-		group.position.set(0, 0, 0);
-		group.updateMatrix();
+		pixelGroup.position.set(0, 0, 0);
+		pixelGroup.updateMatrix();
 		this.rollOverMesh = this.createRollOver()
-		//group.add( this.rollOverMesh );
-		this.group = group;
+		//pixelGroup.add( this.rollOverMesh );
 		/*
 		this.map = map;
 		this.geo = geo;
 		this.mesh = mesh;
 		this.rollOverMesh = rollOverMesh;
 		*/
-		return group;
+		centeredGroup.add(pixelGroup);
+		reoffsetGroup.add(centeredGroup);
+		reoffsetGroup.position.x = -(centeredGroup.position.x = - maxX * sz * 0.5);
+		this.group = reoffsetGroup;
+		
+		//topRightGroup.position.y = -(group.position.y = - maxY * sz);
+		return reoffsetGroup;
 	},
 
 

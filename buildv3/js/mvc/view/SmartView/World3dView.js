@@ -13,7 +13,7 @@ App.World3dView = App.SmartView.extend({
 	QUESTION_MARK_X: -90,
 	QUESTION_MARK_Y: 210,
 	is3dCreated: false,
-	isQuestionMarkRotate: false,
+	isQuestionMarkDragger: false,
 	instanceVarNameArr: [			
 		'renderer',
 		'camera',
@@ -85,17 +85,34 @@ App.World3dView = App.SmartView.extend({
 			pixelObjectList = instanceVarObj.pixelObjectList,
 			camera = instanceVarObj.camera;
 			
-		if (val && !this.isQuestionMarkRotate && camera && pixelObjectList[this.QUESTION_MARK] && this.el) {
-			this.isQuestionMarkRotate = Object.createFromPrototype(
+		if (val && !this.isQuestionMarkDragger && camera && pixelObjectList[this.QUESTION_MARK] && this.el) {
+			this.isQuestionMarkDragger = Object.createFromPrototype(
 					ragh.THREE.Dragger, 
 					{	camera:camera, 
 						dragged: pixelObjectList[this.QUESTION_MARK].group, 
 						el: this.el});
 			
-		} else if (!val && this.isQuestionMarkRotate) {
+		
+						
+						
+						var orbiter = Object.createFromPrototype(
+								ragh.THREE.Orbiter, 
+								{	
+									camera:camera, 
+									orbited: pixelObjectList[this.FACE_ASH].group, 
+									el: document
+								}
+						);
+						console.log('creating orbier', pixelObjectList[this.FACE_ASH].group)
+						this.set('orbiter', orbiter);
+							
+									
+									
+						
+		} else if (!val && this.isQuestionMarkDragger) {
 			pixelObjectList[this.QUESTION_MARK] && pixelObjectList[this.QUESTION_MARK].setInteractive(false);
-			this.isQuestionMarkRotate.destroy();
-			this.isQuestionMarkRotate = false;
+			this.isQuestionMarkDragger.destroy();
+			this.isQuestionMarkDragger = false;
 		}
 		
 	}.observes('controller.isQuestionMarkRotating'),
@@ -157,7 +174,6 @@ App.World3dView = App.SmartView.extend({
 			tmpVec = new THREE.Vector3(); 
 			
 			
-
 			/*
 			var plane = new THREE.Mesh( new THREE.PlaneGeometry( WIDTH, HEIGHT, WIDTH/15, HEIGHT/15 ), new   THREE.MeshBasicMaterial( { color: 0xCCCCCC, wireframe: true } ) );
 			plane.position.x = 0;
@@ -180,6 +196,8 @@ App.World3dView = App.SmartView.extend({
 					ainstanceVarObj.ignoreList.push(pixelatedObj.rollOverMesh);
 					ainstanceVarObj.scene.add(pixelatedObjGroup);
 					ainstanceVarObj.pixelObjectList[plans[p].label] = pixelatedObj;
+					
+					
 				}
 				
 				me.tryStart(ainstanceVarObj);
@@ -427,12 +445,12 @@ App.World3dView = App.SmartView.extend({
 	redraw: function (dur) {
 		var instanceVarObj = this.get('instanceVarObj');
 		
-		if (this.isQuestionMarkRotate && this.isQuestionMarkRotate.dragged && this.isQuestionMarkRotate.dragged.rotation) {
+		if (this.isQuestionMarkDragger && this.isQuestionMarkDragger.dragged && this.isQuestionMarkDragger.dragged.rotation) {
 			var a180 = 1 * Math.PI,
 				a360 = 2 * Math.PI,
 				tolerance = 0.01,
 				targetRot = 2 * Math.PI * 0.75,
-				targetDif = this.isQuestionMarkRotate.dragged.rotation.y - targetRot;
+				targetDif = this.isQuestionMarkDragger.dragged.rotation.y - targetRot;
 
 	        while (targetDif < -a180) targetDif += a360;
 	        while (targetDif > a180) targetDif -= a360;
@@ -441,12 +459,17 @@ App.World3dView = App.SmartView.extend({
 			
 			
 			if (Math.min(tolerance, targetDif) == tolerance) {
-				this.isQuestionMarkRotate.animate();
+				this.isQuestionMarkDragger.animate();
 			} else {
-				this.isQuestionMarkRotate.dragged.rotation.y = targetRot;
+				this.isQuestionMarkDragger.dragged.rotation.y = targetRot;
 				this.get('controller').send('view_doQuestionMarkRotateDone');
 			}
 			
+		}
+		
+		var orbiter;
+		if (orbiter = this.get('orbiter')) {
+			orbiter.animate();
 		}
 		
 		with (instanceVarObj) {
