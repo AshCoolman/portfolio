@@ -148,7 +148,7 @@ CubeGroup.prototype = {
 			maxX = 0, 
 			maxY = 0, 
 			maxZ = 0,
-			group = new THREE.Object3D(), //top right aligned Object3D for cubes
+			pixelGroup = new THREE.Object3D(), //top right aligned Object3D for cubes
 			centeredGroup = new THREE.Object3D(), //centered offset for centerpoint rotation
 			reoffsetGroup = new THREE.Object3D(), //re-offset Object3D to ensure top right aligned
 			map = (amap ? amap : this.defaultMap),
@@ -212,12 +212,13 @@ CubeGroup.prototype = {
 		this.mesh = mesh;
 		this.rollOverMesh = rollOverMesh;
 		*/
+		pixelGroup.position.x = - maxX * sz * 0.5
 		centeredGroup.add(pixelGroup);
+		centeredGroup.position.x = maxX * sz * 0.5
 		reoffsetGroup.add(centeredGroup);
-		reoffsetGroup.position.x = -(centeredGroup.position.x = - maxX * sz * 0.5);
 		this.group = reoffsetGroup;
 		
-		//topRightGroup.position.y = -(group.position.y = - maxY * sz);
+		console.log('graup: ', reoffsetGroup)
 		return reoffsetGroup;
 	},
 

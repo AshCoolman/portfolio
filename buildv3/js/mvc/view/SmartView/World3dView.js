@@ -68,7 +68,7 @@ App.World3dView = App.SmartView.extend({
 			var instanceVarObj = this.get('instanceVarObj'),
 			pixelObjectList = instanceVarObj.pixelObjectList,
 			camera = instanceVarObj.camera,
-			tweened = pixelObjectList[this.QUESTION_MARK].group.rotation;
+			tweened = pixelObjectList[this.QUESTION_MARK].group.children[0].rotation;
 			createjs.Tween.get(tweened).to({y:Math.PI* 0.125}, 600).call(function (me, questionMark) {
 				return function () {
 					console.log('questionMark', questionMark);
@@ -89,7 +89,7 @@ App.World3dView = App.SmartView.extend({
 			this.isQuestionMarkDragger = Object.createFromPrototype(
 					ragh.THREE.Dragger, 
 					{	camera:camera, 
-						dragged: pixelObjectList[this.QUESTION_MARK].group, 
+						dragged: pixelObjectList[this.QUESTION_MARK].group.children[0], 
 						el: this.el});
 			
 		
@@ -99,11 +99,11 @@ App.World3dView = App.SmartView.extend({
 								ragh.THREE.Orbiter, 
 								{	
 									camera:camera, 
-									orbited: pixelObjectList[this.FACE_ASH].group, 
+									orbited: pixelObjectList[this.FACE_ASH].group.children[0], 
 									el: document
 								}
 						);
-						console.log('creating orbier', pixelObjectList[this.FACE_ASH].group)
+						console.log('creating orbier', pixelObjectList[this.FACE_ASH].group.children[0])
 						this.set('orbiter', orbiter);
 							
 									

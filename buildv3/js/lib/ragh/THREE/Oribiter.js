@@ -13,9 +13,10 @@ if (!ragh.THREE) {
 	ragh.THREE = {};
 }
 ragh.THREE.Orbiter = function () {
-	this.maxRot = {x:Math.PI * 0.125, y:Math.PI * 0.125};
+	this.maxRot = {x:Math.PI * 0.125, y:Math.PI * 0.0};
 	this.windowHalfX= window.innerWidth / 2;
 	this.windowHalfY = window.innerHeight / 2;
+	this.WIN_BOUNDS_FACTOR = 5;
 	
 }
 
@@ -32,11 +33,17 @@ ragh.THREE.Orbiter.prototype = {
 		
 		this.onPointerMove = function( me ) {
 			return function( event ) {
-				me.mouse.x = event.pageX - me.windowHalfX;
-				me.mouse.y = event.pageY - me.windowHalfY;
-				me.targetRot.x = me.maxRot.x * me.mouse.x / me.windowHalfX;
-				//console.log('pointermove', me.maxRot.y, me.mouse.x)
-				me.targetRot.y = me.maxRot.y * me.mouse.y / me.windowHalfY;	
+				me.mouse.x = ( event.pageX - me.windowHalfX );
+				me.mouse.y =  ( event.pageY - me.windowHalfY );
+				
+				var wbf = me.WIN_BOUNDS_FACTOR,
+					dir = {};
+				dir.x = me.mouse.x / Math.abs(me.mouse.x);
+				dir.y = me.mouse.y / Math.abs(me.mouse.y);
+				
+				me.targetRot.x = dir.x * me.maxRot.x * Math.min(1, wbf * ( Math.abs( me.mouse.x / me.windowHalfX )));
+				console.log(dir.x * wbf * ( Math.abs( me.mouse.x / me.windowHalfX )))
+				me.targetRot.y = dir.y * me.maxRot.y * Math.min(1, wbf * ( Math.abs( me.mouse.y / me.windowHalfY )));	
 			}
 		}(this);
 
@@ -46,8 +53,8 @@ ragh.THREE.Orbiter.prototype = {
 					event.preventDefault();
 					me.mouse.x = event.touches[ 0 ].pageX - me.windowHalfX;
 					me.mouse.y = event.touches[ 0 ].pageY - me.windowHalfY;
-					me.targetRot.x = me.maxRot.x + me.mouse.x * 0.05;
-					me.targetRot.y = me.maxRot.y + me.mouse.y * 0.05;
+					me.targetRot.x = me.maxRot.x * me.mouse.x / me.windowHalfX;
+					me.targetRot.y = me.maxRot.y * me.mouse.y / me.windowHalfY;
 				}
 			}
 		}(this);
@@ -79,8 +86,10 @@ ragh.THREE.Orbiter.prototype = {
 
 	animate: function () {
  		//console.log('animate', this.orbited.rotation, this.targetRot)
-		this.orbited.rotation.x = this.targetRot.x;
-		this.orbited.rotation.y = this.targetRot.y;
+		if (this.targetRot) {
+			this.orbited.rotation.y = this.targetRot.x;
+			this.orbited.rotation.x = this.targetRot.y;
+		}
 		
 	},
 	destroy: function () {
