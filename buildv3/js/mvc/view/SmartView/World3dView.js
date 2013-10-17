@@ -8,10 +8,10 @@ App.World3dView = App.SmartView.extend({
 	VS: 10,
 	FACE_ASH: 'face-ash',
 	FACE_ASH_X:-540,
-	FACE_ASH_Y:270,
+	FACE_ASH_Y:210,
 	QUESTION_MARK: 'question-mark',
 	QUESTION_MARK_X: -90,
-	QUESTION_MARK_Y: 210,
+	QUESTION_MARK_Y: 180,
 	is3dCreated: false,
 	isQuestionMarkDragger: false,
 	instanceVarNameArr: [			
@@ -91,10 +91,7 @@ App.World3dView = App.SmartView.extend({
 					{	camera:camera, 
 						dragged: pixelObjectList[this.QUESTION_MARK].group.children[0], 
 						el: this.el});
-			
-		
-						
-						
+
 						var orbiter = Object.createFromPrototype(
 								ragh.THREE.Orbiter, 
 								{	
@@ -286,6 +283,7 @@ App.World3dView = App.SmartView.extend({
 			this.resize();
 		}
 	},
+	
 	createFromImage: function (img, groupName, pixelWidth, pixelHeight) {
 		var group = new THREE.Object3D(),
 			instanceVarObj = this.get('instanceVarObj');

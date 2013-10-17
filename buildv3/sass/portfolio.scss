@@ -60,6 +60,7 @@ $col_unselectable-topbar:#777777;
 	background: rgba(200,200,200,0.25);
 	border-bottom: solid 1px #919191;
 	padding-left:1em;
+	margin-bottom:0 !important;
 } 
 
 .top-bar ul, .top-bar h1, .top-bar li {
@@ -692,6 +693,9 @@ $gridColor:rgba(50,50,50,0.25);
 	transition: opacity 2s ease;
 }
 
+.page-content {
+	margin-top: 1.8em !important;
+}
 
 .dimension1 {
 	overflow:hidden; 

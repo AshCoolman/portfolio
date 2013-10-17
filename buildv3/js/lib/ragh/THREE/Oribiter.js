@@ -13,7 +13,7 @@ if (!ragh.THREE) {
 	ragh.THREE = {};
 }
 ragh.THREE.Orbiter = function () {
-	this.maxRot = {x:Math.PI * 0.125, y:Math.PI * 0.0};
+	this.maxRot = {x:Math.PI * 0.125, y:Math.PI * 0.025};
 	this.windowHalfX= window.innerWidth / 2;
 	this.windowHalfY = window.innerHeight / 2;
 	this.WIN_BOUNDS_FACTOR = 5;

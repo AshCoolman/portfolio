@@ -76,14 +76,15 @@ App.UserView = App.TemplatedPixelGroupView.extend({
 			}
 		}
 	},
+
 	setFaceChangeMap: function (aimgPreloadId) {
 		var img = App.preloadedImages[aimgPreloadId];
 		
 		if (img) {
 			var mapElementFunc = function (me) {
 					return function (x, y, z, el, maxX, maxY, maxZ) {
-						el.x2d = (-15+(x+2)*App.PIXEL_SIZE);
-						el.y2d = (240+(0.5-maxY+y)*App.PIXEL_SIZE);
+						el.x2d = (App.USER_X+(x+2)*App.PIXEL_SIZE);
+						el.y2d = (App.USER_X+(0.5-maxY+y)*App.PIXEL_SIZE);
 					}
 				}(this),
 				onCompleteFunc = function (me) {

@@ -268,6 +268,9 @@ App.BREAKPOINT = {
 	HEIGHT_0: 300
 }
 App.PIXEL_SIZE = 30;
+App.USER_X = 240;
+App.USER_Y = -15;
+
 
 App.dictionary = Em.Object.create({
 	copy: {},

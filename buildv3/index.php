@@ -384,10 +384,10 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 
 		<script type="text/x-handlebars" data-template-name="index">		
 			
-			<div class="row">
+			<div class="row page-content">
 				<div class="columns large-6  small-6">		
 					{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $indexCopyA; ?>"}}}
-					{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=One...,X...,Who...,What..." isLink=true linkEvent="doGotoDimension1" hoverEvent="doDimensionNavHover"}}}
+					{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to first dimension: @edits=X...,Who...,What..." isLink=true linkEvent="doGotoDimension1" hoverEvent="doDimensionNavHover"}}}
 					
 				</div>
 				<div class="columns large-6 small-6">
@@ -405,12 +405,12 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="dimension1">
-			<div class="row d1-content">
-				<div class="columns large-6  small-6 d1-content-text">
+			<div class="row d1-content ">
+				<div class="columns large-6  small-6 d1-content-text page-content">
 					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
 					{{{controlWithVars 'subtitle' orderRead='0' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Use mouse to find my x values "}}}
 					
-					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2"  hoverEvent="doDimensionNavHover" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Two...,Y...,Why?...,Motivation..."}}} 
+					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2"  hoverEvent="doDimensionNavHover" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to second dimension: @edits=Y...,Why...,Motivation..."}}} 
 					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}}}
 				</div>
 				<div class="columns large-6 small-6 d1-content-graph">
@@ -594,21 +594,23 @@ Prototype inheritance
 							<div style="position:absolute; width:100%">
 								{{controlWithVars 'world-2d' layoutName='lo-subtitle-row'}}
 								{{controlWithVars 'esl-entity-container'}}
-								<div class="row">
-									<div class="columns large-8 small-12">
-										{{{controlWithVars 'subtitle' orderRead='instructionTurnOn' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Press <span style=\"background-color:#005500; width:2em; height:1.2em; color:#005500\">ON</span> on the storytelling device I built"}}}
-										{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copy1?>"}}}
-										{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copy2?>"}}}			
-										{{{controlWithVars 'subtitle' orderRead='instructionTurnOff' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Press <span style=\"background-color:#33CC33; width:2em; height:1.2em; color:#33CC33\">ON</span> when you are satisfied with the changes made"}}}
-										{{{controlWithVars 'subtitle' orderRead='3' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to dimension @edits=Three...,Z...,Depth...,Exploration..." isLink=true linkEvent="doGotoDimension3" hoverEvent="doDimensionNavHover" }}}
-									</div>
-									<div class="columns large-4  small-12">				
-										{{{controlWithVars 'subtitle' orderRead="example" layoutName="lo-subtitle-instant-row" thescript="<?php echo $d2Example ?>" isLink=false isInstant=true }}}
+								<div class="page-content">
+									<div class="row page-content">
+										<div class="columns large-8 small-12">
+											{{{controlWithVars 'subtitle' orderRead='instructionTurnOn' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Press <span style=\"background-color:#005500; width:2em; height:1.2em; color:#005500\">ON</span> on the storytelling device I built"}}}
+											{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copy1?>"}}}
+											{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copy2?>"}}}			
+											{{{controlWithVars 'subtitle' orderRead='instructionTurnOff' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Press <span style=\"background-color:#33CC33; width:2em; height:1.2em; color:#33CC33\">ON</span> when you are satisfied with the changes made"}}}
+											{{{controlWithVars 'subtitle' orderRead='3' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to third dimension: @edits=Z...,Depth...,Exploration..." isLink=true linkEvent="doGotoDimension3" hoverEvent="doDimensionNavHover" }}}
+										</div>
+										<div class="columns large-4  small-12">				
+											{{{controlWithVars 'subtitle' orderRead="example" layoutName="lo-subtitle-instant-row" thescript="<?php echo $d2Example ?>" isLink=false isInstant=true }}}
+										</div>
 									</div>
 								</div>
 							</div>	
 							
-							<div style="position:absolute">
+							<div style="position:absolute" class="page-content">
 								{{{controlWithVars 'subtitle' orderRead='heading' isInstant=true  layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d2heading?>"}}}
 							</div>
 							
@@ -620,11 +622,10 @@ Prototype inheritance
 
 		<script type="text/x-handlebars" data-template-name="world-2d">
 			<div class="canvas-hero-holder"></div>
-			{{controlWithVars 'ash' ash x=-540 img="img//face-ash.png"}}
-			
-			{{controlWithVars 'machine' machine x=-180 y=90 visible=false	}}
-			{{controlWithVars 'question' question x=-120 y=0 visible=false}}
-			{{controlWithVars 'user' user x=120 y=90 visible=false}}
+			{{controlWithVars 'ash' ash 			x=-540 	y=60 	img="img//face-ash.png"}}
+			{{controlWithVars 'machine' machine 	x=-180 	y=150 	visible=false	}}
+			{{controlWithVars 'question' question 	x=-120 	y=30 	visible=false}}
+			{{controlWithVars 'user' user 			x=120 	y=150 	visible=false}}
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="knob">
@@ -888,28 +889,30 @@ Prototype inheritance
 						<div style="position:relative; width:100%">
 						
 							<div style="position:absolute; width:100%">
-								{{controlWithVars 'world-3d' layoutName='lo-subtitle-row'}}
+									{{controlWithVars 'world-3d' layoutName='lo-subtitle-row'}}
+										<div class="page-content">
 		
-								<div class="row">
-									<div class="columns large-4 small-12">
-										{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d3copyA; ?>"}}}
+									<div class="row">
+										<div class="columns large-4 small-12">
+											{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d3copyA; ?>"}}}
+											</div>
+									
+										<div class="columns large-4	  small-12">
+											{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d3copyB; ?>"}}}
+											{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> <i>Turn</i> the problem into an elegant idea"}}}				
+										
 										</div>
 									
-									<div class="columns large-4	  small-12">
-										{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d3copyB; ?>"}}}
-										{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> <i>Turn</i> the problem into an elegant idea"}}}				
+										<div class="columns large-4	  small-12">
+										{{{controlWithVars 'subtitle' orderRead='award' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=false thescript="<?php echo $d3award; ?>"}}}
+											{{{controlWithVars 'subtitle' orderRead='art' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=false thescript="<?php echo $d3art; ?>"}}}
 										
-									</div>
-									
-									<div class="columns large-4	  small-12">
-									{{{controlWithVars 'subtitle' orderRead='award' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=false thescript="<?php echo $d3award; ?>"}}}
-										{{{controlWithVars 'subtitle' orderRead='art' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=false thescript="<?php echo $d3art; ?>"}}}
-										
+										</div>
 									</div>
 								</div>
 							</div>	
 							
-							<div style="position:absolute">
+							<div style="position:absolute" class="page-content">
 								{{{controlWithVars 'subtitle' orderRead='heading'  layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d3heading?>"}}}
 							</div>
 						</div>

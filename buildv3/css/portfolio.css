@@ -10,7 +10,8 @@ http://jsfiddle.net/VAXrL/190/
   z-index: 1000;
   background: rgba(200, 200, 200, 0.25);
   border-bottom: solid 1px #919191;
-  padding-left: 1em; }
+  padding-left: 1em;
+  margin-bottom: 0 !important; }
 
 .top-bar ul, .top-bar h1, .top-bar li {
   font-size: .95em !important;
@@ -505,6 +506,9 @@ a {
   -o-transition: opacity 2s ease;
   -ms-transition: opacity 2s ease;
   transition: opacity 2s ease; }
+
+.page-content {
+  margin-top: 1.8em !important; }
 
 .dimension1 {
   overflow: hidden;
