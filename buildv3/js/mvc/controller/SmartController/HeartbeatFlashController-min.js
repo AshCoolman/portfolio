@@ -1,0 +1,1 @@
+App.HeartbeatFlashController=App.SmartController.extend({label:"HeartbeatFlashController",content:undefined,init:function(){this.autoMappedEvents.push({type:"heartbeat",listener:this,callback:this.doHeartbeat});return this._super()},doHeartbeat:function(a,b){this.get("view").doHeartbeat()}});

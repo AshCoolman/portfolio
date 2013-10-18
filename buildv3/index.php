@@ -2,7 +2,7 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <?php
-$IS_DEPLOY = true;
+$IS_DEPLOY = false;
 ?>
 <head>
 	<!--link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'-->

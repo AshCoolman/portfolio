@@ -1,0 +1,1 @@
+App.Dimension1Controller=Em.ObjectController.extend({className:"Dimension1Controller",wpm:0,interactiveGridData:[],init:function(){this._super();console.log("listening interactiveGridText");App.eventMapper.addEventListener("interactiveGridText",this,function(a){return function(b,c){a.set("interactiveGridData",c)}}(this))}});

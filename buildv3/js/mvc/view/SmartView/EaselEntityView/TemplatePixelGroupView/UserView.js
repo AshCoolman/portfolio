@@ -52,6 +52,8 @@ App.UserView = App.TemplatedPixelGroupView.extend({
 		faceChangeMaps.push(changeMap);
 		this.set('faceChangeMaps', faceChangeMaps);
 		
+		var changedPixels = [];
+		console.log('makeFaceChange', changeMap)
 		for (var x = 0; x < changeMap.length; x++) {
 			for (var y = 0; y < changeMap[x].length; y++) {
 				var coord = changeMap[x][y][0];
@@ -68,6 +70,10 @@ App.UserView = App.TemplatedPixelGroupView.extend({
 							pixelShp.graphics.clear();
 							pixelShp.graphics.beginFill(col);
 							pixelShp.graphics.drawRect( 0, 0, pixelW, pixelH);
+							console.log('yes', pixelShp, col)
+							changedPixels.push(pixelShp)
+						} else {
+						
 						}
 					}
 					
@@ -75,6 +81,7 @@ App.UserView = App.TemplatedPixelGroupView.extend({
 				
 			}
 		}
+		Em.assert('UserView: No pixels changed in face', changedPixels.length > 0);
 	},
 
 	setFaceChangeMap: function (aimgPreloadId) {
@@ -84,7 +91,7 @@ App.UserView = App.TemplatedPixelGroupView.extend({
 			var mapElementFunc = function (me) {
 					return function (x, y, z, el, maxX, maxY, maxZ) {
 						el.x2d = (App.USER_X+(x+2)*App.PIXEL_SIZE);
-						el.y2d = (App.USER_X+(0.5-maxY+y)*App.PIXEL_SIZE);
+						el.y2d = (App.USER_Y+(0.5-maxY+y)*App.PIXEL_SIZE);
 					}
 				}(this),
 				onCompleteFunc = function (me) {

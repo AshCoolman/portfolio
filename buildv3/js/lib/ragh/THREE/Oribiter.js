@@ -86,7 +86,7 @@ ragh.THREE.Orbiter.prototype = {
 
 	animate: function () {
  		//console.log('animate', this.orbited.rotation, this.targetRot)
-		if (this.targetRot) {
+		if (this.targetRot && this.targetRot.x && this.targetRot.y) {
 			this.orbited.rotation.y = this.targetRot.x;
 			this.orbited.rotation.x = this.targetRot.y;
 		}
