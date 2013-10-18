@@ -6,9 +6,7 @@ App.UserView = App.TemplatedPixelGroupView.extend({
 	faceChangeMaps:[],
 	faceChangeImgPreloadIds:['face-user-pixel-change01', 'face-user-pixel-change02', 'face-user-pixel-change03'],
 	didInsertElement: function () {
-		this._super();
-		console.log('USER VIEW INSERTED', this);
-		
+		this._super();		
 		var ids = this.get('faceChangeImgPreloadIds');
 		for (var f = 0; f < ids.length; f++) {
 			this.setFaceChangeMap(ids[f]);
@@ -21,7 +19,6 @@ App.UserView = App.TemplatedPixelGroupView.extend({
 		this.set('faceChangeImgPreloadIds', null);
 	},
 	doActivate: function () {
-		console.log('UserView.doActivate() child views', this.get('childViews').length)
 		this.clearFace();
 		this.makeFaceChange();
 	},

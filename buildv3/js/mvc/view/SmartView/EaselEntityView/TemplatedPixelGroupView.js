@@ -78,7 +78,7 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 				}(this),
 				onCompleteFunc = function (me) {
 					return function (amap) {
-						console.log('map is completed\n'+str)
+						//console.log('map is completed\n'+str)
 						if (me.get('isCreateFromImage')) {
 							me.set('pixelsFromImgMap', amap);
 						}
@@ -92,7 +92,6 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 	
 	doShowPixelChildrenTo: function (isVis, dur) {
 		var handle = this.get('handle');
-		console.log('view.doShowPixelInChildren', this.handle.children.length);
 		handle.visible = true;
 		var rIndexAr = [],
 			pixels = handle.children,

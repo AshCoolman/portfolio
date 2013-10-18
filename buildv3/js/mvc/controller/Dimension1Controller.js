@@ -4,7 +4,6 @@ App.Dimension1Controller = Em.ObjectController.extend({
 	interactiveGridData:[],
 	init: function () {
 		this._super();
-		console.log('listening interactiveGridText');
 		App.eventMapper.addEventListener('interactiveGridText', this, function (me) {
 			return function (type, data) {
 				me.set('interactiveGridData', data);

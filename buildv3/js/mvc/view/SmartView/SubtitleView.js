@@ -32,7 +32,6 @@ App.SubtitleView = App.SmartView.extend({
 			if (this.get('controller').get('isInstant')) {
 				this.get('$el').addClass('fader fade-out');
 			}
-			console.log('didInsertElement (with remove)', this.get('controller.orderRead'));
 			this.doRemove();
 			this.set('didInsertElementExecuted', true)
 		}
@@ -40,14 +39,12 @@ App.SubtitleView = App.SmartView.extend({
 	
 	doShow: function () {
 		var elId = $(this.get('el'))[0].id;
-		console.log('doShow', elId, $('#'+elId));
 		$('#'+elId).css('display', 'block');
 		this.get('$el').css('display', 'block');
 	},
 	
 	doRemove: function () {
 		var elId = $(this.get('el'))[0].id;
-		console.log('doRemove', elId);
 		$('#'+elId).css('display', 'none');
 		this.get('$el').css('display', 'none');
 	},

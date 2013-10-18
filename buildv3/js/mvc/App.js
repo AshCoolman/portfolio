@@ -277,14 +277,6 @@ App.dictionary = Em.Object.create({
 	init: function() {
 		App.eventMapper.addEventListener('preloaderIsLoaded', this, function(me) {
 			return function(type, data) {
-				var allLines = data.target.getResult('copy').split('=\n');
-				allLines = allLines.splice( 1, allLines.length - 1 );
-				var obj = allLines.forEach( function(el, index, ar) {
-					var lines = el.split('\n');
-					var heading = lines.splice(0, 1);
-					me.copy[heading[0]] = lines.join('\n');
-					//console.log('dictionary read', heading[0], '\n', lines.join('\n'))
-				});
 				me.isReady = true;
 				App.eventMapper.trigger('isDictionaryReady');
 			}

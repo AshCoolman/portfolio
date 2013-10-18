@@ -28,10 +28,6 @@ ragh.THREE.Dragger.prototype = {
 		this.camera = aplan.camera;
 		this.dragged = aplan.dragged;
 		this.el = aplan.el;
-		console.log('Dragged, init', aplan)
-		
-		
-		
 		this.onWindowResize = function(me) {
 			return function () {
 				me.windowHalfX = window.innerWidth / 2;

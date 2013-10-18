@@ -228,7 +228,6 @@ App.SubtitleController = App.SmartController.extend({
 		//Test if Pending wait (via @wait) has executed
 		if (dur > this.get('pendingWait')) {
 			dur -= this.get('pendingWait');
-			if ( this.get('pendingWait') > 0) console.log('waited line:'+atLine+' char:'+atChar);
 			this.set('pendingWait', 0);
 			
 
@@ -472,7 +471,6 @@ App.SubtitleController = App.SmartController.extend({
 
 	
 	doRemoveClicked: function () {
-		console.log('doRemoveClicked', this.get('orderRead'));
 		window.cancelAnimationFrame(this.get('raf'));
 		this.set('isEnded', true);
 		this.set('isRemoved', true);
@@ -492,9 +490,7 @@ App.SubtitleController = App.SmartController.extend({
 			$('.text', 	$(this.get('view').get('element')) )[0].innerHTML = this.createTaggedLines(this.get('lastPrinted'), this.get('lastEdit'));
 	},
 	
-	startReading: function () {
-		console.log('start reading', this.get('orderRead'), this.get('isInstant'))
-		
+	startReading: function () {		
 		if (this.get('isInstant')) {
 			this.get('view').doShowInstant();
 			this.doForceFinish();

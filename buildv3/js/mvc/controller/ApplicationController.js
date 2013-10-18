@@ -7,7 +7,7 @@ App.ApplicationController = Em.Controller.extend({
 	      App.eventMapper.trigger('doRoute', {routePath:this.get('currentPath')});
 	    });
 		
-		console.log('currentPath', this.get('currentPath'))
+		//console.log('currentPath', this.get('currentPath'))
 		
 		if (App.transitionView) {
 			switch (this.get('previousPath')+'>'+this.get('currentPath')) {

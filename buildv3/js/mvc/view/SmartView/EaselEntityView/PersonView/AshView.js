@@ -40,7 +40,6 @@ App.AshView = App.EslEntityView.extend({
 		hammer.framerate = 20;
 		hammer.x = (parseInt(this.get('eslObj').x) + parseInt(App.PIXEL_SIZE * 6));
 		hammer.y = (parseInt(this.get('eslObj').y) + parseInt(App.PIXEL_SIZE * 3));
-		console.log('hammer', hammer, this.get('eslObj').x	)
 		this.set('hammer', hammer);
 		this.get('eslObj').parent.addChild(hammer);
 		

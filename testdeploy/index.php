@@ -468,6 +468,7 @@ mootools
 Emberjs
 Foundation 4
 bootstrap
+HTML5 boilerplate
 
 ## service APIs used
 
@@ -532,6 +533,7 @@ User testing
 
 SVN
 Git
+Mecurial
 JIRA
 Bugzila
 Basecamp

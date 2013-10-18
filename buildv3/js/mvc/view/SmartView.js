@@ -21,9 +21,6 @@ App.SmartView = Ember.View.extend({
 		this.set('$el', $(this.get('el')));
 		var el = $(this.get('el'));
 		selector = '#'+el[0].id;
-		if (this.get('layoutName') == 'lo-subtitle-instruction-row') {
-			console.log(selector);
-		}
 		
 		//selector = selector.split('#')[1];
 		//selector = selector.split('.')[0]; 

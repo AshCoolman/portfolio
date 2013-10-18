@@ -44,7 +44,6 @@ CubeGroup.prototype = {
 			this.withEveryPixel(function (me) {
 				return function (pixel) {
 					pixel.object.material = me.linkMat;
-					console.log('pixel interactive',pixel);
 				} 
 			}(this));
 		} else if (!val && this._isInteractive) {
@@ -218,7 +217,6 @@ CubeGroup.prototype = {
 		reoffsetGroup.add(centeredGroup);
 		this.group = reoffsetGroup;
 		
-		console.log('graup: ', reoffsetGroup)
 		return reoffsetGroup;
 	},
 

@@ -4,12 +4,10 @@ App.World3dController = App.SmartController.extend({
 	isQuestionMarkRotating: false,
 	isQuestionMarkRotatingHint:false,
 	doQuestionMarkRotate: function () {
-		console.log('controller knows it is rotate time')
 		this.set('isQuestionMarkRotating', true);
 	},
 	
 	doRotateQuestionMarkHint: function () {
-		console.log('doQuestionMarkRotateHint')
 		this.set('isQuestionMarkRotatingHint', true)
 	},
 	

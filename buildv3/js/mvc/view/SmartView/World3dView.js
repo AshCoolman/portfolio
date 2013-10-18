@@ -71,7 +71,6 @@ App.World3dView = App.SmartView.extend({
 			tweened = pixelObjectList[this.QUESTION_MARK].group.children[0].rotation;
 			createjs.Tween.get(tweened).to({y:Math.PI* 0.125}, 600).call(function (me, questionMark) {
 				return function () {
-					console.log('questionMark', questionMark);
 					questionMark.setInteractive(true);
 				}
 			}(this, pixelObjectList[this.QUESTION_MARK]));
@@ -100,7 +99,7 @@ App.World3dView = App.SmartView.extend({
 									el: document
 								}
 						);
-						console.log('creating orbier', pixelObjectList[this.FACE_ASH].group.children[0])
+
 						this.set('orbiter', orbiter);
 							
 									

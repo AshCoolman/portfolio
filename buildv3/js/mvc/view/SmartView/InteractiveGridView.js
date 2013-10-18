@@ -325,7 +325,6 @@ App.InteractiveGridView = App.SmartView.extend({
 		var viewH = $(document).height(); 
 		var ratioViewed = viewH / resizeH;
 		var yAtPerc = 1 * ratioViewed * realH;
-		console.log('RESIZED', ['yAtPerc', yAtPerc, 'ratioViewed', ratioViewed].join(','))
 		this.get('xPlot').attr({y:yAtPerc})
 		this.get('xPlotNumber').attr({y:yAtPerc - 18})
 		this.get('xPosNumber').attr({y:yAtPerc - 18})

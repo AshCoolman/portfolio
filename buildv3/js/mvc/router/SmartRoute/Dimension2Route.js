@@ -46,18 +46,15 @@ App.Dimension2Route = App.SmartRoute.extend({
 					window.location.hash = 'd3';
 				},
 				doShowUser: function () {
-					console.log('doShowUser');
 					this.userController.doShowPixelInChildren(1200);
 				},
 				doHideUser:function () {
-					console.log('doHideUser');
 					this.userController.doShowPixelOutChildren(1200);
 				},
 				doShowQuestion: function () {
 					this.questionController.doShowPixelInChildren(300);
 				},
 				doShowMachineCogs: function () {
-					console.log('doShowMachineCogs');
 					this.machineController.doCogOpenAndFadeOut(1200);
 					this.machineController.setInteractive(false);
 				},

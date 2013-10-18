@@ -206,7 +206,6 @@ App.MachineView = App.TemplatedPixelGroupView.extend({
 	},
 	didInsertElement: function () {
 		this._super();
-		console.log('creating machine view', this.get('pixelsFromImgMap'));
 		var pixelsFromImgMap = this.get('pixelsFromImgMap') || [];
 		for (var x= 0; x < pixelsFromImgMap.length; x++) {
 			for (var y = 0; y < pixelsFromImgMap[x].length; y++) {
@@ -222,7 +221,6 @@ App.MachineView = App.TemplatedPixelGroupView.extend({
 	},
 	willDestroyElement: function () {
 		this._super();
-		console.log('destroying machine view')
 		clearInterval(this.get('toggleActivityInterval'));
 		this.set('toggleActivityInterval', null);
 		var ledHash = this.get('ledHash');

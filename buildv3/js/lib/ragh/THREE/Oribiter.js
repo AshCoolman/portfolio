@@ -42,7 +42,6 @@ ragh.THREE.Orbiter.prototype = {
 				dir.y = me.mouse.y / Math.abs(me.mouse.y);
 				
 				me.targetRot.x = dir.x * me.maxRot.x * Math.min(1, wbf * ( Math.abs( me.mouse.x / me.windowHalfX )));
-				console.log(dir.x * wbf * ( Math.abs( me.mouse.x / me.windowHalfX )))
 				me.targetRot.y = dir.y * me.maxRot.y * Math.min(1, wbf * ( Math.abs( me.mouse.y / me.windowHalfY )));	
 			}
 		}(this);

@@ -10,8 +10,8 @@ CSS_FILES = $(filter-out %-min.css,$(wildcard \
 # suffix will be ignored.
 
 #JS_GROUP = "lib"
-#JS_GROUP = "custom"
-JS_GROUP = "foundation"
+JS_GROUP = "custom"
+#JS_GROUP = "foundation"
 
 ifeq ($(JS_GROUP),"lib")
 JS_FILES = $(filter-out %-min.js,$(wildcard \
