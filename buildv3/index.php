@@ -2,7 +2,7 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <?php
-$IS_DEPLOY = false;
+$IS_DEPLOY = true;
 ?>
 <head>
 	<!--link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'-->
@@ -86,7 +86,13 @@ Welcome to my Sandbox
 @=</h5>
 This website has a secondary role as a development sandbox.
 Here I experiment with new ideas, technology tests etc.
-So don\'t be surprised if things change!';
+So don\'t be surprised if things change!
+
+<i>Last update Fri 18th Oct</i>
+<strong>alpha 1.1.3</strong>
+* Updated graph in Dimension Two
+* Added mouse tracking to Ash in Dimension Three
+* + various tweaks';
 $indexCopyB = addcslashes($indexCopyB, '"');
 
 ?>
