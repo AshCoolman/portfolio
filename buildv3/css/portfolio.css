@@ -11,7 +11,10 @@ http://jsfiddle.net/VAXrL/190/
   background: rgba(200, 200, 200, 0.25);
   border-bottom: solid 1px #919191;
   padding-left: 1em;
-  margin-bottom: 0 !important; }
+  margin-bottom: 1em !important; }
+
+.nav-list-holder {
+  width: 100%; }
 
 .top-bar ul, .top-bar h1, .top-bar li {
   font-size: .95em !important;
@@ -534,11 +537,13 @@ a {
   top: -45px; }
 
 .interactive-graph-output {
+  border: solid 2px grey;
   background-color: #666666;
   font-family: monospace;
   color: #CCCCCC; }
   .interactive-graph-output h3 {
-    font-family: inherit; }
+    font-family: inherit;
+    color: #CCCCCC; }
   .interactive-graph-output ul, .interactive-graph-output ol {
     margin-left: 1.5em;
     line-height: 140%;

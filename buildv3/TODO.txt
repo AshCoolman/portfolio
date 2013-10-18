@@ -1,3 +1,5 @@
+ALPHA 1.1
+
 HIGH PRIORITY
 Bring back cursor
 Ruler needs to be more prominent
@@ -12,13 +14,15 @@ CSS Sprites?
 
 UX
 		
-Cross platform
-	Safari
-		Spazzes on responsive resize
+Cross platform	
+	ALPHA 1.1
 		 
 Copy
 	World2d
-		"I induce change" = game where you draw smile on face
+		Interactivity Finished
+		
+ALPHA 1.2
+
 Copy
 	World3d
 		ie the big idea = pixels should reform into a light globe
@@ -26,8 +30,14 @@ Copy
 			Coloured blocks could grow if you can align it somehow
 				Save (more the better) then shoot them at enemy when you get a bomb, but more can be destroyed.
 			
-				
+ALPHA 1.3
+
+Handle 90% devices
+
 		
+ALPHA 1.4
+
+
 Check phone number is ringable on iphone/skype?
 //TODO THIS IS SO YUK: see CoggedPixelController.view_didInsertElement()
 Refactor Word3d
@@ -41,6 +51,10 @@ zindex text so don't use pointer events
 performance
 Typography
 Auto find unclosed tags and add to tag list
+
+
+
+BETA
 
 
 LOW PRIORITY

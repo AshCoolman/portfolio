@@ -237,9 +237,9 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 		<script type="text/x-handlebars" data-template-name="application">
 			{{outlet background}}
 			{{render 'ruler'}}
-			 <row>
+			 <div class="nav-list-holder">
 				{{outlet "nav-list"}}
-			</row>
+			</div>
 
 			{{renderWithVars 'preloader-content' preloader}}
 			{{outlet}}
@@ -405,25 +405,27 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 		</script>
 		
 		<script type="text/x-handlebars" data-template-name="dimension1">
-			<div class="row d1-content ">
-				<div class="columns large-6  small-6 d1-content-text page-content">
+			<div class="row">
+				<div class="columns large-6  small-6">
 					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
 					{{{controlWithVars 'subtitle' orderRead='0' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Use mouse to find my x values "}}}
 					
 					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2"  hoverEvent="doDimensionNavHover" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to second dimension: @edits=Y...,Why...,Motivation..."}}} 
 					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}}}
 				</div>
-				<div class="columns large-6 small-6 d1-content-graph">
+				<div class="columns large-6 small-6">
 					<div class="interactive-graph-output">
 						<div class="graph-info">
-							<h3 {{bindAttr class="interactiveGridData.0.type.cssClass"}}>{{{interactiveGridData.0.x}}} &#215;</h3>
+							<h3 {{bindAttr class="interactiveGridData.0.type.cssClass"}}>x = {{{interactiveGridData.0.x}}} </h3>
 							{{#each this.interactiveGridData}}
-								<strong class="sub-heading">{{{this.text}}}</strong>
-								<ol>
-								{{#each this.xList}}
-									<li>{{{this}}}</li>
-								{{/each}}
-								</ol>
+								{{#if this.text}}
+									<strong class="sub-heading">{{{this.x}}} {{{this.text}}}</strong>
+									<ol>
+									{{#each this.xList}}
+										<li>{{{this}}}</li>
+									{{/each}}
+									</ol>
+								{{/if}}
 							{{/each}}
 						</div>
 					</div>
@@ -442,60 +444,95 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 						<ul>
 					</div>
 				{{/if}}
-				<div style="display:none" class="interactive-grid-values">Javascript technologies I know
+				<div style="display:none" class="interactive-grid-values">examples of javascript tech used
 
-Libraries (JQuery, Google Glosue Library etc)
-Frameworks (Foundation 4, Ember, bootstrap etc)
-Service APIs ( Google Maps, Facebook Graph etc )
-HTML APIs (WebGL, geolocation, sound, video etc)
+JQuery
+JQuery plugin creation
+JQueryUI
+threejs
+raphaeljs
+Google web fonts
+Google Glosue Library
+socket.io
+prototypejs
+mootools
 
-## web markup languages I know
+## web frameworks used
+
+Emberjs
+Foundation 4
+bootstrap
+HTML5 boilerplate
+
+## service APIs used
+
+Google Maps API
+Google Data API
+Facebook Graph API
+
+## browser technologies used
 
 HTML(5)
 CSS(3)
-SASS & LESS
-SVG 
+SASS
+LESS
+SVG
+WebGL
+geolocation
+HTML5 Sound
+HTML5 video
 
-## web development experience I have
+## development aspects I have experience in
 
 AJAX
 Cross-domain problems
-UX & Performance
-SEO & Analytics
-Cross browser (Responsive, graceful degradation etc)
-Input validation
 Profiling tools (jankfree.org!)
+SEO
+Analytics
+API creation
 
-## flash technologies I know
+## common design aspects I have experience in
 
-AS2 & AS3
+UX
+Responsive design
+Fluid design
+Graceful degradation
+
+## flash technologies used
+
+AS3
+AS2
 Flash Video 
 Flex
 MXML
 
-## backend technology I know
+## backend technologies used
 
 PHP 
 SQL (mySQL, PostgresSQL)
 Nodejs
+Ruby
 
-## development tools & techniques I know
+## development techniques used
 
-Make files
-Minification (YUI Compressor, Closure Compiler)
-Unit testing (QUnitjs)
+Wireframing
+Prototyping
+Automation (makefiles etc)
+Minification
 Doc generation
-Chrome Dev tools (and other browser equivalents)
+Unit testing (QUnitjs)
 User testing
-API creation
 
-## project tools & techniques I know
+## project tools used
 
-Version control (SVN, Git, Mecurial)
-Issue tracking (JIRA, Bugzila etc) 
-Wireframing & Prototyping (Fireworks, Axure etc)
+SVN
+Git
+Mecurial
+JIRA
+Bugzila
+Basecamp
 
-## useful areas of general knowledge I have
+## useful areas of experience
 
 2d / 3d Physics math
 Geo-location algorithms
@@ -522,11 +559,6 @@ Prototype inheritance
 
 ## thousand lines of code written for this site
 5
-
-## random quotes I like
-
-"Real artists ship" - Steve Jobs
-"Dont guess it, test it" -Paul Lewis
 
 ## years of experience
 9

@@ -60,9 +60,12 @@ $col_unselectable-topbar:#777777;
 	background: rgba(200,200,200,0.25);
 	border-bottom: solid 1px #919191;
 	padding-left:1em;
-	margin-bottom:0 !important;
+	margin-bottom:1em !important;
 } 
 
+.nav-list-holder {
+	width:100%;
+}
 .top-bar ul, .top-bar h1, .top-bar li {
 	font-size:.95em !important;
 	margin:0;
@@ -729,11 +732,13 @@ $gridColor:rgba(50,50,50,0.25);
 }
 
 .interactive-graph-output {
+	border: solid 2px grey;
 	background-color: $col_bg;
 	font-family:monospace;
 	color:#CCCCCC;
 	h3 {
 		font-family:inherit;
+		color:#CCCCCC;
 	}
 	ul, ol {
 		margin-left:1.5em;

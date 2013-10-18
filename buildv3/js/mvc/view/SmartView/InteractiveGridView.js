@@ -100,14 +100,43 @@ App.InteractiveGridView = App.SmartView.extend({
 			return false;
 		};
 
+		
+		//Create plot markers
+		var plotMarkers = [],
+			plotMarkerDic = {},
+			pm;
+		for (var p = 0; p < plots.length; p++) {
+			if (!plotMarkerDic[plots[p].x]) {
+				pm = raphaeljs.rect(0,0,3,30).attr({fill: '#999999', 'stroke-width': 0, opacity:1})
+				pm.attr({x: unitX * plots[p].x - 3 });
+				plotMarkers.push( pm );
+				plotMarkerDic[plots[p].x] = pm;
+			}
+			plots[p].marker = plotMarkerDic[plots[p].x];
+			
+		}
+		this.set('plotMarkers', plotMarkers);
+		
 		var thePlotX = raphaeljs.rect( 
 			0, 
 			0, 
 			300,
-			h
+			10
 		).attr({fill: '#666666', 'stroke-width': 0, opacity: 0});
 		
-
+		this.set('xPlot', thePlotX);
+		var xPlotNumber = raphaeljs.text(0, 0, '');
+		xPlotNumber.attr({ "font-size": 28, "font-family": "Arial, Helvetica, sans-serif", 'fill': '#99CC99', x: 14 });
+		this.set('xPlotNumber', xPlotNumber);
+		
+		
+		var xPosNumber = raphaeljs.text(0, 0, '');
+		xPosNumber.attr({ "font-size": 28, "font-family": "Arial, Helvetica, sans-serif", 'fill': '#333333', x: App.BREAKPOINT.WIDTH_2 - 28 });
+		this.set('xPosNumber', xPosNumber);
+		
+		
+		
+			
 
 		var mouseZone = raphaeljs.rect(0,0,w,h).attr({'stroke-width': 0, 'fill': '#001133', opacity: 0.0});
 		$(mouseZone.node).addClass('grid-zone');
@@ -122,15 +151,6 @@ App.InteractiveGridView = App.SmartView.extend({
 		  return svgPoint.matrixTransform($mouseZone.parent()[0].getScreenCTM().inverse());
 		}
 		
-		//Create plot markers
-		var plotMarkers = {};
-		for (var p = 0; p < plots.length; p++) {
-			if (!plotMarkers[plots[p].x]) {
-				plotMarkers[plots[p].x] = raphaeljs.rect(0,0,1,h).attr({fill: '#999999', 'stroke-width': 0, opacity:0.25});
-				plotMarkers[plots[p].x].attr({x: unitX * plots[p].x });
-			}
-			plots[p].marker = plotMarkers[plots[p].x];
-		}
 		
 		//Create mouse X
 		var coordX = raphaeljs.rect(0,0,3,h).attr({fill: '#595959', 'stroke-width': 0});
@@ -140,7 +160,7 @@ App.InteractiveGridView = App.SmartView.extend({
 			}
 		}(this))
 
-		var mouseMoveFunc = function (me, acoordX, athePlotX, aplotColors) {
+		var mouseMoveFunc = function (me, acoordX, athePlotX, xPlotNumber, xPosNumber, aplotColors) {
 			return function (e) {
 				
 				var mousePt = pointToSVGSpaceFunc(e, me),
@@ -168,7 +188,8 @@ App.InteractiveGridView = App.SmartView.extend({
 						shownPlotIndex = me.get('shownPlotIndex'),
 						clipX = w,
 						shownPlotList = [];
-	 
+	 				
+					//me.get('xPosNumber').attr({text: valX})
 					//Find plots near to mouse
 					for (var p = 0; p < plots.length; p++) {
 						deltaX = Math.abs(plots[p].x - valX);
@@ -196,23 +217,42 @@ App.InteractiveGridView = App.SmartView.extend({
 							athePlotX
 								.stop()
 								.animate({   
-							        fill: shownPlot.type.fill,
+							        fill: '#FF6347',
 									width: clipX,
 									opacity:1
-							    }, 300);
+							    }, 100);
+							
+							//xPlotNumber.attr({text: plotX});
+							
 							//Animate the mouse's x plot
-							acoordX.attr({ fill: '#FF6347' })
+							
+							
+							shownPlot.marker.attr({ fill: '#FF6347' })
 							
 								
 						}
 					} else {
 					// else if no plots should be shown, hide them all
+					
+						App.eventMapper.trigger('interactiveGridText', [{x: valX}]);
+					
 						if (athePlotX['animateWidthTarget'] != -1) {
 							$('.graph-info h3').removeClass('highlight')
 							$('.d1-content').removeClass('graph-highlight');
 							acoordX.attr({ fill: '#595959' });
 							athePlotX['animateWidthTarget'] = -1;
 							$('.graph-plot', me.get('$el')).css({opacity: 0});
+						athePlotX.animate({   
+							        fill: '#CCCCCC'
+							    }, 100);
+							
+							me.get('plotMarkers').forEach(
+								function(item, index, enumerable) {
+									item.animate({   
+									        fill: '#CCCCCC'
+									    }, 100);
+								}
+							);
 						}						
 					}
 					
@@ -226,9 +266,11 @@ App.InteractiveGridView = App.SmartView.extend({
 			}
 		};
 		
-		$(document).bind('mousemove.InteractiveGridView', mouseMoveFunc(this, coordX, thePlotX, plotColors));
+		$(document).bind('mousemove.InteractiveGridView', mouseMoveFunc(this, coordX, thePlotX, xPlotNumber, plotColors));
 		mouseMoveFunc(this, coordX, thePlotX, plotColors);
 		this.doResize();
+		
+		$(window).on( 'resize.InteractiveGridView', function (me) { return function (e) { me.doResize(e) }}(this) );
 	},
 	
 	setPlotsFromPlainText: function ( src ) {
@@ -269,14 +311,34 @@ App.InteractiveGridView = App.SmartView.extend({
 		$(window).unbind('resize.InteractiveGridView');
 	},
 
+	
 	doResize: function (e) {
 		/* Resize campus element */ 
-		var campusW = App.BREAKPOINT.WIDTH_2; 
-		var campusH = 2000; 
-		var curCampusW = this.get('$svgRaphaeljs').width(); 
-		var newCampusH = heightInRatio(campusH,campusW,curCampusW); 
-		this.get('$svgRaphaeljs').height(newCampusH);  
-		function heightInRatio(oH,oW,nW){ return (oH / oW * nW); } 
+		var realW = App.BREAKPOINT.WIDTH_2; 
+		var realH = 2000; 
+		var resizeW = this.get('$svgRaphaeljs').width(); 
+		var resizeH = heightInRatio(realH,realW,resizeW); 
+		this.get('$svgRaphaeljs').height(resizeH);  
+		function heightInRatio(oH,oW,nW){ return (oH / oW * nW); }
+		
+		//find 50% point in viewport
+		var viewH = $(document).height(); 
+		var ratioViewed = viewH / resizeH;
+		var yAtPerc = 1 * ratioViewed * realH;
+		console.log('RESIZED', ['yAtPerc', yAtPerc, 'ratioViewed', ratioViewed].join(','))
+		this.get('xPlot').attr({y:yAtPerc})
+		this.get('xPlotNumber').attr({y:yAtPerc - 18})
+		this.get('xPosNumber').attr({y:yAtPerc - 18})
+		
+		this.get('plotMarkers').forEach(
+			function (me, ay) {
+				return function (item, index, enumerable) {
+					item.attr({y:ay - 10})
+				}
+			}(this, yAtPerc)
+		);
+		
+		
 	}
 	
 
