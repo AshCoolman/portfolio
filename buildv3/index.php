@@ -2,7 +2,7 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <?php
-$IS_DEPLOY = true;
+$IS_DEPLOY = false;
 ?>
 <head>
 	<!--link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'-->
@@ -343,7 +343,7 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 		<script type="text/x-handlebars" data-template-name="nav-list">
 			<nav class="top-bar">
 				<ul class="title-area">
-					<li class="name"> <h1>Ashley by dimension <?php if (!$IS_DEPLOY) echo "";?></h1> </li>
+					<li class="name"> <h1>Ashley by dimension <?php if (!$IS_DEPLOY) echo "<span style=\"color: yellow\">DEV VERSION</span>";?></h1> </li>
 			    	<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
 				</ul>
 			

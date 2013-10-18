@@ -84,7 +84,7 @@ App.UserView = App.TemplatedPixelGroupView.extend({
 			var mapElementFunc = function (me) {
 					return function (x, y, z, el, maxX, maxY, maxZ) {
 						el.x2d = (App.USER_X+(x+2)*App.PIXEL_SIZE);
-						el.y2d = (App.USER_X+(0.5-maxY+y)*App.PIXEL_SIZE);
+						el.y2d = (App.USER_Y+(0.5-maxY+y)*App.PIXEL_SIZE);
 					}
 				}(this),
 				onCompleteFunc = function (me) {

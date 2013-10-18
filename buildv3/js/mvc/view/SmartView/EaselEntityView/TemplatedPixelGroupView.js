@@ -43,8 +43,8 @@ App.TemplatedPixelGroupView = App.EslEntityView.extend({
 			var mapElementFunc = function (me) {
 					return function (x, y, z, el, maxX, maxY, maxZ) {
 						
-						var x2d = (-15+(x+2)*App.PIXEL_SIZE),
-							y2d = (240+(0.5-maxY+y)*App.PIXEL_SIZE);
+						var x2d = (App.USER_X+(x+2)*App.PIXEL_SIZE),
+							y2d = (App.USER_Y+(0.5-maxY+y)*App.PIXEL_SIZE);
 						
 						str += '{{controlWithVars "cogged-pixel" cogged-pixel x='+x2d+' y='+y2d+' height='+App.PIXEL_SIZE+' width='+App.PIXEL_SIZE+' col="'+el.color+'"}}\n'
 						el.x2d = x2d;
