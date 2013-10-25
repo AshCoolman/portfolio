@@ -977,9 +977,88 @@ Prototype inheritance
 		
 		<div class="row page-content">
 			<div class="columns large-12">		
-				Examples comone dude
+				<h1>Examples</h1>
+				
+				<h3>Showreels</h3>
+				<ul>
+					<li>
+						<h4>
+							<a href="#" data-reveal-id="shrlnews">National news site work</a>
+						</h4>
+					</li>
+					<li>
+						<h4>
+							<a href="#" data-reveal-id="shrladv">Advertising agency work</a>
+						</h4>
+					</li>
+					<li>
+						<h4>
+							<a href="#" data-reveal-id="shrlold">Game dev &#38; edutainment</a>
+						</h4>
+					</li>
+				</ul>
+				
+				<h3>Creativity</h3>
+				<ul>
+					<li>
+						<h4>
+							<a href="#" data-reveal-id="poster1">Gamers4Croyden: poster #1</a>
+						</h4>
+					</li>
+					<li>
+						<h4>
+							<a href="#" data-reveal-id="poster2">Gamers4Croyden: poster #2</a>
+						</h4>
+					</li>
+				</ul>
+				
 			</div>
 		</div>
+		
+		<div id="poster1" class="reveal-modal">
+		  <h2>Gamers4Croyden: poster #1</h2>
+		  <p>A poster to encourage voters to support the Gamers4Croyden political party in the 2010 South Australian elections</p>
+		  <img src="img/eg/g4c-hadoken.png" style="width: 100%;">
+		  <a class="close-reveal-modal">&#215;</a>
+		</div>
+		
+		<div id="poster2" class="reveal-modal">
+		  <h2>Gamers4Croyden: poster #1</h2>
+		  <p>A poster to encourage voters to support the Gamers4Croyden political party in the 2010 South Australian elections</p>
+		  <img src="img/eg/g4c-controller.png" style="width: 100%;">
+		  <a class="close-reveal-modal">&#215;</a>
+		</div>
+
+		<div id="shrlnews" class="reveal-modal large">
+		  <h2>National news site work</h2>
+		  <p>From 2011-2012 I worked for AdelaideNow, part of the Australian NewsCorp group</p>
+	    <div class="flex-video">
+		  <iframe width="640" height="360" src="//www.youtube.com/embed/pZgU5p6dNqE" frameborder="0" allowfullscreen></iframe>
+			</div>
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
+
+		<div id="shrladv" class="reveal-modal large">
+		  <h2>Advertising agency work</h2>
+		  <p>From 2008-2010 I worked for Clemenger BBDO Adelaide, part of the global BBDO Advertising agency network</p>
+	    <div class="flex-video">
+		  <iframe width="853" height="480" src="//www.youtube.com/embed/WvHPl4456S4" frameborder="0" allowfullscreen></iframe>
+			</div>
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
+		
+		<div id="shrlold" class="reveal-modal large">
+		  <h2>Game dev &#38; edutainment</h2>
+		  <p>Work older than 2007</p>
+	    <div class="flex-video">
+		  <iframe width="960" height="720" src="//www.youtube.com/embed/1ntljBExo5o" frameborder="0" allowfullscreen></iframe>
+			</div>
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
+		
+		
+		
+		
 	</script>
 	
 	</head>
