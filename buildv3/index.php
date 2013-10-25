@@ -2,7 +2,7 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <?php
-$IS_DEPLOY = true;
+$IS_DEPLOY = false;
 ?>
 <head>
 	<!--link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'-->
@@ -370,6 +370,11 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 				        {{#view view.NavListItemView item="doDimension3" }}
 				            <h1>3d <a {{action doDimension3}} >Creative</a></h1>
 				        {{/view}}   
+
+						<li class="divider"></li>
+				        {{#view view.NavListItemView item="doExamples" }}
+				            <h1><a {{action doExamples}} >Examples</a></h1>
+				        {{/view}}
 		
 						
 						<span class="top-bar-hint"> </span>
@@ -386,6 +391,7 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 			{{controlWithVars 'hash-btn' hashBtn urlhash="d1" label="Dimension 1" routePath="dimension1"}}
 			{{controlWithVars 'hash-btn' hashBtn urlhash="d2" label="Dimension 2" routePath="dimension2"}}
 			{{controlWithVars 'hash-btn' hashBtn urlhash="d3" label="Dimension 3" routePath="dimension3"}}
+			{{controlWithVars 'hash-btn' hashBtn urlhash="eg" label="Examples" routePath="examples"}}
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="index">		
@@ -965,6 +971,17 @@ Prototype inheritance
 
 	<script type="text/x-handlebars" data-template-name="entity-3d">
 	</script>
+	
+	
+	<script type="text/x-handlebars" data-template-name="examples">		
+		
+		<div class="row page-content">
+			<div class="columns large-12">		
+				Examples comone dude
+			</div>
+		</div>
+	</script>
+	
 	</head>
     <body>
         <!--[if lt IE 7]>

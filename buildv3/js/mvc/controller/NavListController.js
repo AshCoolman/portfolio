@@ -18,6 +18,10 @@ App.NavListController = Em.Controller.extend({
 
 	doDimension3: function() {
 		window.location.hash = 'd3';
+	},
+
+	doExamples: function() {
+		window.location.hash = 'eg';
 	}
 });
 App.register('controller:nav-list', App.NavListController, {singleton: false });
