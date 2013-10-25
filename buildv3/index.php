@@ -2,7 +2,7 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <?php
-$IS_DEPLOY = false;
+$IS_DEPLOY = true;
 ?>
 <head>
 	<!--link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'-->
@@ -370,11 +370,6 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 				        {{#view view.NavListItemView item="doDimension3" }}
 				            <h1>3d <a {{action doDimension3}} >Creative</a></h1>
 				        {{/view}}   
-
-						<li class="divider"></li>
-				        {{#view view.NavListItemView item="doExamples" }}
-				            <h1><a {{action doExamples}} >Examples</a></h1>
-				        {{/view}}
 		
 						
 						<span class="top-bar-hint"> </span>
@@ -391,7 +386,6 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 			{{controlWithVars 'hash-btn' hashBtn urlhash="d1" label="Dimension 1" routePath="dimension1"}}
 			{{controlWithVars 'hash-btn' hashBtn urlhash="d2" label="Dimension 2" routePath="dimension2"}}
 			{{controlWithVars 'hash-btn' hashBtn urlhash="d3" label="Dimension 3" routePath="dimension3"}}
-			{{controlWithVars 'hash-btn' hashBtn urlhash="eg" label="Examples" routePath="examples"}}
 		</script>
 
 		<script type="text/x-handlebars" data-template-name="index">		
@@ -971,115 +965,6 @@ Prototype inheritance
 
 	<script type="text/x-handlebars" data-template-name="entity-3d">
 	</script>
-	
-	
-	<script type="text/x-handlebars" data-template-name="examples">		
-		
-		<div class="row page-content">
-			<div class="columns large-12">	
-			<div class="examples">	
-				<h1><span>Examples</span></h1>
-				
-				<h3><span>Development</span></h3>
-				<ul>
-					<li>
-						<a href="#" data-reveal-id="shrlnews"><i class="icon-youtube-play"></i> National news site work (2011-2012)</a>
-					</li>
-					<li>
-						<a href="#" data-reveal-id="shrladv"><i class="icon-youtube-play"></i> Advertising agency work (2008-2010)</a>
-					</li>
-					<li>
-						<a href="#" data-reveal-id="shrlold"><i class="icon-youtube-play"></i> Game dev &#38; edutainment (2007 and prior)</a>
-					</li>
-				</ul>
-				
-		
-				<h3><span>Storytelling</span></h3>
-				<ul>
-					<li>
-						<a href="pgs/eg/mcgang/index.htm" target="_blank" ><i class="icon-external-link-sign"> Motorcycle infographic  </i></a>
-					</li>
-					<li>
-						<a href="http://www.adelaidenow.com.au/news/ban-lifted-it-only-took-10-years-but-government-gives-r18-video-games-the-go-ahead/story-e6freaal-1226271799644" target="_blank" ><i class="icon-external-link-sign"> R18 games rating interactive infographic </i></a>
-					</li>
-				</ul>
-				
-				
-				<h3><span>Creative</span></h3>
-				<ul>
-					<li><a href="#" data-reveal-id="award1"><i class="icon-picture"></i> Virgin Galactic announcement poster</a></li>
-					<li><a href="#" data-reveal-id="award2"><i class="icon-picture"></i> Smart Four: Viral campaign</a></li>
-					<li><a href="#" data-reveal-id="poster1"><i class="icon-picture"></i> Gamers4Croyden: idea #1</a></li>
-					<li><a href="#" data-reveal-id="poster2"><i class="icon-picture"></i> Gamers4Croyden: idea #2</a></li>
-				</ul>
-				</div>
-			</div>
-		</div>
-
-
-		
-		
-		<div id="poster1" class="reveal-modal small">
-		  <h2>Gamers4Croyden: poster #1</h2>
-		  <p>A poster to encourage voters to support the Gamers4Croyden political party in the 2010 South Australian elections</p>
-		  <img src="img/eg/g4c-hadoken.png" style="width: 100%;">
-		  <a class="close-reveal-modal">&#215;</a>
-		</div>
-		
-		<div id="poster2" class="reveal-modal small">
-		  <h2>Gamers4Croyden: poster #1</h2>
-		  <p>A poster to encourage voters to support the Gamers4Croyden political party in the 2010 South Australian elections</p>
-		  <img src="img/eg/g4c-controller.png" style="width: 100%;">
-		  <a class="close-reveal-modal">&#215;</a>
-		</div>
-
-		<div id="award1" class="reveal-modal small">
-		  <h2>Virgin Galactic announcement poster</h2>
-		  <p>My poster for Award school where the brief was to accounce the Virgin Galactic service</p>
-			<img src="img/eg/award-virgin-galactic.png" style="width: 100%;">
-		  <a class="close-reveal-modal">&#215;</a>
-		</div>
-
-		<div id="award2" class="reveal-modal large">
-		  <h2>Smart Four: Viral campaign</h2>
-		  <p>A viral campaign I designed to emphasis the "Go anywhere" slogan of the Smart Four mini car</p>
-		  <img src="img/eg/award-smart-four.png" style="width: 100%;">
-		  <a class="close-reveal-modal">&#215;</a>
-		</div>
-
-
-		<div id="shrlnews" class="reveal-modal large">
-		  <h2>National news site work</h2>
-		  <p>From 2011-2012 I worked for AdelaideNow, part of the Australian NewsCorp group</p>
-	    <div class="flex-video">
-		  <iframe width="640" height="360" src="//www.youtube.com/embed/pZgU5p6dNqE" frameborder="0" allowfullscreen></iframe>
-			</div>
-			<a class="close-reveal-modal">&#215;</a>
-		</div>
-
-		<div id="shrladv" class="reveal-modal large">
-		  <h2>Advertising agency work</h2>
-		  <p>From 2008-2010 I worked for Clemenger BBDO Adelaide, part of the global BBDO Advertising agency network</p>
-	    <div class="flex-video">
-		  <iframe width="853" height="480" src="//www.youtube.com/embed/WvHPl4456S4" frameborder="0" allowfullscreen></iframe>
-			</div>
-			<a class="close-reveal-modal">&#215;</a>
-		</div>
-		
-		<div id="shrlold" class="reveal-modal large">
-		  <h2>Game dev &#38; edutainment</h2>
-		  <p>Work older than 2007</p>
-	    <div class="flex-video">
-		  <iframe width="960" height="720" src="//www.youtube.com/embed/1ntljBExo5o" frameborder="0" allowfullscreen></iframe>
-			</div>
-			<a class="close-reveal-modal">&#215;</a>
-		</div>
-		
-		
-		
-		
-	</script>
-	
 	</head>
     <body>
         <!--[if lt IE 7]>
