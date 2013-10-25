@@ -976,58 +976,77 @@ Prototype inheritance
 	<script type="text/x-handlebars" data-template-name="examples">		
 		
 		<div class="row page-content">
-			<div class="columns large-12">		
-				<h1>Examples</h1>
+			<div class="columns large-12">	
+			<div class="examples">	
+				<h1><span>Examples</span></h1>
 				
-				<h3>Showreels</h3>
+				<h3><span>Development</span></h3>
 				<ul>
 					<li>
-						<h4>
-							<a href="#" data-reveal-id="shrlnews">National news site work</a>
-						</h4>
+						<a href="#" data-reveal-id="shrlnews"><i class="icon-youtube-play"></i> National news site work (2011-2012)</a>
 					</li>
 					<li>
-						<h4>
-							<a href="#" data-reveal-id="shrladv">Advertising agency work</a>
-						</h4>
+						<a href="#" data-reveal-id="shrladv"><i class="icon-youtube-play"></i> Advertising agency work (2008-2010)</a>
 					</li>
 					<li>
-						<h4>
-							<a href="#" data-reveal-id="shrlold">Game dev &#38; edutainment</a>
-						</h4>
+						<a href="#" data-reveal-id="shrlold"><i class="icon-youtube-play"></i> Game dev &#38; edutainment (2007 and prior)</a>
 					</li>
 				</ul>
 				
-				<h3>Creativity</h3>
+		
+				<h3><span>Storytelling</span></h3>
 				<ul>
 					<li>
-						<h4>
-							<a href="#" data-reveal-id="poster1">Gamers4Croyden: poster #1</a>
-						</h4>
+						<a href="pgs/eg/mcgang/index.htm" target="_blank" ><i class="icon-external-link-sign"> Motorcycle infographic  </i></a>
 					</li>
 					<li>
-						<h4>
-							<a href="#" data-reveal-id="poster2">Gamers4Croyden: poster #2</a>
-						</h4>
+						<a href="http://www.adelaidenow.com.au/news/ban-lifted-it-only-took-10-years-but-government-gives-r18-video-games-the-go-ahead/story-e6freaal-1226271799644" target="_blank" ><i class="icon-external-link-sign"> R18 games rating interactive infographic </i></a>
 					</li>
 				</ul>
 				
+				
+				<h3><span>Creative</span></h3>
+				<ul>
+					<li><a href="#" data-reveal-id="award1"><i class="icon-picture"></i> Virgin Galactic announcement poster</a></li>
+					<li><a href="#" data-reveal-id="award2"><i class="icon-picture"></i> Smart Four: Viral campaign</a></li>
+					<li><a href="#" data-reveal-id="poster1"><i class="icon-picture"></i> Gamers4Croyden: idea #1</a></li>
+					<li><a href="#" data-reveal-id="poster2"><i class="icon-picture"></i> Gamers4Croyden: idea #2</a></li>
+				</ul>
+				</div>
 			</div>
 		</div>
+
+
 		
-		<div id="poster1" class="reveal-modal">
+		
+		<div id="poster1" class="reveal-modal small">
 		  <h2>Gamers4Croyden: poster #1</h2>
 		  <p>A poster to encourage voters to support the Gamers4Croyden political party in the 2010 South Australian elections</p>
 		  <img src="img/eg/g4c-hadoken.png" style="width: 100%;">
 		  <a class="close-reveal-modal">&#215;</a>
 		</div>
 		
-		<div id="poster2" class="reveal-modal">
+		<div id="poster2" class="reveal-modal small">
 		  <h2>Gamers4Croyden: poster #1</h2>
 		  <p>A poster to encourage voters to support the Gamers4Croyden political party in the 2010 South Australian elections</p>
 		  <img src="img/eg/g4c-controller.png" style="width: 100%;">
 		  <a class="close-reveal-modal">&#215;</a>
 		</div>
+
+		<div id="award1" class="reveal-modal small">
+		  <h2>Virgin Galactic announcement poster</h2>
+		  <p>My poster for Award school where the brief was to accounce the Virgin Galactic service</p>
+			<img src="img/eg/award-virgin-galactic.png" style="width: 100%;">
+		  <a class="close-reveal-modal">&#215;</a>
+		</div>
+
+		<div id="award2" class="reveal-modal large">
+		  <h2>Smart Four: Viral campaign</h2>
+		  <p>A viral campaign I designed to emphasis the "Go anywhere" slogan of the Smart Four mini car</p>
+		  <img src="img/eg/award-smart-four.png" style="width: 100%;">
+		  <a class="close-reveal-modal">&#215;</a>
+		</div>
+
 
 		<div id="shrlnews" class="reveal-modal large">
 		  <h2>National news site work</h2>
