@@ -51,6 +51,52 @@ $default-legacy-ie: 7 8 9 10 11 !default;
 * {
 	font-family: 'Ubuntu', 'Helvetica', 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
 }
+.reveal-modal {
+	
+}
+.red {
+	color:red;
+}
+.alert-box.secondary {
+	color: $col_offwhite;
+	background-color: $darkGrey;
+	border-style: solid;
+	border-width: 1px;
+	border-color: $col_offwhite;
+	color: $col_offwhite;
+	a, a:visited {
+		color: #FFFFFF;
+	}
+	
+	a:hover {
+		color: #FFFFFF;
+	}
+}
+
+.feature-list {
+	li{
+	   list-style:none;    
+	   overflow:hidden;
+	   padding:5px 0;
+	
+	
+	   border-bottom:dotted 2px $darkGrey; 
+	   bottom:15px;
+	   left:0;
+	   width:100%;
+	}
+	li label{
+	   float:left;
+	   padding-right:10px;
+	}
+	li span{
+	   float:right;
+	   padding-left:10px;
+	}
+	.dotted-bg{
+	}
+}
+
 
 .examples {
 	span {

@@ -2,7 +2,7 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <?php
-$IS_DEPLOY = false;
+$IS_DEPLOY = true;
 ?>
 <head>
 	<!--link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'-->
@@ -25,7 +25,6 @@ $IS_DEPLOY = false;
 	  });
 	</script>
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-	<script src="//cdn.jsdelivr.net/modernizr/2.6.2/modernizr.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.min.js"></script>
 	<script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
@@ -46,7 +45,7 @@ $IS_DEPLOY = false;
 
 
 	<script src="js/lib/jquery-1.8.1.min.js"></script>
-	<script src="javascripts/vendor/custom.modernizr.js"></script>
+	<script src="js/lib/modernizr.custom.portfolio.js"></script>
 	<script src="javascripts/vendor/zepto.js"></script>
 	<script src="js/lib/handlebars.js"></script>
 	<script src="js/lib/easeljs-0.7.0.min.js"></script>
@@ -58,6 +57,7 @@ $IS_DEPLOY = false;
 	<script src="js/lib.min.js"></script>
 	<script src="js/lib/embermandl.js"></script>
 	<script src="js/foundation.min.js"></script>
+	<script src="js/lib/foundation.alerts.js"></script>
 	
 	
 
@@ -88,11 +88,9 @@ This website has a secondary role as a development sandbox.
 Here I experiment with new ideas, technology tests etc.
 So don\'t be surprised if things change!
 
-<i>Last update Fri 18th Oct</i>
-<strong>alpha 1.1.3</strong>
-* Updated graph in Dimension Two
-* Added mouse tracking to Ash in Dimension Three
-* + various tweaks';
+<i>Last update Fri 25th Oct</i>
+<strong>alpha 1.2.3</strong>
+* Added examples page';
 $indexCopyB = addcslashes($indexCopyB, '"');
 
 ?>
@@ -251,6 +249,114 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 			{{outlet}}
 		</script>
 
+		<script type="text/x-handlebars" data-template-name="modernizr-report">
+			
+			
+			
+			{{#if this.controller.hasFullExp}}
+
+			{{else}}
+				{{#if this.controller.hasMinExp}}
+				<div data-alert class="alert-box secondary">
+					NOTE This site may not fully support your browser. <a href="#" data-reveal-id="modernizrReport">Click here for details</a>.
+					<a href="#" class="close">&times;</a>
+				</div>
+				
+				
+				{{else}}
+						<div data-alert class="alert-box secondary">
+							<span class="red">WARNING</span> This site probably uses features for its core experiences that are unsupported by your browser. <a href="#" data-reveal-id="modernizrReport">Click here for details</a>.
+						<a href="#" class="close">&times;</a>
+						</div>
+						
+						
+				{{/if}}
+			{{/if}}
+			
+			<div id="modernizrReport" class="reveal-modal medium">
+			 
+				{{#if this.controller.hasFullExp}}
+				<h3>Nice browser!</h3>
+				<p>
+					This site works perfectly with your browser
+				</p>
+				
+				<!--
+				<h5>Full support</h4>
+				<ul class="feature-list">
+				{{#each this.controller.features.full}}
+					<li>   
+				    <div class="dotted-bg"></div>
+				     	<label>{{{this.name}}}</label>
+						<span>{{{this.isSupported}}}</span>
+					</li>
+				{{/each}}
+				-->
+				{{else}}
+					{{#if this.controller.hasMinExp}}
+						<h3>Hmmmm...</h3>
+						<p>
+							This site <i>"works"</i> with your browser, but not as intended. Why not try the latest version of <a href="https://www.google.com/intl/en/chrome/browser/">Chrome</a> or <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> to get the <strong>full experience</strong>?
+						</p>
+						
+						<h5>Full experience features</h4>
+						<ul class="feature-list">
+						{{#each this.controller.features.low}}
+							<li>
+						    	<div class="dotted-bg"></div>    
+						     	<label>{{{this.name}}}</label>
+								{{#if this.isSupported}} <span>true</span> {{else}} <span class="red">false</span>{{/if}}
+							</li>
+						{{/each}}
+						</ul>
+						
+					{{else}}
+						<h3>Oh dear...</h3>
+						<p>
+							From the looks of things, your browser does not support features used to build core experiences on this site. Feel free to have a look around, but things will be missing.  
+						</p>
+						<p>
+							It would really make me feel much better if installed the latest version of <a href="https://www.google.com/intl/en/chrome/browser/">Chrome</a> or <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> to get the <strong>full experience</strong>?
+						</p>
+						
+						<h5>Minimum experience features</h4>
+						<ul class="feature-list">
+						{{#each this.controller.features.min}}
+							<li>
+						    	<div class="dotted-bg"></div>    
+						     	<label>{{{this.name}}}</label>
+								{{#if this.isSupported}} <span>true</span> {{else}} <span class="red">false</span>{{/if}}
+							</li>
+						{{/each}}
+						</ul>
+						
+						
+						<h5>Full experience features</h4>
+						<ul class="feature-list">
+						{{#each this.controller.features.low}}
+							<li>
+						    	<div class="dotted-bg"></div>    
+						     	<label>{{{this.name}}}</label>
+								{{#if this.isSupported}} <span>true</span> {{else}} <span class="red">false</span>{{/if}}
+							</li>
+						{{/each}}
+						</ul>
+					{{/if}}
+				{{/if}}
+				 
+			</div>
+
+		</script>
+		
+		
+		<script type="text/x-handlebars" data-template-name="lo-row">
+		<div class="row pointer-events-none">
+			<div class="columns large-12 small-12"> 
+					{{yield}} 
+			</div>
+		</script>
+		
+		
 		<script type="text/x-handlebars" data-template-name="lo-fixed-size-centered">
 			<div class="relative-positioned">
 				<div class="absolute-positioned">
@@ -396,6 +502,8 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 
 		<script type="text/x-handlebars" data-template-name="index">		
 			
+			{{render 'modernizr-report' layoutName='lo-row'}}
+				
 			<div class="row page-content">
 				<div class="columns large-6  small-6">		
 					{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $indexCopyA; ?>"}}}
@@ -418,6 +526,7 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 		
 		<script type="text/x-handlebars" data-template-name="dimension1">
 			<div class="row">
+				{{render 'modernizr-report' layoutName='lo-row'}}
 				<div class="columns large-6  small-6">
 					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
 					{{{controlWithVars 'subtitle' orderRead='0' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Use mouse to find my x values "}}}
@@ -638,6 +747,7 @@ Prototype inheritance
 								{{controlWithVars 'esl-entity-container'}}
 								<div class="page-content">
 									<div class="row page-content">
+										{{render 'modernizr-report' layoutName='lo-row'}}
 										<div class="columns large-8 small-12">
 											{{{controlWithVars 'subtitle' orderRead='instructionTurnOn' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Press <span style=\"background-color:#005500; width:2em; height:1.2em; color:#005500\">ON</span> on the storytelling device I built"}}}
 											{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copy1?>"}}}
@@ -933,6 +1043,7 @@ Prototype inheritance
 							<div style="position:absolute; width:100%">
 									{{controlWithVars 'world-3d' layoutName='lo-subtitle-row'}}
 										<div class="page-content">
+											{{render 'modernizr-report' layoutName='lo-row'}}
 		
 									<div class="row">
 										<div class="columns large-4 small-12">
@@ -1020,14 +1131,14 @@ Prototype inheritance
 		
 		
 		<div id="poster1" class="reveal-modal small">
-		  <h2>Gamers4Croyden: poster #1</h2>
+		  <h2>Gamers4Croyden: poster 1</h2>
 		  <p>A poster to encourage voters to support the Gamers4Croyden political party in the 2010 South Australian elections</p>
 		  <img src="img/eg/g4c-hadoken.png" style="width: 100%;">
 		  <a class="close-reveal-modal">&#215;</a>
 		</div>
 		
 		<div id="poster2" class="reveal-modal small">
-		  <h2>Gamers4Croyden: poster #1</h2>
+		  <h2>Gamers4Croyden: poster 2</h2>
 		  <p>A poster to encourage voters to support the Gamers4Croyden political party in the 2010 South Australian elections</p>
 		  <img src="img/eg/g4c-controller.png" style="width: 100%;">
 		  <a class="close-reveal-modal">&#215;</a>
@@ -1035,7 +1146,7 @@ Prototype inheritance
 
 		<div id="award1" class="reveal-modal small">
 		  <h2>Virgin Galactic announcement poster</h2>
-		  <p>My poster for Award school where the brief was to accounce the Virgin Galactic service</p>
+		  <p>My poster for Award school where the brief was to announce the Virgin Galactic service</p>
 			<img src="img/eg/award-virgin-galactic.png" style="width: 100%;">
 		  <a class="close-reveal-modal">&#215;</a>
 		</div>

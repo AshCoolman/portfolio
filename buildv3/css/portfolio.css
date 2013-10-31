@@ -4,6 +4,36 @@ http://jsfiddle.net/VAXrL/190/
 * {
   font-family: 'Ubuntu', 'Helvetica', 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif; }
 
+.red {
+  color: red; }
+
+.alert-box.secondary {
+  color: #cccccc;
+  background-color: #595959;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #cccccc;
+  color: #cccccc; }
+  .alert-box.secondary a, .alert-box.secondary a:visited {
+    color: #FFFFFF; }
+  .alert-box.secondary a:hover {
+    color: #FFFFFF; }
+
+.feature-list li {
+  list-style: none;
+  overflow: hidden;
+  padding: 5px 0;
+  border-bottom: dotted 2px #595959;
+  bottom: 15px;
+  left: 0;
+  width: 100%; }
+.feature-list li label {
+  float: left;
+  padding-right: 10px; }
+.feature-list li span {
+  float: right;
+  padding-left: 10px; }
+
 .examples span {
   color: #595959; }
 .examples ul li a, .examples span {

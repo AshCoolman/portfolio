@@ -10,11 +10,12 @@ CSS_FILES = $(filter-out %-min.css,$(wildcard \
 # suffix will be ignored.
 
 #JS_GROUP = "lib"
-JS_GROUP = "custom"
+#JS_GROUP = "custom"
 #JS_GROUP = "foundation"
 
 ifeq ($(JS_GROUP),"lib")
 JS_FILES = $(filter-out %-min.js,$(wildcard \
+	js/lib/modernizr.custom.portfolio.js \
 	js/lib/stats.min.js \
 	js/lib/threex.rendererstats.js \
 	js/lib/json2.js \
@@ -60,18 +61,29 @@ JS_FILES = $(filter-out %-min.js,$(wildcard \
 	javascripts/foundation/foundation.clearing.js \
 	javascripts/foundation/foundation.cookie.js \
 	javascripts/foundation/foundation.dropdown.js \
-	javascripts/foundation/foundation.forms.js \
-	javascripts/foundation/foundation.interchange.js \
-	javascripts/foundation/foundation.joyride.js \
-	javascripts/foundation/foundation.magellan.js \
-	javascripts/foundation/foundation.orbit.js \
-	javascripts/foundation/foundation.placeholder.js \
 	javascripts/foundation/foundation.reveal.js \
-	javascripts/foundation/foundation.section.js \
-	javascripts/foundation/foundation.tooltips.js \
 	javascripts/foundation/foundation.topbar.js \
 ))
 endif
+
+
+# javascripts/vendor/zepto.js \
+# javascripts/foundation/foundation.js \
+# javascripts/foundation/foundation.alerts.js \
+# javascripts/foundation/foundation.clearing.js \
+# javascripts/foundation/foundation.cookie.js \
+# javascripts/foundation/foundation.dropdown.js \
+# javascripts/foundation/foundation.forms.js \
+# javascripts/foundation/foundation.interchange.js \
+# javascripts/foundation/foundation.joyride.js \
+# javascripts/foundation/foundation.magellan.js \
+# javascripts/foundation/foundation.orbit.js \
+# javascripts/foundation/foundation.placeholder.js \
+# javascripts/foundation/foundation.reveal.js \
+# javascripts/foundation/foundation.section.js \
+# javascripts/foundation/foundation.tooltips.js \
+# javascripts/foundation/foundation.topbar.js \
+
 
 # Command to run to execute the YUI Compressor.
 YUI_COMPRESSOR = java -jar yuicompressor-2.4.8.jar
