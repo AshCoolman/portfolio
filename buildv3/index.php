@@ -70,7 +70,8 @@ $indexCopyA = '@actionOnRead=doInstruction
 Hi, I\'m Ashley 
 @=</h3>
 
-I built this portfolio site to show who I am. 
+I am looking for a job, so I built this portfolio site to show who I am.
+
 You are at the start page aka the <i>origin</i>. 
 Continue on to learn about my different dimensions. 
 @actionOnRead=doSecondSubtitle 1000
@@ -116,7 +117,7 @@ $quot = htmlspecialchars("\"");
 
 
  $d1copyA = '@=<h3>
-Developer
+Web Developer
 @=</h3>
 <i>My 1st dimension</i>
 @actionOnRead=doSubtitle2';
@@ -464,7 +465,7 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 			
 					    <li class="divider"></li>
 						{{#view view.NavListItemView item="doDimension1" }}
-				            <h1>1d <a {{action doDimension1}} >Developer</a></h1>
+				            <h1>1d <a {{action doDimension1}} >Web Developer</a></h1>
 				        {{/view}}
 			
 						<li class="divider"></li>
@@ -1091,7 +1092,7 @@ Prototype inheritance
 			<div class="examples">	
 				<h1><span>Examples</span></h1>
 				
-				<h3><span>Development</span></h3>
+				<h3><span>Web Development</span></h3>
 				<ul>
 					<li>
 						<a href="#" data-reveal-id="shrlnews"><i class="icon-youtube-play"></i> National news site work (2011-2012)</a>
