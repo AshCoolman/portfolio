@@ -314,10 +314,10 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 					{{else}}
 						<h3>Oh dear...</h3>
 						<p>
-							From the looks of things, your browser does not support features used to build core experiences on this site. Feel free to have a look around, but things will be missing.  
+							From the looks of things, your browser does <strong>not support</strong> features used to build <strong>core experiences</strong> on this site. Feel free to have a look around, <strong>but things will be broken</strong>.  
 						</p>
 						<p>
-							It would really make me feel much better if installed the latest version of <a href="https://www.google.com/intl/en/chrome/browser/">Chrome</a> or <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> to get the <strong>full experience</strong>?
+							Please install the latest version of <a href="https://www.google.com/intl/en/chrome/browser/">Chrome</a> or <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> to get the <strong>full experience</strong>
 						</p>
 						
 						<h5>Minimum experience features</h4>
@@ -354,7 +354,8 @@ I have a great love of art, and in 2012 I curated a pop up art gallery:
 		<div class="row pointer-events-none">
 			<div class="columns large-12 small-12"> 
 					{{yield}} 
-			</div>
+			</div>		
+		</div>
 		</script>
 		
 		
@@ -748,7 +749,6 @@ Prototype inheritance
 								{{controlWithVars 'esl-entity-container'}}
 								<div class="page-content">
 									<div class="row page-content">
-										{{render 'modernizr-report' layoutName='lo-row'}}
 										<div class="columns large-8 small-12">
 											{{{controlWithVars 'subtitle' orderRead='instructionTurnOn' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> Press <span style=\"background-color:#005500; width:2em; height:1.2em; color:#005500\">ON</span> on the storytelling device I built"}}}
 											{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d2copy1?>"}}}
@@ -766,6 +766,8 @@ Prototype inheritance
 							<div style="position:absolute" class="page-content">
 								{{{controlWithVars 'subtitle' orderRead='heading' isInstant=true  layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d2heading?>"}}}
 							</div>
+							
+							{{render 'modernizr-report' layoutName='lo-row'}}
 							
 						</div>
 					</div>
@@ -1037,15 +1039,14 @@ Prototype inheritance
 
 		
 		<script type="text/x-handlebars" data-template-name="dimension3">
+			{{#if this.modernizr.webgl}}
+			
 				<div class="row">
 					<div class="columns large-12 small-12">
 						<div style="position:relative; width:100%">
-						
 							<div style="position:absolute; width:100%">
-									{{controlWithVars 'world-3d' layoutName='lo-subtitle-row'}}
-										<div class="page-content">
-											{{render 'modernizr-report' layoutName='lo-row'}}
-		
+								{{controlWithVars 'world-3d' layoutName='lo-subtitle-row'}}
+								<div class="page-content">
 									<div class="row">
 										<div class="columns large-4 small-12">
 											{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d3copyA; ?>"}}}
@@ -1069,10 +1070,28 @@ Prototype inheritance
 							<div style="position:absolute" class="page-content">
 								{{{controlWithVars 'subtitle' orderRead='heading'  layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d3heading?>"}}}
 							</div>
+							
+							{{render 'modernizr-report' layoutName='lo-row'}}
 						</div>
 					</div>
 				</div>
-			
+			{{else}}	
+				{{render 'modernizr-report' layoutName='lo-row'}}
+
+				<div class="row pointer-events-none">
+					<div class="columns large-12 small-12">
+						<div class="subtitle-text-holder">
+	 						<span class="subtitle">This section of the site <strong>requires</strong> webGL to be enabled!</span>
+						</div>
+					</div>
+					<div class="columns large-12 small-12">
+						<div class="subtitle-text-holder">
+	 						<span class="subtitle">Unfortunately your browser does not seem to support it :(</span>
+						</div>
+					</div>
+				</div>
+				
+			{{/if}}
 		</script>
 		
 	<script type="text/x-handlebars" data-template-name="world-3d">

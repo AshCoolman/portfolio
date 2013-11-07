@@ -87,13 +87,13 @@ App.Dimension3Route = App.SmartRoute.extend({
 
 
 	tryStart: function () {
-        if (!this.get('isStarted') && 
+        if ((!Modernizr.webgl) || (!this.get('isStarted') && 
 				this.subtitleHeadingController &&
 				this.subtitle1Controller && 
 				this.subtitleInstructionController && 
 				this.subtitle2Controller &&
 				this.subArtController &&
-				this.subAwardController) {
+				this.subAwardController)) {
 			this.set('isStarted', true);
 			this.doStart();
         }
