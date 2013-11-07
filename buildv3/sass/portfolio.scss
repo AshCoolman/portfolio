@@ -98,24 +98,6 @@ $default-legacy-ie: 7 8 9 10 11 !default;
 }
 
 
-.examples {
-	span {
-		color: $darkGrey;
-	}
-	ul li a, span { 
-			padding:5px;
-			background-color:#FFFFFF;
-	}
-	
-	ul li {
-		padding:0.5em;
-		line-height:1em;
-	}
-	ul {
-		list-style: none;
-	}
-}
-
 $col_unselectable-topbar:#777777;
 .top-bar {
 	font-weight: normal !important;
