@@ -2,7 +2,7 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <?php
-$IS_DEPLOY = true;
+$IS_DEPLOY = false;
 ?>
 <head>
 	<!--link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'-->
@@ -1039,7 +1039,7 @@ Prototype inheritance
 
 		
 		<script type="text/x-handlebars" data-template-name="dimension3">
-			{{#if this.modernizr.webgl}}
+			{{#if this.controller.modernizr.webgl}}
 			
 				<div class="row">
 					<div class="columns large-12 small-12">
@@ -1054,7 +1054,7 @@ Prototype inheritance
 									
 										<div class="columns large-4	  small-12">
 											{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $d3copyB; ?>"}}}
-											{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> <i>Turn</i> the problem into an elegant idea"}}}				
+											{{{controlWithVars 'subtitle' orderRead='instruction' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=false thescript="<i class=\"icon-info-sign\"></i> <i>Turn</i> the above problem into an elegant idea"}}}				
 										
 										</div>
 									

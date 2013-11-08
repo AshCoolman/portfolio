@@ -1,3 +1,9 @@
+try {
+    Modernizr.webgl = !!window.WebGLRenderingContext && !!document.createElement('canvas').getContext('experimental-webgl');
+} catch(e) {
+    Modernizr.webgl = false;
+}
+
 Ember.Handlebars.registerHelper('controlWithVars', function(path, modelPath, options) {
     if (arguments.length === 2) {
       options = modelPath;

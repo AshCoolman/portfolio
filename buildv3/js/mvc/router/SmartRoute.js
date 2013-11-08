@@ -29,6 +29,7 @@ App.SmartRoute = Em.Route.extend({
 					case '#d1': rulerPosStr = /*App.RulerController.*/'ANI_XY'; break;
 					case '#d2': rulerPosStr = /*App.RulerController.*/'ANI_XYZ'; break;
 					case '#d3': rulerPosStr = /*App.RulerController.*/'ANI_XYZ'; break;
+					case '#eg': rulerPosStr = /*App.RulerController.*/'ANI_XYZ'; break;
 				}
 			} else {
 				switch (window.location.hash) {
@@ -36,6 +37,7 @@ App.SmartRoute = Em.Route.extend({
 					case '#d1': 		rulerPosStr = /*App.RulerController.*/'ANI_X'; break;
 					case '#d2': 		rulerPosStr = /*App.RulerController.*/'ANI_XY'; break;
 					case '#d3': 		rulerPosStr = /*App.RulerController.*/'ANI_XYZ'; break;
+					case '#eg': 		rulerPosStr = /*App.RulerController.*/'ANI_XYZ'; break;
 				}
 			}
 			//TODO maybe i can use the scheduleOnce method i keep seeing?

@@ -1,0 +1,1 @@
+App.HeartbeatFlashView=App.SmartView.extend({className:"HeartbeatFlashView",templateName:"heartbeat-flash",doHeartbeat:function(){this.$().removeClass("heartbeat-off");this.$().addClass("heartbeat-on");var a=this;(function(){setTimeout((function(){a.$().removeClass("heartbeat-on");a.$().addClass("heartbeat-off")}),1000)}())}});

@@ -1,0 +1,1 @@
+App.EslEntityContainerController=App.SmartController.extend({view_didInsertElement:function(a){if(!this.get("view")){this._super(a);App.static_eslEntityContainerView=a}else{}},view_eslEntityCreated:function(a){console.log(" view_eslEntityCreated",a);App.eventMapper.trigger("eslViewAddedEsl",{label:a.label,view:a.get("view"),parentEslObj:a.get("view").parentEslObj})}});

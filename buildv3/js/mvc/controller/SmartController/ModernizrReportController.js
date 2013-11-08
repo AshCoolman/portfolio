@@ -45,12 +45,8 @@ App.ModernizrReportController = App.SmartController.extend({
 			features = this.get('features');
 			
  			// https://github.com/Modernizr/Modernizr/issues/724
-		    try {
-		        modernizr.webgl = !!window.WebGLRenderingContext && !!document.createElement('canvas').getContext('experimental-webgl');
-		    } catch(e) {
-		        modernizr.webgl = false;
-		    }
-		
+
+		var modernizr = this.get('modernizr')
 		for(var p in modernizr) {
 			if (typeof modernizr[p] == 'boolean') {
 				if (listMinExp.indexOf(p) != -1) {
