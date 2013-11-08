@@ -232,9 +232,9 @@ In 2010, I was selected for and completed AWARD school, Australia\'s best regard
 
 
 $d3art = '@=<h5>
-Art fan
+Curation is fun
 @=</h5>
-I have a great love of art, and in 2012 I curated a pop up art gallery:
+In 2012 I curated a pop up art gallery:
 <a href=\"http://www.deathrattleshows.com/\" target=\"_blank\">The Death Rattle Shows</a>';
 
 ?>
