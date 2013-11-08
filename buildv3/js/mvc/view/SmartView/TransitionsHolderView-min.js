@@ -1,1 +1,0 @@
-App.TransitionsHolderView=App.SmartContainerView.extend({className:"TransitionsHolderView",templateName:"transitions-holder",tagName:"div",didInsertElement:function(){this._super()},doTransition:function(a){console.log("doTransition",a);this.pushObject(App.TransitionView.create({controller:App.TransitionController.create(),$canvasSrc:a}))}});
