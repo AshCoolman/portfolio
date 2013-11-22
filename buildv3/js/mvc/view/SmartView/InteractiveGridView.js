@@ -160,6 +160,12 @@ App.InteractiveGridView = App.SmartView.extend({
 			}
 		}(this))
 
+
+
+
+
+		
+		
 		var mouseMoveFunc = function (me, acoordX, athePlotX, xPlotNumber, xPosNumber, aplotColors) {
 			return function (e) {
 				
@@ -194,12 +200,14 @@ App.InteractiveGridView = App.SmartView.extend({
 					for (var p = 0; p < plots.length; p++) {
 						deltaX = Math.abs(plots[p].x - valX);
 						  
-						if (testNearFunc(x, plots[p].x*unitX, 15))
-							shownPlotList.push(plots[p]);
+						//if (testNearFunc(x, plots[p].x*unitX, 15))
+						
+						shownPlotList.push(plots[p]);
 					}
 					
 					//If some plots should be shown, then show and animate
 					if (shownPlotList.length > 0) {
+						
 						var shownPlot = shownPlotList[0],
 							plotX = shownPlot.x,
 							clipX = shownPlot.x * unitX;
@@ -207,7 +215,7 @@ App.InteractiveGridView = App.SmartView.extend({
 						if (athePlotX['animateWidthTarget'] != clipX) {
 							athePlotX['animateWidthTarget'] = clipX;
 							//Broadcast the plots to be shown
-							App.eventMapper.trigger('interactiveGridText', shownPlotList);
+							App.eventMapper.trigger('setInteractiveGridData', shownPlotList);
 							//Show dom elements
 							$('.graph-info').css({display: 'block'});
 							$('.graph-info h3').addClass('highlight');
@@ -234,7 +242,7 @@ App.InteractiveGridView = App.SmartView.extend({
 					} else {
 					// else if no plots should be shown, hide them all
 					
-						App.eventMapper.trigger('interactiveGridText', [{x: valX}]);
+						App.eventMapper.trigger('setInteractiveGridData', [{x: valX}]);
 					
 						if (athePlotX['animateWidthTarget'] != -1) {
 							$('.graph-info h3').removeClass('highlight')
@@ -267,7 +275,12 @@ App.InteractiveGridView = App.SmartView.extend({
 		};
 		
 		$(document).bind('mousemove.InteractiveGridView', mouseMoveFunc(this, coordX, thePlotX, xPlotNumber, plotColors));
+		
 		mouseMoveFunc(this, coordX, thePlotX, plotColors);
+		
+
+		
+		
 		this.doResize();
 		
 		$(window).on( 'resize.InteractiveGridView', function (me) { return function (e) { me.doResize(e) }}(this) );

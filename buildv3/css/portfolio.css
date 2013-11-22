@@ -34,17 +34,6 @@ http://jsfiddle.net/VAXrL/190/
   float: right;
   padding-left: 10px; }
 
-.examples span {
-  color: #595959; }
-.examples ul li a, .examples span {
-  padding: 5px;
-  background-color: #FFFFFF; }
-.examples ul li {
-  padding: 0.5em;
-  line-height: 1em; }
-.examples ul {
-  list-style: none; }
-
 .top-bar {
   font-weight: normal !important;
   color: white !important;

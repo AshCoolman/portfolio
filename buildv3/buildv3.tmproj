@@ -28,56 +28,40 @@
 				<key>column</key>
 				<integer>0</integer>
 				<key>line</key>
-				<integer>12</integer>
+				<integer>11</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>9</integer>
 		</dict>
 		<key>index.htm</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>59</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>169</integer>
+				<integer>0</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>157</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>49</integer>
-				<key>line</key>
-				<integer>169</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>59</integer>
-				<key>line</key>
-				<integer>169</integer>
-			</dict>
+			<integer>0</integer>
 		</dict>
 		<key>index.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>5</integer>
+				<integer>39</integer>
 				<key>line</key>
-				<integer>1121</integer>
+				<integer>92</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>1098</integer>
+			<integer>78</integer>
 		</dict>
 		<key>javascripts/foundation/foundation.interchange.js</key>
 		<dict>
@@ -258,30 +242,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>42</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>248</integer>
+				<integer>0</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>234</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>39</integer>
-				<key>line</key>
-				<integer>248</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>42</integer>
-				<key>line</key>
-				<integer>248</integer>
-			</dict>
+			<integer>0</integer>
 		</dict>
 		<key>js/mvc/controller/Dimension1Controller.js</key>
 		<dict>
@@ -318,30 +286,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>22</integer>
+				<integer>17</integer>
 				<key>line</key>
-				<integer>1</integer>
+				<integer>3</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>1</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>22</integer>
-				<key>line</key>
-				<integer>1</integer>
-			</dict>
 		</dict>
 		<key>js/mvc/controller/ExamplesController.js</key>
 		<dict>
@@ -376,37 +328,21 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>13</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>18</integer>
+				<integer>0</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>3</integer>
-				<key>line</key>
-				<integer>18</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>13</integer>
-				<key>line</key>
-				<integer>18</integer>
-			</dict>
 		</dict>
 		<key>js/mvc/controller/NavTabsController.js</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>25</integer>
+				<integer>3</integer>
 				<key>line</key>
 				<integer>19</integer>
 			</dict>
@@ -473,6 +409,20 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>js/mvc/controller/SmartController/HeartbeatFlashController.js</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>js/mvc/controller/SmartController/IndexNavController.js</key>
 		<dict>
 			<key>caret</key>
@@ -486,6 +436,20 @@
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
+		</dict>
+		<key>js/mvc/controller/SmartController/ModernizrReportController.js</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>37</integer>
+				<key>line</key>
+				<integer>48</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>29</integer>
 		</dict>
 		<key>js/mvc/controller/SmartController/PreloaderContentController.js</key>
 		<dict>
@@ -520,9 +484,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>9</integer>
+				<integer>32</integer>
 				<key>line</key>
-				<integer>10</integer>
+				<integer>1</integer>
 			</dict>
 			<key>columnSelection</key>
 			<false/>
@@ -533,16 +497,16 @@
 			<key>selectFrom</key>
 			<dict>
 				<key>column</key>
-				<integer>1</integer>
+				<integer>22</integer>
 				<key>line</key>
-				<integer>10</integer>
+				<integer>2</integer>
 			</dict>
 			<key>selectTo</key>
 			<dict>
 				<key>column</key>
-				<integer>9</integer>
+				<integer>32</integer>
 				<key>line</key>
-				<integer>10</integer>
+				<integer>1</integer>
 			</dict>
 		</dict>
 		<key>js/mvc/model/ScriptModel.js</key>
@@ -564,14 +528,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>42</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>31</integer>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>16</integer>
+			<integer>18</integer>
 		</dict>
 		<key>js/mvc/router/SmartRoute/Dimension1Route.js</key>
 		<dict>
@@ -638,14 +602,30 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>52</integer>
+				<integer>14</integer>
 				<key>line</key>
-				<integer>23</integer>
+				<integer>89</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>29</integer>
+				<key>line</key>
+				<integer>89</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>14</integer>
+				<key>line</key>
+				<integer>89</integer>
+			</dict>
 		</dict>
 		<key>js/mvc/router/SmartRoute/ExamplesRoute.js</key>
 		<dict>
@@ -900,14 +880,30 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>9</integer>
+				<integer>2</integer>
 				<key>line</key>
-				<integer>105</integer>
+				<integer>39</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>93</integer>
+			<integer>20</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>24</integer>
+				<key>line</key>
+				<integer>39</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>2</integer>
+				<key>line</key>
+				<integer>39</integer>
+			</dict>
 		</dict>
 		<key>sass/portfolio.scss</key>
 		<dict>
@@ -927,6 +923,8 @@
 	<key>openDocuments</key>
 	<array>
 		<string>index.php</string>
+		<string>js/mvc/controller/SmartController/HeartbeatFlashController.js</string>
+		<string>js/mvc/controller/SmartController/ModernizrReportController.js</string>
 		<string>js/mvc/controller/Dimension3Controller.js</string>
 		<string>js/custom.min.js</string>
 		<string>js/mvc/model/ScriptModel.js</string>
@@ -937,12 +935,9 @@
 		<string>js/mvc/view/SmartView/SubtitleView.js</string>
 		<string>js/mvc/router/SmartRoute/Dimension3Route.js</string>
 		<string>js/mvc/router/SmartRoute/IndexRoute.js</string>
-		<string>js/mvc/router/SmartRoute/ExamplesRoute.js</string>
 		<string>js/mvc/view/SmartView/Dimension1NavView.js</string>
 		<string>js/mvc/controller/SmartController/Dimension1NavController.js</string>
-		<string>js/mvc/controller/ExamplesController.js</string>
 		<string>js/mvc/controller/IndexController.js</string>
-		<string>js/mvc/view/ExamplesView.js</string>
 		<string>js/mvc/view/IndexView.js</string>
 		<string>js/mvc/controller/Dimension1Controller.js</string>
 		<string>js/mvc/controller/SmartController/IndexNavController.js</string>
@@ -975,6 +970,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{424, 342}, {1496, 716}}</string>
+	<string>{{203, 30}, {1153, 716}}</string>
 </dict>
 </plist>

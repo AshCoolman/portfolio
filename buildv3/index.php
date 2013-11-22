@@ -2,7 +2,7 @@
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <?php
-$IS_DEPLOY = true;
+$IS_DEPLOY = false;
 ?>
 <head>
 	<!--link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'-->
@@ -70,7 +70,7 @@ $indexCopyA = '@actionOnRead=doInstruction
 Hi, I\'m Ashley 
 @=</h3>
 
-I am looking for a job, so I built this portfolio site to show who I am.
+I am looking for a job, so I built this portfolio site give the world some idea of who I am.
 
 You are at the start page aka the <i>origin</i>. 
 Continue on to learn about my different dimensions. 
@@ -89,9 +89,11 @@ This website has a secondary role as a development sandbox.
 Here I experiment with new ideas, technology tests etc.
 So don\'t be surprised if things change!
 
-<i>Last update Fri 25th Oct</i>
-<strong>alpha 1.2.3</strong>
-* Added examples page';
+@=<sup>
+<i><strong>Last update Fri 8th Nov 2013</strong>: alpha 1.3</i>
+* Tweaked feature report card
+* Copy changes
+@=</sup>';
 $indexCopyB = addcslashes($indexCopyB, '"');
 
 ?>
@@ -125,43 +127,75 @@ $d1copyA = addcslashes($d1copyA, '"');
 
 $obligatoryList = '<span class="heading"> <i class="icon-chevron-left"></i> OBLIGATORY SKILL SUMMARY LIST <i class="icon-chevron-right"></i> </span>
 @=<div class="indent">
-	<span class="heading">Javascript technologies</span>
-	JQuery 
-	Ember 
-	threejs (WebGL) 
-	nodejs
-	plus more!
 
-	<span class="heading">Markup languages</span>
-	HTML
-	HTML5
-	CSS
-	CSS3
-	SASS
-	SVG
-	
-	<span class="heading">Flash technologies</span>
-	AS3
+	<span class="heading">Javascript tech</span>
+	Libraries (JQuery, Google Glosue Library etc)
+	Frameworks (Foundation 4, Ember, bootstrap etc)
+	Service APIs ( Google Maps, Facebook Graph etc )
+	HTML APIs (WebGL, geolocation, sound, video etc)
+
+	<span class="heading">Web markup</span>
+	HTML(5)
+	CSS(3)
+	SASS & LESS
+	SVG 
+
+	<span class="heading">Web dev experience</span>
+	AJAX
+	Cross-domain issues
+	UX & Performance
+	SEO & Analytics
+	Cross platform
+	Input validation
+	Profiling tools (jankfree.org!)
+
+	<span class="heading">Flash tech</span>
+	AS2 & AS3
+	Flash Video 
 	Flex
-	Flash Video
-	
-	<span class="heading">Serverside technologies</span>
-	PHP
-	SQL 
-	Templating libraries 
+	MXML
 
-	<span class="heading">Coding Paradigms/Patterns</span>
-	OOP
-	MVC 
-	MVP 
+	<span class="heading">Backend technology</span>
+	PHP 
+	SQL (mySQL, PostgresSQL)
+	Nodejs
+
+	<span class="heading">Dev tools & techniques</span>
+	Make files
+	Minification (YUI Compressor, Closure Compiler)
+	Unit testing (QUnitjs)
+	Doc generation
+	Chrome Dev tools (and other browser equivalents)
+	User testing
+	API creation
+
+	<span class="heading">Project tools & techniques</span>
+	Version control (SVN, Git, Mecurial)
+	Issue tracking (JIRA, Bugzila etc) 
+	Wireframing & Prototyping (Fireworks, Axure etc)
 
 	<span class="heading">General knowledge</span>
-	3d Math
-	2d / 3d Physics
-	Geolocation
-	API creation
-	Code documentation
-	Photoshop, Premiere, AfterEffects
+	2d / 3d Physics math
+	Geo-location algorithms
+	Image editing (Adobe Photoshop)
+	Video editing (Adobe After Effects)
+	Video encoding (Adobe Media Encoder)
+	Sound editing (Adacity)
+
+	<span class="heading">Notable tech in this site</span>
+	Emberjs
+	Foundation 4
+	JQuery
+	Createjs
+	Threejs
+	Raphaeljs
+	Underscorejs
+	Greensock animation platform
+	WebGL
+	SVG
+	Request Animation Frame
+	Closures
+	Prototype inheritance
 
 @=</div>
 
@@ -483,7 +517,7 @@ In 2012 I curated a pop up art gallery:
 				        {{#view view.NavListItemView item="doExamples" }}
 				            <h1><a {{action doExamples}} >Examples</a></h1>
 				        {{/view}}
-		
+
 						
 						<span class="top-bar-hint"> </span>
 				    </ul>
@@ -521,7 +555,6 @@ In 2012 I curated a pop up art gallery:
 
 		<script type="text/x-handlebars" data-template-name="dimension1-background">
 			<div class="full-width-centered" >
-				{{renderWithVars 'interactive-grid' pixW=20 isPlotX=true}}
 				{{render 'heartbeat' heartbeat}}
 			</div>
 		</script>
@@ -529,29 +562,13 @@ In 2012 I curated a pop up art gallery:
 		<script type="text/x-handlebars" data-template-name="dimension1">
 			<div class="row">
 				{{render 'modernizr-report' layoutName='lo-row'}}
-				<div class="columns large-6  small-6">
+				<div class="columns large-12  small-12">
 					{{{controlWithVars 'subtitle' orderRead='1' layoutName='lo-subtitle-row' hasRemoveButton=true thescript="<?php echo $d1copyA; ?>"}}}
 					{{{controlWithVars 'subtitle' orderRead='0' layoutName='lo-subtitle-instruction-row' isInstant=true hasRemoveButton=true thescript="<i class=\"icon-info-sign\"></i> Use mouse to find my x values "}}}
 					
 					{{{controlWithVars 'subtitle' orderRead='2' layoutName='lo-subtitle-row-link' isLink=true linkEvent="doGotoDimension2"  hoverEvent="doDimensionNavHover" hasRemoveButton=true thescript="<i class=\"icon-caret-right\"></i> Go to second dimension: @edits=Y...,Why...,Motivation..."}}} 
 					{{{controlWithVars 'subtitle' orderRead='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=true thescript="<?php echo $obligatoryList; ?>"}}}
-				</div>
-				<div class="columns large-6 small-6">
-					<div class="interactive-graph-output">
-						<div class="graph-info">
-							<h3 {{bindAttr class="interactiveGridData.0.type.cssClass"}}>x = {{{interactiveGridData.0.x}}} </h3>
-							{{#each this.interactiveGridData}}
-								{{#if this.text}}
-									<strong class="sub-heading">{{{this.x}}} {{{this.text}}}</strong>
-									<ol>
-									{{#each this.xList}}
-										<li>{{{this}}}</li>
-									{{/each}}
-									</ol>
-								{{/if}}
-							{{/each}}
-						</div>
-					</div>
+
 				</div>
 			</div>
 		</script>

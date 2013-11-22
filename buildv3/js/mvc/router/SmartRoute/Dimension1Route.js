@@ -34,6 +34,13 @@ App.Dimension1Route = App.SmartRoute.extend({
 			doSubtitle2: function () { 
 				this.subtitleController1.set('isCursor', false); 
 		        this.subtitleController2.startReading();
+			    setTimeout(function (me) {
+						return function () {
+							me.subtitleController3.set('isCursor', false);
+							me.subtitleController3.startReading();
+						}
+					}(this), 1500);
+				
 			},
 			doSubtitle3: function () { 
 		        this.subtitleController3.startReading();
@@ -64,7 +71,6 @@ App.Dimension1Route = App.SmartRoute.extend({
         this.subtitleController2.setup();
         this.subtitleController3.setup();
 
-        this.subtitleController0.startReading();
         this.subtitleController1.startReading();
 
     },
