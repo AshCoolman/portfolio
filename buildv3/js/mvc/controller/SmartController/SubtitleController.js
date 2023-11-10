@@ -284,12 +284,12 @@ App.SubtitleController = App.SmartController.extend({
 							}
 						}
 						me.set('editList', editList);
-						me.setText(this.get('printedLines'), currentEdit.printed);
+						if (Math.random() <= 0.01) me.setText(this.get('printedLines'), currentEdit.printed);
 					
 					} else if (!isNewLine) {
 						//ELSE IF not newline print next char
 						printedLines[atPrintedLine] += srcLines[atLine][atChar];
-						me.setText(printedLines, null, 'char');
+						if (Math.random() <= 0.01) me.setText(printedLines, null, 'char');
 						atChar++;
 					
 					} else if (isNewLine) {

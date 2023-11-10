@@ -54,14 +54,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>39</integer>
+				<integer>27</integer>
 				<key>line</key>
-				<integer>92</integer>
+				<integer>1290</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>78</integer>
+			<integer>1290</integer>
 		</dict>
 		<key>javascripts/foundation/foundation.interchange.js</key>
 		<dict>
@@ -470,14 +470,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>10</integer>
+				<integer>5</integer>
 				<key>line</key>
-				<integer>272</integer>
+				<integer>282</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>236</integer>
+			<integer>273</integer>
 		</dict>
 		<key>js/mvc/controller/SmartController/World3dController.js</key>
 		<dict>
@@ -873,7 +873,7 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>22</integer>
+			<integer>45</integer>
 		</dict>
 		<key>js/mvc/view/SmartView/World3dView.js</key>
 		<dict>
@@ -910,14 +910,30 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>13</integer>
+				<integer>42</integer>
 				<key>line</key>
-				<integer>64</integer>
+				<integer>814</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>46</integer>
+			<integer>804</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>36</integer>
+				<key>line</key>
+				<integer>814</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>44</integer>
+				<key>line</key>
+				<integer>814</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
@@ -970,6 +986,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{203, 30}, {1153, 716}}</string>
+	<string>{{213, 4}, {1153, 716}}</string>
 </dict>
 </plist>

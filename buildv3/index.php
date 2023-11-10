@@ -9,7 +9,7 @@ $IS_DEPLOY = false;
 
 	
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>Ashley Coleman</title>
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
@@ -541,12 +541,12 @@ In 2012 I curated a pop up art gallery:
 			{{render 'modernizr-report' layoutName='lo-row'}}
 				
 			<div class="row page-content">
-				<div class="columns large-6  small-6">		
+				<div class="columns large-6  small-12">		
 					{{{controlWithVars 'subtitle' readOrder='1' layoutName='lo-subtitle-row' hasRemoveButton=false thescript="<?php echo $indexCopyA; ?>"}}}
 					{{{controlWithVars 'subtitle' readOrder='2' layoutName="lo-subtitle-row-link" thescript="<i class=\"icon-caret-right\"></i> Go to first dimension: @edits=X...,Who...,What..." isLink=true linkEvent="doGotoDimension1" hoverEvent="doDimensionNavHover"}}}
 					
 				</div>
-				<div class="columns large-6 small-6">
+				<div class="columns large-6 small-12">
 					{{{controlWithVars 'subtitle' readOrder='3' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=false thescript="<?php echo $indexCopyC; ?>"}}}
 					{{{controlWithVars 'subtitle' readOrder='4' layoutName='lo-subtitle-instant-row' isInstant=true hasRemoveButton=false thescript="<?php echo $indexCopyB; ?>"}}}
 				</div>
